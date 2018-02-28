@@ -40,7 +40,7 @@ export class TbodyCreateCancelComponent implements OnChanges {
     event.stopPropagation();
 
     if (this.row.isNew) {
-      this.grid.delete(this.row, this.deleteConfirm);
+      this.grid.delete(this.row, null);
     } else {
       this.row.isInEditing = false;
     }

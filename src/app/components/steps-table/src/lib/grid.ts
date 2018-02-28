@@ -146,19 +146,21 @@ export class Grid {
   }
 
   delete(row: Row, confirmEmitter: EventEmitter<any>) {
-    const deferred = new Deferred();
-    deferred.promise.then(() => {
-      this.source.delete(row.getData());
-    }).catch((err) => {
-      // doing nothing
-    });
+    if (confirmEmitter) {
+      const deferred = new Deferred();
+      deferred.promise.then(() => {
+        this.source.delete(row.getData());
+      }).catch((err) => {
+        // doing nothing
+      });
 
-    if(!!confirmEmitter) {
       confirmEmitter.emit({
         data: row.getData(),
         source: this.source,
         confirm: deferred,
       });
+    } else {
+      this.source.delete(row.getData());
     }
 
   }
