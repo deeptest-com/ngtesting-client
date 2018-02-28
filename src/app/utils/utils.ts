@@ -10,7 +10,7 @@ export var Utils: any = {
   config: function() {
     var host = window.location.host;
     if (host.indexOf('localhost') > -1) {
-      CONSTANT.SERVICE_URL = CONSTANT._SERVICE_URL_DEV;
+      CONSTANT.SERVICE_URL = CONSTANT._SERVICE_URL_DEV.replace('client/', '');
     } else {
       CONSTANT.SERVICE_URL = CONSTANT._SERVICE_URL_PRODUCTION;
     }
