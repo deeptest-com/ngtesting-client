@@ -12,6 +12,7 @@ export class Grid {
 
   source: DataSource;
   settings: any;
+  isEditing: boolean = false;
   dataSet: DataSet;
 
   constructor(source: DataSource, settings: any) {
@@ -72,6 +73,7 @@ export class Grid {
   }
 
   edit(row: Row) {
+    this.isEditing = true;
     row.isInEditing = true;
   }
 
@@ -131,7 +133,10 @@ export class Grid {
       newData = newData ? newData : row.getNewData();
 
       this.source.save(row.getData(), newData).then(() => {
+        this.isEditing = false;
         row.isInEditing = false;
+
+        row.getNewData().id = newData.id;
       });
     }).catch((err) => {
       // doing nothing
@@ -149,6 +154,7 @@ export class Grid {
     if (confirmEmitter) {
       const deferred = new Deferred();
       deferred.promise.then(() => {
+        this.isEditing = false;
         this.source.delete(row.getData());
       }).catch((err) => {
         // doing nothing
@@ -160,6 +166,7 @@ export class Grid {
         confirm: deferred,
       });
     } else {
+      this.isEditing = false;
       this.source.delete(row.getData());
     }
 

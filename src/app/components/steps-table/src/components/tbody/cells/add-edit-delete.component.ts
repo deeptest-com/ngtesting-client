@@ -8,17 +8,19 @@ import { DataSource } from '../../../lib/data-source/data-source';
   selector: 'ng2-st-tbody-add-edit-delete',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <a href="#" class="ng2-smart-action ng2-smart-action-edit-edit" (click)="onCreate($event)">
-      <i class="fa fa-plus"></i>
-    </a>
-    
-    <a href="#" class="ng2-smart-action ng2-smart-action-edit-edit" (click)="onEdit($event)">
-      <i class="fa fa-pencil"></i>
-    </a>
-    
-    <a href="#" class="ng2-smart-action ng2-smart-action-delete-delete" (click)="onDelete($event)">
-      <i class="fa fa-trash"></i>
-    </a>
+    <span *ngIf="!grid.isEditing">
+      <a href="#" class="ng2-smart-action ng2-smart-action-edit-edit" (click)="onCreate($event)">
+        <i class="fa fa-plus"></i>
+      </a>
+      
+      <a href="#" class="ng2-smart-action ng2-smart-action-edit-edit" (click)="onEdit($event)">
+        <i class="fa fa-pencil"></i>
+      </a>
+      
+      <a href="#" class="ng2-smart-action ng2-smart-action-delete-delete" (click)="onDelete($event)">
+        <i class="fa fa-trash"></i>
+      </a>
+    </span>
   `,
 })
 export class TbodyAddEditDeleteComponent implements OnChanges {

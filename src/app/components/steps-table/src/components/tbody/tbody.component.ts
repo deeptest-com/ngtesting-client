@@ -24,7 +24,7 @@ export class Ng2SmartTableTbodyComponent implements OnInit {
   @Input() deleteConfirm: EventEmitter<any>;
 
   ngOnInit() {
-    console.log('------', this.grid);
+
   }
   ngOnChanges() {
 

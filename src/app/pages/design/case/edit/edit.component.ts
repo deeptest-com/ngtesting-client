@@ -180,7 +180,7 @@ export class CaseEdit implements OnInit, AfterViewInit, OnDestroy {
   onSaveConfirm(event: any) {
     console.log('onSaveConfirm', event);
     this._caseStepService.save(this.id, event.newData).subscribe((json:any) => {
-      event.confirm.resolve();
+      event.confirm.resolve(json.data);
     });
   }
   onDeleteConfirm(event: any) {
