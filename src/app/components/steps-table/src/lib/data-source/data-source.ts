@@ -60,7 +60,7 @@ export abstract class DataSource {
 
   save(element: any, values: any): Promise<any> {
     this.emitOnSaved(element);
-    this.emitOnChanged('save');
+    // this.emitOnChanged('save');
     return Promise.resolve();
   }
 

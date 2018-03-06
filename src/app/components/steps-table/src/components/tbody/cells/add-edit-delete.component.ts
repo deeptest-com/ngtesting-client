@@ -8,7 +8,7 @@ import { DataSource } from '../../../lib/data-source/data-source';
   selector: 'ng2-st-tbody-add-edit-delete',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <span *ngIf="!grid.isEditing">
+    <span>
       <a href="#" class="ng2-smart-action ng2-smart-action-edit-edit" (click)="onCreate($event)">
         <i class="fa fa-plus"></i>
       </a>

@@ -103,6 +103,7 @@ export class LocalDataSource extends DataSource {
       this.find(element).then((found) => {
         found = deepExtend(found, values);
         super.save(found, values).then(resolve).catch(reject);
+
       }).catch(reject);
     });
   }
