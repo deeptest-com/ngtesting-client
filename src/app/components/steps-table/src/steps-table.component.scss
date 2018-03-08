@@ -59,9 +59,10 @@
               margin: 0 3px 0 0;
               text-align: left;
               .pre {
+                margin: 0 5px;
                 white-space: pre-line;
                 word-wrap: break-word;
-                word-break: normal;
+                word-break: break-all;
               }
             }
           }

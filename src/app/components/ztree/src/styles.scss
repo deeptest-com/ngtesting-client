@@ -3,18 +3,19 @@ span.tmpzTreeMove_arrow {
   margin-top: 0px !important;
   &:before {
     font-family: FontAwesome;
-    content: "\f178";
+    content: '\f178';
   }
 }
 
 .ztree-toolbar {
   display: flex;
   padding: 5px 5px 5px 15px;
+  min-width: 270px;
+  height: 38px;
   border-bottom: 1px solid #eeeeee !important;
   line-height: 28px;
-  height: 38px;
   font-size: 14px;
-  background-color: #F0F3F4;
+  background-color: #f0f3f4;
   label {
     flex: 1;
     line-height: 27px;
