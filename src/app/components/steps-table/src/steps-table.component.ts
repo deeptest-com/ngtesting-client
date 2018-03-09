@@ -1,4 +1,4 @@
-import { Component, Input, Output, SimpleChange, EventEmitter, OnChanges } from '@angular/core';
+import { Component, Input, Output, SimpleChange, EventEmitter, OnChanges, OnDestroy } from '@angular/core';
 
 import { Grid } from './lib/grid';
 import { DataSource } from './lib/data-source/data-source';
@@ -32,7 +32,6 @@ export class StepsTableComponent implements OnChanges {
 
   ngOnChanges(changes: { [propertyName: string]: SimpleChange }) {
     if (this.grid) {
-
       if (changes['settings']) {
         this.grid.setSettings(this.prepareSettings());
       }

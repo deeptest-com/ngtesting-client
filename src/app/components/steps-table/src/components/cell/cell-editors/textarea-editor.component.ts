@@ -6,7 +6,7 @@ import { DefaultEditor } from './default-editor';
   selector: 'textarea-editor',
   styleUrls: ['./editor.component.scss'],
   template: `
-    <textarea class="form-control"
+    <textarea id="test-step-input" class="form-control" maxlength="9999"
               [(ngModel)]="cell.newValue"
               [name]="cell.getId()"
               [disabled]="!cell.isEditable()"

@@ -44,6 +44,7 @@
             }
           }
           &.ng2-smart-seq-numb {
+            vertical-align: top;
             width: 50px;
           }
           &.ng2-smart-actions {
@@ -62,7 +63,6 @@
                 margin: 0 5px;
                 white-space: pre-line;
                 word-wrap: break-word;
-                word-break: break-all;
               }
             }
           }

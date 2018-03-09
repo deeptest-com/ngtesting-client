@@ -50,6 +50,7 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
   newCount: number = 0;
   className: string = "dark";
   autoExpandNode: any;
+  currNode: any;
 
   @Input() set treeModel(model: any) {
     if(!model) {
@@ -191,9 +192,17 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
     return css;
   }
   onClick = (event, treeId, treeNode) => {
+    let textarea = jQuery('textarea#test-step-input');
+    if (textarea.length > 0) {
+      if (!confirm('确认放弃未保存的用例信息？')) {
+        this.ztree.selectNode(this.currNode);
+        return;
+      }
+    }
+    this.currNode = treeNode;
     this.notifyCaseChange(treeNode);
   }
-  notifyCaseChange = (node: any)  => {
+  notifyCaseChange = (node: any) => {
     this.childrenCount = {};
     this.countChildren(node);
     this._state.notifyDataChanged('case.' + this.settings.usage, {node: node, childrenCount: this.childrenCount, random: Math.random()});
