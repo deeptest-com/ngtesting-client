@@ -126,7 +126,6 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     };
 
-
   }
 
   public ngOnInit(): void {

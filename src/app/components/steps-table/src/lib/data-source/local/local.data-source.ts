@@ -97,8 +97,6 @@ export class LocalDataSource extends DataSource {
   }
 
   save(element: any, values: any): Promise<any> {
-    console.log(element, values);
-
     return new Promise((resolve, reject) => {
       this.find(element).then((found) => {
         found = deepExtend(found, values);

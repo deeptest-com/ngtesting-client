@@ -104,6 +104,8 @@ export class BaPageTop implements OnInit, AfterViewInit, OnDestroy {
     let url = '';
     if (module == 'design') {
       url = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + CONSTANT.CURR_PRJ_ID + '/design/case';
+    } else if (module == 'suite') {
+      url = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + CONSTANT.CURR_PRJ_ID + '/implement/suite/list';
     } else if (module == 'implement') {
       url = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + CONSTANT.CURR_PRJ_ID + '/implement/plan/list';
     }

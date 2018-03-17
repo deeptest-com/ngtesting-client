@@ -12,12 +12,15 @@ export class CaseService {
 
   _api_url = 'case/';
 
-  query(projectId: number) {
-    return this._reqService.post(this._api_url + 'query', {projectId: projectId});
+  query(orgId: number, projectId: number) {
+    return this._reqService.post(this._api_url + 'query', {orgId: orgId, projectId: projectId});
   }
 
-  queryForSelection(projectId: number, runId: number) {
-    return this._reqService.post(this._api_url + 'queryForSelection', {projectId: projectId, runId: runId});
+  queryForSuiteSelection(projectId: number, suiteId: number) {
+    return this._reqService.post(this._api_url + 'queryForSuiteSelection', {projectId: projectId, suiteId: suiteId});
+  }
+  queryForRunSelection(projectId: number, runId: number) {
+    return this._reqService.post(this._api_url + 'queryForRunSelection', {projectId: projectId, runId: runId});
   }
 
   get(id: number) {

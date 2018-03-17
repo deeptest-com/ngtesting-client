@@ -1,9 +1,9 @@
-import {Component, Input, Output, OnInit, EventEmitter, } from '@angular/core';
+import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 
 import { Grid } from '../../lib/grid';
 import { Row } from '../../lib/data-set/row';
 import { DataSource } from '../../lib/data-source/data-source';
-import {Column} from "../../lib/data-set/column";
+import { Column } from '../../lib/data-set/column';
 
 @Component({
   selector: '[ng2-st-tbody]',
@@ -26,13 +26,16 @@ export class Ng2SmartTableTbodyComponent implements OnInit {
   ngOnInit() {
 
   }
-  ngOnChanges() {
-
-  }
 
   onCreate(event: any) {
     event.preventDefault();
     event.stopPropagation();
+
+    const textarea = jQuery('textarea#test-step-input');
+    if (textarea.length > 0) {
+      alert('请先保存当前编辑的步骤！');
+      return;
+    }
 
     this.grid.create(this.grid.getNewRow(), this.createConfirm);
   }
@@ -48,10 +51,10 @@ export class Ng2SmartTableTbodyComponent implements OnInit {
     this.grid.edit(row);
   }
 
-  onHoverRow($event, row):void {
+  onHoverRow($event, row): void {
     row.hover = true;
   }
-  onOutRow($event, row):void {
+  onOutRow($event, row): void {
     row.hover = false;
   }
 

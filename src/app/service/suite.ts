@@ -1,57 +1,52 @@
-import * as _ from "lodash";
+import * as _ from 'lodash';
 
-import {Injectable} from "@angular/core";
+import { Injectable } from '@angular/core';
 
-import {CONSTANT} from "../utils/constant";
-import {RequestService} from "./request";
+import { CONSTANT } from '../utils/constant';
+import { RequestService } from './request';
 
 @Injectable()
 export class SuiteService {
   constructor(private _reqService: RequestService) {
   }
 
-  _api_url = 'suite/';
+  _apiUrl = 'suite/';
 
   query(projectId: number, query: any) {
-    _.merge(query, {projectId: projectId});
-    return this._reqService.post(this._api_url + 'query', query);
+    _.merge(query, { projectId: projectId });
+    return this._reqService.post(this._apiUrl + 'query', query);
   }
 
   get(id: number) {
-    let model = {id: id};
-    return this._reqService.post(this._api_url + 'get', model);
+    const model = { id: id };
+    return this._reqService.post(this._apiUrl + 'get', model);
   }
 
-  save(model: number) {
-    return this._reqService.post(this._api_url + 'save', model);
+  save(projectId: number, model: any) {
+    const data = _.clone(model);
+    data.projectId = projectId;
+    return this._reqService.post(this._apiUrl + 'save', data);
   }
 
-  create(node: any) {
-    let model = {id: node.id, value: node.value, type: node.type, pid: node.pid};
-    return this._reqService.post(this._api_url + 'create', model);
+  saveSuiteCases(suiteId: number, cases: any[]) {
+    const ids: number[] = cases.map(function (item, index, input) {
+      return item.id;
+    });
+    return this._reqService.post(this._apiUrl + 'saveCases', { suiteId: suiteId, cases: ids });
   }
 
-  move(target: any, src: any, options: any) {
-    let model;
-    if (options.mode === 'inner') {
-      model = {id: src.id, newPid: target.id, prePid: src.pid};
-    } else {
-      model = {id: src.id, newPid: target.pid, prePid: src.pid};
-    }
-    _.merge(model, options);
-    return this._reqService.post(this._api_url + 'move', model);
+  delete(id: any) {
+    const model = { id: id };
+    return this._reqService.post(this._apiUrl + 'delete', model);
+  }
+  close(id: any) {
+    const model = { id: id };
+    return this._reqService.post(this._apiUrl + 'close', model);
   }
 
-  rename(node: any) {
-    console.log('rename');
-    let model = {id: node.id, value: node.value, type: node.type, pid: node.pid};
-    return this._reqService.post(this._api_url + 'rename', model);
+  markAllRead(ids: number[]) {
+    return this._reqService.post(this._apiUrl + 'markAllRead', { ids: ids });
   }
 
-  delete(node: any) {
-    let model = {id: node.id};
-    return this._reqService.post(this._api_url + 'delete', model);
-  }
 }
-
 

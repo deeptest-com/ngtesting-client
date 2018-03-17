@@ -75,7 +75,7 @@
 
       <div class="test-sets form-group row">
         <label class="col-sm-1 col-form-label">
-          <span>测试集</span>
+          <span>测试任务</span>
         </label>
 
         <div class="col-sm-11 run-list">
@@ -85,9 +85,11 @@
               <th style="width: 50px;" class="id">编号</th>
               <th>标题</th>
               <th>经办人</th>
-              <th style="width: 300px;">执行情况</th>
+              <th style="width: 300px;">执行状况</th>
+              <th>环境</th>
               <th style="width: 250px;" class="opt">
-                <span privilege [privs]="'run-create'" (click)="editRun()" *ngIf="form.valid" class="link no-underline">新建</span>
+                <span *ngIf="form.valid" privilege [privs]="'run-create'" (click)="editRun()" class="link no-underline">导入测试集</span>
+                <span *ngIf="form.valid" privilege [privs]="'run-create'" (click)="editRun()" class="link no-underline">新建任务</span>
               </th>
             </tr>
             </thead>
@@ -99,12 +101,16 @@
               <td>
                 <execution-bar [data]="item"></execution-bar>
               </td>
-              <td class="center">
-                <span privilege [privs]="'run-update'" (click)="editRun(item, i)" class="link no-underline">编辑</span>
-                <span privilege [privs]="'run-update'" (click)="editRunCases(item, i)" class="link no-underline">用例</span>
-                <!--<span (click)="editEnvi(item, i)" class="link no-underline">环境</span>-->
-                <span privilege [privs]="'run-remove'" (click)="removeSet(item, i)" class="link no-underline">删除</span>
+              <td>
+                <span>华为手机,</span>&nbsp;<span>OPPO手机</span>
+                <span privilege [privs]="'run-update'" (click)="editEnvi(item, i)" class="link no-underline">设置</span>
               </td>
+              <td class="center">
+                <span privilege [privs]="'run-update'" (click)="editRunCases(item, i)" class="link no-underline">用例</span>
+                &nbsp;&nbsp;
+                <span privilege [privs]="'run-update'" (click)="editRun(item, i)" class="link no-underline">编辑</span>
+                <span privilege [privs]="'run-remove'" (click)="removeSet(item, i)" class="link no-underline">删除</span>
+                </td>
             </tr>
             </tbody>
           </table>

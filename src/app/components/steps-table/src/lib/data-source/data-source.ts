@@ -21,6 +21,7 @@ export abstract class DataSource {
     return Promise.resolve();
   }
 
+  // caught in grid.ts
   onCreated(): Observable<any> {
     return this.onCreatedSource.asObservable();
   }
@@ -30,7 +31,6 @@ export abstract class DataSource {
   onDeleted(): Observable<any> {
     return this.onDeletedSource.asObservable();
   }
-
   onChanged(): Observable<any> {
     return this.onChangedSource.asObservable();
   }

@@ -33,7 +33,7 @@ export class ExecutionResultComponent implements OnInit {
         show: false
       },
       padding: 0,
-      color: ['#c23531', '#ca8622', '#749f83', '#c4ccd3'],
+      color: ['#749f83', '#c23531', '#ca8622',  '#c4ccd3'],
       tooltip: {
         trigger: 'item',
         formatter: "{a} <br/>{b} : {c} ({d}%)"

@@ -52,9 +52,9 @@ export class ExecutionProcessComponent implements OnInit {
       legend: {
         right: '0%',
         width: '15%',
-        data:['阻塞', '失败', '通过']
+        data:['通过', '失败', '阻塞']
       },
-      color: ['#c23531', '#ca8622', '#749f83'],
+      color: ['#749f83', '#c23531', '#ca8622'],
 
       xAxis : [
         {
@@ -75,10 +75,10 @@ export class ExecutionProcessComponent implements OnInit {
       ],
       series : [
         {
-          name:'阻塞',
+          name:'通过',
           type:'bar',
           stack: '过程',
-          data: this._data.blockList
+          data: this._data.passList
         },
         {
           name:'失败',
@@ -87,10 +87,10 @@ export class ExecutionProcessComponent implements OnInit {
           data: this._data.failList
         },
         {
-          name:'通过',
+          name:'阻塞',
           type:'bar',
           stack: '过程',
-          data: this._data.passList
+          data: this._data.blockList
         }
       ]
     };

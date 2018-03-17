@@ -17,7 +17,7 @@ import { PAGES_MENU } from './pages.menu';
     <footer class="al-footer clearfix">
       <div class="al-footer-right" translate>{{'general.created_with'}} <i class="fa fa-heart"></i></div>
       <div class="al-footer-main clearfix">
-        <div class="al-copy">&copy; <a href="http://ngtesting.com" translate>{{'general.ngtesting'}}</a> 2017</div>
+        <div class="al-copy">&copy; <a href="http://ngtesting.com" translate>{{'general.ngtesting'}}</a> 2017-2018</div>
         
       </div>
     </footer>

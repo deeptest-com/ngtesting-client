@@ -57,8 +57,13 @@ export class DataSet {
    */
   createRows() {
     this.rows = [];
+    console.log('222', this.data);
+
     this.data.forEach((el, index) => {
-      this.rows.push(new Row(index, el, this));
+      const row = new Row(index, el, this);
+      // row.isInEditing = row.getData().isInEditing;
+      this.rows.push(row);
+
     });
   }
 }

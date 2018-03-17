@@ -18,7 +18,7 @@ declare var jQuery;
   templateUrl: './suite.html'
 })
 export class CaseSuite implements OnInit, AfterViewInit {
-
+  orgId: number;
   projectId: number;
   caseId: number;
   public treeModel: any;
@@ -37,6 +37,7 @@ export class CaseSuite implements OnInit, AfterViewInit {
       this.treeSettings.jumpTo = this.caseId;
     }
 
+    this.orgId = CONSTANT.CURR_ORG_ID;
     this.projectId = CONSTANT.CURR_PRJ_ID;
     this.loadData();
   }
@@ -48,7 +49,7 @@ export class CaseSuite implements OnInit, AfterViewInit {
   loadData() {
     this.startLoading();
 
-    this._caseService.query(this.projectId).subscribe((json:any) => {
+    this._caseService.query(this.orgId, this.projectId).subscribe((json:any) => {
       this.treeModel = json.data;
       CONSTANT.CUSTOM_FIELD_FOR_PROJECT = json.customFields;
 

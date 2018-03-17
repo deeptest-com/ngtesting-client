@@ -9,9 +9,11 @@ const routes: Routes = [
     component: Implement,
     children: [
       { path: 'plan', loadChildren: './plan/plan.module#PlanModule' },
-      { path: 'plan/:planId/execution', loadChildren: './execution/execution.module#ExecutionModule' }
-    ]
-  }
+      { path: 'plan/:planId/execution', loadChildren: './execution/execution.module#ExecutionModule' },
+
+      { path: 'suite', loadChildren: './suite/suite.module#SuiteModule' },
+    ],
+  },
 ];
 
 export const routing = RouterModule.forChild(routes);

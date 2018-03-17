@@ -54,7 +54,7 @@ export class Grid {
     });
 
     this.source.onChanged().subscribe((changes) => {
-      console.log('source.onChanged');
+      console.log('source.onChanged', changes);
 
       this.processDataChange(changes);
     });
@@ -75,6 +75,7 @@ export class Grid {
   edit(row: Row) {
     this.isEditing = true;
     row.isInEditing = true;
+    // row.getData().isInEditing = true;
   }
 
   up(curr: Row, confirmEmitter: EventEmitter<any>) {
@@ -113,7 +114,9 @@ export class Grid {
         let newRow = this.dataSet.findRowByData(newData);
 
         this.isEditing = true;
+
         newRow.isInEditing = true;
+        // newRow.getData().isInEditing = true;
         newRow.isNew = true;
       });
     }).catch((err) => {
@@ -133,11 +136,13 @@ export class Grid {
     deferred.promise.then((newData) => {
       newData = newData ? newData : row.getNewData();
 
+      // row.getData().isInEditing = false;
       this.source.save(row.getData(), newData).then(() => {
         this.isEditing = false;
         row.isInEditing = false;
 
         row.getNewData().id = newData.id;
+        console.log(111, row);
       });
     }).catch((err) => {
       // doing nothing

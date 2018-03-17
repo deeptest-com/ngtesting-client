@@ -67,17 +67,23 @@ export class DesignProgressComponent implements OnInit {
         {
           name: '数量（个）',
           type: 'value'
+        },
+        {
+          name: '数量（个）',
+          type: 'value'
         }
       ],
       series: [
         {
           name: '合计用例',
           type: 'line',
+          yAxisIndex: 0,
           data: this._data.totalList,
         },
         {
           name:'新增用例',
           type:'bar',
+          yAxisIndex: 1,
           data: this._data.numbList
         }
       ]

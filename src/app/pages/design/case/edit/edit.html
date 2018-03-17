@@ -57,6 +57,10 @@
                   <ng-template ngbTabTitle>用例信息</ng-template>
                   <ng-template ngbTabContent></ng-template>
                 </ngb-tab>
+                <ngb-tab id="history">
+                  <ng-template ngbTabTitle>修订历史</ng-template>
+                  <ng-template ngbTabContent></ng-template>
+                </ngb-tab>
               </ngb-tabset>
             </div>
           </div>
@@ -127,7 +131,7 @@
         <div class="form-group row">
           <label class="col-sm-3 col-form-label"><span>测试目的</span></label>
           <div class="col-sm-9">
-              <textarea type="text" class="form-control" name="objective" formControlName="objective"
+              <textarea maxlength="1000" type="text" class="form-control" name="objective" formControlName="objective"
                       [(ngModel)]="model.objective" #objective></textarea>
           </div>
         </div>
@@ -140,6 +144,19 @@
             </div>
           </div>
         </ng-container>
+      </div>
+
+      <div [class.hidden]="tab != 'history'" class="tab-history">
+        <div class="activity">
+          <div class="list">
+            <div *ngFor="let his of model.histories; let i = index;" class="item">
+              <div class="descr">
+                  <span [innerHTML]="his.title" class="content"></span> -
+                  <span>{{his.createTime | date:'y/MM/dd HH:mm:ss'}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <comment-list [model]="model"></comment-list>

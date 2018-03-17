@@ -2,11 +2,11 @@
 
   <ng-container [ngSwitch]="field.type">
     <ng-container *ngSwitchCase="'string'">
-      <input name="{{field.myColumn}}" formControlName="{{field.myColumn}}"
+      <input name="{{field.myColumn}}" formControlName="{{field.myColumn}}" maxlength="1000"
              [(ngModel)]="model[field.myColumn]" #{{field.myColumn}} type="text" class="form-control">
     </ng-container>
     <ng-container *ngSwitchCase="'number'">
-      <input name="{{field.myColumn}}" formControlName="{{field.myColumn}}"
+      <input name="{{field.myColumn}}" formControlName="{{field.myColumn}}" maxlength="1000"
              [(ngModel)]="model[field.myColumn]" #{{field.myColumn}} type="number" class="form-control">
     </ng-container>
 
@@ -20,7 +20,7 @@
 
     <ng-container *ngSwitchCase="'text'">
       <ng-container *ngIf="field.format=='plain_text'">
-        <textarea name="{{field.myColumn}}" formControlName="{{field.myColumn}}"
+        <textarea name="{{field.myColumn}}" formControlName="{{field.myColumn}}" maxlength="1000"
                   [(ngModel)]="model[field.myColumn]" #{{field.myColumn}} type="text" class="form-control">
         </textarea>
       </ng-container>

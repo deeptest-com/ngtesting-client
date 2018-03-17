@@ -100,7 +100,7 @@ export class FieldShowComponent implements OnInit {
     }).catch((err) => {console.log('err', err);});
 
     if (this.model[this.prop] != this.temp) {
-      this.onSave.emit({deferred: deferred, data: {prop: this.prop, value: this.model[this.prop]}});
+      this.onSave.emit({deferred: deferred, data: {label: this.label, prop: this.prop, value: this.model[this.prop]}});
     } else {
       this.cancel(event);
     }

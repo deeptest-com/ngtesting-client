@@ -18,6 +18,8 @@ import {CaseSelectionService} from "./case-selection.service";
   styleUrls: ['./styles.scss']
 })
 export class CaseSelectionComponent implements OnInit {
+  orgId: number;
+  projectId: number;
 
   @Input() treeModel: any;
   @Input() treeSettings: any = {};
@@ -42,6 +44,9 @@ export class CaseSelectionComponent implements OnInit {
               public _sutieService: SuiteService, public _caseService: CaseService,) {
 
     this.queryModel = _.cloneDeep(this._queryModel);
+
+    this.orgId = CONSTANT.CURR_ORG_ID;
+    this.projectId = CONSTANT.CURR_PRJ_ID;
   }
 
   ngOnInit(): any {
@@ -51,7 +56,7 @@ export class CaseSelectionComponent implements OnInit {
   }
 
   loadData() {
-    this._caseService.query(3).subscribe((json:any) => {
+    this._caseService.query(this.orgId, this.projectId).subscribe((json:any) => {
       this.cases = json.data;
     });
   }

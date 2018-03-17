@@ -192,7 +192,7 @@ export class PlanEdit implements OnInit, AfterViewInit {
     this.caseSelectionModal = this.modalService.open(CaseSelectionComponent, {windowClass: 'pop-modal'});
     this.caseSelectionModal.componentInstance.treeSettings = this.treeSettings;
 
-    this._caseService.queryForSelection(CONSTANT.CURR_PRJ_ID, run.id).subscribe((json:any) => {
+    this._caseService.queryForRunSelection(CONSTANT.CURR_PRJ_ID, run.id).subscribe((json:any) => {
       this.caseSelectionModal.componentInstance.treeModel = json.data;
     });
     this._userService.getUsers(CONSTANT.CURR_PRJ_ID).subscribe((json:any) => {

@@ -12,9 +12,9 @@ export class RunService {
 
   _api_url = 'run/';
 
-  loadCase(projectId: number, runId: number) {
-    return this._reqService.post(this._api_url + 'loadCase', {projectId: projectId, runId: runId});
-  }
+  // loadCase(orgId: number, projectId: number, runId: number) {
+  //   return this._reqService.post(this._api_url + 'loadCase', {orgId: orgId, projectId: projectId, runId: runId});
+  // }
 
   get(id: number) {
     let model = {id: id};
@@ -40,10 +40,6 @@ export class RunService {
   close(id: any) {
     let model = {id: id};
     return this._reqService.post(this._api_url + 'close', model);
-  }
-
-  markAllRead(ids: number[]) {
-    return this._reqService.post(this._api_url + 'markAllRead', {ids: ids});
   }
 
 }

@@ -12,8 +12,8 @@ export class CaseInRunService {
 
   _api_url = 'caseInRun/';
 
-  query(projectId:number , runId: number) {
-    return this._reqService.post(this._api_url + 'query', {projectId: projectId, runId: runId});
+  query(orgId:number, projectId:number, runId: number) {
+    return this._reqService.post(this._api_url + 'query', {orgId: orgId, projectId: projectId, runId: runId});
   }
 
   get(id: number) {

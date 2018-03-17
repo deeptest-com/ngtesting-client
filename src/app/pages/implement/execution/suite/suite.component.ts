@@ -19,8 +19,10 @@ import { CaseInRunService } from '../../../../service/case-in-run';
   templateUrl: './suite.html'
 })
 export class ExecutionSuite implements OnInit, AfterViewInit {
-  runId: number;
+  orgId: number;
   projectId: number;
+  runId: number;
+
   public treeModel: any;
   public treeSettings: any = {usage: 'exe', isExpanded: true, sonSign: false};
 
@@ -35,6 +37,7 @@ export class ExecutionSuite implements OnInit, AfterViewInit {
       this.runId = +params['runId'];
     });
 
+    this.orgId = CONSTANT.CURR_ORG_ID;
     this.projectId = CONSTANT.CURR_PRJ_ID;
     this.loadData();
   }
@@ -46,7 +49,7 @@ export class ExecutionSuite implements OnInit, AfterViewInit {
   loadData() {
     this.startLoading();
 
-    this._caseInRunService.query(this.projectId, this.runId).subscribe((json:any) => {
+    this._caseInRunService.query(this.orgId, this.projectId, this.runId).subscribe((json:any) => {
       this.treeModel = json.data;
 
       CONSTANT.CUSTOM_FIELD_FOR_PROJECT = json.customFields;

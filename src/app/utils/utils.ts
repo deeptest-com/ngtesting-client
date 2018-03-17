@@ -163,7 +163,6 @@ export var Utils: any = {
 };
 
 export class Deferred {
-
   promise: Promise<any>;
 
   resolve: any;
@@ -175,4 +174,17 @@ export class Deferred {
       this.reject = reject;
     });
   }
+}
+
+export const logger: any = {
+  log: function (msg: any) {
+  // tslint:disable-next-line:no-console
+    console.log(msg);
+  },
+  warn: function (msg: any) {
+    console.warn(msg);
+  },
+  error: function (msg: any) {
+    console.error(msg);
+  },
 }
