@@ -94,12 +94,9 @@ export class SuiteEditComponent implements OnInit, AfterViewInit {
       {
         'name': ['', [Validators.required]],
         'descr': ['', []],
-        'estimate': ['', [Validators.pattern(/^(?!0+(?:\.0+)?$)(?:[1-9]\d*|0)(?:\.\d{1,2})?$/)]],
-        'startTime': ['', []],
-        'endTime': ['', []],
+        'estimate': ['', []],
         'disabled': ['', []],
       }, {
-        validator: CustomValidator.compareDate('dateCompare', 'startTime', 'endTime'),
       },
     );
 
