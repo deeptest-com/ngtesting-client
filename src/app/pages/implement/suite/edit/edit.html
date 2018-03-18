@@ -46,7 +46,7 @@
 
         <label class="col-sm-11 col-form-label left">
           <span *ngIf="!model.id">0个</span>
-          <span *ngIf="model.id">{{model.testcases?.length}}个</span>
+          <span *ngIf="model.id">{{model.count}}个</span>
 
           <span *ngIf="form.valid" (click)="editSuiteCases(model)" class="link">选择</span>
         </label>

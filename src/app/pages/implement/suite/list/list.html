@@ -40,14 +40,14 @@
       <tbody>
       <tr *ngFor="let item of models">
         <td>{{ item.name }}</td>
-        <td>{{ item.testcases.length }}</td>
+        <td>{{ item.count }}</td>
         <td>{{ item.userName }}</td>
         <td>
           <span *ngIf="item.updateTime">{{ item.updateTime | date:'y/MM/dd HH:mm:ss' }}</span>
           <span *ngIf="!item.updateTime">{{ item.createTime | date:'y/MM/dd HH:mm:ss' }}</span>
         </td>
         <td>
-          <span [routerLink]="['/pages/org/' + orgId + '/prj/' + prjId + '/implement/suite/' + item.id + '/view']" class="link no-underline">查看</span>
+          <!--<span [routerLink]="['/pages/org/' + orgId + '/prj/' + prjId + '/implement/suite/' + item.id + '/view']" class="link no-underline">查看</span>-->
           <span privilege [privs]="'plan-update'" [routerLink]="['/pages/org/' + orgId + '/prj/' + prjId + '/implement/suite/' + item.id + '/edit']" class="link no-underline">编辑</span>
         </td>
       </tr>
