@@ -47,6 +47,5 @@ export class SuiteService {
   markAllRead(ids: number[]) {
     return this._reqService.post(this._apiUrl + 'markAllRead', { ids: ids });
   }
-
 }
 
