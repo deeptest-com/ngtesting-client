@@ -1,13 +1,13 @@
-import {Component, ViewEncapsulation, NgModule, Pipe, OnInit, AfterViewInit, OnDestroy} from '@angular/core';
+import { Component, ViewEncapsulation, NgModule, Pipe, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
-import {GlobalState} from '../../../../global.state';
+import { GlobalState } from '../../../../global.state';
 
 import { CONSTANT } from '../../../../utils/constant';
-import { Utils } from '../../../../utils/utils';
-import {ValidatorUtils} from '../../../../validator/validator.utils';
+import { Utils, logger } from '../../../../utils/utils';
+import { ValidatorUtils } from '../../../../validator/validator.utils';
 import { RouteService } from '../../../../service/route';
 
 import { CaseService } from '../../../../service/case';
@@ -22,10 +22,10 @@ declare var jQuery;
   selector: 'execution-result',
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['./result.scss', '../../../../components/case-comments/comment-edit/src/styles.scss'],
-  templateUrl: './result.html'
+  templateUrl: './result.html',
 })
 export class ExecutionResult implements OnInit, AfterViewInit, OnDestroy {
-  eventCode:string = 'ExecutionResult';
+  eventCode: string = 'ExecutionResult';
 
   planId: number;
   runId: number;
@@ -44,9 +44,11 @@ export class ExecutionResult implements OnInit, AfterViewInit, OnDestroy {
   canEdit: boolean;
   canExe: boolean;
 
-  constructor(private _state:GlobalState, private _routeService: RouteService, private _route: ActivatedRoute, private fb: FormBuilder,
-              private _caseService: CaseService, private _caseStepService: CaseStepService, private _caseInRunService: CaseInRunService,
-              private _ztreeService: ZtreeService, private privilegeService:PrivilegeService) {
+  constructor(private _state: GlobalState, private _routeService: RouteService,
+              private _route: ActivatedRoute, private fb: FormBuilder,
+              private _caseService: CaseService, private _caseStepService: CaseStepService,
+              private _caseInRunService: CaseInRunService,
+              private _ztreeService: ZtreeService, private privilegeService: PrivilegeService) {
 
     this.buildForm();
   }
@@ -62,10 +64,10 @@ export class ExecutionResult implements OnInit, AfterViewInit, OnDestroy {
     });
 
     this._state.subscribe(CONSTANT.EVENT_CASE_EXE, this.eventCode, (data: any) => {
-      console.log(CONSTANT.EVENT_CASE_EXE, data);
-      let testCase = data.node;
+      logger.log(CONSTANT.EVENT_CASE_EXE, data);
+      const testCase = data.node;
       if (!testCase || testCase.isParent) {
-        this.model = {childrenCount: data.childrenCount};
+        this.model = { childrenCount: data.childrenCount };
         return;
       }
 
@@ -89,7 +91,7 @@ export class ExecutionResult implements OnInit, AfterViewInit, OnDestroy {
         opt: {
           title: '操作',
           editor: {
-            type: 'textarea'
+            type: 'textarea',
           },
         },
         expect: {
@@ -97,7 +99,7 @@ export class ExecutionResult implements OnInit, AfterViewInit, OnDestroy {
           editor: {
             type: 'textarea',
           },
-        }
+        },
       },
     };
   }
@@ -107,15 +109,15 @@ export class ExecutionResult implements OnInit, AfterViewInit, OnDestroy {
     this.form = this.fb.group(
       {
         'result': ['', []],
-        'next':  ['', []]
-      }, {}
+        'next': ['', []],
+      }, {},
     );
 
     this.form.valueChanges.debounceTime(CONSTANT.DebounceTime).subscribe(data => this.onValueChanged(data));
     this.onValueChanged();
   }
   onValueChanged(data?: any) {
-    let that = this;
+    const that = this;
     that.formErrors = ValidatorUtils.genMsg(that.form, that.validateMsg, []);
   }
 
@@ -124,8 +126,8 @@ export class ExecutionResult implements OnInit, AfterViewInit, OnDestroy {
   };
 
   loadData() {
-    let that = this;
-    that._caseInRunService.get(that.id).subscribe((json:any) => {
+    const that = this;
+    that._caseInRunService.get(that.id).subscribe((json: any) => {
       that.model = json.data;
     });
   }
@@ -136,12 +138,13 @@ export class ExecutionResult implements OnInit, AfterViewInit, OnDestroy {
       next = this._ztreeService.getNextNode(this.model.id);
     }
 
-    this._caseInRunService.setResult(this.model.entityId, this.model.result, next?next.entityId:null, status).subscribe((json:any) => {
+    this._caseInRunService.setResult(this.model.entityId, this.model.result, next ? next.entityId : null, status)
+        .subscribe((json: any) => {
       if (json.code == 1) {
         this.model.status = status;
         this._ztreeService.selectNode(next);
 
-        this._state.notifyDataChanged(CONSTANT.EVENT_CASE_UPDATE, {node: this.model, random: Math.random()});
+        this._state.notifyDataChanged(CONSTANT.EVENT_CASE_UPDATE, { node: this.model, random: Math.random() });
         this.model = json.data;
       }
     });
@@ -152,10 +155,10 @@ export class ExecutionResult implements OnInit, AfterViewInit, OnDestroy {
   }
 
   saveField (event: any) {
-    this._caseService.saveField(this.model.id, event.data).subscribe((json:any) => {
+    this._caseService.saveField(this.model.id, event.data).subscribe((json: any) => {
       if (json.code == 1) {
         // this.model = json.data;
-        this._state.notifyDataChanged(CONSTANT.EVENT_CASE_UPDATE, {node: this.model, random: Math.random()});
+        this._state.notifyDataChanged(CONSTANT.EVENT_CASE_UPDATE, { node: this.model, random: Math.random() });
         event.deferred.resolve();
       }
     });
@@ -165,7 +168,7 @@ export class ExecutionResult implements OnInit, AfterViewInit, OnDestroy {
     this.tab = event.nextId;
   }
   changeContentType(contentType: string) {
-    this._caseService.changeContentType(contentType, this.model.id).subscribe((json:any) => {
+    this._caseService.changeContentType(contentType, this.model.id).subscribe((json: any) => {
       if (json.code == 1) {
         this.model.contentType = contentType;
       }
@@ -173,45 +176,46 @@ export class ExecutionResult implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onUpConfirm(event: any) {
-    console.log('onUpConfirm', event);
-    this._caseStepService.up(event.data).subscribe((json:any) => {
+    logger.log('onUpConfirm', event);
+    this._caseStepService.up(event.data).subscribe((json: any) => {
       event.confirm.resolve();
     });
   }
 
   onDownConfirm(event: any) {
-    console.log('onDownConfirm', event);
-    this._caseStepService.down(event.data).subscribe((json:any) => {
+    logger.log('onDownConfirm', event);
+    this._caseStepService.down(event.data).subscribe((json: any) => {
       event.confirm.resolve();
     });
   }
 
   onCreateConfirm(event: any) {
-    console.log('onCreateConfirm', event);
+    logger.log('onCreateConfirm', event);
     event.confirm.resolve();
   }
   onSaveConfirm(event: any) {
-    console.log('onSaveConfirm', event);
-    this._caseStepService.save(this.model.id, event.newData).subscribe((json:any) => {
+    logger.log('onSaveConfirm', event);
+    this._caseStepService.save(this.model.id, event.newData).subscribe((json: any) => {
       event.confirm.resolve();
     });
   }
   onDeleteConfirm(event: any) {
-    console.log('onDeleteConfirm', event);
-    this._caseStepService.delete(event.data).subscribe((json:any) => {
+    logger.log('onDeleteConfirm', event);
+    this._caseStepService.delete(event.data).subscribe((json: any) => {
       event.confirm.resolve();
     });
   }
 
   returnTo() {
-    let url: string = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + CONSTANT.CURR_PRJ_ID + '/implement/plan/' + this.planId + '/view';
-    console.log(url);
+    const url: string = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + CONSTANT.CURR_PRJ_ID
+      + '/implement/plan/' + this.planId + '/view';
+    logger.log(url);
     this._routeService.navTo(url);
   }
 
   ngOnDestroy(): void {
     this._state.unsubscribe(CONSTANT.EVENT_CASE_EXE, this.eventCode);
-  };
+  }
 
 }
 

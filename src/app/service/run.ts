@@ -1,9 +1,9 @@
-import * as _ from "lodash";
+import * as _ from 'lodash';
 
-import {Injectable} from "@angular/core";
+import { Injectable } from '@angular/core';
 
-import {CONSTANT} from "../utils/constant";
-import {RequestService} from "./request";
+import { CONSTANT } from '../utils/constant';
+import { RequestService } from './request';
 
 @Injectable()
 export class RunService {
@@ -17,31 +17,30 @@ export class RunService {
   // }
 
   get(id: number) {
-    let model = {id: id};
+    const model = { id: id };
     return this._reqService.post(this._api_url + 'get', model);
   }
 
-  saveRun(prjId: number, planId: number, run: any) {
+  saveRun(prjId: number, planId: number, run: any, suites: any[]) {
     return this._reqService.post(this._api_url + 'save',
-      {prjId: prjId, planId: planId, id: run.id, name: run.name, userId: run.userId});
+      { prjId: prjId, planId: planId, id: run.id, name: run.name, userId: run.userId, suites: suites });
   }
 
   saveRunCases(planId: number, runId: number, cases: any[]) {
-    let ids: number[] = cases.map(function (item,index,input) {
+    const ids: number[] = cases.map(function (item, index, input) {
       return item.id;
     });
-    return this._reqService.post(this._api_url + 'saveCases', {planId: planId, runId: runId, cases: ids});
+    return this._reqService.post(this._api_url + 'saveCases', { planId: planId, runId: runId, cases: ids });
   }
 
   delete(id: any) {
-    let model = {id: id};
+    const model = { id: id };
     return this._reqService.post(this._api_url + 'delete', model);
   }
   close(id: any) {
-    let model = {id: id};
+    const model = { id: id };
     return this._reqService.post(this._api_url + 'close', model);
   }
 
 }
-
 

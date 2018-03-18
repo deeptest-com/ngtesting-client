@@ -88,7 +88,6 @@
               <th style="width: 300px;">执行状况</th>
               <th>环境</th>
               <th style="width: 250px;" class="opt">
-                <span *ngIf="form.valid" privilege [privs]="'run-create'" (click)="editRun()" class="link no-underline">导入测试集</span>
                 <span *ngIf="form.valid" privilege [privs]="'run-create'" (click)="editRun()" class="link no-underline">新建任务</span>
               </th>
             </tr>
@@ -106,7 +105,7 @@
                 <span privilege [privs]="'run-update'" (click)="editEnvi(item, i)" class="link no-underline">设置</span>
               </td>
               <td class="center">
-                <span privilege [privs]="'run-update'" (click)="editRunCases(item, i)" class="link no-underline">用例</span>
+                <span privilege [privs]="'run-update'" (click)="editRunCases(item, i)" class="link no-underline">选择用例</span>
                 &nbsp;&nbsp;
                 <span privilege [privs]="'run-update'" (click)="editRun(item, i)" class="link no-underline">编辑</span>
                 <span privilege [privs]="'run-remove'" (click)="removeSet(item, i)" class="link no-underline">删除</span>

@@ -1,6 +1,22 @@
 .run-edit-inner {
   font-size: 14px;
-  .modal-body{
+  .modal-body {
     padding: 15px;
+
+    .v-flex {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+
+      .row {
+        &:not(.v-full) {
+          height: 36px;
+        }
+        &.v-full {
+          flex: 1;
+        }
+      }
+
+    }
   }
 }

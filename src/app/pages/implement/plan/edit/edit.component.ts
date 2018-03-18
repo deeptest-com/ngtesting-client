@@ -24,6 +24,7 @@ import { EnvironmentConfigComponent } from '../../../../components/environment-c
 import { PopDialogComponent } from '../../../../components/pop-dialog';
 
 declare var jQuery;
+import * as _ from 'lodash';
 
 @Component({
   selector: 'plan-edit',
@@ -43,6 +44,7 @@ export class PlanEdit implements OnInit, AfterViewInit {
   planId: number;
   startDate: any;
   model: any = { runVos: [] };
+  suites: any[] = [];
   run: any = {};
   runIndex: number;
   form: FormGroup;
@@ -123,8 +125,9 @@ export class PlanEdit implements OnInit, AfterViewInit {
 
   loadData() {
     const that = this;
-    that._planService.get(this.planId).subscribe((json: any) => {
+    that._planService.get(CONSTANT.CURR_PRJ_ID, this.planId).subscribe((json: any) => {
       that.model = json.data;
+      that.suites = json.suites;
 
       this.model.startTime = this.ngbDateParserFormatter.parse(that.model.startTime);
       this.model.endTime = this.ngbDateParserFormatter.parse(that.model.endTime);
@@ -160,6 +163,7 @@ export class PlanEdit implements OnInit, AfterViewInit {
       this.runEditModal.componentInstance.selectedModels = [{ id: this.run.userId, name: this.run.userName }];
     }
     this.runEditModal.componentInstance.model = this.run;
+    this.runEditModal.componentInstance.suites = this.suites;
 
     this.runEditModal.result.then((result) => {
       this.saveRun();
@@ -185,7 +189,7 @@ export class PlanEdit implements OnInit, AfterViewInit {
     }
   }
   _saveRun() {
-    this._runService.saveRun(CONSTANT.CURR_PRJ_ID, this.planId, this.run).subscribe((json: any) => {
+    this._runService.saveRun(CONSTANT.CURR_PRJ_ID, this.planId, this.run, this.suites).subscribe((json: any) => {
 
       this.model.runVos[this.runIndex] = json.data;
     });

@@ -18,9 +18,9 @@ export class PlanService {
     return this._reqService.post(this._api_url + 'query', query);
   }
 
-  get(id: number) {
-    let model = {id: id};
-    return this._reqService.post(this._api_url + 'get', model);
+  get(projectId: number, id: number) {
+    const data = {projectId: projectId, id: id};
+    return this._reqService.post(this._api_url + 'get', data);
   }
 
   save(projectId: number, model: any) {
