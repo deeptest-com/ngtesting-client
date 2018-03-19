@@ -45,6 +45,13 @@ export class RunEditComponent implements OnInit {
     this.activeModal.dismiss({ act: 'cancel' });
   }
 
+  select(key: string) {
+    const val = key === 'all' ? true : false;
+    for (const suite of this.suites) {
+      suite.selecting = val;
+    }
+  }
+
   buildForm(): void {
     this.form = this.fb.group(
       {

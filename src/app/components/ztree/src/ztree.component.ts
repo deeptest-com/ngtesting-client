@@ -296,6 +296,7 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
   onDrop = (event, treeId, treeNodes, targetNode, moveType, isCopy) => {
+    this.isDragging = false;
     if(!targetNode) {
       return;
     }
