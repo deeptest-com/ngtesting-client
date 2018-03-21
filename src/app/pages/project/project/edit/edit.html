@@ -80,8 +80,7 @@
             &nbsp;
             <button [routerLink]="['/pages/project/list']" type="button" class="btn btn-default">取消</button>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <button (click)="showModal()" *ngIf="model.id && !model.lastestProjectGroup" type="button" class="btn btn-danger">删除</button>
-            <span *ngIf="model.lastestProjectGroup">最后一个项目组不可删除</span>
+            <button (click)="showModal()" type="button" class="btn btn-danger">删除</button>
           </div>
         </div>
 

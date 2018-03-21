@@ -28,6 +28,7 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input()
   treeSettings: any;
   settings: any;
+  treeHeight: number;
 
   @Output() renameEvent: EventEmitter<any> = new EventEmitter<any>();
   @Output() removeEvent: EventEmitter<any> = new EventEmitter<any>();
@@ -84,6 +85,7 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public constructor(private _state:GlobalState, private _routeService: RouteService, @Inject(Renderer2) private renderer:Renderer2,
                      private privilegeService:PrivilegeService, private toastyService:ToastyService, @Inject(ZtreeService) private ztreeService: ZtreeService) {
+    this.treeHeight = Utils.getContainerHeight(110+38);
 
     this.settings = {
       usage: null,
@@ -202,7 +204,7 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
     this.notifyCaseChange(treeNode);
   }
   notifyCaseChange = (node: any) => {
-    this.childrenCount = {};
+    this.childrenCount = {notReview: 0, reviewPass: 0, reviewFail: 0};
     this.countChildren(node);
     this._state.notifyDataChanged('case.' + this.settings.usage, {node: node, childrenCount: this.childrenCount, random: Math.random()});
   }
@@ -212,6 +214,7 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
         this.countChildren(treeNode.children[obj]);
       }
     } else {
+      // 统计用例类型
       if (!this.childrenCount[treeNode.type]) {
         this.childrenCount[treeNode.type] = 0;
       }
@@ -222,6 +225,15 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
           this.childrenCount[treeNode.status] = 0;
         }
         this.childrenCount[treeNode.status] = this.childrenCount[treeNode.status] + 1;
+      }
+
+      // 统计用例评审状态
+      if (treeNode.reviewResult == true) {
+        this.childrenCount['reviewPass'] = this.childrenCount['reviewPass'] + 1;
+      } else if (treeNode.reviewResult == false) {
+        this.childrenCount['reviewFail'] = this.childrenCount['reviewFail'] + 1;
+      } else {
+        this.childrenCount['notReview'] = this.childrenCount['notReview'] + 1;
       }
     }
   }

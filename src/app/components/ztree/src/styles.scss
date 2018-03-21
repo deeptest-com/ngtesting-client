@@ -34,6 +34,7 @@ span.tmpzTreeMove_arrow {
 }
 
 .ztree {
+  overflow-y: auto;
   * {
     font-size: 14px !important;
     line-height: 24px !important;
