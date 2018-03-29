@@ -36,11 +36,12 @@ export class PlanView implements OnInit, AfterViewInit {
   modalTitle: string;
 
   chartData: any = {};
+  profile: any;
 
   constructor(private _routeService: RouteService, private _route: ActivatedRoute,
               private _reportService: ReportService,
               private _planService: PlanService, private _runService: RunService) {
-
+    this.profile = CONSTANT.PROFILE;
   }
   ngOnInit() {
     this.orgId = CONSTANT.CURR_ORG_ID;
@@ -63,6 +64,15 @@ export class PlanView implements OnInit, AfterViewInit {
     let that = this;
     that._planService.get(CONSTANT.CURR_PRJ_ID, that.planId).subscribe((json:any) => {
       that.model = json.data;
+
+      that.model.runVos.forEach((run: any) => {
+        for (const item of run.assignees) {
+            if (item.id == this.profile.id) {
+              run.show = true;
+              break;
+            }
+        }
+      });
     });
   }
 

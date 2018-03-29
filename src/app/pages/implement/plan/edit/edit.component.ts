@@ -68,9 +68,9 @@ export class PlanEdit implements OnInit, AfterViewInit {
               private _planService: PlanService, private _runService: RunService,
               private _caseService: CaseService, private _userService: UserService) {
 
-
   }
   ngOnInit() {
+
     this.orgId = CONSTANT.CURR_ORG_ID;
     this.prjId = CONSTANT.CURR_PRJ_ID;
 
@@ -150,6 +150,7 @@ export class PlanEdit implements OnInit, AfterViewInit {
   }
 
   editRun(run?: any, index?: number) {
+    console.log('---', run);
     this.compiler.clearCacheFor(RunEditComponent);
     this.runEditModal = this.modalService.open(RunEditComponent, { windowClass: 'pop-modal' });
 

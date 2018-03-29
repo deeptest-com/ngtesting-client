@@ -84,6 +84,7 @@
             <tr>
               <th style="width: 50px;" class="id">编号</th>
               <th>标题</th>
+              <th>创建人</th>
               <th>经办人</th>
               <th style="width: 300px;">执行状况</th>
               <th>环境</th>
@@ -97,6 +98,11 @@
               <td>{{i+1}}</td>
               <td [routerLink]="['/pages/implement/run/execution', item.id]" class="pointer">{{item.name}}</td>
               <td>{{item.userName}}</td>
+              <td>
+                <span *ngFor="let a of item.assignees; let i = index;">
+                  <span>{{a.name}}</span><span *ngIf="i != item.assignees.length-1">, </span>
+                </span>
+              </td>
               <td>
                 <execution-bar [data]="item"></execution-bar>
               </td>

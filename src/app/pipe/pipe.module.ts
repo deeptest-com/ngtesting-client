@@ -8,14 +8,17 @@ import { ModelStatusPipe } from './model-status';
 import { ExeStatusPipe } from './exe-status';
 import { PercentPipe } from './percent';
 import { MarkErrorPipe } from './mark-error';
+import { ShowIfContainsPipe } from './contains';
 import { FieldTypePipe, FieldApplyToPipe, FieldFormatPipe, TrueOrFalsePipe, DisableOrNotPipe } from './field-property';
 
 @NgModule({
   imports: [],
-  declarations: [MsgReadPipe, ExeStatusPipe, ImgPathPipe, ThumbPathPipe, MapToArrayPipe, TimePassedPipe, ModelStatusPipe, MarkErrorPipe,
-    FieldTypePipe, FieldApplyToPipe, FieldFormatPipe, TrueOrFalsePipe, DisableOrNotPipe, PercentPipe],
-  exports:      [MsgReadPipe, ExeStatusPipe, ImgPathPipe, ThumbPathPipe, MapToArrayPipe, TimePassedPipe, ModelStatusPipe, MarkErrorPipe,
-    FieldTypePipe, FieldApplyToPipe, FieldFormatPipe, TrueOrFalsePipe, DisableOrNotPipe],
+  declarations: [MsgReadPipe, ExeStatusPipe, ImgPathPipe, ThumbPathPipe, MapToArrayPipe, TimePassedPipe,
+    ModelStatusPipe, MarkErrorPipe, FieldTypePipe, FieldApplyToPipe, FieldFormatPipe, TrueOrFalsePipe,
+    DisableOrNotPipe, PercentPipe, ShowIfContainsPipe],
+  exports: [MsgReadPipe, ExeStatusPipe, ImgPathPipe, ThumbPathPipe, MapToArrayPipe, TimePassedPipe,
+    ModelStatusPipe, MarkErrorPipe, FieldTypePipe, FieldApplyToPipe, FieldFormatPipe, TrueOrFalsePipe,
+    DisableOrNotPipe, ShowIfContainsPipe],
 })
 export class PipeModule {
 
