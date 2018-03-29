@@ -22,17 +22,19 @@ export const CONSTANT: CONSTANT_INTERFACE = {
   RECENT_PROJECTS: undefined,
   PRJ_PRIVILEGES: undefined,
 
+  CASE_PRIORITIES_FOR_PROJECT: undefined,
+  CASE_TYPES_FOR_PROJECT: undefined,
   CUSTOM_FIELD_FOR_PROJECT: undefined,
   CASE_PROPERTY_MAP: undefined,
 
   TOKEN_KEY: 'com.ngtesting.token',
   TOKEN_EXPIRE: 'com.ngtesting.expire',
 
-  ExeStatus: {'not_start': '未开始', 'in_progress': '执行中', 'end': '已完成'},
-  EntityDisabled: {'false': '启用', 'true': '归档', '': '所有'},
-  EntityRead: {'': '所有', 'false': '未读', 'true': '已读'},
+  ExeStatus: { 'not_start': '未开始', 'in_progress': '执行中', 'end': '已完成' },
+  EntityDisabled: { 'false': '启用', 'true': '归档', '': '所有' },
+  EntityRead: { '': '所有', 'false': '未读', 'true': '已读' },
 
-  ScreenSize: {h: 0, w: 0},
+  ScreenSize: { h: 0, w: 0 },
   DebounceTime: 500,
 
   EVENT_LOADING_COMPLETE: 'loading.complete',
@@ -43,56 +45,58 @@ export const CONSTANT: CONSTANT_INTERFACE = {
   EVENT_CASE_UPDATE: 'case.update',
   EVENT_CASE_CHANGE: 'case.change',
   EVENT_CASE_EXE: 'case.exe',
-  EVENT_CASE_JUMP: 'case.jump'
+  EVENT_CASE_JUMP: 'case.jump',
 
 };
 
 export interface CONSTANT_INTERFACE {
-  _SERVICE_URL_DEV: string,
-  _SERVICE_URL_PRODUCTION: string,
+  _SERVICE_URL_DEV: string;
+  _SERVICE_URL_PRODUCTION: string;
 
-  SERVICE_URL: string,
-  API_URL: string,
+  SERVICE_URL: string;
+  API_URL: string;
 
-  API_PATH: string,
-  UPLOAD_URI: string,
+  API_PATH: string;
+  UPLOAD_URI: string;
 
-  CURR_ORG_ID: number,
-  CURR_PRJ_ID: number,
-  CURR_PRJ_NAME: string,
+  CURR_ORG_ID: number;
+  CURR_PRJ_ID: number;
+  CURR_PRJ_NAME: string;
 
-  TOKEN: string,
+  TOKEN: string;
 
-  PROFILE: any,
-  SYS_PRIVILEGES: any,
+  PROFILE: any;
+  SYS_PRIVILEGES: any;
 
-  MY_ORGS: any[],
-  ORG_PRIVILEGES: any,
-  RECENT_PROJECTS: any[],
+  MY_ORGS: any[];
+  ORG_PRIVILEGES: any;
+  RECENT_PROJECTS: any[];
 
-  CUSTOM_FIELD_FOR_PROJECT: any,
-  CASE_PROPERTY_MAP: any,
-  PRJ_PRIVILEGES: any,
+  CASE_PRIORITIES_FOR_PROJECT: any;
+  CASE_TYPES_FOR_PROJECT: any;
+  CUSTOM_FIELD_FOR_PROJECT: any;
+  CASE_PROPERTY_MAP: any;
+  PRJ_PRIVILEGES: any;
 
-  TOKEN_KEY: string,
-  TOKEN_EXPIRE: string,
+  TOKEN_KEY: string;
+  TOKEN_EXPIRE: string;
 
-  ExeStatus: any,
-  EntityDisabled: any,
-  EntityRead: any,
+  ExeStatus: any;
+  EntityDisabled: any;
+  EntityRead: any;
 
-  ScreenSize: any,
-  DebounceTime: number,
+  ScreenSize: any;
+  DebounceTime: number;
 
-  EVENT_LOADING_COMPLETE: string,
-  EVENT_COMMENTS_EDIT: string,
-  EVENT_COMMENTS_SAVE: string,
+  EVENT_LOADING_COMPLETE: string;
+  EVENT_COMMENTS_EDIT: string;
+  EVENT_COMMENTS_SAVE: string;
 
-  EVENT_CASE_EDIT: string,
-  EVENT_CASE_UPDATE: string,
-  EVENT_CASE_CHANGE: string,
-  EVENT_CASE_EXE: string,
-  EVENT_CASE_JUMP: string
+  EVENT_CASE_EDIT: string;
+  EVENT_CASE_UPDATE: string;
+  EVENT_CASE_CHANGE: string;
+  EVENT_CASE_EXE: string;
+  EVENT_CASE_JUMP: string;
 
 }
 

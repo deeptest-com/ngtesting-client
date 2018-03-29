@@ -22,8 +22,11 @@ export class RunService {
   }
 
   saveRun(prjId: number, planId: number, run: any, suites: any[]) {
+    const assignees: any[] = [];
+    run.assignees.forEach(item => { assignees.push({id: item.id}); });
+
     return this._reqService.post(this._api_url + 'save',
-      { prjId: prjId, planId: planId, id: run.id, name: run.name, userId: run.userId, suites: suites });
+      { prjId: prjId, planId: planId, id: run.id, name: run.name, userId: run.userId, assignees: assignees, suites: suites });
   }
 
   saveRunCases(planId: number, runId: number, cases: any[]) {

@@ -452,3 +452,8 @@ ul.al-share {
 .col-form-label.left{
   text-align: left;
 }
+
+.col-form-label.text {
+  text-align: left !important;
+  max-width: none !important;
+}

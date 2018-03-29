@@ -37,7 +37,11 @@ export class RunEditComponent implements OnInit {
   }
 
   save(): any {
-    this.model.userId = this.selectedModels[0].id;
+    const userIds: string[] = [];
+    console.log('this.selectedModels', this.selectedModels);
+    this.selectedModels.forEach(item => { userIds.push(item.id); });
+
+    this.model.userIds = userIds;
     this.activeModal.close({ act: 'save', data: this.model });
   }
 
@@ -70,7 +74,10 @@ export class RunEditComponent implements OnInit {
   }
 
   changeSearch(searchModel: any): void {
-    this.userService.search(CONSTANT.CURR_ORG_ID, searchModel.keywords).subscribe((json: any) => {
+    const ids = [];
+    this.selectedModels.forEach(item => { ids.push(item.id); });
+
+    this.userService.search(CONSTANT.CURR_ORG_ID, searchModel.keywords, ids).subscribe((json: any) => {
       if (json.data.length == 0) {
         this.searchResult = null;
       } else {

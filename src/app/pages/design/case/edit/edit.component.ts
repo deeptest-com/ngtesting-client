@@ -35,6 +35,8 @@ export class CaseEdit implements OnInit, AfterViewInit, OnDestroy {
   form: any;
   tab: string = 'content';
 
+  caseTypes: any[] = [];
+  casePriorities: any[] = [];
   fields: any[] = [];
   user: any;
 
@@ -54,13 +56,15 @@ export class CaseEdit implements OnInit, AfterViewInit, OnDestroy {
     this.buildForm();
 
     this._state.subscribe(CONSTANT.EVENT_CASE_EDIT, this.eventCode, (data: any) => {
-      let testCase = data.node;
+      const testCase = data.node;
 
       if (!testCase || testCase.isParent) {
         this.model = {childrenCount: data.childrenCount};
         return;
       }
 
+      this.caseTypes = CONSTANT.CASE_TYPES_FOR_PROJECT;
+      this.casePriorities = CONSTANT.CASE_PRIORITIES_FOR_PROJECT;
       this.fields = CONSTANT.CUSTOM_FIELD_FOR_PROJECT;
 
       if (testCase) {

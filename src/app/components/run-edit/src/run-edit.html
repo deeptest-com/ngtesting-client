@@ -25,7 +25,7 @@
         <label class="col-2 col-form-label"><span>经办人</span></label>
         <div class="col-10">
           <search-select [(searchModel)]="searchModel" [searchResult]="searchResult" [(selectedModels)]="selectedModels"
-                         [selectSingle]='true' (searchChange)="changeSearch($event)">
+                         [selectSingle]='false' (searchChange)="changeSearch($event)">
           </search-select>
         </div>
       </div>

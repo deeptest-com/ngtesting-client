@@ -160,12 +160,13 @@ export class PlanEdit implements OnInit, AfterViewInit {
       this.run = run;
       this.runIndex = index;
 
-      this.runEditModal.componentInstance.selectedModels = [{ id: this.run.userId, name: this.run.userName }];
+      this.runEditModal.componentInstance.selectedModels = this.run.assignees;
     }
     this.runEditModal.componentInstance.model = this.run;
     this.runEditModal.componentInstance.suites = this.suites;
 
     this.runEditModal.result.then((result) => {
+      this.model.userIds = result.data.userIds;
       this.saveRun();
     }, (reason) => {
       logger.log('reason', reason);
@@ -190,7 +191,6 @@ export class PlanEdit implements OnInit, AfterViewInit {
   }
   _saveRun() {
     this._runService.saveRun(CONSTANT.CURR_PRJ_ID, this.planId, this.run, this.suites).subscribe((json: any) => {
-
       this.model.runVos[this.runIndex] = json.data;
     });
   }

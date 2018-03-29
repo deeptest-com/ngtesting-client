@@ -33,8 +33,9 @@ export class CaseView implements OnInit, AfterViewInit, OnDestroy {
   fields: any[] = [];
   user: any;
 
-  constructor(private _state:GlobalState,
-              private _caseService: CaseService, private _caseStepService: CaseStepService, private _caseCommentsService: CaseCommentsService) {
+  constructor(private _state: GlobalState,
+              private _caseService: CaseService, private _caseStepService: CaseStepService,
+              private _caseCommentsService: CaseCommentsService) {
     this.casePropertyMap = CONSTANT.CASE_PROPERTY_MAP;
   }
   ngOnInit() {
@@ -45,7 +46,7 @@ export class CaseView implements OnInit, AfterViewInit, OnDestroy {
       let testCase = data.node;
 
       if (!testCase || testCase.isParent) {
-        this.model = {};
+        this.model = {childrenCount: data.childrenCount};
         return;
       }
 

@@ -2,8 +2,8 @@ import { Input, Component, OnInit, OnDestroy, AfterViewInit, Renderer2, EventEmi
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import * as _ from 'lodash';
 
-import {ToastyService, ToastyConfig, ToastOptions, ToastData} from 'ng2-toasty';
-import {GlobalState} from "../../../global.state";
+import { ToastyService, ToastyConfig, ToastOptions, ToastData } from 'ng2-toasty';
+import { GlobalState } from '../../../global.state';
 import { Deferred, getDeepFromObject } from './helpers';
 
 import { CONSTANT } from '../../../utils/constant';
@@ -20,10 +20,10 @@ declare var jQuery;
   templateUrl: './ztree.html',
   styleUrls: ['./styles.scss',
     '../../../../assets/vendor/ztree/css/zTreeStyle/zTreeStyle.css'],
-  providers: [ZtreeService]
+  providers: [ZtreeService],
 })
 export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
-  eventCode:string = 'ZtreeComponent';
+  eventCode: string = 'ZtreeComponent';
 
   @Input()
   treeSettings: any;
@@ -34,7 +34,7 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
   @Output() removeEvent: EventEmitter<any> = new EventEmitter<any>();
   @Output() moveEvent: EventEmitter<any> = new EventEmitter<any>();
 
-  private disposersForDragListeners:Function[] = [];
+  private disposersForDragListeners: Function[] = [];
   childrenCount: any = {};
 
   _treeModel: any;
@@ -49,12 +49,12 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   log: any;
   newCount: number = 0;
-  className: string = "dark";
+  className: string = 'dark';
   autoExpandNode: any;
   currNode: any;
 
   @Input() set treeModel(model: any) {
-    if(!model) {
+    if (!model) {
       return;
     }
 
@@ -70,8 +70,8 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.settings.usage == 'selection') {
       this.settings.check = {
         enable: true,
-        chkboxType: {"Y": "ps", "N": "ps"}
-      }
+        chkboxType: { 'Y': 'ps', 'N': 'ps' },
+      };
     }
 
     this._treeModel = model;
@@ -83,9 +83,9 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  public constructor(private _state:GlobalState, private _routeService: RouteService, @Inject(Renderer2) private renderer:Renderer2,
-                     private privilegeService:PrivilegeService, private toastyService:ToastyService, @Inject(ZtreeService) private ztreeService: ZtreeService) {
-    this.treeHeight = Utils.getContainerHeight(110+38);
+  public constructor(private _state: GlobalState, private _routeService: RouteService, @Inject(Renderer2) private renderer: Renderer2,
+                     private privilegeService: PrivilegeService, private toastyService: ToastyService, @Inject(ZtreeService) private ztreeService: ZtreeService) {
+    this.treeHeight = Utils.getContainerHeight(110 + 38);
 
     this.settings = {
       usage: null,
@@ -95,25 +95,25 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
         addHoverDom: this.addHoverDom,
         removeHoverDom: this.removeHoverDom,
         selectedMulti: false,
-        fontCss: this.setFontCss
+        fontCss: this.setFontCss,
       },
       edit: {
         enable: true,
 
-        showRemoveBtn: this.privilegeService.hasPrivilege('cases-remove'),
+        showRemoveBtn: this.showRemoveBtn,
         showRenameBtn: this.privilegeService.hasPrivilege('cases-update'),
 
         editNameSelectAll: true,
-        renameTitle: "编辑",
-        removeTitle: "删除",
+        renameTitle: '编辑',
+        removeTitle: '删除',
         drag: {
-          autoExpandTrigger: true
-        }
+          autoExpandTrigger: true,
+        },
       },
       data: {
         simpleData: {
-          enable: true
-        }
+          enable: true,
+        },
       },
       callback: {
         onClick: this.onClick,
@@ -124,8 +124,8 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
         beforeDrop: this.beforeDrop,
         onDrop: this.onDrop,
         onCheck: this.onCheck,
-        onExpand: this.onExpand
-      }
+        onExpand: this.onExpand,
+      },
     };
 
   }
@@ -135,14 +135,14 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this._state.subscribe(CONSTANT.EVENT_CASE_JUMP, this.eventCode, (id: number) => {
       console.log(CONSTANT.EVENT_CASE_JUMP);
-      this.jumpTo(id+'');
+      this.jumpTo(id + '');
     });
 
     this._state.subscribe(CONSTANT.EVENT_CASE_UPDATE, this.eventCode, (data: any) => {
-      let testCase = data.node;
+      const testCase = data.node;
 
       if (testCase) {
-        var node = this.ztree.getNodeByParam("id", testCase.id, null);
+        const node = this.ztree.getNodeByParam('id', testCase.id, null);
 
         node.name = testCase.name;
         node.status = testCase.status;
@@ -156,13 +156,13 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
     this.disposersForDragListeners.push(this.renderer.listen('document', 'keyup', this.copyKeyup.bind(this)));
     this.disposersForDragListeners.push(this.renderer.listen('document', 'keydown', this.copyKeyDown.bind(this)));
   }
-  copyKeyup(e):any {
+  copyKeyup(e): any {
     this.isToCopy = false;
   }
-  copyKeyDown(e):any {
+  copyKeyDown(e): any {
     this.isToCopy = true;
   }
-  public ngOnDestroy():void {
+  public ngOnDestroy(): void {
     this.disposersForDragListeners.forEach(dispose => dispose());
   }
 
@@ -181,7 +181,7 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   setFontCss (treeId, treeNode) {
-    let css:any = {};
+    const css: any = {};
     css.color = '#333333';
     if (treeNode.status == 'pass' || treeNode.reviewResult) {
       css.color = '#209e91';
@@ -193,7 +193,7 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
     return css;
   }
   onClick = (event, treeId, treeNode) => {
-    let textarea = jQuery('textarea#test-step-input');
+    const textarea = jQuery('textarea#test-step-input');
     if (textarea.length > 0) {
       if (!confirm('确认放弃未保存的用例信息？')) {
         this.ztree.selectNode(this.currNode);
@@ -204,13 +204,13 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
     this.notifyCaseChange(treeNode);
   }
   notifyCaseChange = (node: any) => {
-    this.childrenCount = {notReview: 0, reviewPass: 0, reviewFail: 0};
+    this.childrenCount = { notReview: 0, reviewPass: 0, reviewFail: 0 };
     this.countChildren(node);
-    this._state.notifyDataChanged('case.' + this.settings.usage, {node: node, childrenCount: this.childrenCount, random: Math.random()});
+    this._state.notifyDataChanged('case.' + this.settings.usage, { node: node, childrenCount: this.childrenCount, random: Math.random() });
   }
   countChildren = (treeNode) => {
     if (treeNode.isParent){
-      for(var obj in treeNode.children){
+      for (const obj in treeNode.children){
         this.countChildren(treeNode.children[obj]);
       }
     } else {
@@ -239,24 +239,26 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   addHoverDom = (treeId, treeNode) => {
-    if (!this.privilegeService.hasPrivilege('cases-create')) {return false;}
+    if (!this.privilegeService.hasPrivilege('cases-create')) {return false; }
 
-    var sObj = $("#" + treeNode.tId + "_span");
-    if (treeNode.editNameFlag || $("#addBtn_"+treeNode.tId).length>0) return;
-    var addStr = "<span class='button add' id='addBtn_" + treeNode.tId
+    const sObj = $('#' + treeNode.tId + '_span');
+
+    if (treeNode.editNameFlag || $('#addBtn_' + treeNode.tId).length > 0) return;
+    const addStr = "<span class='button add' id='addBtn_" + treeNode.tId
       + "' title='添加' onfocus='this.blur();'></span>";
     sObj.after(addStr);
+    console.log('treeNode.isShowDeleteBut', treeNode);
 
-    var btn = jQuery("#addBtn_"+treeNode.tId);
-    if (btn) btn.bind("click", () => {
-      let newNode = this.ztree.addNodes(treeNode, {id: -1 * this.newCount++, pId:treeNode.id, name:"新用例",
-        type: "functional", priority: 2, estimate: undefined});
+    const btn = jQuery('#addBtn_' + treeNode.tId);
+    if (btn) btn.bind('click', () => {
+      const newNode = this.ztree.addNodes(treeNode, {id: -1 * this.newCount++, pId: treeNode.id, name: '新用例',
+        type: 'functional', priority: 2, estimate: undefined});
       this.ztree.editName(newNode[0]);
       return false;
     });
   }
   removeHoverDom = (treeId, treeNode) => {
-    $("#addBtn_"+treeNode.tId).unbind().remove();
+    $('#addBtn_' + treeNode.tId).unbind().remove();
   }
 
   onRename = (e, treeId, treeNode, isCancel) => {
@@ -269,8 +271,8 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
 
       treeNode.tm = new Date().getTime();
 
-      this._state.notifyDataChanged('case.' + this.settings.usage, {node: _.clone(treeNode), random: Math.random()});
-    }).catch((err) => {console.log('err', err);});
+      this._state.notifyDataChanged('case.' + this.settings.usage, { node: _.clone(treeNode), random: Math.random() });
+    }).catch((err) => {console.log('err', err); });
 
     this.renameEvent.emit({
       data: treeNode,
@@ -279,7 +281,7 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   beforeRemove = (treeId, treeNode) => {
-    this.className = (this.className === "dark" ? "":"dark");
+    this.className = (this.className === 'dark' ? '' : 'dark');
     this.ztree.selectNode(treeNode);
     return confirm('确认删除名为"' + treeNode.name + '"的用例吗？');
   }
@@ -287,8 +289,8 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
     const deferred = new Deferred();
     deferred.promise.then((data) => {
       console.log('success to remove', treeNode);
-      this._state.notifyDataChanged('case.' + this.settings.usage, {node: null, random: Math.random()});
-    }).catch((err) => {console.log('err', err);});
+      this._state.notifyDataChanged('case.' + this.settings.usage, { node: null, random: Math.random() });
+    }).catch((err) => {console.log('err', err); });
 
     this.removeEvent.emit({
       data: treeNode,
@@ -309,14 +311,14 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   onDrop = (event, treeId, treeNodes, targetNode, moveType, isCopy) => {
     this.isDragging = false;
-    if(!targetNode) {
+    if (!targetNode) {
       return;
     }
 
     const deferred = new Deferred();
     deferred.promise.then((data) => {
       console.log('success to move', data);
-      this._state.notifyDataChanged(CONSTANT.EVENT_CASE_CHANGE, {node: data, random: Math.random()});
+      this._state.notifyDataChanged(CONSTANT.EVENT_CASE_CHANGE, { node: data, random: Math.random() });
 
       if (isCopy) {
         let parentNode;
@@ -326,7 +328,7 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
           parentNode = targetNode.getParentNode();
         }
         console.log('parentNode', parentNode);
-        let copyiedNode = this.ztree.getNodesByParam("id", treeNodes[0].id, parentNode)[0];
+        const copyiedNode = this.ztree.getNodesByParam('id', treeNodes[0].id, parentNode)[0];
         console.log('copyiedNode', copyiedNode);
 
         copyiedNode.id = data.id;
@@ -338,23 +340,23 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       }
 
-    }).catch((err) => {console.log('err', err);});
+    }).catch((err) => {console.log('err', err); });
 
     this.moveEvent.emit({
-      data: {pId: treeNodes[0].pId, srcId: treeNodes[0].id, targetId: targetNode.id, moveType: moveType, isCopy: isCopy},
-      deferred: deferred
+      data: { pId: treeNodes[0].pId, srcId: treeNodes[0].id, targetId: targetNode.id, moveType: moveType, isCopy: isCopy },
+      deferred: deferred,
     });
   }
 
   onExpand = (event, treeId, treeNode) => {
     if (treeNode === this.autoExpandNode) {
-      this.className = (this.className === "dark" ? "":"dark");
+      this.className = (this.className === 'dark' ? '' : 'dark');
     }
   }
   onCheck = () => {
     let i = 0;
     this.ztree.getCheckedNodes(true).forEach((value, index, array) => {
-      if(!value.isParent) {
+      if (!value.isParent) {
         i++;
       }
     });
@@ -370,17 +372,17 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   getTime = () => {
-    var now= new Date(),
-      h=now.getHours(),
-      m=now.getMinutes(),
-      s=now.getSeconds(),
-      ms=now.getMilliseconds();
-    return (h+":"+m+":"+s+ " " +ms);
+    const now = new Date(),
+      h = now.getHours(),
+      m = now.getMinutes(),
+      s = now.getSeconds(),
+      ms = now.getMilliseconds();
+    return (h + ':' + m + ':' + s + ' ' + ms);
   }
 
   onKeywordsChange(values) {
     this.keywords = values;
-    let nodes = this.ztree.getNodesByParam("isHidden", true);
+    let nodes = this.ztree.getNodesByParam('isHidden', true);
     this.ztree.showNodes(nodes);
 
     nodes = this.ztree.getNodesByFilter((node) => {
@@ -395,25 +397,29 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
     node.id = data.id;
     node.pId = data.pId;
 
-    for(let i=0; i<node.children.length; i++) {
+    for (let i = 0; i < node.children.length; i++) {
       this.updateCopiedNodes(node.children[i], data.children[i]);
     }
   }
   jumpTo(id: string) {
     this._routeService.gotoCase(id);
 
-    var node = this.ztree.getNodeByParam("id", id, null);
+    const node = this.ztree.getNodeByParam('id', id, null);
     if (node) {
       this.ztree.selectNode(node);
       this.notifyCaseChange(node);
     } else {
-      var toastOptions:ToastOptions = {
-        title: "未找到用例",
-        timeout: 2000
+      const toastOptions: ToastOptions = {
+        title: '未找到用例',
+        timeout: 2000,
       };
       this.toastyService.warning(toastOptions);
     }
 
+  }
+
+  showRemoveBtn = (treeId, treeNode) => {
+    return this.privilegeService.hasPrivilege('cases-remove') && !!treeNode.pId;
   }
 
 }
