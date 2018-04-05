@@ -18,7 +18,7 @@ import { PagesResolve } from './pages.resolve';
   declarations: [Pages],
   providers: [
     UserService,
-    PagesResolve
+    PagesResolve,
   ]
 })
 export class PagesModule {

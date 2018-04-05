@@ -1,20 +1,16 @@
-import {Component, ViewEncapsulation, ViewChild} from '@angular/core';
+import { Component, ViewEncapsulation, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { NgModule, Pipe, OnInit, AfterViewInit }      from '@angular/core';
 
-import { NgbModalModule, NgbPaginationModule, NgbDropdownModule,
-  NgbTabsetModule, NgbButtonsModule, NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
-import { BrowserModule } from '@angular/platform-browser';
-
-import {GlobalState} from '../../../../global.state';
+import { GlobalState } from '../../../../global.state';
 
 import { CONSTANT } from '../../../../utils/constant';
 import { Utils } from '../../../../utils/utils';
-import {ValidatorUtils, PhoneValidator} from '../../../../validator';
+import { ValidatorUtils, PhoneValidator } from '../../../../validator';
 import { RouteService } from '../../../../service/route';
 
-import { PopDialogComponent } from '../../../../components/pop-dialog'
+import { PopDialogComponent } from '../../../../components/pop-dialog';
 
 import { OrgService } from '../../../../service/org';
 
@@ -24,19 +20,18 @@ declare var jQuery;
   selector: 'org-edit',
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['./edit.scss'],
-  templateUrl: './edit.html'
+  templateUrl: './edit.html',
 })
 export class OrgEdit implements OnInit, AfterViewInit {
 
   id: number;
 
-  model: any = {disabled: false};
+  model: any = { disabled: false };
   groups: any[] = [];
   form: FormGroup;
-  isSubmitted: boolean;
   @ViewChild('modalWrapper') modalWrapper: PopDialogComponent;
 
-  constructor(private _state:GlobalState, private _routeService: RouteService, private _route: ActivatedRoute,
+  constructor(private _state: GlobalState, private _routeService: RouteService, private _route: ActivatedRoute,
               private fb: FormBuilder, private orgService: OrgService) {
 
   }
@@ -54,44 +49,43 @@ export class OrgEdit implements OnInit, AfterViewInit {
   ngAfterViewInit() {}
 
   buildForm(): void {
-    let that = this;
+    const that = this;
     this.form = this.fb.group(
       {
         'name': ['', [Validators.required]],
         'website': ['', []],
-        'disabled': ['', []]
-      }, {}
+        'disabled': ['', []],
+      }, {},
     );
 
     this.form.valueChanges.debounceTime(CONSTANT.DebounceTime).subscribe(data => this.onValueChanged(data));
     this.onValueChanged();
   }
   onValueChanged(data?: any) {
-    let that = this;
-    that.formErrors = ValidatorUtils.genMsg(that.form, that.validateMsg, []);
+    this.formErrors = ValidatorUtils.genMsg(this.form, this.validateMsg, []);
   }
 
   formErrors = [];
   validateMsg = {
     'name': {
-      'required':      '姓名不能为空'
-    }
+      'required': '姓名不能为空',
+    },
   };
 
   loadData() {
-    let that = this;
-    that.orgService.get(that.id).subscribe((json:any) => {
+    const that = this;
+    that.orgService.get(that.id).subscribe((json: any) => {
       that.model = json.data;
     });
   }
 
   save() {
-    let that = this;
+    const that = this;
 
-    that.orgService.save(that.model).subscribe((json:any) => {
+    that.orgService.save(that.model).subscribe((json: any) => {
       if (json.code == 1) {
         that.formErrors = ['保存成功'];
-        that._routeService.navTo("/pages/org-admin/org/list");
+        that._routeService.navTo('/pages/org-admin/org/list');
       } else {
         that.formErrors = ['保存失败'];
       }
@@ -99,12 +93,12 @@ export class OrgEdit implements OnInit, AfterViewInit {
   }
 
   delete() {
-    let that = this;
+    const that = this;
 
-    that.orgService.delete(that.model.id).subscribe((json:any) => {
+    that.orgService.delete(that.model.id).subscribe((json: any) => {
       if (json.code == 1) {
         that.formErrors = ['删除成功'];
-        that._routeService.navTo("/pages/org-admin/org/list");
+        that._routeService.navTo('/pages/org-admin/org/list');
 
         this.modalWrapper.closeModal();
       } else {

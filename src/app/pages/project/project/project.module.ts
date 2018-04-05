@@ -1,6 +1,6 @@
 import { NgModule }      from '@angular/core';
 import { CommonModule }  from '@angular/common';
-import {FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgaModule } from '../../../theme/nga.module';
 
 import { NgbModalModule, NgbPaginationModule, NgbDropdownModule,
@@ -24,11 +24,19 @@ import { ProjectService } from '../../../service/project';
 import { UserService } from '../../../service/user';
 import { UserAndGroupService } from '../../../service/userAndGroup';
 import { ReportService } from '../../../service/report';
+import { VerService } from '../../../service/ver';
+import { EnvService } from '../../../service/env';
 
 import { Project } from './project.component';
 import { ProjectList } from './list/list.component';
-import { ProjectEdit } from './edit/edit.component';
 import { ProjectView } from './view/view.component';
+
+import { ProjectEditInfo } from './edit/info/info.component';
+import { ProjectEditMember } from './edit/member/member.component';
+import { ProjectVerList } from './edit/ver/list.component';
+import { ProjectVerEdit } from './edit/ver/edit.component';
+import { ProjectEnvList } from './edit/env/list.component';
+import { ProjectEnvEdit } from './edit/env/edit.component';
 
 @NgModule({
   imports: [
@@ -47,13 +55,18 @@ import { ProjectView } from './view/view.component';
     ChartDesignModule,
     ChartExecutionModule,
     SearchSelectModule,
-    AppTranslationModule
+    AppTranslationModule,
   ],
   declarations: [
     Project,
     ProjectList,
-    ProjectEdit,
-    ProjectView
+    ProjectView,
+    ProjectEditInfo,
+    ProjectEditMember,
+    ProjectVerList,
+    ProjectVerEdit,
+    ProjectEnvList,
+    ProjectEnvEdit,
   ],
   providers: [
     RouteService,
@@ -62,8 +75,10 @@ import { ProjectView } from './view/view.component';
     ProjectService,
     UserService,
     UserAndGroupService,
-    ReportService
-  ]
+    ReportService,
+    VerService,
+    EnvService,
+  ],
 })
 export class ProjectModule {}
 

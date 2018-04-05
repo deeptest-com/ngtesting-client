@@ -28,7 +28,7 @@ export const routes: Routes = [
     path: 'pages',
     component: Pages,
     resolve: {
-      data: PagesResolve
+      data: PagesResolve,
     },
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },

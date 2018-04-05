@@ -18,7 +18,6 @@ export class Property implements OnInit, AfterViewInit, OnDestroy {
     let arr = path.split('property/')[1].split('/');
     this.tab = arr[0];
     this.status = arr[1];
-    console.log('===', this.tabset, this.tab);
   }
 
   ngOnInit() {

@@ -38,7 +38,6 @@ export class RunEditComponent implements OnInit {
 
   save(): any {
     const userIds: string[] = [];
-    console.log('this.selectedModels', this.selectedModels);
     this.selectedModels.forEach(item => { userIds.push(item.id); });
 
     this.model.userIds = userIds;

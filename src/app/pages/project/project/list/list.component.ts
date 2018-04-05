@@ -58,7 +58,7 @@ export class ProjectList implements OnInit, AfterViewInit, OnDestroy {
   }
 
   create(type: string):void {
-    this._routeService.navTo('/pages/org/' + CONSTANT.CURR_ORG_ID + '/prjs/null/edit/' + type);
+    this._routeService.navTo('/pages/org/' + CONSTANT.CURR_ORG_ID + '/prjs/null/edit/' + type + '/info');
   }
 
   queryChange(values:any):void {

@@ -119,7 +119,7 @@ path - use pathMatch: ‘prefix’. In this case if the menu item has no childre
 you navigated to some child route - the item will be highlighted.
 <br><br>
 
-6) And in the end let's import our component in `src/app/pages/pages.routing.ts` like this:
+6) And in the end let's import our component in `src/app/pages/edit.routing.ts` like this:
 
 ```javascript
 const routes: Routes = [

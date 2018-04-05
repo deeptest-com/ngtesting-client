@@ -19,7 +19,7 @@ import { CaseTypeService } from '../../../../service/case-type';
 
 import { CaseType } from './case-type.component';
 import { CaseTypeList } from './list';
-import {CaseTypeEdit } from './edit';
+import { CaseTypeEdit } from './edit';
 
 @NgModule({
   imports: [

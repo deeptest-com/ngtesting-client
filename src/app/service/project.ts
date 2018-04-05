@@ -15,9 +15,13 @@ export class ProjectService {
     return this._reqService.post(this._api_url + 'list', query);
   }
 
-  get(id:number) {
+  getInfo(id:number) {
     let model = {id: id};
-    return this._reqService.post(this._api_url + 'get', model);
+    return this._reqService.post(this._api_url + 'getInfo', model);
+  }
+  getUsers(id:number) {
+    let model = {id: id};
+    return this._reqService.post(this._api_url + 'getUsers', model);
   }
 
   save(model:any) {

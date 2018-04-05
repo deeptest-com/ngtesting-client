@@ -44,6 +44,9 @@ export class PlanEdit implements OnInit, AfterViewInit {
   planId: number;
   startDate: any;
   model: any = { runVos: [] };
+  vers: any = [];
+  envs: any = [];
+
   suites: any[] = [];
   run: any = {};
   runIndex: number;
@@ -70,7 +73,6 @@ export class PlanEdit implements OnInit, AfterViewInit {
 
   }
   ngOnInit() {
-
     this.orgId = CONSTANT.CURR_ORG_ID;
     this.prjId = CONSTANT.CURR_PRJ_ID;
 
@@ -78,9 +80,8 @@ export class PlanEdit implements OnInit, AfterViewInit {
       this.planId = +params['planId'];
     });
 
-    if (this.planId) {
-      this.loadData();
-    }
+    this.loadData();
+
     this.buildForm();
 
     const now = new Date();
@@ -95,6 +96,7 @@ export class PlanEdit implements OnInit, AfterViewInit {
         'descr': ['', []],
         'estimate': ['', []],
         'startTime': ['', []],
+        'verId': ['', [Validators.required]], 'envId': ['', [Validators.required]],
         'endTime': ['', []],
         'disabled': ['', []],
       }, {
@@ -114,11 +116,11 @@ export class PlanEdit implements OnInit, AfterViewInit {
     'name': {
       'required': '名称不能为空',
     },
-    'objective': {
-      'required': '测试目的不能为空',
+    'verId': {
+      'required': '项目版本不能为空',
     },
-    'estimate': {
-      'pattern': '耗时必须是最多含2位小数的数字',
+    'envId': {
+      'pattern': '测试环境不能为空',
     },
     dateCompare: '结束时间必须大于或等于开始时间',
   };
@@ -128,6 +130,8 @@ export class PlanEdit implements OnInit, AfterViewInit {
     that._planService.get(CONSTANT.CURR_PRJ_ID, this.planId).subscribe((json: any) => {
       that.model = json.data;
       that.suites = json.suites;
+      that.vers = json.vers;
+      that.envs = json.envs;
 
       this.model.startTime = this.ngbDateParserFormatter.parse(that.model.startTime);
       this.model.endTime = this.ngbDateParserFormatter.parse(that.model.endTime);
@@ -150,19 +154,17 @@ export class PlanEdit implements OnInit, AfterViewInit {
   }
 
   editRun(run?: any, index?: number) {
-    console.log('---', run);
     this.compiler.clearCacheFor(RunEditComponent);
     this.runEditModal = this.modalService.open(RunEditComponent, { windowClass: 'pop-modal' });
 
     if (!run) {
-      this.run = {};
+      this.run = { assignees: [] };
       this.runIndex = this.model.runVos.length;
     } else {
       this.run = run;
       this.runIndex = index;
-
-      this.runEditModal.componentInstance.selectedModels = this.run.assignees;
     }
+    this.runEditModal.componentInstance.selectedModels = this.run.assignees;
     this.runEditModal.componentInstance.model = this.run;
     this.runEditModal.componentInstance.suites = this.suites;
 

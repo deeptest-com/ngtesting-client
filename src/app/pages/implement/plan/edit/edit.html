@@ -53,6 +53,41 @@
           </div>
         </div>
       </div>
+
+      <div class="form-group row">
+        <label class="col-sm-1 col-form-label">项目版本</label>
+        <div class="col-sm-5">
+          <select [(ngModel)]="model.verId" formControlName="verId" class="form-control" name="verId">
+            <option value=""></option>
+            <option *ngFor="let entry of vers" value="{{entry.id}}">
+              <span>{{entry.name}}</span>
+            </option>
+          </select>
+        </div>
+
+        <label class="col-sm-1 col-form-label">项目版本</label>
+        <div class="col-sm-5">
+          <select [(ngModel)]="model.envId" formControlName="envId" class="form-control" name="envId">
+            <option value=""></option>
+            <option *ngFor="let entry of envs" value="{{entry.id}}">
+              <span>{{entry.name}}</span>
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div *ngIf="model.type=='project'" class="form-group row">
+        <label class="col-sm-2 col-form-label">项目组</label>
+        <div class="col-sm-10">
+          <select [(ngModel)]="model.envId" formControlName="envId" class="form-control" name="envId">
+            <option value=""></option>
+            <option *ngFor="let entry of envs" value="{{entry.id}}">
+              <span>{{entry.name}}</span>
+            </option>
+          </select>
+        </div>
+      </div>
+
       <div class="form-group row">
         <label class="col-sm-1 col-form-label"><span>简介</span></label>
         <div class="col-sm-11">
