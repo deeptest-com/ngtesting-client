@@ -6,14 +6,13 @@ export class ValidatorUtils {
       return;
     }
 
-    let errors = [];
+    const errors = [];
     for (const field in form.controls) {
       const control = form.controls[field];
 
       if (control && control.dirty && !control.valid) {
         const messages = validateMsg[field];
         for (const key in control.errors) {
-
           errors.push(messages[key]);
         }
       }
@@ -21,8 +20,7 @@ export class ValidatorUtils {
 
     // deal with custom validators' msg
     for (const idx in customValidators) {
-      let validator = customValidators[idx];
-
+      const validator = customValidators[idx];
       if (form.errors && form.errors[validator]) {
         errors.push(validateMsg[validator]);
       }

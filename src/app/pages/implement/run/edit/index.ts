@@ -2,9 +2,9 @@ import { NgModule, ModuleWithProviders } from "@angular/core";
 import { CommonModule }  from '@angular/common';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 
-import { SearchSelectModule } from '../search-select';
+import { SearchSelectModule } from '../../../../components/search-select';
 
-import { UserService } from '../../service/user';
+import { UserService } from '../../../../service/user';
 
 import { RunEditService } from './src/run-edit.service';
 import { RunEditComponent } from './src/run-edit.component';

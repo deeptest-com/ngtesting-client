@@ -18,10 +18,11 @@ import { RunService } from '../../../../service/run';
 import { CaseService } from '../../../../service/case';
 import { UserService } from '../../../../service/user';
 
-import { RunEditComponent } from '../../../../components/run-edit';
 import { CaseSelectionComponent } from '../../../../components/case-selection';
 import { EnvironmentConfigComponent } from '../../../../components/environment-config';
 import { PopDialogComponent } from '../../../../components/pop-dialog';
+
+import { RunEditComponent } from '../../run/edit';
 
 declare var jQuery;
 import * as _ from 'lodash';
@@ -96,7 +97,7 @@ export class PlanEdit implements OnInit, AfterViewInit {
         'descr': ['', []],
         'estimate': ['', []],
         'startTime': ['', []],
-        'verId': ['', [Validators.required]], 'envId': ['', [Validators.required]],
+        'verId': ['', [Validators.required]],
         'endTime': ['', []],
         'disabled': ['', []],
       }, {
@@ -119,9 +120,7 @@ export class PlanEdit implements OnInit, AfterViewInit {
     'verId': {
       'required': '项目版本不能为空',
     },
-    'envId': {
-      'pattern': '测试环境不能为空',
-    },
+
     dateCompare: '结束时间必须大于或等于开始时间',
   };
 
@@ -167,6 +166,7 @@ export class PlanEdit implements OnInit, AfterViewInit {
     this.runEditModal.componentInstance.selectedModels = this.run.assignees;
     this.runEditModal.componentInstance.model = this.run;
     this.runEditModal.componentInstance.suites = this.suites;
+    this.runEditModal.componentInstance.envs = this.envs;
 
     this.runEditModal.result.then((result) => {
       this.model.userIds = result.data.userIds;

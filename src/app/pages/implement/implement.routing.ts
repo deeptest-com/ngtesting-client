@@ -11,7 +11,7 @@ const routes: Routes = [
       { path: 'plan', loadChildren: './plan/plan.module#PlanModule' },
       { path: 'plan/:planId/execution', loadChildren: './execution/execution.module#ExecutionModule' },
 
-      { path: 'suite', loadChildren: './suite/suite.module#SuiteModule' },
+      // { path: 'suite', loadChildren: './suite/suite.module#SuiteModule' },
     ],
   },
 ];

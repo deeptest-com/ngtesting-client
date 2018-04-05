@@ -4,8 +4,8 @@ import { Component, Input, OnInit, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { CONSTANT } from '../../../utils/constant';
-import { UserService } from '../../../service/user';
+import { CONSTANT } from '../../../../../utils/constant';
+import { UserService } from '../../../../../service/user';
 import { RunEditService } from './run-edit.service';
 
 @Component({
@@ -19,6 +19,7 @@ export class RunEditComponent implements OnInit {
   selectedModels: any[] = [];
   model: any = {};
   suites: any[] = [];
+  envs: any[] = [];
 
   form: FormGroup;
 
@@ -59,6 +60,7 @@ export class RunEditComponent implements OnInit {
     this.form = this.fb.group(
       {
         'name': ['', [Validators.required]],
+        'envId': ['', [Validators.required]],
       }, {},
     );
     _.forEach(this.suites, (suite: any, index: number) => {
@@ -89,6 +91,9 @@ export class RunEditComponent implements OnInit {
   validateMsg = {
     'name': {
       'required': '名称不能为空',
+    },
+    'envId': {
+      'pattern': '测试环境不能为空',
     },
   };
 }

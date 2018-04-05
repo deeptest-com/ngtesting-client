@@ -64,16 +64,6 @@
             </option>
           </select>
         </div>
-
-        <label class="col-sm-1 col-form-label">项目版本</label>
-        <div class="col-sm-5">
-          <select [(ngModel)]="model.envId" formControlName="envId" class="form-control" name="envId">
-            <option value=""></option>
-            <option *ngFor="let entry of envs" value="{{entry.id}}">
-              <span>{{entry.name}}</span>
-            </option>
-          </select>
-        </div>
       </div>
 
       <div *ngIf="model.type=='project'" class="form-group row">
@@ -122,7 +112,7 @@
               <th>创建人</th>
               <th>经办人</th>
               <th style="width: 300px;">执行状况</th>
-              <th>环境</th>
+              <th>测试环境</th>
               <th style="width: 250px;" class="opt">
                 <span *ngIf="form.valid" privilege [privs]="'run-create'" (click)="editRun()" class="link no-underline">新建任务</span>
               </th>
@@ -141,10 +131,7 @@
               <td>
                 <execution-bar [data]="item"></execution-bar>
               </td>
-              <td>
-                <span>华为手机,</span>&nbsp;<span>OPPO手机</span>
-                <span privilege [privs]="'run-update'" (click)="editEnvi(item, i)" class="link no-underline">设置</span>
-              </td>
+              <td>{{ item.envName }}</td>
               <td class="center">
                 <span privilege [privs]="'run-update'" (click)="editRunCases(item, i)" class="link no-underline">选择用例</span>
                 &nbsp;&nbsp;

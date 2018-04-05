@@ -26,7 +26,8 @@ export class RunService {
     run.assignees.forEach(item => { assignees.push({id: item.id}); });
 
     return this._reqService.post(this._api_url + 'save',
-      { prjId: prjId, planId: planId, id: run.id, name: run.name, userId: run.userId, assignees: assignees, suites: suites });
+      { prjId: prjId, envId: run.envId, planId: planId, id: run.id,
+        name: run.name, userId: run.userId, assignees: assignees, suites: suites });
   }
 
   saveRunCases(planId: number, runId: number, cases: any[]) {
