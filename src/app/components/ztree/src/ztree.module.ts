@@ -12,7 +12,7 @@ import { ZtreeService } from './ztree.service';
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
   declarations: [ZtreeComponent],
   exports: [ZtreeComponent],
-  providers: [ToastyService,ToastyConfig, ZtreeService, PrivilegeService]
+  providers: [ToastyService, ToastyConfig, ZtreeService, PrivilegeService]
 })
 export class ZtreeModule {
 

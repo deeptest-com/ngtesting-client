@@ -1,28 +1,32 @@
-import * as _ from "lodash";
+import * as _ from 'lodash';
 
-import {Component, Input, OnInit, AfterViewInit} from "@angular/core";
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
+import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
-import {CONSTANT} from "../../../utils/constant";
+import { CONSTANT } from '../../../utils/constant';
 
-import {ZtreeService} from "../../ztree/src/ztree.service";
-import {SuiteService} from "../../../service/suite";
-import {CaseService} from "../../../service/case";
-
-import {CaseSelectionService} from "./case-selection.service";
+import { ZtreeService } from '../../ztree/src/ztree.service';
+import { SuiteService } from '../../../service/suite';
+import { CaseService } from '../../../service/case';
 
 @Component({
   selector: 'case-selection',
   templateUrl: './case-selection.html',
-  styleUrls: ['./styles.scss']
+  styleUrls: ['./styles.scss'],
 })
 export class CaseSelectionComponent implements OnInit {
   orgId: number;
   projectId: number;
+  caseProjectId: number;
+
+  @Input() selectFor: string;
+  suiteId: number;
+  runId: number;
 
   @Input() treeModel: any;
   @Input() treeSettings: any = {};
+  @Input() brotherProjects: any[] = [];
   @Input() users: any[] = [];
 
   @Input() progress: string = '0';
@@ -33,20 +37,20 @@ export class CaseSelectionComponent implements OnInit {
   form: FormGroup;
   createUsers: any[] = [];
   updateUsers: any[] = [];
-  _queryModel: any = {type: {}, priority: {}, createUsers: [], updateUsers: []};
+  _queryModel: any = { type: {}, priority: {}, createUsers: [], updateUsers: [] };
   queryModel: any;
 
   cases: string[];
-  _disabledV:string = '0';
-  disabled:boolean = false;
+  _disabledV: string = '0';
+  disabled: boolean = false;
 
   constructor(public activeModal: NgbActiveModal, private fb: FormBuilder, private _treeService: ZtreeService,
-              public _sutieService: SuiteService, public _caseService: CaseService,) {
+              public _sutieService: SuiteService, public _caseService: CaseService ) {
 
     this.queryModel = _.cloneDeep(this._queryModel);
+    this.queryModel.projectId
 
     this.orgId = CONSTANT.CURR_ORG_ID;
-    this.projectId = CONSTANT.CURR_PRJ_ID;
   }
 
   ngOnInit(): any {
@@ -56,14 +60,25 @@ export class CaseSelectionComponent implements OnInit {
   }
 
   loadData() {
-    this._caseService.query(this.orgId, this.projectId).subscribe((json:any) => {
-      this.cases = json.data;
-    });
+    if (this.selectFor == 'suite') {
+      this._caseService.queryForSuiteSelection(this.projectId, this.caseProjectId, this.suiteId)
+            .subscribe((json: any) => {
+        this.treeModel = json.data;
+        this.brotherProjects = json.brotherProjects;
+      });
+    } else if (this.selectFor == 'run') {
+      this._caseService.queryForRunSelection(this.projectId, this.caseProjectId, this.runId)
+            .subscribe((json: any) => {
+        this.treeModel = json.data;
+        this.brotherProjects = json.brotherProjects;
+      });
+    }
   }
 
   save(): any {
-    let ztree = $.fn.zTree.getZTreeObj("tree");
-    this.activeModal.close({act: 'save', data: ztree.getCheckedNodes(true)});
+    const ztree = $.fn.zTree.getZTreeObj('tree');
+    this.activeModal.close({ act: 'save', projectId: this.projectId, caseProjectId: this.caseProjectId,
+      data: ztree.getCheckedNodes(true) });
   }
 
   reset() {
@@ -71,7 +86,7 @@ export class CaseSelectionComponent implements OnInit {
   }
 
   dismiss(): any {
-    this.activeModal.dismiss({act: 'cancel'});
+    this.activeModal.dismiss({ act: 'cancel' });
   }
 
   onModuleSelected(event: any) {
@@ -90,8 +105,8 @@ export class CaseSelectionComponent implements OnInit {
         'createTime': ['', []],
         'updateTime': ['', []],
         'createUser': ['', []],
-        'updateUser': ['', []]
-      }, {}
+        'updateUser': ['', []],
+      }, {},
     );
 
     this.form.valueChanges.debounceTime(CONSTANT.DebounceTime).subscribe(data => this.query(data));
@@ -102,25 +117,25 @@ export class CaseSelectionComponent implements OnInit {
   };
 
   query(data?: any) {
-    let ztree = jQuery.fn.zTree.getZTreeObj('tree');
+    const ztree = jQuery.fn.zTree.getZTreeObj('tree');
     if (!ztree) {
       return;
     }
 
-    let nodes = ztree.getNodesByParam("isHidden", true);
+    let nodes = ztree.getNodesByParam('isHidden', true);
     ztree.showNodes(nodes);
 
-    let typeFilter: string[] = this.validFilter(this.queryModel.type);
-    let priorityFilter: string[] = this.validFilter(this.queryModel.priority);
-    let estimateFilter: string[] = this.queryModel.estimate?this.queryModel.estimate.split('-'): [];
+    const typeFilter: string[] = this.validFilter(this.queryModel.type);
+    const priorityFilter: string[] = this.validFilter(this.queryModel.priority);
+    const estimateFilter: string[] = this.queryModel.estimate ? this.queryModel.estimate.split('-') : [];
 
-    let createTimeFilter: number = this.queryModel.createTime * 24 * 60 * 60 * 1000;
-    let updateTimeFilter: number = this.queryModel.updateTime * 24 * 60 * 60 * 1000;
+    const createTimeFilter: number = this.queryModel.createTime * 24 * 60 * 60 * 1000;
+    const updateTimeFilter: number = this.queryModel.updateTime * 24 * 60 * 60 * 1000;
 
-    let createByFilter: string[] = this.queryModel.createUsers.map(function (item,index,input) {
+    const createByFilter: string[] = this.queryModel.createUsers.map(function (item, index, input) {
       return item.id;
     });
-    let updateByFilter: string[] = this.queryModel.updateUsers.map(function (item,index,input) {
+    const updateByFilter: string[] = this.queryModel.updateUsers.map(function (item, index, input) {
       return item.id;
     });
 
@@ -147,40 +162,45 @@ export class CaseSelectionComponent implements OnInit {
     this.query();
   }
 
-  private get disabledV():string {
+  private get disabledV(): string {
     return this._disabledV;
   }
 
-  private set disabledV(value:string) {
+  private set disabledV(value: string) {
     this._disabledV = value;
     this.disabled = this._disabledV === '1';
   }
 
-  public refreshCreateBy(value:any):void {
+  public refreshCreateBy(value: any): void {
     this.queryModel.createUsers = value;
     this.query();
   }
-  public refreshUpdateBy(value:any):void {
+  public refreshUpdateBy(value: any): void {
     this.queryModel.updateUsers = value;
     this.query();
   }
 
-  public itemsToString(value:Array<any> = []):string {
+  public itemsToString(value: Array<any> = []): string {
     return value
-      .map((item:any) => {
+      .map((item: any) => {
         return item.text;
       }).join(',');
   }
 
   public validFilter(obj: any): string[] {
-    let arr:string[] = [];
+    const arr: string[] = [];
 
-    for(var i in obj){
+    for (const i in obj) {
       if (obj[i]) {
         arr.push(i);
       }
     }
     return arr;
+  }
+
+  changeProject(id: number) {
+    this.caseProjectId = id;
+    this.loadData();
   }
 
 }

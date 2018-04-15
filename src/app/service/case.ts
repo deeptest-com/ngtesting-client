@@ -16,11 +16,13 @@ export class CaseService {
     return this._reqService.post(this._api_url + 'query', {orgId: orgId, projectId: projectId});
   }
 
-  queryForSuiteSelection(projectId: number, suiteId: number) {
-    return this._reqService.post(this._api_url + 'queryForSuiteSelection', {projectId: projectId, suiteId: suiteId});
+  queryForSuiteSelection(projectId: number, caseProjectId: number, suiteId: number) {
+    return this._reqService.post(this._api_url + 'queryForSuiteSelection',
+      {projectId: projectId, caseProjectId: caseProjectId, suiteId: suiteId});
   }
-  queryForRunSelection(projectId: number, runId: number) {
-    return this._reqService.post(this._api_url + 'queryForRunSelection', {projectId: projectId, runId: runId});
+  queryForRunSelection(projectId: number, caseProjectId: number, runId: number) {
+    return this._reqService.post(this._api_url + 'queryForRunSelection',
+      {projectId: projectId, caseProjectId: caseProjectId , runId: runId});
   }
 
   get(id: number) {

@@ -1,13 +1,13 @@
 import { Input, Component, OnInit, OnDestroy, AfterViewInit, Renderer2, EventEmitter, Output, Inject, OnChanges, SimpleChanges } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import * as _ from 'lodash';
 
-import { ToastyService, ToastyConfig, ToastOptions, ToastData } from 'ng2-toasty';
+import { ToastyService, ToastOptions } from 'ng2-toasty';
 import { GlobalState } from '../../../global.state';
-import { Deferred, getDeepFromObject } from './helpers';
+import { Deferred } from './helpers';
 
 import { CONSTANT } from '../../../utils/constant';
-import { Utils } from '../../../utils/utils';
+import { Utils, logger } from '../../../utils/utils';
 
 import { RouteService } from '../../../service/route';
 import { PrivilegeService } from '../../../service/privilege';
@@ -25,8 +25,9 @@ declare var jQuery;
 export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
   eventCode: string = 'ZtreeComponent';
 
-  @Input()
-  treeSettings: any;
+  @Input() projectId: any;
+  @Input() caseProjectId: any;
+  @Input() treeSettings: any;
   settings: any;
   treeHeight: number;
 
@@ -37,10 +38,11 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
   private disposersForDragListeners: Function[] = [];
   childrenCount: any = {};
 
-  _treeModel: any;
+  queryForm: FormGroup;
+  queryModel:any = { keywords: '', projectId: '' };
+
   ztree: any;
   checkCount: number;
-  keywordsControl = new FormControl();
   keywords: string = '';
   isExpanded: boolean = false;
   sonSign: boolean = false;
@@ -53,6 +55,10 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
   autoExpandNode: any;
   currNode: any;
 
+  @Output() projectChanged = new EventEmitter<any>();
+  @Input() brotherProjects: any[] = [];
+
+  _treeModel: any;
   @Input() set treeModel(model: any) {
     if (!model) {
       return;
@@ -83,9 +89,18 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  public constructor(private _state: GlobalState, private _routeService: RouteService, @Inject(Renderer2) private renderer: Renderer2,
-                     private privilegeService: PrivilegeService, private toastyService: ToastyService, @Inject(ZtreeService) private ztreeService: ZtreeService) {
+  public constructor(private _state: GlobalState, private _routeService: RouteService,
+                     @Inject(Renderer2) private renderer: Renderer2, private fb: FormBuilder,
+                     private privilegeService: PrivilegeService, private toastyService: ToastyService,
+                     @Inject(ZtreeService) private ztreeService: ZtreeService) {
     this.treeHeight = Utils.getContainerHeight(110 + 38);
+
+    this.queryForm = this.fb.group(
+      {
+        'projectId': ['', []],
+        'keywords': ['', []],
+      }, {},
+    );
 
     this.settings = {
       usage: null,
@@ -131,10 +146,10 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    this.keywordsControl.valueChanges.debounceTime(CONSTANT.DebounceTime).subscribe(values => this.onKeywordsChange(values));
+    this.queryModel.projectId = this.projectId;
 
     this._state.subscribe(CONSTANT.EVENT_CASE_JUMP, this.eventCode, (id: number) => {
-      console.log(CONSTANT.EVENT_CASE_JUMP);
+      logger.log(CONSTANT.EVENT_CASE_JUMP);
       this.jumpTo(id + '');
     });
 
@@ -155,6 +170,11 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
   ngAfterViewInit() {
     this.disposersForDragListeners.push(this.renderer.listen('document', 'keyup', this.copyKeyup.bind(this)));
     this.disposersForDragListeners.push(this.renderer.listen('document', 'keydown', this.copyKeyDown.bind(this)));
+
+    this.queryForm.controls['keywords'].valueChanges.debounceTime(CONSTANT.DebounceTime)
+      .subscribe(values => this.onKeywordsChange(values));
+    this.queryForm.controls['projectId'].valueChanges.debounceTime(CONSTANT.DebounceTime)
+      .subscribe(values => this.onProjectChange(values));
   }
   copyKeyup(e): any {
     this.isToCopy = false;
@@ -209,6 +229,7 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
     this._state.notifyDataChanged('case.' + this.settings.usage, { node: node, childrenCount: this.childrenCount, random: Math.random() });
   }
   countChildren = (treeNode) => {
+    logger.log(treeNode.name, treeNode.isParent, !treeNode.isLeaf);
     if (treeNode.isParent){
       for (const obj in treeNode.children){
         this.countChildren(treeNode.children[obj]);
@@ -247,7 +268,7 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
     const addStr = "<span class='button add' id='addBtn_" + treeNode.tId
       + "' title='添加' onfocus='this.blur();'></span>";
     sObj.after(addStr);
-    console.log('treeNode.isShowDeleteBut', treeNode);
+    logger.log('treeNode.isShowDeleteBut', treeNode);
 
     const btn = jQuery('#addBtn_' + treeNode.tId);
     if (btn) btn.bind('click', () => {
@@ -264,7 +285,7 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
   onRename = (e, treeId, treeNode, isCancel) => {
     const deferred = new Deferred();
     deferred.promise.then((data) => {
-      console.log('success to rename', data);
+      logger.log('success to rename', data);
       treeNode.id = data.id;
       treeNode.entityId = data.entityId;
       treeNode.ordr = data.ordr;
@@ -272,7 +293,7 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
       treeNode.tm = new Date().getTime();
 
       this._state.notifyDataChanged('case.' + this.settings.usage, { node: _.clone(treeNode), random: Math.random() });
-    }).catch((err) => {console.log('err', err); });
+    }).catch((err) => {logger.log('err', err); });
 
     this.renameEvent.emit({
       data: treeNode,
@@ -288,9 +309,9 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
   onRemove = (e, treeId, treeNode) => {
     const deferred = new Deferred();
     deferred.promise.then((data) => {
-      console.log('success to remove', treeNode);
+      logger.log('success to remove', treeNode);
       this._state.notifyDataChanged('case.' + this.settings.usage, { node: null, random: Math.random() });
-    }).catch((err) => {console.log('err', err); });
+    }).catch((err) => {logger.log('err', err); });
 
     this.removeEvent.emit({
       data: treeNode,
@@ -317,7 +338,7 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
 
     const deferred = new Deferred();
     deferred.promise.then((data) => {
-      console.log('success to move', data);
+      logger.log('success to move', data);
       this._state.notifyDataChanged(CONSTANT.EVENT_CASE_CHANGE, { node: data, random: Math.random() });
 
       if (isCopy) {
@@ -327,9 +348,9 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
         } else {
           parentNode = targetNode.getParentNode();
         }
-        console.log('parentNode', parentNode);
+        logger.log('parentNode', parentNode);
         const copyiedNode = this.ztree.getNodesByParam('id', treeNodes[0].id, parentNode)[0];
-        console.log('copyiedNode', copyiedNode);
+        logger.log('copyiedNode', copyiedNode);
 
         copyiedNode.id = data.id;
         copyiedNode.pId = data.pId;
@@ -340,7 +361,7 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       }
 
-    }).catch((err) => {console.log('err', err); });
+    }).catch((err) => {logger.log('err', err); });
 
     this.moveEvent.emit({
       data: { pId: treeNodes[0].pId, srcId: treeNodes[0].id, targetId: targetNode.id, moveType: moveType, isCopy: isCopy },
@@ -380,7 +401,9 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
     return (h + ':' + m + ':' + s + ' ' + ms);
   }
 
-  onKeywordsChange(values) {
+  onKeywordsChange(values: string) {
+    if (!this.ztree) { return; }
+
     this.keywords = values;
     let nodes = this.ztree.getNodesByParam('isHidden', true);
     this.ztree.showNodes(nodes);
@@ -390,9 +413,13 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
     });
     this.ztree.hideNodes(nodes);
   }
+  onProjectChange(id: number) {
+    this.queryModel.projectId = id;
+    this.projectChanged.emit(id);
+  }
 
   updateCopiedNodes(node: any, data: any) {
-    console.log('===',  node.id, data.id);
+    logger.log('===',  node.id, data.id);
 
     node.id = data.id;
     node.pId = data.pId;

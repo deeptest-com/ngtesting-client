@@ -30,11 +30,12 @@ export class RunService {
         name: run.name, userId: run.userId, assignees: assignees, suites: suites });
   }
 
-  saveRunCases(planId: number, runId: number, cases: any[]) {
+  saveRunCases(projectId: number, caseProjectId: number, planId: number, runId: number, cases: any[]) {
     const ids: number[] = cases.map(function (item, index, input) {
       return item.id;
     });
-    return this._reqService.post(this._api_url + 'saveCases', { planId: planId, runId: runId, cases: ids });
+    return this._reqService.post(this._api_url + 'saveCases',
+      { projectId: projectId, caseProjectId: caseProjectId, planId: planId, runId: runId, cases: ids });
   }
 
   delete(id: any) {

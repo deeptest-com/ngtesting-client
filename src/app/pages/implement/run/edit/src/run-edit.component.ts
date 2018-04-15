@@ -14,10 +14,12 @@ import { RunEditService } from './run-edit.service';
   styleUrls: ['./styles.scss'],
 })
 export class RunEditComponent implements OnInit {
+  projectId: number;
+
   searchModel: any = {};
   searchResult: any[];
   selectedModels: any[] = [];
-  model: any = {};
+  model: any = { envId: null };
   suites: any[] = [];
   envs: any[] = [];
 
@@ -31,6 +33,8 @@ export class RunEditComponent implements OnInit {
   }
 
   ngOnInit(): any {
+    this.projectId = this.model.projectId;
+
     this.buildForm();
     this.suites.forEach((suite) => {
       suite.selecting = false;
@@ -60,7 +64,7 @@ export class RunEditComponent implements OnInit {
     this.form = this.fb.group(
       {
         'name': ['', [Validators.required]],
-        'envId': ['', [Validators.required]],
+        'envId': ['', []],
       }, {},
     );
     _.forEach(this.suites, (suite: any, index: number) => {
@@ -91,9 +95,6 @@ export class RunEditComponent implements OnInit {
   validateMsg = {
     'name': {
       'required': '名称不能为空',
-    },
-    'envId': {
-      'pattern': '测试环境不能为空',
     },
   };
 }

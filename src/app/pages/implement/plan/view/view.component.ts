@@ -67,6 +67,7 @@ export class PlanView implements OnInit, AfterViewInit {
 
       that.model.runVos.forEach((run: any) => {
         for (const item of run.assignees) {
+          console.log(item.id, this.profile.id);
             if (item.id == this.profile.id) {
               run.show = true;
               break;

@@ -5,14 +5,16 @@
     <button type="button" class="btn btn-primary confirm-btn" (click)="save()">确认</button>
     &nbsp;&nbsp;
     <button type="button" class="btn btn-secondary" (click)="dismiss()">取消</button>
-
   </div>
   <div class="modal-body">
     <div class="cols">
       <div class="modules">
         <ztree
+          [projectId]="caseProjectId"
           [treeModel]="treeModel"
-          [treeSettings]="treeSettings">
+          [treeSettings]="treeSettings"
+          [brotherProjects]="brotherProjects"
+          (projectChanged)="changeProject($event)">
         </ztree>
       </div>
 

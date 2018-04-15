@@ -1,11 +1,11 @@
-import {Component, ViewEncapsulation, OnInit, AfterViewInit} from "@angular/core";
+import { Component, ViewEncapsulation, OnInit, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
-import {GlobalState} from "../../../../global.state";
-import {CONSTANT} from "../../../../utils/constant";
-import {RouteService} from "../../../../service/route";
-import {SlimLoadingBarService} from "../../../../components/ng2-loading-bar";
-import {CaseService} from "../../../../service/case";
+import { GlobalState } from '../../../../global.state';
+import { CONSTANT } from '../../../../utils/constant';
+import { RouteService } from '../../../../service/route';
+import { SlimLoadingBarService } from '../../../../components/ng2-loading-bar';
+import { CaseService } from '../../../../service/case';
 
 declare var jQuery;
 
@@ -15,17 +15,18 @@ declare var jQuery;
   styleUrls: ['./suite.scss',
     '../../../../../assets/vendor/ztree/css/zTreeStyle/zTreeStyle.css',
     '../../../../components/ztree/src/styles.scss'],
-  templateUrl: './suite.html'
+  templateUrl: './suite.html',
 })
 export class CaseSuite implements OnInit, AfterViewInit {
   orgId: number;
   projectId: number;
   caseId: number;
-  public treeModel: any;
-  public treeSettings: any = {usage: 'edit', isExpanded: true, sonSign: false};
 
-  constructor(private _routeService:RouteService, private _route: ActivatedRoute, private _state:GlobalState,
-              private _caseService:CaseService, private slimLoadingBarService:SlimLoadingBarService) {
+  public treeModel: any;
+  public treeSettings: any = { usage: 'edit', isExpanded: true, sonSign: false };
+
+  constructor(private _routeService: RouteService, private _route: ActivatedRoute, private _state: GlobalState,
+              private _caseService: CaseService, private slimLoadingBarService: SlimLoadingBarService) {
 
   }
 
@@ -49,7 +50,7 @@ export class CaseSuite implements OnInit, AfterViewInit {
   loadData() {
     this.startLoading();
 
-    this._caseService.query(this.orgId, this.projectId).subscribe((json:any) => {
+    this._caseService.query(this.orgId, this.projectId).subscribe((json: any) => {
       this.treeModel = json.data;
       CONSTANT.CUSTOM_FIELD_FOR_PROJECT = json.customFields;
       CONSTANT.CASE_TYPES_FOR_PROJECT = json.caseTypeList;
@@ -66,19 +67,19 @@ export class CaseSuite implements OnInit, AfterViewInit {
   }
 
   rename(event: any) {
-    let testCase = event.data;
-    this._caseService.rename(this.projectId, testCase).subscribe((json:any) => {
+    const testCase = event.data;
+    this._caseService.rename(this.projectId, testCase).subscribe((json: any) => {
       event.deferred.resolve(json.data);
     });
   }
   delete(event: any) {
-    let testCase = event.data;
-    this._caseService.delete(testCase.id).subscribe((json:any) => {
+    const testCase = event.data;
+    this._caseService.delete(testCase.id).subscribe((json: any) => {
       event.deferred.resolve(json.data);
     });
   }
   move(event: any) {
-    this._caseService.move(this.projectId, event.data).subscribe((json:any) => {
+    this._caseService.move(this.projectId, event.data).subscribe((json: any) => {
       event.deferred.resolve(json.data);
     });
   }

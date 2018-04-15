@@ -22,17 +22,18 @@ export class SuiteService {
     return this._reqService.post(this._apiUrl + 'get', model);
   }
 
-  save(projectId: number, model: any) {
+  save(projectId: number, caseProjectId: number, model: any) {
     const data = _.clone(model);
     data.projectId = projectId;
+    data.caseProjectId = caseProjectId;
     return this._reqService.post(this._apiUrl + 'save', data);
   }
 
-  saveSuiteCases(suiteId: number, cases: any[]) {
+  saveSuiteCases(projectId: number, caseProjectId: number, suiteId: number, cases: any[]) {
     const ids: number[] = cases.map(function (item, index, input) {
       return item.id;
     });
-    return this._reqService.post(this._apiUrl + 'saveCases', { suiteId: suiteId, cases: ids });
+    return this._reqService.post(this._apiUrl + 'saveCases', { projectId: projectId, caseProjectId: caseProjectId, suiteId: suiteId, cases: ids });
   }
 
   delete(id: any) {

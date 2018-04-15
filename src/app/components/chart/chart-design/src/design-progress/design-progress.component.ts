@@ -41,7 +41,7 @@ export class DesignProgressComponent implements OnInit {
       legend: {
         right: '0%',
         width: '15%',
-        data: ['合计用例数', '新增用例数']
+        data: ['新增用例数', '合计用例数']
       },
       grid: {
         top: '15%',
@@ -50,7 +50,7 @@ export class DesignProgressComponent implements OnInit {
         left: '1%',
         containLabel: true,
       },
-      color: ['#2f4554', '#c23531'],
+      color: ['#c23531','#2f4554'],
       xAxis: {
         type: 'category',
         name: '',
@@ -65,27 +65,27 @@ export class DesignProgressComponent implements OnInit {
 
       yAxis: [
         {
-          name: '数量（个）',
+          name: '新增（个）',
           type: 'value'
         },
         {
-          name: '数量（个）',
+          name: '累计（个）',
           type: 'value'
         }
       ],
       series: [
         {
-          name: '合计用例',
-          type: 'line',
+          name:'新增数量',
+          type:'bar',
           yAxisIndex: 0,
-          data: this._data.totalList,
+          data: this._data.numbList
         },
         {
-          name:'新增用例',
-          type:'bar',
+          name: '累计数量',
+          type: 'line',
           yAxisIndex: 1,
-          data: this._data.numbList
-        }
+          data: this._data.totalList,
+        },
       ]
     };
   }

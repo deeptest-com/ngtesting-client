@@ -1,0 +1,97 @@
+<div class="plan-edit container-fluid">
+  <div class="row">
+    <div class="edit-toolbar col-xl-12">
+      <div class="title">
+        <span *ngIf="!model?.id">新建测试集</span>
+        <span *ngIf="model?.id">编辑测试集</span>
+      </div>
+      <div class="buttons">
+        <button [routerLink]="['/pages/org/' + orgId + '/prj/' + prjId + '/implement/suite/list']" type="button"
+                class="btn btn-primary btn-with-icon btn-sm back">
+          <i class="fa fa-arrow-circle-left"></i>返回
+        </button>
+      </div>
+    </div>
+  </div>
+  <hr/>
+
+  <form [formGroup]="form" class="my-validate-form">
+    <div class="org-edit">
+      <div class="form-group row">
+        <label class="col-sm-1 col-form-label"><span>名称</span></label>
+        <div class="col-sm-5">
+          <input type="text" class="form-control" name="name" formControlName="name"
+                 [(ngModel)]="model.name" #name>
+        </div>
+
+        <label class="col-sm-1 col-form-label"><span>耗时(小时)</span></label>
+        <div class="col-sm-5">
+          <input type="number" class="form-control" name="estimate" formControlName="estimate"
+                 [(ngModel)]="model.estimate" #estimate>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-1 col-form-label"><span>简介</span></label>
+        <div class="col-sm-11">
+              <textarea type="text" class="form-control" name="descr" formControlName="descr"
+                        [(ngModel)]="model.descr" #descr></textarea>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-1 col-form-label">
+          <span>所属项目</span>
+        </label>
+        <label class="col-sm-11 col-form-label left">
+          {{model?.projectName}}
+        </label>
+      </div>
+
+      <div class="test-sets form-group row">
+        <label class="col-sm-1 col-form-label">
+          <span>测试用例</span>
+        </label>
+
+        <label class="col-sm-11 col-form-label left">
+          <span *ngIf="!model.id">0个</span>
+          <span *ngIf="model.id">{{model.count}}个</span>
+
+          <span *ngIf="form.valid" (click)="editSuiteCases(model)" class="link">选择</span>
+        </label>
+
+      </div>
+
+    </div>
+
+    <div class="form-group row">
+      <div class="offset-sm-1  col-sm-11">
+        <button (click)="save()" type="button" class="btn btn-primary" [disabled]="!form.valid">保存</button>
+        &nbsp;
+        <button [routerLink]="['/pages/org/' + orgId + '/prj/' + prjId + '/implement/suite/list']" type="button" class="btn btn-default">取消</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button privilege [privs]="'plan-remove'" (click)="delete()" *ngIf="model.id" type="button" class="btn btn-danger">删除</button>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="offset-sm-1 col-sm-11">
+        <div class="validate-errors">
+          <div class="validate-error" *ngFor="let msg of formErrors">
+            <div>{{ msg }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </form>
+
+</div>
+
+<pop-dialog #modalDelete (confirm)="deleteConfirm()" [title]="modalTitle">
+  确认删除名为"{{model.name}}"的测试计划？
+</pop-dialog>
+
+<pop-dialog #modalRemoveSet (confirm)="removeSetConfirm()" [title]="modalTitle">
+  <div *ngIf="testSet"> 确认删除名为"{{testSet.name}}"的测试集? </div>
+</pop-dialog>
