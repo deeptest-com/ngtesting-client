@@ -91,6 +91,15 @@ export class RunEditComponent implements OnInit {
     });
   }
 
+  selectSuite (item: any, status: any) {
+    console.log('===', item, status);
+    this.suites.forEach(suite => {
+      if (suite.caseProjectId != item.caseProjectId) {
+        suite.selecting = false;
+      }
+    });
+  }
+
   formErrors = [];
   validateMsg = {
     'name': {

@@ -223,17 +223,6 @@ export class PlanEdit implements OnInit, AfterViewInit {
     });
   }
 
-  editEnvi(testSet: any): void {
-    this.compiler.clearCacheFor(EnvironmentConfigComponent);
-    this.envSelectionModal = this.modalService.open(EnvironmentConfigComponent, { windowClass: 'pop-modal' });
-    this.envSelectionModal.result.then((result) => {
-      logger.log('result', result);
-    }, (reason) => {
-      logger.log('reason', reason);
-    });
-    this.envSelectionModal.componentInstance.testSet = testSet;
-  }
-
   delete(): void {
     this.modalTitle = '确认删除';
     this.modalDelete.showModal();

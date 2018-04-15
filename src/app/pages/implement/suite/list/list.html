@@ -7,12 +7,6 @@
 
       <div class="filter">
         <form [formGroup]="queryForm" class="form-inline">
-          <label for="status">状态</label>
-          <select [(ngModel)]="queryModel.status" formControlName="status"
-                  class="form-control form-control-sm" id="status" name="status">
-            <option *ngFor="let entry of (statusMap | mapToArray)" value="{{entry.key}}">{{entry.value}}</option>
-          </select>
-          &nbsp;&nbsp;&nbsp;
           <label for="keywords">关键字</label>
           <input [(ngModel)]="queryModel.keywords" formControlName="keywords"
                  type="search" class="form-control form-control-sm" placeholder="" id="keywords" name="keywords">

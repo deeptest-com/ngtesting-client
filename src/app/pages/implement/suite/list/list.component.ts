@@ -18,7 +18,7 @@ export class SuiteListComponent implements OnInit, AfterViewInit {
   models: any;
 
   queryForm: FormGroup;
-  queryModel: any = { keywords: '', status: '' };
+  queryModel: any = { keywords: '' };
   statusMap: Array<any> = CONSTANT.ExeStatus;
 
   constructor(private _routeService: RouteService, private fb: FormBuilder, private el: ElementRef,
@@ -26,7 +26,6 @@ export class SuiteListComponent implements OnInit, AfterViewInit {
 
     this.queryForm = this.fb.group(
       {
-        'status': ['', []],
         'keywords': ['', []],
       }, {},
     );
