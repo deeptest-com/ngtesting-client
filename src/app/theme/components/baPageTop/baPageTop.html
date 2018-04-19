@@ -30,7 +30,7 @@
         <button class="dropdown-item">当前项目</button>
         <button class="dropdown-item">
           <a *ngIf="projects && projects[0]"
-             [routerLink]="['/pages/org/' + orgId + '/prjs/' + projects[0].projectId + '/view']">
+             [routerLink]="['/pages/org/' + orgId + '/prj/' + projects[0].projectId + '/view']">
             {{projects[0].projectName}}
           </a>
           <a *ngIf="!projects || projects.length == 0">无</a>
@@ -39,7 +39,7 @@
         <button class="dropdown-item next">最近查看</button>
         <ng-container *ngFor="let item of projects; let i = index">
           <button *ngIf="i > 0" class="dropdown-item" class="dropdown-item">
-            <a [routerLink]="['/pages/org/' + orgId + '/prjs/' + item.projectId + '/view']">
+            <a [routerLink]="['/pages/org/' + orgId + '/prj/' + item.projectId + '/view']">
               {{item.projectName}}</a>
           </button>
         </ng-container>
@@ -67,6 +67,10 @@
 
     <div *ngIf="prjId" ngbDropdown class="btn-group">
       <button (click)="gotoModule('implement')" class="btn btn-default" ngbDropdownToggle>测试计划</button>
+    </div>
+
+    <div *ngIf="prjId" ngbDropdown class="btn-group">
+      <button (click)="gotoModule('autotest')" class="btn btn-default" ngbDropdownToggle>测试自动化</button>
     </div>
 
 <!--    <div *ngIf="project.id" ngbDropdown class="btn-group">

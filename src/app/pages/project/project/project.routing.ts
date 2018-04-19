@@ -2,7 +2,6 @@ import { Routes, RouterModule }  from '@angular/router';
 
 import { Project } from './project.component';
 import { ProjectList } from './list/list.component';
-import { ProjectView } from './view/view.component';
 
 import { ProjectEditInfo } from './edit/info/info.component';
 import { ProjectEditMember } from './edit/member/member.component';
@@ -18,7 +17,6 @@ const routes: Routes = [
     component: Project,
     children: [
       { path: '', component: ProjectList },
-      { path: ':id/view', component: ProjectView },
 
       { path: ':id/edit/:type/info', component: ProjectEditInfo },
       { path: ':id/edit/member', component: ProjectEditMember },

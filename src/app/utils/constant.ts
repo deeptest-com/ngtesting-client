@@ -47,6 +47,9 @@ export const CONSTANT: CONSTANT_INTERFACE = {
   EVENT_CASE_EXE: 'case.exe',
   EVENT_CASE_JUMP: 'case.jump',
 
+  HEAD_HEIGHT: 66,
+  FOOTER_HEIGHT: 44,
+  ZTREE_TOOOLBAR_HEIGHT: 38,
 };
 
 export interface CONSTANT_INTERFACE {
@@ -98,5 +101,8 @@ export interface CONSTANT_INTERFACE {
   EVENT_CASE_EXE: string;
   EVENT_CASE_JUMP: string;
 
+  HEAD_HEIGHT: number;
+  FOOTER_HEIGHT: number;
+  ZTREE_TOOOLBAR_HEIGHT: number;
 }
 

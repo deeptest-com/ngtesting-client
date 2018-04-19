@@ -17,6 +17,7 @@ import {PlanService} from "../../../../service/plan";
 export class PlanList implements OnInit, AfterViewInit {
   orgId: number;
   prjId: number;
+  projectName: string;
   isInit: boolean;
 
   models: any;
@@ -41,6 +42,7 @@ export class PlanList implements OnInit, AfterViewInit {
   ngOnInit() {
     this.orgId = CONSTANT.CURR_ORG_ID;
     this.prjId = CONSTANT.CURR_PRJ_ID;
+    this.projectName = CONSTANT.CURR_PRJ_NAME;
 
     this.loadData();
   }

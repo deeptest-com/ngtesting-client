@@ -10,9 +10,10 @@ const routes: Routes = [
     path: '',
     component: AutoTest,
     children: [
-      { path: 'report', loadChildren: './report/report.module#ReportModule' }
-    ]
-  }
+      { path: 'aitask', loadChildren: './aitask/aitask.module#AitaskModule' },
+      { path: 'report', loadChildren: './report/report.module#ReportModule' },
+    ],
+  },
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forChild(routes);

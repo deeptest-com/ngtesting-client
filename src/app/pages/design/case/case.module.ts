@@ -51,13 +51,13 @@ import { CaseView } from './view/view.component';
     ZtreeModule,
     StepsTableModule,
     CustomFieldModule,
-    TinyMCEModule
+    TinyMCEModule,
   ],
   declarations: [
     Case,
     CaseSuite,
     CaseEdit,
-    CaseView
+    CaseView,
   ],
   providers: [
     RouteService,
@@ -67,7 +67,7 @@ import { CaseView } from './view/view.component';
     CaseService,
     CaseStepService,
     CaseCommentsService,
-    PrivilegeService
+    PrivilegeService,
   ]
 })
 export class CaseModule {}

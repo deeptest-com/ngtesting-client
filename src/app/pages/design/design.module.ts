@@ -20,15 +20,14 @@ import { Design } from './design.component';
     routing,
 
     NgbModalModule, NgbPaginationModule, NgbDropdownModule,
-    NgbTabsetModule, NgbButtonsModule, NgbCollapseModule
+    NgbTabsetModule, NgbButtonsModule, NgbCollapseModule,
   ],
   declarations: [
-    Design
+    Design,
   ],
   providers: [
-    AccountService, ProjectService
-  ]
+    AccountService, ProjectService,
+  ],
 })
 export class DesignModule {}
-
 

@@ -4,16 +4,28 @@ import { RouterModule } from '@angular/router';
 import { routing }       from './prj.routing';
 import { NgaModule } from '../../../../theme/nga.module';
 
+import { PipeModule } from '../../../../pipe/pipe.module';
+import { ChartDesignModule } from '../../../../components/chart/chart-design';
+import { ChartExecutionModule } from '../../../../components/chart/chart-execution';
+
+import { ProjectView } from '../../../project/project/view/view.component';
+
+import { PrjResolve } from './prj.resolve';
+import { ReportService } from '../../../../service/report';
 import { ProjectService } from '../../../../service/project';
 import { AccountService } from '../../../../service/account';
 
 import { Prj } from './prj.component';
 
 @NgModule({
-  imports: [CommonModule, RouterModule, NgaModule, routing],
-  declarations: [Prj],
+  imports: [CommonModule, RouterModule, NgaModule, routing,
+    PipeModule,
+    ChartDesignModule,
+    ChartExecutionModule,
+  ],
+  declarations: [Prj, ProjectView],
   providers: [
-    AccountService, ProjectService
+    AccountService, ProjectService, PrjResolve, ReportService,
   ]
 })
 export class PrjModule {

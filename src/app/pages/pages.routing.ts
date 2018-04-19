@@ -10,26 +10,24 @@ import { PagesResolve } from './pages.resolve';
 export const routes: Routes = [
   {
     path: 'login',
-    loadChildren: './account/login/login.module#LoginModule'
+    loadChildren: './account/login/login.module#LoginModule',
   },
   {
     path: 'register',
-    loadChildren: './account/register/register.module#RegisterModule'
+    loadChildren: './account/register/register.module#RegisterModule',
   },
   {
     path: 'forgot-password',
-    loadChildren: './account/forgot-password/forgot-password.module#ForgotPasswordModule'
+    loadChildren: './account/forgot-password/forgot-password.module#ForgotPasswordModule',
   },
   {
     path: 'reset-password/:vcode',
-    loadChildren: './account/reset-password/reset-password.module#ResetPasswordModule'
+    loadChildren: './account/reset-password/reset-password.module#ResetPasswordModule',
   },
   {
     path: 'pages',
     component: Pages,
-    resolve: {
-      data: PagesResolve,
-    },
+    canActivate: [PagesResolve],
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
@@ -39,9 +37,8 @@ export const routes: Routes = [
       { path: 'sys-admin', loadChildren: './admin-sys/sys-admin.module#AdminModule' },
 
       { path: 'org', loadChildren: './_context/org/org.module#OrgModule' }
-    ]
-  }
+    ],
+  },
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forChild(routes);
-

@@ -147,12 +147,16 @@ export var Utils: any = {
   getOrgAndPrjId: function (url: string) {
     let orgId, prjId;
 
-    // #/pages/org/139/prj/179/implement/plan/list
+    // #/pages/org/5/prjs/18/view
+    // #/pages/org/5/prj/18/design/case
+
     if (url.indexOf('pages/org/') > -1) {
       let str = url.split('org/')[1];
       orgId = str.split('/')[0];
-      if (str.indexOf('prj/') > -1) {
-        prjId = str.split('prj/')[1].split('/')[0];;
+      if (str.indexOf('prjs/') > -1) {
+        prjId = str.split('prjs/')[1].split('/')[0];
+      } else if (str.indexOf('prj/') > -1) {
+        prjId = str.split('prj/')[1].split('/')[0];
       }
     }
     let ret = {orgId: orgId, prjId: prjId};

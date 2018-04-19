@@ -44,7 +44,6 @@
       <div class="form-group row v-full">
         <label class="col-2 col-form-label">
           <span>导入测试集</span><br/>
-          <span *ngIf="model.id" class="red">已有用例将被删除</span>
         </label>
         <div class="col-10">
           <div class="checkbox-list">
@@ -53,13 +52,28 @@
                 <div class="toolbar-inner">
                   <span (click)="select('all')" class="link">全选</span> |
                   <span (click)="select('none')" class="link">全不选</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  <span>同时只能选中1个项目的测试集</span>
+                  <span class="red">同时只能选中1个项目, 已有用例将被删除</span>
                 </div>
               </div>
               <div>
+                <div class="checkbox-list-item title">
+                  <label>
+                    <span class="checkbox-name">
+                      <span class="project">项目</span>
+                      <span class="suite">测试集</span>
+                      <span class="count">用例数</span>
+                    </span>
+                  </label>
+                </div>
+
                 <div *ngFor="let item of suites" class="checkbox-list-item">
                   <label>
-                    <span class="checkbox-name">{{item.caseProjectName}} - {{item.name}}<span></span></span>
+                    <span class="checkbox-name">
+                      <span class="project">{{item.caseProjectName}}</span>
+                      <span class="suite">{{item.name}}</span>
+                      <span class="count">{{item.count}}</span>
+                    </span>
+
                     <input (change)="selectSuite(item, $event.target.value)" type="checkbox" class="form-check-input"
                            [(ngModel)]="item.selecting" formControlName="{{'suite-' + item.id}}">
                   </label>

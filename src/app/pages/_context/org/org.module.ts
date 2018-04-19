@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { routing }       from './org.routing';
 import { NgaModule } from '../../../theme/nga.module';
 
+import { OrgResolve } from './org.resolve';
 import { ProjectService } from '../../../service/project';
 import { AccountService } from '../../../service/account';
 
@@ -13,7 +14,7 @@ import { Org } from './org.component';
   imports: [CommonModule, RouterModule, NgaModule, routing],
   declarations: [Org],
   providers: [
-    AccountService, ProjectService
+    AccountService, ProjectService, OrgResolve
   ]
 })
 export class OrgModule {

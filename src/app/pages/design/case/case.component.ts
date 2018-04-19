@@ -19,7 +19,7 @@ export class Case implements OnInit, AfterViewInit, OnDestroy {
   projectId: number;
   key: number;
 
-  contentHeight = Utils.getContainerHeight(110);
+  contentHeight = Utils.getContainerHeight(CONSTANT.HEAD_HEIGHT + CONSTANT.FOOTER_HEIGHT);
   leftWidth: number;
   canEdit: boolean;
 

@@ -11,8 +11,7 @@ import { PipeModule } from '../../../pipe/pipe.module';
 import { DirectiveModule } from '../../../directive/directive.module';
 import { TableTreeModule } from '../../../components/table-tree';
 import { PopDialogModule } from '../../../components/pop-dialog';
-import { ChartDesignModule } from '../../../components/chart/chart-design';
-import { ChartExecutionModule } from '../../../components/chart/chart-execution';
+
 import { SearchSelectModule } from '../../../components/search-select';
 
 import { RouteService } from '../../../service/route';
@@ -23,13 +22,11 @@ import { routing }       from './project.routing';
 import { ProjectService } from '../../../service/project';
 import { UserService } from '../../../service/user';
 import { UserAndGroupService } from '../../../service/userAndGroup';
-import { ReportService } from '../../../service/report';
 import { VerService } from '../../../service/ver';
 import { EnvService } from '../../../service/env';
 
 import { Project } from './project.component';
 import { ProjectList } from './list/list.component';
-import { ProjectView } from './view/view.component';
 
 import { ProjectEditInfo } from './edit/info/info.component';
 import { ProjectEditMember } from './edit/member/member.component';
@@ -52,15 +49,12 @@ import { ProjectEnvEdit } from './edit/env/edit.component';
     DirectiveModule,
     TableTreeModule,
     PopDialogModule,
-    ChartDesignModule,
-    ChartExecutionModule,
     SearchSelectModule,
     AppTranslationModule,
   ],
   declarations: [
     Project,
     ProjectList,
-    ProjectView,
     ProjectEditInfo,
     ProjectEditMember,
     ProjectVerList,
@@ -75,7 +69,6 @@ import { ProjectEnvEdit } from './edit/env/edit.component';
     ProjectService,
     UserService,
     UserAndGroupService,
-    ReportService,
     VerService,
     EnvService,
   ],

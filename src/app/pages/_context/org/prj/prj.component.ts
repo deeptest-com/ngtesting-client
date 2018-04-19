@@ -27,13 +27,5 @@ export class Prj {
       this.prjId = params['prjId'];
     });
     console.log('==Current Prj', this.prjId, CONSTANT.CURR_PRJ_ID);
-
-    if (CONSTANT.CURR_PRJ_ID != this.prjId) {
-      CONSTANT.CURR_PRJ_ID = this.prjId;
-
-      this._projectService.view(CONSTANT.CURR_PRJ_ID).subscribe((json: any) => {
-
-      });
-    }
   }
 }

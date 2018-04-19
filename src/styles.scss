@@ -7,7 +7,7 @@ body {
 .link {
   margin: 0 5px;
   text-decoration:none !important;
-  color: #209e91;
+  color: #209e91 !important;
   cursor:pointer;
   &.underline {
     text-decoration: underline !important;
@@ -261,6 +261,14 @@ ul.al-share {
       padding-left: 30px;
       height: 20px;
       position: relative;
+      &.title {
+        height: 25px;
+        font-weight: bolder;
+        border-bottom: 1px solid #ddd;
+        label {
+          cursor: default;
+        }
+      }
       label {
         position: relative;
         display: inline;

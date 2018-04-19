@@ -1,9 +1,9 @@
 import * as _ from 'lodash';
 
-import {Injectable} from "@angular/core";
+import { Injectable } from '@angular/core';
 
-import {RequestService} from "./request";
-import {CONSTANT} from "../utils/constant";
+import { RequestService } from './request';
+import { CONSTANT } from '../utils/constant';
 
 @Injectable()
 export class OrgService {
@@ -15,7 +15,7 @@ export class OrgService {
   }
 
   get(id: number) {
-    let model = {id: id};
+    const model = { id: id };
     return this._reqService.post(this._api_url + 'get', model);
   }
 
@@ -24,14 +24,13 @@ export class OrgService {
   }
 
   delete(id: number) {
-    let model = {id: id};
+    const model = { id: id };
     return this._reqService.post(this._api_url + 'delete', model);
   }
 
-  setDefault(id: number, queryModel: any) {
-    CONSTANT.CURR_ORG_ID = id;
-    let model = {id: id, keywords: queryModel.keywords, disabled: queryModel.disabled};
-    return this._reqService.post(this._api_url + 'setDefault', model);
+  change(id: number) {
+    const model = { id: id };
+    return this._reqService.post(this._api_url + 'change', model);
   }
 
 }

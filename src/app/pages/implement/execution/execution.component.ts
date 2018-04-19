@@ -21,7 +21,7 @@ declare var jQuery;
 export class Execution implements OnInit, AfterViewInit, OnDestroy {
   eventCode:string = 'Execution';
 
-  contentHeight = Utils.getContainerHeight(110);
+  contentHeight = Utils.getContainerHeight(CONSTANT.HEAD_HEIGHT + CONSTANT.FOOTER_HEIGHT);
   leftWidth: number;
 
   constructor(private _state: GlobalState, private _route: ActivatedRoute) {

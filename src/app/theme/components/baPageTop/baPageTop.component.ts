@@ -91,9 +91,7 @@ export class BaPageTop implements OnInit, AfterViewInit, OnDestroy {
   ngAfterViewInit() {}
 
   public changeOrg(org: any) {
-    this.orgService.setDefault(org.id, {disabled: false}).subscribe((json: any) => {
-      this._routeService.navTo('/pages/org/' + org.id + '/prjs');
-    });
+    this._routeService.navTo('/pages/org/' + org.id + '/prjs');
   }
 
   public scrolledChanged(isScrolled) {
@@ -108,6 +106,8 @@ export class BaPageTop implements OnInit, AfterViewInit, OnDestroy {
       url = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + CONSTANT.CURR_PRJ_ID + '/implement/suite/list';
     } else if (module == 'implement') {
       url = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + CONSTANT.CURR_PRJ_ID + '/implement/plan/list';
+    } else if (module == 'autotest') {
+      url = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + CONSTANT.CURR_PRJ_ID + '/autotest/aitask';
     }
 
     this._routeService.navTo(url);

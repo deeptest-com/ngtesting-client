@@ -93,7 +93,7 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
                      @Inject(Renderer2) private renderer: Renderer2, private fb: FormBuilder,
                      private privilegeService: PrivilegeService, private toastyService: ToastyService,
                      @Inject(ZtreeService) private ztreeService: ZtreeService) {
-    this.treeHeight = Utils.getContainerHeight(110 + 38);
+    this.treeHeight = Utils.getContainerHeight(CONSTANT.HEAD_HEIGHT +  CONSTANT.FOOTER_HEIGHT + CONSTANT.ZTREE_TOOOLBAR_HEIGHT);
 
     this.queryForm = this.fb.group(
       {

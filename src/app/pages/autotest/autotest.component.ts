@@ -4,7 +4,7 @@ import { GlobalState } from '../../global.state';
 @Component({
   selector: 'autotest',
   styleUrls: ['./autotest.scss'],
-  templateUrl: './autotest.html'
+  templateUrl: './autotest.html',
 })
 export class AutoTest {
 

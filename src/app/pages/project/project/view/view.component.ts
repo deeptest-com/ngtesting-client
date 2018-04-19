@@ -1,4 +1,4 @@
-import {Component, ViewEncapsulation, ViewChild, QueryList, Query} from '@angular/core';
+import { Component, ViewEncapsulation, ViewChild, QueryList, Query } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { NgModule, Pipe, OnInit, AfterViewInit }      from '@angular/core';
 
@@ -12,7 +12,7 @@ declare var jQuery;
   selector: 'project-view',
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['./view.scss'],
-  templateUrl: './view.html'
+  templateUrl: './view.html',
 })
 export class ProjectView implements OnInit, AfterViewInit {
   orgId: number;
@@ -26,32 +26,38 @@ export class ProjectView implements OnInit, AfterViewInit {
 
   constructor(private _route: ActivatedRoute,
               private _projectService: ProjectService, private _reportService: ReportService) {
-
+    this.orgId = CONSTANT.CURR_ORG_ID;
   }
   ngOnInit() {
-    this.orgId = CONSTANT.CURR_ORG_ID;
-
-    this._route.params.subscribe(params => {
-      this.id = +params['id'];
+    this._route.pathFromRoot[5].params.subscribe(params => {
+      if (this.id != +params['prjId']) {
+        this.id = +params['prjId'];
+        this.loadData();
+      }
     });
-    if (this.id) {
-      this.loadData();
-      this._reportService.projectReport(this.id).subscribe((json:any) => {
-        this.chartData = json.data;
-      });
-    }
   }
   ngAfterViewInit() {
 
   }
 
   loadData() {
-      CONSTANT.CURR_PRJ_ID = this.id;
-      this._projectService.view(this.id).subscribe((json:any) => {
-        this.project = json.project;
-        this.plans = json.plans;
-        this.histories = json.histories;
-      });
+    if (!this.id) {
+      return;
+    }
+    this._projectService.view(this.id).subscribe((json: any) => {
+      this.project = json.project;
+      this.plans = json.plans;
+      this.histories = json.histories;
+
+      if (json.project.type == 'project') {
+        CONSTANT.CURR_PRJ_ID = this.project.id;
+        CONSTANT.CURR_PRJ_NAME = this.project.name;
+      }
+    });
+
+    this._reportService.projectReport(this.id).subscribe((json: any) => {
+      this.chartData = json.data;
+    });
   }
 
 }

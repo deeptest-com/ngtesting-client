@@ -8,10 +8,9 @@ const routes: Routes = [
     path: '',
     component: Design,
     children: [
-      { path: 'case', loadChildren: './case/case.module#CaseModule' }
-    ]
-  }
+      { path: 'case', loadChildren: './case/case.module#CaseModule' },
+    ],
+  },
 ];
 
 export const routing = RouterModule.forChild(routes);
-

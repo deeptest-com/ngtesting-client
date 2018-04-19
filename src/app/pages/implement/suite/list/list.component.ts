@@ -14,6 +14,7 @@ import { SuiteService } from '../../../../service/suite';
 export class SuiteListComponent implements OnInit, AfterViewInit {
   orgId: number;
   prjId: number;
+  projectName: string;
 
   models: any;
 
@@ -36,6 +37,7 @@ export class SuiteListComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.orgId = CONSTANT.CURR_ORG_ID;
     this.prjId = CONSTANT.CURR_PRJ_ID;
+    this.projectName = CONSTANT.CURR_PRJ_NAME;
 
     this.loadData();
   }

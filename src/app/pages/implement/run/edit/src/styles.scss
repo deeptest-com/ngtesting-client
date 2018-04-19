@@ -19,4 +19,24 @@
 
     }
   }
+
+  .checkbox-list-item {
+    label {
+      display: block;
+    }
+    .checkbox-name {
+      display: flex;
+      width: 90%;
+      text-align: left;
+      .project {
+        flex: 1;
+      }
+      .suite {
+        flex: 1;
+      }
+      .count {
+        width: 60px;
+      }
+    }
+  }
 }

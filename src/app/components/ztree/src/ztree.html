@@ -10,10 +10,10 @@
         <span *ngIf="settings.usage=='selection' && !checkCount" (click)="selectAll()">选择所有</span>
       </label>
 
-      <input [(ngModel)]="queryModel.keywords" formControlName="keywords"
+      <input [class.hidden]="isDragging" [(ngModel)]="queryModel.keywords" formControlName="keywords"
              type="search" class="form-control form-control-sm" placeholder="过滤" id="keywords" name="keywords">
 
-      <select [(ngModel)]="queryModel.projectId" formControlName="projectId"
+      <select *ngIf="settings.usage=='selection'" [(ngModel)]="queryModel.projectId" formControlName="projectId"
               class="form-control form-control-sm" id="projectId" name="projectId">
         <option *ngFor="let entry of brotherProjects" value="{{entry.id}}">{{entry.name}}</option>
       </select>
