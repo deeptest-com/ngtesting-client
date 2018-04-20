@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, AfterViewInit } from '@angular/core';
 import { FileUploader, FileUploaderOptions } from 'ng2-file-upload';
 
 import { CONSTANT } from '../../../utils/constant';
@@ -12,10 +12,10 @@ import { Deferred } from '../../../service/deferred';
   templateUrl: './file-uploader.html',
   providers: [],
 })
-export class FileUploaderComponent {
+export class FileUploaderComponent implements OnInit, AfterViewInit {
   @Output() uploadedEvent: EventEmitter<any> = new EventEmitter<any>();
-  @Input() file: string = '';
   @Input() mimeType: string[];
+  file: string = '';
 
   uploader: FileUploader;
   uploadedFile: any;
@@ -34,15 +34,27 @@ export class FileUploaderComponent {
     }],
   };
 
+  @Input() set ifile(f: any) {
+    this.file = f;
+    this.init();
+  }
+
   constructor(private routeService: RouteService) {
-    this.uploader = new FileUploader(this.uploaderOptions);
-    this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
-      this.onUploadCompleteItem(item, response, status, headers);
-    };
+    this.init();
   }
 
   public ngOnInit(): void {
 
+  }
+  public ngAfterViewInit() {
+    console.log(11);
+  }
+
+  init (): void {
+    this.uploader = new FileUploader(this.uploaderOptions);
+    this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
+      this.onUploadCompleteItem(item, response, status, headers);
+    };
   }
 
   public fileOverBase(e: any): void {

@@ -7,7 +7,7 @@
          class="well my-drop-zone">
 
       <span *ngIf="!uploader.isUploading && !uploadedFile">
-        <span class="upload-file-name" *ngIf="file">{{file}}</span>
+        <span class="upload-file-name" *ngIf="file">{{file | pathToName}}</span>
         <span *ngIf="!file">拖动文件到此处上传</span>
       </span>
 

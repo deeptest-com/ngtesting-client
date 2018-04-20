@@ -107,8 +107,8 @@ export class AitaskEdit implements OnInit, AfterViewInit, OnDestroy {
         'name': ['', [Validators.required]],
         'testType': ['', [Validators.required]],
         'testEnv': ['', [Validators.required]],
-        'testProductId': ['', [Validators.required]],
-        'testConcurrent': ['', [Validators.required]],
+        'testProductId': ['', []],
+        'testConcurrent': ['', []],
         'productBranch': ['', []],
         'asrLangModel': ['', []],
         'audioType': ['', []],
@@ -154,9 +154,6 @@ export class AitaskEdit implements OnInit, AfterViewInit, OnDestroy {
     },
     'testProductId': {
       'required': '名称不能为空',
-    },
-    'testConcurrent': {
-      'required': '并发数不能为空',
     },
     'testType': {
       'required': '测试类型不能为空',

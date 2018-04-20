@@ -20,13 +20,23 @@ export class OrgResolve implements CanActivate {
     console.log('OrgResolve - canActivate', state.url, context);
 
     if (context.orgId != CONSTANT.CURR_ORG_ID) {
-      return this.orgService.change(context.orgId).toPromise().then(result => {
+      if (this.willNotChangePrj(context) || !context.prjId) {
+        return this.orgService.change(context.orgId).toPromise().then(result => {
+          CONSTANT.CURR_ORG_ID = context.orgId;
+          return true;
+        });
+      } else {
         CONSTANT.CURR_ORG_ID = context.orgId;
         return true;
-      });
+      }
+
     } else {
       return true;
     }
-
   }
+
+  willNotChangePrj(context: any) {
+    return context.prjId == CONSTANT.CURR_PRJ_ID;
+  }
+
 }

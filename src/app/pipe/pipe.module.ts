@@ -2,6 +2,7 @@ import { NgModule }      from '@angular/core';
 
 import { MsgReadPipe } from './msg-read';
 import { ImgPathPipe, ThumbPathPipe } from './img-path';
+import { PathToNamePipe } from './path-to-name';
 import { MapToArrayPipe } from './map-to-array';
 import { TimePassedPipe } from './date';
 import { ModelStatusPipe } from './model-status';
@@ -13,10 +14,10 @@ import { FieldTypePipe, FieldApplyToPipe, FieldFormatPipe, TrueOrFalsePipe, Disa
 
 @NgModule({
   imports: [],
-  declarations: [MsgReadPipe, ExeStatusPipe, ImgPathPipe, ThumbPathPipe, MapToArrayPipe, TimePassedPipe,
+  declarations: [MsgReadPipe, ExeStatusPipe, PathToNamePipe, ImgPathPipe, ThumbPathPipe, MapToArrayPipe, TimePassedPipe,
     ModelStatusPipe, MarkErrorPipe, FieldTypePipe, FieldApplyToPipe, FieldFormatPipe, TrueOrFalsePipe,
     DisableOrNotPipe, PercentPipe, ShowIfContainsPipe],
-  exports: [MsgReadPipe, ExeStatusPipe, ImgPathPipe, ThumbPathPipe, MapToArrayPipe, TimePassedPipe,
+  exports: [MsgReadPipe, ExeStatusPipe, PathToNamePipe, ImgPathPipe, ThumbPathPipe, MapToArrayPipe, TimePassedPipe,
     ModelStatusPipe, MarkErrorPipe, FieldTypePipe, FieldApplyToPipe, FieldFormatPipe, TrueOrFalsePipe,
     DisableOrNotPipe, ShowIfContainsPipe],
 })
