@@ -61,10 +61,10 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
       + '/issue/null/edit');
   }
 
-  queryChanged(values: any): void {
+  queryChanged(): void {
     // this._routeService.navTo('/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + this.prjId
     //   + '/issue/query/' + this.filter + '/' + this.tql);
-    console.log('queryChange 2', values);
+    console.log('queryChange 2', this.query);
   }
 
   loadData() {

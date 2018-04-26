@@ -15,7 +15,7 @@ export class Tql implements OnInit, AfterViewInit {
 
   form: FormGroup;
   @Input() query: any;
-  @Input() tql: string = 'all';
+  @Input() tql: string;
   @Output() public queryChanged: EventEmitter<any> = new EventEmitter();
 
   constructor(private fb: FormBuilder, private _state: GlobalState) {
