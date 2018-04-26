@@ -1,0 +1,23 @@
+@import '../issue-data';
+
+.issue-edit {
+  margin: 5px;
+
+  .my-validate-form {
+    .contentType {
+      line-height: 36px;
+    }
+  }
+
+  .module-tips {
+    padding: 0 20px;
+  }
+
+  .tab-history {
+    padding: 10px 50px;
+  }
+
+  .form-check {
+    margin: 6px 0;
+  }
+}

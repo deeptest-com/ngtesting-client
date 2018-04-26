@@ -1,0 +1,13 @@
+<div class="tql">
+  <form [formGroup]="form" class="form-inline">
+    <label for="disabled">状态</label>
+    <select [(ngModel)]="query.disabled" formControlName="disabled"
+            class="form-control form-control-sm" id="disabled" name="disabled">
+      <option *ngFor="let entry of (statusMap | mapToArray:'true')" value="{{entry.key}}">{{entry.value}}</option>
+    </select>
+    &nbsp;&nbsp;&nbsp;
+    <label for="keywords">关键字</label>
+    <input [(ngModel)]="query.keywords" formControlName="keywords"
+           type="search" class="form-control form-control-sm" placeholder="" id="keywords" name="keywords">
+  </form>
+</div>

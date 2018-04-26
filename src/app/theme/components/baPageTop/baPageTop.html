@@ -25,7 +25,7 @@
       <button [routerLink]="['/pages/org/' + orgId + '/prjs']" class="btn btn-default">测试项目</button>
     </div>
     <div *ngIf="projects?.length > 0" ngbDropdown class="btn-group">
-      <button class="btn btn-default" ngbDropdownToggle>测试项目</button>
+      <button class="btn btn-default" ngbDropdownToggle>项目</button>
       <div class="dropdown-menu">
         <button class="dropdown-item">当前项目</button>
         <button class="dropdown-item">
@@ -58,7 +58,7 @@
     </div>
 
     <div *ngIf="prjId" ngbDropdown class="btn-group">
-      <button (click)="gotoModule('design')" class="btn btn-default">测试用例</button>
+      <button (click)="gotoModule('design')" class="btn btn-default">用例</button>
     </div>
 
     <div *ngIf="prjId" ngbDropdown class="btn-group">
@@ -66,25 +66,25 @@
     </div>
 
     <div *ngIf="prjId" ngbDropdown class="btn-group">
-      <button (click)="gotoModule('implement')" class="btn btn-default" ngbDropdownToggle>测试计划</button>
+      <button (click)="gotoModule('implement')" class="btn btn-default" ngbDropdownToggle>计划</button>
     </div>
 
     <div *ngIf="prjId" ngbDropdown class="btn-group">
-      <button (click)="gotoModule('autotest')" class="btn btn-default" ngbDropdownToggle>测试自动化</button>
+      <button (click)="gotoModule('issue')" class="btn btn-default" ngbDropdownToggle>缺陷</button>
     </div>
 
-<!--    <div *ngIf="project.id" ngbDropdown class="btn-group">
-      <button (click)="gotoModule('analysis')" class="btn btn-default" ngbDropdownToggle>测试分析</button>
-    </div>-->
+    <div *ngIf="prjId" ngbDropdown class="btn-group">
+      <button (click)="gotoModule('autotest')" class="btn btn-default" ngbDropdownToggle>自动化</button>
+    </div>
 
     <div ngbDropdown class="btn-group">
       <button [routerLink]="['/pages/org-admin/org/list']" class="btn btn-default">
-        组织管理
+        设置
       </button>
     </div>
     <div *ngIf="profile?.sysPrivilege?.sys_admin" ngbDropdown class="btn-group">
       <button [routerLink]="['/pages/sys-admin']" class="btn btn-default">
-        系统管理
+        系统
       </button>
     </div>
 

@@ -1,8 +1,8 @@
-<div class="aitask-view">
+<div class="issue-view">
   <div [class.hidden]="model.id" class="module-tips">
     <div *ngIf="model.childrenCount">
 
-      <div class="aitask-data">
+      <div class="issue-data">
         <div class="row header">用例类型：</div>
         <div *ngIf="model.childrenCount.functional" class="row">
           <div class="col-sm-2">功能</div>
@@ -22,7 +22,7 @@
         </div>
       </div>
 
-      <div class="aitask-data">
+      <div class="issue-data">
         <div class="row header">用例评审：</div>
         <div class="row">
           <div class="col-sm-2">未评审</div>
@@ -40,7 +40,7 @@
     </div>
   </div>
 
-  <div [class.hidden]="!model.id" class="my-validate-form small-label">
+  <div class="my-validate-form small-label">
     <div class="form-group row">
 
     </div>

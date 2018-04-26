@@ -1,0 +1,24 @@
+<div class="issue-query container-fluid">
+  <div class="row">
+    <div class="list-toolbar col-xl-12">
+      <div class="title">
+        <span>缺陷查询</span>
+      </div>
+
+      <div class="filter">
+        <tql (queryChanged)="queryChanged($event)" [query]="qurey" [tql]="tql"></tql>
+      </div>
+
+      <div class="buttons">
+        <button (click)="create()" type="button" class="btn btn-primary btn-with-icon btn-sm">
+          <i class="fa fa-plus-circle"></i>新建问题
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- /.row -->
+  <div class="row">
+
+  </div>
+
+</div>
