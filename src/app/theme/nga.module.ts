@@ -6,30 +6,30 @@ import { AppTranslationModule } from '../app.translation.module';
 
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
-import {PipeModule} from '../pipe/pipe.module';
+import { PipeModule } from '../pipe/pipe.module';
 
 import { RouteService } from '../service/route';
 import { RequestService } from '../service/request';
-import {SockService} from "../service/sock";
+import { SockService } from '../service/sock';
 
-import {AlertService} from '../service/alert';
-import {MsgService} from '../service/msg';
+import { AlertService } from '../service/alert';
+import { MsgService } from '../service/msg';
 import { OrgService } from '../service/org';
 import { AccountService } from '../service/account';
 
 import {
-  BaThemeConfig
+  BaThemeConfig,
 } from './theme.config';
 
 import {
-  BaThemeConfigProvider
+  BaThemeConfigProvider,
 } from './theme.configProvider';
 
 import {
   BaBackTop,
   BaCard,
   BaMsgCenter,
-  BaPageTop
+  BaPageTop,
 } from './components';
 
 import { BaCardBlur } from './components/baCard/baCardBlur.directive';
@@ -37,44 +37,44 @@ import { BaCardBlur } from './components/baCard/baCardBlur.directive';
 import {
   BaScrollPosition,
   BaSlimScroll,
-  BaThemeRun
+  BaThemeRun,
 } from './directives';
 
 import {
   BaAppPicturePipe,
   BaKameleonPicturePipe,
-  BaProfilePicturePipe
+  BaProfilePicturePipe,
 } from './pipes';
 
 import {
   BaImageLoaderService,
   BaMenuService,
   BaThemePreloader,
-  BaThemeSpinner
+  BaThemeSpinner,
 } from './services';
 
 import {
-  EqualPasswordsValidator
+  EqualPasswordsValidator,
 } from './validators';
 
 const NGA_COMPONENTS = [
   BaBackTop,
   BaCard,
   BaMsgCenter,
-  BaPageTop
+  BaPageTop,
 ];
 
 const NGA_DIRECTIVES = [
   BaScrollPosition,
   BaSlimScroll,
   BaThemeRun,
-  BaCardBlur
+  BaCardBlur,
 ];
 
 const NGA_PIPES = [
   BaAppPicturePipe,
   BaKameleonPicturePipe,
-  BaProfilePicturePipe
+  BaProfilePicturePipe,
 ];
 
 const NGA_SERVICES = [
@@ -89,18 +89,18 @@ const NGA_SERVICES = [
   AccountService,
   OrgService,
   AlertService,
-  MsgService
+  MsgService,
 ];
 
 const NGA_VALIDATORS = [
-  EqualPasswordsValidator
+  EqualPasswordsValidator,
 ];
 
 @NgModule({
   declarations: [
     ...NGA_PIPES,
     ...NGA_DIRECTIVES,
-    ...NGA_COMPONENTS
+    ...NGA_COMPONENTS,
   ],
   imports: [
     CommonModule,
@@ -109,13 +109,13 @@ const NGA_VALIDATORS = [
     ReactiveFormsModule,
     AppTranslationModule,
     NgbDropdownModule,
-    PipeModule
+    PipeModule,
   ],
   exports: [
     ...NGA_PIPES,
     ...NGA_DIRECTIVES,
-    ...NGA_COMPONENTS
-  ]
+    ...NGA_COMPONENTS,
+  ],
 })
 export class NgaModule {
   static forRoot(): ModuleWithProviders {
@@ -125,7 +125,7 @@ export class NgaModule {
         BaThemeConfigProvider,
         BaThemeConfig,
         ...NGA_VALIDATORS,
-        ...NGA_SERVICES
+        ...NGA_SERVICES,
       ],
     };
   }

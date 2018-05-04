@@ -19,6 +19,8 @@ import { IssueService } from '../../../service/issue';
   templateUrl: './query.html',
 })
 export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
+  eventCode: string = 'IssueQuery';
+
   orgId: number;
   prjId: number;
   filter: number;
@@ -29,11 +31,21 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
   maxLevel: number;
   statusMap: Array<any> = CONSTANT.EntityDisabled;
 
-  isInit: boolean = false;
+  routeSub: any;
+  myPrivs: any;
+
+  contentHeight = Utils.getContainerHeight(CONSTANT.HEAD_HEIGHT + CONSTANT.FOOTER_HEIGHT + 46);
+  leftWidth: number;
 
   constructor(private _route: ActivatedRoute, private router: Router, private _routeService: RouteService,
               private _state: GlobalState,
               private fb: FormBuilder, private el: ElementRef, private _issueService: IssueService) {
+  }
+
+  ngOnInit() {
+    this.myPrivs = CONSTANT.PRJ_PRIVILEGES;
+
+    this.leftWidth = CONSTANT.PROFILE.leftSizeIssue;
 
     this.orgId = CONSTANT.CURR_ORG_ID;
     this.prjId = CONSTANT.CURR_PRJ_ID;
@@ -42,14 +54,22 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
       this.filter = +params['filter'];
       this.tql = params['tql'];
 
-      this.query = this.buildQuery(this.tql);
-      this.loadData();
+      CONSTANT.ISSUE_FILTER = this.filter;
+      CONSTANT.ISSUE_TQL = this.tql;
     });
-  }
-
-  ngOnInit() {
-    this.isInit = false;
     this.loadData();
+
+    this.routeSub = this._route.pathFromRoot[5].params.subscribe(params => {
+      if (this.prjId != +params['prjId']) {
+        this.prjId = +params['prjId'];
+        this.loadData();
+      }
+    });
+    this._state.subscribe(WS_CONSTANT.WS_PRJ_SETTINGS, this.eventCode, (json) => {
+      console.log(WS_CONSTANT.WS_PRJ_SETTINGS + ' in ' + this.eventCode, json);
+
+      this.myPrivs = json.prjPrivileges;
+    });
   }
 
   ngAfterViewInit() {
@@ -68,9 +88,10 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
   }
 
   loadData() {
+    this.query = this.buildQuery(this.tql);
+
     this._issueService.query(this.filter, this.query).subscribe((json: any) => {
       this.projects = json.data;
-      this.isInit = true;
     });
   }
   buildQuery(tql: string) {
@@ -78,6 +99,7 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-
+    this.routeSub.unsubscribe();
+    this._state.unsubscribe(WS_CONSTANT.WS_PRJ_SETTINGS, this.eventCode);
   }
 }

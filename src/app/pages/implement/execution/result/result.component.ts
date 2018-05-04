@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { BrowserModule } from '@angular/platform-browser';
 
 import { GlobalState } from '../../../../global.state';
+import { WS_CONSTANT } from '../../../../utils/ws-constant';
 
 import { CONSTANT } from '../../../../utils/constant';
 import { Utils, logger } from '../../../../utils/utils';
@@ -49,6 +50,13 @@ export class ExecutionResult implements OnInit, AfterViewInit, OnDestroy {
               private _caseService: CaseService, private _caseStepService: CaseStepService,
               private _caseInRunService: CaseInRunService,
               private _ztreeService: ZtreeService, private privilegeService: PrivilegeService) {
+
+    this._state.subscribe(WS_CONSTANT.WS_PRJ_SETTINGS, this.eventCode, (json) => {
+      console.log(WS_CONSTANT.WS_PRJ_SETTINGS + ' in ' + this.eventCode, json);
+
+      this.canEdit = this.privilegeService.hasPrivilege('cases-update');
+      this.canExe = this.privilegeService.hasPrivilege('run-exe');
+    });
 
     this.buildForm();
   }
@@ -215,6 +223,7 @@ export class ExecutionResult implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     this._state.unsubscribe(CONSTANT.EVENT_CASE_EXE, this.eventCode);
+    this._state.unsubscribe(WS_CONSTANT.WS_PRJ_SETTINGS, this.eventCode);
   }
 
 }

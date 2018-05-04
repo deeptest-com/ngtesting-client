@@ -14,22 +14,14 @@ import { PrivilegeService } from '../../service/privilege';
   templateUrl: './issue.html',
 })
 export class Issue implements OnInit, AfterViewInit, OnDestroy {
-  eventCode: string = 'AiTask';
+  eventCode: string = 'Issue';
 
-  projectId: number;
-  key: number;
-
-  contentHeight = Utils.getContainerHeight(CONSTANT.HEAD_HEIGHT + CONSTANT.FOOTER_HEIGHT);
-  leftWidth: number;
-  canEdit: boolean;
-
-  constructor(private _state: GlobalState, private _route: ActivatedRoute, private privilegeService: PrivilegeService) {
+  constructor(private _state: GlobalState, private _route: ActivatedRoute) {
 
   }
 
   ngOnInit() {
-      this.leftWidth = CONSTANT.PROFILE.leftSize;
-      this.canEdit = this.privilegeService.hasPrivilege('issue-update');
+
   }
 
   ngAfterViewInit() {

@@ -9,9 +9,11 @@ import { GlobalState } from '../../../global.state';
 import { CONSTANT } from '../../../utils/constant';
 import { ValidatorUtils } from '../../../validator/validator.utils';
 
+import { RouteService } from '../../../service/route';
 import { IssueService } from '../../../service/issue';
 
 import { PrivilegeService } from '../../../service/privilege';
+import { PopDialogComponent } from '../../../components/pop-dialog';
 
 declare var jQuery;
 
@@ -23,8 +25,9 @@ declare var jQuery;
 })
 export class IssueEdit implements OnInit, AfterViewInit, OnDestroy {
   eventCode: string = 'AiTaskEdit';
+  orgId: number;
+  prjId: number;
 
-  projectId: number;
   id: number;
   model: any = { aiTestEnv: '' };
   asrLangModelVos: any[] = [];
@@ -45,15 +48,17 @@ export class IssueEdit implements OnInit, AfterViewInit, OnDestroy {
   user: any;
 
   canEdit: boolean;
+  @ViewChild('modalWrapper') modalWrapper: PopDialogComponent;
 
-  constructor(private _state: GlobalState, private fb: FormBuilder, private toastyService: ToastyService,
+  constructor(private _routeService: RouteService, private _state: GlobalState,
+              private fb: FormBuilder, private toastyService: ToastyService,
               private issueService: IssueService, private privilegeService: PrivilegeService) {
 
   }
   ngOnInit() {
     this.canEdit = this.privilegeService.hasPrivilege('issue-update');
-
-    this.projectId = CONSTANT.CURR_PRJ_ID;
+    this.orgId = CONSTANT.CURR_ORG_ID;
+    this.prjId = CONSTANT.CURR_PRJ_ID;
     this.user = CONSTANT.PROFILE;
 
     this.buildForm();
@@ -105,23 +110,6 @@ export class IssueEdit implements OnInit, AfterViewInit, OnDestroy {
     this.form = this.fb.group(
       {
         'name': ['', [Validators.required]],
-        'testType': ['', [Validators.required]],
-        'testEnv': ['', [Validators.required]],
-        'testProductId': ['', []],
-        'testConcurrent': ['', []],
-        'productBranch': ['', []],
-        'asrLangModel': ['', []],
-        'audioType': ['', []],
-        'fuse': ['', []],
-        'regexInput': ['', []],
-        'startIndex': ['', []],
-        'numbToRun': ['', []],
-
-        'testsetSrc': ['', []],
-        'testDuration': ['', []],
-        'testsetId': ['', []],
-        'testsetName': ['', []],
-        'testsetPath': ['', []],
       }, {},
     );
 
@@ -152,18 +140,6 @@ export class IssueEdit implements OnInit, AfterViewInit, OnDestroy {
     'name': {
       'required': '名称不能为空',
     },
-    'testProductId': {
-      'required': '名称不能为空',
-    },
-    'testType': {
-      'required': '测试类型不能为空',
-    },
-    'testEnv': {
-      'required': '测试环境不能为空',
-    },
-    'productBranch': {
-      'required': '产品分支不能为空',
-    },
   };
 
   loadData() {
@@ -180,7 +156,7 @@ export class IssueEdit implements OnInit, AfterViewInit, OnDestroy {
   }
 
   save() {
-    this.issueService.save(this.projectId, this.model).subscribe((json: any) => {
+    this.issueService.save(this.prjId, this.model).subscribe((json: any) => {
       if (json.code == 1) {
         this.model = json.data;
         this._state.notifyDataChanged(CONSTANT.EVENT_CASE_UPDATE, { node: this.model, random: Math.random() });
@@ -215,7 +191,18 @@ export class IssueEdit implements OnInit, AfterViewInit, OnDestroy {
     }
   }
   back() {
+    const url = '/pages/org/' + this.orgId + '/prj/' + this.prjId + '/issue/query/'
+      + CONSTANT.ISSUE_FILTER + '/' + CONSTANT.ISSUE_TQL;
+    console.log(url);
+    this._routeService.navTo(url);
+  }
 
+  delete() {
+
+  }
+
+  showModal(): void {
+    this.modalWrapper.showModal();
   }
 
   ngOnDestroy(): void {

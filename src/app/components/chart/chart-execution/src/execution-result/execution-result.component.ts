@@ -1,9 +1,9 @@
-import {Component, Input, OnInit} from "@angular/core";
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'execution-result',
   templateUrl: './execution-result.html',
-  styleUrls: ['./styles.scss']
+  styleUrls: ['./styles.scss'],
 })
 export class ExecutionResultComponent implements OnInit {
   chartOption: any;
@@ -27,41 +27,41 @@ export class ExecutionResultComponent implements OnInit {
   genChart(): any {
     this.chartOption = {
       title: {
-        show: false
+        show: false,
       },
       legend: {
-        show: false
+        show: false,
       },
       padding: 0,
       color: ['#749f83', '#c23531', '#ca8622',  '#c4ccd3'],
       tooltip: {
         trigger: 'item',
-        formatter: "{a} <br/>{b} : {c} ({d}%)"
+        formatter: '{a} <br/>{b} : {c} ({d}%)',
       },
 
       series: [
         {
           name: '执行结果',
           type: 'pie',
-          radius: '90%',
+          radius: '70%',
           center: ['50%', '55%'],
           data: this._data,
           itemStyle: {
             emphasis: {
               shadowBlur: 10,
               shadowOffsetX: 0,
-              shadowColor: 'rgba(0, 0, 0, 0.5)'
+              shadowColor: 'rgba(0, 0, 0, 0.5)',
             },
-            normal:{
-              label:{
+            normal: {
+              label: {
                 show: true,
-                formatter: '{b} : {c} ({d}%)'
+                formatter: '{b} : {c} ({d}%)',
               },
-              labelLine :{show:true}
-            }
-          }
-        }
-      ]
+              labelLine : { show: true },
+            },
+          },
+        },
+      ],
     };
   }
 

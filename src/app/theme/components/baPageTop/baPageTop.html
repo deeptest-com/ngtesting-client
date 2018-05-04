@@ -25,12 +25,11 @@
       <button [routerLink]="['/pages/org/' + orgId + '/prjs']" class="btn btn-default">测试项目</button>
     </div>
     <div *ngIf="projects?.length > 0" ngbDropdown class="btn-group">
-      <button class="btn btn-default" ngbDropdownToggle>项目</button>
+      <button class="btn btn-default dropdown" ngbDropdownToggle>项目</button>
       <div class="dropdown-menu">
         <button class="dropdown-item">当前项目</button>
         <button class="dropdown-item">
-          <a *ngIf="projects && projects[0]"
-             [routerLink]="['/pages/org/' + orgId + '/prj/' + projects[0].projectId + '/view']">
+          <a (click)="selectProject(projects[0].projectId)" *ngIf="projects && projects[0]" class="link">
             {{projects[0].projectName}}
           </a>
           <a *ngIf="!projects || projects.length == 0">无</a>
@@ -39,7 +38,7 @@
         <button class="dropdown-item next">最近查看</button>
         <ng-container *ngFor="let item of projects; let i = index">
           <button *ngIf="i > 0" class="dropdown-item" class="dropdown-item">
-            <a [routerLink]="['/pages/org/' + orgId + '/prj/' + item.projectId + '/view']">
+            <a (click)="selectProject(item.projectId)" class="link">
               {{item.projectName}}</a>
           </button>
         </ng-container>
@@ -66,15 +65,15 @@
     </div>
 
     <div *ngIf="prjId" ngbDropdown class="btn-group">
-      <button (click)="gotoModule('implement')" class="btn btn-default" ngbDropdownToggle>计划</button>
+      <button (click)="gotoModule('implement')" class="btn btn-default">计划</button>
     </div>
 
     <div *ngIf="prjId" ngbDropdown class="btn-group">
-      <button (click)="gotoModule('issue')" class="btn btn-default" ngbDropdownToggle>缺陷</button>
+      <button (click)="gotoModule('issue')" class="btn btn-default">缺陷</button>
     </div>
 
     <div *ngIf="prjId" ngbDropdown class="btn-group">
-      <button (click)="gotoModule('autotest')" class="btn btn-default" ngbDropdownToggle>自动化</button>
+      <button (click)="gotoModule('autotest')" class="btn btn-default">自动化</button>
     </div>
 
     <div ngbDropdown class="btn-group">

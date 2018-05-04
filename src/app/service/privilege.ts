@@ -6,8 +6,12 @@ import {CONSTANT} from "../utils/constant";
 
 @Injectable()
 export class PrivilegeService {
-  hasPrivilege(privs: string) {
+  hasPrivilege(privs: string, myPrivs?: any) {
     let ret = true;
+
+    if (!myPrivs) {
+      myPrivs = CONSTANT.PRJ_PRIVILEGES
+    }
 
     let arr = privs.split(',');
     // console.log('arr', arr);
@@ -19,7 +23,7 @@ export class PrivilegeService {
         not = true;
       }
 
-      if (!CONSTANT.PRJ_PRIVILEGES[arr[i]]) {
+      if (!myPrivs[arr[i]]) {
         ret = false;
         break;
       }

@@ -20,7 +20,7 @@
       </div>
 
       <div class="buttons">
-        <button privilege [privs]="'plan-create'" (click)="create()" type="button" class="btn btn-primary btn-with-icon btn-sm">
+        <button privilege [privs]="'plan-create'" [myPrivs]="myPrivs" (click)="create()" type="button" class="btn btn-primary btn-with-icon btn-sm">
           <i class="fa fa-plus-circle"></i>新建
         </button>
       </div>
@@ -31,6 +31,7 @@
       <thead class="thead-inverse">
       <tr>
         <th style="width: 200px">名称</th>
+        <th>所属项目</th>
         <th>项目版本</th>
         <th>计划开始时间</th>
         <th>计划结束时间</th>
@@ -42,6 +43,7 @@
       <tbody>
       <tr *ngFor="let item of models">
         <td>{{ item.name }}</td>
+        <td>{{ item.projectName }}</td>
         <td>{{ item.verName }}</td>
         <td>{{ item.startTime | date:'y/MM/dd HH:mm:ss' }}</td>
         <td>{{ item.endTime | date:'y/MM/dd HH:mm:ss' }}</td>
@@ -49,7 +51,7 @@
         <td>{{ item.status | exeStatus}}</td>
         <td>
           <span [routerLink]="['/pages/org/' + orgId + '/prj/' + prjId + '/implement/plan/' + item.id + '/view']" class="link no-underline">查看</span>
-          <span privilege [privs]="'plan-update'" [routerLink]="['/pages/org/' + orgId + '/prj/' + prjId + '/implement/plan/' + item.id + '/edit']" class="link no-underline">编辑</span>
+          <span privilege [privs]="'plan-update'" [myPrivs]="myPrivs" [routerLink]="['/pages/org/' + orgId + '/prj/' + prjId + '/implement/plan/' + item.id + '/edit']" class="link no-underline">编辑</span>
         </td>
       </tr>
       </tbody>

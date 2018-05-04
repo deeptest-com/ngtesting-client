@@ -50,6 +50,9 @@ export const CONSTANT: CONSTANT_INTERFACE = {
   HEAD_HEIGHT: 66,
   FOOTER_HEIGHT: 44,
   ZTREE_TOOOLBAR_HEIGHT: 38,
+
+  ISSUE_FILTER: undefined,
+  ISSUE_TQL: undefined,
 };
 
 export interface CONSTANT_INTERFACE {
@@ -104,5 +107,8 @@ export interface CONSTANT_INTERFACE {
   HEAD_HEIGHT: number;
   FOOTER_HEIGHT: number;
   ZTREE_TOOOLBAR_HEIGHT: number;
+
+  ISSUE_FILTER: number;
+  ISSUE_TQL: string;
 }
 

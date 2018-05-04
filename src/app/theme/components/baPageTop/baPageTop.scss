@@ -13,8 +13,8 @@
     min-width: $resMin;
     padding: 0 32px 0 40px;
 
-    .dropdown-toggle::after {
-      display: none;
+    .dropdown-toggle.no-dropdown::after {
+        display: none;
     }
   }
 

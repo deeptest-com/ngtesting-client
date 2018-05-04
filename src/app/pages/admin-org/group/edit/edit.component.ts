@@ -12,7 +12,7 @@ import {ValidatorUtils, PhoneValidator} from '../../../../validator';
 import { RouteService } from '../../../../service/route';
 
 import { GroupService } from '../../../../service/group';
-import { PopDialogComponent } from '../../../../components/pop-dialog'
+import { PopDialogComponent } from '../../../../components/pop-dialog';
 
 declare var jQuery;
 

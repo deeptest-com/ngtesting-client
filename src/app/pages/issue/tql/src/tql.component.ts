@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { GlobalState } from '../../../../global.state';
 import { CONSTANT } from '../../../../utils/constant';
+import { TqlService } from './tql.service';
 
 @Component({
   selector: 'tql',
@@ -18,7 +19,7 @@ export class Tql implements OnInit, AfterViewInit {
   @Input() tql: string;
   @Output() public queryChanged: EventEmitter<any> = new EventEmitter();
 
-  constructor(private fb: FormBuilder, private _state: GlobalState) {
+  constructor(private fb: FormBuilder, private _state: GlobalState, _tqlService: TqlService) {
     this.form = this.fb.group(
       {
         'disabled': ['', []],
@@ -34,5 +35,9 @@ export class Tql implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.form.valueChanges.debounceTime(CONSTANT.DebounceTime).subscribe(
       values => this.queryChanged.emit());
+  }
+
+  selectProject() {
+
   }
 }

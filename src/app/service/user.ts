@@ -89,12 +89,10 @@ export class UserService {
     return this._reqService.post(this._saveInfo, profile);
   }
 
-  setLeftSize(left: any) {
-    let model = {left: left};
+  setLeftSize(left: number, prop: string) {
+    let model = { left: left, prop: prop };
     return this._reqService.post(this._setLeftSize, model);
   }
-
-
 
 }
 

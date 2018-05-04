@@ -5,7 +5,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import {ToastyService, ToastyConfig, ToastOptions, ToastData} from 'ng2-toasty';
 
 import {GlobalState} from '../../../../global.state';
-
+import { WS_CONSTANT } from '../../../../utils/ws-constant';
 import { CONSTANT } from '../../../../utils/constant';
 import {ValidatorUtils} from '../../../../validator/validator.utils';
 
@@ -45,6 +45,12 @@ export class CaseEdit implements OnInit, AfterViewInit, OnDestroy {
   constructor(private _state:GlobalState, private fb: FormBuilder, private toastyService:ToastyService,
               private _caseService: CaseService, private _caseStepService: CaseStepService,
               private privilegeService:PrivilegeService) {
+
+    this._state.subscribe(WS_CONSTANT.WS_PRJ_SETTINGS, this.eventCode, (json) => {
+      console.log(WS_CONSTANT.WS_PRJ_SETTINGS + ' in ' + this.eventCode, json);
+
+      this.canEdit = this.privilegeService.hasPrivilege('cases-update');
+    });
 
   }
   ngOnInit() {

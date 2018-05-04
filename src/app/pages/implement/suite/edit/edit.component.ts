@@ -135,7 +135,8 @@ export class SuiteEditComponent implements OnInit, AfterViewInit {
   }
 
   save() {
-    this._suiteService.save(this.prjId, this.caseProjectId ? this.caseProjectId : this.prjId, this.model).subscribe((json: any) => {
+    this._suiteService.save(this.prjId, this.caseProjectId ? this.caseProjectId : this.prjId, this.model)
+        .subscribe((json: any) => {
       if (json.code == 1) {
         this._routeService.navTo('/pages/org/' + CONSTANT.CURR_ORG_ID
           + '/prj/' + CONSTANT.CURR_PRJ_ID + '/implement/suite/list');

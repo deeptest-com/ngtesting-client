@@ -1,21 +1,21 @@
-import {Component, OnInit, AfterViewInit, OnDestroy} from "@angular/core";
+import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 
-import {Router} from "@angular/router";
+import { Router } from '@angular/router';
 
-import {GlobalState} from "../../../global.state";
+import { GlobalState } from '../../../global.state';
 
-import {CONSTANT} from "../../../utils/constant";
-import {WS_CONSTANT} from "../../../utils/ws-constant";
+import { CONSTANT } from '../../../utils/constant';
+import { WS_CONSTANT } from '../../../utils/ws-constant';
 
-import {RouteService} from "../../../service/route";
+import { RouteService } from '../../../service/route';
 
-import {OrgService} from "../../../service/org";
-import {AccountService} from "../../../service/account";
+import { OrgService } from '../../../service/org';
+import { AccountService } from '../../../service/account';
 
 @Component({
   selector: 'ba-page-top',
   templateUrl: './baPageTop.html',
-  styleUrls: ['./baPageTop.scss']
+  styleUrls: ['./baPageTop.scss'],
 })
 export class BaPageTop implements OnInit, AfterViewInit, OnDestroy {
   eventCode: string = 'BaPageTop';
@@ -35,9 +35,9 @@ export class BaPageTop implements OnInit, AfterViewInit, OnDestroy {
 
   public isScrolled: boolean = false;
 
-  constructor(private _router: Router, private _state: GlobalState, private _routeService: RouteService,
+  constructor(private _router: Router,
+              private _state: GlobalState, private _routeService: RouteService,
               private orgService: OrgService, private accountService: AccountService) {
-    // console.log('==== BaPageTop constructor ');
 
     this._state.subscribe(WS_CONSTANT.WS_MSG_AND_ALERT_LASTEST, this.eventCode, (json) => {
       console.log(WS_CONSTANT.WS_MSG_AND_ALERT_LASTEST + ' in ' + this.eventCode, json);
@@ -85,8 +85,6 @@ export class BaPageTop implements OnInit, AfterViewInit, OnDestroy {
     this.profile = CONSTANT.PROFILE;
     this.orgs = CONSTANT.MY_ORGS;
     this.projects = CONSTANT.RECENT_PROJECTS;
-
-    // console.log('==== BaPageTop ngOnInit ', this.orgId, this.prjId, this.profile);
   }
   ngAfterViewInit() {}
 
@@ -122,13 +120,29 @@ export class BaPageTop implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onSearchKeywordChanged(e: any) {
-    console.log('0-', this._router.url);
     if (this._router.url.indexOf('design/case') < 0) {
-      console.log('1-', this.keywords);
       this._routeService.quickJump(this.keywords);
     } else {
-      console.log('2-', this.keywords);
       this._state.notifyDataChanged(CONSTANT.EVENT_CASE_JUMP, this._routeService.caseIdForJump(this.keywords));
+    }
+  }
+
+  selectProject(prjId: number) {
+    if (this._router.url.indexOf('/prj/') > -1) {
+      // Suite、Plan、Issue回到模块的首页
+      if (this._router.url.indexOf('/implement/suite') > -1) {
+        this._routeService.navTo('/pages/org/' + this.orgId + '/prj/' + prjId + '/implement/suite/list');
+      } else if (this._router.url.indexOf('/implement/plan') > -1) {
+        this._routeService.navTo('/pages/org/' + this.orgId + '/prj/' + prjId + '/implement/plan/list');
+      } else if (this._router.url.indexOf('/issue/query') > -1) {
+        this._routeService.navTo('/pages/org/' + this.orgId + '/prj/' + prjId + '/issue/query/0/all');
+      } else {
+        const arr = this._router.url.split('/prj/');
+        const url = arr[0] + '/prj/' + prjId + arr[1].substr(arr[1].indexOf('/'), arr[1].length);
+        this._routeService.navTo(url);
+      }
+    } else { // 回到项目View页
+      this._routeService.navTo('/pages/org/' + this.orgId + '/prj/' + prjId + '/view');
     }
   }
 
@@ -137,6 +151,7 @@ export class BaPageTop implements OnInit, AfterViewInit, OnDestroy {
     this._state.unsubscribe(WS_CONSTANT.WS_USER_SETTINGS, this.eventCode);
     this._state.unsubscribe(WS_CONSTANT.WS_MY_ORGS, this.eventCode);
     this._state.unsubscribe(WS_CONSTANT.WS_RECENT_PROJECTS, this.eventCode);
-  };
+    this._state.unsubscribe(WS_CONSTANT.WS_PRJ_SETTINGS, this.eventCode);
+  }
 
 }

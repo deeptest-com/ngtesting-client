@@ -10,15 +10,23 @@
       </div>
 
       <div class="buttons">
-        <button (click)="create()" type="button" class="btn btn-primary btn-with-icon btn-sm">
-          <i class="fa fa-plus-circle"></i>新建问题
+        <button privilege [privs]="'issue-create'" [myPrivs]="myPrivs" (click)="create()" type="button" class="btn btn-primary btn-with-icon btn-sm">
+          <i class="fa fa-plus-circle"></i>新建
         </button>
       </div>
     </div>
   </div>
   <!-- /.row -->
-  <div class="row">
+  <div class="row main" [resize]="'issue'">
+    <div class="left resize-left" [style.width]="leftWidth+'px'" [style.height]="contentHeight">
 
+    </div>
+
+    <div class="resize-handle" [style.left]="leftWidth+'px'" [style.height]="contentHeight"></div>
+
+    <div class="content resize-right y-scrollable" [style.height]="contentHeight">
+
+    </div>
   </div>
 
 </div>

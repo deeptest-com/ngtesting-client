@@ -93,7 +93,8 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
                      @Inject(Renderer2) private renderer: Renderer2, private fb: FormBuilder,
                      private privilegeService: PrivilegeService, private toastyService: ToastyService,
                      @Inject(ZtreeService) private ztreeService: ZtreeService) {
-    this.treeHeight = Utils.getContainerHeight(CONSTANT.HEAD_HEIGHT +  CONSTANT.FOOTER_HEIGHT + CONSTANT.ZTREE_TOOOLBAR_HEIGHT);
+    this.treeHeight = Utils.getContainerHeight(CONSTANT.HEAD_HEIGHT + CONSTANT.FOOTER_HEIGHT
+      + CONSTANT.ZTREE_TOOOLBAR_HEIGHT);
 
     this.queryForm = this.fb.group(
       {
@@ -116,7 +117,7 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
         enable: true,
 
         showRemoveBtn: this.showRemoveBtn,
-        showRenameBtn: this.privilegeService.hasPrivilege('cases-update'),
+        showRenameBtn: this.showRenameBtn,
 
         editNameSelectAll: true,
         renameTitle: '编辑',
@@ -226,12 +227,13 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
   notifyCaseChange = (node: any) => {
     this.childrenCount = { notReview: 0, reviewPass: 0, reviewFail: 0 };
     this.countChildren(node);
-    this._state.notifyDataChanged('case.' + this.settings.usage, { node: node, childrenCount: this.childrenCount, random: Math.random() });
+    this._state.notifyDataChanged('case.' + this.settings.usage,
+      { node: node, childrenCount: this.childrenCount, random: Math.random() });
   }
   countChildren = (treeNode) => {
     logger.log(treeNode.name, treeNode.isParent, !treeNode.isLeaf);
     if (treeNode.isParent){
-      for (const obj in treeNode.children){
+      for (const obj in treeNode.children) {
         this.countChildren(treeNode.children[obj]);
       }
     } else {
@@ -260,7 +262,7 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   addHoverDom = (treeId, treeNode) => {
-    if (!this.privilegeService.hasPrivilege('cases-create')) {return false; }
+    if (!this.privilegeService.hasPrivilege('cases-create')) { return false; }
 
     const sObj = $('#' + treeNode.tId + '_span');
 
@@ -293,7 +295,7 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
       treeNode.tm = new Date().getTime();
 
       this._state.notifyDataChanged('case.' + this.settings.usage, { node: _.clone(treeNode), random: Math.random() });
-    }).catch((err) => {logger.log('err', err); });
+    }).catch((err) => { logger.log('err', err); });
 
     this.renameEvent.emit({
       data: treeNode,
@@ -311,7 +313,7 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
     deferred.promise.then((data) => {
       logger.log('success to remove', treeNode);
       this._state.notifyDataChanged('case.' + this.settings.usage, { node: null, random: Math.random() });
-    }).catch((err) => {logger.log('err', err); });
+    }).catch((err) => { logger.log('err', err); });
 
     this.removeEvent.emit({
       data: treeNode,
@@ -361,10 +363,11 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       }
 
-    }).catch((err) => {logger.log('err', err); });
+    }).catch((err) => { logger.log('err', err); });
 
     this.moveEvent.emit({
-      data: { pId: treeNodes[0].pId, srcId: treeNodes[0].id, targetId: targetNode.id, moveType: moveType, isCopy: isCopy },
+      data: { pId: treeNodes[0].pId, srcId: treeNodes[0].id, targetId: targetNode.id,
+        moveType: moveType, isCopy: isCopy },
       deferred: deferred,
     });
   }
@@ -419,7 +422,7 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   updateCopiedNodes(node: any, data: any) {
-    logger.log('===',  node.id, data.id);
+    logger.log('===', node.id, data.id);
 
     node.id = data.id;
     node.pId = data.pId;
@@ -447,6 +450,10 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   showRemoveBtn = (treeId, treeNode) => {
     return this.privilegeService.hasPrivilege('cases-remove') && !!treeNode.pId;
+  }
+
+  showRenameBtn = (treeId, treeNode) => {
+    return this.privilegeService.hasPrivilege('cases-update');
   }
 
 }
