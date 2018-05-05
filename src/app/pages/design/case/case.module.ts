@@ -1,6 +1,6 @@
 import { NgModule }      from '@angular/core';
 import { CommonModule }  from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {ToastyModule} from 'ng2-toasty';
 
 import { NgbModalModule, NgbPaginationModule, NgbDropdownModule,
@@ -9,8 +9,10 @@ import { NgbModalModule, NgbPaginationModule, NgbDropdownModule,
 import { NgaModule } from '../../../theme/nga.module';
 import { routing }       from './case.routing';
 
+import { FileUploaderModule } from '../../../components/file-uploader';
 import { PipeModule } from '../../../pipe/pipe.module';
 import { DirectiveModule } from '../../../directive/directive.module';
+
 import { SlimLoadingBarModule } from '../../../components/ng2-loading-bar';
 import { ZtreeModule } from '../../../components/ztree';
 import { StepsTableModule } from '../../../components/steps-table';
@@ -24,6 +26,7 @@ import { DatetimePickerService } from '../../../service/datetime-picker';
 
 import { SuiteService } from '../../../service/suite';
 import { CaseService } from '../../../service/case';
+import { CaseAttachmentService } from '../../../service/case-attachment';
 import { CaseStepService } from '../../../service/case-step';
 import { CaseCommentsService } from '../../../service/case-comments';
 import { PrivilegeService } from '../../../service/privilege';
@@ -36,6 +39,7 @@ import { CaseView } from './view/view.component';
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
     ReactiveFormsModule,
     NgaModule,
     routing,
@@ -52,6 +56,7 @@ import { CaseView } from './view/view.component';
     StepsTableModule,
     CustomFieldModule,
     TinyMCEModule,
+    FileUploaderModule,
   ],
   declarations: [
     Case,
@@ -68,6 +73,7 @@ import { CaseView } from './view/view.component';
     CaseStepService,
     CaseCommentsService,
     PrivilegeService,
+    CaseAttachmentService,
   ]
 })
 export class CaseModule {}

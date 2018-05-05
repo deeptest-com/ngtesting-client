@@ -26,7 +26,7 @@
       </ng-container>
       <ng-container *ngIf="field.format=='rich_text'">
         <tiny-mce [elemId]="'custom-field-'+field.myColumn" [content]="model[field.myColumn]" [height]="'200px'"
-                  (editorKeyup)="onEditorKeyup($event)"></tiny-mce>
+                  (changed)="onChange($event)"></tiny-mce>
       </ng-container>
     </ng-container>
 

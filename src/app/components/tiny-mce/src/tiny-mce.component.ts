@@ -16,7 +16,7 @@ declare var tinymce: any;
 export class TinyMCEComponent implements OnDestroy, AfterViewInit, OnChanges {
   @Input() elemId: string = 'mceEditor';
 
-  @Output() editorKeyup = new EventEmitter<any>();
+  @Output() changed = new EventEmitter<any>();
   @Input() height: string;
   contentModel: string;
   @Input() set content(cont: string) {
@@ -32,8 +32,7 @@ export class TinyMCEComponent implements OnDestroy, AfterViewInit, OnChanges {
   constructor(private host: ElementRef) { }
 
   ngAfterViewInit() {
-    let that = this;
-
+    const that = this;
     this.sel = 'textarea#'+this.elemId;
     if (!$(this.sel)) {
       return;
@@ -41,17 +40,17 @@ export class TinyMCEComponent implements OnDestroy, AfterViewInit, OnChanges {
 
     tinymce.init({
       document_base_url: '/assets/vendor/tinymce',
-      selector: this.sel,
+      selector: that.sel,
       plugins: ['link', 'table'],
       skin_url: 'skins/lightgray',
       language : "zh_CN",
       language_url : "assets/vendor/tinymce/langs/zh_CN.js",
       setup: editor => {
-        editor.on('keyup', () => {
-          this.editorKeyup.emit(editor.getContent());
+        editor.on('change', () => {
+          this.changed.emit(editor.getContent());
         });
       },
-      height: this.height
+      height: that.height
     }).then(function(editors) {
       that.updateContent();
     });

@@ -1,5 +1,5 @@
 <div class="row file-upload">
-  <div class="col-sm-10 drop-container">
+  <div *ngIf="showDropZone" class="col-sm-8 drop-container">
     <div ng2FileDrop
          [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
          (fileOver)="fileOver($event)"
@@ -22,7 +22,7 @@
     </div>
   </div>
 
-  <div class="col-sm-2">
+  <div [ngClass]="{'col-sm-4': showDropZone}">
     <div class="upload-row">
       <div class="upload-input-wrapper">
             <span class="upload-input-container">
@@ -30,7 +30,10 @@
                        [accept]="mimeType.toString()"/>
             </span>
             <span class="upload-button-container">
-                <button (click)='selectFile()' type="button" class="btn btn-secondary btn-sm">选择</button>
+                <button (click)='selectFile()' type="button" class="btn btn-secondary btn-sm">
+                  <span *ngIf="showDropZone">选择</span>
+                  <span *ngIf="!showDropZone">上传...</span>
+                </button>
             </span>
       </div>
     </div>

@@ -5,6 +5,7 @@ import { CONSTANT } from '../../../utils/constant';
 import { RouteService } from '../../../service/route';
 import { Utils } from '../../../utils/utils';
 import { Deferred } from '../../../service/deferred';
+import { ToastyService, ToastyConfig, ToastOptions, ToastData } from 'ng2-toasty';
 
 @Component({
   selector: 'file-uploader',
@@ -15,18 +16,22 @@ import { Deferred } from '../../../service/deferred';
 export class FileUploaderComponent implements OnInit, AfterViewInit {
   @Output() uploadedEvent: EventEmitter<any> = new EventEmitter<any>();
   @Input() mimeType: string[];
-  file: string = '';
+  @Input() maxFileSize: number = 100; // MB
+  @Input() showDropZone: boolean = true;
+  file: any = {};
 
   uploader: FileUploader;
   uploadedFile: any;
   hasBaseDropZoneOver: boolean = false;
   public hasAnotherDropZoneOver: boolean = false;
+  errorMessage: string;
 
   uploaderOptions: FileUploaderOptions = {
     url: CONSTANT.SERVICE_URL + CONSTANT.UPLOAD_URI,
     authToken: CONSTANT.TOKEN,
     autoUpload: true,
     allowedMimeType: this.mimeType,
+    maxFileSize: this.maxFileSize * 1024  * 1024,
     filters: [{
       name: 'upload', fn: (item: any) => {
         return true;
@@ -39,7 +44,7 @@ export class FileUploaderComponent implements OnInit, AfterViewInit {
     this.init();
   }
 
-  constructor(private routeService: RouteService) {
+  constructor(private routeService: RouteService, private toastyService: ToastyService) {
     this.init();
   }
 
@@ -47,7 +52,6 @@ export class FileUploaderComponent implements OnInit, AfterViewInit {
 
   }
   public ngAfterViewInit() {
-    console.log(11);
   }
 
   init (): void {
@@ -55,6 +59,29 @@ export class FileUploaderComponent implements OnInit, AfterViewInit {
     this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
       this.onUploadCompleteItem(item, response, status, headers);
     };
+    this.uploader.onWhenAddingFileFailed = (item, filter, options) =>
+      this.onWhenAddingFileFailed(item, filter, options);
+  }
+  onWhenAddingFileFailed(item: any, filter: any, options: any) {
+    switch (filter.name) {
+      case 'fileSize':
+        this.errorMessage = `文件大小超过了${this.maxFileSize}M的限制。`;
+        break;
+      case 'mimeType':
+        const allowedTypes = this.mimeType.join();
+        this.errorMessage = `仅支持上传这些类型的文件："${allowedTypes}。`;
+        break;
+      default:
+        this.errorMessage = `未知错误：filter is ${filter.name}。`;
+    }
+    if (this.errorMessage) {
+      const toastOptions = {
+        title: '文件上传失败',
+        msg: this.errorMessage,
+        timeout: 3000,
+      };
+      this.toastyService.warning(toastOptions);
+    }
   }
 
   public fileOverBase(e: any): void {
@@ -77,12 +104,12 @@ export class FileUploaderComponent implements OnInit, AfterViewInit {
 
     if (json.code == 1) {
       this.uploadedFile = json;
-      this.file = json.uploadPath;
+      this.file = { name: json.origName, path: json.uploadPath };
 
       const deferred = new Deferred();
       deferred.promise.then((data) => {
         console.log('onUploadCompleteItem', data);
-      }).catch((err) => {console.log('err', err); });
+      }).catch((err) => { console.log('err', err); });
 
       this.uploadedEvent.emit({
         data: this.file,

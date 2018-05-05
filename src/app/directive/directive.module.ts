@@ -11,7 +11,7 @@ import { PrivilegeDirective } from './privilege/privilege.directive';
   imports: [CommonModule],
   declarations: [ResizeDirective, PrivilegeDirective],
   exports: [ResizeDirective, PrivilegeDirective],
-  providers: [UserService, PrivilegeService]
+  providers: [UserService, PrivilegeService],
 })
 export class DirectiveModule {
 

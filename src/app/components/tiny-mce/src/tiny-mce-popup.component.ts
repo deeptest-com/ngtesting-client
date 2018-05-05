@@ -40,7 +40,7 @@ export class TinyMCEComponentPopup implements OnDestroy, AfterViewInit, OnChange
     this.removeTinymce();
   }
 
-  onEditorKeyup(event: any) {
+  onChange(event: any) {
     this.content = event;
   }
 

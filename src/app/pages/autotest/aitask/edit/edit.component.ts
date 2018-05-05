@@ -232,7 +232,7 @@ export class AitaskEdit implements OnInit, AfterViewInit, OnDestroy {
 
   uploadedEvent(event: any) {
     console.log('uploadedEvent', event);
-    this.model.testsetPath = event.data;
+    this.model.testsetPath = event.data.path;
     if (this.model.id) {
       this.save();
     }

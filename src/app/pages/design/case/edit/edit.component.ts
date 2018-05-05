@@ -1,15 +1,16 @@
-import {Component, ViewEncapsulation, NgModule, Pipe, OnInit, AfterViewInit, OnDestroy,ViewChild} from '@angular/core';
+import { Component, ViewEncapsulation, NgModule, Pipe, OnInit, AfterViewInit, OnDestroy, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
-import {ToastyService, ToastyConfig, ToastOptions, ToastData} from 'ng2-toasty';
+import { ToastyService, ToastyConfig, ToastOptions, ToastData } from 'ng2-toasty';
 
-import {GlobalState} from '../../../../global.state';
+import { GlobalState } from '../../../../global.state';
 import { WS_CONSTANT } from '../../../../utils/ws-constant';
 import { CONSTANT } from '../../../../utils/constant';
-import {ValidatorUtils} from '../../../../validator/validator.utils';
+import { ValidatorUtils } from '../../../../validator/validator.utils';
 
 import { CaseService } from '../../../../service/case';
+import { CaseAttachmentService } from '../../../../service/case-attachment';
 import { CaseStepService } from '../../../../service/case-step';
 
 import { PrivilegeService } from '../../../../service/privilege';
@@ -20,7 +21,7 @@ declare var jQuery;
   selector: 'case-edit',
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['./edit.scss', '../../../../components/case-comments/comment-edit/src/styles.scss'],
-  templateUrl: './edit.html'
+  templateUrl: './edit.html',
 })
 export class CaseEdit implements OnInit, AfterViewInit, OnDestroy {
   eventCode: string = 'CaseEdit';
@@ -42,9 +43,9 @@ export class CaseEdit implements OnInit, AfterViewInit, OnDestroy {
 
   canEdit: boolean;
 
-  constructor(private _state:GlobalState, private fb: FormBuilder, private toastyService:ToastyService,
-              private _caseService: CaseService, private _caseStepService: CaseStepService,
-              private privilegeService:PrivilegeService) {
+  constructor(private _state: GlobalState, private fb: FormBuilder, private toastyService: ToastyService,
+              private _caseService: CaseService, private _caseAttachmentService: CaseAttachmentService, private _caseStepService: CaseStepService,
+              private privilegeService: PrivilegeService) {
 
     this._state.subscribe(WS_CONSTANT.WS_PRJ_SETTINGS, this.eventCode, (json) => {
       console.log(WS_CONSTANT.WS_PRJ_SETTINGS + ' in ' + this.eventCode, json);
@@ -65,7 +66,7 @@ export class CaseEdit implements OnInit, AfterViewInit, OnDestroy {
       const testCase = data.node;
 
       if (!testCase || testCase.isParent) {
-        this.model = {childrenCount: data.childrenCount};
+        this.model = { childrenCount: data.childrenCount };
         return;
       }
 
@@ -90,7 +91,7 @@ export class CaseEdit implements OnInit, AfterViewInit, OnDestroy {
         opt: {
           title: '操作',
           editor: {
-            type: 'textarea'
+            type: 'textarea',
           },
         },
         expect: {
@@ -98,7 +99,7 @@ export class CaseEdit implements OnInit, AfterViewInit, OnDestroy {
           editor: {
             type: 'textarea',
           },
-        }
+        },
       },
     };
   }
@@ -112,46 +113,46 @@ export class CaseEdit implements OnInit, AfterViewInit, OnDestroy {
         'priority': ['', [Validators.required]],
         'estimate': ['', []],
         'objective': ['', []],
-        'pre_condition': ['', []]
-      }, {}
+        'pre_condition': ['', []],
+      }, {},
     );
 
     this.form.valueChanges.debounceTime(CONSTANT.DebounceTime).subscribe(data => this.onValueChanged(data));
     this.onValueChanged();
   }
   onValueChanged(data?: any) {
-    let that = this;
+    const that = this;
     that.formErrors = ValidatorUtils.genMsg(that.form, that.validateMsg, []);
   }
 
   formErrors = [];
   validateMsg = {
     'name': {
-      'required':      '标题不能为空'
+      'required':      '标题不能为空',
     },
     'type': {
-      'required':      '类别不能为空'
+      'required':      '类别不能为空',
     },
     'priority': {
-      'required':      '优先级不能为空'
-    }
+      'required':      '优先级不能为空',
+    },
   };
 
   loadData() {
-    this._caseService.get(this.id).subscribe((json:any) => {
+    this._caseService.get(this.id).subscribe((json: any) => {
       this.model = json.data;
     });
   }
 
   save() {
-    this._caseService.save(this.projectId, this.model).subscribe((json:any) => {
+    this._caseService.save(this.projectId, this.model).subscribe((json: any) => {
       if (json.code == 1) {
         this.model = json.data;
-        this._state.notifyDataChanged(CONSTANT.EVENT_CASE_UPDATE, {node: this.model, random: Math.random()});
+        this._state.notifyDataChanged(CONSTANT.EVENT_CASE_UPDATE, { node: this.model, random: Math.random() });
 
-        var toastOptions:ToastOptions = {
-          title: "保存成功",
-          timeout: 2000
+        const toastOptions: ToastOptions = {
+          title: '保存成功',
+          timeout: 2000,
         };
         this.toastyService.success(toastOptions);
       }
@@ -162,7 +163,7 @@ export class CaseEdit implements OnInit, AfterViewInit, OnDestroy {
     this.tab = event.nextId;
   }
   changeContentType(contentType: string) {
-    this._caseService.changeContentType(contentType, this.model.id).subscribe((json:any) => {
+    this._caseService.changeContentType(contentType, this.model.id).subscribe((json: any) => {
       if (json.code == 1) {
         this.model.contentType = contentType;
       }
@@ -171,14 +172,14 @@ export class CaseEdit implements OnInit, AfterViewInit, OnDestroy {
 
   onUpConfirm(event: any) {
     console.log('onUpConfirm', event);
-    this._caseStepService.up({caseId: this.id, id: event.data.id, ordr: event.data.ordr}).subscribe((json:any) => {
+    this._caseStepService.up({ caseId: this.id, id: event.data.id, ordr: event.data.ordr }).subscribe((json: any) => {
       event.confirm.resolve();
     });
   }
 
   onDownConfirm(event: any) {
     console.log('onDownConfirm', event);
-    this._caseStepService.down({caseId: this.id, id: event.data.id, ordr: event.data.ordr}).subscribe((json:any) => {
+    this._caseStepService.down({ caseId: this.id, id: event.data.id, ordr: event.data.ordr }).subscribe((json: any) => {
       event.confirm.resolve();
     });
   }
@@ -189,26 +190,39 @@ export class CaseEdit implements OnInit, AfterViewInit, OnDestroy {
   }
   onSaveConfirm(event: any) {
     console.log('onSaveConfirm', event);
-    this._caseStepService.save(this.id, event.newData).subscribe((json:any) => {
+    this._caseStepService.save(this.id, event.newData).subscribe((json: any) => {
       event.confirm.resolve(json.data);
     });
   }
   onDeleteConfirm(event: any) {
     console.log('onDeleteConfirm', event);
-    this._caseStepService.delete(event.data).subscribe((json:any) => {
+    this._caseStepService.delete(event.data).subscribe((json: any) => {
       event.confirm.resolve();
     });
   }
 
-  onEditorKeyup(event: any) {
+  onChange(event: any) {
     this.model.content = event;
+  }
+
+  uploadedEvent(event: any) {
+    this._caseAttachmentService.uploadAttachment(this.model.id, event.data.name, event.data.path)
+        .subscribe((json: any) => {
+      this.model.attachments = json.data;
+      event.deferred.resolve();
+    });
+  }
+  removeAttachment(item: any) {
+    this._caseAttachmentService.removeAttachment(this.model.id, item.id).subscribe((json: any) => {
+      this.model.attachments = json.data;
+    });
   }
 
   review(pass: boolean) {
     if (!pass) {
-      this._state.notifyDataChanged(CONSTANT.EVENT_COMMENTS_EDIT, {pass:pass, summary: '评审失败'});
+      this._state.notifyDataChanged(CONSTANT.EVENT_COMMENTS_EDIT, { pass: pass, summary: '评审失败' });
     } else {
-      this._state.notifyDataChanged(CONSTANT.EVENT_COMMENTS_SAVE, {pass:pass, summary: '评审通过'});
+      this._state.notifyDataChanged(CONSTANT.EVENT_COMMENTS_SAVE, { pass: pass, summary: '评审通过' });
     }
   }
 

@@ -48,8 +48,7 @@ export class CustomFieldComponent implements OnInit, OnChanges {
     this.form.addControl(this.field.myColumn, control);
   }
 
-  onEditorKeyup(event: any) {
-    // console.log('===', this.model, this.field.myColumn, event);
+  onChange(event: any) {
     this.model[this.field.myColumn] = event;
   }
 }
