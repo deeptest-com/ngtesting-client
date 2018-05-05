@@ -10,6 +10,16 @@
 </head>
 
 <body>
+  <script>
+    if (navigator.userAgent.toLowerCase().indexOf('chrome') < 0) {
+      alert("请使用Google Chrome浏览器访问！");
+      document.execCommand("Stop");
+      if (window.stop) {
+        window.stop();
+      }
+    }
+  </script>
+
   <app>
   </app>
 

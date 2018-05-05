@@ -1,4 +1,5 @@
 npm run build:prod
+
 rm -rf ~/dev/project/ngtesting-platform/src/main/webapp/client
 cp -R dist ~/dev/project/ngtesting-platform/src/main/webapp/client
 
