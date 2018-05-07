@@ -44,7 +44,7 @@ export const PAGES_MENU = [
             data: {
               menu: {
                 title: 'general.menu.devsite',
-                url: 'http://dev.console.aispeech.com/console/index.html',
+                url: '',
                 target: '_blank'
               }
             }
@@ -54,7 +54,7 @@ export const PAGES_MENU = [
             data: {
               menu: {
                 title: 'general.menu.testsite',
-                url: 'http://test.console.aispeech.com/console/index.html',
+                url: '',
                 target: '_blank'
               }
             }
@@ -64,7 +64,7 @@ export const PAGES_MENU = [
             data: {
               menu: {
                 title: 'general.menu.demosite',
-                url: 'http://demo.console.aispeech.com/console/index.html',
+                url: '',
                 target: '_blank'
               }
             }
@@ -88,7 +88,7 @@ export const PAGES_MENU = [
             data: {
               menu: {
                 title: 'general.menu.devops',
-                url: 'http://172.16.10.9:8000',
+                url: '',
                 target: '_blank'
               }
             }
@@ -98,7 +98,7 @@ export const PAGES_MENU = [
             data: {
               menu: {
                 title: 'general.menu.gitlab',
-                url: 'https://gitlab.spetechcular.com',
+                url: '',
                 target: '_blank'
               }
             }
@@ -108,7 +108,7 @@ export const PAGES_MENU = [
             data: {
               menu: {
                 title: 'general.menu.jira',
-                url: 'https://jira.spetechcular.com',
+                url: '',
                 target: '_blank'
               }
             }
@@ -118,7 +118,7 @@ export const PAGES_MENU = [
             data: {
               menu: {
                 title: 'general.menu.wiki',
-                url: 'https://wiki.spetechcular.com/display/DevPlatform/AISPEECH+DUI',
+                url: '',
                 target: '_blank'
               }
             }
