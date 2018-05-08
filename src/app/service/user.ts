@@ -1,18 +1,18 @@
 import * as _ from 'lodash';
 
-import {Injectable} from "@angular/core";
-import {Observable} from 'rxjs/Observable';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 
-import {RequestService} from "./request";
+import { RequestService } from './request';
 
 import { Cookie } from 'ng2-cookies/ng2-cookies';
 import { CONSTANT } from '../utils/constant';
-import {GlobalState} from '../global.state';
+import { GlobalState } from '../global.state';
 import { RouteService } from './route';
 
 @Injectable()
 export class UserService {
-  constructor(private _state:GlobalState, private _routeService: RouteService, private _reqService: RequestService) { }
+  constructor(private _state: GlobalState, private _routeService: RouteService, private _reqService: RequestService) { }
   _api_url = 'user/';
 
   _getProfile = this._api_url + 'getProfile';
@@ -20,39 +20,43 @@ export class UserService {
   _setLeftSize = this._api_url + 'setLeftSize';
 
   list(query: any, page: number, pageSize: number) {
-    _.merge(query, {page: page, pageSize: pageSize});
+    _.merge(query, { page: page, pageSize: pageSize });
     return this._reqService.post(this._api_url + 'list', query);
   }
   getUsers(projectId: number) {
-    let model = {projectId: projectId};
+    const model = { projectId: projectId };
     return this._reqService.post(this._api_url + 'getUsers', model);
   }
 
   get(id: number) {
-    let model = {id: id};
+    const model = { id: id };
     return this._reqService.post(this._api_url + 'get', model);
   }
 
   save(user: any, groups: any[]) {
-    return this._reqService.post(this._api_url + 'save', {user: user, relations: groups});
+    return this._reqService.post(this._api_url + 'save', { user: user, relations: groups });
   }
   invite(user: any, groups: any[]) {
-    return this._reqService.post(this._api_url + 'invite', {user: user, relations: groups});
+    return this._reqService.post(this._api_url + 'invite', { user: user, relations: groups });
   }
 
   delete(id: number) {
-    let model = {id: id};
+    const model = { id: id };
     return this._reqService.post(this._api_url + 'delete', model);
   }
+  removeFromOrg(userId: number, orgId: number) {
+    const model = { userId: userId, orgId: orgId };
+    return this._reqService.post(this._api_url + 'removeFromOrg', model);
+  }
 
-  search(orgId:number, keywords: string, exceptIds: any[]) {
-    let model = { orgId:orgId, keywords: keywords, exceptIds: exceptIds };
+  search(orgId: number, keywords: string, exceptIds: any[]) {
+    const model = { orgId: orgId, keywords: keywords, exceptIds: exceptIds };
     return this._reqService.post(this._api_url + 'search', model);
   }
 
   loadProfileRemote(context = {}): Observable<any> {
-    let that = this;
-    let token = Cookie.get(CONSTANT.TOKEN_KEY);
+    const that = this;
+    const token = Cookie.get(CONSTANT.TOKEN_KEY);
     console.log('token from cookie: ', token);
 
     if (token && token != 'undefined') {
@@ -85,12 +89,12 @@ export class UserService {
     }
   }
 
-  saveInfo(profile:any) {
+  saveInfo(profile: any) {
     return this._reqService.post(this._saveInfo, profile);
   }
 
   setLeftSize(left: number, prop: string) {
-    let model = { left: left, prop: prop };
+    const model = { left: left, prop: prop };
     return this._reqService.post(this._setLeftSize, model);
   }
 
