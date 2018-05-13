@@ -15,8 +15,7 @@ declare var jQuery;
 export class BaSidebar implements OnInit, AfterViewInit, OnDestroy {
   eventCode: string = 'BaSidebar';
 
-  @Input() orgs: any[];
-
+  isOrgAdmin: boolean;
   public menuHeight: number;
   public isMenuCollapsed: boolean = false;
   public isMenuShouldCollapsed: boolean = false;
@@ -26,11 +25,15 @@ export class BaSidebar implements OnInit, AfterViewInit, OnDestroy {
       this.isMenuCollapsed = isCollapsed;
     });
 
-    this._state.subscribe(WS_CONSTANT.WS_ORG_SETTINGS, this.eventCode, (json) => {
-      console.log(WS_CONSTANT.WS_ORG_SETTINGS + ' in ' + this.eventCode, json);
+    // this._state.subscribe(WS_CONSTANT.WS_ORG_SETTINGS, this.eventCode, (json) => {
+    //   console.log(WS_CONSTANT.WS_ORG_SETTINGS + ' in ' + this.eventCode, json);
+    //
+    //   this.updateOrgName(json.org.name);
+    // });
 
-      this.updateOrgName(json.org.name);
-    });
+    if (CONSTANT.PROFILE) {
+      this.isOrgAdmin = CONSTANT.ORG_PRIVILEGES.org_admin;
+    }
   }
 
   public ngOnInit(): void {
@@ -42,10 +45,10 @@ export class BaSidebar implements OnInit, AfterViewInit, OnDestroy {
   public ngAfterViewInit(): void {
     setTimeout(() => {
       this.updateSidebarHeight();
-      console.log('====================', CONSTANT.CURR_ORG_NAME);
-      if (CONSTANT.CURR_ORG_NAME) {
-        this.updateOrgName(CONSTANT.CURR_ORG_NAME);
-      }
+      // console.log('====================', CONSTANT.CURR_ORG_NAME);
+      // if (CONSTANT.CURR_ORG_NAME) {
+      //   this.updateOrgName(CONSTANT.CURR_ORG_NAME);
+      // }
     });
   }
 
@@ -87,8 +90,8 @@ export class BaSidebar implements OnInit, AfterViewInit, OnDestroy {
     this._state.unsubscribe(WS_CONSTANT.WS_ORG_SETTINGS, this.eventCode);
   }
 
-  updateOrgName(name: string): void {
-    const elem = jQuery(jQuery('.al-sidebar li[title*="当前组织"] .al-sidebar-list-link').children('span')[0]);
-    elem.text(name);
-  }
+  // updateOrgName(name: string): void {
+  //   const elem = jQuery(jQuery('.al-sidebar li[title*="当前组织"] .al-sidebar-list-link').children('span')[0]);
+  //   elem.text(name);
+  // }
 }
