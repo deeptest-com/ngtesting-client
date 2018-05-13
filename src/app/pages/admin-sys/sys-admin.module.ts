@@ -7,8 +7,6 @@ import { routing }       from './sys-admin.routing';
 import { NgbModalModule, NgbPaginationModule, NgbDropdownModule,
   NgbTabsetModule, NgbButtonsModule, NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { SlidebarModule } from '../../components/slidebar';
-
 import { SysAdmin } from './sys-admin.component';
 
 @NgModule({
@@ -20,8 +18,6 @@ import { SysAdmin } from './sys-admin.component';
 
     NgbModalModule, NgbPaginationModule, NgbDropdownModule,
     NgbTabsetModule, NgbButtonsModule, NgbCollapseModule,
-
-    SlidebarModule
   ],
   declarations: [
     SysAdmin
