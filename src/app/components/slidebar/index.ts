@@ -4,7 +4,7 @@ import { SlidebarItem } from './src/slidebar-item.component';
 
 import { SlidebarService } from './src/slidebar.service';
 
-import {SlidebarModule} from "./src/slidebar.module";
+import { SlidebarModule } from './src/slidebar.module';
 
 export {
   Slidebar,

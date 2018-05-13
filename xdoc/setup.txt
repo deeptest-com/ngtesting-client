@@ -1,7 +1,5 @@
 npm run build:prod
 
-sed -i '' "s/lab.dui.ai/localhost:8080/g" dist/main.*.bundle.js
-
 rm -rf ~/dev/project/ngtesting-platform/src/main/webapp/client
 cp -R dist ~/dev/project/ngtesting-platform/src/main/webapp/client
 

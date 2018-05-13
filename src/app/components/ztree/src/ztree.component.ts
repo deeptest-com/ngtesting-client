@@ -63,6 +63,7 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
     if (!model) {
       return;
     }
+    this._state.notifyDataChanged('case.' + this.settings.usage, { node: null, random: Math.random() });
 
     _.merge(this.settings, this.treeSettings);
     this.isExpanded = this.settings.isExpanded;
@@ -83,6 +84,8 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
     this._treeModel = model;
     this.ztree = jQuery.fn.zTree.init($('#tree'), this.settings, this._treeModel);
     this.ztree.expandNode(this.ztree.getNodes()[0], this.isExpanded, this.sonSign, true);
+
+
 
     if (this.settings.jumpTo) {
       this.jumpTo(this.settings.jumpTo);

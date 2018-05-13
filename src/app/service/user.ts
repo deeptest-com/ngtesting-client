@@ -65,6 +65,7 @@ export class UserService {
       return this._reqService.post(that._getProfile, context).map(json => {
         if (json.code == 1) {
           CONSTANT.CURR_ORG_ID = json.profile.defaultOrgId;
+          CONSTANT.CURR_ORG_NAME = json.profile.defaultOrgName;
           CONSTANT.CURR_PRJ_ID = json.profile.defaultPrjId;
           CONSTANT.CURR_PRJ_NAME = json.profile.defaultPrjName;
 

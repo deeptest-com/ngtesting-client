@@ -1,6 +1,4 @@
 export const CONSTANT: CONSTANT_INTERFACE = {
-  _SERVICE_URL_DEV: 'http://localhost:8080/platform/',
-  _SERVICE_URL_PRODUCTION: 'http://lab.dui.ai/platform/',
 
   SERVICE_URL: undefined,
   API_URL: undefined,
@@ -10,6 +8,7 @@ export const CONSTANT: CONSTANT_INTERFACE = {
 
   CURR_ORG_ID: undefined,
   CURR_PRJ_ID: undefined,
+  CURR_ORG_NAME: undefined,
   CURR_PRJ_NAME: undefined,
 
   TOKEN: undefined,
@@ -56,9 +55,6 @@ export const CONSTANT: CONSTANT_INTERFACE = {
 };
 
 export interface CONSTANT_INTERFACE {
-  _SERVICE_URL_DEV: string;
-  _SERVICE_URL_PRODUCTION: string;
-
   SERVICE_URL: string;
   API_URL: string;
 
@@ -66,6 +62,7 @@ export interface CONSTANT_INTERFACE {
   UPLOAD_URI: string;
 
   CURR_ORG_ID: number;
+  CURR_ORG_NAME: string;
   CURR_PRJ_ID: number;
   CURR_PRJ_NAME: string;
 

@@ -1,4 +1,4 @@
-import { NgModule, ModuleWithProviders }      from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule }  from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -30,6 +30,10 @@ import {
   BaCard,
   BaMsgCenter,
   BaPageTop,
+
+  BaMenuItem,
+  BaMenu,
+  BaSidebar,
 } from './components';
 
 import { BaCardBlur } from './components/baCard/baCardBlur.directive';
@@ -44,13 +48,14 @@ import {
   BaAppPicturePipe,
   BaKameleonPicturePipe,
   BaProfilePicturePipe,
+  baMenuPath,
 } from './pipes';
 
 import {
   BaImageLoaderService,
-  BaMenuService,
   BaThemePreloader,
   BaThemeSpinner,
+  BaMenuService,
 } from './services';
 
 import {
@@ -62,6 +67,10 @@ const NGA_COMPONENTS = [
   BaCard,
   BaMsgCenter,
   BaPageTop,
+
+  BaSidebar,
+  BaMenuItem,
+  BaMenu,
 ];
 
 const NGA_DIRECTIVES = [
@@ -75,13 +84,13 @@ const NGA_PIPES = [
   BaAppPicturePipe,
   BaKameleonPicturePipe,
   BaProfilePicturePipe,
+  baMenuPath,
 ];
 
 const NGA_SERVICES = [
   BaImageLoaderService,
   BaThemePreloader,
   BaThemeSpinner,
-  BaMenuService,
 
   RouteService,
   RequestService,
@@ -90,6 +99,7 @@ const NGA_SERVICES = [
   OrgService,
   AlertService,
   MsgService,
+  BaMenuService,
 ];
 
 const NGA_VALIDATORS = [

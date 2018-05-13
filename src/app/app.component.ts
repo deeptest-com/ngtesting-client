@@ -1,4 +1,6 @@
-import { Component, ViewContainerRef } from '@angular/core';
+import { Component, ViewContainerRef, enableProdMode} from '@angular/core';
+enableProdMode();
+
 import { ActivatedRoute, Params } from '@angular/router';
 import * as $ from 'jquery';
 
@@ -57,7 +59,7 @@ export class App {
 
   private _loadImages(): void {
     // register some loaders
-    BaThemePreloader.registerLoader(this._imageLoader.load('/assets/img/sky-bg.jpg'));
+    BaThemePreloader.registerLoader(this._imageLoader.load('assets/img/sky-bg.jpg'));
   }
 
 }

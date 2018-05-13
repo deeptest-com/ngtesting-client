@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, NgModule, Pipe, OnInit, AfterViewInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, ViewEncapsulation, NgModule, Pipe, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
@@ -63,6 +63,7 @@ export class CaseEdit implements OnInit, AfterViewInit, OnDestroy {
     this.buildForm();
 
     this._state.subscribe(CONSTANT.EVENT_CASE_EDIT, this.eventCode, (data: any) => {
+      this.projectId = CONSTANT.CURR_PRJ_ID;
       const testCase = data.node;
 
       if (!testCase || testCase.isParent) {

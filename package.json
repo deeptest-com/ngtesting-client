@@ -23,6 +23,7 @@
     "start:prod:aot": "ng serve --prod --aot",
     "build": "npm run clean:dist && ng build",
     "build:prod": "npm run build -- --prod",
+    "build:ailab": "npm run build -- --prod --env=ailab",
     "build:prod:aot": "npm run build:prod -- --aot",
     "build:ci": "npm run build:prod && npm run build:prod:aot",
     "build:demo": "npm run build:prod:aot -- --base-href \"http://akveo.com/ng2-admin/\"",

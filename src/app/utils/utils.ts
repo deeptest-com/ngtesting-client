@@ -3,17 +3,13 @@ import {Injectable} from '@angular/core';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 import {CONSTANT} from '../utils/constant';
+import {environment} from '../../environments/environment';
 
 declare var unescape;
 
 export var Utils: any = {
   config: function() {
-    var host = window.location.host;
-    if (host.indexOf('localhost') > -1) {
-      CONSTANT.SERVICE_URL = CONSTANT._SERVICE_URL_DEV.replace('client/', '');
-    } else {
-      CONSTANT.SERVICE_URL = CONSTANT._SERVICE_URL_PRODUCTION;
-    }
+    CONSTANT.SERVICE_URL = environment.SERVICE_URL;
     CONSTANT.API_URL = CONSTANT.SERVICE_URL + CONSTANT.API_PATH;
   },
 

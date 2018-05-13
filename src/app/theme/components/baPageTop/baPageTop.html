@@ -68,11 +68,11 @@
       <button (click)="gotoModule('implement')" class="btn btn-default">计划</button>
     </div>
 
-    <div *ngIf="prjId" ngbDropdown class="btn-group">
+<!--    <div *ngIf="prjId" ngbDropdown class="btn-group">
       <button (click)="gotoModule('issue')" class="btn btn-default">缺陷</button>
-    </div>
+    </div>-->
 
-    <div *ngIf="prjId" ngbDropdown class="btn-group">
+    <div *ngIf="prjId && (!environment.production || environment.consumer=='ailab')" ngbDropdown class="btn-group">
       <button (click)="gotoModule('autotest')" class="btn btn-default">自动化</button>
     </div>
 

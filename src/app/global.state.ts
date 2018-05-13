@@ -34,8 +34,6 @@ export class GlobalState {
 
     subscribers.set(code, callback);
     this._subscriptions.set(event, subscribers);
-
-    // console.log('===subscribe', this._subscriptions);
   }
   unsubscribe(event: string, code: string) {
     let subscribers: Map<string, Function> = this._subscriptions.get(event)

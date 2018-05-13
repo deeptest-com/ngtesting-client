@@ -33,5 +33,10 @@ export class OrgService {
     return this._reqService.post(this._api_url + 'change', model);
   }
 
+  setDefault(id: number, queryModel: any) {
+    let model = { id: id, keywords: queryModel.keywords, disabled: queryModel.disabled };
+    return this._reqService.post(this._api_url + 'setDefault', model);
+  }
+
 }
 

@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 
 import { Router } from '@angular/router';
 
+import { environment } from '../../../../environments/environment';
 import { GlobalState } from '../../../global.state';
 
 import { CONSTANT } from '../../../utils/constant';
@@ -19,6 +20,8 @@ import { AccountService } from '../../../service/account';
 })
 export class BaPageTop implements OnInit, AfterViewInit, OnDestroy {
   eventCode: string = 'BaPageTop';
+
+  environment: any;
 
   orgId: number;
   prjId: number;
@@ -39,6 +42,8 @@ export class BaPageTop implements OnInit, AfterViewInit, OnDestroy {
               private _state: GlobalState, private _routeService: RouteService,
               private orgService: OrgService, private accountService: AccountService) {
 
+    this.environment = environment;
+
     this._state.subscribe(WS_CONSTANT.WS_MSG_AND_ALERT_LASTEST, this.eventCode, (json) => {
       console.log(WS_CONSTANT.WS_MSG_AND_ALERT_LASTEST + ' in ' + this.eventCode, json);
       this.alerts = json.alerts;
@@ -55,6 +60,13 @@ export class BaPageTop implements OnInit, AfterViewInit, OnDestroy {
       console.log(WS_CONSTANT.WS_MY_ORGS + ' in ' + this.eventCode, json);
 
       this.orgs = json.myOrgs;
+    });
+
+    this._state.subscribe(WS_CONSTANT.WS_ORG_SETTINGS, this.eventCode, (json) => {
+      console.log(WS_CONSTANT.WS_ORG_SETTINGS + ' in ' + this.eventCode, json);
+
+      CONSTANT.CURR_ORG_NAME = json.org.name;
+      CONSTANT.ORG_PRIVILEGES = json.orgPrivileges;
     });
 
     this._state.subscribe(WS_CONSTANT.WS_RECENT_PROJECTS, this.eventCode, (json) => {
@@ -150,6 +162,7 @@ export class BaPageTop implements OnInit, AfterViewInit, OnDestroy {
     this._state.unsubscribe(WS_CONSTANT.WS_MSG_AND_ALERT_LASTEST, this.eventCode);
     this._state.unsubscribe(WS_CONSTANT.WS_USER_SETTINGS, this.eventCode);
     this._state.unsubscribe(WS_CONSTANT.WS_MY_ORGS, this.eventCode);
+    this._state.unsubscribe(WS_CONSTANT.WS_ORG_SETTINGS, this.eventCode);
     this._state.unsubscribe(WS_CONSTANT.WS_RECENT_PROJECTS, this.eventCode);
     this._state.unsubscribe(WS_CONSTANT.WS_PRJ_SETTINGS, this.eventCode);
   }

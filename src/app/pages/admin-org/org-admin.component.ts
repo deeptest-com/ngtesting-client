@@ -1,34 +1,37 @@
-import {Component} from "@angular/core";
+import { Component, OnInit } from '@angular/core';
+import { Routes, ActivatedRoute } from '@angular/router';
 import { GlobalState } from '../../global.state';
 
 import { CONSTANT } from '../../utils/constant';
-import {RouteService} from "../../service/route";
-import {AccountService} from "../../service/account";
+import { RouteService } from '../../service/route';
+import { BaMenuService } from '../../theme';
+import { ORG_MENU } from './org.menu';
+
+import { OrgService } from '../../service/org';
 
 @Component({
   selector: 'org-admin',
   styleUrls: ['./org-admin.scss'],
-  templateUrl: './org-admin.html'
+  templateUrl: './org-admin.html',
 })
-export class OrgAdmin {
+export class OrgAdmin implements OnInit {
+  orgs: any[];
 
-  menus:any[] = [
-    {link:'/pages/org-admin/org/list', title: '我的组织'},
-    {link:'/pages/org-admin/user/list', title: '组织用户'},
-    {link:'/pages/org-admin/group/list', title: '组织群组'},
-    {link:'/pages/org-admin/org-role/list', title: '组织角色'},
-    {link:'/pages/org-admin/project-role/list', title: '项目角色'},
-    {link:'/pages/org-admin/property/case-type/list', title: '属性设置'}
-  ];
-
-  menuItems:any[] = this.menus;
-
-  constructor(private _state: GlobalState, private _routeService:RouteService, private accountService: AccountService) {
+  constructor(private _state: GlobalState, private _routeService: RouteService,
+              private orgService: OrgService, private _menuService: BaMenuService) {
 
   }
 
   ngOnInit() {
+    this._menuService.updateMenuByRoutes(<Routes> ORG_MENU);
 
+    this.loadData();
+  }
+
+  loadData() {
+    this.orgService.list({}).subscribe((json: any) => {
+      this.orgs = json.data;
+    });
   }
 
 }

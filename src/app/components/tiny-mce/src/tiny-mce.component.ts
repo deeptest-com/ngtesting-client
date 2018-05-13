@@ -39,7 +39,7 @@ export class TinyMCEComponent implements OnDestroy, AfterViewInit, OnChanges {
     }
 
     tinymce.init({
-      document_base_url: '/assets/vendor/tinymce',
+      document_base_url: 'assets/vendor/tinymce',
       selector: that.sel,
       plugins: ['link', 'table'],
       skin_url: 'skins/lightgray',
