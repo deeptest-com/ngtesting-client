@@ -66,6 +66,7 @@ export class BaPageTop implements OnInit, AfterViewInit, OnDestroy {
       console.log(WS_CONSTANT.WS_ORG_SETTINGS + ' in ' + this.eventCode, json);
 
       CONSTANT.CURR_ORG_NAME = json.org.name;
+      CONSTANT.CURR_PRJ_NAME = json.defaultPrjName;
       CONSTANT.ORG_PRIVILEGES = json.orgPrivileges;
     });
 
