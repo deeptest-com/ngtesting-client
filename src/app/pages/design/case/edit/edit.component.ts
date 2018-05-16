@@ -44,8 +44,8 @@ export class CaseEdit implements OnInit, AfterViewInit, OnDestroy {
   canEdit: boolean;
 
   constructor(private _state: GlobalState, private fb: FormBuilder, private toastyService: ToastyService,
-              private _caseService: CaseService, private _caseAttachmentService: CaseAttachmentService, private _caseStepService: CaseStepService,
-              private privilegeService: PrivilegeService) {
+              private _caseService: CaseService, private _caseAttachmentService: CaseAttachmentService,
+              private _caseStepService: CaseStepService, private privilegeService: PrivilegeService) {
 
     this._state.subscribe(WS_CONSTANT.WS_PRJ_SETTINGS, this.eventCode, (json) => {
       console.log(WS_CONSTANT.WS_PRJ_SETTINGS + ' in ' + this.eventCode, json);
@@ -129,13 +129,13 @@ export class CaseEdit implements OnInit, AfterViewInit, OnDestroy {
   formErrors = [];
   validateMsg = {
     'name': {
-      'required':      '标题不能为空',
+      'required': '标题不能为空',
     },
     'type': {
-      'required':      '类别不能为空',
+      'required': '类别不能为空',
     },
     'priority': {
-      'required':      '优先级不能为空',
+      'required': '优先级不能为空',
     },
   };
 
@@ -229,7 +229,8 @@ export class CaseEdit implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     this._state.unsubscribe(CONSTANT.EVENT_CASE_EDIT, this.eventCode);
-  };
+    this._state.unsubscribe(WS_CONSTANT.WS_PRJ_SETTINGS, this.eventCode);
+  }
 
 }
 

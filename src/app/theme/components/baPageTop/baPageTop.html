@@ -9,7 +9,7 @@
         <span class="text">组织</span>
       </button>
       <div class="dropdown-menu">
-        <button (click)="changeOrg(item)" *ngFor="let item of orgs" class="dropdown-item">
+        <button (click)="selectOrg(item)" *ngFor="let item of orgs" class="dropdown-item">
           <span class="link">
             <span [class.transparent]="item?.id!=orgId" class="fa fa-check"></span>
             &nbsp;{{item.name}}

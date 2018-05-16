@@ -26,19 +26,19 @@ export class OrgAdmin implements OnInit, OnDestroy {
     this._state.subscribe(WS_CONSTANT.WS_ORG_SETTINGS, this.eventCode, (json) => {
       console.log(WS_CONSTANT.WS_ORG_SETTINGS + ' in ' + this.eventCode, json);
 
-      this.updateMenu(json.orgPrivileges);
+      this.updateMenu(json.defaultOrgName, json.orgPrivileges);
     });
 
   }
 
   ngOnInit() {
-    this.updateMenu(CONSTANT.ORG_PRIVILEGES);
+    this.updateMenu(CONSTANT.CURR_ORG_NAME, CONSTANT.ORG_PRIVILEGES);
   }
 
-  updateMenu(orgPrivileges: any) {
+  updateMenu(defaultOrgName: string, orgPrivileges: any) {
     let menu = _.cloneDeep(ORG_MENU);
     if (orgPrivileges.org_admin) {
-      menu[0].children[1].data.menu.title = CONSTANT.CURR_ORG_NAME;
+      menu[0].children[1].data.menu.title = defaultOrgName;
     } else {
       menu[0].children.pop();
     }

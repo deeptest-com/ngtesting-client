@@ -34,6 +34,12 @@ export class CaseService {
     _.merge(model, { projectId: projectId });
     return this._reqService.post(this._api_url + 'rename', model);
   }
+  save(projectId: number, model: any) {
+    const data = _.clone(model);
+    data.steps = null;
+    _.merge(data, { projectId: projectId });
+    return this._reqService.post(this._api_url + 'save', data);
+  }
   move(projectId: number, data: any) {
     _.merge(data, { projectId: projectId });
 
@@ -42,13 +48,6 @@ export class CaseService {
   delete(id: any) {
     const model = { id: id };
     return this._reqService.post(this._api_url + 'delete', model);
-  }
-
-  save(projectId: number, model: any) {
-    const data = _.clone(model);
-    data.steps = null;
-    _.merge(data, { projectId: projectId });
-    return this._reqService.post(this._api_url + 'save', data);
   }
 
   saveField(id: number, field: any) {

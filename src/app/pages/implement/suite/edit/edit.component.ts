@@ -150,7 +150,7 @@ export class SuiteEditComponent implements OnInit, AfterViewInit {
     this.loadData();
   }
 
-  editSuiteCases(suite: any, index: number) {
+  editSuiteCases(suite: any) {
     this.compiler.clearCacheFor(CaseSelectionComponent);
     this.caseSelectionModal = this.modalService.open(CaseSelectionComponent, { windowClass: 'pop-modal' });
 
@@ -165,13 +165,13 @@ export class SuiteEditComponent implements OnInit, AfterViewInit {
     });
 
     this.caseSelectionModal.result.then((result) => {
-      this.saveSuiteCases(result.projectId, result.caseProjectId, result.data, index);
+      this.saveSuiteCases(result.projectId, result.caseProjectId, result.data);
     }, (reason) => {
       logger.log('reason', reason);
     });
   }
 
-  saveSuiteCases(projectId: number, caseProjectId: number, cases: any[], index: number): void {
+  saveSuiteCases(projectId: number, caseProjectId: number, cases: any[]): void {
     // if (!this.model.id) {
       this._suiteService.save(projectId, caseProjectId, this.model).subscribe((json: any) => {
         if (json.code == 1) {

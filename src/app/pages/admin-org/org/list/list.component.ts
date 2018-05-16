@@ -79,14 +79,14 @@ export class OrgList implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  ngOnDestroy(): void {
-    this._state.unsubscribe(WS_CONSTANT.WS_ORG_SETTINGS, this.eventCode);
-  }
-
   setDefault(item: any): void {
     this.orgService.setDefault(item.id, this.queryModel).subscribe((json: any) => {
       this.models = json.data;
     });
+  }
+
+  ngOnDestroy(): void {
+    this._state.unsubscribe(WS_CONSTANT.WS_ORG_SETTINGS, this.eventCode);
   }
 
 }

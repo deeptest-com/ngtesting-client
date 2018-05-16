@@ -65,7 +65,7 @@ export class BaPageTop implements OnInit, AfterViewInit, OnDestroy {
     this._state.subscribe(WS_CONSTANT.WS_ORG_SETTINGS, this.eventCode, (json) => {
       console.log(WS_CONSTANT.WS_ORG_SETTINGS + ' in ' + this.eventCode, json);
 
-      CONSTANT.CURR_ORG_NAME = json.org.name;
+      CONSTANT.CURR_ORG_NAME = json.defaultOrgName;
       CONSTANT.CURR_PRJ_NAME = json.defaultPrjName;
       CONSTANT.ORG_PRIVILEGES = json.orgPrivileges;
     });
@@ -100,10 +100,6 @@ export class BaPageTop implements OnInit, AfterViewInit, OnDestroy {
     this.projects = CONSTANT.RECENT_PROJECTS;
   }
   ngAfterViewInit() {}
-
-  public changeOrg(org: any) {
-    this._routeService.navTo('/pages/org/' + org.id + '/prjs');
-  }
 
   public scrolledChanged(isScrolled) {
     this.isScrolled = isScrolled;
@@ -140,6 +136,10 @@ export class BaPageTop implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
+  public selectOrg(org: any) {
+    this.orgId = org.id;
+    this._routeService.navTo('/pages/org/' + org.id + '/prjs');
+  }
   selectProject(prjId: number) {
     if (this._router.url.indexOf('/prj/') > -1) {
       // Suite、Plan、Issue回到模块的首页

@@ -313,8 +313,15 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   onRemove = (e, treeId, treeNode) => {
     const deferred = new Deferred();
+    const pid = treeNode.pId;
+
     deferred.promise.then((data) => {
-      logger.log('success to remove', treeNode);
+      const node = this.ztree.getNodeByParam('id', pid, null);
+
+      // if (node.children.length == 0) {
+      //   this.ztree.removeNode(node);
+      // }
+      console.log('success to remove');
       this._state.notifyDataChanged('case.' + this.settings.usage, { node: null, random: Math.random() });
     }).catch((err) => { logger.log('err', err); });
 
@@ -452,7 +459,7 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   showRemoveBtn = (treeId, treeNode) => {
-    return this.privilegeService.hasPrivilege('cases-remove') && !!treeNode.pId;
+    return this.treeSettings.usage !='exe' && this.privilegeService.hasPrivilege('cases-remove') && !!treeNode.pId;
   }
 
   showRenameBtn = (treeId, treeNode) => {
