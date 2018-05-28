@@ -2,15 +2,14 @@
 @import '../../components/baMsgCenter/baMsgCenter';
 
 :host /deep/ {
-
   .page-top {
+
     background-color: $sidebar;
-    position: fixed;
+    position: absolute;
     z-index: 904;
     box-shadow: 2px 0 3px rgba(0, 0, 0, 0.5);
     height: 66px;
     width: 100%;
-    min-width: $resMin;
     padding: 0 32px 0 40px;
 
     .dropdown-toggle.no-dropdown::after {
