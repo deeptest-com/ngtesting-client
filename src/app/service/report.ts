@@ -9,6 +9,9 @@ export class ReportService {
   constructor(private _reqService: RequestService) { }
   _api_url = 'report/';
 
+  orgReport(orgId: number) {
+    return this._reqService.post(this._api_url + 'org', {orgId: orgId});
+  }
   projectReport(projectId: number) {
     return this._reqService.post(this._api_url + 'project', {projectId: projectId});
   }

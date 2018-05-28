@@ -19,6 +19,11 @@ export class OrgService {
     return this._reqService.post(this._api_url + 'get', model);
   }
 
+  view(id: number) {
+    const model = { id: id };
+    return this._reqService.post(this._api_url + 'view', model);
+  }
+
   save(org: any) {
     return this._reqService.post(this._api_url + 'save', org);
   }

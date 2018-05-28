@@ -1,0 +1,48 @@
+.org-view {
+  display: flex;
+  padding: 15px;
+
+  .content {
+    flex: 1;
+    margin-right: 20px;
+
+    .list-toolbar {
+      margin-top: 3px;
+    }
+
+    design-progress {
+      margin-bottom: 20px;
+      width: 100%;
+      background-color: #fff;
+    }
+    execution-process {
+      margin-bottom: 20px;
+      width: 100%;
+      background-color: #fff;
+    }
+    .cards {
+      .col {
+        padding: 0;
+        &.col1 {
+          margin-right: 10px;
+        }
+        &.col2 {
+          margin-left: 10px;
+        }
+
+        .card {
+          box-shadow: none;
+          .card-block {
+            padding: 10px;
+            .table > tbody > tr > td {
+              border-top: none;
+              border-bottom: 1px solid gainsboro;
+            }
+          }
+        }
+      }
+    }
+
+  }
+
+}

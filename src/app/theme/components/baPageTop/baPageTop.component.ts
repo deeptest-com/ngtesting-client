@@ -138,7 +138,7 @@ export class BaPageTop implements OnInit, AfterViewInit, OnDestroy {
 
   public selectOrg(org: any) {
     this.orgId = org.id;
-    this._routeService.navTo('/pages/org/' + org.id + '/prjs');
+    this._routeService.navTo('/pages/org/' + org.id + '/view');
   }
   selectProject(prjId: number) {
     if (this._router.url.indexOf('/prj/') > -1) {

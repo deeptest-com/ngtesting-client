@@ -4,17 +4,27 @@ import { RouterModule } from '@angular/router';
 import { routing }       from './org.routing';
 import { NgaModule } from '../../../theme/nga.module';
 
+import { PipeModule } from '../../../pipe/pipe.module';
+import { ChartDesignModule } from '../../../components/chart/chart-design';
+import { ChartExecutionModule } from '../../../components/chart/chart-execution';
+
 import { OrgResolve } from './org.resolve';
 import { ProjectService } from '../../../service/project';
 import { AccountService } from '../../../service/account';
+import { ReportService } from '../../../service/report';
 
 import { Org } from './org.component';
+import { OrgView } from '../../org/view/view.component';
 
 @NgModule({
-  imports: [CommonModule, RouterModule, NgaModule, routing],
-  declarations: [Org],
+  imports: [CommonModule, RouterModule, NgaModule, routing,
+    PipeModule,
+    ChartDesignModule,
+    ChartExecutionModule,
+  ],
+  declarations: [Org, OrgView],
   providers: [
-    AccountService, ProjectService, OrgResolve
+    AccountService, ProjectService, OrgResolve, ReportService,
   ]
 })
 export class OrgModule {
