@@ -1,43 +1,43 @@
-import {Component, ViewEncapsulation, OnInit, AfterViewInit, ViewChild, ElementRef} from "@angular/core";
+import { Component, ViewEncapsulation, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
-import {GlobalState} from "../../../../global.state";
+import { GlobalState } from '../../../../global.state';
 
-import {CONSTANT} from "../../../../utils/constant";
-import {Utils} from "../../../../utils/utils";
-import {RouteService} from "../../../../service/route";
-import {MsgService} from "../../../../service/msg";
-import {AccountService} from "../../../../service/account";
+import { CONSTANT } from '../../../../utils/constant';
+import { Utils } from '../../../../utils/utils';
+import { RouteService } from '../../../../service/route';
+import { MsgService } from '../../../../service/msg';
+import { AccountService } from '../../../../service/account';
 
 @Component({
   selector: 'msg-list',
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['./list.scss'],
-  templateUrl: './list.html'
+  templateUrl: './list.html',
 })
 export class MsgList implements OnInit, AfterViewInit {
 
   queryForm: FormGroup;
-  queryModel:any = {keywords: '', disabled: 'false'};
+  queryModel: any = { keywords: '', disabled: 'false' };
   readMap: Array<any> = CONSTANT.EntityRead;
 
   models: any;
-  collectionSize:number = 0;
-  page:number = 1;
-  pageSize:number = 6;
+  collectionSize: number = 0;
+  page: number = 1;
+  pageSize: number = 20;
 
-  constructor(private _routeService:RouteService, private _state:GlobalState, private fb: FormBuilder, private el: ElementRef,
+  constructor(private _routeService: RouteService, private _state: GlobalState, private fb: FormBuilder, private el: ElementRef,
               private msgService: MsgService, private accountService: AccountService) {
   }
 
   ngOnInit() {
-    let that = this;
+    const that = this;
 
     that.queryForm = that.fb.group(
       {
         'isRead': ['', []],
-        'keywords': ['', []]
-      }, {}
+        'keywords': ['', []],
+      }, {},
     );
 
     that.loadData();
@@ -47,35 +47,40 @@ export class MsgList implements OnInit, AfterViewInit {
     this.queryForm.valueChanges.debounceTime(CONSTANT.DebounceTime).subscribe(values => this.queryChange(values));
   }
 
-  create():void {
+  create(): void {
     this._routeService.navTo('/pages/msg-admin/msg/edit/null');
   }
 
-  markRead(item: any, index: number):void {
-    this.msgService.markRead(item.id).subscribe((json:any) => {
+  markRead(item: any, index: number): void {
+    this.msgService.markRead(item.id).subscribe((json: any) => {
       this.loadData();
     });
   }
-  delete(item: any, index: number):void {
-    this.msgService.delete(item.id).subscribe((json:any) => {
+  delete(item: any, index: number): void {
+    this.msgService.delete(item.id).subscribe((json: any) => {
       this.loadData();
     });
   }
 
   loadData() {
-    let that = this;
+    const that = this;
 
-    that.msgService.list(that.queryModel, that.page, that.pageSize).subscribe((json:any) => {
+    that.msgService.list(that.queryModel, that.page, that.pageSize).subscribe((json: any) => {
       that.models = json.data;
       that.collectionSize = json.collectionSize;
     });
   }
 
-  queryChange(values:any):void {
+  queryChange(values: any): void {
     this.loadData();
   }
-  pageChange(event:any):void {
-    this.page = event.page;
+  pageChange(event: any): void {
     this.loadData();
+  }
+
+  readAllMsgs($event) {
+    this.msgService.markAllRead().subscribe((json:any) => {
+      this.loadData();
+    });
   }
 }

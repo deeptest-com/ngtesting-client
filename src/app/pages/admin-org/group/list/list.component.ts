@@ -21,7 +21,7 @@ export class GroupList implements OnInit, AfterViewInit {
   statusMap: Array<any> = CONSTANT.EntityDisabled;
 
   models: any;
-  collectionSize:number = 0;
+  collectionSize: number = 0;
   page:number = 1;
   pageSize:number = 6;
 
@@ -74,7 +74,7 @@ export class GroupList implements OnInit, AfterViewInit {
     let that = this;
 
     that.groupService.list(that.queryModel, that.page, that.pageSize).subscribe((json:any) => {
-      that.collectionSize = json.totalItems;
+      that.collectionSize = json.collectionSize;
       that.models = json.data;
     });
   }
