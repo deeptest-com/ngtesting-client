@@ -8,13 +8,16 @@ import { AngularEchartsModule } from 'ngx-echarts';
 import { ChartExecutionComponent } from './src/chart-execution.component';
 import { ExecutionResultComponent } from './src/execution-result/execution-result.component';
 import { ExecutionProcessComponent } from './src/execution-process/execution-process.component';
+import { ExecutionProcessByUserComponent } from './src/execution-process/execution-process-by-user.component';
 import { ExecutionProgressComponent } from './src/execution-progress/execution-progress.component';
 
 export * from './src/execution-result/execution-result.component';
 
 @NgModule({
-    declarations: [ChartExecutionComponent, ExecutionResultComponent, ExecutionProcessComponent, ExecutionProgressComponent],
-    exports: [ChartExecutionComponent, ExecutionResultComponent, ExecutionProcessComponent, ExecutionProgressComponent],
+    declarations: [ChartExecutionComponent, ExecutionResultComponent,
+      ExecutionProcessComponent, ExecutionProgressComponent, ExecutionProcessByUserComponent],
+    exports: [ChartExecutionComponent, ExecutionResultComponent,
+      ExecutionProcessComponent, ExecutionProgressComponent, ExecutionProcessByUserComponent],
     providers: [],
     imports: [CommonModule, NgbTabsetModule, AngularEchartsModule]
 })

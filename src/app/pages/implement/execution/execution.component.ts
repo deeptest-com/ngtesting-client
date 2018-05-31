@@ -23,17 +23,21 @@ export class Execution implements OnInit, AfterViewInit, OnDestroy {
 
   contentHeight = Utils.getContainerHeight(CONSTANT.HEAD_HEIGHT + CONSTANT.FOOTER_HEIGHT);
   leftWidth: number;
+  act: string;
 
   constructor(private _state: GlobalState, private _route: ActivatedRoute) {
+    this._route.params.subscribe(params => {
+      this.act = params['act'];
+    });
   }
 
   ngOnInit() {
-    this.leftWidth = CONSTANT.PROFILE.leftSize;
+    this.leftWidth = CONSTANT.PROFILE.leftSizeCase;
   }
   ngAfterViewInit() {}
 
   ngOnDestroy(): void {
-  };
+  }
 
 }
 

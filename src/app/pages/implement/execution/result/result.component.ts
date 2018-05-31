@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, NgModule, Pipe, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, ViewEncapsulation, NgModule, Pipe, OnInit, AfterViewInit, OnDestroy, Input } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -14,6 +14,7 @@ import { RouteService } from '../../../../service/route';
 import { CaseService } from '../../../../service/case';
 import { CaseStepService } from '../../../../service/case-step';
 import { CaseInRunService } from '../../../../service/case-in-run';
+import { CaseAttachmentService } from '../../../../service/case-attachment';
 import { ZtreeService } from '../../../../components/ztree';
 import { PrivilegeService } from '../../../../service/privilege';
 
@@ -45,10 +46,12 @@ export class ExecutionResult implements OnInit, AfterViewInit, OnDestroy {
   canEdit: boolean;
   canExe: boolean;
 
+  @Input() act: string;
+
   constructor(private _state: GlobalState, private _routeService: RouteService,
               private _route: ActivatedRoute, private fb: FormBuilder,
               private _caseService: CaseService, private _caseStepService: CaseStepService,
-              private _caseInRunService: CaseInRunService,
+              private _caseInRunService: CaseInRunService, private _caseAttachmentService: CaseAttachmentService,
               private _ztreeService: ZtreeService, private privilegeService: PrivilegeService) {
 
     this._state.subscribe(WS_CONSTANT.WS_PRJ_SETTINGS, this.eventCode, (json) => {
@@ -63,8 +66,8 @@ export class ExecutionResult implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit() {
     this.user = CONSTANT.PROFILE;
 
-    this.canEdit = this.privilegeService.hasPrivilege('cases-update');
-    this.canExe = this.privilegeService.hasPrivilege('run-exe');
+    this.canEdit = this.act != 'view' && this.privilegeService.hasPrivilege('cases-update');
+    this.canExe = this.act != 'view' && this.privilegeService.hasPrivilege('run-exe');
 
     this._route.params.forEach((params: Params) => {
       this.planId = +params['planId'];
@@ -211,6 +214,19 @@ export class ExecutionResult implements OnInit, AfterViewInit, OnDestroy {
     logger.log('onDeleteConfirm', event);
     this._caseStepService.delete(event.data).subscribe((json: any) => {
       event.confirm.resolve();
+    });
+  }
+
+  uploadedEvent(event: any) {
+    this._caseAttachmentService.uploadAttachment(this.model.id, event.data.name, event.data.path)
+      .subscribe((json: any) => {
+        this.model.attachments = json.data;
+        event.deferred.resolve();
+      });
+  }
+  removeAttachment(item: any) {
+    this._caseAttachmentService.removeAttachment(this.model.id, item.id).subscribe((json: any) => {
+      this.model.attachments = json.data;
     });
   }
 

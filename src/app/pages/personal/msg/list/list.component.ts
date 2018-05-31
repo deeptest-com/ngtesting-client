@@ -78,7 +78,7 @@ export class MsgList implements OnInit, AfterViewInit {
     this.loadData();
   }
 
-  readAllMsgs($event) {
+  readAllMsgs() {
     this.msgService.markAllRead().subscribe((json:any) => {
       this.loadData();
     });

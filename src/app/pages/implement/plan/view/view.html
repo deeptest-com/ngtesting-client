@@ -102,11 +102,14 @@
           </td>
           <td>{{item.status | exeStatus}}</td>
           <td>
-            <span privilege [privs]="'!run-exe'" *ngIf="item.countMap.total > 0" (click)="exeOrView(item.id)" class="link no-underline">查看</span>
-            <span privilege [privs]="'run-exe'" *ngIf="item.status == 'end' && item.countMap.total > 0" (click)="exeOrView(item.id)" class="link no-underline">查看</span>
+            <span *ngIf="!item.show">
+              <span privilege [privs]="'run-exe'" *ngIf="item.countMap.total > 0" (click)="exeOrView('view', item.id)" class="link no-underline">查看</span>
+              <span privilege [privs]="'run-exe'" *ngIf="item.status != 'end'" (click)="close(item, i)" class="link no-underline">关闭</span>
+            </span>
             <span *ngIf="item.show">
-              <span privilege [privs]="'run-exe'" *ngIf="item.status != 'end' && item.countMap.total > 0" (click)="exeOrView(item.id)" class="link no-underline">执行</span>
-              <span privilege [privs]="'run-exe'" *ngIf="item.status != 'end'" (click)="close(item.id, i)" class="link no-underline">关闭</span>
+              <span privilege [privs]="'run-exe'" *ngIf="item.status == 'end' && item.countMap.total > 0" (click)="exeOrView('view', item.id)" class="link no-underline">查看</span>
+              <span privilege [privs]="'run-exe'" *ngIf="item.status != 'end' && item.countMap.total > 0" (click)="exeOrView('exe', item.id)" class="link no-underline">执行</span>
+              <span privilege [privs]="'run-exe'" *ngIf="item.status != 'end'" (click)="close(item, i)" class="link no-underline">关闭</span>
             </span>
           </td>
         </tr>
@@ -116,3 +119,7 @@
   </div>
 
 </div>
+
+<pop-dialog #modalClose (confirm)="closeConfirm()" [title]="modalTitle">
+  确认关闭名为"{{run.name}}"的测试任务？
+</pop-dialog>

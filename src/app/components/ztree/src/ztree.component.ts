@@ -69,7 +69,7 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
     this.isExpanded = this.settings.isExpanded;
     this.sonSign = this.settings.sonSign;
 
-    if (this.settings.usage == 'selection') {
+    if (this.settings.usage == 'selection' || this.treeSettings.readonly) {
       this.settings.view.addHoverDom = null;
       this.settings.view.removeHoverDom = null;
       this.settings.edit.enable = false;
@@ -84,8 +84,6 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
     this._treeModel = model;
     this.ztree = jQuery.fn.zTree.init($('#tree'), this.settings, this._treeModel);
     this.ztree.expandNode(this.ztree.getNodes()[0], this.isExpanded, this.sonSign, true);
-
-
 
     if (this.settings.jumpTo) {
       this.jumpTo(this.settings.jumpTo);
@@ -265,7 +263,7 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   addHoverDom = (treeId, treeNode) => {
-    if (!this.privilegeService.hasPrivilege('cases-create')) { return false; }
+    if (!this.privilegeService.hasPrivilege('cases-create') || this.settings.usage == 'exe') { return false; }
 
     const sObj = $('#' + treeNode.tId + '_span');
 

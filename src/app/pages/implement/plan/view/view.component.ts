@@ -15,6 +15,8 @@ import { PlanService } from '../../../../service/plan';
 import { RunService } from '../../../../service/run';
 import { ReportService } from '../../../../service/report';
 
+import { PopDialogComponent } from '../../../../components/pop-dialog';
+
 declare var jQuery;
 
 @Component({
@@ -37,6 +39,10 @@ export class PlanView implements OnInit, AfterViewInit {
 
   chartData: any = {};
   profile: any;
+
+  @ViewChild('modalClose') modalClose: PopDialogComponent;
+  run: any = {};
+  index: number;
 
   constructor(private _routeService: RouteService, private _route: ActivatedRoute,
               private _reportService: ReportService,
@@ -76,13 +82,22 @@ export class PlanView implements OnInit, AfterViewInit {
     });
   }
 
-  exeOrView(runId: number) {
-    this._routeService.navTo('/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + CONSTANT.CURR_PRJ_ID + '/implement/plan/' + this.planId + '/execution/' + runId);
+  exeOrView(act: string, runId: number) {
+    this._routeService.navTo('/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + CONSTANT.CURR_PRJ_ID + '/implement/plan/'
+      + this.planId + '/execution/' + runId + '/' + act);
   }
-  close(runId: number, index: number) {
-    this._runService.close(runId).subscribe((json:any) => {
+
+  close(run: any, index: number): void {
+    this.modalTitle = run.name;
+    this.run = run;
+    this.index = index;
+    this.modalClose.showModal();
+  }
+  closeConfirm() {
+    this._runService.close(this.run.id).subscribe((json:any) => {
       if (json.code == 1) {
-        this.model.runVos[index] = json.data;
+        this.model.runVos[this.index] = json.data;
+        this.modalClose.closeModal();
       }
     });
   }

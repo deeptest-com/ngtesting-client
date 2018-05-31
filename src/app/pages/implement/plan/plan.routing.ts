@@ -13,9 +13,9 @@ const routes: Routes = [
     children: [
       { path: 'list', component: PlanList },
       { path: ':planId/view', component: PlanView },
-      { path: ':planId/edit', component: PlanEdit }
-    ]
-  }
+      { path: ':planId/edit', component: PlanEdit },
+    ],
+  },
 ];
 
 export const routing = RouterModule.forChild(routes);

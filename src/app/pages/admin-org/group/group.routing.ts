@@ -12,8 +12,8 @@ const routes: Routes = [
     children: [
       { path: 'list', component: GroupList },
       { path: 'edit/:id', component: GroupEdit },
-    ]
-  }
+    ],
+  },
 ];
 
 export const routing = RouterModule.forChild(routes);

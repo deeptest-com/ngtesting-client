@@ -6,11 +6,10 @@ import { Execution } from './execution.component';
 const routes: Routes = [
   {
     path: ':runId',
-    component: Execution,
     children: [
-
-    ]
-  }
+      { path: ':act', component: Execution },
+    ],
+  },
 ];
 
 export const routing = RouterModule.forChild(routes);

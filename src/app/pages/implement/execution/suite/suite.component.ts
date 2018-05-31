@@ -1,13 +1,13 @@
-import {Component, ViewEncapsulation, OnInit, AfterViewInit} from "@angular/core";
+import { Component, ViewEncapsulation, OnInit, AfterViewInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
-import {GlobalState} from "../../../../global.state";
-import {CONSTANT} from "../../../../utils/constant";
-import {Utils} from "../../../../utils/utils";
-import {RouteService} from "../../../../service/route";
-import {SlimLoadingBarService} from "../../../../components/ng2-loading-bar";
-import {RunService} from "../../../../service/run";
-import {CaseService} from "../../../../service/case";
+import { GlobalState } from '../../../../global.state';
+import { CONSTANT } from '../../../../utils/constant';
+import { Utils } from '../../../../utils/utils';
+import { RouteService } from '../../../../service/route';
+import { SlimLoadingBarService } from '../../../../components/ng2-loading-bar';
+import { RunService } from '../../../../service/run';
+import { CaseService } from '../../../../service/case';
 import { CaseInRunService } from '../../../../service/case-in-run';
 
 @Component({
@@ -16,23 +16,29 @@ import { CaseInRunService } from '../../../../service/case-in-run';
   styleUrls: ['./suite.scss',
     '../../../../../assets/vendor/ztree/css/zTreeStyle/zTreeStyle.css',
     '../../../../components/ztree/src/styles.scss'],
-  templateUrl: './suite.html'
+  templateUrl: './suite.html',
 })
 export class ExecutionSuite implements OnInit, AfterViewInit {
   orgId: number;
   projectId: number;
   runId: number;
 
-  public treeModel: any;
-  public treeSettings: any = {usage: 'exe', isExpanded: true, sonSign: false};
+  @Input() act: string;
 
-  constructor(private _routeService:RouteService, private _route: ActivatedRoute, private _state:GlobalState,
+  public treeModel: any;
+  public treeSettings: any = { usage: 'exe', isExpanded: true, sonSign: false };
+
+  constructor(private _routeService: RouteService, private _route: ActivatedRoute, private _state: GlobalState,
               private _runService: RunService, private _caseInRunService: CaseInRunService,
-              private slimLoadingBarService:SlimLoadingBarService) {
+              private slimLoadingBarService: SlimLoadingBarService) {
 
   }
 
   ngOnInit() {
+    if (this.act == 'view') {
+      this.treeSettings.readonly = true;
+    }
+
     this._route.params.forEach((params: Params) => {
       this.runId = +params['runId'];
     });
@@ -49,7 +55,7 @@ export class ExecutionSuite implements OnInit, AfterViewInit {
   loadData() {
     this.startLoading();
 
-    this._caseInRunService.query(this.orgId, this.projectId, this.runId).subscribe((json:any) => {
+    this._caseInRunService.query(this.orgId, this.projectId, this.runId).subscribe((json: any) => {
       this.treeModel = json.data;
 
       CONSTANT.CUSTOM_FIELD_FOR_PROJECT = json.customFields;
@@ -63,15 +69,15 @@ export class ExecutionSuite implements OnInit, AfterViewInit {
     });
   }
   completeLoading() {
-    let that = this;
+    const that = this;
     setTimeout(function () {
       that.slimLoadingBarService.complete();
     }, 500);
   }
 
   rename(event: any) {
-    let testCase = event.data;
-    this._caseInRunService.rename(this.projectId, this.runId, testCase).subscribe((json:any) => {
+    const testCase = event.data;
+    this._caseInRunService.rename(this.projectId, this.runId, testCase).subscribe((json: any) => {
       event.deferred.resolve(json.data);
     });
   }
@@ -82,7 +88,7 @@ export class ExecutionSuite implements OnInit, AfterViewInit {
     // });
   }
   move(event: any) {
-    this._caseInRunService.move(this.projectId, this.runId, event.data).subscribe((json:any) => {
+    this._caseInRunService.move(this.projectId, this.runId, event.data).subscribe((json: any) => {
       event.deferred.resolve(json.data);
     });
   }

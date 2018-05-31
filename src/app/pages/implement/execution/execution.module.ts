@@ -9,6 +9,7 @@ import { NgaModule } from '../../../theme/nga.module';
 import { routing }       from './execution.routing';
 
 import { PipeModule } from '../../../pipe/pipe.module';
+import { FileUploaderModule } from '../../../components/file-uploader';
 
 import { DirectiveModule } from '../../../directive/directive.module';
 import { SlimLoadingBarModule } from '../../../components/ng2-loading-bar';
@@ -27,6 +28,7 @@ import { SuiteService } from '../../../service/suite';
 import { CaseService } from '../../../service/case';
 import { CaseStepService } from '../../../service/case-step';
 import { CaseInRunService } from '../../../service/case-in-run';
+import { CaseAttachmentService } from '../../../service/case-attachment';
 import { PrivilegeService } from '../../../service/privilege';
 import { CaseCommentsService } from '../../../service/case-comments';
 
@@ -45,6 +47,7 @@ import { ExecutionResult } from './result/result.component';
     NgbTabsetModule, NgbButtonsModule, NgbCollapseModule,
 
     PipeModule,
+    FileUploaderModule,
 
     DirectiveModule,
     SlimLoadingBarModule.forRoot(),
@@ -52,12 +55,12 @@ import { ExecutionResult } from './result/result.component';
     StepsTableModule,
     CustomFieldModule,
     FieldShowModule,
-    CaseCommentsModule
+    CaseCommentsModule,
   ],
   declarations: [
     Execution,
     ExecutionSuite,
-    ExecutionResult
+    ExecutionResult,
   ],
   providers: [
     RouteService,
@@ -69,8 +72,9 @@ import { ExecutionResult } from './result/result.component';
     CaseStepService,
     CaseInRunService,
     PrivilegeService,
-    CaseCommentsService
-  ]
+    CaseCommentsService,
+    CaseAttachmentService,
+  ],
 })
 export class ExecutionModule {}
 

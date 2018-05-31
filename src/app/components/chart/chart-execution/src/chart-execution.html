@@ -11,7 +11,11 @@
           <ng-template ngbTabContent></ng-template>
         </ngb-tab>
         <ngb-tab id="exe-progress">
-          <ng-template ngbTabTitle>执行进度</ng-template>
+          <ng-template ngbTabTitle>总体进度</ng-template>
+          <ng-template ngbTabContent></ng-template>
+        </ngb-tab>
+        <ngb-tab id="exe-process-by-user">
+          <ng-template ngbTabTitle>成员进度</ng-template>
           <ng-template ngbTabContent></ng-template>
         </ngb-tab>
       </ngb-tabset>
@@ -29,6 +33,10 @@
 
     <div *ngIf="tab == 'exe-progress'" class="execution-content">
       <execution-progress [data]="chartData.progress"></execution-progress>
+    </div>
+
+    <div *ngIf="tab == 'exe-process-by-user'" class="execution-content">
+      <execution-process-by-user [data]="chartData.processByUser"></execution-process-by-user>
     </div>
 
   </div>

@@ -37,30 +37,5 @@
   .tab-history {
     padding: 10px 50px;
   }
-  .attach-list {
-    max-width: none !important;
-    .attach-item {
-      float: left;
-      user-select: none;
 
-      cursor: default;
-      border: 1px solid #e5e5e5;
-      border-radius: 3px;
-
-      padding: 8px 8px 8px 0;
-      position: relative;
-
-      margin: 0 8px 3px 0;
-      box-shadow: none;
-      color: #5c5c5c;
-      line-height: 15px;
-      background-color: #fafafa;
-      .fa.fa-times {
-        padding: 0 3px 0 8px;
-      }
-      .download {
-        text-decoration: underline;
-      }
-    }
-  }
 }
