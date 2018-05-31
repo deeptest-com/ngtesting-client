@@ -6,6 +6,7 @@ import {Location} from '@angular/common';
   selector: '[pages]',
   template: `
     <ba-page-top></ba-page-top>
+    
     <div class="al-main">
       <div class="al-content">
         <router-outlet></router-outlet>
@@ -18,6 +19,7 @@ import {Location} from '@angular/common';
         
       </div>
     </footer>
+    
     <ba-back-top position="200"></ba-back-top>
     `
 })

@@ -19,7 +19,8 @@ export class OrgResolve implements CanActivate {
     const context = Utils.getOrgAndPrjId(state.url);
     console.log('OrgResolve - canActivate', state.url, context);
 
-    if (context.orgId != CONSTANT.CURR_ORG_ID) {
+    // CONSTANT.CURR_ORG_ID为空时，pages.resolve会执行相关操作
+    if (CONSTANT.CURR_ORG_ID != null && CONSTANT.CURR_ORG_ID != context.orgId) {
       if (this.willNotChangePrj(context) || !context.prjId) {
         return this.orgService.change(context.orgId).toPromise().then(result => {
           CONSTANT.CURR_ORG_ID = context.orgId;

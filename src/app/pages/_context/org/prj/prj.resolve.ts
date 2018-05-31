@@ -19,7 +19,8 @@ export class PrjResolve implements CanActivate {
     const context = Utils.getOrgAndPrjId(state.url);
     console.log('PrjResolve - canActivate', context.prjId, CONSTANT.CURR_PRJ_ID);
 
-    if (context.prjId != CONSTANT.CURR_PRJ_ID) {
+    // CONSTANT.CURR_PRJ_ID，pages.resolve会执行相关操作
+    if (CONSTANT.CURR_PRJ_ID != null && CONSTANT.CURR_PRJ_ID != context.prjId) {
       return this.projectService.change(context.prjId).toPromise().then(result => {
         const prj = result.data;
         if (prj.type == 'project') {
