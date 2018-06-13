@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { routing }       from './prj.routing';
 import { NgaModule } from '../../../../theme/nga.module';
 
+import { DirectiveModule } from '../../../../directive/directive.module';
 import { PipeModule } from '../../../../pipe/pipe.module';
 import { ChartDesignModule } from '../../../../components/chart/chart-design';
 import { ChartExecutionModule } from '../../../../components/chart/chart-execution';
@@ -19,6 +20,7 @@ import { Prj } from './prj.component';
 
 @NgModule({
   imports: [CommonModule, RouterModule, NgaModule, routing,
+    DirectiveModule,
     PipeModule,
     ChartDesignModule,
     ChartExecutionModule,

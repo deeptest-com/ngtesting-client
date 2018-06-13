@@ -26,7 +26,7 @@ export class AitaskEdit implements OnInit, AfterViewInit, OnDestroy {
 
   projectId: number;
   id: number;
-  model: any = { aiTestEnv: '' };
+  model: any = { testTarget: 'func', aiTestEnv: '', startIndex: 0, numbToRun: 1000000};
   asrLangModelVos: any[] = [];
   aiAudioTypeVos: any[] = [];
   aiProductBranchVos: any[] = [];
@@ -34,10 +34,12 @@ export class AitaskEdit implements OnInit, AfterViewInit, OnDestroy {
   aiTestTypeVos: any[] = [];
   aiTestSetVos: any[] = [];
 
+  testset: any = {};
+
   settings: any;
   data: any;
   form: any;
-  tab: string = 'content';
+  tab: string = 'tab-summary';
 
   caseTypes: any[] = [];
   casePriorities: any[] = [];
@@ -105,6 +107,7 @@ export class AitaskEdit implements OnInit, AfterViewInit, OnDestroy {
     this.form = this.fb.group(
       {
         'name': ['', [Validators.required]],
+        'testTarget': ['', [Validators.required]],
         'testType': ['', [Validators.required]],
         'testEnv': ['', [Validators.required]],
         'testProductId': ['', []],
@@ -233,9 +236,9 @@ export class AitaskEdit implements OnInit, AfterViewInit, OnDestroy {
   uploadedEvent(event: any) {
     console.log('uploadedEvent', event);
     this.model.testsetPath = event.data.path;
-    if (this.model.id) {
-      this.save();
-    }
+    // if (this.model.id) {
+    //   this.save();
+    // }
     event.deferred.resolve();
   }
 

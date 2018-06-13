@@ -13,7 +13,7 @@
   <span *ngIf="model.disabled">归档</span>
 </td>
 <td class="opt">
-  <span *ngIf="orgPrivileges.org_admin || orgPrivileges.project_admin">
+  <span privilege [privs]="'project-maintain'">
     <span [routerLink]="['/pages/org/' + orgId + '/prjs/' +model.id+ '/edit/' + model.type + '/info']"
           class="link no-underline">编辑</span>
     <span *ngIf="model.type=='project'" [routerLink]="['/pages/org/' + orgId + '/prjs/' +model.id+ '/edit/member']"
@@ -26,8 +26,7 @@
     <span class="link no-underline">|</span>
   </span>
 
-  <span [routerLink]="['/pages/org/' + orgId + '/prj/' + model.id + '/view']"
-        class="link no-underline">查看</span>
-  <span *ngIf="model.type=='project'" [routerLink]="['/pages/org/' + orgId + '/prj/' + model.id + '/design/case']" class="link no-underline">设计</span>
-  <span *ngIf="model.type=='project'" [routerLink]="['/pages/org/' + orgId + '/prj/' + model.id + '/implement/plan/list']" class="link no-underline">执行</span>
+  <span privilege [privs]="'project-view'" [routerLink]="['/pages/org/' + orgId + '/prj/' + model.id + '/view']" class="link no-underline">查看</span>
+  <span privilege [privs]="'test_case-view|test_case-maintain'" *ngIf="model.type=='project'" [routerLink]="['/pages/org/' + orgId + '/prj/' + model.id + '/design/case']" class="link no-underline">设计</span>
+  <span privilege [privs]="'test_plan-view|test_plan-maintain'" *ngIf="model.type=='project'" [routerLink]="['/pages/org/' + orgId + '/prj/' + model.id + '/implement/plan/list']" class="link no-underline">执行</span>
 </td>

@@ -13,8 +13,19 @@
     padding: 0 20px;
   }
 
-  .tab-history {
+  .tab-summary {
     padding: 10px 50px;
+  }
+  .tab-testset {
+    padding: 10px 50px;
+
+    .testset-form {
+      margin-bottom: 10px;
+    }
+    .testset-list {
+
+    }
+
   }
 
   .form-check {

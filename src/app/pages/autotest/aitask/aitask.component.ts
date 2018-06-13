@@ -28,7 +28,7 @@ export class Aitask implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit() {
-      this.leftWidth = CONSTANT.PROFILE.leftSize;
+      this.leftWidth = CONSTANT.PROFILE.leftSizeCase;;
       this.canEdit = this.privilegeService.hasPrivilege('aitask-update');
   }
 

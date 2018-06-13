@@ -359,12 +359,49 @@ ul.al-share {
   float: right;
 }
 
+.simple-list {
+  .item {
+    position: relative;
+    display: flex;
+    border-bottom: 1px solid #ccc;
+    padding: 10px;
+    font-size: 14px;
+    line-height: 25px;
+
+    &.header {
+      font-weight: bolder;
+    }
+    &:hover {
+      background: #f8faff;
+    }
+
+    .numb {
+      text-align: center;
+      width: 50px;
+    }
+    .title {
+      flex: 1;
+    }
+    .opts {
+      width: 100px;
+    }
+  }
+  .buttons {
+    margin: 10px;
+  }
+
+}
+
 .comments {
   .item {
     position: relative;
     border-bottom: 1px solid #ccc;
     padding: 10px;
     font-size: 14px;
+
+    &.header {
+      font-weight: bolder;
+    }
 
     &:hover {
       background: #f8faff;

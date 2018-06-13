@@ -27,7 +27,8 @@
           <button (click)="save()" type="button" class="btn btn-info btn-sm" [disabled]="!form.valid">保存</button>
           &nbsp;&nbsp;
           <button (click)="run()" type="button" class="btn btn-primary btn-sm"
-                  [disabled]="!form.valid">立即执行</button>
+                  [disabled]="!form.valid">立即执行
+          </button>
         </div>
       </div>
 
@@ -44,9 +45,13 @@
         <div class="col-sm-7">
           <div class="tabs-container light">
             <div class="tabs">
-              <ngb-tabset>
-                <ngb-tab id="summary">
+              <ngb-tabset (tabChange)="tabChange($event)">
+                <ngb-tab id="tab-summary">
                   <ng-template ngbTabTitle>任务信息</ng-template>
+                  <ng-template ngbTabContent></ng-template>
+                </ngb-tab>
+                <ngb-tab id="tab-testset">
+                  <ng-template ngbTabTitle>测试集</ng-template>
                   <ng-template ngbTabContent></ng-template>
                 </ngb-tab>
               </ngb-tabset>
@@ -58,8 +63,17 @@
         </div>
       </div>
 
-      <div class="tab-summary">
+      <div [class.hidden]="tab != 'tab-summary'" class="tab-summary">
+
         <div class="form-group row">
+          <label class="col-sm-2 col-form-label"><span>测试目的</span></label>
+          <div class="col-sm-4">
+            <select [(ngModel)]="model.testTarget" formControlName="testTarget" class="form-control" name="testTarget">
+              <option value="func">功能</option>
+              <option value="perf">性能</option>
+            </select>
+          </div>
+
           <label class="col-sm-2 col-form-label"><span>测试类型</span></label>
           <div class="col-sm-4">
             <select [(ngModel)]="model.testType" formControlName="testType" class="form-control" name="testType">
@@ -67,6 +81,9 @@
               <option *ngFor="let item of aiTestTypeVos" value="{{item.name}}">{{item.name}}</option>
             </select>
           </div>
+        </div>
+
+        <div class="form-group row">
 
           <label class="col-sm-2 col-form-label"><span>测试环境</span></label>
           <div class="col-sm-4">
@@ -75,19 +92,10 @@
               <option *ngFor="let item of aiTestEnvVos" value="{{item.name}}">{{item.name}}</option>
             </select>
           </div>
-        </div>
-
-        <div class="form-group row">
 
           <label class="col-sm-2 col-form-label"><span>测试集来源</span></label>
           <div class="col-sm-4">
             <div class="form-check">
-              <label class="form-check-label">
-                <input type="radio" class="form-check-input" name="testsetSrc" formControlName="testsetSrc"
-                       value="upload" [(ngModel)]="model.testsetSrc" #testsetSrc>
-                上传
-              </label>&nbsp;&nbsp;
-
               <label class="form-check-label">
                 <input type="radio" class="form-check-input" name="testsetSrc" formControlName="testsetSrc"
                        value="private" [(ngModel)]="model.testsetSrc" #testsetSrc>
@@ -102,30 +110,27 @@
             </div>
           </div>
 
-          <label class="col-sm-2 col-form-label"><span>测试集</span></label>
-          <div *ngIf="model.testsetSrc=='upload'" class="col-sm-3">
-            <file-uploader (uploadedEvent)="uploadedEvent($event)"
-                           [ifile]="model.testsetPath" [mimeType]="['.zip']"></file-uploader>
-          </div>
-          <div *ngIf="model.testsetSrc=='upload'" class="col-sm-1">
-            <label class="col-form-label link">
-              <a [href]="'upload/data/20180419/t.zip' | imgPath">示例</a>
-            </label>
-          </div>
+        </div>
 
-          <div *ngIf="model.testsetSrc=='private'" class="col-sm-4">
-            <select [(ngModel)]="model.testsetId" formControlName="testsetId" class="form-control" name="testsetId">
-              <option value=""></option>
-              <option *ngFor="let item of aiTestSetVos" value="{{item.id}}">{{item.name}}</option>
-            </select>
-          </div>
+        <div *ngIf="model.testsetSrc=='public'" class="form-group row">
+          <label class="col-sm-2 col-form-label"><span>测试集</span></label>
+
           <div *ngIf="model.testsetSrc=='public'" class="col-sm-4">
             <select [(ngModel)]="model.testsetId" formControlName="testsetId" class="form-control" name="testsetId">
               <option value=""></option>
               <option *ngFor="let item of aiTestSetVos" value="{{item.id}}">{{item.name}}</option>
             </select>
           </div>
+        </div>
+        <div *ngIf="model.testsetSrc=='private'" class="form-group row">
+          <label class="col-sm-2 col-form-label"><span>测试集</span></label>
 
+          <div class="col-sm-4">
+            <select [(ngModel)]="model.testsetId" formControlName="testsetId" class="form-control" name="testsetId">
+              <option value=""></option>
+              <option *ngFor="let item of aiTestSetVos" value="{{item.id}}">{{item.name}}</option>
+            </select>
+          </div>
         </div>
 
         <div class="form-group row">
@@ -148,7 +153,8 @@
         <div class="form-group row">
           <label [class.hidden]="model.testType != 'asrLite'" class="col-sm-2 col-form-label"><span>语言模型</span></label>
           <div [class.hidden]="model.testType != 'asrLite'" class="col-sm-4">
-            <select [(ngModel)]="model.asrLangModel" formControlName="asrLangModel" class="form-control" name="asrLangModel">
+            <select [(ngModel)]="model.asrLangModel" formControlName="asrLangModel" class="form-control"
+                    name="asrLangModel">
               <option value=""></option>
               <option *ngFor="let item of asrLangModelVos" value="{{item.name}}">{{item.name}}</option>
             </select>
@@ -174,7 +180,7 @@
           </div>
         </div>
 
-        <div class="form-group row">
+        <div [class.hidden]="model.testTarget != 'perf'" class="form-group row">
           <label class="col-sm-2 col-form-label"><span>并发数</span></label>
           <div class="col-sm-4">
             <input type="text" class="form-control" name="testConcurrent" formControlName="testConcurrent"
@@ -212,6 +218,51 @@
 
       </div>
 
+      <div [class.hidden]="tab != 'tab-testset'" class="tab-testset simple-list">
+        <div class="testset-form">
+          <div class="row">
+            <label class="col-sm-1 col-form-label"><span>名称</span></label>
+            <div class="col-sm-5">
+              <input type="text" class="form-control" name="testsetName" formControlName="testsetName"
+                     [(ngModel)]="testset.name" #testsetName>
+            </div>
+
+            <div class="col-sm-5">
+              <file-uploader (uploadedEvent)="uploadedEvent($event)"
+                             [ifile]="testset.path" [mimeType]="['.zip']"></file-uploader>
+            </div>
+            <div class="col-sm-1">
+              <label class="col-form-label link">
+                <a [href]="'upload/data/20180419/t.zip' | imgPath">示例</a>
+              </label>
+            </div>
+          </div>
+
+          <!--<div class="buttons">
+            <button (click)="addTestset()" type="button" class="btn btn-secondary btn-with-icon btn-sm">
+              <i class="fa fa-plus-circle"></i>添加
+            </button>
+          </div>-->
+        </div>
+
+        <div class="testset-list">
+          <div class="item header">
+            <div class="numb">编号</div>
+            <div class="title">名称</div>
+            <div class="opts">操作</div>
+          </div>
+          <div *ngFor="let testset of aiTestSetVos; let i = index;" class="item">
+            <div class="numb">{{i+1}}</div>
+            <div class="title">{{testset.name}}</div>
+
+            <div class="opts">
+              <span (click)="editComments(testset)" class="link"><i class="fa fa-pencil"></i></span>
+              <span (click)="removeComments(testset.id, i)" class="link"><i class="fa fa-trash"></i></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="form-group row">
         <label class="col-sm-3 col-form-label"></label>
         <div class="col-sm-9">
@@ -222,7 +273,6 @@
           </div>
         </div>
       </div>
-
     </form>
   </div>
 
