@@ -50,12 +50,12 @@ export class CaseEdit implements OnInit, AfterViewInit, OnDestroy {
     this._state.subscribe(WS_CONSTANT.WS_PRJ_SETTINGS, this.eventCode, (json) => {
       console.log(WS_CONSTANT.WS_PRJ_SETTINGS + ' in ' + this.eventCode, json);
 
-      this.canEdit = this.privilegeService.hasPrivilege('cases-update');
+      this.canEdit = this.privilegeService.hasPrivilege('test_case-maintain');
     });
 
   }
   ngOnInit() {
-    this.canEdit = this.privilegeService.hasPrivilege('cases-update');
+    this.canEdit = this.privilegeService.hasPrivilege('test_case-maintain');
 
     this.projectId = CONSTANT.CURR_PRJ_ID;
     this.user = CONSTANT.PROFILE;

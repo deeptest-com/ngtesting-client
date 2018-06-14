@@ -57,8 +57,7 @@ export class ExecutionResult implements OnInit, AfterViewInit, OnDestroy {
     this._state.subscribe(WS_CONSTANT.WS_PRJ_SETTINGS, this.eventCode, (json) => {
       console.log(WS_CONSTANT.WS_PRJ_SETTINGS + ' in ' + this.eventCode, json);
 
-      this.canEdit = this.privilegeService.hasPrivilege('cases-update');
-      this.canExe = this.privilegeService.hasPrivilege('run-exe');
+      this.updatePriv();
     });
 
     this.buildForm();
@@ -66,8 +65,7 @@ export class ExecutionResult implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit() {
     this.user = CONSTANT.PROFILE;
 
-    this.canEdit = this.act != 'view' && this.privilegeService.hasPrivilege('cases-update');
-    this.canExe = this.act != 'view' && this.privilegeService.hasPrivilege('run-exe');
+    this.updatePriv();
 
     this._route.params.forEach((params: Params) => {
       this.planId = +params['planId'];
@@ -228,6 +226,11 @@ export class ExecutionResult implements OnInit, AfterViewInit, OnDestroy {
     this._caseAttachmentService.removeAttachment(this.model.id, item.id).subscribe((json: any) => {
       this.model.attachments = json.data;
     });
+  }
+
+  updatePriv() {
+    this.canEdit = this.act != 'view' && this.privilegeService.hasPrivilege('test_case-maintain');
+    this.canExe = this.act != 'view' && this.privilegeService.hasPrivilege('test_task-exe');
   }
 
   returnTo() {

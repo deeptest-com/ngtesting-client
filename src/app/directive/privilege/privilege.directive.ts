@@ -29,9 +29,10 @@ export class PrivilegeDirective implements OnInit, OnDestroy {
   }
 
   update(): void {
-    if (!this.myPrivs) {
+    if (!this.myPrivs || this.myPrivs.length == 0) {
       this.myPrivs = CONSTANT.PRJ_PRIVILEGES;
     }
+    console.log('===', CONSTANT.PRJ_PRIVILEGES);
     const ret = this._privilegeService.hasPrivilege(this.privs, this.myPrivs);
     if (!ret) {
       this.renderer.setElementStyle(this.elem, 'display', 'none');
