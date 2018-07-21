@@ -4,10 +4,11 @@ import { CommonModule }  from '@angular/common';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/map';
 
-import { routing }       from './pages.routing';
+import { routing } from './pages.routing';
 import { NgaModule } from '../theme/nga.module';
 import { AppTranslationModule } from '../app.translation.module';
 
+import { StompRService } from '@stomp/ng2-stompjs';
 import { UserService } from '../service/user';
 
 import { Pages } from './pages.component';
@@ -19,7 +20,8 @@ import { PagesResolve } from './pages.resolve';
   providers: [
     UserService,
     PagesResolve,
-  ]
+    StompRService,
+  ],
 })
 export class PagesModule {
 

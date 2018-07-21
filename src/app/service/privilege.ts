@@ -10,11 +10,11 @@ export class PrivilegeService {
     if (!myPrivs) {
       myPrivs = CONSTANT.PRJ_PRIVILEGES;
     }
-    console.log('===', myPrivs);
+    // console.log('===', myPrivs);
     const arr = privs.split('|');
     for (let i = 0; i < arr.length; i++) {
       const priv = arr[i];
-      console.log('---', priv);
+      // console.log('---', priv);
 
       if (myPrivs[priv]) {
         return true;

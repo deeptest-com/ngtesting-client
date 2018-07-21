@@ -12,8 +12,8 @@ export class SuiteService {
 
   _apiUrl = 'suite/';
 
-  query(projectId: number, query: any) {
-    _.merge(query, { projectId: projectId });
+  query(query: any, page: number, pageSize: number) {
+    _.merge(query, { projectId: CONSTANT.CURR_PRJ_ID, page: page, pageSize: pageSize });
     return this._reqService.post(this._apiUrl + 'query', query);
   }
 

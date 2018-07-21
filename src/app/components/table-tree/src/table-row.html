@@ -15,7 +15,7 @@
 <td class="opt">
 
   <span *ngIf="model.type=='group'">
-        <span *ngIf="orgPrivileges.org_admin || orgPrivileges.project_admin" [routerLink]="['/pages/org/' + orgId + '/prjs/' +model.id+ '/edit/' + model.type + '/info']"
+        <span *ngIf="orgPrivileges?.org_admin || orgPrivileges?.project_admin" [routerLink]="['/pages/org/' + orgId + '/prjs/' +model.id+ '/edit/' + model.type + '/info']"
               class="link no-underline">编辑</span>
         <span *ngIf="model.privs != null && model.privs['project-view']" [routerLink]="['/pages/org/' + orgId + '/prj/' + model.id + '/view']" class="link no-underline">查看</span>
   </span>

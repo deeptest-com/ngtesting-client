@@ -19,7 +19,7 @@ export class MyDateParserFormatter extends NgbDateParserFormatter {
     }
   }
   parse(value: string): NgbDateStruct {
-    console.log('===', new Date(value));
+    // console.log('===', new Date(value));
 
     let returnVal: NgbDateStruct;
     if (!value) {

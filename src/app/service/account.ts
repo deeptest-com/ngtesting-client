@@ -16,7 +16,7 @@ export class AccountService {
   }
 
   _login = 'account/login';
-  _loginWithVcode = 'account/loginWithVcode';
+  _loginWithVcode = 'account/loginWithVerifyCode';
   _logout = 'account/logout';
   _register = 'account/register';
   _changePassword = 'account/changePassword';

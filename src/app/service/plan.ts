@@ -13,8 +13,8 @@ export class PlanService {
 
   _api_url = 'plan/';
 
-  query(projectId: number, query: any) {
-    _.merge(query, {projectId: projectId});
+  query(query: any, page: number, pageSize: number) {
+    _.merge(query, {projectId: CONSTANT.CURR_PRJ_ID, page: page, pageSize: pageSize});
     return this._reqService.post(this._api_url + 'query', query);
   }
 

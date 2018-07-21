@@ -94,7 +94,7 @@
       }
     ],
     "no-conditional-assignment": true,
-    "no-console": [true, "log"],
+    "no-console": false,
     "directive-selector": [true, "attribute", ["nga"], "camelCase"],
     "component-selector": [true, "attribute", "element", ["nga"], "kebab-case"],
     "use-input-property-decorator": true,

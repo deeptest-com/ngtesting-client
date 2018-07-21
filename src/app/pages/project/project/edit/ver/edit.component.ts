@@ -98,6 +98,7 @@ export class ProjectVerEdit implements OnInit, AfterViewInit {
   delete() {
     this._verService.delete(this.model.id).subscribe((json: any) => {
       if (json.code == 1) {
+        this.modalWrapper.closeModal();
         this.gotoList();
       } else {
         this.formErrors = ['删除失败'];

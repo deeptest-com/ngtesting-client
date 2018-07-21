@@ -23,6 +23,9 @@ export class PlanList implements OnInit, AfterViewInit, OnDestroy {
   projectName: string;
 
   models: any;
+  collectionSize: number = 0;
+  page:number = 1;
+  pageSize:number = 15;
 
   queryForm: FormGroup;
   queryModel: any = { keywords: '', status: '' };
@@ -82,13 +85,17 @@ export class PlanList implements OnInit, AfterViewInit, OnDestroy {
   }
 
   loadData() {
-    this._planService.query(CONSTANT.CURR_PRJ_ID, this.queryModel).subscribe((json: any) => {
+    this._planService.query(this.queryModel, this.page, this.pageSize).subscribe((json: any) => {
+      this.collectionSize = json.collectionSize;
       this.models = json.data;
     });
   }
 
   queryChange(values: any): void {
       this.loadData();
+  }
+  pageChange(event:any):void {
+    this.loadData();
   }
 
   ngOnDestroy(): void {

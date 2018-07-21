@@ -68,7 +68,7 @@
             <span *ngIf="item.type=='group'">用户组</span>
           </td>
           <td class="role">
-            <select (change)="changeRole($event.target.value, item.id)" [ngModel]="item.projectRoleId" class="form-control form-control-sm">
+            <select (change)="changeRole($event.target.value, item.entityId)" [ngModel]="item.projectRoleId" class="form-control form-control-sm">
               <option *ngFor="let entry of projectRoles" value="{{entry.id}}">
                 <span>{{entry.name}}</span>
               </option>

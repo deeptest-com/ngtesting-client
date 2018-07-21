@@ -21,6 +21,9 @@ export class SuiteListComponent implements OnInit, AfterViewInit, OnDestroy {
   projectName: string;
 
   models: any;
+  collectionSize: number = 0;
+  page:number = 1;
+  pageSize:number = 2;
 
   queryForm: FormGroup;
   queryModel: any = { keywords: '' };
@@ -77,13 +80,17 @@ export class SuiteListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   loadData() {
-    this._suiteService.query(CONSTANT.CURR_PRJ_ID, this.queryModel).subscribe((json: any) => {
+    this._suiteService.query(this.queryModel, this.page, this.pageSize).subscribe((json: any) => {
+      this.collectionSize = json.collectionSize;
       this.models = json.data;
     });
   }
 
   queryChange(values: any): void {
       this.loadData();
+  }
+  pageChange(event:any):void {
+    this.loadData();
   }
 
   ngOnDestroy(): void {
