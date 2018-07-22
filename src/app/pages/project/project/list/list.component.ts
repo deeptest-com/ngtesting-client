@@ -37,6 +37,7 @@ export class ProjectList implements OnInit, AfterViewInit, OnDestroy {
               private fb: FormBuilder, private el: ElementRef, private _projectService: ProjectService) {
 
     this._route.pathFromRoot[3].params.subscribe(params => {
+      console.log('000');
       this.loadData();
     });
 
@@ -50,6 +51,7 @@ export class ProjectList implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit() {
     this.isInit = false;
+    console.log('111');
     this.loadData();
   }
 
@@ -62,6 +64,7 @@ export class ProjectList implements OnInit, AfterViewInit, OnDestroy {
   }
 
   queryChange(values: any): void {
+    console.log('222');
     this.loadData();
   }
   loadData() {
