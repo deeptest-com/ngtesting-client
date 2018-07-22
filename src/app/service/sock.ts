@@ -53,10 +53,10 @@ export class SockService {
     stompSub1.map((message: any) => {
       return message.body;
     }).subscribe((msg: string) => {
-      console.log('===', msg);
+      console.log('======/topic/comm received: ');
+      console.log('      ', msg);
 
       const json = JSON.parse(msg);
-      console.log('/topic/comm received: ', json.code);
 
       if (json.code != 1) {
         console.log(json.code);
@@ -68,15 +68,18 @@ export class SockService {
     stompSub2.map((message: any) => {
       return message.body;
     }).subscribe((msg: string) => {
-      console.log('---', msg);
+      console.log('======/user/' + CONSTANT.TOKEN + '/notification received: ');
+      console.log('      ', msg);
+
       const json = JSON.parse(msg);
       const payload = JSON.parse(json.payload)
-      console.log('/user/' + CONSTANT.TOKEN + '/notification received: ', payload.code);
 
       if (payload.code != 1) {
         console.log(payload.code);
         return;
       }
+
+      this._state.notifyDataChanged(payload.type, payload);
     });
 
     this._stompService.publish('/send/comm', JSON.stringify( { type: WS_CONSTANT.WS_OPEN } ));
