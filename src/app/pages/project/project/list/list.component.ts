@@ -30,16 +30,11 @@ export class ProjectList implements OnInit, AfterViewInit, OnDestroy {
   maxLevel: number;
   statusMap: Array<any> = CONSTANT.EntityDisabled;
 
-  isInit: boolean = false;
+  routeSub: any;
 
   constructor(private _route: ActivatedRoute, private router: Router, private _routeService: RouteService,
               private _state: GlobalState,
               private fb: FormBuilder, private el: ElementRef, private _projectService: ProjectService) {
-
-    this._route.pathFromRoot[3].params.subscribe(params => {
-      console.log('000');
-      this.loadData();
-    });
 
     this.queryForm = this.fb.group(
       {
@@ -50,9 +45,10 @@ export class ProjectList implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.isInit = false;
-    console.log('111');
-    this.loadData();
+    this.routeSub = this._route.pathFromRoot[3].params.subscribe(params => {
+      console.log('000');
+      this.loadData();
+    });
   }
 
   ngAfterViewInit() {
@@ -70,10 +66,10 @@ export class ProjectList implements OnInit, AfterViewInit, OnDestroy {
   loadData() {
     this._projectService.list(this.queryModel).subscribe((json: any) => {
       this.projects = json.data;
-      this.isInit = true;
     });
   }
   ngOnDestroy(): void {
     this._state.unsubscribe(WS_CONSTANT.WS_RECENT_PROJECTS, this.eventCode);
+    this.routeSub.unsubscribe();
   };
 }

@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation, ViewChild, QueryList, Query } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { NgModule, Pipe, OnInit, AfterViewInit }      from '@angular/core';
+import { NgModule, Pipe, OnInit, AfterViewInit, OnDestroy }      from '@angular/core';
 
 import { CONSTANT } from '../../../utils/constant';
 import { OrgService } from '../../../service/org';
@@ -14,7 +14,7 @@ declare var jQuery;
   styleUrls: ['./view.scss'],
   templateUrl: './view.html',
 })
-export class OrgView implements OnInit, AfterViewInit {
+export class OrgView implements OnInit, AfterViewInit, OnDestroy {
   id: number;
 
   org: any = {};
@@ -22,13 +22,14 @@ export class OrgView implements OnInit, AfterViewInit {
   histories: any = {};
 
   chartData: any = {};
+  routeSub: any;
 
   constructor(private _route: ActivatedRoute,
               private _orgService: OrgService, private _reportService: ReportService) {
     this.id = CONSTANT.CURR_ORG_ID;
   }
   ngOnInit() {
-    this._route.pathFromRoot[3].params.subscribe(params => {
+    this.routeSub = this._route.pathFromRoot[3].params.subscribe(params => {
       // console.log('===', params, params['orgId']);
        // if (this.id != +params['orgId']) {
          this.id = +params['orgId'];
@@ -53,6 +54,10 @@ export class OrgView implements OnInit, AfterViewInit {
     this._reportService.orgReport(this.id).subscribe((json: any) => {
       this.chartData = json.data;
     });
+  }
+
+  ngOnDestroy(): void {
+    this.routeSub.unsubscribe();
   }
 
 }
