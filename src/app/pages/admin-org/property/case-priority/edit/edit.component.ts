@@ -1,4 +1,4 @@
-import {Component, ViewEncapsulation, ViewChild} from '@angular/core';
+import { Component, ViewEncapsulation, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { NgModule, Pipe, OnInit, AfterViewInit }      from '@angular/core';
@@ -7,15 +7,15 @@ import { NgbModalModule, NgbPaginationModule, NgbDropdownModule,
   NgbTabsetModule, NgbButtonsModule, NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserModule } from '@angular/platform-browser';
 
-import {GlobalState} from '../../../../../global.state';
+import { GlobalState } from '../../../../../global.state';
 
 import { CONSTANT } from '../../../../../utils/constant';
 import { Utils } from '../../../../../utils/utils';
-import {ValidatorUtils, PhoneValidator} from '../../../../../validator';
+import { ValidatorUtils, PhoneValidator } from '../../../../../validator';
 import { RouteService } from '../../../../../service/route';
 
 import { CasePriorityService } from '../../../../../service/case-priority';
-import { PopDialogComponent } from '../../../../../components/pop-dialog'
+import { PopDialogComponent } from '../../../../../components/pop-dialog';
 
 declare var jQuery;
 
@@ -23,7 +23,7 @@ declare var jQuery;
   selector: 'case-priority-edit',
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['./edit.scss'],
-  templateUrl: './edit.html'
+  templateUrl: './edit.html',
 })
 export class CasePriorityEdit implements OnInit, AfterViewInit {
 
@@ -34,7 +34,7 @@ export class CasePriorityEdit implements OnInit, AfterViewInit {
   isSubmitted: boolean;
   @ViewChild('modalWrapper') modalWrapper: PopDialogComponent;
 
-  constructor(private _state:GlobalState, private _routeService: RouteService, private _route: ActivatedRoute,
+  constructor(private _state: GlobalState, private _routeService: RouteService, private _route: ActivatedRoute,
               private fb: FormBuilder, private casePriorityService: CasePriorityService) {
 
   }
@@ -49,58 +49,62 @@ export class CasePriorityEdit implements OnInit, AfterViewInit {
   ngAfterViewInit() {}
 
   buildForm(): void {
-    let that = this;
+    const that = this;
     this.form = this.fb.group(
       {
         'name': ['', [Validators.required]],
-        'descr': ['', []]
-      }, {}
+        'descr': ['', []],
+      }, {},
     );
 
     this.form.valueChanges.debounceTime(CONSTANT.DebounceTime).subscribe(data => this.onValueChanged(data));
     this.onValueChanged();
   }
   onValueChanged(data?: any) {
-    let that = this;
+    const that = this;
     that.formErrors = ValidatorUtils.genMsg(that.form, that.validateMsg, []);
   }
 
   formErrors = [];
   validateMsg = {
     'name': {
-      'required':      '名称不能为空'
-    }
+      'required':      '名称不能为空',
+    },
   };
 
   loadData() {
-    let that = this;
-    that.casePriorityService.get(that.id).subscribe((json:any) => {
+    const that = this;
+    that.casePriorityService.get(that.id).subscribe((json: any) => {
       that.model = json.data;
     });
   }
 
   save() {
-    let that = this;
+    const that = this;
 
-    that.casePriorityService.save(that.model).subscribe((json:any) => {
+    that.casePriorityService.save(that.model).subscribe((json: any) => {
       if (json.code == 1) {
         CONSTANT.CASE_PROPERTY_MAP = json.casePropertyMap;
 
         that.formErrors = ['保存成功'];
-        that._routeService.navTo("/pages/org-admin/property/case-priority/list");
+        this.back();
       } else {
         that.formErrors = [json.msg];
       }
     });
   }
+  back() {
+    this._state.notifyDataChanged(CONSTANT.EVENT_PROPERTY_STATUS, 'list');
+    this._routeService.navTo('/pages/org-admin/property/case-priority/list');
+  }
 
   delete() {
-    let that = this;
+    const that = this;
 
-    that.casePriorityService.delete(that.model.id).subscribe((json:any) => {
+    that.casePriorityService.delete(that.model.id).subscribe((json: any) => {
       if (json.code == 1) {
         that.formErrors = ['删除成功'];
-        that._routeService.navTo("/pages/org-admin/property/case-priority/list");
+        this.back();
       } else {
         that.formErrors = ['删除失败'];
       }

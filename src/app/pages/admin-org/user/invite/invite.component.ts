@@ -50,7 +50,7 @@ export class UserInvite implements OnInit, AfterViewInit {
   buildForm(): void {
     this.form = this.fb.group(
       {
-        'name': ['', [Validators.required]],
+        'nickname': ['', [Validators.required]],
         'email': ['', [Validators.required, Validators.email]],
         'groups': ['', []]
       }, {}
@@ -66,7 +66,7 @@ export class UserInvite implements OnInit, AfterViewInit {
 
   formErrors = [];
   validateMsg = {
-    'name': {
+    'nickname': {
       'required':      '姓名不能为空'
     },
     'email': {

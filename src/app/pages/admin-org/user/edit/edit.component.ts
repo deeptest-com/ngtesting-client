@@ -54,7 +54,7 @@ export class UserEdit implements OnInit, AfterViewInit {
   buildForm(): void {
     this.form = this.fb.group(
       {
-        'name': ['', [Validators.required]],
+        'nickname': ['', [Validators.required]],
         'email': ['', [Validators.required, Validators.email]],
         'phone': ['', [Validators.required, PhoneValidator.validate()]],
         'disabled': ['', []],
@@ -71,7 +71,7 @@ export class UserEdit implements OnInit, AfterViewInit {
 
   formErrors = [];
   validateMsg = {
-    'name': {
+    'nickname': {
       'required':      '姓名不能为空',
     },
     'email': {
@@ -95,10 +95,10 @@ export class UserEdit implements OnInit, AfterViewInit {
     });
   }
 
-  save() {
+  update() {
     const that = this;
 
-    that.userService.save(that.user, that.relations).subscribe((json: any) => {
+    that.userService.update(that.user, that.relations).subscribe((json: any) => {
       if (json.code == 1) {
 
         that.formErrors = ['保存成功'];

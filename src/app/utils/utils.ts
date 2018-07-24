@@ -13,7 +13,7 @@ export let Utils: any = {
       CONSTANT.SERVICE_URL = environment.SERVICE_URL;
     } else {
       const url = unescape(window.location.href);
-      CONSTANT.SERVICE_URL = url.split('client/')[0];
+      CONSTANT.SERVICE_URL = url.split('#')[0];
     }
 
     CONSTANT.API_URL = CONSTANT.SERVICE_URL + CONSTANT.API_PATH;

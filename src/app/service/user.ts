@@ -33,8 +33,8 @@ export class UserService {
     return this._reqService.post(this._api_url + 'get', model);
   }
 
-  save(user: any, groups: any[]) {
-    return this._reqService.post(this._api_url + 'save', { user: user, relations: groups });
+  update(user: any, groups: any[]) {
+    return this._reqService.post(this._api_url + 'update', { user: user, relations: groups });
   }
   invite(user: any, groups: any[]) {
     return this._reqService.post(this._api_url + 'invite', { user: user, relations: groups });

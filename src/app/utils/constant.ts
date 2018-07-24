@@ -37,6 +37,7 @@ export const CONSTANT: CONSTANT_INTERFACE = {
   DebounceTime: 500,
 
   EVENT_LOADING_COMPLETE: 'loading.complete',
+  EVENT_PROPERTY_STATUS: 'property.status',
   EVENT_COMMENTS_EDIT: 'comments.edit',
   EVENT_COMMENTS_SAVE: 'comments.save',
 
@@ -92,6 +93,7 @@ export interface CONSTANT_INTERFACE {
   DebounceTime: number;
 
   EVENT_LOADING_COMPLETE: string;
+  EVENT_PROPERTY_STATUS: string;
   EVENT_COMMENTS_EDIT: string;
   EVENT_COMMENTS_SAVE: string;
 

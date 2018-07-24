@@ -43,9 +43,9 @@ export class UserList implements OnInit, AfterViewInit {
     this.queryForm.valueChanges.debounceTime(CONSTANT.DebounceTime).subscribe(values => this.queryChange(values));
   }
 
-  create(): void {
-    this._routeService.navTo('/pages/org-admin/user/edit/null');
-  }
+  // create(): void {
+  //   this._routeService.navTo('/pages/org-admin/user/edit/null');
+  // }
   invite(): void {
     this._routeService.navTo('/pages/org-admin/user/invite');
   }
@@ -66,7 +66,7 @@ export class UserList implements OnInit, AfterViewInit {
 
   loadData() {
     this.userService.list(this.queryModel, this.page, this.pageSize).subscribe((json: any) => {
-      this.collectionSize = json.collectionSize;
+      this.collectionSize = json.total;
       this.models = json.data;
     });
   }

@@ -36,7 +36,7 @@
           <span (click)="down(item)" *ngIf="i < models.length - 1" class="fa fa-arrow-down ionic-icon link"></span>
           <span *ngIf="i == models.length - 1" class="ionic-icon link placeholder"></span>
           &nbsp;
-          <span [routerLink]="['/pages/org-admin/property/custom-field/edit', item.id]" class="link no-underline">编辑</span>
+          <span (click)="edit(item.id)" class="link no-underline">编辑</span>
         </td>
       </tr>
       </tbody>

@@ -24,9 +24,9 @@
           <i class="fa fa-plus-circle"></i>邀请
         </button>
 
-        <button (click)="create()" type="button" class="btn btn-primary btn-with-icon btn-sm">
+<!--        <button (click)="create()" type="button" class="btn btn-primary btn-with-icon btn-sm">
           <i class="fa fa-plus-circle"></i>新建
-        </button>
+        </button>-->
       </div>
     </div>
   </div>
@@ -43,7 +43,7 @@
       </thead>
       <tbody>
       <tr *ngFor="let item of models">
-        <td>{{ item.name }}</td>
+        <td>{{ item.nickname }}</td>
         <th>{{ item.email }}</th>
         <th>{{ item.phone }}</th>
         <td>{{statusMap[''+item.disabled]}}</td>

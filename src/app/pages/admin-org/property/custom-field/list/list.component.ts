@@ -1,63 +1,56 @@
-import {Component, ViewEncapsulation, OnInit, AfterViewInit, ViewChild, ElementRef} from "@angular/core";
+import { Component, ViewEncapsulation, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import {GlobalState} from "../../../../../global.state";
+import { GlobalState } from '../../../../../global.state';
 
-import {CONSTANT} from "../../../../../utils/constant";
-import {Utils} from "../../../../../utils/utils";
-import {RouteService} from "../../../../../service/route";
-import {CustomFieldService} from "../../../../../service/custom-field";
+import { CONSTANT } from '../../../../../utils/constant';
+import { Utils } from '../../../../../utils/utils';
+import { RouteService } from '../../../../../service/route';
+import { CustomFieldService } from '../../../../../service/custom-field';
 
 @Component({
   selector: 'custom-field-list',
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['./list.scss'],
-  templateUrl: './list.html'
+  templateUrl: './list.html',
 })
 export class CustomFieldList implements OnInit, AfterViewInit {
 
   models: any[];
 
-  constructor(private _routeService:RouteService, private _state:GlobalState, private fb: FormBuilder, private el: ElementRef,
+  constructor(private _routeService: RouteService, private _state: GlobalState, private fb: FormBuilder, private el: ElementRef,
               private customFieldService: CustomFieldService) {
   }
 
   ngOnInit() {
-    let that = this;
-
-    that.loadData();
+    this.loadData();
   }
 
   ngAfterViewInit() {
   }
 
-  edit($event: any):void {
-    let that = this;
-
-    console.log($event);
+  edit(item: any): void {
+    this._state.notifyDataChanged(CONSTANT.EVENT_PROPERTY_STATUS, 'edit');
+    this._routeService.navTo('/pages/org-admin/property/custom-field/edit/' + item.id);
   }
-  delete($event: any):void {
-    let that = this;
-
+  delete($event: any): void {
     console.log($event);
   }
 
   loadData() {
-    let that = this;
-
-    that.customFieldService.list().subscribe((json:any) => {
-      that.models = json.data;
+    this.customFieldService.list().subscribe((json: any) => {
+      this.models = json.data;
     });
   }
 
   up(item: any) {
-    this.customFieldService.changeOrder(item.id, 'up').subscribe((json:any) => {
+    this.customFieldService.changeOrder(item.id, 'up').subscribe((json: any) => {
       if (json.code == 1) {
         this.models = json.data;
       }
     });
   }
   down(item: any) {
-    this.customFieldService.changeOrder(item.id, 'down').subscribe((json:any) => {
+    this.customFieldService.changeOrder(item.id, 'down').subscribe((json: any) => {
       if (json.code == 1) {
         this.models = json.data;
       }

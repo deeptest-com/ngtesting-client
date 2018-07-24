@@ -37,8 +37,8 @@
       <div class="form-group row">
         <label class="col-sm-2 col-form-label"><span>姓名</span></label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" name="name" formControlName="name"
-                 [(ngModel)]="user.name" #name>
+          <input type="text" class="form-control" name="nickname" formControlName="nickname"
+                 [(ngModel)]="user.nickname" #nickname>
         </div>
       </div>
       <div class="form-group row">
@@ -83,7 +83,7 @@
               </div>
               <div>
                 <div *ngFor="let item of relations" class="checkbox-list-item">
-                  <label *ngIf="item.orgGroupName!='所有人'">
+                  <label>
                     <span class="checkbox-name">{{item.orgGroupName}}<span></span></span>
                     <input type="checkbox" class="form-check-input"
                            [(ngModel)]="item.selecting" formControlName="{{'group-' + item.orgGroupId}}">
@@ -100,7 +100,7 @@
     <div class="form-group row">
       <label class="col-sm-2 col-form-label"></label>
       <div class="col-sm-10">
-        <button (click)="save()" type="button" class="btn btn-primary" [disabled]="!form.valid">保存</button>
+        <button (click)="update()" type="button" class="btn btn-primary" [disabled]="!form.valid">保存</button>
         &nbsp;
         <button [routerLink]="['/pages/org-admin/user/list']" type="button" class="btn btn-default">取消</button>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
