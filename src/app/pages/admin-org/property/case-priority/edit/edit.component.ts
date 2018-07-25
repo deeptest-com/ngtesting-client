@@ -94,7 +94,7 @@ export class CasePriorityEdit implements OnInit, AfterViewInit {
     });
   }
   back() {
-    this._state.notifyDataChanged(CONSTANT.EVENT_PROPERTY_STATUS, 'list');
+    this._state.notifyDataChanged(CONSTANT.EVENT_PROPERTY_STATUS, { data: 'list', random: Math.random() });
     this._routeService.navTo('/pages/org-admin/property/case-priority/list');
   }
 

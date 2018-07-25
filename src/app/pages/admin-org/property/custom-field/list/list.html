@@ -22,8 +22,9 @@
 
         <td>{{ item.type | fieldType }}</td>
         <td>
-          {{ item.format | fieldFormat }}
-          <span *ngIf="item.type == 'text'">({{item.rows}})</span>
+          <span *ngIf="item.type == 'text'">
+            {{ item.format | fieldFormat }} ({{item.rows}})
+          </span>
         </td>
         <td>{{item.global | trueOrFalse}}</td>
         <td>{{item.required | trueOrFalse}}</td>

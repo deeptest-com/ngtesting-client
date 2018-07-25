@@ -26,10 +26,10 @@ export class Property implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit() {
-    this._state.subscribe(CONSTANT.EVENT_PROPERTY_STATUS, this.eventCode, (status) => {
-      console.log(CONSTANT.EVENT_PROPERTY_STATUS + ' in ' + this.eventCode, status);
+    this._state.subscribe(CONSTANT.EVENT_PROPERTY_STATUS, this.eventCode, (json) => {
+      console.log(CONSTANT.EVENT_PROPERTY_STATUS + ' in ' + this.eventCode, json);
 
-      this.status = status;
+      this.status = json.data;
     });
   }
 

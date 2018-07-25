@@ -31,7 +31,7 @@ export class CaseTypeList implements OnInit, AfterViewInit {
   }
 
   edit(item: any): void {
-    this._state.notifyDataChanged(CONSTANT.EVENT_PROPERTY_STATUS, 'edit');
+    this._state.notifyDataChanged(CONSTANT.EVENT_PROPERTY_STATUS, { data: 'edit', random: Math.random() });
     this._routeService.navTo('/pages/org-admin/property/case-type/edit/' + item.id);
   }
 
