@@ -278,6 +278,11 @@ ul.al-share {
           overflow: hidden;
           white-space: nowrap;
           text-overflow: ellipsis;
+
+          &.group {
+            margin: 5px 0 5px -20px;
+            font-weight: bolder;
+          }
         }
         input {
           position: absolute;

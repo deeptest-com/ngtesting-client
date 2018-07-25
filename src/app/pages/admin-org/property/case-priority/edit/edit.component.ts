@@ -104,6 +104,7 @@ export class CasePriorityEdit implements OnInit, AfterViewInit {
     that.casePriorityService.delete(that.model.id).subscribe((json: any) => {
       if (json.code == 1) {
         that.formErrors = ['删除成功'];
+        this.modalWrapper.closeModal();
         this.back();
       } else {
         that.formErrors = ['删除失败'];

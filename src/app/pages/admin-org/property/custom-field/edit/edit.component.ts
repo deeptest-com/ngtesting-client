@@ -118,10 +118,10 @@ export class CustomFieldEdit implements OnInit, AfterViewInit {
       that.applyToList = json.applyToList;
       that.typeList = json.typeList;
       that.formatList = json.formatList;
-      that.relations = json.projects;
+      that.relations = json.relations;
 
-      _.forEach(that.relations, (project: any, index: number) => {
-        this.form.addControl('project-' + project.id, new FormControl('', []));
+      _.forEach(that.relations, (item: any, index: number) => {
+        this.form.addControl('project-' + item.projectId, new FormControl('', []));
       });
     });
   }
