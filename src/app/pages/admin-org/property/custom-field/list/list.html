@@ -9,7 +9,6 @@
         <th>应用对象</th>
         <th>类型</th>
         <th>格式</th>
-        <th>是否內置</th>
         <th>是否全局</th>
         <th>是否必填</th>
         <th>操作</th>
@@ -26,7 +25,6 @@
           {{ item.format | fieldFormat }}
           <span *ngIf="item.type == 'text'">({{item.rows}})</span>
         </td>
-        <td>{{item.buildIn | trueOrFalse}}</td>
         <td>{{item.global | trueOrFalse}}</td>
         <td>{{item.required | trueOrFalse}}</td>
         <td>
@@ -36,7 +34,7 @@
           <span (click)="down(item)" *ngIf="i < models.length - 1" class="fa fa-arrow-down ionic-icon link"></span>
           <span *ngIf="i == models.length - 1" class="ionic-icon link placeholder"></span>
           &nbsp;
-          <span (click)="edit(item.id)" class="link no-underline">编辑</span>
+          <span (click)="edit(item)" class="link no-underline">编辑</span>
         </td>
       </tr>
       </tbody>

@@ -5,7 +5,6 @@
       <thead class="thead-inverse">
       <tr>
         <th>名称</th>
-        <th style="width: 250px;">是否內置</th>
         <th style="width: 250px;">是否默认</th>
         <th style="width: 250px;">操作</th>
       </tr>
@@ -13,7 +12,6 @@
       <tbody>
       <tr *ngFor="let item of models; let i = index;">
         <td>{{ item.name }}</td>
-        <td>{{ item.isBuildIn | trueOrFalse }}</td>
         <td>
           <input *ngIf="!item.isDefault" (change)="setDefault(item)" [(ngModel)]="item.isDefault" type="checkbox" name="isDefault" #isDefault>
           <input *ngIf="item.isDefault" onclick="return false;" [(ngModel)]="item.isDefault" type="checkbox" name="isDefault" #isDefault>
@@ -25,7 +23,7 @@
           <span (click)="down(item)" *ngIf="i < models.length - 1" class="fa fa-arrow-down ionic-icon link"></span>
           <span *ngIf="i == models.length - 1" class="ionic-icon link placeholder"></span>
           &nbsp;
-          <span (click)="edit(item.id)" class="link no-underline">编辑</span>
+          <span (click)="edit(item)" class="link no-underline">编辑</span>
         </td>
       </tr>
       </tbody>

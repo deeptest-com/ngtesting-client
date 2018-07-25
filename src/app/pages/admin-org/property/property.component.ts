@@ -39,6 +39,8 @@ export class Property implements OnInit, AfterViewInit, OnDestroy {
 
   tabChange(event: any) {
     this.tab = event.nextId;
+
+    this.status = 'list';
     this._routeService.navTo('/pages/org-admin/property/' + this.tab + '/list');
   }
 
