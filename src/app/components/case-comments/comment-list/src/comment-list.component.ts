@@ -1,9 +1,9 @@
 import { Input, Output, Component, ViewChild, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import {CONSTANT} from '../../../../utils/constant';
-import {GlobalState} from '../../../../global.state';
+import { CONSTANT } from '../../../../utils/constant';
+import { GlobalState } from '../../../../global.state';
 
 import { CaseService } from '../../../../service/case';
 import { CaseCommentsService } from '../../../../service/case-comments';
@@ -12,7 +12,7 @@ import { CommentEditComponent } from '../../comment-edit/src/comment-edit.compon
 @Component({
   selector: 'comment-list',
   styleUrls: ['./styles.scss'],
-  templateUrl: './comment-list.html'
+  templateUrl: './comment-list.html',
 })
 export class CommentListComponent implements OnInit, AfterViewInit, OnDestroy{
   @Input() @Output() model: any = {};
@@ -22,7 +22,7 @@ export class CommentListComponent implements OnInit, AfterViewInit, OnDestroy{
   comment: any = {};
   eventCode: string = 'CommentListComponent';
 
-  constructor(private _state:GlobalState, private modalService: NgbModal,
+  constructor(private _state: GlobalState, private modalService: NgbModal,
               private _caseService: CaseService, private _caseCommentsService: CaseCommentsService) {
     this._state.subscribe(CONSTANT.EVENT_COMMENTS_EDIT, this.eventCode, (json) => {
       console.log(CONSTANT.EVENT_COMMENTS_EDIT + ' in ' + this.eventCode, json);
@@ -32,7 +32,7 @@ export class CommentListComponent implements OnInit, AfterViewInit, OnDestroy{
     this._state.subscribe(CONSTANT.EVENT_COMMENTS_SAVE, this.eventCode, (json) => {
       console.log(CONSTANT.EVENT_COMMENTS_SAVE + ' in ' + this.eventCode, json);
       this.comment = json;
-      this.saveComments(json.pass);
+      this.saveComments(json.result);
     });
   }
 
@@ -49,7 +49,7 @@ export class CommentListComponent implements OnInit, AfterViewInit, OnDestroy{
     if (data) {
       this.comment = data;
     } else {
-      this.comment = {summary: '添加备注'};
+      this.comment = { summary: '添加备注' };
     }
   }
   editComments(comment: any) {
@@ -60,34 +60,34 @@ export class CommentListComponent implements OnInit, AfterViewInit, OnDestroy{
     }
   }
   removeComments(id: number, indx: number) {
-    this._caseCommentsService.remove(id).subscribe((json:any) => {
+    this._caseCommentsService.remove(id).subscribe((json: any) => {
       this.model.comments.splice(indx, 1);
     });
   }
 
-  saveComments(pass:boolean) {
-    this._caseCommentsService.save(this.model.id, this.comment).subscribe((json:any) => {
+  saveComments(result: boolean) {
+    this._caseCommentsService.save(this.model.id, this.comment).subscribe((json: any) => {
       if (json.code == 1) {
-        if (this.comment.pass != undefined) { // 评审
-          this.reviewRequest(this.model.id, this.comment.pass);
+        if (this.comment.result != undefined) { // 评审
+          this.reviewRequest(this.model.id, this.comment.result);
         }
 
         if (this.comment.id != json.data.id) {
           this.model.comments[this.model.comments.length] = json.data;
         }
         this.comment = json.data;
-        if (!pass) {
+        if (!result) {
           this.modalWrapper.closeModal();
         }
       }
     });
   }
 
-  reviewRequest(id: number, pass: boolean) {
-    this._caseService.reviewPass(id, pass).subscribe((json:any) => {
+  reviewRequest(id: number, result: boolean) {
+    this._caseService.reviewResult(id, result).subscribe((json: any) => {
       if (json.code == 1) {
-        this.model.reviewResult = pass;
-        this._state.notifyDataChanged(CONSTANT.EVENT_CASE_UPDATE, {node: this.model, random: Math.random()});
+        this.model.reviewResult = result;
+        this._state.notifyDataChanged(CONSTANT.EVENT_CASE_UPDATE, { node: this.model, random: Math.random() });
       }
     });
   }

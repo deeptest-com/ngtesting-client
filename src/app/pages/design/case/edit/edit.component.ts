@@ -145,8 +145,8 @@ export class CaseEdit implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  save() {
-    this._caseService.save(this.projectId, this.model).subscribe((json: any) => {
+  update() {
+    this._caseService.update(this.projectId, this.model).subscribe((json: any) => {
       if (json.code == 1) {
         this.model = json.data;
         this._state.notifyDataChanged(CONSTANT.EVENT_CASE_UPDATE, { node: this.model, random: Math.random() });
@@ -219,11 +219,11 @@ export class CaseEdit implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  review(pass: boolean) {
-    if (!pass) {
-      this._state.notifyDataChanged(CONSTANT.EVENT_COMMENTS_EDIT, { pass: pass, summary: '评审失败' });
+  reviewResult(result: boolean) {
+    if (!result) {
+      this._state.notifyDataChanged(CONSTANT.EVENT_COMMENTS_EDIT, { result: result, summary: '评审失败' });
     } else {
-      this._state.notifyDataChanged(CONSTANT.EVENT_COMMENTS_SAVE, { pass: pass, summary: '评审通过' });
+      this._state.notifyDataChanged(CONSTANT.EVENT_COMMENTS_SAVE, { result: result, summary: '评审通过' });
     }
   }
 
