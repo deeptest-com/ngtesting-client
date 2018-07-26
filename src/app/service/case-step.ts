@@ -1,5 +1,5 @@
-import {Injectable} from "@angular/core";
-import {RequestService} from "./request";
+import { Injectable } from '@angular/core';
+import { RequestService } from './request';
 
 import * as _ from 'lodash';
 
@@ -18,8 +18,8 @@ export class CaseStepService {
     return this._reqService.post(this._api_url + 'down', json);
   }
 
-  save(testCaseId:number, caseStep: any) {
-    _.merge(caseStep, {testCaseId: testCaseId});
+  save(caseId: number, caseStep: any) {
+    _.merge(caseStep, { caseId: caseId });
     return this._reqService.post(this._api_url + 'save', caseStep);
   }
 
@@ -27,6 +27,4 @@ export class CaseStepService {
     return this._reqService.post(this._api_url + 'delete', caseStep);
   }
 }
-
-
 
