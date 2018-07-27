@@ -160,7 +160,7 @@
                                     [items]="users"
                                     [(active)]="createUsers"
                                     [idField]="'id'"
-                                    [textField]="'name'"
+                                    [textField]="'nickname'"
                                     [disabled]="disabled"
                                     (data)="refreshCreateBy($event)"
                                     placeholder="请选择"></ng-select>
@@ -173,7 +173,7 @@
                                     [items]="users"
                                     [(active)]="updateUsers"
                                     [idField]="'id'"
-                                    [textField]="'name'"
+                                    [textField]="'nickname'"
                                     [disabled]="disabled"
                                     (data)="refreshUpdateBy($event)"
                                     placeholder="请选择"></ng-select>

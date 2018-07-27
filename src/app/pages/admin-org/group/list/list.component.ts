@@ -1,42 +1,42 @@
-import {Component, ViewEncapsulation, OnInit, AfterViewInit, ViewChild, ElementRef} from "@angular/core";
+import { Component, ViewEncapsulation, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
-import {GlobalState} from "../../../../global.state";
+import { GlobalState } from '../../../../global.state';
 
-import {CONSTANT} from "../../../../utils/constant";
-import {Utils} from "../../../../utils/utils";
-import {RouteService} from "../../../../service/route";
-import {GroupService} from "../../../../service/group";
+import { CONSTANT } from '../../../../utils/constant';
+import { Utils } from '../../../../utils/utils';
+import { RouteService } from '../../../../service/route';
+import { GroupService } from '../../../../service/group';
 
 @Component({
   selector: 'group-list',
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['./list.scss'],
-  templateUrl: './list.html'
+  templateUrl: './list.html',
 })
 export class GroupList implements OnInit, AfterViewInit {
 
   queryForm: FormGroup;
-  queryModel:any = {keywords: '', disabled: 'false'};
+  queryModel: any = { keywords: '', disabled: 'false' };
   statusMap: Array<any> = CONSTANT.EntityDisabled;
 
   models: any;
   collectionSize: number = 0;
-  page:number = 1;
-  pageSize:number = 6;
+  page: number = 1;
+  pageSize: number = 15;
 
-  constructor(private _routeService:RouteService, private _state:GlobalState, private fb: FormBuilder, private el: ElementRef,
-              private groupService:GroupService) {
+  constructor(private _routeService: RouteService, private _state: GlobalState,
+              private fb: FormBuilder, private el: ElementRef, private groupService: GroupService) {
   }
 
   ngOnInit() {
-    let that = this;
+    const that = this;
 
     that.queryForm = that.fb.group(
       {
         'disabled': ['', []],
-        'keywords': ['', []]
-      }, {}
+        'keywords': ['', []],
+      }, {},
     );
 
     that.loadData();
@@ -46,36 +46,34 @@ export class GroupList implements OnInit, AfterViewInit {
     this.queryForm.valueChanges.debounceTime(CONSTANT.DebounceTime).subscribe(values => this.queryChange(values));
   }
 
-  create():void {
-    let that = this;
+  create(): void {
+    const that = this;
 
-    that._routeService.navTo("/pages/org-admin/group/edit/null");
+    that._routeService.navTo('/pages/org-admin/group/edit/null');
   }
 
-  queryChange(values: any):void {
+  queryChange(values: any): void {
     this.loadData();
   }
-  pageChange(event:any):void {
+  pageChange(event: any): void {
     this.loadData();
   }
 
-  edit($event: any):void {
-    let that = this;
+  edit($event: any): void {
+    const that = this;
 
     console.log($event);
   }
-  delete($event: any):void {
-    let that = this;
+  delete($event: any): void {
+    const that = this;
 
     console.log($event);
   }
 
   loadData() {
-    let that = this;
-
-    that.groupService.list(that.queryModel, that.page, that.pageSize).subscribe((json:any) => {
-      that.collectionSize = json.collectionSize;
-      that.models = json.data;
+    this.groupService.list(this.queryModel, this.page, this.pageSize).subscribe((json: any) => {
+      this.collectionSize = json.total;
+      this.models = json.data;
     });
   }
 

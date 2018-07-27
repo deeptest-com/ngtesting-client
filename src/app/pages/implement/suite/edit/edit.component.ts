@@ -165,14 +165,13 @@ export class SuiteEditComponent implements OnInit, AfterViewInit {
     });
 
     this.caseSelectionModal.result.then((result) => {
-      this.saveSuiteCases(result.projectId, result.caseProjectId, result.data);
+      this.saveSuiteThenCases(result.projectId, result.caseProjectId, result.data);
     }, (reason) => {
       logger.log('reason', reason);
     });
   }
 
-  saveSuiteCases(projectId: number, caseProjectId: number, cases: any[]): void {
-    // if (!this.model.id) {
+  saveSuiteThenCases(projectId: number, caseProjectId: number, cases: any[]): void {
       this._suiteService.save(projectId, caseProjectId, this.model).subscribe((json: any) => {
         if (json.code == 1) {
           this.suiteId = json.data.id;
@@ -184,9 +183,6 @@ export class SuiteEditComponent implements OnInit, AfterViewInit {
           this.formErrors = [json.msg];
         }
       });
-    // } else {
-    //   this._saveSuiteCases(projectId, suiteId, cases);
-    // }
   }
 
   _saveSuiteCases(projectId: number, caseProjectId: number, cases: any[]) {

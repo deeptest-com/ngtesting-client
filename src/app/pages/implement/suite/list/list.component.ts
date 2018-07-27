@@ -22,12 +22,12 @@ export class SuiteListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   models: any;
   collectionSize: number = 0;
-  page:number = 1;
-  pageSize:number = 2;
+  page: number = 1;
+  pageSize: number = 15;
 
   queryForm: FormGroup;
-  queryModel: any = { keywords: '' };
-  statusMap: Array<any> = CONSTANT.ExeStatus;
+  queryModel: any = { keywords: '', disabled: 'false' };
+  statusMap: Array<any> = CONSTANT.EntityDisabled;
 
   routeSub: any;
   myPrivs: any;
@@ -39,6 +39,7 @@ export class SuiteListComponent implements OnInit, AfterViewInit, OnDestroy {
     this.queryForm = this.fb.group(
       {
         'keywords': ['', []],
+        'disabled': ['', []],
       }, {},
     );
 
@@ -81,7 +82,7 @@ export class SuiteListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   loadData() {
     this._suiteService.query(this.queryModel, this.page, this.pageSize).subscribe((json: any) => {
-      this.collectionSize = json.collectionSize;
+      this.collectionSize = json.total;
       this.models = json.data;
     });
   }
@@ -89,7 +90,7 @@ export class SuiteListComponent implements OnInit, AfterViewInit, OnDestroy {
   queryChange(values: any): void {
       this.loadData();
   }
-  pageChange(event:any):void {
+  pageChange(event: any): void {
     this.loadData();
   }
 
