@@ -13,7 +13,7 @@ import { RouteService } from '../../../../service/route';
 
 import { CaseService } from '../../../../service/case';
 import { CaseStepService } from '../../../../service/case-step';
-import { CaseInRunService } from '../../../../service/case-in-run';
+import { CaseInTaskService } from '../../../../service/case-in-task';
 import { CaseAttachmentService } from '../../../../service/case-attachment';
 import { ZtreeService } from '../../../../components/ztree';
 import { PrivilegeService } from '../../../../service/privilege';
@@ -30,7 +30,7 @@ export class ExecutionResult implements OnInit, AfterViewInit, OnDestroy {
   eventCode: string = 'ExecutionResult';
 
   planId: number;
-  runId: number;
+  taskId: number;
 
   id: number;
   model: any = {};
@@ -51,7 +51,7 @@ export class ExecutionResult implements OnInit, AfterViewInit, OnDestroy {
   constructor(private _state: GlobalState, private _routeService: RouteService,
               private _route: ActivatedRoute, private fb: FormBuilder,
               private _caseService: CaseService, private _caseStepService: CaseStepService,
-              private _caseInRunService: CaseInRunService, private _caseAttachmentService: CaseAttachmentService,
+              private _caseInTaskService: CaseInTaskService, private _caseAttachmentService: CaseAttachmentService,
               private _ztreeService: ZtreeService, private privilegeService: PrivilegeService) {
 
     this._state.subscribe(WS_CONSTANT.WS_PRJ_SETTINGS, this.eventCode, (json) => {
@@ -69,7 +69,7 @@ export class ExecutionResult implements OnInit, AfterViewInit, OnDestroy {
 
     this._route.params.forEach((params: Params) => {
       this.planId = +params['planId'];
-      this.runId = +params['runId'];
+      this.taskId = +params['taskId'];
     });
 
     this._state.subscribe(CONSTANT.EVENT_CASE_EXE, this.eventCode, (data: any) => {
@@ -136,7 +136,7 @@ export class ExecutionResult implements OnInit, AfterViewInit, OnDestroy {
 
   loadData() {
     const that = this;
-    that._caseInRunService.get(that.id).subscribe((json: any) => {
+    that._caseInTaskService.get(that.id).subscribe((json: any) => {
       that.model = json.data;
     });
   }
@@ -147,7 +147,7 @@ export class ExecutionResult implements OnInit, AfterViewInit, OnDestroy {
       next = this._ztreeService.getNextNode(this.model.id);
     }
 
-    this._caseInRunService.setResult(this.model.entityId, this.model.result, next ? next.entityId : null, status)
+    this._caseInTaskService.setResult(this.model.entityId, this.model.result, next ? next.entityId : null, status)
         .subscribe((json: any) => {
       if (json.code == 1) {
         this.model.status = status;

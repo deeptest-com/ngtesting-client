@@ -91,7 +91,7 @@
           <span>测试任务</span>
         </label>
 
-        <div class="col-sm-11 run-list">
+        <div class="col-sm-11 task-list">
           <table class="table">
             <thead>
             <tr>
@@ -103,14 +103,14 @@
               <th style="width: 300px;">执行状况</th>
               <th>测试环境</th>
               <th style="width: 250px;" class="opt">
-                <span *ngIf="form.valid" privilege [privs]="'test_plan-maintain'" (click)="editRun()" class="link no-underline">新建任务</span>
+                <span *ngIf="form.valid" privilege [privs]="'test_plan-maintain'" (click)="editTask()" class="link no-underline">新建任务</span>
               </th>
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let item of model.runVos; let i = index;">
+            <tr *ngFor="let item of model.tasks; let i = index;">
               <td>{{i+1}}</td>
-              <td [routerLink]="['/pages/implement/run/execution', item.id]" class="pointer">{{item.name}}</td>
+              <td [routerLink]="['/pages/implement/task/execution', item.id]" class="pointer">{{item.name}}</td>
               <td>{{item.userName}}</td>
               <td>
                 <span *ngFor="let a of item.assignees; let i = index;">
@@ -123,8 +123,8 @@
               </td>
               <td>{{ item.envName }}</td>
               <td class="center">
-                <span privilege [privs]="'test_plan-maintain'" (click)="editRunCases(item, i)" class="link no-underline">选用例</span>
-                <span privilege [privs]="'test_plan-maintain'" (click)="editRun(item, i)" class="link no-underline">编辑</span>
+                <span privilege [privs]="'test_plan-maintain'" (click)="editTaskCases(item, i)" class="link no-underline">选用例</span>
+                <span privilege [privs]="'test_plan-maintain'" (click)="editTask(item, i)" class="link no-underline">编辑</span>
                 <span privilege [privs]="'test_plan-delete'" (click)="removeSet(item, i)" class="link no-underline">删除</span>
                 </td>
             </tr>

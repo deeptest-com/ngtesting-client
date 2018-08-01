@@ -5,7 +5,7 @@ import { Execution } from './execution.component';
 // noinspection TypeScriptValidateTypes
 const routes: Routes = [
   {
-    path: ':runId',
+    path: ':taskId',
     children: [
       { path: ':act', component: Execution },
     ],

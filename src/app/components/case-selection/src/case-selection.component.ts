@@ -22,7 +22,7 @@ export class CaseSelectionComponent implements OnInit {
 
   @Input() selectFor: string;
   suiteId: number;
-  runId: number;
+  taskId: number;
 
   @Input() treeModel: any;
   @Input() treeSettings: any = {};
@@ -66,8 +66,8 @@ export class CaseSelectionComponent implements OnInit {
         this.treeModel = json.data;
         this.brotherProjects = json.brotherProjects;
       });
-    } else if (this.selectFor == 'run') {
-      this._caseService.queryForRunSelection(this.projectId, this.caseProjectId, this.runId)
+    } else if (this.selectFor == 'task') {
+      this._caseService.queryForTaskSelection(this.projectId, this.caseProjectId, this.taskId)
             .subscribe((json: any) => {
         this.treeModel = json.data;
         this.brotherProjects = json.brotherProjects;

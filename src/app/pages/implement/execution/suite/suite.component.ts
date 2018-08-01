@@ -6,9 +6,10 @@ import { CONSTANT } from '../../../../utils/constant';
 import { Utils } from '../../../../utils/utils';
 import { RouteService } from '../../../../service/route';
 import { SlimLoadingBarService } from '../../../../components/ng2-loading-bar';
-import { RunService } from '../../../../service/run';
+import { TaskService } from '../../../../service/task';
 import { CaseService } from '../../../../service/case';
-import { CaseInRunService } from '../../../../service/case-in-run';
+import { CaseInTaskService } from '../../../../service/case-in-task';
+import {Task} from "protractor/built/taskScheduler";
 
 @Component({
   selector: 'execution-suite',
@@ -21,7 +22,7 @@ import { CaseInRunService } from '../../../../service/case-in-run';
 export class ExecutionSuite implements OnInit, AfterViewInit {
   orgId: number;
   projectId: number;
-  runId: number;
+  taskId: number;
 
   @Input() act: string;
 
@@ -29,7 +30,7 @@ export class ExecutionSuite implements OnInit, AfterViewInit {
   public treeSettings: any = { usage: 'exe', isExpanded: true, sonSign: false };
 
   constructor(private _routeService: RouteService, private _route: ActivatedRoute, private _state: GlobalState,
-              private _runService: RunService, private _caseInRunService: CaseInRunService,
+              private _taskService: TaskService, private _caseInTaskService: CaseInTaskService,
               private slimLoadingBarService: SlimLoadingBarService) {
 
   }
@@ -40,7 +41,7 @@ export class ExecutionSuite implements OnInit, AfterViewInit {
     }
 
     this._route.params.forEach((params: Params) => {
-      this.runId = +params['runId'];
+      this.taskId = +params['taskId'];
     });
 
     this.orgId = CONSTANT.CURR_ORG_ID;
@@ -55,7 +56,7 @@ export class ExecutionSuite implements OnInit, AfterViewInit {
   loadData() {
     this.startLoading();
 
-    this._caseInRunService.query(this.orgId, this.projectId, this.runId).subscribe((json: any) => {
+    this._caseInTaskService.query(this.orgId, this.projectId, this.taskId).subscribe((json: any) => {
       this.treeModel = json.data;
 
       CONSTANT.CUSTOM_FIELD_FOR_PROJECT = json.customFields;
@@ -77,18 +78,18 @@ export class ExecutionSuite implements OnInit, AfterViewInit {
 
   rename(event: any) {
     const testCase = event.data;
-    this._caseInRunService.rename(this.projectId, this.runId, testCase).subscribe((json: any) => {
+    this._caseInTaskService.rename(this.projectId, this.taskId, testCase).subscribe((json: any) => {
       event.deferred.resolve(json.data);
     });
   }
   delete(event: any) {
     // let testCase = event.data;
-    // this._caseInRunService.delete(testCase.id, testCase.entityId).subscribe((json:any) => {
+    // this._caseInTaskService.delete(testCase.id, testCase.entityId).subscribe((json:any) => {
     //   event.deferred.resolve(json.data);
     // });
   }
   move(event: any) {
-    this._caseInRunService.move(this.projectId, this.runId, event.data).subscribe((json: any) => {
+    this._caseInTaskService.move(this.projectId, this.taskId, event.data).subscribe((json: any) => {
       event.deferred.resolve(json.data);
     });
   }

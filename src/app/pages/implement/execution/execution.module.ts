@@ -23,11 +23,11 @@ import { RouteService } from '../../../service/route';
 import { RequestService } from '../../../service/request';
 import { DatetimePickerService } from '../../../service/datetime-picker';
 
-import { RunService } from '../../../service/run';
+import { TaskService } from '../../../service/task';
 import { SuiteService } from '../../../service/suite';
 import { CaseService } from '../../../service/case';
 import { CaseStepService } from '../../../service/case-step';
-import { CaseInRunService } from '../../../service/case-in-run';
+import { CaseInTaskService } from '../../../service/case-in-task';
 import { CaseAttachmentService } from '../../../service/case-attachment';
 import { PrivilegeService } from '../../../service/privilege';
 import { CaseCommentsService } from '../../../service/case-comments';
@@ -66,11 +66,11 @@ import { ExecutionResult } from './result/result.component';
     RouteService,
     RequestService,
     DatetimePickerService,
-    RunService,
+    TaskService,
     SuiteService,
     CaseService,
     CaseStepService,
-    CaseInRunService,
+    CaseInTaskService,
     PrivilegeService,
     CaseCommentsService,
     CaseAttachmentService,

@@ -27,7 +27,7 @@ export class PlanService {
     let data = _.clone(model);
     data.projectId = projectId;
 
-    data.runVos = null;
+    data.tasks = null;
     data.startTime = !!data.startTime?Utils.dateStructToDate(data.startTime):null;
     data.endTime = !!data.endTime?Utils.dateStructToDate(data.endTime):null;
     return this._reqService.post(this._api_url + 'save', data);

@@ -6,14 +6,14 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { CONSTANT } from '../../../../../utils/constant';
 import { UserService } from '../../../../../service/user';
-import { RunEditService } from './run-edit.service';
+import { TaskEditService } from './task-edit.service';
 
 @Component({
-  selector: 'run-edit',
-  templateUrl: './run-edit.html',
+  selector: 'task-edit',
+  templateUrl: './task-edit.html',
   styleUrls: ['./styles.scss'],
 })
-export class RunEditComponent implements OnInit {
+export class TaskEditComponent implements OnInit {
   projectId: number;
 
   searchModel: any = {};
@@ -28,7 +28,7 @@ export class RunEditComponent implements OnInit {
   disabled: boolean = false;
 
   constructor(public activeModal: NgbActiveModal, private fb: FormBuilder,
-              public runEditService: RunEditService, public userService: UserService ) {
+              public taskEditService: TaskEditService, public userService: UserService ) {
 
   }
 

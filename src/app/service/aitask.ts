@@ -42,7 +42,7 @@ export class AitaskService {
     return this._reqService.post(this._api_url + 'save', data);
   }
   run(taskId: number) {
-    return this._reqService.post(this._api_url + 'run', {taskId: taskId});
+    return this._reqService.post(this._api_url + 'task', { taskId: taskId });
   }
 
   saveField(id: number, field: any) {

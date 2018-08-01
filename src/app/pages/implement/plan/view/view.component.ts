@@ -1,18 +1,18 @@
-import {Component, ViewEncapsulation, NgModule, Pipe, Compiler, OnInit, AfterViewInit, ViewChild} from '@angular/core';
+import { Component, ViewEncapsulation, NgModule, Pipe, Compiler, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
-import {NgbDatepickerI18n, NgbDateParserFormatter, NgbDateStruct, NgbModal, NgbModalRef, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { NgbDatepickerI18n, NgbDateParserFormatter, NgbDateStruct, NgbModal, NgbModalRef, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
-import {I18n, CustomDatepickerI18n} from '../../../../service/datepicker-I18n';
+import { I18n, CustomDatepickerI18n } from '../../../../service/datepicker-I18n';
 
-import {GlobalState} from '../../../../global.state';
+import { GlobalState } from '../../../../global.state';
 
 import { CONSTANT } from '../../../../utils/constant';
 import { RouteService } from '../../../../service/route';
 
 import { PlanService } from '../../../../service/plan';
-import { RunService } from '../../../../service/run';
+import { TaskService } from '../../../../service/task';
 import { ReportService } from '../../../../service/report';
 
 import { PopDialogComponent } from '../../../../components/pop-dialog';
@@ -24,7 +24,7 @@ declare var jQuery;
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['./view.scss'],
   templateUrl: './view.html',
-  providers: [I18n, {provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n}]
+  providers: [I18n, { provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n }],
 })
 export class PlanView implements OnInit, AfterViewInit {
   orgId: number;
@@ -41,12 +41,12 @@ export class PlanView implements OnInit, AfterViewInit {
   profile: any;
 
   @ViewChild('modalClose') modalClose: PopDialogComponent;
-  run: any = {};
+  task: any = {};
   index: number;
 
   constructor(private _routeService: RouteService, private _route: ActivatedRoute,
               private _reportService: ReportService,
-              private _planService: PlanService, private _runService: RunService) {
+              private _planService: PlanService, private _taskService: TaskService) {
     this.profile = CONSTANT.PROFILE;
   }
   ngOnInit() {
@@ -59,7 +59,7 @@ export class PlanView implements OnInit, AfterViewInit {
 
     if (this.planId) {
       this.loadData();
-      this._reportService.planReport(this.planId).subscribe((json:any) => {
+      this._reportService.planReport(this.planId).subscribe((json: any) => {
         this.chartData = json.data;
       });
     }
@@ -67,14 +67,14 @@ export class PlanView implements OnInit, AfterViewInit {
   ngAfterViewInit() {}
 
   loadData() {
-    let that = this;
-    that._planService.get(CONSTANT.CURR_PRJ_ID, that.planId).subscribe((json:any) => {
+    const that = this;
+    that._planService.get(CONSTANT.CURR_PRJ_ID, that.planId).subscribe((json: any) => {
       that.model = json.data;
 
-      that.model.runVos.forEach((run: any) => {
-        for (const item of run.assignees) {
+      that.model.tasks.forEach((task: any) => {
+        for (const item of task.assignees) {
             if (item.id == this.profile.id) {
-              run.show = true;
+              task.show = true;
               break;
             }
         }
@@ -82,28 +82,28 @@ export class PlanView implements OnInit, AfterViewInit {
     });
   }
 
-  exeOrView(act: string, runId: number) {
+  exeOrView(act: string, taskId: number) {
     this._routeService.navTo('/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + CONSTANT.CURR_PRJ_ID + '/implement/plan/'
-      + this.planId + '/execution/' + runId + '/' + act);
+      + this.planId + '/execution/' + taskId + '/' + act);
   }
 
-  close(run: any, index: number): void {
-    this.modalTitle = run.name;
-    this.run = run;
+  close(task: any, index: number): void {
+    this.modalTitle = task.name;
+    this.task = task;
     this.index = index;
     this.modalClose.showModal();
   }
   closeConfirm() {
-    this._runService.close(this.run.id).subscribe((json:any) => {
+    this._taskService.close(this.task.id).subscribe((json: any) => {
       if (json.code == 1) {
-        this.model.runVos[this.index] = json.data;
+        this.model.taskVos[this.index] = json.data;
         this.modalClose.closeModal();
       }
     });
   }
 
   returnTo() {
-    let url: string = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + CONSTANT.CURR_PRJ_ID + '/implement/plan/list';
+    const url: string = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + CONSTANT.CURR_PRJ_ID + '/implement/plan/list';
     this._routeService.navTo(url);
   }
 

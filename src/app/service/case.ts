@@ -20,9 +20,9 @@ export class CaseService {
     return this._reqService.post(this._api_url + 'queryForSuiteSelection',
       { projectId: projectId, caseProjectId: caseProjectId, suiteId: suiteId });
   }
-  queryForRunSelection(projectId: number, caseProjectId: number, runId: number) {
-    return this._reqService.post(this._api_url + 'queryForRunSelection',
-      { projectId: projectId, caseProjectId: caseProjectId , runId: runId });
+  queryForTaskSelection(projectId: number, caseProjectId: number, taskId: number) {
+    return this._reqService.post(this._api_url + 'queryForTaskSelection',
+      { projectId: projectId, caseProjectId: caseProjectId , taskId: taskId });
   }
 
   get(id: number) {

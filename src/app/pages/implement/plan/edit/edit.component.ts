@@ -14,7 +14,7 @@ import { ValidatorUtils, CustomValidator } from '../../../../validator';
 import { RouteService } from '../../../../service/route';
 
 import { PlanService } from '../../../../service/plan';
-import { RunService } from '../../../../service/run';
+import { TaskService } from '../../../../service/task';
 import { CaseService } from '../../../../service/case';
 import { UserService } from '../../../../service/user';
 
@@ -22,7 +22,7 @@ import { CaseSelectionComponent } from '../../../../components/case-selection';
 import { EnvironmentConfigComponent } from '../../../../components/environment-config';
 import { PopDialogComponent } from '../../../../components/pop-dialog';
 
-import { RunEditComponent } from '../../run/edit';
+import { TaskEditComponent } from '../../task/edit';
 
 declare var jQuery;
 import * as _ from 'lodash';
@@ -45,13 +45,13 @@ export class PlanEdit implements OnInit, AfterViewInit {
   treeSettings: any = { usage: 'selection', isExpanded: true, sonSign: false };
 
   startDate: any;
-  model: any = { verId: 'null', runVos: [] };
+  model: any = { verId: 'null', tasks: [] };
   vers: any = [];
   envs: any = [];
 
   suites: any[] = [];
-  run: any = {};
-  runIndex: number;
+  task: any = {};
+  taskIndex: number;
   form: FormGroup;
 
   @ViewChild('modalSelectCase') modalSelectCase: CaseSelectionComponent;
@@ -62,7 +62,7 @@ export class PlanEdit implements OnInit, AfterViewInit {
   testSet: any;
   modalTitle: string;
 
-  runEditModal: any;
+  taskEditModal: any;
   caseSelectionModal: any;
   envSelectionModal: any;
 
@@ -70,7 +70,7 @@ export class PlanEdit implements OnInit, AfterViewInit {
               private _route: ActivatedRoute, private fb: FormBuilder,
               private _i18n: I18n, private modalService: NgbModal, private compiler: Compiler,
               private ngbDateParserFormatter: NgbDateParserFormatter,
-              private _planService: PlanService, private _runService: RunService,
+              private _planService: PlanService, private _taskService: TaskService,
               private _caseService: CaseService, private _userService: UserService) {
 
 
@@ -126,7 +126,7 @@ export class PlanEdit implements OnInit, AfterViewInit {
   loadData() {
     const that = this;
     that._planService.get(CONSTANT.CURR_PRJ_ID, this.planId).subscribe((json: any) => {
-      that.model = json.data ? json.data : { verId: 'null', runVos: [] };
+      that.model = json.data ? json.data : { verId: 'null', tasks: [] };
       that.suites = json.suites;
       that.vers = json.vers;
       that.envs = json.envs;
@@ -151,76 +151,76 @@ export class PlanEdit implements OnInit, AfterViewInit {
     this.loadData();
   }
 
-  editRun(run?: any, index?: number) {
-    this.compiler.clearCacheFor(RunEditComponent);
-    this.runEditModal = this.modalService.open(RunEditComponent, { windowClass: 'pop-modal' });
+  editTask(task?: any, index?: number) {
+    this.compiler.clearCacheFor(TaskEditComponent);
+    this.taskEditModal = this.modalService.open(TaskEditComponent, { windowClass: 'pop-modal' });
 
-    if (!run) {
-      this.run = { envId: '', assignees: [] };
-      this.runIndex = this.model.runVos.length;
+    if (!task) {
+      this.task = { envId: '', assignees: [] };
+      this.taskIndex = this.model.tasks.length;
     } else {
-      this.run = run;
-      this.runIndex = index;
+      this.task = task;
+      this.taskIndex = index;
     }
-    this.runEditModal.componentInstance.selectedModels = this.run.assignees;
-    this.runEditModal.componentInstance.model = this.run;
-    this.runEditModal.componentInstance.suites = this.suites;
-    this.runEditModal.componentInstance.envs = this.envs;
+    this.taskEditModal.componentInstance.selectedModels = this.task.assignees;
+    this.taskEditModal.componentInstance.model = this.task;
+    this.taskEditModal.componentInstance.suites = this.suites;
+    this.taskEditModal.componentInstance.envs = this.envs;
 
-    this.runEditModal.result.then((result) => {
+    this.taskEditModal.result.then((result) => {
       this.model.userIds = result.data.userIds;
-      this.saveRun();
+      this.saveTask();
     }, (reason) => {
       logger.log('reason', reason);
     });
 
   }
-  saveRun() {
+  saveTask() {
     if (!this.model.id) {
       this._planService.save(this.prjId, this.model).subscribe((json: any) => {
         if (json.code == 1) {
           this.planId = json.data.id;
           this.model.id = json.data.id;
 
-          this._saveRun();
+          this._saveTask();
         } else {
           this.formErrors = [json.msg];
         }
       });
     } else {
-      this._saveRun();
+      this._saveTask();
     }
   }
-  _saveRun() {
-    this._runService.saveRun(this.prjId, this.planId, this.run, this.suites).subscribe((json: any) => {
-      this.model.runVos[this.runIndex] = json.data;
+  _saveTask() {
+    this._taskService.saveTask(this.prjId, this.planId, this.task, this.suites).subscribe((json: any) => {
+      this.model.tasks[this.taskIndex] = json.data;
     });
   }
 
-  editRunCases(run: any, index: number) {
+  editTaskCases(task: any, index: number) {
     this.compiler.clearCacheFor(CaseSelectionComponent);
     this.caseSelectionModal = this.modalService.open(CaseSelectionComponent, { windowClass: 'pop-modal' });
 
-    this.caseSelectionModal.componentInstance.selectFor = 'run';
+    this.caseSelectionModal.componentInstance.selectFor = 'task';
     this.caseSelectionModal.componentInstance.treeSettings = this.treeSettings;
-    this.caseSelectionModal.componentInstance.projectId = run.projectId;
-    this.caseSelectionModal.componentInstance.caseProjectId = run.caseProjectId ? run.caseProjectId : run.prjId;
-    this.caseSelectionModal.componentInstance.runId = run.id;
+    this.caseSelectionModal.componentInstance.projectId = task.projectId;
+    this.caseSelectionModal.componentInstance.caseProjectId = task.caseProjectId ? task.caseProjectId : task.prjId;
+    this.caseSelectionModal.componentInstance.taskId = task.id;
 
     this._userService.getUsers(CONSTANT.CURR_PRJ_ID).subscribe((json: any) => {
       this.caseSelectionModal.componentInstance.users = json.data;
     });
 
     this.caseSelectionModal.result.then((result) => {
-      const runId = run ? run.id : undefined;
-      this.saveRunCases(result.projectId, result.caseProjectId, runId, result.data, index);
+      const taskId = task ? task.id : undefined;
+      this.saveTaskCases(result.projectId, result.caseProjectId, taskId, result.data, index);
     }, (reason) => {
       logger.log('reason', reason);
     });
   }
-  saveRunCases(projectId: number, caseProjectId: number, runId: any, cases: any[], index: number): void {
-    this._runService.saveRunCases(projectId, caseProjectId, this.planId, runId, cases).subscribe((json: any) => {
-      this.model.runVos[index] = json.data;
+  saveTaskCases(projectId: number, caseProjectId: number, taskId: any, cases: any[], index: number): void {
+    this._taskService.saveTaskCases(projectId, caseProjectId, this.planId, taskId, cases).subscribe((json: any) => {
+      this.model.tasks[index] = json.data;
     });
   }
 
@@ -248,12 +248,12 @@ export class PlanEdit implements OnInit, AfterViewInit {
     this.modalRemoveSet.showModal();
   }
   removeSetConfirm() {
-    this._runService.delete(this.testSet.id).subscribe((json: any) => {
+    this._taskService.delete(this.testSet.id).subscribe((json: any) => {
       if (json.code == 1) {
         this.formErrors = ['删除成功'];
         this.modalRemoveSet.closeModal();
 
-        this.model.runVos = this.model.runVos.filter((item: any) => {
+        this.model.tasks = this.model.tasks.filter((item: any) => {
           return item.id != this.testSet.id;
           });
 

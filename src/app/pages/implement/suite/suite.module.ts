@@ -13,7 +13,7 @@ import { PipeModule } from '../../../pipe/pipe.module';
 import { DirectiveModule } from '../../../directive/directive.module';
 import { PopDialogModule } from '../../../components/pop-dialog';
 
-import { RunEditModule, RunEditComponent } from '../run/edit';
+import { TaskEditModule, TaskEditComponent } from '../task/edit';
 import { CaseSelectionModule, CaseSelectionComponent } from '../../../components/case-selection';
 
 import { RouteService } from '../../../service/route';
@@ -21,7 +21,7 @@ import { RequestService } from '../../../service/request';
 import { DatetimePickerService } from '../../../service/datetime-picker';
 import { MyDateParserFormatter } from '../../../service/my-date-parser-formatter';
 import { PlanService } from '../../../service/plan';
-import { RunService } from '../../../service/run';
+import { TaskService } from '../../../service/task';
 import { SuiteService } from '../../../service/suite';
 import { CaseService } from '../../../service/case';
 import { UserService } from '../../../service/user';
@@ -53,7 +53,7 @@ export function myDateParserFormatterFactory() {
     PipeModule,
     PopDialogModule,
 
-    RunEditModule,
+    TaskEditModule,
     CaseSelectionModule,
   ],
   declarations: [
@@ -66,7 +66,7 @@ export function myDateParserFormatterFactory() {
     RouteService,
     RequestService,
     DatetimePickerService,
-    PlanService, RunService, SuiteService, CaseService, UserService,
+    PlanService, TaskService, SuiteService, CaseService, UserService,
     AccountService, ProjectService, ReportService,
     {
       provide: NgbDateParserFormatter,
@@ -74,7 +74,7 @@ export function myDateParserFormatterFactory() {
     },
   ],
   entryComponents: [
-    RunEditComponent,
+    TaskEditComponent,
     CaseSelectionComponent,
   ],
 })

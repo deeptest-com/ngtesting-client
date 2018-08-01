@@ -55,9 +55,9 @@ export class SuiteViewComponent implements OnInit, AfterViewInit {
     });
   }
 
-  exeOrView(runId: number) {
+  exeOrView(taskId: number) {
     this._routeService.navTo('/pages/org/' + CONSTANT.CURR_ORG_ID
-      + '/prj/' + CONSTANT.CURR_PRJ_ID + '/implement/suite/' + this.suiteId + '/execution/' + runId);
+      + '/prj/' + CONSTANT.CURR_PRJ_ID + '/implement/suite/' + this.suiteId + '/execution/' + taskId);
   }
 
   returnTo() {

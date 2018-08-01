@@ -72,7 +72,7 @@
     </div>
   </div>
   <div class="test-sets row">
-    <div class="col-sm-12 run-list">
+    <div class="col-sm-12 task-list">
       <table class="table">
         <thead>
         <tr>
@@ -87,7 +87,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let item of model.runVos; let i = index;">
+        <tr *ngFor="let item of model.tasks; let i = index;">
           <td>{{i+1}}</td>
           <td class="pointer">{{item.name}}</td>
           <td class="pointer">{{item.userName}}</td>
@@ -121,5 +121,5 @@
 </div>
 
 <pop-dialog #modalClose (confirm)="closeConfirm()" [title]="modalTitle">
-  确认关闭名为"{{run.name}}"的测试任务？
+  确认关闭名为"{{task.name}}"的测试任务？
 </pop-dialog>

@@ -68,13 +68,14 @@
       <button (click)="gotoModule('implement')" class="btn btn-default">执行计划</button>
     </div>
 
-<!--    <div *ngIf="prjId" ngbDropdown class="btn-group">
+    <!-- <div *ngIf="prjId" ngbDropdown class="btn-group">
       <button (click)="gotoModule('issue')" class="btn btn-default">缺陷</button>
-    </div> -->
+    </div>
 
     <div *ngIf="prjId && !environment.production" ngbDropdown class="btn-group">
       <button (click)="gotoModule('autotest')" class="btn btn-default">自动化</button>
     </div>
+     -->
 
     <div ngbDropdown class="btn-group">
       <button [routerLink]="['/pages/org-admin/org/list']" class="btn btn-default">

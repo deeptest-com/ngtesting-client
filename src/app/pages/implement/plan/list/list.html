@@ -10,6 +10,7 @@
           <label for="status">状态</label>
           <select [(ngModel)]="queryModel.status" formControlName="status"
                   class="form-control form-control-sm" id="status" name="status">
+            <option value=""></option>
             <option *ngFor="let entry of (statusMap | mapToArray)" value="{{entry.key}}">{{entry.value}}</option>
           </select>
           &nbsp;&nbsp;&nbsp;

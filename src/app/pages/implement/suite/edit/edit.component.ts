@@ -14,11 +14,11 @@ import { CustomValidator, ValidatorUtils } from '../../../../validator';
 import { RouteService } from '../../../../service/route';
 
 import { SuiteService } from '../../../../service/suite';
-import { RunService } from '../../../../service/run';
+import { TaskService } from '../../../../service/task';
 import { CaseService } from '../../../../service/case';
 import { UserService } from '../../../../service/user';
 
-import { RunEditComponent } from '../../run/edit';
+import { TaskEditComponent } from '../../task/edit';
 import { CaseSelectionComponent } from '../../../../components/case-selection';
 import { EnvironmentConfigComponent } from '../../../../components/environment-config';
 import { PopDialogComponent } from '../../../../components/pop-dialog';
@@ -44,8 +44,6 @@ export class SuiteEditComponent implements OnInit, AfterViewInit {
   suiteId: number;
   startDate: any;
   model: any = { };
-  run: any = {};
-  runIndex: number;
   form: FormGroup;
 
   @ViewChild('modalSelectCase') modalSelectCase: CaseSelectionComponent;
@@ -56,7 +54,7 @@ export class SuiteEditComponent implements OnInit, AfterViewInit {
   testSet: any;
   modalTitle: string;
 
-  runEditModal: any;
+  taskEditModal: any;
   caseSelectionModal: any;
   envSelectionModal: any;
 
@@ -64,7 +62,7 @@ export class SuiteEditComponent implements OnInit, AfterViewInit {
               private _route: ActivatedRoute, private fb: FormBuilder,
               private _i18n: I18n, private modalService: NgbModal,
               private compiler: Compiler, private ngbDateParserFormatter: NgbDateParserFormatter,
-              private _suiteService: SuiteService, private _runService: RunService,
+              private _suiteService: SuiteService, private _taskService: TaskService,
               private _caseService: CaseService, private _userService: UserService) {
 
 
@@ -228,12 +226,12 @@ export class SuiteEditComponent implements OnInit, AfterViewInit {
   }
 
   removeSetConfirm() {
-    this._runService.delete(this.testSet.id).subscribe((json: any) => {
+    this._taskService.delete(this.testSet.id).subscribe((json: any) => {
       if (json.code == 1) {
         this.formErrors = ['删除成功'];
         this.modalRemoveSet.closeModal();
 
-        this.model.runVos = this.model.runVos.filter((item: any) => {
+        this.model.tasks = this.model.tasks.filter((item: any) => {
           return item.id != this.testSet.id;
         });
 
