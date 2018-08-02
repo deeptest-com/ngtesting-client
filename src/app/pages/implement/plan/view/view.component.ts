@@ -96,7 +96,7 @@ export class PlanView implements OnInit, AfterViewInit {
   closeConfirm() {
     this._taskService.close(this.task.id).subscribe((json: any) => {
       if (json.code == 1) {
-        this.model.taskVos[this.index] = json.data;
+        this.model.tasks[this.index] = json.data;
         this.modalClose.closeModal();
       }
     });
