@@ -22,7 +22,7 @@ export class TaskService {
     task.assignees.forEach(item => { assignees.push({id: item.id}); });
 
     return this._reqService.post(this._api_url + 'save',
-      { prjId: prjId, envId: task.envId, planId: planId, id: task.id,
+      { projectId: prjId, envId: task.envId, planId: planId, id: task.id,
         name: task.name, userId: task.userId, assignees: assignees, suites: suites });
   }
 

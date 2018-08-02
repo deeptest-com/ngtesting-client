@@ -199,6 +199,8 @@ export class CaseSelectionComponent implements OnInit {
   }
 
   changeProject(id: number) {
+    console.log('---------------');
+
     this.caseProjectId = id;
     this.loadData();
   }

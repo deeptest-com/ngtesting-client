@@ -99,7 +99,7 @@
               <th>标题</th>
               <th>创建人</th>
               <th>经办人</th>
-              <th>所属项目</th>
+              <th>用例来源项目</th>
               <th style="width: 300px;">执行状况</th>
               <th>测试环境</th>
               <th style="width: 250px;" class="opt">
@@ -114,7 +114,7 @@
               <td>{{item.userName}}</td>
               <td>
                 <span *ngFor="let a of item.assignees; let i = index;">
-                  <span>{{a.name}}</span><span *ngIf="i != item.assignees.length-1">, </span>
+                  <span>{{a.nickname}}</span><span *ngIf="i != item.assignees.length-1">, </span>
                 </span>
               </td>
               <td>{{item.caseProjectName}}</td>

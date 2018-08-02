@@ -198,6 +198,7 @@ export class PlanEdit implements OnInit, AfterViewInit {
   }
 
   editTaskCases(task: any, index: number) {
+
     this.compiler.clearCacheFor(CaseSelectionComponent);
     this.caseSelectionModal = this.modalService.open(CaseSelectionComponent, { windowClass: 'pop-modal' });
 

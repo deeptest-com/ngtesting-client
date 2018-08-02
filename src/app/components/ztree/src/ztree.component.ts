@@ -173,10 +173,13 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
     this.disposersForDragListeners.push(this.renderer.listen('document', 'keyup', this.copyKeyup.bind(this)));
     this.disposersForDragListeners.push(this.renderer.listen('document', 'keydown', this.copyKeyDown.bind(this)));
 
-    this.queryForm.controls['keywords'].valueChanges.debounceTime(CONSTANT.DebounceTime)
-      .subscribe(values => this.onKeywordsChange(values));
-    this.queryForm.controls['projectId'].valueChanges.debounceTime(CONSTANT.DebounceTime)
-      .subscribe(values => this.onProjectChange(values));
+    // 避免前面的赋值触发事件
+    setTimeout(() => {
+      this.queryForm.controls['keywords'].valueChanges.debounceTime(CONSTANT.DebounceTime)
+        .subscribe(values => this.onKeywordsChange(values));
+      this.queryForm.controls['projectId'].valueChanges.debounceTime(CONSTANT.DebounceTime)
+        .subscribe(values => this.onProjectChange(values));
+    }, 500);
   }
   copyKeyup(e): any {
     this.isToCopy = false;
@@ -425,8 +428,10 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
     this.ztree.hideNodes(nodes);
   }
   onProjectChange(id: number) {
-    this.queryModel.projectId = id;
-    this.projectChanged.emit(id);
+    if (id) {
+      this.queryModel.projectId = id;
+      this.projectChanged.emit(id);
+    }
   }
 
   updateCopiedNodes(node: any, data: any) {
