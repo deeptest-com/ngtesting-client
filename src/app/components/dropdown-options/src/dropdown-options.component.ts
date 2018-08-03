@@ -23,6 +23,7 @@ export class DropdownOptionsComponent implements OnDestroy, AfterViewInit, OnCha
 
   form: FormGroup;
   model: any = {};
+  optionOrdr: number = 10;
 
   constructor(private fb: FormBuilder, private host: ElementRef, public activeModal: NgbActiveModal,
               private customFieldOptionService: CustomFieldOptionService) {
@@ -55,13 +56,22 @@ export class DropdownOptionsComponent implements OnDestroy, AfterViewInit, OnCha
     this.model = {};
   }
   save(): any {
-    this.customFieldOptionService.save(this.model, this.field).subscribe((json: any) => {
-      if (json.code == 1) {
-        this.form.reset();
-        this.model = {};
-        this.field = json.data;
-      }
-    });
+    if (this.field.id) {
+      this.customFieldOptionService.save(this.model, this.field.id).subscribe((json: any) => {
+        if (json.code == 1) {
+          this.form.reset();
+          this.model = {};
+          this.field.options = json.data;
+        }
+      });
+    } else {
+      this.model.ordr = this.optionOrdr;
+      this.optionOrdr += 10;
+      this.field.options[this.field.options.length] = _.clone(this.model);
+
+      this.form.reset();
+      this.model = {};
+    }
   }
   delete(item: any) {
     this.customFieldOptionService.delete(this.model, this.field.id).subscribe((json: any) => {

@@ -9,8 +9,8 @@ export class CustomFieldOptionService {
   constructor(private _reqService: RequestService) { }
   _api_url = 'custom_field_option/';
 
-  save(model: any, field: any) {
-    return this._reqService.post(this._api_url + 'save', { model: model, field });
+  save(model: any, fieldId: number) {
+    return this._reqService.post(this._api_url + 'save', { model: model, fieldId: fieldId });
   }
 
   delete(id: number, fieldId: number) {
