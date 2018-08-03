@@ -59,7 +59,10 @@ export class ExecutionSuite implements OnInit, AfterViewInit {
     this._caseInTaskService.query(this.orgId, this.projectId, this.taskId).subscribe((json: any) => {
       this.treeModel = json.data;
 
+      CONSTANT.CASE_TYPES_FOR_PROJECT = json.caseTypeList;
+      CONSTANT.CASE_PRIORITIES_FOR_PROJECT = json.casePriorityList;
       CONSTANT.CUSTOM_FIELD_FOR_PROJECT = json.customFields;
+
       this.completeLoading();
     });
 
@@ -79,17 +82,6 @@ export class ExecutionSuite implements OnInit, AfterViewInit {
   rename(event: any) {
     const testCase = event.data;
     this._caseInTaskService.rename(this.projectId, this.taskId, testCase).subscribe((json: any) => {
-      event.deferred.resolve(json.data);
-    });
-  }
-  delete(event: any) {
-    // let testCase = event.data;
-    // this._caseInTaskService.delete(testCase.id, testCase.entityId).subscribe((json:any) => {
-    //   event.deferred.resolve(json.data);
-    // });
-  }
-  move(event: any) {
-    this._caseInTaskService.move(this.projectId, this.taskId, event.data).subscribe((json: any) => {
       event.deferred.resolve(json.data);
     });
   }

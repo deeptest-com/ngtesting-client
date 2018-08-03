@@ -31,7 +31,7 @@ export class FieldShowComponent implements OnInit {
   @Input()
   public rows: number;
   @Input()
-  public optionsKey: string;
+  public options: any[];
   @Input()
   public label: string;
   @Input()

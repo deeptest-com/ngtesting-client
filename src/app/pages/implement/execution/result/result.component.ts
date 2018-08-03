@@ -39,6 +39,8 @@ export class ExecutionResult implements OnInit, AfterViewInit, OnDestroy {
   form: any;
   tab: string = 'info';
 
+  caseTypes: any[] = [];
+  casePriorities: any[] = [];
   fields: any;
   next: boolean = true;
 
@@ -80,6 +82,8 @@ export class ExecutionResult implements OnInit, AfterViewInit, OnDestroy {
         return;
       }
 
+      this.caseTypes = CONSTANT.CASE_TYPES_FOR_PROJECT;
+      this.casePriorities = CONSTANT.CASE_PRIORITIES_FOR_PROJECT;
       this.fields = CONSTANT.CUSTOM_FIELD_FOR_PROJECT;
 
       if (testCase) {

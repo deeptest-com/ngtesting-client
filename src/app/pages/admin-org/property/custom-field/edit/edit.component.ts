@@ -170,8 +170,8 @@ export class CustomFieldEdit implements OnInit, AfterViewInit {
     this.dropdownOptionsModal.componentInstance.field = this.model;
 
     this.dropdownOptionsModal.result.then((result) => {
-      this.model.options = result.data;
-      this.save();
+      console.log('======', result);
+      this.model = result.field;
     }, (reason) => {
       console.log('reason', reason);
     });

@@ -231,6 +231,7 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
   notifyCaseChange = (node: any) => {
     this.childrenCount = { notReview: 0, reviewPass: 0, reviewFail: 0 };
     this.countChildren(node);
+
     this._state.notifyDataChanged('case.' + this.settings.usage,
       { node: node, childrenCount: this.childrenCount, random: Math.random() });
   }

@@ -117,18 +117,18 @@
               <tr>
                 <td style="width: 25%">
                   <div class="label">状态</div>
-                  <field-show (onSave)="saveField($event)" [(model)]="model" [prop]="'status'" [type]="'string'" optionsKey="status"
+                  <field-show (onSave)="saveField($event)" [(model)]="model" [prop]="'status'" [type]="'string'"
                               [required]="true" [readonly]="true"></field-show>
                 </td>
 
                 <td style="width: 25%">
                   <div class="label">类型</div>
-                  <field-show (onSave)="saveField($event)" [(model)]="model" [prop]="'type'" [type]="'dropdown'" optionsKey="type"
+                  <field-show (onSave)="saveField($event)" [(model)]="model" [prop]="'type'" [type]="'dropdown'" [options]="caseTypes"
                               [required]="true" [readonly]="!canEdit"></field-show>
                 </td>
                 <td style="width: 25%">
                   <div class="label">优先级</div>
-                  <field-show (onSave)="saveField($event)" [(model)]="model" [prop]="'priority'" [type]="'dropdown'" optionsKey="priority"
+                  <field-show (onSave)="saveField($event)" [(model)]="model" [prop]="'priority'" [type]="'dropdown'" [options]="casePriorities"
                               [required]="true" [readonly]="!canEdit"></field-show>
                 </td>
                 <td style="width: 25%">
@@ -156,7 +156,7 @@
       <div *ngFor="let field of fields;" class="row field-show-container">
         <div class="col-sm-12">
           <field-show (onSave)="saveField($event)" [(model)]="model" [readonly]="!canEdit"
-                      [label]="field.label" [prop]="field.myColumn" [type]="field.type" [field]="field"
+                      [label]="field.label" [prop]="field.myColumn" [type]="field.type" [options]="field.options"
                       [format]="field.format" [rows]="field.rows" [required]="field.isRequired"></field-show>
         </div>
       </div>

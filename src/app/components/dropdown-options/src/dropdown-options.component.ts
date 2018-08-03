@@ -1,18 +1,18 @@
-import { Component, OnDestroy, AfterViewInit, OnChanges,ViewChild, Input, Output, EventEmitter, Injector, ElementRef } from '@angular/core';
+import { Component, OnDestroy, AfterViewInit, OnChanges, ViewChild, Input, Output, EventEmitter, Injector, ElementRef } from '@angular/core';
 
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
-import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CONSTANT } from '../../../utils/constant';
-import {ValidatorUtils} from '../../../validator';
-import {CustomFieldOptionService} from "../../../service/custom-field-option";
+import { ValidatorUtils } from '../../../validator';
+import { CustomFieldOptionService } from '../../../service/custom-field-option';
 
-import * as _ from "lodash";
+import * as _ from 'lodash';
 
 @Component({
   selector: 'dropdown-options',
   templateUrl: './dropdown-options.html',
-  styleUrls: ['./dropdown-options.scss']
+  styleUrls: ['./dropdown-options.scss'],
 })
 export class DropdownOptionsComponent implements OnDestroy, AfterViewInit, OnChanges {
   @Input() title: string;
@@ -30,7 +30,10 @@ export class DropdownOptionsComponent implements OnDestroy, AfterViewInit, OnCha
   }
 
   dismiss(): any {
-    this.activeModal.dismiss({act: 'cancel'});
+    this.activeModal.dismiss({ act: 'cancel' });
+  }
+  close(): any {
+    this.activeModal.close({ act: 'close', field: this.field });
   }
 
   ngOnChanges() {
@@ -52,36 +55,36 @@ export class DropdownOptionsComponent implements OnDestroy, AfterViewInit, OnCha
     this.model = {};
   }
   save(): any {
-    this.customFieldOptionService.save(this.model, this.field.id).subscribe((json:any) => {
+    this.customFieldOptionService.save(this.model, this.field).subscribe((json: any) => {
       if (json.code == 1) {
         this.form.reset();
         this.model = {};
-        this.field.optionVos = json.data;
+        this.field = json.data;
       }
     });
   }
   delete(item: any) {
-    this.customFieldOptionService.delete(this.model, this.field.id).subscribe((json:any) => {
+    this.customFieldOptionService.delete(this.model, this.field.id).subscribe((json: any) => {
       if (json.code == 1) {
         this.form.reset();
         this.model = {};
-        this.field.optionVos = json.data;
+        this.field.options = json.data;
       }
     });
   }
   up(item: any) {
-    this.customFieldOptionService.changeOrder(item.id, 'up', this.field.id).subscribe((json:any) => {
+    this.customFieldOptionService.changeOrder(item.id, 'up', this.field.id).subscribe((json: any) => {
       if (json.code == 1) {
         this.model = {};
-        this.field.optionVos = json.data;
+        this.field.options = json.data;
       }
     });
   }
   down(item: any) {
-    this.customFieldOptionService.changeOrder(item.id, 'down', this.field.id).subscribe((json:any) => {
+    this.customFieldOptionService.changeOrder(item.id, 'down', this.field.id).subscribe((json: any) => {
       if (json.code == 1) {
         this.model = {};
-        this.field.optionVos = json.data;
+        this.field.options = json.data;
       }
     });
   }
@@ -90,25 +93,25 @@ export class DropdownOptionsComponent implements OnDestroy, AfterViewInit, OnCha
     this.form = this.fb.group(
       {
         label: ['', [Validators.required]],
-        value: ['', [Validators.required]]
-      }, {}
+        value: ['', [Validators.required]],
+      }, {},
     );
 
     this.form.valueChanges.debounceTime(CONSTANT.DebounceTime).subscribe(data => this.onValueChanged(data));
     this.onValueChanged();
   }
   onValueChanged(data?: any) {
-    let that = this;
+    const that = this;
     that.formErrors = ValidatorUtils.genMsg(that.form, that.validateMsg, []);
   }
   formErrors = [];
   validateMsg = {
     'value': {
-      'required':      '取值不能为空'
+      'required':      '取值不能为空',
     },
     'label': {
-      'required':      '名称不能为空'
-    }
+      'required':      '名称不能为空',
+    },
   };
 
 }

@@ -28,7 +28,7 @@
           <span *ngSwitchCase="'dropdown'">
               <select [(ngModel)]="model[prop]" formControlName="{{prop}}" name="{{prop}}" class="form-control form-control-sm">
                 <option value="">请选择</option>
-                <option *ngFor="let entry of field.optionVos" value="{{entry.value}}">{{entry.label}}</option>
+                <option *ngFor="let entry of options" value="{{entry.code}}">{{entry.name}}{{entry.label}}</option>
               </select>
           </span>
 

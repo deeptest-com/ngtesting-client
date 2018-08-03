@@ -2,7 +2,7 @@
 
   <div class="modal-header">
     <h4 class="modal-title">{{title}}选项列表</h4>
-    <button type="button" class="close" aria-label="Close" (click)="dismiss()">
+    <button type="button" class="close" aria-label="Close" (click)="close()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -45,15 +45,15 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let item of field.optionVos; let i = index;">
+        <tr *ngFor="let item of field.options; let i = index;">
           <td>{{ item.label }}</td>
           <td>{{ item.value }}</td>
           <td>
             <span *ngIf="i == 0" class="ionic-icon link placeholder"></span>
             <span (click)="up(item)" *ngIf="i > 0" class="fa fa-arrow-up ionic-icon link"></span>
 
-            <span (click)="down(item)" *ngIf="i < field.optionVos.length - 1" class="fa fa-arrow-down ionic-icon link"></span>
-            <span *ngIf="i == field.optionVos.length - 1" class="ionic-icon link placeholder"></span>
+            <span (click)="down(item)" *ngIf="i < field.options.length - 1" class="fa fa-arrow-down ionic-icon link"></span>
+            <span *ngIf="i == field.options.length - 1" class="ionic-icon link placeholder"></span>
             &nbsp;
             <span (click)="edit(item)" class="link no-underline">编辑</span>
             <span (click)="delete(item)" class="link no-underline">删除</span>
@@ -66,7 +66,7 @@
   </div>
 
   <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" (click)="dismiss()">关闭</button>
+    <button type="button" class="btn btn-secondary" (click)="close()">关闭</button>
   </div>
 
 </div>
