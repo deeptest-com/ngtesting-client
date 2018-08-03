@@ -52,7 +52,7 @@ export class CasePriorityEdit implements OnInit, AfterViewInit {
     const that = this;
     this.form = this.fb.group(
       {
-        'name': ['', [Validators.required]],
+        'label': ['', [Validators.required]],
         'descr': ['', []],
       }, {},
     );
@@ -67,7 +67,7 @@ export class CasePriorityEdit implements OnInit, AfterViewInit {
 
   formErrors = [];
   validateMsg = {
-    'name': {
+    'label': {
       'required':      '名称不能为空',
     },
   };

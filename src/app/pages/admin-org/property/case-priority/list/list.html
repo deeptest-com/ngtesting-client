@@ -5,15 +5,15 @@
       <thead class="thead-inverse">
       <tr>
         <th>名称</th>
-        <th>编码</th>
+        <th>值</th>
         <th style="width: 250px;">是否默认</th>
         <th style="width: 250px;">操作</th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let item of models; let i = index;">
-        <td>{{ item.name }}</td>
-        <td>{{ item.code }}</td>
+        <td>{{ item.label }}</td>
+        <td>{{ item.value }}</td>
         <td>
           <input *ngIf="!item.isDefault" (change)="setDefault(item)" [(ngModel)]="item.isDefault" type="checkbox" name="isDefault" #isDefault>
           <input *ngIf="item.isDefault" onclick="return false;" [(ngModel)]="item.isDefault" type="checkbox" name="isDefault" #isDefault>

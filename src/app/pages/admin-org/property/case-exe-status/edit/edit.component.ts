@@ -51,7 +51,7 @@ export class CaseExeStatusEdit implements OnInit, AfterViewInit {
   buildForm(): void {
     this.form = this.fb.group(
       {
-        'name': ['', [Validators.required]],
+        'label': ['', [Validators.required]],
         'descr': ['', []],
         'isFinal': ['', []]
       }, {}
@@ -67,7 +67,7 @@ export class CaseExeStatusEdit implements OnInit, AfterViewInit {
 
   formErrors = [];
   validateMsg = {
-    'name': {
+    'label': {
       'required':      '姓名不能为空'
     },
     'email': {
