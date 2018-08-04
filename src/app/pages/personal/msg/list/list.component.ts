@@ -18,13 +18,13 @@ import { AccountService } from '../../../../service/account';
 export class MsgList implements OnInit, AfterViewInit {
 
   queryForm: FormGroup;
-  queryModel: any = { keywords: '', disabled: 'false' };
+  queryModel: any = { keywords: '', isRead: 'false' };
   readMap: Array<any> = CONSTANT.EntityRead;
 
   models: any;
   collectionSize: number = 0;
   page: number = 1;
-  pageSize: number = 20;
+  pageSize: number = 2;
 
   constructor(private _routeService: RouteService, private _state: GlobalState, private fb: FormBuilder, private el: ElementRef,
               private msgService: MsgService, private accountService: AccountService) {
@@ -67,7 +67,7 @@ export class MsgList implements OnInit, AfterViewInit {
 
     that.msgService.list(that.queryModel, that.page, that.pageSize).subscribe((json: any) => {
       that.models = json.data;
-      that.collectionSize = json.collectionSize;
+      that.collectionSize = json.total;
     });
   }
 

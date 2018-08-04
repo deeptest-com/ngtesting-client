@@ -39,7 +39,7 @@
       </thead>
       <tbody>
       <tr *ngFor="let item of models; let i = index;">
-        <td><span [innerHTML]="item.name"></span></td>
+        <td><span [innerHTML]="item.title"></span></td>
         <th>{{item.createTime | date:'y-MM-dd HH:mm:ss'}}</th>
         <td>{{readMap[''+item.read]}}</td>
         <td>
@@ -51,7 +51,6 @@
     </table>
     <div class="page-container">
       <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
-                      [maxSize]="5"  [boundaryLinks]="true"
                       (pageChange)="pageChange($event)">
       </ngb-pagination>
     </div>
