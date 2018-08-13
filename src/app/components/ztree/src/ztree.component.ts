@@ -353,7 +353,7 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
     const deferred = new Deferred();
     deferred.promise.then((data) => {
       logger.log('success to move', data);
-      this._state.notifyDataChanged(CONSTANT.EVENT_CASE_CHANGE, { node: data, random: Math.random() });
+      this._state.notifyDataChanged('case.' + this.settings.usage, { node: data, random: Math.random() });
 
       if (isCopy) {
         let parentNode;

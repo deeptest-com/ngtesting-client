@@ -43,7 +43,6 @@ export const CONSTANT: CONSTANT_INTERFACE = {
 
   EVENT_CASE_EDIT: 'case.edit',
   EVENT_CASE_UPDATE: 'case.update',
-  EVENT_CASE_CHANGE: 'case.change',
   EVENT_CASE_EXE: 'case.exe',
   EVENT_CASE_JUMP: 'case.jump',
 
@@ -99,7 +98,6 @@ export interface CONSTANT_INTERFACE {
 
   EVENT_CASE_EDIT: string;
   EVENT_CASE_UPDATE: string;
-  EVENT_CASE_CHANGE: string;
   EVENT_CASE_EXE: string;
   EVENT_CASE_JUMP: string;
 
