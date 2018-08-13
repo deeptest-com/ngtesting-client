@@ -20,9 +20,11 @@ export class PagesResolve implements CanActivate {
     console.log('PagesResolve - canActivate', state.url, context);
 
     return this.userService.loadProfileRemote(context).toPromise().then(result => {
+      if  (result) {
+        this._sockService.init();
+        this._state.notifyDataChanged(CONSTANT.EVENT_LOADING_COMPLETE, {});
+      }
 
-      this._sockService.init();
-      this._state.notifyDataChanged(CONSTANT.EVENT_LOADING_COMPLETE, {});
       return true;
     });
   }

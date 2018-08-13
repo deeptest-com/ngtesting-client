@@ -16,7 +16,7 @@ import { UserService } from '../../../../service/user';
 export class UserList implements OnInit, AfterViewInit {
 
   queryForm: FormGroup;
-  queryModel: any = { keywords: '', read: 'false' };
+  queryModel: any = { keywords: '', disabled: 'false' };
   statusMap: Array<any> = CONSTANT.EntityDisabled;
 
   models: any;
