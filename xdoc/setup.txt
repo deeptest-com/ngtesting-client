@@ -1,5 +1,5 @@
 npm run build:prod
+rm -rf ~/dev/project/ngtesting-web/src/main/webapp/client
+cp -R dist ~/dev/project/ngtesting-web/src/main/webapp/client
 scp -r dist/* root@116.62.17.31:/home/aaron/dev/server/apache-tomcat-8.5.27/webapps/ROOT/client
-rm -rf ~/dev/project/ngtesting-platform/src/main/webapp/client
-cp -R dist ~/dev/project/ngtesting-platform/src/main/webapp/client
 echo SUCCESS
