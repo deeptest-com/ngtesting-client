@@ -151,7 +151,7 @@ export class ExecutionResult implements OnInit, AfterViewInit, OnDestroy {
       next = this._ztreeService.getNextNode(this.model.id);
     }
 
-    this._caseInTaskService.setResult(this.model.entityId, this.model.result, next ? next.entityId : null, status)
+    this._caseInTaskService.setResult(this.model.entityId, this.model.id, this.model.result, next ? next.entityId : null, status)
         .subscribe((json: any) => {
       if (json.code == 1) {
         this.model.status = status;
