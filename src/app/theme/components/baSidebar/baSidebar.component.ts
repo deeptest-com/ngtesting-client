@@ -26,7 +26,7 @@ export class BaSidebar implements OnInit, AfterViewInit, OnDestroy {
     });
 
     if (CONSTANT.PROFILE) {
-      this.isOrgAdmin = CONSTANT.ORG_PRIVILEGES.org_admin;
+      this.isOrgAdmin = CONSTANT.ORG_PRIVILEGES['org-admin'];
     }
   }
 

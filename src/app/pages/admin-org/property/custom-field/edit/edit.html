@@ -102,7 +102,7 @@
           <label class="form-check-label">
             <input type="checkbox" class="form-check-input" name="global" formControlName="global"
                    [(ngModel)]="model.global" #global>
-            &nbsp;&nbsp;是否全局
+            &nbsp;&nbsp;应用到所有项目
           </label>
         </div>
       </div>
@@ -150,7 +150,10 @@
     <div class="form-group row">
       <label class="col-sm-2 col-form-label"></label>
       <div class="col-sm-10">
-        <button (click)="save()" type="button" class="btn btn-primary" [disabled]="!form.valid">保存</button>
+        <button (click)="save()" type="button" class="btn btn-primary"
+                [disabled]="!form.valid || (model.type == 'dropdown' && model.options.length < 1)">
+          保存
+        </button>
         &nbsp;
         <button (click)="back()" type="button" class="btn btn-default">取消</button>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

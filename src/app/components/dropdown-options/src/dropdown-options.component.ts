@@ -74,7 +74,7 @@ export class DropdownOptionsComponent implements OnDestroy, AfterViewInit, OnCha
     }
   }
   delete(item: any) {
-    this.customFieldOptionService.delete(this.model, this.field.id).subscribe((json: any) => {
+    this.customFieldOptionService.delete(item.id, this.field.id).subscribe((json: any) => {
       if (json.code == 1) {
         this.form.reset();
         this.model = {};
