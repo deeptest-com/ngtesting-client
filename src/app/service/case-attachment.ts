@@ -13,10 +13,10 @@ export class CaseAttachmentService {
   _api_url = 'case_attachment/';
 
   uploadAttachment(caseId: number, name: string, path: any) {
-    return this._reqService.post(this._api_url + 'uploadAttachment', { caseId: caseId, name: name, path: path });
+    return this._reqService.post(this._api_url + 'upload', { caseId: caseId, name: name, path: path });
   }
 
   removeAttachment(caseId: number, id: number) {
-    return this._reqService.post(this._api_url + 'removeAttachment', { caseId: caseId, id: id });
+    return this._reqService.post(this._api_url + 'remove', { caseId: caseId, id: id });
   }
 }

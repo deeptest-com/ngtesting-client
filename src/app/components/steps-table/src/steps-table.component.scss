@@ -39,7 +39,7 @@
           &.ng2-smart-seq-act {
             width: 70px;
             .transparent {
-              color: transparent;
+              color: transparent !important;
               cursor: default !important;
             }
           }

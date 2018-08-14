@@ -12,8 +12,8 @@ export class CaseService {
 
   _api_url = 'case/';
 
-  query(orgId: number, projectId: number) {
-    return this._reqService.post(this._api_url + 'query', { orgId: orgId, projectId: projectId });
+  query() {
+    return this._reqService.post(this._api_url + 'query', {});
   }
 
   queryForSuiteSelection(projectId: number, caseProjectId: number, suiteId: number) {
@@ -26,28 +26,22 @@ export class CaseService {
   }
 
   get(id: number) {
-    const model = { id: id };
-    return this._reqService.post(this._api_url + 'get', model);
+    return this._reqService.post(this._api_url + 'get', { id: id });
   }
 
-  rename(projectId: number, model: any) {
-    _.merge(model, { projectId: projectId });
+  rename(model: any) {
     return this._reqService.post(this._api_url + 'rename', model);
   }
-  update(projectId: number, model: any) {
+  update(model: any) {
     const data = _.clone(model);
     data.steps = null;
-    _.merge(data, { projectId: projectId });
     return this._reqService.post(this._api_url + 'update', data);
   }
-  move(projectId: number, data: any) {
-    _.merge(data, { projectId: projectId });
-
+  move(data: any) {
     return this._reqService.post(this._api_url + 'move', data);
   }
   delete(id: any) {
-    const model = { id: id };
-    return this._reqService.post(this._api_url + 'delete', model);
+    return this._reqService.post(this._api_url + 'delete', { id: id });
   }
 
   saveField(id: number, field: any) {

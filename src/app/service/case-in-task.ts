@@ -12,8 +12,8 @@ export class CaseInTaskService {
 
   _api_url = 'caseInTask/';
 
-  query(orgId: number, projectId: number, taskId: number) {
-    return this._reqService.post(this._api_url + 'query', { orgId: orgId, projectId: projectId, taskId: taskId });
+  query(taskId: number) {
+    return this._reqService.post(this._api_url + 'query', { taskId: taskId });
   }
 
   get(id: number) {

@@ -87,7 +87,7 @@ export class Grid {
     confirmEmitter.emit({
       data: curr.getData(),
       source: this.source,
-      confirm: deferred
+      confirm: deferred,
     });
 
   }
@@ -100,7 +100,7 @@ export class Grid {
     confirmEmitter.emit({
       data: curr.getData(),
       source: this.source,
-      confirm: deferred
+      confirm: deferred,
     });
 
   }
@@ -110,8 +110,8 @@ export class Grid {
     deferred.promise.then((newData) => {
       newData = newData ? newData : row.getNewData();
 
-      this.source.create(newData, curr?curr.getData(): null).then(() => {
-        let newRow = this.dataSet.findRowByData(newData);
+      this.source.create(newData, curr ? curr.getData() : null).then(() => {
+        const newRow = this.dataSet.findRowByData(newData);
 
         this.isEditing = true;
 

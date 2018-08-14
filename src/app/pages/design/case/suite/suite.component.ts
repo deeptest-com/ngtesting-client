@@ -59,7 +59,7 @@ export class CaseSuite implements OnInit, AfterViewInit, OnDestroy {
   loadData() {
     this.startLoading();
 
-    this._caseService.query(this.orgId, this.prjId).subscribe((json: any) => {
+    this._caseService.query().subscribe((json: any) => {
       this.treeModel = json.data;
 
       CONSTANT.CASE_TYPES_FOR_PROJECT = json.caseTypeList;
@@ -78,7 +78,7 @@ export class CaseSuite implements OnInit, AfterViewInit, OnDestroy {
 
   rename(event: any) {
     const testCase = event.data;
-    this._caseService.rename(this.prjId, testCase).subscribe((json: any) => {
+    this._caseService.rename(testCase).subscribe((json: any) => {
       event.deferred.resolve(json.data);
     });
   }
@@ -89,7 +89,7 @@ export class CaseSuite implements OnInit, AfterViewInit, OnDestroy {
     });
   }
   move(event: any) {
-    this._caseService.move(this.prjId, event.data).subscribe((json: any) => {
+    this._caseService.move(event.data).subscribe((json: any) => {
       event.deferred.resolve(json.data);
     });
   }

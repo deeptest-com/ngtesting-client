@@ -8,7 +8,7 @@ import { DataSource } from '../../../lib/data-source/data-source';
   selector: 'ng2-st-tbody-change-order',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-
+    
     <span *ngIf="isFirst" href="#" class="ng2-smart-action link transparent">
       <span class="fa fa-arrow-up ionic-icon near"></span>
     </span>

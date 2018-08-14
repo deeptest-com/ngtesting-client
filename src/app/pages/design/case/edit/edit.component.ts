@@ -146,7 +146,7 @@ export class CaseEdit implements OnInit, AfterViewInit, OnDestroy {
   }
 
   update() {
-    this._caseService.update(this.projectId, this.model).subscribe((json: any) => {
+    this._caseService.update(this.model).subscribe((json: any) => {
       if (json.code == 1) {
         this.model = json.data;
         this._state.notifyDataChanged(CONSTANT.EVENT_CASE_UPDATE, { node: this.model, random: Math.random() });
@@ -209,13 +209,15 @@ export class CaseEdit implements OnInit, AfterViewInit, OnDestroy {
   uploadedEvent(event: any) {
     this._caseAttachmentService.uploadAttachment(this.model.id, event.data.name, event.data.path)
         .subscribe((json: any) => {
-      this.model.attachments = json.data;
+      this.model.attachments = json.attachments;
+      this.model.histories = json.histories;
       event.deferred.resolve();
     });
   }
   removeAttachment(item: any) {
     this._caseAttachmentService.removeAttachment(this.model.id, item.id).subscribe((json: any) => {
-      this.model.attachments = json.data;
+      this.model.attachments = json.attachments;
+      this.model.histories = json.histories;
     });
   }
 

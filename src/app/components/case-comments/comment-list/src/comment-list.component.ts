@@ -59,11 +59,6 @@ export class CommentListComponent implements OnInit, AfterViewInit, OnDestroy{
       this.comment.summary = '修改备注';
     }
   }
-  removeComments(id: number, indx: number) {
-    this._caseCommentsService.remove(id).subscribe((json: any) => {
-      this.model.comments.splice(indx, 1);
-    });
-  }
 
   saveComments(result: boolean) {
     this._caseCommentsService.save(this.model.id, this.comment).subscribe((json: any) => {
@@ -80,6 +75,12 @@ export class CommentListComponent implements OnInit, AfterViewInit, OnDestroy{
           this.modalWrapper.closeModal();
         }
       }
+    });
+  }
+
+  removeComments(id: number, indx: number) {
+    this._caseCommentsService.remove(id).subscribe((json: any) => {
+      this.model.comments.splice(indx, 1);
     });
   }
 
