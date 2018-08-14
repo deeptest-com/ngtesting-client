@@ -21,7 +21,6 @@
       <label class="col-sm-2 col-form-label"><span>应用对象</span></label>
       <div *ngIf="!model.buildIn" class="col-sm-4">
         <select [(ngModel)]="model.applyTo" formControlName="applyTo" name="applyTo" class="form-control form-control-sm">
-          <option value=""></option>
           <option *ngFor="let item of applyToList" value="{{item}}">{{item | fieldApplyTo}}</option>
         </select>
       </div>
@@ -180,5 +179,5 @@
 </div>
 
 <pop-dialog #modalWrapper (confirm)="delete()" [title]="'提示'">
-  确认删除名为"{{model?.name}}"的自定义字段?
+  确认删除名为"{{model?.label}}"的自定义字段?
 </pop-dialog>
