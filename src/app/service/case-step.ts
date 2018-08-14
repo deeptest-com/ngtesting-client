@@ -10,21 +10,24 @@ export class CaseStepService {
 
   _api_url = 'case_step/';
 
-  up(json: any) {
-    return this._reqService.post(this._api_url + 'up', json);
-  }
-
-  down(json: any) {
-    return this._reqService.post(this._api_url + 'down', json);
-  }
-
   save(caseId: number, caseStep: any) {
-    _.merge(caseStep, { caseId: caseId });
+    _.merge(caseStep, { caseId: caseId } );
     return this._reqService.post(this._api_url + 'save', caseStep);
   }
 
-  delete(caseStep: any) {
-    return this._reqService.post(this._api_url + 'delete', caseStep);
+  delete(caseStepId: number) {
+    return this._reqService.post(this._api_url + 'delete', { id: caseStepId });
   }
+
+  up(caseStepId: number, ordr: number) {
+    const data = { id: caseStepId, ordr: ordr };
+    return this._reqService.post(this._api_url + 'up', data);
+  }
+
+  down(caseStepId: number, ordr: number) {
+    const data = { id: caseStepId, ordr: ordr };
+    return this._reqService.post(this._api_url + 'down', data);
+  }
+
 }
 

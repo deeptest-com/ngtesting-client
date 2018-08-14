@@ -190,14 +190,14 @@ export class ExecutionResult implements OnInit, AfterViewInit, OnDestroy {
 
   onUpConfirm(event: any) {
     logger.log('onUpConfirm', event);
-    this._caseStepService.up(event.data).subscribe((json: any) => {
+    this._caseStepService.up(event.data.id, event.data.ordr).subscribe((json: any) => {
       event.confirm.resolve();
     });
   }
 
   onDownConfirm(event: any) {
     logger.log('onDownConfirm', event);
-    this._caseStepService.down(event.data).subscribe((json: any) => {
+    this._caseStepService.down(event.data.id, event.data.ordr).subscribe((json: any) => {
       event.confirm.resolve();
     });
   }

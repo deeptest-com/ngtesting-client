@@ -171,20 +171,6 @@ export class CaseEdit implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  onUpConfirm(event: any) {
-    console.log('onUpConfirm', event);
-    this._caseStepService.up({ caseId: this.id, id: event.data.id, ordr: event.data.ordr }).subscribe((json: any) => {
-      event.confirm.resolve();
-    });
-  }
-
-  onDownConfirm(event: any) {
-    console.log('onDownConfirm', event);
-    this._caseStepService.down({ caseId: this.id, id: event.data.id, ordr: event.data.ordr }).subscribe((json: any) => {
-      event.confirm.resolve();
-    });
-  }
-
   onCreateConfirm(event: any) {
     console.log('onCreateConfirm', event);
     event.confirm.resolve();
@@ -197,7 +183,21 @@ export class CaseEdit implements OnInit, AfterViewInit, OnDestroy {
   }
   onDeleteConfirm(event: any) {
     console.log('onDeleteConfirm', event);
-    this._caseStepService.delete(event.data).subscribe((json: any) => {
+    this._caseStepService.delete(event.data.id).subscribe((json: any) => {
+      event.confirm.resolve();
+    });
+  }
+
+  onUpConfirm(event: any) {
+    console.log('onUpConfirm', event);
+    this._caseStepService.up(event.data.id, event.data.ordr).subscribe((json: any) => {
+      event.confirm.resolve();
+    });
+  }
+
+  onDownConfirm(event: any) {
+    console.log('onDownConfirm', event);
+    this._caseStepService.down(event.data.id, event.data.ordr).subscribe((json: any) => {
       event.confirm.resolve();
     });
   }
