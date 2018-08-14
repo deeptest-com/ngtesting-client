@@ -39,12 +39,16 @@ export class BaMsgCenter {
       ids += item.id;
     });
     this.alertService.markAllRead(ids).subscribe((json:any) => {
-
+      if (json.code == 1) {
+        this._alerts = [];
+      }
     });
   }
   readAllMsgs($event) {
     this.msgService.markAllRead().subscribe((json:any) => {
-
+      if (json.code == 1) {
+        this.msgs = [];
+      }
     });
   }
   moreMsgs($event) {

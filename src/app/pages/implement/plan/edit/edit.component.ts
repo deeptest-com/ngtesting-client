@@ -192,7 +192,11 @@ export class PlanEdit implements OnInit, AfterViewInit {
     }
   }
   _saveTask() {
-    this._taskService.saveTask(this.prjId, this.planId, this.task, this.suites).subscribe((json: any) => {
+    const suites: any[] = this.suites.map((item, index, input) => {
+        return { id: item.id, caseProjectId: item.caseProjectId, selecting: item.selecting };
+    });
+
+    this._taskService.saveTask(this.prjId, this.planId, this.task, suites).subscribe((json: any) => {
       this.model.tasks[this.taskIndex] = json.data;
     });
   }

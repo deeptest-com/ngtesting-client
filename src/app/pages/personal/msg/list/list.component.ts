@@ -80,7 +80,9 @@ export class MsgList implements OnInit, AfterViewInit {
 
   readAllMsgs() {
     this.msgService.markAllRead().subscribe((json:any) => {
-      this.loadData();
+      if (json.code == 1) {
+        this.loadData();
+      }
     });
   }
 }
