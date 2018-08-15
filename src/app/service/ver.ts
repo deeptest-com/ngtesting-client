@@ -9,8 +9,7 @@ export class VerService {
   constructor(private _reqService: RequestService) { }
   apiUrl = 'ver/';
 
-  list(projectId: number, queryModel: any) {
-    queryModel.projectId = projectId;
+  list(queryModel: any) {
     return this._reqService.post(this.apiUrl + 'list', queryModel);
   }
 
@@ -28,8 +27,8 @@ export class VerService {
     return this._reqService.post(this.apiUrl + 'delete', model);
   }
 
-  changeOrder(id: number, act: string, projectId: number) {
-    let model = { id: id, act: act, projectId: projectId };
+  changeOrder(id: number, act: string) {
+    let model = { id: id, act: act };
     return this._reqService.post(this.apiUrl + 'changeOrder', model);
   }
 

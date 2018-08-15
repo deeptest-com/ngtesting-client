@@ -28,11 +28,11 @@ export class TableRowComponent implements OnInit, OnDestroy {
     this.orgId = CONSTANT.CURR_ORG_ID;
     this.orgPrivileges = CONSTANT.ORG_PRIVILEGES;
 
-    this._state.subscribe(WS_CONSTANT.WS_ORG_SETTINGS, this.eventCode, (json) => {
-      console.log(WS_CONSTANT.WS_ORG_SETTINGS + ' in ' + this.eventCode, json);
-
-      this.orgPrivileges = json.orgPrivileges;
-    });
+    // this._state.subscribe(WS_CONSTANT.WS_ORG_SETTINGS, this.eventCode, (json) => {
+    //   console.log(WS_CONSTANT.WS_ORG_SETTINGS + ' in ' + this.eventCode, json);
+    //
+    //   this.orgPrivileges = json.orgPrivileges;
+    // });
 
   }
 

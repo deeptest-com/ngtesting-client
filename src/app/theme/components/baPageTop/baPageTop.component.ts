@@ -54,6 +54,7 @@ export class BaPageTop implements OnInit, AfterViewInit, OnDestroy {
       console.log(WS_CONSTANT.WS_USER_SETTINGS + ' in ' + this.eventCode, json);
 
       this.profile = json.profile;
+      CONSTANT.SYS_PRIVILEGES = json.sysPrivileges;
     });
 
     this._state.subscribe(WS_CONSTANT.WS_MY_ORGS, this.eventCode, (json: any) => {

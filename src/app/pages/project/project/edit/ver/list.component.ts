@@ -59,14 +59,14 @@ export class ProjectVerList implements OnInit, AfterViewInit {
     console.log($event);
   }
   up(item: any) {
-    this._verService.changeOrder(item.id, 'up', this.projectId).subscribe((json:any) => {
+    this._verService.changeOrder(item.id, 'up').subscribe((json:any) => {
       if (json.code == 1) {
         this.models = json.data;
       }
     });
   }
   down(item: any) {
-    this._verService.changeOrder(item.id, 'down', this.projectId).subscribe((json:any) => {
+    this._verService.changeOrder(item.id, 'down').subscribe((json:any) => {
       if (json.code == 1) {
         this.models = json.data;
       }
@@ -74,7 +74,7 @@ export class ProjectVerList implements OnInit, AfterViewInit {
   }
 
   loadData() {
-    this._verService.list(this.projectId, this.queryModel).subscribe((json: any) => {
+    this._verService.list(this.queryModel).subscribe((json: any) => {
       this.models = json.data;
     });
   }

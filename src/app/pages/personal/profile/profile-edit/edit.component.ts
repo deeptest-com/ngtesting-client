@@ -86,5 +86,5 @@ export class ProfileEdit implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
 
-  };
+  }
 }
