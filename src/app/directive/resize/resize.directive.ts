@@ -4,7 +4,7 @@ import * as _ from 'lodash';
 declare var jQuery;
 
 import { CONSTANT } from '../../utils/constant';
-import { UserService } from '../../service/user';
+import { ClientService } from '../../service/client';
 
 @Directive({
   selector: '[resize]',
@@ -25,7 +25,7 @@ export class ResizeDirective implements OnDestroy, OnInit, AfterViewInit, OnDest
   @Input('resize') profileProp: string;
 
   public constructor(@Inject(ElementRef) public element: ElementRef, @Inject(Renderer2) private renderer: Renderer2,
-                     private userService: UserService) {
+                     private clientService: ClientService) {
     this.elem = element.nativeElement;
   }
 
@@ -78,7 +78,7 @@ export class ResizeDirective implements OnDestroy, OnInit, AfterViewInit, OnDest
     });
 
     const left = this.left.css('width').replace('px', '');
-    this.userService.setLeftSize(left, this.profileProp).subscribe((json: any) => {
+    this.clientService.setLeftSize(left, this.profileProp).subscribe((json: any) => {
       CONSTANT.PROFILE.leftSize = { leftSizeCase: json.leftSizeCase, leftSizeIssue: json.leftSizeIssue };
     });
   }

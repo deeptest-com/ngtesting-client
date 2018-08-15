@@ -10,7 +10,7 @@ import { NgbModalModule, NgbPaginationModule, NgbDropdownModule,
 
 import { PictureUploaderModule } from '../../components/picture-uploader';
 import { FieldShowModule } from '../../components/field-show';
-import {PipeModule} from '../../pipe/pipe.module';
+import { PipeModule } from '../../pipe/pipe.module';
 
 import { RouteService } from '../../service/route';
 import { RequestService } from '../../service/request';
@@ -18,6 +18,7 @@ import { DatetimePickerService } from '../../service/datetime-picker';
 
 import { AccountService } from '../../service/account';
 import { CompanyService } from '../../service/company';
+import { ClientService } from '../../service/client';
 
 import { Personal } from './personal.component';
 
@@ -35,24 +36,25 @@ import { ProfileEdit } from './profile/profile-edit';
 
     NgbModalModule, NgbPaginationModule, NgbDropdownModule,
     NgbTabsetModule, NgbButtonsModule, NgbCollapseModule,
-    PictureUploaderModule, FieldShowModule, PipeModule
+    PictureUploaderModule, FieldShowModule, PipeModule,
   ],
   declarations: [
     Personal,
     PasswordEditComponent,
     PasswordEditPopupComponent,
     Profile,
-    ProfileEdit
+    ProfileEdit,
   ],
   providers: [
     RouteService,
     RequestService,
     DatetimePickerService,
     AccountService,
-    CompanyService
+    CompanyService,
+    ClientService,
   ],
   entryComponents: [
-    PasswordEditPopupComponent
-  ]
+    PasswordEditPopupComponent,
+  ],
 })
 export class PersonalModule {}

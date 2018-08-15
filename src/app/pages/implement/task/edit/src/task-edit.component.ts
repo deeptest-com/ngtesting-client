@@ -82,7 +82,7 @@ export class TaskEditComponent implements OnInit {
     const ids = [];
     this.selectedModels.forEach(item => { ids.push(item.id); });
 
-    this.userService.search(CONSTANT.CURR_ORG_ID, searchModel.keywords, ids).subscribe((json: any) => {
+    this.userService.search(searchModel.keywords, ids).subscribe((json: any) => {
       if (json.data.length == 0) {
         this.searchResult = null;
       } else {

@@ -8,18 +8,18 @@ import { CONSTANT } from '../utils/constant';
 import { Utils } from '../utils/utils';
 
 import { SockService } from '../service/sock';
-import { UserService } from '../service/user';
+import { ClientService } from '../service/client';
 
 @Injectable()
 export class PagesResolve implements CanActivate {
   constructor(private location: Location, private _state: GlobalState, private _sockService: SockService,
-              private userService: UserService, private router: Router) { }
+              private clientService: ClientService, private router: Router) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     const context = Utils.getOrgAndPrjId(state.url);
     console.log('PagesResolve - canActivate', state.url, context);
 
-    return this.userService.loadProfileRemote(context).toPromise().then(result => {
+    return this.clientService.loadProfileRemote(context).toPromise().then(result => {
       if  (result) {
         this._sockService.init();
         this._state.notifyDataChanged(CONSTANT.EVENT_LOADING_COMPLETE, {});

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { UserService } from '../service/user';
+import { ClientService } from '../service/client';
 import { PrivilegeService } from '../service/privilege';
 
 import { ResizeDirective } from './resize/resize.directive';
@@ -12,7 +13,7 @@ import { OrgPrivilegeDirective } from './privilege/org-privilege.directive';
   imports: [CommonModule],
   declarations: [ResizeDirective, PrivilegeDirective, OrgPrivilegeDirective],
   exports: [ResizeDirective, PrivilegeDirective, OrgPrivilegeDirective],
-  providers: [UserService, PrivilegeService, OrgPrivilegeDirective],
+  providers: [UserService, ClientService, PrivilegeService, OrgPrivilegeDirective],
 })
 export class DirectiveModule {
 

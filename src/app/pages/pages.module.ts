@@ -10,6 +10,7 @@ import { AppTranslationModule } from '../app.translation.module';
 
 import { StompRService } from '@stomp/ng2-stompjs';
 import { UserService } from '../service/user';
+import { ClientService } from '../service/client';
 
 import { Pages } from './pages.component';
 import { PagesResolve } from './pages.resolve';
@@ -19,6 +20,7 @@ import { PagesResolve } from './pages.resolve';
   declarations: [Pages],
   providers: [
     UserService,
+    ClientService,
     PagesResolve,
     StompRService,
   ],

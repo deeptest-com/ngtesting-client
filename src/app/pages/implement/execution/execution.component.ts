@@ -32,7 +32,7 @@ export class Execution implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.leftWidth = CONSTANT.PROFILE.leftSizeCase;
+    this.leftWidth = CONSTANT.PROFILE.leftSizeExe;
   }
   ngAfterViewInit() {}
 
