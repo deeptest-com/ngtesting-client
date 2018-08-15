@@ -96,7 +96,7 @@ export class ProjectEditMember implements OnInit, AfterViewInit {
     const ids = [];
     this.selectedModels.forEach(item => { ids.push(item.id); });
 
-    this._userAndGroupService.search(this.orgId, searchModel.keywords, ids).subscribe((json: any) => {
+    this._userAndGroupService.search(searchModel.keywords, ids).subscribe((json: any) => {
       if (json.data.length == 0) {
         this.entitySearchResult = null;
       } else {
