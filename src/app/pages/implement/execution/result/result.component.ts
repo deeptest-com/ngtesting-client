@@ -222,7 +222,8 @@ export class ExecutionResult implements OnInit, AfterViewInit, OnDestroy {
   uploadedEvent(event: any) {
     this._caseAttachmentService.uploadAttachment(this.model.id, event.data.name, event.data.path)
       .subscribe((json: any) => {
-        this.model.attachments = json.data;
+        this.model.attachments = json.attachments;
+        this.model.histories = json.histories;
         event.deferred.resolve();
       });
   }
