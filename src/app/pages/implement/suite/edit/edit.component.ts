@@ -219,27 +219,5 @@ export class SuiteEditComponent implements OnInit, AfterViewInit {
     });
   }
 
-  removeSet(testSet: any): void {
-    this.modalTitle = '确认删除';
-    this.testSet = testSet;
-    this.modalRemoveSet.showModal();
-  }
-
-  removeSetConfirm() {
-    this._taskService.delete(this.testSet.id).subscribe((json: any) => {
-      if (json.code == 1) {
-        this.formErrors = ['删除成功'];
-        this.modalRemoveSet.closeModal();
-
-        this.model.tasks = this.model.tasks.filter((item: any) => {
-          return item.id != this.testSet.id;
-        });
-
-      } else {
-        this.formErrors = ['删除失败'];
-      }
-    });
-  }
-
 }
 
