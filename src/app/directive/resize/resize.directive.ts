@@ -79,7 +79,7 @@ export class ResizeDirective implements OnDestroy, OnInit, AfterViewInit, OnDest
 
     const left = this.left.css('width').replace('px', '');
     this.clientService.setLeftSize(left, this.profileProp).subscribe((json: any) => {
-      CONSTANT.PROFILE.leftSize = { leftSizeCase: json.leftSizeCase, leftSizeIssue: json.leftSizeIssue };
+      CONSTANT.PROFILE.leftSize = { leftSizeDesign: json.leftSizeDesign, leftSizeExe: json.leftSizeExe };
     });
   }
 }

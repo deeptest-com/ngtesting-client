@@ -166,6 +166,25 @@ export let Utils: any = {
     return ret;
   },
 
+  changeOrder: function (arr: any[], act: string, idx: number) {
+    let otherIdx: number;
+    if (act == 'up') {
+      otherIdx = idx - 1;
+    } else {
+      otherIdx = idx + 1;
+    }
+    const temp = arr[otherIdx];
+    const curr = arr[idx];
+    const tempOrdr = temp.ordr;
+    const currOrdr = curr.ordr;
+
+    arr[otherIdx] = arr[idx];
+    arr[idx] = temp;
+
+    arr[idx].ordr = currOrdr;
+    arr[otherIdx].ordr = tempOrdr;
+  },
+
 };
 
 export class Deferred {

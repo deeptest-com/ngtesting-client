@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CONSTANT } from '../../../utils/constant';
+import { Utils } from '../../../utils/utils';
 import { ValidatorUtils } from '../../../validator';
 import { CustomFieldOptionService } from '../../../service/custom-field-option';
 
@@ -82,21 +83,17 @@ export class DropdownOptionsComponent implements OnDestroy, AfterViewInit, OnCha
       }
     });
   }
-  up(item: any) {
-    this.customFieldOptionService.changeOrder(item.id, 'up', this.field.id).subscribe((json: any) => {
-      if (json.code == 1) {
-        this.model = {};
-        this.field.options = json.data;
-      }
-    });
-  }
-  down(item: any) {
-    this.customFieldOptionService.changeOrder(item.id, 'down', this.field.id).subscribe((json: any) => {
-      if (json.code == 1) {
-        this.model = {};
-        this.field.options = json.data;
-      }
-    });
+  changeOrder(item: any, act: string, idx: number) {
+    if (!item.id) { // 未保存
+      Utils.changeOrder(this.field.options, act, idx);
+    } else {
+      this.customFieldOptionService.changeOrder(item.id, act, this.field.id).subscribe((json: any) => {
+        if (json.code == 1) {
+          this.model = {};
+          this.field.options = json.data;
+        }
+      });
+    }
   }
 
   buildForm(): void {

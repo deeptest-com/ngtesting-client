@@ -50,9 +50,9 @@
           <td>{{ item.value }}</td>
           <td>
             <span *ngIf="i == 0" class="ionic-icon link placeholder"></span>
-            <span (click)="up(item)" *ngIf="i > 0" class="fa fa-arrow-up ionic-icon link"></span>
+            <span (click)="changeOrder(item, 'up', i)" *ngIf="i > 0" class="fa fa-arrow-up ionic-icon link"></span>
 
-            <span (click)="down(item)" *ngIf="i < field.options.length - 1" class="fa fa-arrow-down ionic-icon link"></span>
+            <span (click)="changeOrder(item, 'down', i)" *ngIf="i < field.options.length - 1" class="fa fa-arrow-down ionic-icon link"></span>
             <span *ngIf="i == field.options.length - 1" class="ionic-icon link placeholder"></span>
             &nbsp;
             <span (click)="edit(item)" class="link no-underline">编辑</span>
