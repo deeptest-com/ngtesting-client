@@ -1,9 +1,16 @@
 <tr *ngIf="grid?.settings.canEdit">
-  <td [attr.colspan]="4" style="border-top: 0px;">
+  <td [attr.colspan]="5" style="border-top: 0px;">
     <a href="#" class="" (click)="onCreate($event)">
       添加步骤
     </a>
   </td>
+</tr>
+
+<tr *ngIf="grid?.settings.canEdit">
+  <th [attr.colspan]="2">编号</th>
+  <th>操作步骤</th>
+  <th>预期结果</th>
+  <th>操作</th>
 </tr>
 
 <tr *ngFor="let row of grid?.getRows(); let i = index;"
@@ -31,19 +38,19 @@
     </ng2-smart-table-cell> <!-- 序号 -->
   </td>
 
-  <td (click)="onEdit(row)" class="pointer">
-    <div class="my-cols">
-      <ng-container *ngFor="let cell of row.cells">
-        <ng-container *ngIf="cell.column.id != 'ordr'">
-          <ng2-smart-table-cell class="my-col" [cell]="cell"
-                                               [grid]="grid"
-                                               [row]="row"
-                                               [isInEditing]="row.isInEditing">
-          </ng2-smart-table-cell>
-        </ng-container>
-      </ng-container>
-    </div>
-  </td>
+  <ng-container *ngFor="let cell of row.cells; let i = index;">
+    <ng-container *ngIf="cell.column.id != 'ordr'">
+      <td (click)="onEdit(row)" [class.has-border]="i==1" class="pointer">
+        <div class="my-cols">
+            <ng2-smart-table-cell class="my-col" [cell]="cell"
+                                                 [grid]="grid"
+                                                 [row]="row"
+                                                 [isInEditing]="row.isInEditing">
+            </ng2-smart-table-cell>
+        </div>
+      </td>
+    </ng-container>
+  </ng-container>
 
   <td *ngIf="grid?.settings.canEdit && !row.isInEditing" class="ng2-smart-actions">
    <ng2-st-tbody-add-edit-delete *ngIf="row.hover" [grid]="grid"

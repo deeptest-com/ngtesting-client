@@ -28,6 +28,9 @@
       tr {
         th {
           text-align: center;
+          &:first-child {
+            text-align: center !important;
+          }
           font-weight: bold;
         }
         td {
@@ -49,6 +52,9 @@
           }
           &.ng2-smart-actions {
             width: 100px;
+          }
+          &.has-border {
+            border-right: 1px solid gainsboro;
           }
           .my-cols {
             display: flex;

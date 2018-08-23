@@ -5,6 +5,7 @@ import {NgbModal, NgbModalRef, ModalDismissReasons} from '@ng-bootstrap/ng-boots
 
 import { CONSTANT } from '../../../utils/constant';
 import { Utils, Deferred } from '../../../utils/utils';
+import { PhoneValidator } from '../../../validator';
 
 import { FieldShowService } from './field-show.service';
 import { TinyMCEComponentPopup } from '../../tiny-mce';
@@ -57,7 +58,21 @@ export class FieldShowComponent implements OnInit {
     this.casePropertyMap = CONSTANT.CASE_PROPERTY_MAP;
 
     this.form = this.fb.group({});
-    let control: FormControl = new FormControl(this.prop, Validators.required);
+
+    let validators = [];
+    if (this.required) {
+      validators.push(Validators.required);
+    }
+    if (this.type == 'email') {
+      validators.push(Validators.email);
+    } else if (this.type == 'number') {
+      validators.push(Validators.pattern('^[1-9]*$'));
+    } else if (this.type == 'phone') {
+      validators.push(PhoneValidator.validate());
+    }
+
+    const control: FormControl = new FormControl(this.prop);
+    control.setValidators(Validators.compose(validators))
     this.form.addControl(this.prop, control);
   }
 
