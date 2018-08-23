@@ -23,8 +23,8 @@ declare var jQuery;
   templateUrl: './edit.html',
 })
 export class OrgEdit implements OnInit, AfterViewInit {
-
   id: number;
+  profile: any = {};
 
   model: any = { disabled: false };
   groups: any[] = [];
@@ -46,7 +46,9 @@ export class OrgEdit implements OnInit, AfterViewInit {
 
     this.buildForm();
   }
-  ngAfterViewInit() {}
+  ngAfterViewInit() {
+    this.profile = CONSTANT.PROFILE;
+  }
 
   buildForm(): void {
     const that = this;
@@ -99,11 +101,10 @@ export class OrgEdit implements OnInit, AfterViewInit {
       if (json.code == 1) {
         that.formErrors = ['删除成功'];
         that._routeService.navTo('/pages/org-admin/org/list');
-
-        this.modalWrapper.closeModal();
       } else {
-        that.formErrors = ['删除失败'];
+        that.formErrors = [json.msg];
       }
+      this.modalWrapper.closeModal();
     });
   }
 
