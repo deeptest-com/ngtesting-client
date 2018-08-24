@@ -20,10 +20,6 @@
   </div>
 
   <div class="menu">
-
-    <div *ngIf="projects?.length == 0" ngbDropdown class="btn-group">
-      <button [routerLink]="['/pages/org/' + orgId + '/prjs']" class="btn btn-default">测试项目</button>
-    </div>
     <div *ngIf="projects?.length > 0" ngbDropdown class="btn-group">
       <button class="btn btn-default dropdown" ngbDropdownToggle>项目</button>
       <div class="dropdown-menu">

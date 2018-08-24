@@ -22,7 +22,7 @@ export class OrgList implements OnInit, AfterViewInit, OnDestroy {
   queryModel: any = { keywords: '', disabled: 'false' };
   statusMap: Array<any> = CONSTANT.EntityDisabled;
 
-  models: any;
+  models: any = [];
 
   constructor(private _routeService: RouteService, private _state: GlobalState,
               private fb: FormBuilder, private el: ElementRef,
