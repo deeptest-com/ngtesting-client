@@ -140,16 +140,18 @@ export class CaseSelectionComponent implements OnInit {
     });
 
     nodes = ztree.getNodesByFilter((node) => {
+      console.log('====', createByFilter, node.createById);
+
       return !node.isParent && (
           ( typeFilter.length > 0 && _.indexOf(typeFilter, node.type) < 0 )
           || ( priorityFilter.length > 0 && _.indexOf(priorityFilter, node.priority) < 0 )
           || ( estimateFilter.length > 0 && (parseInt(node.estimate) < parseInt(estimateFilter[0]) || parseInt(node.estimate) > parseInt(estimateFilter[1])) )
 
-          || ( createTimeFilter && (new Date().getTime() - node.createTime) > createTimeFilter )
-          || ( updateTimeFilter && (new Date().getTime() - node.updateTime) > updateTimeFilter )
+          || ( createTimeFilter && (new Date().getTime() - new Date(node.createTime).getTime()) > createTimeFilter )
+          || ( updateTimeFilter && !node.updateTime && (new Date().getTime() - new Date(node.updateTime).getTime()) > updateTimeFilter )
 
           || ( createByFilter.length > 0 && _.indexOf(createByFilter, node.createById) < 0 )
-          || ( updateByFilter.length > 0 && _.indexOf(updateByFilter, node.updateById) < 0 )
+          || ( updateByFilter.length > 0  && !node.updateById && _.indexOf(updateByFilter, node.updateById) < 0 )
         );
     });
     ztree.hideNodes(nodes);
