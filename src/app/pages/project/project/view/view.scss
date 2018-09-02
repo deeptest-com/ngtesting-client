@@ -45,4 +45,19 @@
 
   }
 
+  .info {
+    width: 360px;
+
+    .manage {
+      .project-manage {
+        padding: 8px 5px 5px 5px;
+        .item {
+          line-height: 18px;
+        }
+        .more {
+          text-align: right;
+        }
+      }
+    }
+  }
 }

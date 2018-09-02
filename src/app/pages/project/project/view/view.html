@@ -20,8 +20,12 @@
     </div>
 
     <div class="row chart">
-      <design-progress [data]="chartData.design" [showTitle]="true"></design-progress>
-      <execution-process [data]="chartData.exe" [showTitle]="true"></execution-process>
+      <div class="col-sm-6">
+        <design-progress [data]="chartData.design" [showTitle]="true"></design-progress>
+      </div>
+      <div class="col-sm-6">
+        <execution-process [data]="chartData.exe" [showTitle]="true"></execution-process>
+      </div>
     </div>
 
     <div class="row cards">
@@ -61,23 +65,86 @@
     </div>
   </div>
 
-  <div class="activity">
-    <div class="title">
-      项目活动
-    </div>
-    <div class="list">
-      <div *ngFor="let item of (histories | mapToArray); let i = index;" class="item">
-        <div class="date">
-          {{item.key}}
+  <div class="info">
+    <div *ngIf="project.type=='project' && project.privs != null && project.privs['project-maintain']" class="manage">
+      <div class="tabs-container light">
+        <div class="tabs">
+          <ngb-tabset  (tabChange)="tabChange($event)">
+            <ngb-tab id="ver">
+              <ng-template ngbTabTitle>版本</ng-template>
+              <ng-template ngbTabContent></ng-template>
+            </ngb-tab>
+            <ngb-tab id="env">
+              <ng-template ngbTabTitle>环境</ng-template>
+              <ng-template ngbTabContent></ng-template>
+            </ngb-tab>
+            <ngb-tab id="user">
+              <ng-template ngbTabTitle>用户</ng-template>
+              <ng-template ngbTabContent></ng-template>
+            </ngb-tab>
+          </ngb-tabset>
         </div>
-        <div class="descr">
-          <div class="action-html descr-item" *ngFor="let his of item.value; let j = index;">
-            <div [innerHTML]="his.title" class="content"></div>&nbsp;&nbsp;
-            <div class="date">{{his.createTime | date:'HH:mm:ss'}}</div>
+      </div>
+      <div class="tab-bottom-space"></div>
+
+      <div [class.hidden]="tab != 'ver'" class="project-manage">
+        <div>
+          <div class="item" *ngFor="let ver of vers; let i = index;">
+            <div>{{ver.name}} 创建于{{ver.createTime | date:'y/MM/dd'}}</div>
           </div>
+        </div>
+
+        <div class="more">
+              <span [routerLink]="['/pages/org/' + orgId + '/prjs/' +project.id+ '/edit/ver/list']"
+                    class="link no-underline">更多</span>
         </div>
       </div>
 
+      <div [class.hidden]="tab != 'env'" class="project-manage">
+        <div>
+          <div class="item" *ngFor="let env of envs; let i = index;">
+            <div>{{env.name}} 创建于{{env.createTime | date:'y/MM/dd'}}</div>
+          </div>
+        </div>
+
+        <div class="more">
+              <span [routerLink]="['/pages/org/' + orgId + '/prjs/' +project.id+ '/edit/env/list']"
+                    class="link no-underline">更多</span>
+        </div>
+      </div>
+
+      <div [class.hidden]="tab != 'user'" class="project-manage">
+        <div>
+          <div class="item" *ngFor="let usr of users; let i = index;">
+            <div>{{usr.nickname}} {{usr.createTime | date:'y/MM/dd'}}加入</div>
+          </div>
+        </div>
+
+        <div class="more">
+              <span [routerLink]="['/pages/org/' + orgId + '/prjs/' +project.id+ '/edit/member']"
+                    class="link no-underline">更多</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="activity">
+      <div class="title">
+        项目活动
+      </div>
+      <div class="list">
+        <div *ngFor="let item of (histories | mapToArray); let i = index;" class="item">
+          <div class="date">
+            {{item.key}}
+          </div>
+          <div class="descr">
+            <div class="action-html descr-item" *ngFor="let his of item.value; let j = index;">
+              <div [innerHTML]="his.title" class="content"></div>&nbsp;&nbsp;
+              <div class="date">{{his.createTime | date:'HH:mm:ss'}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+
 </div>

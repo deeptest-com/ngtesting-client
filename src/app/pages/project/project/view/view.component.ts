@@ -17,10 +17,14 @@ declare var jQuery;
 export class ProjectView implements OnInit, AfterViewInit, OnDestroy {
   orgId: number;
   id: number;
+  tab: string = 'ver';
 
   project: any = {};
   plans: any[] = [];
   histories: any = {};
+  vers: any[] = [];
+  envs: any[] = [];
+  users: any[] = [];
 
   chartData: any = {};
 
@@ -50,6 +54,9 @@ export class ProjectView implements OnInit, AfterViewInit, OnDestroy {
       this.project = json.project;
       this.plans = json.plans;
       this.histories = json.histories;
+      this.vers = json.vers;
+      this.envs = json.envs;
+      this.users = json.users;
 
       if (json.project.type == 'project') {
         CONSTANT.CURR_PRJ_ID = this.project.id;
@@ -60,6 +67,10 @@ export class ProjectView implements OnInit, AfterViewInit, OnDestroy {
     this._reportService.projectReport(this.id).subscribe((json: any) => {
       this.chartData = json.data;
     });
+  }
+
+  tabChange(event: any) {
+    this.tab = event.nextId;
   }
 
   ngOnDestroy(): void {

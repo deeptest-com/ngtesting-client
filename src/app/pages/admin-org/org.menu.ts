@@ -62,7 +62,7 @@ export const ORG_MENU = [
             path: 'org-admin/project-role/list',
             data: {
               menu: {
-                title: '项目角色',
+                title: '测试角色',
                 icon: 'ion-edit',
                 selected: false,
                 order: 1,

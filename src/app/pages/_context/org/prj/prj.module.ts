@@ -2,6 +2,8 @@ import { NgModule }      from '@angular/core';
 import { CommonModule }  from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { routing }       from './prj.routing';
+
+import { NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgaModule } from '../../../../theme/nga.module';
 
 import { DirectiveModule } from '../../../../directive/directive.module';
@@ -19,7 +21,7 @@ import { AccountService } from '../../../../service/account';
 import { Prj } from './prj.component';
 
 @NgModule({
-  imports: [CommonModule, RouterModule, NgaModule, routing,
+  imports: [CommonModule, RouterModule, NgaModule, NgbTabsetModule, routing,
     DirectiveModule,
     PipeModule,
     ChartDesignModule,
