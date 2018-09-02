@@ -46,13 +46,17 @@
   }
 
   .info {
-    width: 360px;
+    width: 450px;
 
     .manage {
       .project-manage {
         padding: 8px 5px 5px 5px;
         .item {
           line-height: 18px;
+          .dict {
+            color: black;
+            font-style: italic;
+          }
         }
         .more {
           text-align: right;

@@ -81,8 +81,8 @@ export class ProjectEnvList implements OnInit, AfterViewInit {
     });
   }
 
-  gotoProjectList() {
-    this._routeService.navTo('/pages/org/' + CONSTANT.CURR_ORG_ID + '/prjs');
+  gotoProject() {
+    this._routeService.navTo('/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + this.projectId + '/view');
   }
 
   queryChange(values: any): void {

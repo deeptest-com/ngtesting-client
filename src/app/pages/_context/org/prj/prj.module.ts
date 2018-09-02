@@ -18,6 +18,10 @@ import { ReportService } from '../../../../service/report';
 import { ProjectService } from '../../../../service/project';
 import { AccountService } from '../../../../service/account';
 
+import { UserService } from '../../../../service/user';
+import { VerService } from '../../../../service/ver';
+import { EnvService } from '../../../../service/env';
+
 import { Prj } from './prj.component';
 
 @NgModule({
@@ -30,6 +34,7 @@ import { Prj } from './prj.component';
   declarations: [Prj, ProjectView],
   providers: [
     AccountService, ProjectService, PrjResolve, ReportService,
+    UserService, VerService, EnvService
   ]
 })
 export class PrjModule {

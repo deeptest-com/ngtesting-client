@@ -19,6 +19,11 @@ export class UserService {
     _.merge(query, { page: page, pageSize: pageSize });
     return this._reqService.post(this._api_url + 'list', query);
   }
+
+  listLastest() {
+    return this._reqService.post(this._api_url + 'listLastest', {});
+  }
+
   getUsers(projectId: number) {
     const model = { projectId: projectId };
     return this._reqService.post(this._api_url + 'getUsers', model);

@@ -4,6 +4,10 @@ import { NgModule, Pipe, OnInit, AfterViewInit, OnDestroy }      from '@angular/
 
 import { CONSTANT } from '../../../../utils/constant';
 import { ProjectService } from '../../../../service/project';
+import { VerService } from '../../../../service/ver';
+import { EnvService } from '../../../../service/env';
+import { UserService } from '../../../../service/user';
+
 import { ReportService } from '../../../../service/report';
 
 declare var jQuery;
@@ -31,6 +35,7 @@ export class ProjectView implements OnInit, AfterViewInit, OnDestroy {
   routeSub: any;
 
   constructor(private _route: ActivatedRoute,
+              private _verService: VerService, private _envService: EnvService, private _userService: UserService,
               private _projectService: ProjectService, private _reportService: ReportService) {
     this.orgId = CONSTANT.CURR_ORG_ID;
   }
@@ -39,6 +44,8 @@ export class ProjectView implements OnInit, AfterViewInit, OnDestroy {
       if (this.id != +params['prjId']) {
         this.id = +params['prjId'];
         this.loadData();
+
+        this.tabChange(this.tab);
       }
     });
   }
@@ -54,9 +61,6 @@ export class ProjectView implements OnInit, AfterViewInit, OnDestroy {
       this.project = json.project;
       this.plans = json.plans;
       this.histories = json.histories;
-      this.vers = json.vers;
-      this.envs = json.envs;
-      this.users = json.users;
 
       if (json.project.type == 'project') {
         CONSTANT.CURR_PRJ_ID = this.project.id;
@@ -69,8 +73,26 @@ export class ProjectView implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  tabChange(event: any) {
-    this.tab = event.nextId;
+  tabChange(tab: any) {
+    if (this.tab != tab) {
+      this.tab = tab;
+    }
+
+    if (this.tab === 'ver') {
+      this._verService.listLastest().subscribe((json: any) => {
+        this.vers = json.data;
+      });
+    } else if (this.tab === 'env') {
+      this._envService.listLastest().subscribe((json: any) => {
+        this.envs = json.data;
+      });
+    } else if (this.tab === 'user') {
+      this._userService.listLastest().subscribe((json: any) => {
+        this.users = json.data;
+      });
+    } else if (this.tab === 'team') {
+
+    }
   }
 
   ngOnDestroy(): void {

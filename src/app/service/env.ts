@@ -13,6 +13,10 @@ export class EnvService {
     return this._reqService.post(this.apiUrl + 'list', queryModel);
   }
 
+  listLastest() {
+    return this._reqService.post(this.apiUrl + 'listLastest', {});
+  }
+
   get(id: number) {
     const model = { id: id };
     return this._reqService.post(this.apiUrl + 'get', model);
