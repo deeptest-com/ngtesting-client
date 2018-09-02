@@ -13,11 +13,24 @@ export const ORG_MENU = [
           },
         },
       },
+
+      {
+        path: 'org-admin/org/list',
+        data: {
+          menu: {
+            title: '当前组织',
+            icon: 'ion-edit',
+            selected: false,
+            order: 2,
+          },
+        },
+      },
+
       {
         path: '',
         data: {
           menu: {
-            title: '当前组织',
+            title: '测试管理',
             icon: 'ion-edit',
             selected: true,
             expanded: true,
@@ -62,7 +75,7 @@ export const ORG_MENU = [
             path: 'org-admin/project-role/list',
             data: {
               menu: {
-                title: '测试角色',
+                title: '项目角色',
                 icon: 'ion-edit',
                 selected: false,
                 order: 1,
@@ -74,6 +87,87 @@ export const ORG_MENU = [
             data: {
               menu: {
                 title: '属性设置',
+                icon: 'ion-edit',
+                selected: false,
+                order: 1,
+              },
+            },
+          },
+        ],
+      },
+
+      {
+        path: '',
+        data: {
+          menu: {
+            title: '问题管理',
+            icon: 'ion-edit',
+            selected: true,
+            expanded: true,
+            order: 1,
+          },
+        },
+        children: [
+          {
+            path: 'org-admin/issue/type/list',
+            data: {
+              menu: {
+                title: '类型',
+                icon: 'ion-edit',
+                selected: false,
+                order: 1,
+              },
+            },
+          },
+          {
+            path: 'org-admin/issue/field/list',
+            data: {
+              menu: {
+                title: '字段',
+                icon: 'ion-edit',
+                selected: false,
+                order: 1,
+              },
+            },
+          },
+          {
+            path: 'org-admin/issue/field/list',
+            data: {
+              menu: {
+                title: '界面',
+                icon: 'ion-edit',
+                selected: false,
+                order: 1,
+              },
+            },
+          },
+          {
+            path: 'org-admin/issue/field/list',
+            data: {
+              menu: {
+                title: '工作流',
+                icon: 'ion-edit',
+                selected: false,
+                order: 1,
+              },
+            },
+          },
+          {
+            path: 'org-admin/issue/priority/list',
+            data: {
+              menu: {
+                title: '优先级',
+                icon: 'ion-edit',
+                selected: false,
+                order: 1,
+              },
+            },
+          },
+          {
+            path: 'org-admin/issue/priority/list',
+            data: {
+              menu: {
+                title: '通知',
                 icon: 'ion-edit',
                 selected: false,
                 order: 1,

@@ -115,6 +115,8 @@ $angle-right: '\f101';
 
   a.al-sidebar-list-link {
     display: block;
+    text-overflow: ellipsis;
+
     height: 42px;
     padding-left: 18px;
     text-shadow: none;
