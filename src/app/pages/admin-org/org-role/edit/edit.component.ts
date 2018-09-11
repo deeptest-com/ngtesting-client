@@ -29,7 +29,7 @@ export class OrgRoleEdit implements OnInit, AfterViewInit {
   orgRole: any = { disabled: false };
   privileges: any[] = [];
   users: any[] = [];
-  groups: any[] = [];
+  // groups: any[] = [];
 
   form: any;
   @ViewChild('modalWrapper') modalWrapper: PopDialogComponent;
@@ -56,7 +56,7 @@ export class OrgRoleEdit implements OnInit, AfterViewInit {
       that.orgRole = json.orgRole;
       that.privileges = json.privileges;
       that.users = json.users;
-      this.groups = json.groups;
+      // this.groups = json.groups;
 
       _.forEach(that.privileges, (item: any, index: number) => {
         this.form.addControl('privilege-' + item.orgPrivilegeId, new FormControl('', []));
@@ -65,16 +65,17 @@ export class OrgRoleEdit implements OnInit, AfterViewInit {
       _.forEach(that.users, (item: any, index: number) => {
         this.form.addControl('user-' + item.userId, new FormControl('', []));
       });
-      _.forEach(that.groups, (item: any, index: number) => {
-        this.form.addControl('group-' + item.groupId, new FormControl('', []));
-      });
+
+      // _.forEach(that.groups, (item: any, index: number) => {
+      //   this.form.addControl('group-' + item.groupId, new FormControl('', []));
+      // });
     });
   }
 
   save() {
     const that = this;
 
-    that.orgRoleService.save(that.orgRole, that.privileges, that.users, that.groups).subscribe((json: any) => {
+    that.orgRoleService.save(that.orgRole, that.privileges, that.users).subscribe((json: any) => {
       if (json.code == 1) {
 
         that.formErrors = ['保存成功'];

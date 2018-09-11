@@ -38,7 +38,6 @@ export class CustomFieldEdit implements OnInit, AfterViewInit {
 
   relations: any[] = [];
   form: FormGroup;
-  isSubmitted: boolean;
   @ViewChild('modalWrapper') modalWrapper: PopDialogComponent;
   public dropdownOptionsModal: any;
 

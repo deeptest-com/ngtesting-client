@@ -30,7 +30,7 @@ export const ORG_MENU = [
         path: '',
         data: {
           menu: {
-            title: '测试管理',
+            title: '组织管理',
             icon: 'ion-edit',
             selected: true,
             expanded: true,
@@ -42,18 +42,7 @@ export const ORG_MENU = [
             path: 'org-admin/user/list',
             data: {
               menu: {
-                title: '用户管理',
-                icon: 'ion-edit',
-                selected: false,
-                order: 1,
-              },
-            },
-          },
-          {
-            path: 'org-admin/group/list',
-            data: {
-              menu: {
-                title: '群组管理',
+                title: '组织用户',
                 icon: 'ion-edit',
                 selected: false,
                 order: 1,
@@ -86,7 +75,7 @@ export const ORG_MENU = [
             path: 'org-admin/property/case-type/list',
             data: {
               menu: {
-                title: '属性设置',
+                title: '用例属性',
                 icon: 'ion-edit',
                 selected: false,
                 order: 1,
@@ -100,7 +89,7 @@ export const ORG_MENU = [
         path: '',
         data: {
           menu: {
-            title: '问题管理',
+            title: '问题跟踪',
             icon: 'ion-edit',
             selected: true,
             expanded: true,
@@ -112,7 +101,7 @@ export const ORG_MENU = [
             path: 'org-admin/issue/type/list',
             data: {
               menu: {
-                title: '类型',
+                title: '问题类型',
                 icon: 'ion-edit',
                 selected: false,
                 order: 1,
@@ -123,7 +112,7 @@ export const ORG_MENU = [
             path: 'org-admin/issue/field/list',
             data: {
               menu: {
-                title: '字段',
+                title: '问题字段',
                 icon: 'ion-edit',
                 selected: false,
                 order: 1,
@@ -134,7 +123,7 @@ export const ORG_MENU = [
             path: 'org-admin/issue/field/list',
             data: {
               menu: {
-                title: '界面',
+                title: '问题界面',
                 icon: 'ion-edit',
                 selected: false,
                 order: 1,
@@ -164,10 +153,43 @@ export const ORG_MENU = [
             },
           },
           {
+            path: 'org-admin/issue/status/list',
+            data: {
+              menu: {
+                title: '问题状态',
+                icon: 'ion-edit',
+                selected: false,
+                order: 1,
+              },
+            },
+          },
+          {
+            path: 'org-admin/issue/resolution/list',
+            data: {
+              menu: {
+                title: '解决措施',
+                icon: 'ion-edit',
+                selected: false,
+                order: 1,
+              },
+            },
+          },
+          {
+            path: 'org-admin/issue/privilege/list',
+            data: {
+              menu: {
+                title: '权限方案',
+                icon: 'ion-edit',
+                selected: false,
+                order: 1,
+              },
+            },
+          },
+          {
             path: 'org-admin/issue/priority/list',
             data: {
               menu: {
-                title: '通知',
+                title: '消息通知',
                 icon: 'ion-edit',
                 selected: false,
                 order: 1,
