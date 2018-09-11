@@ -8,14 +8,11 @@ const routes: Routes = [
     path: '',
     component: OrgAdmin,
     children: [
-      { path: 'org', loadChildren: './org/org.module#OrgModule' },
-      { path: 'user', loadChildren: './user/user.module#UserModule'  },
-      { path: 'group', loadChildren: './group/group.module#GroupModule' },
-      { path: 'org-role', loadChildren: './org-role/org-role.module#OrgRoleModule' },
-      { path: 'project-role', loadChildren: './project-role/project-role.module#ProjectRoleModule' },
-      { path: 'property', loadChildren: './property/property.module#PropertyModule' }
-    ]
-  }
+      { path: 'org-settings', loadChildren: './org-settings/org-settings.module#OrgSettingsModule' },
+      { path: 'test-settings', loadChildren: './test-settings/test-settings.module#TestSettingsModule' },
+      { path: 'case-settings', loadChildren: './case-settings/case-settings.module#CaseSettingsModule' },
+    ],
+  },
 ];
 
 export const routing = RouterModule.forChild(routes);
