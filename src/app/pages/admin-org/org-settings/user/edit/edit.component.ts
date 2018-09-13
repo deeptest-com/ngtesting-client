@@ -102,7 +102,7 @@ export class UserEdit implements OnInit, AfterViewInit {
       if (json.code == 1) {
 
         that.formErrors = ['保存成功'];
-        that._routeService.navTo('/pages/org-admin/user/list');
+        that._routeService.navTo('/pages/org-admin/org-settings/user/list');
 
       } else {
         that.formErrors = [json.msg];
@@ -114,7 +114,7 @@ export class UserEdit implements OnInit, AfterViewInit {
     this.userService.removeFromOrg(this.user.id, CONSTANT.CURR_ORG_ID).subscribe((json: any) => {
       if (json.code == 1) {
         this.formErrors = ['删除成功'];
-        this._routeService.navTo('/pages/org-admin/user/list');
+        this._routeService.navTo('/pages/org-admin/org-settings/user/list');
 
         this.modalWrapper.closeModal();
       } else {

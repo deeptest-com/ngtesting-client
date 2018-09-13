@@ -14,6 +14,17 @@ export const ORG_MENU = [
         },
       },
       {
+        path: 'org-admin/org-settings/org/list',
+        data: {
+          menu: {
+            title: '（无管理权限）',
+            icon: 'ion-edit',
+            selected: false,
+            order: 2,
+          },
+        },
+      },
+      {
         path: '',
         data: {
           menu: {
@@ -131,119 +142,119 @@ export const ORG_MENU = [
         ],
       },
 
-      {
-        path: '',
-        data: {
-          menu: {
-            title: '问题管理',
-            icon: 'ion-edit',
-            selected: true,
-            expanded: true,
-            order: 1,
-          },
-        },
-        children: [
-          {
-            path: 'org-admin/issue/type/list',
-            data: {
-              menu: {
-                title: '问题类型',
-                icon: 'ion-edit',
-                selected: false,
-                order: 1,
-              },
-            },
-          },
-          {
-            path: 'org-admin/issue/field/list',
-            data: {
-              menu: {
-                title: '问题字段',
-                icon: 'ion-edit',
-                selected: false,
-                order: 1,
-              },
-            },
-          },
-          {
-            path: 'org-admin/issue/field/list',
-            data: {
-              menu: {
-                title: '问题界面',
-                icon: 'ion-edit',
-                selected: false,
-                order: 1,
-              },
-            },
-          },
-          {
-            path: 'org-admin/issue/field/list',
-            data: {
-              menu: {
-                title: '工作流',
-                icon: 'ion-edit',
-                selected: false,
-                order: 1,
-              },
-            },
-          },
-          {
-            path: 'org-admin/issue/priority/list',
-            data: {
-              menu: {
-                title: '优先级',
-                icon: 'ion-edit',
-                selected: false,
-                order: 1,
-              },
-            },
-          },
-          {
-            path: 'org-admin/issue/status/list',
-            data: {
-              menu: {
-                title: '问题状态',
-                icon: 'ion-edit',
-                selected: false,
-                order: 1,
-              },
-            },
-          },
-          {
-            path: 'org-admin/issue/resolution/list',
-            data: {
-              menu: {
-                title: '解决措施',
-                icon: 'ion-edit',
-                selected: false,
-                order: 1,
-              },
-            },
-          },
-          {
-            path: 'org-admin/issue/privilege/list',
-            data: {
-              menu: {
-                title: '权限方案',
-                icon: 'ion-edit',
-                selected: false,
-                order: 1,
-              },
-            },
-          },
-          {
-            path: 'org-admin/issue/priority/list',
-            data: {
-              menu: {
-                title: '消息通知',
-                icon: 'ion-edit',
-                selected: false,
-                order: 1,
-              },
-            },
-          },
-        ],
-      },
+      // {
+      //   path: '',
+      //   data: {
+      //     menu: {
+      //       title: '问题管理',
+      //       icon: 'ion-edit',
+      //       selected: true,
+      //       expanded: true,
+      //       order: 1,
+      //     },
+      //   },
+      //   children: [
+      //     {
+      //       path: 'org-admin/issue-settings/type/list',
+      //       data: {
+      //         menu: {
+      //           title: '问题类型',
+      //           icon: 'ion-edit',
+      //           selected: false,
+      //           order: 1,
+      //         },
+      //       },
+      //     },
+      //     {
+      //       path: 'org-admin/issue-settings/field/list',
+      //       data: {
+      //         menu: {
+      //           title: '问题字段',
+      //           icon: 'ion-edit',
+      //           selected: false,
+      //           order: 1,
+      //         },
+      //       },
+      //     },
+      //     {
+      //       path: 'org-admin/issue-settings/field/list',
+      //       data: {
+      //         menu: {
+      //           title: '问题界面',
+      //           icon: 'ion-edit',
+      //           selected: false,
+      //           order: 1,
+      //         },
+      //       },
+      //     },
+      //     {
+      //       path: 'org-admin/issue-settings/field/list',
+      //       data: {
+      //         menu: {
+      //           title: '工作流',
+      //           icon: 'ion-edit',
+      //           selected: false,
+      //           order: 1,
+      //         },
+      //       },
+      //     },
+      //     {
+      //       path: 'org-admin/issue-settings/priority/list',
+      //       data: {
+      //         menu: {
+      //           title: '优先级',
+      //           icon: 'ion-edit',
+      //           selected: false,
+      //           order: 1,
+      //         },
+      //       },
+      //     },
+      //     {
+      //       path: 'org-admin/issue-settings/status/list',
+      //       data: {
+      //         menu: {
+      //           title: '问题状态',
+      //           icon: 'ion-edit',
+      //           selected: false,
+      //           order: 1,
+      //         },
+      //       },
+      //     },
+      //     {
+      //       path: 'org-admin/issue-settings/resolution/list',
+      //       data: {
+      //         menu: {
+      //           title: '解决措施',
+      //           icon: 'ion-edit',
+      //           selected: false,
+      //           order: 1,
+      //         },
+      //       },
+      //     },
+      //     {
+      //       path: 'org-admin/issue-settings/privilege/list',
+      //       data: {
+      //         menu: {
+      //           title: '权限方案',
+      //           icon: 'ion-edit',
+      //           selected: false,
+      //           order: 1,
+      //         },
+      //       },
+      //     },
+      //     {
+      //       path: 'org-admin/issue-settings/priority/list',
+      //       data: {
+      //         menu: {
+      //           title: '消息通知',
+      //           icon: 'ion-edit',
+      //           selected: false,
+      //           order: 1,
+      //         },
+      //       },
+      //     },
+      //   ],
+      // },
     ],
   },
 ];

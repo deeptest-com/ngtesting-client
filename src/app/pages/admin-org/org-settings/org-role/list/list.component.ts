@@ -50,7 +50,7 @@ export class OrgRoleList implements OnInit, AfterViewInit {
   create(): void {
     const that = this;
 
-    that._routeService.navTo('/pages/org-admin/org-role/edit/null');
+    that._routeService.navTo('/pages/org-admin/org-settings/org-role/edit/null');
   }
 
   queryChange(values: any): void {

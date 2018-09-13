@@ -48,7 +48,7 @@
           <input *ngIf="item.defaultOrg" onclick="return false;" [(ngModel)]="item.defaultOrg" type="checkbox" name="defaultOrg" #defaultOrg>
         </td>
         <td>
-          <span *ngIf="item.orgPrivileges['org-admin']" [routerLink]="['/pages/org-admin/org/edit', item.id]" class="link no-underline">编辑</span>
+          <span *ngIf="item.orgPrivileges['org-admin']" [routerLink]="['/pages/org-admin/org-settings/org/edit', item.id]" class="link no-underline">编辑</span>
         </td>
       </tr>
       </tbody>

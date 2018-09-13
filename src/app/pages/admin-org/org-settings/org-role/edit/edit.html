@@ -6,7 +6,7 @@
         <span *ngIf="orgRole?.id">编辑角色</span>
       </div>
       <div class="buttons">
-        <button [routerLink]="['/pages/org-admin/org-role/list']" type="button"
+        <button [routerLink]="['/pages/org-admin/org-settings/org-role/list']" type="button"
                 class="btn btn-secondary btn-with-icon btn-sm back">
           <i class="fa fa-arrow-circle-left"></i>返回
         </button>
@@ -159,7 +159,7 @@
       <div class="col-sm-10">
         <button (click)="save()" type="button" class="btn btn-primary" [disabled]="!form.valid">保存</button>
         &nbsp;
-        <button [routerLink]="['/pages/org-admin/org-role/list']" type="button" class="btn btn-default">取消</button>
+        <button [routerLink]="['/pages/org-admin/org-settings/org-role/list']" type="button" class="btn btn-default">取消</button>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <button (click)="showModal()" *ngIf="orgRole.id" type="button" class="btn btn-danger">删除</button>
       </div>

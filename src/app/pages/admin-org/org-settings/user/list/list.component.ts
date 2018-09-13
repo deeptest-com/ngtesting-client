@@ -44,10 +44,10 @@ export class UserList implements OnInit, AfterViewInit {
   }
 
   // create(): void {
-  //   this._routeService.navTo('/pages/org-admin/user/edit/null');
+  //   this._routeService.navTo('/pages/org-admin/org-settings/user/edit/null');
   // }
   invite(): void {
-    this._routeService.navTo('/pages/org-admin/user/invite');
+    this._routeService.navTo('/pages/org-admin/org-settings/user/invite');
   }
 
   queryChange(values: any): void {

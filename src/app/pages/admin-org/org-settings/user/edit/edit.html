@@ -6,7 +6,7 @@
         <span *ngIf="user?.id">编辑用户</span>
       </div>
       <div class="buttons">
-        <button [routerLink]="['/pages/org-admin/user/list']" type="button"
+        <button [routerLink]="['/pages/org-admin/org-settings/user/list']" type="button"
                 class="btn btn-secondary btn-with-icon btn-sm back">
           <i class="fa fa-arrow-circle-left"></i>返回
         </button>
@@ -102,7 +102,7 @@
       <div class="col-sm-10">
         <button (click)="update()" type="button" class="btn btn-primary" [disabled]="!form.valid">保存</button>
         &nbsp;
-        <button [routerLink]="['/pages/org-admin/user/list']" type="button" class="btn btn-default">取消</button>
+        <button [routerLink]="['/pages/org-admin/org-settings/user/list']" type="button" class="btn btn-default">取消</button>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <button (click)="showModal()" *ngIf="user.id" type="button" class="btn btn-danger">移除</button>
       </div>

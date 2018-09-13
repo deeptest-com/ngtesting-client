@@ -49,7 +49,7 @@ export class GroupList implements OnInit, AfterViewInit {
   create(): void {
     const that = this;
 
-    that._routeService.navTo('/pages/org-admin/group/edit/null');
+    that._routeService.navTo('/pages/org-admin/org-settings/group/edit/null');
   }
 
   queryChange(values: any): void {

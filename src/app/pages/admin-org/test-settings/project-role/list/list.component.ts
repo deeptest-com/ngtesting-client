@@ -47,7 +47,7 @@ export class ProjectRoleList implements OnInit, AfterViewInit {
   create(): void {
     const that = this;
 
-    that._routeService.navTo('/pages/org-admin/project-role/edit/null');
+    that._routeService.navTo('/pages/org-admin/org-settings/project-role/edit/null');
   }
 
   queryChange(values: any): void {

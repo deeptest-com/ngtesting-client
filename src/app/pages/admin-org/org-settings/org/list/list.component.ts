@@ -52,7 +52,7 @@ export class OrgList implements OnInit, AfterViewInit, OnDestroy {
   }
 
   create(): void {
-    this._routeService.navTo('/pages/org-admin/org/edit/null');
+    this._routeService.navTo('/pages/org-admin/org-settings/org/edit/null');
   }
 
   queryChange(values: any): void {

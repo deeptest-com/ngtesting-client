@@ -37,12 +37,11 @@ export class OrgAdmin implements OnInit, OnDestroy {
 
   updateMenu(defaultOrgName: string, orgPrivileges: any) {
     let menu = _.cloneDeep(ORG_MENU);
+    menu[0].children[0].data.menu.title = defaultOrgName;
     if (orgPrivileges['org-admin']) {
-      menu[0].children[0].data.menu.title = defaultOrgName;
+      menu[0].children.splice(1, 1);
     } else {
-      menu[0].children.pop();
-      menu[0].children.pop();
-      menu[0].children.pop();
+      menu[0].children.splice(2, 2);
     }
     this._menuService.updateMenuByRoutes(<Routes> menu);
   }
