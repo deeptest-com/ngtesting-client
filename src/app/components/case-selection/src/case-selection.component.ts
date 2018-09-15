@@ -140,8 +140,6 @@ export class CaseSelectionComponent implements OnInit {
     });
 
     nodes = ztree.getNodesByFilter((node) => {
-      console.log('====', createByFilter, node.createById);
-
       return !node.isParent && (
           ( typeFilter.length > 0 && _.indexOf(typeFilter, node.type) < 0 )
           || ( priorityFilter.length > 0 && _.indexOf(priorityFilter, node.priority) < 0 )
