@@ -80,6 +80,7 @@
               <th class="checkboxWithTitle">查看</th>
               <th class="checkboxWithTitle">编辑</th>
               <th class="checkboxWithTitle">删除</th>
+              <th class="checkboxWithTitle">评审</th>
               <th class="checkboxWithTitle">执行</th>
               <th class="checkboxWithTitle">关闭</th>
             </tr>
@@ -102,6 +103,12 @@
                 <span *ngIf="items.value.delete">
                   <span class="checkbox-name"></span>
                   <input type="checkbox" [(ngModel)]="items.value.delete.selecting">
+                </span>
+              </td>
+              <td class="tick">
+                <span *ngIf="items.value.review">
+                  <span class="checkbox-name"></span>
+                  <input type="checkbox" [(ngModel)]="items.value.review.selecting">
                 </span>
               </td>
               <td class="tick">
