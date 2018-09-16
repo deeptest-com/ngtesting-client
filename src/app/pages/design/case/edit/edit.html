@@ -48,9 +48,9 @@
         <div class="col-sm-9">
           <button (click)="update()" type="button" class="btn btn-info btn-sm" [disabled]="!form.valid">保存</button>
           &nbsp;&nbsp;
-          <button (click)="reviewResult(true)" type="button" class="btn btn-primary btn-sm"
+          <button privilege [privs]="'test_case-review'" (click)="reviewResult(true)" type="button" class="btn btn-primary btn-sm"
                   [disabled]="!form.valid">评审通过</button>
-          <button (click)="reviewResult(false)" type="button" class="btn btn-warning btn-sm"
+          <button privilege [privs]="'test_case-review'" (click)="reviewResult(false)" type="button" class="btn btn-warning btn-sm"
                   [disabled]="!form.valid">评审失败</button>
         </div>
       </div>
