@@ -90,9 +90,9 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
   loadData() {
     this.query = this.buildQuery(this.tql);
 
-    this._issueService.query(this.filter, this.query).subscribe((json: any) => {
-      this.projects = json.data;
-    });
+    // this._issueService.query(this.filter, this.query).subscribe((json: any) => {
+    //   this.projects = json.data;
+    // });
   }
   buildQuery(tql: string) {
     return {};

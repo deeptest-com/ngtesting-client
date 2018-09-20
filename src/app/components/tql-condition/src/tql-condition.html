@@ -1,0 +1,21 @@
+<div class="tql-condition">
+  <form [formGroup]="form">
+    <div ngbDropdown #projectDropdown="ngbDropdown" [autoClose]="false" class="btn-group">
+      <button class="btn btn-default dropdown" id="projectDropdownMenu" ngbDropdownToggle>{{title}}</button>
+      <div class="dropdown-menu" aria-labelledby="projectDropdownMenu" ngbDropdownMenu>
+        <button class="dropdown-item">
+          <input type="search" class="form-control form-control-sm" placeholder="过滤" name="keywords">
+          <i class="fa fa-search"></i>
+        </button>
+
+        <li class="dropdown-divider"></li>
+
+        <button class="dropdown-item">所有</button>
+        <button *ngFor="let item of items" class="dropdown-item">
+          <input [(ngModel)]="item.selected" formControlName="selectedItems" class="form-check-input" type="checkbox" value="{{item.id}}">
+          <a>测试</a>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

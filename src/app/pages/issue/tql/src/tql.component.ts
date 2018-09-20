@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation, OnInit, AfterViewInit, OnDestroy,
   Input, Output, EventEmitter, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 
@@ -17,20 +16,20 @@ import { TqlService } from './tql.service';
 export class Tql implements OnInit, AfterViewInit {
   statusMap: Array<any> = CONSTANT.EntityDisabled;
 
-  form: FormGroup;
   @Input() query: any;
   @Input() tql: string;
   @Output() public queryChanged: EventEmitter<any> = new EventEmitter();
 
   @ViewChild(NgbDropdown) private typeDropdown: NgbDropdown;
+  @ViewChild(NgbDropdown) private projectDropdown: NgbDropdown;
 
-  constructor(private fb: FormBuilder, private _state: GlobalState, _tqlService: TqlService) {
-    this.form = this.fb.group(
-      {
-        'disabled': ['', []],
-        'keywords': ['', []],
-      }, {},
-    );
+  projects: any[] = [
+    { id: 1, name: 'ngtesting-web' },
+    { id: 2, name: 'ngtesting-client' },
+    { id: 3, name: 'ngtesting-mindmap' } ];
+
+  constructor(private _state: GlobalState, _tqlService: TqlService) {
+
   }
 
   ngOnInit(): void {
@@ -38,17 +37,19 @@ export class Tql implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.form.valueChanges.debounceTime(CONSTANT.DebounceTime).subscribe(
-      values => this.queryChanged.emit());
+
   }
 
   selectProject() {
 
   }
 
+  selected($event: any) {
+    console.log('---selected ', $event);
+  }
   search() {
     console.log('===', this.typeDropdown);
-    this.typeDropdown.open();
+    this.projectDropdown.open();
     console.log('===', this.typeDropdown);
   }
 }

@@ -1,0 +1,23 @@
+.tql-condition {
+  .btn-group {
+    margin: 0 5px;
+    input.keywords {
+      width: 120px;
+      margin-right: 0;
+    }
+
+    &.more {
+      margin-left: 10px;
+    }
+
+    .dropdown-item {
+      .fa-search {
+        margin-left: -45px;
+      }
+
+      input[type='checkbox'] {
+        margin-right: 3px;
+      }
+    }
+  }
+}

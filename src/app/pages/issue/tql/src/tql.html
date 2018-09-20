@@ -1,77 +1,13 @@
 <div class="tql">
-  <form [formGroup]="form" class="form-inline">
-    <div ngbDropdown class="btn-group">
-      <button class="btn btn-default dropdown" ngbDropdownToggle>项目</button>
-      <div class="dropdown-menu">
-        <button class="dropdown-item">当前项目</button>
-        <button class="dropdown-item">
-          <a (click)="selectProject()" class="link">
-            测试
-          </a>
-        </button>
-
-        <li class="dropdown-divider"></li>
-      </div>
-    </div>
-
-    <div ngbDropdown #typeDropdown="ngbDropdown" class="btn-group">
-      <button class="btn btn-default dropdown" id="typeDropdownMenu" ngbDropdownToggle>类型</button>
-      <div class="dropdown-menu" aria-labelledby="typeDropdownMenu" ngbDropdownMenu>
-        <button class="dropdown-item">当前项目</button>
-        <button class="dropdown-item">
-          <a (click)="selectProject()" class="link">
-            测试
-          </a>
-        </button>
-
-        <li class="dropdown-divider"></li>
-      </div>
-    </div>
-
-    <div ngbDropdown  class="btn-group">
-      <button class="btn btn-default dropdown" ngbDropdownToggle>状态</button>
-      <div class="dropdown-menu">
-        <button class="dropdown-item">当前项目</button>
-        <button class="dropdown-item">
-          <a (click)="selectProject()" class="link">
-            测试
-          </a>
-        </button>
-
-        <li class="dropdown-divider"></li>
-      </div>
-    </div>
-
-    <div ngbDropdown class="btn-group">
-      <button class="btn btn-default dropdown" ngbDropdownToggle>优先级</button>
-      <div class="dropdown-menu">
-        <button class="dropdown-item">当前项目</button>
-        <button class="dropdown-item">
-          <a (click)="selectProject()" class="link">
-            测试
-          </a>
-        </button>
-
-        <li class="dropdown-divider"></li>
-      </div>
-    </div>
-
-    <div ngbDropdown class="btn-group">
-      <button class="btn btn-default dropdown" ngbDropdownToggle>经办人</button>
-      <div class="dropdown-menu">
-        <button class="dropdown-item">当前项目</button>
-        <button class="dropdown-item">
-          <a (click)="selectProject()" class="link">
-            测试
-          </a>
-        </button>
-
-        <li class="dropdown-divider"></li>
-      </div>
-    </div>
+  <div class="form-inline">
+    <tql-condition [title]="'项目'" [items]="projects" (selected)="selected($event)"></tql-condition>
+    <tql-condition [title]="'类型'"></tql-condition>
+    <tql-condition [title]="'状态'"></tql-condition>
+    <tql-condition [title]="'优先级'"></tql-condition>
+    <tql-condition [title]="'经办人'"></tql-condition>
 
     <div class="btn-group">
-      <input [(ngModel)]="query.keywords" formControlName="keywords"
+      <input [(ngModel)]="query.keywords"
              type="search" class="form-control form-control-sm keywords" placeholder="关键字" id="keywords" name="keywords">
     </div>
 
@@ -95,5 +31,5 @@
       </button>
     </div>
 
-  </form>
+  </div>
 </div>
