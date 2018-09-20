@@ -1,7 +1,7 @@
 <div class="tql">
   <form [formGroup]="form" class="form-inline">
     <div ngbDropdown class="btn-group">
-      <button class="btn btn-default dropdown" ngbDropdownToggle>类型</button>
+      <button class="btn btn-default dropdown" ngbDropdownToggle>项目</button>
       <div class="dropdown-menu">
         <button class="dropdown-item">当前项目</button>
         <button class="dropdown-item">
@@ -14,7 +14,21 @@
       </div>
     </div>
 
-    <div ngbDropdown class="btn-group">
+    <div ngbDropdown #typeDropdown="ngbDropdown" class="btn-group">
+      <button class="btn btn-default dropdown" id="typeDropdownMenu" ngbDropdownToggle>类型</button>
+      <div class="dropdown-menu" aria-labelledby="typeDropdownMenu" ngbDropdownMenu>
+        <button class="dropdown-item">当前项目</button>
+        <button class="dropdown-item">
+          <a (click)="selectProject()" class="link">
+            测试
+          </a>
+        </button>
+
+        <li class="dropdown-divider"></li>
+      </div>
+    </div>
+
+    <div ngbDropdown  class="btn-group">
       <button class="btn btn-default dropdown" ngbDropdownToggle>状态</button>
       <div class="dropdown-menu">
         <button class="dropdown-item">当前项目</button>
@@ -73,6 +87,12 @@
 
         <li class="dropdown-divider"></li>
       </div>
+    </div>
+
+    <div class="btn-group">
+      <button (click)="$event.stopPropagation(); search();" type="button" class="btn btn-primary btn-with-icon btn-sm">
+        <i class="fa fa-search"></i>搜索
+      </button>
     </div>
 
   </form>
