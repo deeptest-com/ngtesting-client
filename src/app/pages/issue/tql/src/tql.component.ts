@@ -20,8 +20,8 @@ export class Tql implements OnInit, AfterViewInit {
   @Input() tql: string;
   @Output() public queryChanged: EventEmitter<any> = new EventEmitter();
 
-  @ViewChild(NgbDropdown) private typeDropdown: NgbDropdown;
-  @ViewChild(NgbDropdown) private projectDropdown: NgbDropdown;
+  @ViewChild(NgbDropdown) private typeDropdown2: NgbDropdown;
+  @ViewChild(NgbDropdown) private projectDropdown2: NgbDropdown;
 
   projects: any[] = [
     { id: 1, name: 'ngtesting-web' },
@@ -47,9 +47,11 @@ export class Tql implements OnInit, AfterViewInit {
   selected($event: any) {
     console.log('---selected ', $event);
   }
-  search() {
-    console.log('===', this.typeDropdown);
-    this.projectDropdown.open();
-    console.log('===', this.typeDropdown);
+  search($event) {
+    console.log('===', this.typeDropdown2);
+    this.typeDropdown2.open();
+    console.log('===', this.typeDropdown2);
+
+    $event.stopPropagation();
   }
 }

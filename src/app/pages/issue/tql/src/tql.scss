@@ -2,4 +2,12 @@
   form {
     button,input,textarea{outline:none;}
   }
+
+  .btn-group {
+    margin: 0 4px;
+
+    .keywords {
+      margin-right: 0;
+    }
+  }
 }
