@@ -1,9 +1,9 @@
 <div class="tql">
   <div class="form-inline">
     <tql-condition [title]="'项目'" [items]="projects" (selected)="selected($event)"></tql-condition>
-    <tql-condition [title]="'类型'"></tql-condition>
-    <tql-condition [title]="'状态'"></tql-condition>
-    <tql-condition [title]="'优先级'"></tql-condition>
+    <tql-condition [title]="'类型'" [filter]="false"></tql-condition>
+    <tql-condition [title]="'状态'" [filter]="false"></tql-condition>
+    <tql-condition [title]="'优先级'" [filter]="false"></tql-condition>
     <tql-condition [title]="'经办人'"></tql-condition>
 
     <div class="btn-group">
