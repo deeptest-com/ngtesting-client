@@ -20,7 +20,7 @@ export class PrjResolve implements CanActivate {
     console.log('PrjResolve - canActivate', context.prjId, CONSTANT.CURR_PRJ_ID);
 
     // CONSTANT.CURR_PRJ_ID，pages.resolve会执行相关操作
-    if (CONSTANT.CURR_PRJ_ID != null && CONSTANT.CURR_PRJ_ID != context.prjId) {
+    if (CONSTANT.CURR_PRJ_ID != context.prjId) { // CONSTANT.CURR_PRJ_ID != null &&
       return this.projectService.change(context.prjId).toPromise().then(result => {
         const prj = result.data;
         if (prj.type == 'project') {
