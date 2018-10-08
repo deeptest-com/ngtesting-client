@@ -4,9 +4,9 @@ import { CONSTANT } from '../../utils/constant';
 import { PrivilegeService } from '../../service/privilege';
 
 @Directive({
-  selector: '[privilege]',
+  selector: '[prj-privilege]',
 })
-export class PrivilegeDirective implements OnInit, OnDestroy {
+export class PrjPrivilegeDirective implements OnInit, OnDestroy {
   eventCode: string = 'PrivilegeDirective';
 
   private elem: Element;

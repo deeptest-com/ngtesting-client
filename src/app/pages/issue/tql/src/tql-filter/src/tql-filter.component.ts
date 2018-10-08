@@ -4,16 +4,16 @@ import { Component, Input, OnInit, AfterViewInit, Output, EventEmitter, ViewChil
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 
-import { CONSTANT } from '../../../utils/constant';
+import { CONSTANT } from '../../../../../../utils/constant';
 
-import { TqlConditionService } from './tql-condition.service';
+import { TqlFilterService } from './tql-filter.service';
 
 @Component({
-  selector: 'tql-condition',
-  templateUrl: './tql-condition.html',
+  selector: 'tql-filter',
+  templateUrl: './tql-filter.html',
   styleUrls: ['./styles.scss'],
 })
-export class TqlConditionComponent implements OnInit, AfterViewInit {
+export class TqlFilterComponent implements OnInit, AfterViewInit {
   form: FormGroup;
 
   @Input() filter: boolean = true;
@@ -21,7 +21,7 @@ export class TqlConditionComponent implements OnInit, AfterViewInit {
   @Input() items: any[];
   @Output() selected = new EventEmitter<any>();
 
-  constructor(private fb: FormBuilder, private tqlConditionService: TqlConditionService) {
+  constructor(private fb: FormBuilder, private tqlFilterService: TqlFilterService) {
     this.form = this.fb.group({});
   }
 

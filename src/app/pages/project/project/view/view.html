@@ -53,7 +53,7 @@
                 <td>{{plan.endTime | date:'y/MM/dd'}}</td>
                 <td>{{plan.status | exeStatus}}</td>
                 <td>
-                  <span privilege [privs]="'test_plan-view'"
+                  <span prj-privilege [privs]="'test_plan-view'"
                         [routerLink]="['/pages/org/' + orgId + '/prj/' + id + '/implement/plan/' + plan.id + '/view']" class="link no-underline">查看</span>
                 </td>
               </tr>

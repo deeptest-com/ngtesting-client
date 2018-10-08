@@ -1,0 +1,22 @@
+<div class="tql-filters">
+  <form [formGroup]="form">
+    <div ngbDropdown #projectDropdown="ngbDropdown" [autoClose]="'outside'" class="btn-group">
+      <button class="btn btn-default dropdown" id="projectDropdownMenu" ngbDropdownToggle>{{title}}</button>
+
+      <div (click)="clickMenu($event)" class="dropdown-menu" aria-labelledby="projectDropdownMenu" ngbDropdownMenu>
+        <button *ngIf="filter" class="dropdown-item">
+          <input type="search" class="form-control form-control-sm" placeholder="过滤" name="keywords">
+          <i class="fa fa-search"></i>
+        </button>
+
+        <li class="dropdown-divider"></li>
+
+        <!--<button class="dropdown-item">所有</button>-->
+        <button (click)="selectItem(item)" *ngFor="let item of items" class="dropdown-item list-item">
+          <input [(ngModel)]="item.selected" formControlName="{{'menu-item-' + item.id}}" class="form-check-input" type="checkbox" value="{{item.id}}">
+          <a>{{item.name}}</a>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

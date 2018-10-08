@@ -6,13 +6,13 @@ import { ClientService } from '../service/client';
 import { PrivilegeService } from '../service/privilege';
 
 import { ResizeDirective } from './resize/resize.directive';
-import { PrivilegeDirective } from './privilege/privilege.directive';
+import { PrjPrivilegeDirective } from './privilege/prj-privilege.directive';
 import { OrgPrivilegeDirective } from './privilege/org-privilege.directive';
 
 @NgModule({
   imports: [CommonModule],
-  declarations: [ResizeDirective, PrivilegeDirective, OrgPrivilegeDirective],
-  exports: [ResizeDirective, PrivilegeDirective, OrgPrivilegeDirective],
+  declarations: [ResizeDirective, PrjPrivilegeDirective, OrgPrivilegeDirective],
+  exports: [ResizeDirective, PrjPrivilegeDirective, OrgPrivilegeDirective],
   providers: [UserService, ClientService, PrivilegeService, OrgPrivilegeDirective],
 })
 export class DirectiveModule {

@@ -103,7 +103,7 @@
               <th style="width: 300px;">执行状况</th>
               <th>测试环境</th>
               <th style="width: 250px;" class="opt">
-                <span *ngIf="form.valid" privilege [privs]="'test_plan-maintain'" (click)="editTask()" class="link no-underline">新建任务</span>
+                <span *ngIf="form.valid" prj-privilege [privs]="'test_plan-maintain'" (click)="editTask()" class="link no-underline">新建任务</span>
               </th>
             </tr>
             </thead>
@@ -123,9 +123,9 @@
               </td>
               <td>{{ item.envName }}</td>
               <td class="center">
-                <span privilege [privs]="'test_plan-maintain'" (click)="editTaskCases(item, i)" class="link no-underline">选用例</span>
-                <span privilege [privs]="'test_plan-maintain'" (click)="editTask(item, i)" class="link no-underline">编辑</span>
-                <span privilege [privs]="'test_plan-delete'" (click)="removeSet(item, i)" class="link no-underline">删除</span>
+                <span prj-privilege [privs]="'test_plan-maintain'" (click)="editTaskCases(item, i)" class="link no-underline">选用例</span>
+                <span prj-privilege [privs]="'test_plan-maintain'" (click)="editTask(item, i)" class="link no-underline">编辑</span>
+                <span prj-privilege [privs]="'test_plan-delete'" (click)="removeSet(item, i)" class="link no-underline">删除</span>
                 </td>
             </tr>
             </tbody>
@@ -141,7 +141,7 @@
         &nbsp;
         <button [routerLink]="['/pages/org/' + orgId + '/prj/' + prjId + '/implement/plan/list']" type="button" class="btn btn-default">取消</button>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <button privilege [privs]="'test_plan-maintain'" (click)="delete()" *ngIf="model.id" type="button" class="btn btn-danger">删除</button>
+        <button prj-privilege [privs]="'test_plan-maintain'" (click)="delete()" *ngIf="model.id" type="button" class="btn btn-danger">删除</button>
       </div>
     </div>
 
