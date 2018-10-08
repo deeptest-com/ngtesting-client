@@ -11,7 +11,7 @@ const routes: Routes = [
     path: '',
     component: Issue,
     children: [
-      { path: 'query/:filter/:tql', component: IssueQuery },
+      { path: 'query/:tql', component: IssueQuery },
       {
         path: ':id',
         component: Issue,

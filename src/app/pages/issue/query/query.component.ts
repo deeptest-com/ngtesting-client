@@ -23,9 +23,6 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
 
   orgId: number;
   prjId: number;
-  filter: number;
-  tql: string = 'all';
-  query: any = { keywords: '', disabled: 'false' };
 
   projects: any;
   maxLevel: number;
@@ -50,13 +47,6 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
     this.orgId = CONSTANT.CURR_ORG_ID;
     this.prjId = CONSTANT.CURR_PRJ_ID;
 
-    this._route.params.forEach((params: Params) => {
-      this.filter = +params['filter'];
-      this.tql = params['tql'];
-
-      CONSTANT.ISSUE_FILTER = this.filter;
-      CONSTANT.ISSUE_TQL = this.tql;
-    });
     this.loadData();
 
     this.routeSub = this._route.pathFromRoot[5].params.subscribe(params => {
@@ -84,18 +74,13 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
   queryChanged(): void {
     // this._routeService.navTo('/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + this.prjId
     //   + '/issue/query/' + this.filter + '/' + this.tql);
-    console.log('queryChange 2', this.query);
+    console.log('queryChange 2', CONSTANT.ISSUE_TQL);
   }
 
   loadData() {
-    this.query = this.buildQuery(this.tql);
-
     // this._issueService.query(this.filter, this.query).subscribe((json: any) => {
     //   this.projects = json.data;
     // });
-  }
-  buildQuery(tql: string) {
-    return {};
   }
 
   ngOnDestroy(): void {

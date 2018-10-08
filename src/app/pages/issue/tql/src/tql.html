@@ -1,28 +1,18 @@
 <div class="tql">
   <div class="form-inline">
     <tql-filter [title]="'项目'" [items]="projects" (selected)="selected($event)"></tql-filter>
-    <tql-filter [title]="'类型'" [filter]="false"></tql-filter>
-    <tql-filter [title]="'状态'" [filter]="false"></tql-filter>
-    <tql-filter [title]="'优先级'" [filter]="false"></tql-filter>
+    <tql-filter [title]="'类型'" [search]="false"></tql-filter>
+    <tql-filter [title]="'状态'" [search]="false"></tql-filter>
+    <tql-filter [title]="'优先级'" [search]="false"></tql-filter>
     <tql-filter [title]="'经办人'"></tql-filter>
 
     <div class="btn-group">
-      <input [(ngModel)]="query.keywords"
+      <input [(ngModel)]="keywords"
              type="search" class="form-control form-control-sm keywords" placeholder="关键字" id="keywords" name="keywords">
     </div>
 
     <div ngbDropdown class="btn-group more">
-      <button class="btn btn-default dropdown" ngbDropdownToggle>更多</button>
-      <div class="dropdown-menu">
-        <button class="dropdown-item">===</button>
-        <button class="dropdown-item">
-          <a (click)="selectProject()" class="link">
-            ===
-          </a>
-        </button>
-
-        <li class="dropdown-divider"></li>
-      </div>
+      <tql-filters (selected)="selected($event)"></tql-filters>
     </div>
 
     <div class="btn-group">
@@ -34,7 +24,7 @@
   </div>
 
   <div class="form-inline">
-    <tql-filters [title]="'项目'" [items]="projects" (selected)="selected($event)"></tql-filters>
+    <tql-filter [title]="'项目'" [items]="projects" (selected)="selected($event)"></tql-filter>
   </div>
 
 </div>

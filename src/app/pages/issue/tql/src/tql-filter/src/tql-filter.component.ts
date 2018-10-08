@@ -16,7 +16,7 @@ import { TqlFilterService } from './tql-filter.service';
 export class TqlFilterComponent implements OnInit, AfterViewInit {
   form: FormGroup;
 
-  @Input() filter: boolean = true;
+  @Input() search: boolean = true;
   @Input() title: string;
   @Input() items: any[];
   @Output() selected = new EventEmitter<any>();

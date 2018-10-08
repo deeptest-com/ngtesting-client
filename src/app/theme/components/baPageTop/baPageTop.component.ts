@@ -117,7 +117,7 @@ export class BaPageTop implements OnInit, AfterViewInit, OnDestroy {
     } else if (module == 'autotest') {
       url = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + CONSTANT.CURR_PRJ_ID + '/autotest/aitask';
     } else if (module == 'issue') {
-      url = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + CONSTANT.CURR_PRJ_ID + '/issue/query/0/all';
+      url = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + CONSTANT.CURR_PRJ_ID + '/issue/query/all';
     }
 
     this._routeService.navTo(url);

@@ -16,9 +16,7 @@ import { TqlFiltersService } from './tql-filters.service';
 export class TqlFiltersComponent implements OnInit, AfterViewInit {
   form: FormGroup;
 
-  @Input() filter: boolean = true;
-  @Input() title: string;
-  @Input() items: any[];
+  @Input() filters: any[];
   @Output() selected = new EventEmitter<any>();
 
   constructor(private fb: FormBuilder, private tqlFiltersService: TqlFiltersService) {
@@ -26,7 +24,7 @@ export class TqlFiltersComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): any {
-    _.forEach(this.items, (item: any, index: number) => {
+    _.forEach(this.filters, (item: any, index: number) => {
       this.form.addControl('menu-item-' + item.id, new FormControl('', []));
     });
   }
@@ -36,7 +34,7 @@ export class TqlFiltersComponent implements OnInit, AfterViewInit {
 
   change(values: any) {
     let selectedItems = '';
-    _.forEach(this.items, (item: any, index: number) => {
+    _.forEach(this.filters, (item: any, index: number) => {
       if (item.selected) {
         if (selectedItems != '') {
           selectedItems += ',';

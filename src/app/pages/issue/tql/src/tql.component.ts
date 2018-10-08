@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation, OnInit, AfterViewInit, OnDestroy,
   Input, Output, EventEmitter, ViewChild } from '@angular/core';
-
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 
 import { GlobalState } from '../../../../global.state';
@@ -15,8 +15,8 @@ import { TqlService } from './tql.service';
 })
 export class Tql implements OnInit, AfterViewInit {
   statusMap: Array<any> = CONSTANT.EntityDisabled;
+  keywords: string = '';
 
-  @Input() query: any;
   @Input() tql: string;
   @Output() public queryChanged: EventEmitter<any> = new EventEmitter();
 
@@ -28,8 +28,13 @@ export class Tql implements OnInit, AfterViewInit {
     { id: 2, name: 'ngtesting-client' },
     { id: 3, name: 'ngtesting-mindmap' } ];
 
-  constructor(private _state: GlobalState, _tqlService: TqlService) {
+  constructor(private _route: ActivatedRoute, private _state: GlobalState, private _tqlService: TqlService) {
+    this._route.params.forEach((params: Params) => {
+      this.tql = params['tql'];
+    });
+    CONSTANT.ISSUE_TQL = this.tql;
 
+    this.loadData();
   }
 
   ngOnInit(): void {
@@ -53,5 +58,11 @@ export class Tql implements OnInit, AfterViewInit {
     console.log('===', this.typeDropdown2);
 
     $event.stopPropagation();
+  }
+
+  loadData() {
+    this._tqlService.getAllFilters().subscribe((json: any) => {
+
+    });
   }
 }
