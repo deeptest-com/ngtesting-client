@@ -88,9 +88,6 @@ export class CustomFieldEdit implements OnInit, AfterViewInit {
 
   formErrors = [];
   validateMsg = {
-    'code': {
-      'required': '编码不能为空',
-    },
     'label': {
       'required': '名称不能为空',
     },

@@ -19,15 +19,14 @@
   <form *ngIf="model" [formGroup]="form" class="my-validate-form">
     <div class="form-group row">
       <label class="col-sm-2 col-form-label"><span>名称</span></label>
-      <div class="col-sm-10">
+      <div class="col-sm-4">
         <input type="text" class="form-control" name="label" formControlName="label"
                [(ngModel)]="model.label" #label>
       </div>
-    </div>
-    <div class="form-group row">
+
       <label class="col-sm-2 col-form-label"><span>编码</span></label>
-      <label class="col-sm-10 col-form-label left">
-        {{model.myColumn}}-{{model.code}}
+      <label class="col-sm-4 col-form-label left">
+        {{model.myColumn}}
         <input type="hidden" class="form-control" name="myColumn" formControlName="myColumn"
                [(ngModel)]="model.myColumn" #myColumn>
       </label>

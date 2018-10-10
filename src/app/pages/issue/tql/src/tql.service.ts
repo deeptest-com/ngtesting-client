@@ -11,14 +11,14 @@ import { RouteService } from '../../../../service/route';
 @Injectable()
 export class TqlService {
   _apiUrl = 'tql/';
-  _getAllFiltersUrl = this._apiUrl + 'getAllFilters';
+  _getFiltersUrl = this._apiUrl + 'getFilters';
 
   constructor(private _reqService: RequestService) {
 
   }
 
-  getAllFilters() {
-    return this._reqService.post(this._getAllFiltersUrl, { tql: CONSTANT.ISSUE_TQL } );
+  getFilters() {
+    return this._reqService.post(this._getFiltersUrl, { tql: CONSTANT.ISSUE_TQL } );
   }
 
   tqlToModel (tql: string) {

@@ -61,7 +61,7 @@ export class Tql implements OnInit, AfterViewInit {
   }
 
   loadData() {
-    this._tqlService.getAllFilters().subscribe((json: any) => {
+    this._tqlService.getFilters().subscribe((json: any) => {
 
     });
   }
