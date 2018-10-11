@@ -6,10 +6,10 @@ import { CONSTANT } from '../../../../utils/constant';
 import { Utils } from '../../../../utils/utils';
 import { RouteService } from '../../../../service/route';
 import { SlimLoadingBarService } from '../../../../components/ng2-loading-bar';
-import { TaskService } from '../../../../service/task';
-import { CaseService } from '../../../../service/case';
-import { CaseInTaskService } from '../../../../service/case-in-task';
-import {Task} from "protractor/built/taskScheduler";
+import { TaskService } from '../../../../service/client/task';
+import { CaseService } from '../../../../service/client/case';
+import { CaseInTaskService } from '../../../../service/client/case-in-task';
+import { Task } from 'protractor/built/taskScheduler';
 
 @Component({
   selector: 'execution-suite',

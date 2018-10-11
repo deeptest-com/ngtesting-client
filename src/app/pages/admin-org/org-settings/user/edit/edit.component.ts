@@ -12,7 +12,7 @@ import { Utils } from '../../../../../utils/utils';
 import { ValidatorUtils, PhoneValidator } from '../../../../../validator';
 import { RouteService } from '../../../../../service/route';
 
-import { UserService } from '../../../../../service/user';
+import { UserAdmin } from '../../../../../service/admin/user';
 import { PopDialogComponent } from '../../../../../components/pop-dialog';
 
 declare var jQuery;
@@ -34,7 +34,7 @@ export class UserEdit implements OnInit, AfterViewInit {
   @ViewChild('modalWrapper') modalWrapper: PopDialogComponent;
 
   constructor(private _state: GlobalState, private _routeService: RouteService, private _route: ActivatedRoute,
-              private fb: FormBuilder, private userService: UserService) {
+              private fb: FormBuilder, private userAdmin: UserAdmin) {
 
   }
   ngOnInit() {
@@ -72,20 +72,20 @@ export class UserEdit implements OnInit, AfterViewInit {
   formErrors = [];
   validateMsg = {
     'nickname': {
-      'required':      '姓名不能为空',
+      'required': '姓名不能为空',
     },
     'email': {
-      'required':      '邮箱不能为空',
-      'email':      '邮箱格式错误',
+      'required': '邮箱不能为空',
+      'email': '邮箱格式错误',
     },
     'phone': {
-      'required':      '手机不能为空',
-      'validate':      '手机格式不正确',
+      'required': '手机不能为空',
+      'validate': '手机格式不正确',
     },
   };
 
   loadData() {
-    this.userService.get(this.id).subscribe((json: any) => {
+    this.userAdmin.get(this.id).subscribe((json: any) => {
       this.user = json.user;
       this.relations = json.relations;
 
@@ -98,7 +98,7 @@ export class UserEdit implements OnInit, AfterViewInit {
   update() {
     const that = this;
 
-    that.userService.update(that.user, that.relations).subscribe((json: any) => {
+    that.userAdmin.update(that.user, that.relations).subscribe((json: any) => {
       if (json.code == 1) {
 
         that.formErrors = ['保存成功'];
@@ -111,7 +111,7 @@ export class UserEdit implements OnInit, AfterViewInit {
   }
 
   remove() {
-    this.userService.removeFromOrg(this.user.id, CONSTANT.CURR_ORG_ID).subscribe((json: any) => {
+    this.userAdmin.removeFromOrg(this.user.id, CONSTANT.CURR_ORG_ID).subscribe((json: any) => {
       if (json.code == 1) {
         this.formErrors = ['删除成功'];
         this._routeService.navTo('/pages/org-admin/org-settings/user/list');

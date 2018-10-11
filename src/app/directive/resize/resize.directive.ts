@@ -4,7 +4,7 @@ import * as _ from 'lodash';
 declare var jQuery;
 
 import { CONSTANT } from '../../utils/constant';
-import { ClientService } from '../../service/client';
+import { ClientService } from '../../service/client/client';
 
 @Directive({
   selector: '[resize]',

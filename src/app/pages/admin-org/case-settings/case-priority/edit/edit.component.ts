@@ -14,7 +14,7 @@ import { Utils } from '../../../../../utils/utils';
 import { ValidatorUtils, PhoneValidator } from '../../../../../validator';
 import { RouteService } from '../../../../../service/route';
 
-import { CasePriorityService } from '../../../../../service/case-priority';
+import { CasePriorityService } from '../../../../../service/admin/case-priority';
 import { PopDialogComponent } from '../../../../../components/pop-dialog';
 
 declare var jQuery;

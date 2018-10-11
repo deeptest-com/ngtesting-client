@@ -6,8 +6,7 @@ import { GlobalState } from '../../../../../global.state';
 import { CONSTANT } from '../../../../../utils/constant';
 import { WS_CONSTANT } from '../../../../../utils/ws-constant';
 import { RouteService } from '../../../../../service/route';
-import { OrgService } from '../../../../../service/org';
-import { AccountService } from '../../../../../service/account';
+import { OrgService } from '../../../../../service/admin/org';
 
 @Component({
   selector: 'org-list',
@@ -26,7 +25,7 @@ export class OrgList implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(private _routeService: RouteService, private _state: GlobalState,
               private fb: FormBuilder, private el: ElementRef,
-              private orgService: OrgService, private accountService: AccountService) {
+              private orgService: OrgService) {
   }
 
   ngOnInit() {

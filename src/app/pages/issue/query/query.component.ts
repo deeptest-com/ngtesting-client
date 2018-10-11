@@ -10,7 +10,7 @@ import { CONSTANT } from '../../../utils/constant';
 import { WS_CONSTANT } from '../../../utils/ws-constant';
 import { Utils } from '../../../utils/utils';
 import { RouteService } from '../../../service/route';
-import { IssueService } from '../../../service/issue';
+import { IssueService } from '../../../service/client/issue';
 
 @Component({
   selector: 'issue-query',

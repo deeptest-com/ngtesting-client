@@ -24,11 +24,11 @@ import { RouteService } from '../../../service/route';
 import { RequestService } from '../../../service/request';
 import { DatetimePickerService } from '../../../service/datetime-picker';
 
-import { SuiteService } from '../../../service/suite';
-import { CaseService } from '../../../service/case';
-import { CaseAttachmentService } from '../../../service/case-attachment';
-import { CaseStepService } from '../../../service/case-step';
-import { CaseCommentsService } from '../../../service/case-comments';
+import { SuiteService } from '../../../service/client/suite';
+import { CaseService } from '../../../service/client/case';
+import { CaseAttachmentService } from '../../../service/client/case-attachment';
+import { CaseStepService } from '../../../service/client/case-step';
+import { CaseCommentsService } from '../../../service/client/case-comments';
 import { PrivilegeService } from '../../../service/privilege';
 
 import { Case } from './case.component';

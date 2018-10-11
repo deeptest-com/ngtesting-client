@@ -13,10 +13,10 @@ import { logger } from '../../../../utils/utils';
 import { CustomValidator, ValidatorUtils } from '../../../../validator';
 import { RouteService } from '../../../../service/route';
 
-import { SuiteService } from '../../../../service/suite';
-import { TaskService } from '../../../../service/task';
-import { CaseService } from '../../../../service/case';
-import { UserService } from '../../../../service/user';
+import { SuiteService } from '../../../../service/client/suite';
+import { TaskService } from '../../../../service/client/task';
+import { CaseService } from '../../../../service/client/case';
+import { UserService } from '../../../../service/client/user';
 
 import { TaskEditComponent } from '../../task/edit';
 import { CaseSelectionComponent } from '../../../../components/case-selection';

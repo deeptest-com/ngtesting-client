@@ -6,8 +6,8 @@ import { GlobalState } from '../../../../global.state';
 import { CONSTANT } from '../../../../utils/constant';
 import { Utils } from '../../../../utils/utils';
 import { RouteService } from '../../../../service/route';
-import { MsgService } from '../../../../service/msg';
-import { AccountService } from '../../../../service/account';
+import { MsgService } from '../../../../service/client/msg';
+import { AccountService } from '../../../../service/client/account';
 
 @Component({
   selector: 'msg-list',

@@ -11,9 +11,9 @@ import { ChartExecutionModule } from '../../../components/chart/chart-execution'
 import { DirectiveModule } from '../../../directive/directive.module';
 
 import { OrgResolve } from './org.resolve';
-import { ProjectService } from '../../../service/project';
-import { AccountService } from '../../../service/account';
-import { ReportService } from '../../../service/report';
+import { ProjectService } from '../../../service/client/project';
+import { AccountService } from '../../../service/client/account';
+import { ReportService } from '../../../service/client/report';
 
 import { Org } from './org.component';
 import { OrgView } from '../../org/view/view.component';

@@ -13,10 +13,10 @@ import { Utils, logger } from '../../../../utils/utils';
 import { ValidatorUtils, CustomValidator } from '../../../../validator';
 import { RouteService } from '../../../../service/route';
 
-import { PlanService } from '../../../../service/plan';
-import { TaskService } from '../../../../service/task';
-import { CaseService } from '../../../../service/case';
-import { UserService } from '../../../../service/user';
+import { PlanService } from '../../../../service/client/plan';
+import { TaskService } from '../../../../service/client/task';
+import { CaseService } from '../../../../service/client/case';
+import { UserService } from '../../../../service/client/user';
 
 import { CaseSelectionComponent } from '../../../../components/case-selection';
 import { EnvironmentConfigComponent } from '../../../../components/environment-config';

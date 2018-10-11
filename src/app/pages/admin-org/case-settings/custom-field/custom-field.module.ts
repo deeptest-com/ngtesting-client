@@ -17,7 +17,7 @@ import { DropdownOptionsComponent } from '../../../../components/dropdown-option
 import { RouteService } from '../../../../service/route';
 import { RequestService } from '../../../../service/request';
 import { DatetimePickerService } from '../../../../service/datetime-picker';
-import { CustomFieldService } from '../../../../service/custom-field';
+import { CustomFieldService } from '../../../../service/admin/custom-field';
 
 import { CustomField } from './custom-field.component';
 import { CustomFieldList } from './list';

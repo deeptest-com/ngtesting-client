@@ -11,10 +11,10 @@ import { Utils, logger } from '../../../../utils/utils';
 import { ValidatorUtils } from '../../../../validator/validator.utils';
 import { RouteService } from '../../../../service/route';
 
-import { CaseService } from '../../../../service/case';
-import { CaseStepService } from '../../../../service/case-step';
-import { CaseInTaskService } from '../../../../service/case-in-task';
-import { CaseAttachmentService } from '../../../../service/case-attachment';
+import { CaseService } from '../../../../service/client/case';
+import { CaseStepService } from '../../../../service/client/case-step';
+import { CaseInTaskService } from '../../../../service/client/case-in-task';
+import { CaseAttachmentService } from '../../../../service/client/case-attachment';
 import { ZtreeService } from '../../../../components/ztree';
 import { PrivilegeService } from '../../../../service/privilege';
 

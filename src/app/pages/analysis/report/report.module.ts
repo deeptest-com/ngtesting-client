@@ -16,8 +16,8 @@ import { CustomFieldModule } from '../../../components/custom-field';
 import { RouteService } from '../../../service/route';
 import { RequestService } from '../../../service/request';
 import { DatetimePickerService } from '../../../service/datetime-picker';
-import { CaseService } from '../../../service/case';
-import { CaseStepService } from '../../../service/case-step';
+import { CaseService } from '../../../service/client/case';
+import { CaseStepService } from '../../../service/client/case-step';
 
 import { Report } from './report.component';
 import { ReportList } from './list/list.component';

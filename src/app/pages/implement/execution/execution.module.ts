@@ -23,14 +23,14 @@ import { RouteService } from '../../../service/route';
 import { RequestService } from '../../../service/request';
 import { DatetimePickerService } from '../../../service/datetime-picker';
 
-import { TaskService } from '../../../service/task';
-import { SuiteService } from '../../../service/suite';
-import { CaseService } from '../../../service/case';
-import { CaseStepService } from '../../../service/case-step';
-import { CaseInTaskService } from '../../../service/case-in-task';
-import { CaseAttachmentService } from '../../../service/case-attachment';
+import { TaskService } from '../../../service/client/task';
+import { SuiteService } from '../../../service/client/suite';
+import { CaseService } from '../../../service/client/case';
+import { CaseStepService } from '../../../service/client/case-step';
+import { CaseInTaskService } from '../../../service/client/case-in-task';
+import { CaseAttachmentService } from '../../../service/client/case-attachment';
 import { PrivilegeService } from '../../../service/privilege';
-import { CaseCommentsService } from '../../../service/case-comments';
+import { CaseCommentsService } from '../../../service/client/case-comments';
 
 import { Execution } from './execution.component';
 import { ExecutionSuite } from './suite/suite.component';

@@ -5,7 +5,7 @@ import { GlobalState } from '../../../../../global.state';
 import { CONSTANT } from '../../../../../utils/constant';
 import { Utils } from '../../../../../utils/utils';
 import { RouteService } from '../../../../../service/route';
-import { CasePriorityService } from '../../../../../service/case-priority';
+import { CasePriorityService } from '../../../../../service/admin/case-priority';
 
 @Component({
   selector: 'case-priority-list',

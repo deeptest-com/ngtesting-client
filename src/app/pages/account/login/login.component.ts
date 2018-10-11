@@ -7,7 +7,7 @@ import {GlobalState} from '../../../global.state';
 import {ValidatorUtils} from '../../../validator';
 
 import { RouteService } from '../../../service/route';
-import { AccountService } from '../../../service/account';
+import { AccountService } from '../../../service/client/account';
 
 @Component({
   selector: 'login',

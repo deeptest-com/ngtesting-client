@@ -6,7 +6,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CONSTANT } from '../../../utils/constant';
 import { Utils } from '../../../utils/utils';
 import { ValidatorUtils } from '../../../validator';
-import { CustomFieldOptionService } from '../../../service/custom-field-option';
+import { CustomFieldOptionService } from '../../../service/admin/custom-field-option';
 
 import * as _ from 'lodash';
 

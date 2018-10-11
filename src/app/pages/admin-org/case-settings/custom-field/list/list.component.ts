@@ -5,7 +5,7 @@ import { GlobalState } from '../../../../../global.state';
 import { CONSTANT } from '../../../../../utils/constant';
 import { Utils } from '../../../../../utils/utils';
 import { RouteService } from '../../../../../service/route';
-import { CustomFieldService } from '../../../../../service/custom-field';
+import { CustomFieldService } from '../../../../../service/admin/custom-field';
 
 @Component({
   selector: 'custom-field-list',

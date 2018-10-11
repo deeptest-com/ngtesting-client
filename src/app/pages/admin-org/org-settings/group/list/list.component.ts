@@ -6,7 +6,7 @@ import { GlobalState } from '../../../../../global.state';
 import { CONSTANT } from '../../../../../utils/constant';
 import { Utils } from '../../../../../utils/utils';
 import { RouteService } from '../../../../../service/route';
-import { GroupService } from '../../../../../service/group';
+import { OrgGroupService } from '../../../../../service/admin/org-group';
 
 @Component({
   selector: 'group-list',
@@ -26,7 +26,7 @@ export class GroupList implements OnInit, AfterViewInit {
   pageSize: number = 15;
 
   constructor(private _routeService: RouteService, private _state: GlobalState,
-              private fb: FormBuilder, private el: ElementRef, private groupService: GroupService) {
+              private fb: FormBuilder, private el: ElementRef, private groupService: OrgGroupService) {
   }
 
   ngOnInit() {

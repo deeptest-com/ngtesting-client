@@ -10,7 +10,7 @@ import { CONSTANT } from '../../../../utils/constant';
 import { WS_CONSTANT } from '../../../../utils/ws-constant';
 import { Utils } from '../../../../utils/utils';
 import { RouteService } from '../../../../service/route';
-import { ProjectService } from '../../../../service/project';
+import { ProjectService } from '../../../../service/client/project';
 
 @Component({
   selector: 'project-list',

@@ -4,7 +4,7 @@ import { GlobalState } from '../../../global.state';
 
 import { CONSTANT } from '../../../utils/constant';
 
-import { IssueService } from '../../../service/issue';
+import { IssueService } from '../../../service/client/issue';
 
 declare var jQuery;
 

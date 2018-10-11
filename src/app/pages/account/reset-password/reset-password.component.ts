@@ -7,7 +7,7 @@ import {GlobalState} from '../../../global.state';
 import {ValidatorUtils} from '../../../validator/validator.utils';
 import {PasswordsEqualValidator} from '../../../validator';
 
-import { AccountService } from '../../../service/account';
+import { AccountService } from '../../../service/client/account';
 
 declare var jQuery;
 

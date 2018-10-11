@@ -10,12 +10,12 @@ import { PipeModule } from '../pipe/pipe.module';
 
 import { RouteService } from '../service/route';
 import { RequestService } from '../service/request';
-import { SockService } from '../service/sock';
+import { SockService } from '../service/client/sock';
 
-import { AlertService } from '../service/alert';
-import { MsgService } from '../service/msg';
-import { OrgService } from '../service/org';
-import { AccountService } from '../service/account';
+import { OrgService } from '../service/admin/org';
+import { AlertService } from '../service/client/alert';
+import { MsgService } from '../service/client/msg';
+import { AccountService } from '../service/client/account';
 
 import {
   BaThemeConfig,

@@ -14,7 +14,7 @@ import { Utils } from '../../../../../utils/utils';
 import { ValidatorUtils } from '../../../../../validator/validator.utils';
 import { RouteService } from '../../../../../service/route';
 
-import { ProjectRoleService } from '../../../../../service/project-role';
+import { ProjectRoleService } from '../../../../../service/admin/project-role';
 import { PopDialogComponent } from '../../../../../components/pop-dialog';
 
 declare var jQuery;

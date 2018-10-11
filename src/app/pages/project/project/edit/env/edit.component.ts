@@ -11,7 +11,7 @@ import { RouteService } from '../../../../../service/route';
 
 import { PopDialogComponent } from '../../../../../components/pop-dialog';
 
-import { EnvService } from '../../../../../service/env';
+import { EnvService } from '../../../../../service/client/env';
 
 declare var jQuery;
 

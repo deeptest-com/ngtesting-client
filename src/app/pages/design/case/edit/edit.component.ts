@@ -9,9 +9,9 @@ import { WS_CONSTANT } from '../../../../utils/ws-constant';
 import { CONSTANT } from '../../../../utils/constant';
 import { ValidatorUtils } from '../../../../validator/validator.utils';
 
-import { CaseService } from '../../../../service/case';
-import { CaseAttachmentService } from '../../../../service/case-attachment';
-import { CaseStepService } from '../../../../service/case-step';
+import { CaseService } from '../../../../service/client/case';
+import { CaseAttachmentService } from '../../../../service/client/case-attachment';
+import { CaseStepService } from '../../../../service/client/case-step';
 
 import { PrivilegeService } from '../../../../service/privilege';
 

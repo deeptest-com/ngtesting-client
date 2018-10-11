@@ -8,7 +8,7 @@ import { SlimLoadingBarModule } from '../../../components/ng2-loading-bar';
 import { routing }       from './register.routing';
 import { RouteService } from '../../../service/route';
 import { RequestService } from '../../../service/request';
-import { AccountService } from '../../../service/account';
+import { AccountService } from '../../../service/client/account';
 
 import { Register } from './register.component';
 

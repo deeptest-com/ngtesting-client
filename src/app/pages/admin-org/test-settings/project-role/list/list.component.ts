@@ -5,7 +5,7 @@ import { GlobalState } from '../../../../../global.state';
 import { CONSTANT } from '../../../../../utils/constant';
 import { Utils } from '../../../../../utils/utils';
 import { RouteService } from '../../../../../service/route';
-import { ProjectRoleService } from '../../../../../service/project-role';
+import { ProjectRoleService } from '../../../../../service/admin/project-role';
 
 @Component({
   selector: 'role-list',

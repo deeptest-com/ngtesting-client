@@ -7,8 +7,8 @@ import { routing }       from './design.routing';
 import { NgbModalModule, NgbPaginationModule, NgbDropdownModule,
   NgbTabsetModule, NgbButtonsModule, NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { ProjectService } from '../../service/project';
-import { AccountService } from '../../service/account';
+import { ProjectService } from '../../service/client/project';
+import { AccountService } from '../../service/client/account';
 
 import { Design } from './design.component';
 

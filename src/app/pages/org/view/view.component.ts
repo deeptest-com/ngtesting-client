@@ -3,8 +3,8 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { NgModule, Pipe, OnInit, AfterViewInit, OnDestroy }      from '@angular/core';
 
 import { CONSTANT } from '../../../utils/constant';
-import { OrgService } from '../../../service/org';
-import { ReportService } from '../../../service/report';
+import { OrgService } from '../../../service/admin/org';
+import { ReportService } from '../../../service/client/report';
 
 declare var jQuery;
 

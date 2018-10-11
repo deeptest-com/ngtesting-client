@@ -12,7 +12,7 @@ import { RouteService } from '../../../../../service/route';
 
 import { PopDialogComponent } from '../../../../../components/pop-dialog';
 
-import { OrgService } from '../../../../../service/org';
+import { OrgService } from '../../../../../service/admin/org';
 
 declare var jQuery;
 

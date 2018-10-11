@@ -10,7 +10,7 @@ import { CONSTANT } from '../../../utils/constant';
 import { ValidatorUtils } from '../../../validator/validator.utils';
 
 import { RouteService } from '../../../service/route';
-import { IssueService } from '../../../service/issue';
+import { IssueService } from '../../../service/client/issue';
 
 import { PrivilegeService } from '../../../service/privilege';
 import { PopDialogComponent } from '../../../components/pop-dialog';
@@ -192,7 +192,7 @@ export class IssueEdit implements OnInit, AfterViewInit, OnDestroy {
   }
   back() {
     const url = '/pages/org/' + this.orgId + '/prj/' + this.prjId + '/issue/query/'
-      + CONSTANT.ISSUE_FILTER + '/' + CONSTANT.ISSUE_TQL;
+       + CONSTANT.ISSUE_TQL;
     console.log(url);
     this._routeService.navTo(url);
   }

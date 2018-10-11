@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { SearchSelectModule } from '../../../../components/search-select';
 
-import { UserService } from '../../../../service/user';
+import { UserService } from '../../../../service/client/user';
 
 import { TaskEditService } from './src/task-edit.service';
 import { TaskEditComponent } from './src/task-edit.component';

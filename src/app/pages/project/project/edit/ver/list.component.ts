@@ -6,7 +6,7 @@ import { GlobalState } from '../../../../../global.state';
 import { CONSTANT } from '../../../../../utils/constant';
 import { Utils } from '../../../../../utils/utils';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { VerService } from '../../../../../service/ver';
+import { VerService } from '../../../../../service/client/ver';
 
 @Component({
   selector: 'ver-list',

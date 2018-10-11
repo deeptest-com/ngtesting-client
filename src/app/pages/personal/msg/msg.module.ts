@@ -14,7 +14,7 @@ import { PopDialogModule } from '../../../components/pop-dialog';
 
 import { RouteService } from '../../../service/route';
 import { RequestService } from '../../../service/request';
-import { MsgService } from '../../../service/msg';
+import { MsgService } from '../../../service/client/msg';
 
 import { Msg } from './msg.component';
 import { MsgList } from './list';

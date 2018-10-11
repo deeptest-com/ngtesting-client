@@ -12,7 +12,7 @@ import { Utils } from '../../../../../utils/utils';
 import { ValidatorUtils } from '../../../../../validator/validator.utils';
 import { RouteService } from '../../../../../service/route';
 
-import { OrgRoleService } from '../../../../../service/org-role';
+import { OrgRoleService } from '../../../../../service/admin/org-role';
 import { PopDialogComponent } from '../../../../../components/pop-dialog';
 
 declare var jQuery;

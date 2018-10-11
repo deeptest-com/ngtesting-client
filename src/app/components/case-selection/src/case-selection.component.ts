@@ -7,8 +7,8 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CONSTANT } from '../../../utils/constant';
 
 import { ZtreeService } from '../../ztree/src/ztree.service';
-import { SuiteService } from '../../../service/suite';
-import { CaseService } from '../../../service/case';
+import { SuiteService } from '../../../service/client/suite';
+import { CaseService } from '../../../service/client/case';
 
 @Component({
   selector: 'case-selection',

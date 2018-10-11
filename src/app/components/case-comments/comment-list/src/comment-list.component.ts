@@ -5,8 +5,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CONSTANT } from '../../../../utils/constant';
 import { GlobalState } from '../../../../global.state';
 
-import { CaseService } from '../../../../service/case';
-import { CaseCommentsService } from '../../../../service/case-comments';
+import { CaseService } from '../../../../service/client/case';
+import { CaseCommentsService } from '../../../../service/client/case-comments';
 import { CommentEditComponent } from '../../comment-edit/src/comment-edit.component';
 
 @Component({

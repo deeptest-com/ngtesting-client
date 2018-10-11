@@ -6,9 +6,9 @@ import 'rxjs/add/operator/toPromise';
 import { GlobalState } from '../../../../global.state';
 import { CONSTANT } from '../../../../utils/constant';
 import { Utils } from '../../../../utils/utils';
-import { SockService } from '../../../../service/sock';
-import { UserService } from '../../../../service/user';
-import { ProjectService } from '../../../../service/project';
+import { SockService } from '../../../../service/client/sock';
+import { UserService } from '../../../../service/client/user';
+import { ProjectService } from '../../../../service/client/project';
 
 @Injectable()
 export class PrjResolve implements CanActivate {

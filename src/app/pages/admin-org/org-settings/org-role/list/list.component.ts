@@ -5,7 +5,7 @@ import { GlobalState } from '../../../../../global.state';
 import { CONSTANT } from '../../../../../utils/constant';
 import { Utils } from '../../../../../utils/utils';
 import { RouteService } from '../../../../../service/route';
-import { OrgRoleService } from '../../../../../service/org-role';
+import { OrgRoleService } from '../../../../../service/admin/org-role';
 
 @Component({
   selector: 'role-list',

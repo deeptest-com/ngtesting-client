@@ -9,7 +9,7 @@ import { CONSTANT } from '../../../../utils/constant';
 
 import { RouteService } from '../../../../service/route';
 
-import { ClientService } from './../../../../service/client';
+import { ClientService } from './../../../../service/client/client';
 
 import { PasswordEditPopupComponent } from '../../password';
 

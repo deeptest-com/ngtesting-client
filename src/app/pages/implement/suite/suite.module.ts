@@ -20,15 +20,15 @@ import { RouteService } from '../../../service/route';
 import { RequestService } from '../../../service/request';
 import { DatetimePickerService } from '../../../service/datetime-picker';
 import { MyDateParserFormatter } from '../../../service/my-date-parser-formatter';
-import { PlanService } from '../../../service/plan';
-import { TaskService } from '../../../service/task';
-import { SuiteService } from '../../../service/suite';
-import { CaseService } from '../../../service/case';
-import { UserService } from '../../../service/user';
+import { PlanService } from '../../../service/client/plan';
+import { TaskService } from '../../../service/client/task';
+import { SuiteService } from '../../../service/client/suite';
+import { CaseService } from '../../../service/client/case';
+import { UserService } from '../../../service/client/user';
 
-import { ProjectService } from '../../../service/project';
-import { AccountService } from '../../../service/account';
-import { ReportService } from '../../../service/report';
+import { ProjectService } from '../../../service/client/project';
+import { AccountService } from '../../../service/client/account';
+import { ReportService } from '../../../service/client/report';
 
 import { SuiteComponent } from './suite.component';
 import { SuiteListComponent } from './list/list.component';

@@ -19,11 +19,11 @@ import { RequestService } from '../../../service/request';
 import { DatetimePickerService } from '../../../service/datetime-picker';
 
 import { routing }       from './project.routing';
-import { ProjectService } from '../../../service/project';
-import { UserService } from '../../../service/user';
-import { UserAndGroupService } from '../../../service/userAndGroup';
-import { VerService } from '../../../service/ver';
-import { EnvService } from '../../../service/env';
+import { ProjectService } from '../../../service/client/project';
+import { UserService } from '../../../service/client/user';
+import { UserAndGroupService } from '../../../service/client/userAndGroup';
+import { VerService } from '../../../service/client/ver';
+import { EnvService } from '../../../service/client/env';
 
 import { Project } from './project.component';
 import { ProjectList } from './list/list.component';

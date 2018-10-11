@@ -13,7 +13,7 @@ import { Utils } from '../../../../../utils/utils';
 import { ValidatorUtils, CustomValidator } from '../../../../../validator';
 import { RouteService } from '../../../../../service/route';
 
-import { CustomFieldService } from '../../../../../service/custom-field';
+import { CustomFieldService } from '../../../../../service/admin/custom-field';
 import { PopDialogComponent } from '../../../../../components/pop-dialog';
 
 import { DropdownOptionsComponent } from '../../../../../components/dropdown-options';

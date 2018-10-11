@@ -15,7 +15,7 @@ import { PopDialogModule } from '../../../../components/pop-dialog';
 import { RouteService } from '../../../../service/route';
 import { RequestService } from '../../../../service/request';
 import { DatetimePickerService } from '../../../../service/datetime-picker';
-import { GroupService } from '../../../../service/group';
+import { OrgGroupService } from '../../../../service/admin/org-group';
 
 import { Group } from './group.component';
 import { GroupList } from './list';
@@ -42,8 +42,8 @@ import { GroupEdit } from './edit';
     RouteService,
     RequestService,
     DatetimePickerService,
-    GroupService,
-  ]
+    OrgGroupService,
+  ],
 })
 export class GroupModule {}
 

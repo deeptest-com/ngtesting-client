@@ -15,7 +15,7 @@ import { PopDialogModule } from '../../../../components/pop-dialog';
 import { RouteService } from '../../../../service/route';
 import { RequestService } from '../../../../service/request';
 import { DatetimePickerService } from '../../../../service/datetime-picker';
-import { CaseExeStatusService } from '../../../../service/case-exe-status';
+import { CaseExeStatusService } from '../../../../service/admin/case-exe-status';
 
 import { CaseExeStatus } from './case-exe-status.component';
 import { CaseExeStatusList } from './list';

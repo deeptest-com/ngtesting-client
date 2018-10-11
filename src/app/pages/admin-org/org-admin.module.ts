@@ -9,9 +9,9 @@ import { NgbModalModule, NgbPaginationModule, NgbDropdownModule,
 
 import { OrgAdmin } from './org-admin.component';
 
-import { OrgService } from '../../service/org';
+import { OrgService } from '../../service/admin/org';
 import { RouteService } from '../../service/route';
-import { AccountService } from '../../service/account';
+import { AccountService } from '../../service/client/account';
 
 @NgModule({
   imports: [

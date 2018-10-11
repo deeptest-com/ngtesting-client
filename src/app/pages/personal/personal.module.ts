@@ -16,9 +16,8 @@ import { RouteService } from '../../service/route';
 import { RequestService } from '../../service/request';
 import { DatetimePickerService } from '../../service/datetime-picker';
 
-import { AccountService } from '../../service/account';
-import { CompanyService } from '../../service/company';
-import { ClientService } from '../../service/client';
+import { AccountService } from '../../service/client/account';
+import { ClientService } from '../../service/client/client';
 
 import { Personal } from './personal.component';
 
@@ -50,7 +49,6 @@ import { ProfileEdit } from './profile/profile-edit';
     RequestService,
     DatetimePickerService,
     AccountService,
-    CompanyService,
     ClientService,
   ],
   entryComponents: [

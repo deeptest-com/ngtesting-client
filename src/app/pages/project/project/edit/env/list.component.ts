@@ -6,7 +6,7 @@ import { CONSTANT } from '../../../../../utils/constant';
 import { Utils, logger } from '../../../../../utils/utils';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { RouteService } from '../../../../../service/route';
-import { EnvService } from '../../../../../service/env';
+import { EnvService } from '../../../../../service/client/env';
 
 @Component({
   selector: 'env-list',

@@ -6,7 +6,7 @@ import { CONSTANT } from '../../../../utils/constant';
 import { WS_CONSTANT } from '../../../../utils/ws-constant';
 import { GlobalState } from '../../../../global.state';
 import { RouteService } from '../../../../service/route';
-import { SuiteService } from '../../../../service/suite';
+import { SuiteService } from '../../../../service/client/suite';
 
 @Component({
   selector: 'nga-suite-list',

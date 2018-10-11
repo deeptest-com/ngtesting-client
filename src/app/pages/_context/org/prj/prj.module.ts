@@ -14,13 +14,13 @@ import { ChartExecutionModule } from '../../../../components/chart/chart-executi
 import { ProjectView } from '../../../project/project/view/view.component';
 
 import { PrjResolve } from './prj.resolve';
-import { ReportService } from '../../../../service/report';
-import { ProjectService } from '../../../../service/project';
-import { AccountService } from '../../../../service/account';
+import { ReportService } from '../../../../service/client/report';
+import { ProjectService } from '../../../../service/client/project';
+import { AccountService } from '../../../../service/client/account';
 
-import { UserService } from '../../../../service/user';
-import { VerService } from '../../../../service/ver';
-import { EnvService } from '../../../../service/env';
+import { UserService } from '../../../../service/client/user';
+import { VerService } from '../../../../service/client/ver';
+import { EnvService } from '../../../../service/client/env';
 
 import { Prj } from './prj.component';
 
@@ -34,7 +34,7 @@ import { Prj } from './prj.component';
   declarations: [Prj, ProjectView],
   providers: [
     AccountService, ProjectService, PrjResolve, ReportService,
-    UserService, VerService, EnvService
+    UserService, VerService, EnvService,
   ]
 })
 export class PrjModule {

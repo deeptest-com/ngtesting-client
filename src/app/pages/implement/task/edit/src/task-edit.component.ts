@@ -5,7 +5,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { CONSTANT } from '../../../../../utils/constant';
-import { UserService } from '../../../../../service/user';
+import { UserService } from '../../../../../service/client/user';
 import { TaskEditService } from './task-edit.service';
 
 @Component({

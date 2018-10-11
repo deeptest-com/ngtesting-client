@@ -8,7 +8,7 @@ import { RouteService } from '../../service/route';
 import { BaMenuService } from '../../theme';
 import { ORG_MENU } from './org.menu';
 
-import { OrgService } from '../../service/org';
+import { OrgService } from '../../service/admin/org';
 
 import * as _ from "lodash";
 

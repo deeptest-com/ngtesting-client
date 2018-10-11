@@ -11,9 +11,9 @@ import { GlobalState } from '../../../../global.state';
 import { CONSTANT } from '../../../../utils/constant';
 import { RouteService } from '../../../../service/route';
 
-import { PlanService } from '../../../../service/plan';
-import { TaskService } from '../../../../service/task';
-import { ReportService } from '../../../../service/report';
+import { PlanService } from '../../../../service/client/plan';
+import { TaskService } from '../../../../service/client/task';
+import { ReportService } from '../../../../service/client/report';
 
 import { PopDialogComponent } from '../../../../components/pop-dialog';
 

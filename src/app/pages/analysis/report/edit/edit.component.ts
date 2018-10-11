@@ -10,8 +10,8 @@ import { Utils } from '../../../../utils/utils';
 import { ValidatorUtils } from '../../../../validator/validator.utils';
 import { RouteService } from '../../../../service/route';
 
-import { CaseService } from '../../../../service/case';
-import { CaseStepService } from '../../../../service/case-step';
+import { CaseService } from '../../../../service/client/case';
+import { CaseStepService } from '../../../../service/client/case-step';
 
 declare var jQuery;
 
@@ -73,10 +73,10 @@ export class ReportEdit implements OnInit, AfterViewInit, OnDestroy {
   formErrors = [];
   validateMsg = {
     'title': {
-      'required':      '简介不能为空',
+      'required': '简介不能为空',
     },
     'objective': {
-      'required':      '描述不能为空',
+      'required': '描述不能为空',
     },
   };
 

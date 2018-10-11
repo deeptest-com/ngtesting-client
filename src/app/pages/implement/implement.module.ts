@@ -11,8 +11,8 @@ import { I18n, CustomDatepickerI18n } from '../../service/datepicker-I18n';
 
 import { Implement } from './implement.component';
 
-import { ProjectService } from '../../service/project';
-import { AccountService } from '../../service/account';
+import { ProjectService } from '../../service/client/project';
+import { AccountService } from '../../service/client/account';
 
 @NgModule({
   imports: [

@@ -7,8 +7,8 @@ import { GlobalState } from '../global.state';
 import { CONSTANT } from '../utils/constant';
 import { Utils } from '../utils/utils';
 
-import { SockService } from '../service/sock';
-import { ClientService } from '../service/client';
+import { SockService } from '../service/client/sock';
+import { ClientService } from '../service/client/client';
 
 @Injectable()
 export class PagesResolve implements CanActivate {

@@ -15,7 +15,7 @@ import { PopDialogModule } from '../../../../components/pop-dialog';
 import { RouteService } from '../../../../service/route';
 import { RequestService } from '../../../../service/request';
 import { DatetimePickerService } from '../../../../service/datetime-picker';
-import { OrgRoleService } from '../../../../service/org-role';
+import { OrgRoleService } from '../../../../service/admin/org-role';
 
 import { OrgRole } from './org-role.component';
 import { OrgRoleList } from './list';

@@ -3,12 +3,12 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { NgModule, Pipe, OnInit, AfterViewInit, OnDestroy }      from '@angular/core';
 
 import { CONSTANT } from '../../../../utils/constant';
-import { ProjectService } from '../../../../service/project';
-import { VerService } from '../../../../service/ver';
-import { EnvService } from '../../../../service/env';
-import { UserService } from '../../../../service/user';
+import { ProjectService } from '../../../../service/client/project';
+import { VerService } from '../../../../service/client/ver';
+import { EnvService } from '../../../../service/client/env';
+import { UserService } from '../../../../service/client/user';
 
-import { ReportService } from '../../../../service/report';
+import { ReportService } from '../../../../service/client/report';
 
 declare var jQuery;
 

@@ -5,7 +5,7 @@ import { GlobalState } from '../../../../../global.state';
 import { CONSTANT } from '../../../../../utils/constant';
 import { Utils } from '../../../../../utils/utils';
 import { RouteService } from '../../../../../service/route';
-import { CaseTypeService } from '../../../../../service/case-type';
+import { CaseTypeService } from '../../../../../service/admin/case-type';
 
 @Component({
   selector: 'case-type-list',

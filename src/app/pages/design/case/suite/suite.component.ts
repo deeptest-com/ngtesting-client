@@ -5,7 +5,7 @@ import { GlobalState } from '../../../../global.state';
 import { CONSTANT } from '../../../../utils/constant';
 import { RouteService } from '../../../../service/route';
 import { SlimLoadingBarService } from '../../../../components/ng2-loading-bar';
-import { CaseService } from '../../../../service/case';
+import { CaseService } from '../../../../service/client/case';
 
 declare var jQuery;
 

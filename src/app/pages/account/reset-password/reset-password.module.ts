@@ -6,7 +6,7 @@ import { NgaModule } from '../../../theme/nga.module';
 import { routing }       from './reset-password.routing';
 import { RouteService } from '../../../service/route';
 import { RequestService } from '../../../service/request';
-import { AccountService } from '../../../service/account';
+import { AccountService } from '../../../service/client/account';
 
 import { ResetPassword } from './reset-password.component';
 

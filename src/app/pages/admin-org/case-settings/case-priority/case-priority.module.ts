@@ -15,7 +15,7 @@ import { PopDialogModule } from '../../../../components/pop-dialog';
 import { RouteService } from '../../../../service/route';
 import { RequestService } from '../../../../service/request';
 import { DatetimePickerService } from '../../../../service/datetime-picker';
-import { CasePriorityService } from '../../../../service/case-priority';
+import { CasePriorityService } from '../../../../service/admin/case-priority';
 
 import { CasePriority } from './case-priority.component';
 import { CasePriorityList } from './list';

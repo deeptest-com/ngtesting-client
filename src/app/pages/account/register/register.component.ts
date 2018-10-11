@@ -5,7 +5,7 @@ import { ValidatorUtils, PhoneValidator, PasswordsEqualValidator } from '../../.
 import { CONSTANT } from '../../../utils/constant';
 import { GlobalState } from '../../../global.state';
 import { SlimLoadingBarService } from '../../../components/ng2-loading-bar';
-import { AccountService } from '../../../service/account';
+import { AccountService } from '../../../service/client/account';
 
 @Component({
   selector: 'register',

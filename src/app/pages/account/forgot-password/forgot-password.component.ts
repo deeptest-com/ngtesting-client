@@ -8,7 +8,7 @@ import {ValidatorUtils} from '../../../validator';
 
 import { RouteService } from '../../../service/route';
 
-import { AccountService } from '../../../service/account';
+import { AccountService } from '../../../service/client/account';
 
 declare var jQuery;
 

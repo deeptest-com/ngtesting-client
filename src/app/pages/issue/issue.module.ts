@@ -20,7 +20,7 @@ import { RouteService } from '../../service/route';
 import { RequestService } from '../../service/request';
 import { DatetimePickerService } from '../../service/datetime-picker';
 
-import { IssueService } from '../../service/issue';
+import { IssueService } from '../../service/client/issue';
 import { PrivilegeService } from '../../service/privilege';
 
 import { Issue } from './issue.component';

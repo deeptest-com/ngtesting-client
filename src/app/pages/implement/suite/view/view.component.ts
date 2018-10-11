@@ -8,7 +8,7 @@ import { I18n, CustomDatepickerI18n } from '../../../../service/datepicker-I18n'
 import { CONSTANT } from '../../../../utils/constant';
 import { RouteService } from '../../../../service/route';
 
-import { SuiteService } from '../../../../service/suite';
+import { SuiteService } from '../../../../service/client/suite';
 
 declare var jQuery;
 

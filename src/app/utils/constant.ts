@@ -3,8 +3,8 @@ export const CONSTANT: CONSTANT_INTERFACE = {
   SERVICE_URL: undefined,
   API_URL: undefined,
 
-  API_PATH: 'api/client/v1/',
-  UPLOAD_URI: 'api/client/v1/uploadSingle',
+  API_PATH: 'api/v1/',
+  UPLOAD_URI: 'api/v1/uploadSingle',
 
   CURR_ORG_ID: undefined,
   CURR_PRJ_ID: undefined,

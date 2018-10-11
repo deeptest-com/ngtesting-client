@@ -5,7 +5,7 @@ import { GlobalState } from '../../../../../global.state';
 import { CONSTANT } from '../../../../../utils/constant';
 import { Utils } from '../../../../../utils/utils';
 import { RouteService } from '../../../../../service/route';
-import { UserService } from '../../../../../service/user';
+import { UserAdmin } from '../../../../../service/admin/user';
 
 @Component({
   selector: 'user-list',
@@ -25,7 +25,7 @@ export class UserList implements OnInit, AfterViewInit {
   pageSize: number = 6;
 
   constructor(private _routeService: RouteService, private _state: GlobalState, private fb: FormBuilder, private el: ElementRef,
-              private userService: UserService) {
+              private userAdmin: UserAdmin) {
   }
 
   ngOnInit() {
@@ -65,7 +65,7 @@ export class UserList implements OnInit, AfterViewInit {
   }
 
   loadData() {
-    this.userService.list(this.queryModel, this.page, this.pageSize).subscribe((json: any) => {
+    this.userAdmin.list(this.queryModel, this.page, this.pageSize).subscribe((json: any) => {
       this.collectionSize = json.total;
       this.models = json.data;
     });

@@ -10,8 +10,8 @@ import { WS_CONSTANT } from '../../../utils/ws-constant';
 
 import { RouteService } from '../../../service/route';
 
-import { OrgService } from '../../../service/org';
-import { AccountService } from '../../../service/account';
+import { OrgService } from '../../../service/admin/org';
+import { AccountService } from '../../../service/client/account';
 
 @Component({
   selector: 'ba-page-top',

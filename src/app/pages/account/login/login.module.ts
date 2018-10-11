@@ -7,7 +7,7 @@ import { routing }       from './login.routing';
 
 import { RouteService } from '../../../service/route';
 import { RequestService } from '../../../service/request';
-import { AccountService } from '../../../service/account';
+import { AccountService } from '../../../service/client/account';
 
 import { Login } from './login.component';
 

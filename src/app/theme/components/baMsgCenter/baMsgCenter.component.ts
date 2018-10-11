@@ -1,17 +1,17 @@
-import {Input, Component} from '@angular/core';
+import { Input, Component } from '@angular/core';
 
-import {CONSTANT} from "../../../utils/constant";
-import {RouteService} from "../../../service/route";
-import {BaMsgCenterService} from './baMsgCenter.service';
+import { CONSTANT } from '../../../utils/constant';
+import { RouteService } from '../../../service/route';
+import { BaMsgCenterService } from './baMsgCenter.service';
 
-import {AlertService} from '../../../service/alert';
-import {MsgService} from '../../../service/msg';
+import { AlertService } from '../../../service/client/alert';
+import { MsgService } from '../../../service/client/msg';
 
 @Component({
   selector: 'ba-msg-center',
   providers: [BaMsgCenterService],
   styleUrls: ['./baMsgCenter.scss'],
-  templateUrl: './baMsgCenter.html'
+  templateUrl: './baMsgCenter.html',
 })
 export class BaMsgCenter {
 
@@ -21,38 +21,38 @@ export class BaMsgCenter {
     this._alerts = vals;
     this.noReads = 0;
 
-    this._alerts.map((item:any) => {
-      if (!item.read) {this.noReads += 1};
+    this._alerts.map((item: any) => {
+      if (!item.read) {this.noReads += 1; };
     });
   };
   @Input() msgs;
 
-  constructor(private _routeService: RouteService, private _baMsgCenterService:BaMsgCenterService,
-              private alertService:AlertService, private msgService:MsgService) {
+  constructor(private _routeService: RouteService, private _baMsgCenterService: BaMsgCenterService,
+              private alertService: AlertService, private msgService: MsgService) {
 
   }
 
   readAllAlerts($event) {
     let ids: string = '';
-    this._alerts.map((item:any) => {
-      if (ids != '') {ids += ','}
+    this._alerts.map((item: any) => {
+      if (ids != '') {ids += ','; }
       ids += item.id;
     });
-    this.alertService.markAllRead(ids).subscribe((json:any) => {
+    this.alertService.markAllRead(ids).subscribe((json: any) => {
       if (json.code == 1) {
         this._alerts = [];
       }
     });
   }
   readAllMsgs($event) {
-    this.msgService.markAllRead().subscribe((json:any) => {
+    this.msgService.markAllRead().subscribe((json: any) => {
       if (json.code == 1) {
         this.msgs = [];
       }
     });
   }
   moreMsgs($event) {
-    let url = '/pages/personal/msg/list';
+    const url = '/pages/personal/msg/list';
     this._routeService.navTo(url);
   }
 

@@ -4,9 +4,9 @@ import {GlobalState} from '../../../../global.state';
 
 import { CONSTANT } from '../../../../utils/constant';
 
-import { CaseService } from '../../../../service/case';
-import { CaseStepService } from '../../../../service/case-step';
-import { CaseCommentsService } from '../../../../service/case-comments';
+import { CaseService } from '../../../../service/client/case';
+import { CaseStepService } from '../../../../service/client/case-step';
+import { CaseCommentsService } from '../../../../service/client/case-comments';
 
 declare var jQuery;
 
