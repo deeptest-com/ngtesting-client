@@ -10,7 +10,7 @@ import { WS_CONSTANT } from '../../../utils/ws-constant';
 
 import { RouteService } from '../../../service/route';
 
-import { OrgService } from '../../../service/admin/org';
+import { OrgService } from '../../../service/client/org';
 import { AccountService } from '../../../service/client/account';
 
 @Component({

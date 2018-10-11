@@ -6,7 +6,7 @@ import 'rxjs/add/operator/toPromise';
 import { GlobalState } from '../../../global.state';
 import { CONSTANT } from '../../../utils/constant';
 import { Utils } from '../../../utils/utils';
-import { OrgService } from '../../../service/admin/org';
+import { OrgService } from '../../../service/client/org';
 import { SockService } from '../../../service/client/sock';
 import { UserService } from '../../../service/client/user';
 

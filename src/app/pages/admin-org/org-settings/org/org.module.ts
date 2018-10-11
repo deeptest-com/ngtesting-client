@@ -15,7 +15,7 @@ import { PopDialogModule } from '../../../../components/pop-dialog';
 import { RouteService } from '../../../../service/route';
 import { RequestService } from '../../../../service/request';
 import { DatetimePickerService } from '../../../../service/datetime-picker';
-import { OrgService } from '../../../../service/admin/org';
+import { OrgAdmin } from '../../../../service/admin/org';
 
 import { Org } from './org.component';
 import { OrgList } from './list';
@@ -42,7 +42,7 @@ import { OrgEdit } from './edit';
     RouteService,
     RequestService,
     DatetimePickerService,
-    OrgService,
+    OrgAdmin,
   ],
 })
 export class OrgModule {}

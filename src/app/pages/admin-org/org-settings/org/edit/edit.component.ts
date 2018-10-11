@@ -12,7 +12,7 @@ import { RouteService } from '../../../../../service/route';
 
 import { PopDialogComponent } from '../../../../../components/pop-dialog';
 
-import { OrgService } from '../../../../../service/admin/org';
+import { OrgAdmin } from '../../../../../service/admin/org';
 
 declare var jQuery;
 
@@ -32,7 +32,7 @@ export class OrgEdit implements OnInit, AfterViewInit {
   @ViewChild('modalWrapper') modalWrapper: PopDialogComponent;
 
   constructor(private _state: GlobalState, private _routeService: RouteService, private _route: ActivatedRoute,
-              private fb: FormBuilder, private orgService: OrgService) {
+              private fb: FormBuilder, private orgService: OrgAdmin) {
 
   }
   ngOnInit() {

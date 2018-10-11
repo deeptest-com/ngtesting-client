@@ -12,7 +12,7 @@ import { RouteService } from '../service/route';
 import { RequestService } from '../service/request';
 import { SockService } from '../service/client/sock';
 
-import { OrgService } from '../service/admin/org';
+import { OrgService } from '../service/client/org';
 import { AlertService } from '../service/client/alert';
 import { MsgService } from '../service/client/msg';
 import { AccountService } from '../service/client/account';

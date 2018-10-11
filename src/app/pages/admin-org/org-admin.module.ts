@@ -7,9 +7,9 @@ import { routing }       from './org-admin.routing';
 import { NgbModalModule, NgbPaginationModule, NgbDropdownModule,
   NgbTabsetModule, NgbButtonsModule, NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { OrgAdmin } from './org-admin.component';
+import { OrgAdminComponent } from './org-admin.component';
 
-import { OrgService } from '../../service/admin/org';
+import { OrgAdmin } from '../../service/admin/org';
 import { RouteService } from '../../service/route';
 import { AccountService } from '../../service/client/account';
 
@@ -25,10 +25,10 @@ import { AccountService } from '../../service/client/account';
 
   ],
   declarations: [
-    OrgAdmin,
+    OrgAdminComponent,
   ],
   providers: [
-    RouteService, AccountService, OrgService,
+    RouteService, AccountService, OrgAdmin,
   ],
 })
 export class OrgAdminModule {}

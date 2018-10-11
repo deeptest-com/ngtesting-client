@@ -8,20 +8,20 @@ import { RouteService } from '../../service/route';
 import { BaMenuService } from '../../theme';
 import { ORG_MENU } from './org.menu';
 
-import { OrgService } from '../../service/admin/org';
+import { OrgAdmin } from '../../service/admin/org';
 
-import * as _ from "lodash";
+import * as _ from 'lodash';
 
 @Component({
   selector: 'org-admin',
   styleUrls: ['./org-admin.scss'],
   templateUrl: './org-admin.html',
 })
-export class OrgAdmin implements OnInit, OnDestroy {
+export class OrgAdminComponent implements OnInit, OnDestroy {
   eventCode: string = 'OrgAdmin';
 
   constructor(private _state: GlobalState, private _routeService: RouteService,
-              private orgService: OrgService, private _menuService: BaMenuService) {
+              private orgService: OrgAdmin, private _menuService: BaMenuService) {
 
     this._state.subscribe(WS_CONSTANT.WS_ORG_SETTINGS, this.eventCode, (json) => {
       console.log(WS_CONSTANT.WS_ORG_SETTINGS + ' in ' + this.eventCode, json);
@@ -36,7 +36,7 @@ export class OrgAdmin implements OnInit, OnDestroy {
   }
 
   updateMenu(defaultOrgName: string, orgPrivileges: any) {
-    let menu = _.cloneDeep(ORG_MENU);
+    const menu = _.cloneDeep(ORG_MENU);
     menu[0].children[0].data.menu.title = defaultOrgName;
     if (orgPrivileges['org-admin']) {
       menu[0].children.splice(1, 1);
