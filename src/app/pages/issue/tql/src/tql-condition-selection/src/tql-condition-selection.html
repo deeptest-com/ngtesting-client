@@ -4,7 +4,7 @@
       <button class="btn btn-default dropdown" id="projectDropdownMenu" ngbDropdownToggle>更多</button>
 
       <div (click)="clickMenu($event)" class="dropdown-menu" aria-labelledby="projectDropdownMenu" ngbDropdownMenu>
-        <button *ngIf="filter" class="dropdown-item">
+        <button class="dropdown-item">
           <input type="search" class="form-control form-control-sm" placeholder="过滤" name="keywords">
           <i class="fa fa-search"></i>
         </button>
