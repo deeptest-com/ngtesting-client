@@ -10,23 +10,16 @@ import { RouteService } from '../../../../service/route';
 
 @Injectable()
 export class TqlService {
-  _apiUrl = 'tql/';
-  _getFiltersUrl = this._apiUrl + 'getFilters';
+  _apiUrl = 'client/tql/';
+  _query = this._apiUrl + 'query';
 
   constructor(private _reqService: RequestService) {
 
   }
 
-  getFilters() {
-    return this._reqService.post(this._getFiltersUrl, { tql: CONSTANT.ISSUE_TQL } );
+  query() {
+    return this._reqService.post(this._query, { tql: CONSTANT.ISSUE_JQL } );
   }
 
-  tqlToModel (tql: string) {
-
-  }
-
-  modelToTql (model: any) {
-
-  }
 }
 
