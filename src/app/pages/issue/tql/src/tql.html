@@ -1,10 +1,9 @@
 <div class="tql">
   <div class="form-inline">
-    <tql-condition [title]="'项目'" [items]="projects" (selected)="selectItem($event)"></tql-condition>
-    <tql-condition [title]="'类型'" [search]="false"></tql-condition>
-    <tql-condition [title]="'状态'" [search]="false"></tql-condition>
-    <tql-condition [title]="'优先级'" [search]="false"></tql-condition>
-    <tql-condition [title]="'经办人'"></tql-condition>
+
+    <ng-container *ngFor="let item of filters; let i = index">
+      <tql-condition *ngIf="i < 5" [title]="item.label" [items]="item.values | mapToArray" (selected)="selectItem($event)"></tql-condition>
+    </ng-container>
 
     <div class="btn-group">
       <input [(ngModel)]="keywords"
@@ -24,7 +23,9 @@
   </div>
 
   <div class="form-inline">
-
+    <ng-container *ngFor="let item of filters; let i = index">
+      <tql-condition *ngIf="i >= 5" [title]="item.label" [items]="item.values | mapToArray" (selected)="selectItem($event)"></tql-condition>
+    </ng-container>
   </div>
 
 </div>

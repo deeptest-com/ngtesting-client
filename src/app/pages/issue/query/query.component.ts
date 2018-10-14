@@ -27,7 +27,7 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
   prjId: number;
 
   models: any[];
-  jql: string;
+  jql: any;
   filters: any[];
 
   constructor(private _route: ActivatedRoute,

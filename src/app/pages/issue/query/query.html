@@ -6,7 +6,7 @@
       </div>
 
       <div class="filter">
-        <tql (queryChanged)="queryChanged($event)"></tql>
+        <tql [jql]="jql" [filters]="filters" (queryChanged)="queryChanged($event)"></tql>
       </div>
 
       <div class="buttons">

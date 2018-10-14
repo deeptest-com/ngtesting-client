@@ -27,7 +27,7 @@ export class TqlConditionComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): any {
     _.forEach(this.items, (item: any, index: number) => {
-      this.form.addControl('menu-item-' + item.id, new FormControl('', []));
+      this.form.addControl('menu-item-' + item.key, new FormControl('', []));
     });
   }
   ngAfterViewInit() {

@@ -14,6 +14,9 @@ import { CONSTANT } from '../../../../utils/constant';
 })
 export class Tql implements OnInit, AfterViewInit {
 
+  @Input() jql: any;
+  @Input() filters: any[];
+
   @Output() public queryChanged: EventEmitter<any> = new EventEmitter();
 
   @ViewChild(NgbDropdown) private typeDropdown: NgbDropdown;
