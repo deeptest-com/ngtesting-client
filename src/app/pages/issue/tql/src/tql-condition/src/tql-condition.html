@@ -1,7 +1,7 @@
 <div class="tql-condition">
   <form [formGroup]="form">
     <div ngbDropdown #projectDropdown="ngbDropdown" [autoClose]="'outside'" class="btn-group">
-      <button class="btn btn-default dropdown" id="projectDropdownMenu" ngbDropdownToggle>{{title}}</button>
+      <button class="btn btn-default dropdown" id="projectDropdownMenu" ngbDropdownToggle>{{model.label}}</button>
 
       <div (click)="clickMenu($event)" class="dropdown-menu" aria-labelledby="projectDropdownMenu" ngbDropdownMenu>
         <button *ngIf="search" class="dropdown-item">
@@ -12,7 +12,7 @@
         <li class="dropdown-divider"></li>
 
         <!--<button class="dropdown-item">所有</button>-->
-        <button (click)="selectItem(item)" *ngFor="let item of items" class="dropdown-item list-item">
+        <button (click)="selectItem(item)" *ngFor="let item of selectOptions" class="dropdown-item list-item">
           <input [(ngModel)]="item.selected" formControlName="{{'menu-item-' + item.key}}" class="form-check-input" type="checkbox" value="{{item.id}}">
           <a>{{item.value}}</a>
         </button>

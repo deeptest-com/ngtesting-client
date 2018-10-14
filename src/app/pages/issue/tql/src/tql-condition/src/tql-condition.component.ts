@@ -17,16 +17,21 @@ export class TqlConditionComponent implements OnInit, AfterViewInit {
   form: FormGroup;
 
   @Input() search: boolean = true;
-  @Input() title: string;
-  @Input() items: any[];
+  @Input() model: any;
   @Output() selected = new EventEmitter<any>();
+
+  selectOptions: any[] = [];
 
   constructor(private fb: FormBuilder, private tqlConditionService: TqlConditionService) {
     this.form = this.fb.group({});
   }
 
   ngOnInit(): any {
-    _.forEach(this.items, (item: any, index: number) => {
+    for (const key in this.model.values) {
+      this.selectOptions.push({ key: key, value: this.model.values[key] });
+    }
+
+    _.forEach(this.selectOptions, (item: any, index: number) => {
       this.form.addControl('menu-item-' + item.key, new FormControl('', []));
     });
   }
@@ -36,17 +41,17 @@ export class TqlConditionComponent implements OnInit, AfterViewInit {
 
   change(values: any) {
     let selectedItems = '';
-    _.forEach(this.items, (item: any, index: number) => {
+    _.forEach(this.selectOptions, (item: any, index: number) => {
       if (item.selected) {
         if (selectedItems != '') {
           selectedItems += ',';
         }
 
-        selectedItems += item.id;
+        selectedItems += item.key;
       }
     });
 
-    this.selected.emit({ type: 'project', data: selectedItems });
+    this.selected.emit({ type: this.model.id, data: selectedItems });
   }
 
   clickMenu($event): any {

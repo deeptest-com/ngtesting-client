@@ -2,7 +2,7 @@
   <div class="form-inline">
 
     <ng-container *ngFor="let item of filters; let i = index">
-      <tql-condition *ngIf="i < 5" [title]="item.label" [items]="item.values | mapToArray" (selected)="selectItem($event)"></tql-condition>
+      <tql-condition *ngIf="i < 5" [model]="item" (selected)="selectItem($event)"></tql-condition>
     </ng-container>
 
     <div class="btn-group">
@@ -24,7 +24,7 @@
 
   <div class="form-inline">
     <ng-container *ngFor="let item of filters; let i = index">
-      <tql-condition *ngIf="i >= 5" [title]="item.label" [items]="item.values | mapToArray" (selected)="selectItem($event)"></tql-condition>
+      <tql-condition *ngIf="i >= 5" [model]="item" (selected)="selectItem($event)"></tql-condition>
     </ng-container>
   </div>
 
