@@ -18,12 +18,9 @@ export class TqlConditionComponent implements OnInit, AfterViewInit {
 
   @Input() search: boolean = true;
   @Input() model: any;
-  @Output() selected = new EventEmitter<any>();
+  @Input() checkedItems: any = {};
 
-  _checkedItems: any = {};
-  @Input() set checkedItems(model: any) {
-    this._checkedItems = model != null ? model : {};
-  }
+  @Output() selected = new EventEmitter<any>();
 
   selectOptions: any[] = [];
 
@@ -32,8 +29,10 @@ export class TqlConditionComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): any {
+
     for (const key in this.model.values) {
-      this.selectOptions.push({ key: key, value: this.model.values[key] });
+      this.selectOptions.push({ key: key, value: this.model.values[key],
+        checked: this.checkedItems ? this.checkedItems[key] : false });
     }
 
     _.forEach(this.selectOptions, (item: any, index: number) => {
@@ -41,10 +40,6 @@ export class TqlConditionComponent implements OnInit, AfterViewInit {
     });
   }
   ngAfterViewInit() {
-    // this.form.valueChanges.debounceTime(CONSTANT.DebounceTime).subscribe(values => this.change(values));
-  }
-
-  change(values: any) {
 
   }
 
@@ -52,18 +47,9 @@ export class TqlConditionComponent implements OnInit, AfterViewInit {
     $event.stopPropagation();
   }
   selectItem(item): any {
-    this._checkedItems[item.key] = !this._checkedItems[item.key];
+    item.checked = !item.checked;
 
-    let selectedItems = '';
-    _.forEach(this.selectOptions, (option: any, index: number) => {
-      if (this._checkedItems[option.key]) {
-        if (selectedItems != '') { selectedItems += ','; }
-
-        selectedItems += option.key;
-      }
-    });
-
-    this.selected.emit({ condition: this.model.id, data: selectedItems });
+    this.selected.emit({ id: this.model.id, options: this.selectOptions });
   }
 
 }

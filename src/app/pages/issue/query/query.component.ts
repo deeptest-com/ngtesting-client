@@ -31,10 +31,16 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
   checkedConditions: any = {};
   filters: any[];
 
-  constructor(private _route: ActivatedRoute,
+  constructor(private _activeRoute: ActivatedRoute, private _router: Router,
               private _tqlService: TqlService, private _issueService: IssueService) {
-    this._route.params.forEach((params: Params) => {
+    this._activeRoute.params.forEach((params: Params) => {
       this.jql = params['jql'];
+
+      if (this.jql == 'all') {
+        this.jql = {};
+      } else {
+        this.jql = JSON.parse(this.jql);
+      }
     });
 
     this.loadData();
@@ -48,16 +54,26 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
 
   }
 
-  queryChanged($event): void {
-    console.log('---queryChange ', $event);
+  queryChanged(data): void {
+    this.jql = this._tqlService.buildJql(this.jql, this.filters, data);
+    console.log('---queryChange ', this.jql);
+
+    let url = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + CONSTANT.CURR_PRJ_ID
+      + '/issue/query/' + JSON.stringify(this.jql);
+    this._router.navigateByUrl(url);
+
+    this.loadData(false);
   }
 
-  loadData() {
-    this._tqlService.query().subscribe((json: any) => {
+  loadData(update: boolean = true) {
+    this._tqlService.query(this.jql).subscribe((json: any) => {
       console.log('===', json);
-      this.jql = json.jql;
-      this.filters = json.filters;
       this.models = json.data;
+
+      if (update) {
+        this.jql = json.jql;
+        this.filters = json.filters;
+      }
     });
   }
 

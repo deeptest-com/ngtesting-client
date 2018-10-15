@@ -31,8 +31,7 @@ export class Tql implements OnInit, AfterViewInit {
 
   @Input() set jql(model: any) {
     if (!model.rules || model.rules.length == 0) { return; }
-    this.checkedConditions = this._tqlService.baseJqlToMap(model);
-    console.log('**1**', this.checkedConditions);
+    this.checkedConditions = this._tqlService.basicJqlToMap(model);
   }
 
   constructor(private _route: ActivatedRoute, private _state: GlobalState, private _tqlService: TqlService) {
@@ -47,9 +46,8 @@ export class Tql implements OnInit, AfterViewInit {
 
   }
 
-  selectItem($event: any) {
-    console.log('---selectItem ', $event);
-    this.queryChanged.emit($event);
+  selectItem(data: any) {
+    this.queryChanged.emit(data);
   }
   selectCondition($event: any) {
     console.log('---selectCondition ', $event);
