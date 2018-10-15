@@ -21,5 +21,21 @@ export class TqlService {
     return this._reqService.post(this._query, { tql: CONSTANT.ISSUE_JQL } );
   }
 
+  baseJqlToMap(jql: any): any {
+    const ret = {};
+
+    jql.rules.forEach((rule: any) => {
+      let selecteds = {};
+      if (rule.operator === 'equal') {
+        selecteds[rule.value] = true;
+      } else if (rule.operator === 'in') {
+        rule.value.split(',').forEach((val: string) => {
+          selecteds[val] = true;
+        });
+      }
+      ret[rule.id] = selecteds;
+    });
+    return ret;
+  }
 }
 

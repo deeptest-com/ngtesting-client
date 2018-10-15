@@ -20,6 +20,11 @@ export class TqlConditionComponent implements OnInit, AfterViewInit {
   @Input() model: any;
   @Output() selected = new EventEmitter<any>();
 
+  _checkedItems: any = {};
+  @Input() set checkedItems(model: any) {
+    this._checkedItems = model != null ? model : {};
+  }
+
   selectOptions: any[] = [];
 
   constructor(private fb: FormBuilder, private tqlConditionService: TqlConditionService) {
@@ -36,29 +41,29 @@ export class TqlConditionComponent implements OnInit, AfterViewInit {
     });
   }
   ngAfterViewInit() {
-    this.form.valueChanges.debounceTime(CONSTANT.DebounceTime).subscribe(values => this.change(values));
+    // this.form.valueChanges.debounceTime(CONSTANT.DebounceTime).subscribe(values => this.change(values));
   }
 
   change(values: any) {
-    let selectedItems = '';
-    _.forEach(this.selectOptions, (item: any, index: number) => {
-      if (item.selected) {
-        if (selectedItems != '') {
-          selectedItems += ',';
-        }
 
-        selectedItems += item.key;
-      }
-    });
-
-    this.selected.emit({ type: this.model.id, data: selectedItems });
   }
 
   clickMenu($event): any {
     $event.stopPropagation();
   }
   selectItem(item): any {
-    item.selected = !item.selected;
+    this._checkedItems[item.key] = !this._checkedItems[item.key];
+
+    let selectedItems = '';
+    _.forEach(this.selectOptions, (option: any, index: number) => {
+      if (this._checkedItems[option.key]) {
+        if (selectedItems != '') { selectedItems += ','; }
+
+        selectedItems += option.key;
+      }
+    });
+
+    this.selected.emit({ condition: this.model.id, data: selectedItems });
   }
 
 }

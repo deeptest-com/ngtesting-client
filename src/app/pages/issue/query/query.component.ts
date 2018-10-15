@@ -27,7 +27,8 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
   prjId: number;
 
   models: any[];
-  jql: any;
+  jql: any = {};
+  checkedConditions: any = {};
   filters: any[];
 
   constructor(private _route: ActivatedRoute,
@@ -54,7 +55,7 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
   loadData() {
     this._tqlService.query().subscribe((json: any) => {
       console.log('===', json);
-      this.jql = json.tql;
+      this.jql = json.jql;
       this.filters = json.filters;
       this.models = json.data;
     });
