@@ -30,24 +30,25 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
   jql: any = {};
   checkedConditions: any = {};
   filters: any[];
+  init = 0;
 
   constructor(private _activeRoute: ActivatedRoute, private _router: Router,
               private _tqlService: TqlService, private _issueService: IssueService) {
-    this._activeRoute.params.forEach((params: Params) => {
+
+    this._activeRoute.params.subscribe(params => {
       this.jql = params['jql'];
 
       if (this.jql == 'all') {
         this.jql = {};
+        this.loadData();
       } else {
         this.jql = JSON.parse(this.jql);
+        this.loadData(this.init++ == 0);
       }
     });
-
-    this.loadData();
   }
 
   ngOnInit() {
-
   }
 
   ngAfterViewInit() {
@@ -61,16 +62,14 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
     let url = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + CONSTANT.CURR_PRJ_ID
       + '/issue/query/' + JSON.stringify(this.jql);
     this._router.navigateByUrl(url);
-
-    this.loadData(false);
   }
 
-  loadData(update: boolean = true) {
-    this._tqlService.query(this.jql).subscribe((json: any) => {
+  loadData(init: boolean = true) {
+    this._tqlService.query(this.jql, init).subscribe((json: any) => {
       console.log('===', json);
       this.models = json.data;
 
-      if (update) {
+      if (init) {
         this.jql = json.jql;
         this.filters = json.filters;
       }

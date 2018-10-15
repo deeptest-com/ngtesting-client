@@ -17,8 +17,8 @@ export class TqlService {
 
   }
 
-  query(jql: string) {
-    return this._reqService.post(this._query, { jql: jql } );
+  query(jql: string, init: boolean) {
+    return this._reqService.post(this._query, { jql: jql, init: init } );
   }
 
   basicJqlToMap(jql: any): any {
