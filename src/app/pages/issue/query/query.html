@@ -11,7 +11,14 @@
       </div>
 
       <div class="buttons">
-        <button prj-privilege [privs]="'issue-create'" (click)="create()" type="button" class="btn btn-primary btn-with-icon btn-sm">
+        <span (click)="changeLayout('columns')">
+          <i [class.active]="layout=='columns'" class="fa fa-columns layout"></i>
+        </span>
+        <span (click)="changeLayout('list')">
+          <i [class.active]="layout=='list'" class="fa fa-list layout"></i>
+        </span>
+
+        <button type="button" class="btn btn-primary btn-with-icon btn-sm">
           <i class="fa fa-plus-circle"></i>新建
         </button>
       </div>

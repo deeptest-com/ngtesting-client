@@ -39,6 +39,7 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy, OnChanges, 
   private elem: Element;
   private tqlElem: any;
 
+  layout: string = 'columns';
   contentHeight: number;
   leftWidth: number = CONSTANT.PROFILE.leftSizeDesign;
 
@@ -106,6 +107,10 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy, OnChanges, 
 
   create(): void {
 
+  }
+
+  changeLayout(layout: string): void {
+    this.layout = layout;
   }
 
   ngOnDestroy(): void {

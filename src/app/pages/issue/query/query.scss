@@ -9,14 +9,22 @@
     }
 
     .buttons {
-      width: 100px;
+      width: 200px;
+      .layout {
+        display: inline-block;
+        padding: 3px;
+        font-size: 17px;
+        cursor: pointer;
+        &.active {
+          color: #209e91;
+        }
+      }
     }
   }
 
   .main {
     position: relative;
     display: flex;
-    min-height: 500px;
     background-color: #fff;
 
     .left {
