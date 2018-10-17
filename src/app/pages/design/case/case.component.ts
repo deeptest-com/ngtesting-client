@@ -30,6 +30,8 @@ export class Case implements OnInit, AfterViewInit, OnDestroy {
 
       this.canEdit = this.privilegeService.hasPrivilege('test_case-maintain', json.prjPrivileges);
     });
+
+    console.log('contentHeight', this.contentHeight);
   }
 
   ngOnInit() {

@@ -5,7 +5,7 @@
 
       <div (click)="clickMenu($event)" class="dropdown-menu" aria-labelledby="projectDropdownMenu" ngbDropdownMenu>
         <button *ngIf="search" class="dropdown-item">
-          <input type="search" class="form-control form-control-sm" name="keywords"
+          <input [(ngModel)]="keywords" formControlName="keywords" type="search" class="form-control form-control-sm" name="keywords"
                  placeholder="{{model.input==='select'?'过滤':''}}">
           <i class="fa fa-search"></i>
         </button>
@@ -14,10 +14,12 @@
           <li class="dropdown-divider"></li>
 
           <!--<button class="dropdown-item">所有</button>-->
-          <button (click)="selectItem(item)" *ngFor="let item of selectOptions" class="dropdown-item list-item">
-            <input [(ngModel)]="item.checked" formControlName="{{'menu-item-' + item.key}}" class="form-check-input" type="checkbox" value="{{item.key}}">
-            <a>{{item.value}}</a>
-          </button>
+          <ng-container *ngFor="let item of selectOptions | myFilter:'value':keywords">
+            <button (click)="selectItem(item)" class="dropdown-item list-item">
+              <input [(ngModel)]="item.checked" formControlName="{{'menu-item-' + item.key}}" class="form-check-input" type="checkbox" value="{{item.key}}">
+              <a>{{item.value}}</a>
+            </button>
+          </ng-container>
         </ng-container>
 
       </div>

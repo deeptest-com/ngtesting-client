@@ -22,6 +22,7 @@ export class TqlConditionComponent implements OnInit, AfterViewInit {
 
   @Output() selected = new EventEmitter<any>();
 
+  keywords: string = '';
   selectOptions: any[] = [];
 
   constructor(private fb: FormBuilder, private tqlConditionService: TqlConditionService) {
@@ -35,6 +36,7 @@ export class TqlConditionComponent implements OnInit, AfterViewInit {
         checked: this.checkedItems ? this.checkedItems[key] : false });
     }
 
+    this.form.addControl('keywords', new FormControl('', []));
     _.forEach(this.selectOptions, (item: any, index: number) => {
       this.form.addControl('menu-item-' + item.key, new FormControl('', []));
     });

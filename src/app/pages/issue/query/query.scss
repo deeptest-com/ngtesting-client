@@ -14,6 +14,7 @@
   }
 
   .main {
+    position: relative;
     display: flex;
     min-height: 500px;
     background-color: #fff;
@@ -28,8 +29,8 @@
 
     .resize-handle {
       position:absolute;
-      top: 50px;
       width: 2px;
+      height: 100%;
       cursor: col-resize;
       background-color: #eeeeee;
       z-index: 20;

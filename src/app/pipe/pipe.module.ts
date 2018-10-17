@@ -1,4 +1,4 @@
-import { NgModule }      from '@angular/core';
+import { NgModule } from '@angular/core';
 
 import { MsgReadPipe } from './msg-read';
 import { ImgPathPipe, ThumbPathPipe } from './img-path';
@@ -12,15 +12,16 @@ import { ShowIfContainsPipe } from './contains';
 import { PathToLinkPipe } from './misc';
 import { FieldTypePipe, FieldApplyToPipe, FieldFormatPipe, TrueOrFalsePipe, DisableOrNotPipe } from './field-property';
 import { PathToNamePipe } from './path-to-name';
+import { MyFilterPipe } from './my-filter';
 
 @NgModule({
   imports: [],
   declarations: [MsgReadPipe, ExeStatusPipe, PathToNamePipe, ImgPathPipe, ThumbPathPipe, MapToArrayPipe, TimePassedPipe,
     ModelStatusPipe, MarkErrorPipe, FieldTypePipe, FieldApplyToPipe, FieldFormatPipe, TrueOrFalsePipe,
-    DisableOrNotPipe, PercentPipe, ShowIfContainsPipe, PathToLinkPipe],
+    DisableOrNotPipe, PercentPipe, ShowIfContainsPipe, PathToLinkPipe, MyFilterPipe],
   exports: [MsgReadPipe, ExeStatusPipe, PathToNamePipe, ImgPathPipe, ThumbPathPipe, MapToArrayPipe, TimePassedPipe,
     ModelStatusPipe, MarkErrorPipe, FieldTypePipe, FieldApplyToPipe, FieldFormatPipe, TrueOrFalsePipe,
-    DisableOrNotPipe, ShowIfContainsPipe, PathToLinkPipe],
+    DisableOrNotPipe, ShowIfContainsPipe, PathToLinkPipe, MyFilterPipe],
 })
 export class PipeModule {
 

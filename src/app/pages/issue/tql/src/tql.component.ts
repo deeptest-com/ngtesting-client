@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation, OnInit, AfterViewInit, OnDestroy,
-  Input, Output, EventEmitter, ViewChild } from '@angular/core';
+  Input, Output, EventEmitter, ViewChild} from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 
@@ -44,6 +44,7 @@ export class Tql implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
 
   }
+
 
   selectItem(data: any) {
     this.queryChanged.emit(data);

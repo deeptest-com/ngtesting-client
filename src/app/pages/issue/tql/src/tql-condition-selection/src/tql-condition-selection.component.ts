@@ -17,17 +17,25 @@ export class TqlConditionSelectionComponent implements OnInit, AfterViewInit {
   form: FormGroup;
 
   @Output() selected = new EventEmitter<any>();
+  keywords: string = '';
 
   _filters: any[];
+  _filtersForSelect: any[];
   @Input() set filters(models: any[]) {
-    this._filters = models;
-    _.forEach(this._filters, (item: any, index: number) => {
-      this.form.addControl('menu-item-' + item.id, new FormControl('', []));
-    });
+    if (models) {
+      this._filters = models;
+      this._filtersForSelect = this._filters.filter((it, index) => index > 5);
+
+      _.forEach(this._filters, (item: any, index: number) => {
+        this.form.addControl('menu-item-' + item.id, new FormControl('', []));
+      });
+    }
   }
 
   constructor(private fb: FormBuilder, private onditionSelectionService: TqlConditionSelectionService) {
-    this.form = this.fb.group({});
+    this.form = this.fb.group({
+        'keywords': ['', []],
+      }, {});
   }
 
   ngOnInit(): any {
