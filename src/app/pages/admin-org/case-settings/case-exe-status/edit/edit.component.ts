@@ -39,7 +39,7 @@ export class CaseExeStatusEdit implements OnInit, AfterViewInit {
 
   }
   ngOnInit() {
-    this._route.params.forEach((params: Params) => {
+    this._route.params.forEach(params => {
       this.id = +params['id'];
     });
 

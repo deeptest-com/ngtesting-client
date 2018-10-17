@@ -21,7 +21,7 @@ export class Case implements OnInit, AfterViewInit, OnDestroy {
   key: number;
 
   contentHeight = Utils.getContainerHeight(CONSTANT.HEAD_HEIGHT + CONSTANT.FOOTER_HEIGHT);
-  leftWidth: number;
+  leftWidth: number = CONSTANT.PROFILE.leftSizeDesign;
   canEdit: boolean;
 
   constructor(private _state: GlobalState, private _route: ActivatedRoute, private privilegeService:PrivilegeService) {
@@ -33,7 +33,6 @@ export class Case implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit() {
-      this.leftWidth = CONSTANT.PROFILE.leftSizeDesign;
       this.canEdit = this.privilegeService.hasPrivilege('test_case-maintain');
   }
 

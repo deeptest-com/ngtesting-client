@@ -25,8 +25,6 @@ export class CaseSuite implements OnInit, AfterViewInit, OnDestroy {
   public treeModel: any;
   public treeSettings: any = { usage: 'edit', isExpanded: true, sonSign: false };
 
-  routeSub: any;
-
   constructor(private _routeService: RouteService, private _route: ActivatedRoute, private _state: GlobalState,
               private _caseService: CaseService, private slimLoadingBarService: SlimLoadingBarService) {
 
@@ -43,13 +41,6 @@ export class CaseSuite implements OnInit, AfterViewInit, OnDestroy {
     this.orgId = CONSTANT.CURR_ORG_ID;
     this.prjId = CONSTANT.CURR_PRJ_ID;
     this.loadData();
-
-    this.routeSub = this._route.pathFromRoot[5].params.subscribe(params => {
-      if (this.prjId != +params['prjId']) {
-        this.prjId = +params['prjId'];
-        this.loadData();
-      }
-    });
   }
 
   ngAfterViewInit() {
@@ -95,7 +86,6 @@ export class CaseSuite implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.routeSub.unsubscribe();
   }
 
 }

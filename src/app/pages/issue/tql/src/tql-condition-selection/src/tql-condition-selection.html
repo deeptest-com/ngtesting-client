@@ -10,12 +10,13 @@
         </button>
 
         <li class="dropdown-divider"></li>
-
         <!--<button class="dropdown-item">所有</button>-->
-        <button (click)="selectItem(item)" *ngFor="let item of filters" class="dropdown-item list-item">
-          <input [(ngModel)]="item.selected" formControlName="{{'menu-item-' + item.id}}" class="form-check-input" type="checkbox" value="{{item.id}}">
-          <a>{{item.name}}</a>
-        </button>
+        <ng-container *ngFor="let item of _filters; let i = index;">
+          <button (click)="selectItem(item)" *ngIf="i >= 5" class="dropdown-item list-item">
+            <input [(ngModel)]="item.display" formControlName="{{'menu-item-' + item.id}}" class="form-check-input" type="checkbox" value="{{item.id}}">
+            <a>{{item.label}}</a>
+          </button>
+        </ng-container>
       </div>
     </div>
   </form>

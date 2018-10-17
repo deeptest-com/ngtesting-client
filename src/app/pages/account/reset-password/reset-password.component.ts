@@ -28,7 +28,7 @@ export class ResetPassword implements OnInit, AfterViewInit {
   constructor(private _state: GlobalState, private _route: ActivatedRoute,
               private fb: FormBuilder, private accountService: AccountService) {
 
-    this._route.params.subscribe(params => {
+    this._route.params.forEach(params => {
       this.vcode = params['vcode'];
     });
   }

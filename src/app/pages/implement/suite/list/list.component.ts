@@ -29,7 +29,6 @@ export class SuiteListComponent implements OnInit, AfterViewInit, OnDestroy {
   queryModel: any = { keywords: '', disabled: 'false' };
   statusMap: Array<any> = CONSTANT.EntityDisabled;
 
-  routeSub: any;
   myPrivs: any;
 
   constructor(private _state: GlobalState, private _route: ActivatedRoute, private _routeService: RouteService,
@@ -58,13 +57,6 @@ export class SuiteListComponent implements OnInit, AfterViewInit, OnDestroy {
     this.myPrivs = CONSTANT.PRJ_PRIVILEGES;
 
     this.loadData();
-
-    this.routeSub = this._route.pathFromRoot[5].params.subscribe(params => {
-      if (this.prjId != +params['prjId']) {
-        this.prjId = +params['prjId'];
-        this.loadData();
-      }
-    });
   }
 
   ngAfterViewInit() {
@@ -95,7 +87,6 @@ export class SuiteListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.routeSub.unsubscribe();
     this._state.unsubscribe(WS_CONSTANT.WS_PRJ_SETTINGS, this.eventCode);
   }
 

@@ -24,7 +24,7 @@ export class ProjectVerList implements OnInit, AfterViewInit {
   constructor(private _route: ActivatedRoute, private _state: GlobalState, private fb: FormBuilder,
               private el: ElementRef, private _verService: VerService, private _routeService: RouteService) {
 
-    this._route.params.subscribe(params => {
+    this._route.params.forEach(params => {
       this.projectId = +params['id'];
     });
 

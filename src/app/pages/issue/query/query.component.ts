@@ -22,27 +22,31 @@ import { TqlService } from '../tql/src/tql.service';
 })
 export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
   eventCode: string = 'IssueQuery';
+  routeSub: any;
 
   orgId: number;
   prjId: number;
 
   models: any[];
-  jql: any = {};
+  rule: any = {};
   checkedConditions: any = {};
   filters: any[];
   init = 0;
 
+  contentHeight = Utils.getContainerHeight(CONSTANT.HEAD_HEIGHT + CONSTANT.FOOTER_HEIGHT);
+  leftWidth: number = CONSTANT.PROFILE.leftSizeDesign;
+
   constructor(private _activeRoute: ActivatedRoute, private _router: Router,
               private _tqlService: TqlService, private _issueService: IssueService) {
 
-    this._activeRoute.params.subscribe(params => {
-      this.jql = params['jql'];
+    this.routeSub = this._activeRoute.params.subscribe(params => {
+      this.rule = params['rule'];
 
-      if (this.jql == 'all') {
-        this.jql = {};
+      if (this.rule == 'all') {
+        this.rule = {};
         this.loadData();
       } else {
-        this.jql = JSON.parse(this.jql);
+        this.rule = JSON.parse(this.rule);
         this.loadData(this.init++ == 0);
       }
     });
@@ -56,28 +60,36 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
   }
 
   queryChanged(data): void {
-    this.jql = this._tqlService.buildJql(this.jql, this.filters, data);
-    console.log('---queryChange ', this.jql);
+    this.rule = this._tqlService.buildRule(this.rule, this.filters, data);
+    console.log('---queryChange ', this.rule);
 
-    let url = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + CONSTANT.CURR_PRJ_ID
-      + '/issue/query/' + JSON.stringify(this.jql);
+    const url = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + CONSTANT.CURR_PRJ_ID
+      + '/issue/query/' + JSON.stringify(this.rule);
     this._router.navigateByUrl(url);
   }
 
   loadData(init: boolean = true) {
-    this._tqlService.query(this.jql, init).subscribe((json: any) => {
+    this._tqlService.query(this.rule, init).subscribe((json: any) => {
       console.log('===', json);
       this.models = json.data;
 
       if (init) {
-        this.jql = json.jql;
+        this.rule = json.rule;
         this.filters = json.filters;
       }
     });
   }
 
-  ngOnDestroy(): void {
+  search(data: any) {
+    this.loadData(false);
+  }
 
+  create(): void {
+
+  }
+
+  ngOnDestroy(): void {
+    this.routeSub.unsubscribe();
   }
 
 }

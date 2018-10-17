@@ -19,7 +19,7 @@ export class Prj {
   }
 
   ngOnInit() {
-    this._route.params.subscribe(params => {
+    this._route.params.forEach(params => {
       this.prjId = params['prjId'];
     });
     console.log('==Current Prj', this.prjId, CONSTANT.CURR_PRJ_ID);

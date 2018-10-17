@@ -11,7 +11,7 @@ declare var tinymce: any;
 @Component({
   selector: 'tiny-mce',
   templateUrl: './tiny-mce.html',
-  styleUrls: ['./tiny-mce.scss']
+  styleUrls: ['./tiny-mce.scss'],
 })
 export class TinyMCEComponent implements OnDestroy, AfterViewInit, OnChanges {
   @Input() elemId: string = 'mceEditor';
@@ -33,7 +33,7 @@ export class TinyMCEComponent implements OnDestroy, AfterViewInit, OnChanges {
 
   ngAfterViewInit() {
     const that = this;
-    this.sel = 'textarea#'+this.elemId;
+    this.sel = 'textarea#' + this.elemId;
     if (!$(this.sel)) {
       return;
     }
@@ -43,14 +43,14 @@ export class TinyMCEComponent implements OnDestroy, AfterViewInit, OnChanges {
       selector: that.sel,
       plugins: ['link', 'table'],
       skin_url: 'skins/lightgray',
-      language : "zh_CN",
-      language_url : "assets/vendor/tinymce/langs/zh_CN.js",
+      language: 'zh_CN',
+      language_url: 'assets/vendor/tinymce/langs/zh_CN.js',
       setup: editor => {
         editor.on('change', () => {
           this.changed.emit(editor.getContent());
         });
       },
-      height: that.height
+      height: that.height,
     }).then(function(editors) {
       that.updateContent();
     });
@@ -61,16 +61,16 @@ export class TinyMCEComponent implements OnDestroy, AfterViewInit, OnChanges {
   }
 
   ngOnDestroy() {
-    console.log("tinymce ngOnDestroy");
+    console.log('tinymce ngOnDestroy');
     if ($(this.sel) && tinymce.get(this.elemId)) {
       tinymce.get(this.elemId).remove();
     }
   }
 
   updateContent() {
-    this.contentModel = this.contentModel?this.contentModel:'';
-    let editor = tinymce.get(this.elemId);
-    if (editor) {editor.setContent(this.contentModel);}
+    this.contentModel = this.contentModel ? this.contentModel : '';
+    const editor = tinymce.get(this.elemId);
+    if (editor) {editor.setContent(this.contentModel); }
   }
 
 }

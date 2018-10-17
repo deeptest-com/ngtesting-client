@@ -31,7 +31,7 @@ export class Login implements OnInit {
     this.onValueChanged();
   }
   ngOnInit() {
-    this._route.params.subscribe(params => {
+    this._route.params.forEach(params => {
       this.vcode = params['vcode'];
     });
     if(this.vcode) {

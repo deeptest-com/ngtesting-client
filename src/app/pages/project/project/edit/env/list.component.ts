@@ -24,7 +24,7 @@ export class ProjectEnvList implements OnInit, AfterViewInit {
   constructor(private _route: ActivatedRoute, private _state: GlobalState,
               private fb: FormBuilder, private el: ElementRef, private _routeService: RouteService,
               private _envService: EnvService) {
-    this._route.params.subscribe(params => {
+    this._route.params.forEach(params => {
       this.projectId = +params['id'];
     });
 

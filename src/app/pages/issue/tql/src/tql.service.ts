@@ -17,51 +17,51 @@ export class TqlService {
 
   }
 
-  query(jql: string, init: boolean) {
-    return this._reqService.post(this._query, { jql: jql, init: init } );
+  query(rule: string, init: boolean) {
+    return this._reqService.post(this._query, { rule: rule, init: init } );
   }
 
-  basicJqlToMap(jql: any): any {
+  basicJqlToMap(rule: any): any {
     const ret = {};
 
-    jql.rules.forEach((rule: any) => {
+    rule.rules.forEach((r: any) => {
       const selecteds = {};
-      if (rule.operator === 'equal') {
-        selecteds[rule.value] = true;
-      } else if (rule.operator === 'in') {
-        rule.value.forEach((val: string) => {
+      if (r.operator === 'equal') {
+        selecteds[r.value] = true;
+      } else if (r.operator === 'in') {
+        r.value.forEach((val: string) => {
           selecteds[val] = true;
         });
       }
-      ret[rule.id] = selecteds;
+      ret[r.id] = selecteds;
     });
     return ret;
   }
 
-  buildJql(jql: any, filters: any[], condition: any): any {
+  buildRule(rule: any, filters: any[], condition: any): any {
     const filter = filters.filter((elem, index) => elem.id == condition.id)[0];
-    const rule = this.newBasicRule(filter, condition.options);
-    console.log('filter', filter, rule);
+    const r = this.newBasicRule(filter, condition.options);
+    console.log('filter', filter, r);
 
     let replace = false;
-    for (const idx in jql.rules) {
-      console.log('r=', jql.rules[idx]);
-      if (jql.rules[idx].id == condition.id) {
-        if (rule) {
-          jql.rules[idx] = rule;
+    for (const idx in rule.rules) {
+      console.log('r=', rule.rules[idx]);
+      if (rule.rules[idx].id == condition.id) {
+        if (r) {
+          rule.rules[idx] = r;
         } else {
-          jql.rules.splice(jql.rules.indexOf(jql.rules[idx]), 1);
+          rule.rules.splice(rule.rules.indexOf(rule.rules[idx]), 1);
         }
 
         replace = true;
       }
     }
 
-    if (!replace && rule != null) {
-      jql.rules.push(rule);
+    if (!replace && r != null) {
+      rule.rules.push(r);
     }
 
-    return jql;
+    return rule;
   }
 
   newBasicRule(filter: any, options: any[]): any {

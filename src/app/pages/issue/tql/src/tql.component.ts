@@ -17,19 +17,18 @@ import { TqlService } from './tql.service';
 export class Tql implements OnInit, AfterViewInit {
 
   @Output() public queryChanged: EventEmitter<any> = new EventEmitter();
-
-  @ViewChild(NgbDropdown) private typeDropdown: NgbDropdown;
-  @ViewChild(NgbDropdown) private projectDropdown: NgbDropdown;
+  @Output() public searchEvent: EventEmitter<any> = new EventEmitter();
 
   projects: any[] = [
-    {id: 1, name: 'ngtesting-web'},
-    {id: 2, name: 'ngtesting-client'},
-    {id: 3, name: 'ngtesting-mindmap'}];
+    { id: 1, name: 'ngtesting-web' },
+    { id: 2, name: 'ngtesting-client' },
+    { id: 3, name: 'ngtesting-mindmap' }];
 
+  keywords: string;
   @Input() filters: any[];
   checkedConditions: any = {};
 
-  @Input() set jql(model: any) {
+  @Input() set rule(model: any) {
     if (!model.rules || model.rules.length == 0) { return; }
     this.checkedConditions = this._tqlService.basicJqlToMap(model);
   }
@@ -55,11 +54,7 @@ export class Tql implements OnInit, AfterViewInit {
   }
 
   search($event) {
-    console.log('===', this.typeDropdown);
-    this.typeDropdown.open();
-    console.log('===', this.typeDropdown);
-
-    $event.stopPropagation();
+    this.searchEvent.emit({});
   }
 
 }

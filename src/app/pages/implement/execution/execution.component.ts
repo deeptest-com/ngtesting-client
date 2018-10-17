@@ -26,7 +26,7 @@ export class Execution implements OnInit, AfterViewInit, OnDestroy {
   act: string;
 
   constructor(private _state: GlobalState, private _route: ActivatedRoute) {
-    this._route.params.subscribe(params => {
+    this._route.params.forEach(params => {
       this.act = params['act'];
     });
   }

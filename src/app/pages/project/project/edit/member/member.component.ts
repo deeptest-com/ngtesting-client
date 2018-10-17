@@ -46,7 +46,7 @@ export class ProjectEditMember implements OnInit, AfterViewInit {
               private _userAndGroupService: UserAndGroupService) {
     this.orgId = CONSTANT.CURR_ORG_ID;
 
-    this._route.params.subscribe(params => {
+    this._route.params.forEach(params => {
       this.id = +params['id'];
     });
     this.loadData();

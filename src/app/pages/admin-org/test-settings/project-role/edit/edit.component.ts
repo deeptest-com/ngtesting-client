@@ -40,7 +40,7 @@ export class ProjectRoleEdit implements OnInit, AfterViewInit {
   ngOnInit() {
     const that = this;
 
-    that._route.params.forEach((params: Params) => {
+    that._route.params.forEach(params => {
       that.id = +params['id'];
     });
 

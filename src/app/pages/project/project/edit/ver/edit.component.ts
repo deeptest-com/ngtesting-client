@@ -37,7 +37,7 @@ export class ProjectVerEdit implements OnInit, AfterViewInit {
     const that = this;
     this.orgId = CONSTANT.CURR_ORG_ID;
 
-    this._route.params.subscribe(params => {
+    this._route.params.forEach(params => {
       that.projectId = +params['id'];
       that.id = +params['eid'];
     });

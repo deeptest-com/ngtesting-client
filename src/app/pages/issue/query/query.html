@@ -6,11 +6,12 @@
       </div>
 
       <div class="filter">
-        <tql [jql]="jql" [filters]="filters" (queryChanged)="queryChanged($event)"></tql>
+        <tql [rule]="rule" [filters]="filters"
+             (queryChanged)="queryChanged($event)" (searchEvent)="search($event)"></tql>
       </div>
 
       <div class="buttons">
-        <button prj-privilege [privs]="'issue-create'" [myPrivs]="myPrivs" (click)="create()" type="button" class="btn btn-primary btn-with-icon btn-sm">
+        <button prj-privilege [privs]="'issue-create'" (click)="create()" type="button" class="btn btn-primary btn-with-icon btn-sm">
           <i class="fa fa-plus-circle"></i>新建
         </button>
       </div>

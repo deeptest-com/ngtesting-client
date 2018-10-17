@@ -43,7 +43,7 @@ export class ProjectEditInfo implements OnInit, AfterViewInit {
               private fb: FormBuilder, private _projectService: ProjectService) {
     this.orgId = CONSTANT.CURR_ORG_ID;
 
-    this._route.params.subscribe(params => {
+    this._route.params.forEach(params => {
       this.id = +params['id'];
       this.type = params['type'];
     });
