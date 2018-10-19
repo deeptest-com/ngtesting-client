@@ -47,6 +47,8 @@ export class TableColumnSelection implements OnInit, AfterViewInit {
   }
   selectItem(item): any {
     item.display = !item.display;
+
+    this.selected.emit({});
   }
 
 }
