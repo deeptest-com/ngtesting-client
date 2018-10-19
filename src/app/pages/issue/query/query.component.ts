@@ -37,8 +37,8 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
 
   rule: any = {};
   checkedConditions: any = {};
-  filters: any[];
-  columns: any[];
+  filters: any[] = [];
+  columns: any[] = [];
   init = 0;
 
   layout: string = CONSTANT.PROFILE.issueView;
@@ -97,6 +97,22 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
 
   search(data: any) {
     this.loadData(false);
+  }
+  changeColumns(data: any) {
+    let columnsForShow = '';
+    let i = 0
+
+    console.log('====', this.columns);
+
+    this.columns.forEach((it, index) => {
+      if (it.display) {
+        columnsForShow += (i++ == 0 ? it.id : ',' + it.id);
+      }
+    });
+
+    this._tqlService.changeColumns(columnsForShow).subscribe((json: any) => {
+      // this.loadData(false);
+    });
   }
 
   create(): void {

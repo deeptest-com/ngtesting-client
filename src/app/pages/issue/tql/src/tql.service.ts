@@ -12,13 +12,19 @@ import { RouteService } from '../../../../service/route';
 export class TqlService {
   _apiUrl = 'client/tql/';
   _query = this._apiUrl + 'query';
+  _changeColumns = this._apiUrl + 'changeColumns';
 
   constructor(private _reqService: RequestService) {
 
   }
 
+  changeColumns(columns: string) {
+    return this._reqService.post(this._changeColumns, { columns: columns } );
+  }
+
   query(rule: string, page: number, pageSize: number, init: boolean) {
-    return this._reqService.post(this._query, { rule: rule, page: page, pageSize: pageSize, init: init } );
+    return this._reqService.post(this._query, { rule: rule,
+      page: page, pageSize: pageSize, init: init } );
   }
 
   basicJqlToMap(rule: any): any {

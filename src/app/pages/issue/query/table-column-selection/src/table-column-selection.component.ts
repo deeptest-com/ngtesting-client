@@ -18,12 +18,9 @@ export class TableColumnSelection implements OnInit, AfterViewInit {
   keywords: string = '';
 
   _columns: any[] = [];
-  _columnsForSelect: any[] = [];
   @Input() set columns(models: any[]) {
     if (models) {
       this._columns = models;
-      this._columnsForSelect = this._columns.filter((it, index) => index > 5);
-
       _.forEach(this._columns, (item: any, index: number) => {
         this.form.addControl('menu-item-' + item.id, new FormControl('', []));
       });
