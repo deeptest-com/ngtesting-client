@@ -1,0 +1,4 @@
+<div class="page-info">
+  第 <span *ngIf="(page-1)*pageSize+1<collectionSize">{{(page-1)*pageSize+1}}–</span>
+  <span>{{page*pageSize>collectionSize?collectionSize:page*pageSize}} 个，共 {{collectionSize}} 个问题</span>
+</div>

@@ -1,17 +1,17 @@
-<div class="tql-condition-selection">
+<div class="table-column-selection form-inline">
   <form [formGroup]="form">
-    <div ngbDropdown #projectDropdown="ngbDropdown" [autoClose]="'outside'" class="btn-group">
-      <button class="btn btn-default dropdown" id="moreDropdownMenu" ngbDropdownToggle>更多</button>
+    <div ngbDropdown #columnDropdownMenu="ngbDropdown" [autoClose]="'outside'"
+         placement="bottom-right" class="btn-group">
+      <button class="btn btn-default dropdown" id="columnDropdownMenu" ngbDropdownToggle>列</button>
 
-      <div (click)="clickMenu($event)" class="dropdown-menu" aria-labelledby="moreDropdownMenu" ngbDropdownMenu>
+      <div (click)="clickMenu($event)" class="dropdown-menu" aria-labelledby="columnDropdownMenu" ngbDropdownMenu>
         <button class="dropdown-item">
-          <input [(ngModel)]="keywords" formControlName="keywords" type="search"
-                 class="keywords form-control form-control-sm" placeholder="过滤" name="keywords">
+          <input [(ngModel)]="keywords" formControlName="keywords" type="search" class="keywords form-control form-control-sm" placeholder="过滤" name="keywords">
           <i class="fa fa-search"></i>
         </button>
 
         <li class="dropdown-divider"></li>
-        <ng-container *ngFor="let item of _filtersForSelect; let i = index;">
+        <ng-container *ngFor="let item of _columnsForSelect; let i = index;">
           <button (click)="selectItem(item)" *ngIf="item.display"
             class="dropdown-item list-item">
             <input [(ngModel)]="item.display" formControlName="{{'menu-item-' + item.id}}" class="form-check-input" type="checkbox" value="{{item.id}}">
@@ -20,7 +20,7 @@
         </ng-container>
 
         <li class="dropdown-divider"></li>
-        <ng-container *ngFor="let item of (_filtersForSelect | myFilter:'label':keywords); let i = index;">
+        <ng-container *ngFor="let item of (_columnsForSelect | myFilter:'label':keywords); let i = index;">
           <button (click)="selectItem(item)" *ngIf="!item.display"
                   class="dropdown-item list-item">
             <input [(ngModel)]="item.display" formControlName="{{'menu-item-' + item.id}}" class="form-check-input" type="checkbox" value="{{item.id}}">

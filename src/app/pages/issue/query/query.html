@@ -29,14 +29,14 @@
     <div class="row table">
       <div class="list-toolbar col-xl-12">
         <div class="title">
-          第 <span *ngIf="(page-1)*pageSize+1!=collectionSize">{{(page-1)*pageSize+1}}–</span>
-          <span>{{page*pageSize>collectionSize?collectionSize:page*pageSize}} 个，共 {{collectionSize}} 个问题</span>
+          <page-info [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"></page-info>
         </div>
 
         <div class="filter">
         </div>
 
-        <div class="buttons">
+        <div class="buttons table-column-selection-wrap">
+          <table-column-selection [columns]="columns"></table-column-selection>
         </div>
       </div>
     </div>

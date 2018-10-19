@@ -14,6 +14,7 @@ import { DirectiveModule } from '../../directive/directive.module';
 import { SlimLoadingBarModule } from '../../components/ng2-loading-bar';
 import { FileUploaderModule } from '../../components/file-uploader';
 import { PopDialogModule } from '../../components/pop-dialog';
+import { PageInfoModule } from '../../components/page-info';
 import { TqlModule } from './tql';
 
 import { RouteService } from '../../service/route';
@@ -27,6 +28,8 @@ import { PrivilegeService } from '../../service/privilege';
 import { Issue } from './issue.component';
 import { IssueQuery } from './query/query.component';
 import { IssueTable } from './query/table/table.component';
+import { TableColumnSelectionModule } from './query/table-column-selection';
+
 import { IssueBrowse } from './query/browse/browse.component';
 import { IssueEdit } from './edit/edit.component';
 import { IssueView } from './view/view.component';
@@ -47,7 +50,9 @@ import { IssueView } from './view/view.component';
     ToastyModule,
     SlimLoadingBarModule.forRoot(),
     PopDialogModule,
+    PageInfoModule,
     TqlModule,
+    TableColumnSelectionModule,
   ],
   declarations: [
     Issue,

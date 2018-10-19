@@ -8,7 +8,7 @@
     }
 
     .buttons {
-      width: 200px;
+      width: 100px;
       .layout {
         display: inline-block;
         padding: 3px;
@@ -16,6 +16,12 @@
         cursor: pointer;
         &.active {
           color: #209e91;
+        }
+      }
+      &.table-column-selection-wrap {
+        width: 65px;
+        button.dropdown {
+          border: 0;
         }
       }
     }

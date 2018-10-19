@@ -4,35 +4,33 @@ import { Component, Input, OnInit, AfterViewInit, Output, EventEmitter, ViewChil
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 
-import { CONSTANT } from '../../../../../../utils/constant';
-
-import { TqlConditionSelectionService } from './tql-condition-selection.service';
+import { CONSTANT } from '../../../../../utils/constant';
 
 @Component({
-  selector: 'tql-condition-selection',
-  templateUrl: './tql-condition-selection.html',
+  selector: 'table-column-selection',
+  templateUrl: './table-column-selection.html',
   styleUrls: ['./styles.scss'],
 })
-export class TqlConditionSelectionComponent implements OnInit, AfterViewInit {
+export class TableColumnSelection implements OnInit, AfterViewInit {
   form: FormGroup;
 
   @Output() selected = new EventEmitter<any>();
   keywords: string = '';
 
-  _filters: any[] = [];
-  _filtersForSelect: any[] = [];
-  @Input() set filters(models: any[]) {
+  _columns: any[] = [];
+  _columnsForSelect: any[] = [];
+  @Input() set columns(models: any[]) {
     if (models) {
-      this._filters = models;
-      this._filtersForSelect = this._filters.filter((it, index) => index > 5);
+      this._columns = models;
+      this._columnsForSelect = this._columns.filter((it, index) => index > 5);
 
-      _.forEach(this._filters, (item: any, index: number) => {
+      _.forEach(this._columns, (item: any, index: number) => {
         this.form.addControl('menu-item-' + item.id, new FormControl('', []));
       });
     }
   }
 
-  constructor(private fb: FormBuilder, private onditionSelectionService: TqlConditionSelectionService) {
+  constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
         'keywords': ['', []],
       }, {});

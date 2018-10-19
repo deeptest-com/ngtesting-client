@@ -1,6 +1,5 @@
 <div class="tql">
   <div class="form-inline">
-
     <ng-container *ngFor="let item of filters; let i = index">
       <tql-condition *ngIf="i < 5" [model]="item"
                      [checkedItems]="checkedConditions[item.id]" (selected)="selectItem($event)"></tql-condition>
@@ -11,7 +10,7 @@
              type="search" class="form-control form-control-sm keywords" placeholder="关键字" id="keywords" name="keywords">
     </div>
 
-    <div ngbDropdown class="btn-group more">
+    <div class="btn-group more">
       <tql-condition-selection [filters]="filters" (selected)="selectCondition($event)"></tql-condition-selection>
     </div>
 

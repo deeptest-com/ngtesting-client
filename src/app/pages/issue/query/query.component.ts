@@ -38,6 +38,7 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
   rule: any = {};
   checkedConditions: any = {};
   filters: any[];
+  columns: any[];
   init = 0;
 
   layout: string = CONSTANT.PROFILE.issueView;
@@ -89,6 +90,7 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
       if (init) {
         this.rule = json.rule;
         this.filters = json.filters;
+        this.columns = json.columns;
       }
     });
   }

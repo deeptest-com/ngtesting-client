@@ -1,12 +1,13 @@
-.tql-condition-selection {
+.table-column-selection {
   .btn-group {
     margin: 0 5px;
-    input.keywords {
-      margin-right: 20px;
+
+    button {
+      margin-left: 0;
     }
 
-    &.more {
-      margin-left: 10px;
+    input.keywords {
+      margin-right: 20px;
     }
 
     .dropdown-item {

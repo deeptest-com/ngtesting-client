@@ -1,11 +1,12 @@
 <div class="tql-condition">
   <form [formGroup]="form">
     <div ngbDropdown #projectDropdown="ngbDropdown" [autoClose]="'outside'" class="btn-group">
-      <button class="btn btn-default dropdown" id="projectDropdownMenu" ngbDropdownToggle>{{model.label}}</button>
+      <button class="btn btn-default dropdown" id="conditionDropdownMenu" ngbDropdownToggle>{{model.label}}</button>
 
-      <div (click)="clickMenu($event)" class="dropdown-menu" aria-labelledby="projectDropdownMenu" ngbDropdownMenu>
+      <div (click)="clickMenu($event)" class="dropdown-menu" aria-labelledby="conditionDropdownMenu" ngbDropdownMenu>
         <button *ngIf="search" class="dropdown-item">
-          <input [(ngModel)]="keywords" formControlName="keywords" type="search" class="form-control form-control-sm" name="keywords"
+          <input [(ngModel)]="keywords" formControlName="keywords" type="search"
+                 class="keywords form-control form-control-sm" name="keywords"
                  placeholder="{{model.input==='select'?'过滤':''}}">
           <i class="fa fa-search"></i>
         </button>
