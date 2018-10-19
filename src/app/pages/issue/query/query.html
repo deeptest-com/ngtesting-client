@@ -26,7 +26,23 @@
   </div>
 
   <div *ngIf="layout=='table'">
+    <div class="row table">
+      <div class="list-toolbar col-xl-12">
+        <div class="title">
+          第 <span *ngIf="(page-1)*pageSize+1!=collectionSize">{{(page-1)*pageSize+1}}–</span>
+          <span>{{page*pageSize>collectionSize?collectionSize:page*pageSize}} 个，共 {{collectionSize}} 个问题</span>
+        </div>
+
+        <div class="filter">
+        </div>
+
+        <div class="buttons">
+        </div>
+      </div>
+    </div>
+
     <issue-table [issues]="models"></issue-table>
+
     <div class="page-container">
       <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
                       (pageChange)="pageChange($event)">
