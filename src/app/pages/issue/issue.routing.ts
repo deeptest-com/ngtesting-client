@@ -2,6 +2,9 @@ import { Routes, RouterModule }  from '@angular/router';
 
 import { Issue } from './issue.component';
 import { IssueQuery } from './query/query.component';
+import { IssueTable } from './query/table/table.component';
+import { IssueBrowse } from './query/browse/browse.component';
+
 import { IssueEdit } from './edit/edit.component';
 import { IssueView } from './view/view.component';
 
@@ -11,8 +14,13 @@ const routes: Routes = [
     path: '',
     component: Issue,
     children: [
-      { path: 'query/:rule', component: IssueQuery },
-      { path: 'filter/:filterId', component: IssueQuery },
+      {
+        path: 'query/:rule',
+        component: IssueQuery,
+      },
+      { path: 'filter/:filterId',
+        component: IssueQuery,
+      },
 
       {
         path: ':id',

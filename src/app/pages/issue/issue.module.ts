@@ -20,11 +20,14 @@ import { RouteService } from '../../service/route';
 import { RequestService } from '../../service/request';
 import { DatetimePickerService } from '../../service/datetime-picker';
 
+import { ClientService } from '../../service/client/client';
 import { IssueService } from '../../service/client/issue';
 import { PrivilegeService } from '../../service/privilege';
 
 import { Issue } from './issue.component';
 import { IssueQuery } from './query/query.component';
+import { IssueTable } from './query/table/table.component';
+import { IssueBrowse } from './query/browse/browse.component';
 import { IssueEdit } from './edit/edit.component';
 import { IssueView } from './view/view.component';
 
@@ -48,7 +51,7 @@ import { IssueView } from './view/view.component';
   ],
   declarations: [
     Issue,
-    IssueQuery,
+    IssueQuery, IssueTable, IssueBrowse,
     IssueEdit,
     IssueView,
   ],
@@ -56,6 +59,7 @@ import { IssueView } from './view/view.component';
     RouteService,
     RequestService,
     DatetimePickerService,
+    ClientService,
     IssueService,
     PrivilegeService,
   ],

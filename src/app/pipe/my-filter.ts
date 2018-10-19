@@ -3,7 +3,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 @Pipe( { name: 'myFilter' } )
 export class MyFilterPipe implements PipeTransform {
   transform(items: any[], field: string, value: string): any[] {
-    console.log('========', items, field, value);
+    // console.log('========', items, field, value);
 
     if (!items) {
       return [];

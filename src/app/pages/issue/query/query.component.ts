@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation, OnInit, AfterViewInit, OnDestroy,
-  ElementRef, Inject, Renderer2, OnChanges, DoCheck, SimpleChanges } from '@angular/core';
+  ElementRef, Inject, Renderer2 } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import 'rxjs/add/operator/debounceTime';
@@ -11,11 +11,11 @@ import { CONSTANT } from '../../../utils/constant';
 import { WS_CONSTANT } from '../../../utils/ws-constant';
 import { Utils } from '../../../utils/utils';
 import { RouteService } from '../../../service/route';
+
+import { ClientService } from '../../../service/client/client';
 import { IssueService } from '../../../service/client/issue';
 
 import { TqlService } from '../tql/src/tql.service';
-
-declare var jQuery;
 
 @Component({
   selector: 'issue-query',
@@ -23,7 +23,7 @@ declare var jQuery;
   styleUrls: ['./query.scss'],
   templateUrl: './query.html',
 })
-export class IssueQuery implements OnInit, AfterViewInit, OnDestroy, OnChanges, DoCheck {
+export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
   eventCode: string = 'IssueQuery';
   routeSub: any;
 
@@ -31,21 +31,20 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy, OnChanges, 
   prjId: number;
 
   models: any[];
+  collectionSize: number = 0;
+  page: number = 1;
+  pageSize: number = 3;
+
   rule: any = {};
   checkedConditions: any = {};
   filters: any[];
   init = 0;
 
-  private elem: Element;
-  private tqlElem: any;
-
-  layout: string = 'columns';
-  contentHeight: number;
-  leftWidth: number = CONSTANT.PROFILE.leftSizeDesign;
+  layout: string = CONSTANT.PROFILE.issueView;
 
   constructor(private _activeRoute: ActivatedRoute, private _router: Router,
               private _tqlService: TqlService, private _issueService: IssueService,
-              @Inject(ElementRef) public element: ElementRef, @Inject(Renderer2) private renderer: Renderer2) {
+              private _clientService: ClientService) {
 
     this.routeSub = this._activeRoute.params.subscribe(params => {
       this.rule = params['rule'];
@@ -59,8 +58,6 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy, OnChanges, 
       }
     });
 
-    this.elem = element.nativeElement;
-
   }
 
   ngOnInit() {
@@ -68,16 +65,6 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy, OnChanges, 
 
   ngAfterViewInit() {
 
-  }
-
-  ngDoCheck(): void {
-    console.log('ngDoCheck');
-    this.tqlElem = jQuery(this.elem.querySelector('.tql'));
-    this.contentHeight = Utils.getContainerHeight(CONSTANT.HEAD_HEIGHT + CONSTANT.FOOTER_HEIGHT
-      + CONSTANT.ISSUE_TQL_SPAN + this.tqlElem.height());
-  }
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log('ngOnChanges', changes);
   }
 
   queryChanged(data): void {
@@ -89,9 +76,14 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy, OnChanges, 
     this._router.navigateByUrl(url);
   }
 
+  pageChange(event: any): void {
+    this.loadData();
+  }
+
   loadData(init: boolean = true) {
-    this._tqlService.query(this.rule, init).subscribe((json: any) => {
+    this._tqlService.query(this.rule, this.page, this.pageSize, init).subscribe((json: any) => {
       console.log('===', json);
+      this.collectionSize = json.total;
       this.models = json.data;
 
       if (init) {
@@ -111,6 +103,9 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy, OnChanges, 
 
   changeLayout(layout: string): void {
     this.layout = layout;
+
+    this._clientService.setIssueView(layout).subscribe((json: any) => {
+    });
   }
 
   ngOnDestroy(): void {

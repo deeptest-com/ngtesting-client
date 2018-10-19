@@ -18,6 +18,7 @@ export class ClientService {
   _getProfile = this._apiBase + 'getProfile';
   _saveInfo = this._apiBase + 'saveInfo';
   _setLeftSize = this._apiBase + 'setLeftSize';
+  _setIssueView = this._apiBase + 'setIssueView';
 
   loadProfileRemote(context = {}): Observable<any> {
     const that = this;
@@ -62,6 +63,11 @@ export class ClientService {
   setLeftSize(left: number, prop: string) {
     const model = { left: left, prop: prop };
     return this._reqService.post(this._setLeftSize, model);
+  }
+
+  setIssueView(issueView: string) {
+    const model = { issueView: issueView };
+    return this._reqService.post(this._setIssueView, model);
   }
 
 }

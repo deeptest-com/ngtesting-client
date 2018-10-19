@@ -1,5 +1,5 @@
 <div class="issue-query container-fluid">
-  <div class="row">
+  <div>
     <div class="list-toolbar col-xl-12">
       <div class="title">
         <span>问题查询</span>
@@ -11,11 +11,11 @@
       </div>
 
       <div class="buttons">
-        <span (click)="changeLayout('columns')">
-          <i [class.active]="layout=='columns'" class="fa fa-columns layout"></i>
+        <span (click)="changeLayout('table')">
+          <i [class.active]="layout=='table'" class="fa fa-list layout"></i>
         </span>
-        <span (click)="changeLayout('list')">
-          <i [class.active]="layout=='list'" class="fa fa-list layout"></i>
+        <span (click)="changeLayout('browse')">
+          <i [class.active]="layout=='browse'" class="fa fa-columns layout"></i>
         </span>
 
         <button type="button" class="btn btn-primary btn-with-icon btn-sm">
@@ -24,17 +24,18 @@
       </div>
     </div>
   </div>
-  <!-- /.row -->
-  <div class="row main" [resize]="'issue'">
-    <div class="left resize-left" [style.width]="leftWidth+'px'" [style.height]="contentHeight">
 
+  <div *ngIf="layout=='table'">
+    <issue-table [issues]="models"></issue-table>
+    <div class="page-container">
+      <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
+                      (pageChange)="pageChange($event)">
+      </ngb-pagination>
     </div>
+  </div>
 
-    <div class="resize-handle" [style.left]="leftWidth+'px'"></div>
-
-    <div class="content resize-right y-scrollable" [style.height]="contentHeight">
-
-    </div>
+  <div *ngIf="layout=='browse'">
+    <issue-browse></issue-browse>
   </div>
 
 </div>

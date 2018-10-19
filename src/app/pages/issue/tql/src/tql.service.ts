@@ -17,8 +17,8 @@ export class TqlService {
 
   }
 
-  query(rule: string, init: boolean) {
-    return this._reqService.post(this._query, { rule: rule, init: init } );
+  query(rule: string, page: number, pageSize: number, init: boolean) {
+    return this._reqService.post(this._query, { rule: rule, page: page, pageSize: pageSize, init: init } );
   }
 
   basicJqlToMap(rule: any): any {

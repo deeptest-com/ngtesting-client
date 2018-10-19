@@ -24,8 +24,8 @@ export class PlanList implements OnInit, AfterViewInit, OnDestroy {
 
   models: any;
   collectionSize: number = 0;
-  page:number = 1;
-  pageSize:number = 15;
+  page: number = 1;
+  pageSize: number = 15;
 
   queryForm: FormGroup;
   queryModel: any = { keywords: '', status: '' };
@@ -86,7 +86,7 @@ export class PlanList implements OnInit, AfterViewInit, OnDestroy {
   queryChange(values: any): void {
       this.loadData();
   }
-  pageChange(event:any):void {
+  pageChange(event: any): void {
     this.loadData();
   }
 
