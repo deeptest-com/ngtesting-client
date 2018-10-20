@@ -16,8 +16,7 @@
         <tr *ngFor="let item of issues">
           <ng-container *ngFor="let col of columns">
             <td *ngIf="col.display">
-              {{col.id | idToName}} -
-              {{item[col.id | idToName]}}
+              <item-prop [item]="item" [col]="col"></item-prop>
             </td>
           </ng-container>
 

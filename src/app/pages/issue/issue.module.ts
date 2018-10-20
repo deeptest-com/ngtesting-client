@@ -28,6 +28,7 @@ import { PrivilegeService } from '../../service/privilege';
 import { Issue } from './issue.component';
 import { IssueQuery } from './query/query.component';
 import { IssueTable } from './query/table/table.component';
+import { ItemProp } from './query/table/item-prop';
 import { TableColumnSelectionModule } from './query/table-column-selection';
 
 import { IssueBrowse } from './query/browse/browse.component';
@@ -56,7 +57,7 @@ import { IssueView } from './view/view.component';
   ],
   declarations: [
     Issue,
-    IssueQuery, IssueTable, IssueBrowse,
+    IssueQuery, IssueTable, ItemProp, IssueBrowse,
     IssueEdit,
     IssueView,
   ],
