@@ -13,16 +13,20 @@ import { PathToLinkPipe } from './misc';
 import { FieldTypePipe, FieldApplyToPipe, FieldFormatPipe, TrueOrFalsePipe, DisableOrNotPipe } from './field-property';
 import { PathToNamePipe } from './path-to-name';
 import { MyFilterPipe } from './my-filter';
+import { IdToNamePipe } from './id-to-name';
 
 @NgModule({
   imports: [],
+
   declarations: [MsgReadPipe, ExeStatusPipe, PathToNamePipe, ImgPathPipe, ThumbPathPipe, MapToArrayPipe, TimePassedPipe,
     ModelStatusPipe, MarkErrorPipe, FieldTypePipe, FieldApplyToPipe, FieldFormatPipe, TrueOrFalsePipe,
-    DisableOrNotPipe, PercentPipe, ShowIfContainsPipe, PathToLinkPipe, MyFilterPipe],
+    DisableOrNotPipe, PercentPipe, ShowIfContainsPipe, PathToLinkPipe, MyFilterPipe, IdToNamePipe],
+
   exports: [MsgReadPipe, ExeStatusPipe, PathToNamePipe, ImgPathPipe, ThumbPathPipe, MapToArrayPipe, TimePassedPipe,
     ModelStatusPipe, MarkErrorPipe, FieldTypePipe, FieldApplyToPipe, FieldFormatPipe, TrueOrFalsePipe,
-    DisableOrNotPipe, ShowIfContainsPipe, PathToLinkPipe, MyFilterPipe],
+    DisableOrNotPipe, ShowIfContainsPipe, PathToLinkPipe, MyFilterPipe, IdToNamePipe],
 })
 export class PipeModule {
 
 }
+

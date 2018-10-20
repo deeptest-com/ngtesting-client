@@ -41,7 +41,7 @@
       </div>
     </div>
 
-    <issue-table [issues]="models"></issue-table>
+    <issue-table [issues]="models" [columns]="columns"></issue-table>
 
     <div class="page-container">
       <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"

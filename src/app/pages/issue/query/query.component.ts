@@ -111,7 +111,7 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
     });
 
     this._tqlService.changeColumns(columnsForShow).subscribe((json: any) => {
-      // this.loadData(false);
+      this.loadData(false);
     });
   }
 

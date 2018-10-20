@@ -17,6 +17,7 @@ export class IssueTable implements OnInit, AfterViewInit, OnDestroy {
   eventCode: string = 'IssueView';
 
   @Input() issues: any[] = [];
+  @Input() columns: any[] = [];
 
   constructor(private _state: GlobalState, private _issueService: IssueService) {
 
