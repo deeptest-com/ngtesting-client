@@ -51,7 +51,7 @@ export class TqlConditionComponent implements OnInit, AfterViewInit {
   selectItem(item): any {
     item.checked = !item.checked;
 
-    this.selected.emit({ id: this.model.id, options: this.selectOptions });
+    this.selected.emit({ code: this.model.code, options: this.selectOptions });
   }
 
 }

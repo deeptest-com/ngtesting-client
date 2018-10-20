@@ -27,7 +27,7 @@ export class TqlConditionSelectionComponent implements OnInit, AfterViewInit {
       this._filtersForSelect = this._filters.filter((it, index) => index > 5);
 
       _.forEach(this._filters, (item: any, index: number) => {
-        this.form.addControl('menu-item-' + item.id, new FormControl('', []));
+        this.form.addControl('menu-item-' + item.code, new FormControl('', []));
       });
     }
   }

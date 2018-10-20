@@ -100,13 +100,11 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
   }
   changeColumns(data: any) {
     let columnsForShow = '';
-    let i = 0
-
-    console.log('====', this.columns);
+    let i = 0;
 
     this.columns.forEach((it, index) => {
       if (it.display) {
-        columnsForShow += (i++ == 0 ? it.id : ',' + it.id);
+        columnsForShow += (i++ == 0 ? it.code : ',' + it.code);
       }
     });
 

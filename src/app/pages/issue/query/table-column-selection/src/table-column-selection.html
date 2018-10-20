@@ -14,7 +14,7 @@
         <ng-container *ngFor="let item of _columns; let i = index;">
           <button (click)="selectItem(item)" *ngIf="item.display"
             class="dropdown-item list-item">
-            <input [(ngModel)]="item.display" formControlName="{{'menu-item-' + item.id}}" class="form-check-input" type="checkbox" value="{{item.id}}">
+            <input [(ngModel)]="item.display" formControlName="{{'menu-item-' + item.code}}" class="form-check-input" type="checkbox" value="{{item.code}}">
             <a>{{item.label}}</a>
           </button>
         </ng-container>
@@ -23,7 +23,7 @@
         <ng-container *ngFor="let item of (_columns | myFilter:'label':keywords); let i = index;">
           <button (click)="selectItem(item)" *ngIf="!item.display"
                   class="dropdown-item list-item">
-            <input [(ngModel)]="item.display" formControlName="{{'menu-item-' + item.id}}" class="form-check-input" type="checkbox" value="{{item.id}}">
+            <input [(ngModel)]="item.display" formControlName="{{'menu-item-' + item.code}}" class="form-check-input" type="checkbox" value="{{item.code}}">
             <a>{{item.label}}</a>
           </button>
         </ng-container>

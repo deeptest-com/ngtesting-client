@@ -22,7 +22,7 @@ export class TableColumnSelection implements OnInit, AfterViewInit {
     if (models) {
       this._columns = models;
       _.forEach(this._columns, (item: any, index: number) => {
-        this.form.addControl('menu-item-' + item.id, new FormControl('', []));
+        this.form.addControl('menu-item-' + item.code, new FormControl('', []));
       });
     }
   }

@@ -12,9 +12,9 @@ declare var jQuery;
   encapsulation: ViewEncapsulation.None,
   styleUrls: [],
   template: `
-    <span>{{col.id | idToName}} - </span>
-    <span *ngIf="col.type=='string'">{{item[col.id | idToName]}}</span>
-    <span *ngIf="col.type=='date'">{{item[col.id] | date:'y/MM/dd HH:mm:ss'}}</span>
+    <span>{{col.code | idToName}} - </span>
+    <span *ngIf="col.type=='string'">{{item[col.code | idToName]}}</span>
+    <span *ngIf="col.type=='date'">{{item[col.code] | date:'y/MM/dd HH:mm:ss'}}</span>
   `,
 })
 export class ItemProp implements OnInit {
