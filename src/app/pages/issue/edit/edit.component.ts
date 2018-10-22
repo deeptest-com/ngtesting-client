@@ -1,4 +1,5 @@
-import { Component, ViewEncapsulation, NgModule, Pipe, OnInit, AfterViewInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, ViewEncapsulation, NgModule, Pipe, OnInit, AfterViewInit, OnDestroy, ViewChild }
+  from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
@@ -27,6 +28,7 @@ export class IssueEdit implements OnInit, AfterViewInit, OnDestroy {
   eventCode: string = 'IssueEdit';
   orgId: number;
   prjId: number;
+  canEdit: boolean;
 
   id: number;
   model: any = { };
@@ -40,20 +42,27 @@ export class IssueEdit implements OnInit, AfterViewInit, OnDestroy {
 
   form: any;
 
-  canEdit: boolean;
+
   @ViewChild('modalWrapper') modalWrapper: PopDialogComponent;
 
-  constructor(private _routeService: RouteService, private _state: GlobalState,
+  constructor(private _routeService: RouteService, private _state: GlobalState, private _route: ActivatedRoute,
               private fb: FormBuilder, private toastyService: ToastyService,
               private issueService: IssueService, private privilegeService: PrivilegeService) {
 
-  }
-  ngOnInit() {
     this.canEdit = this.privilegeService.hasPrivilege('issue-update');
     this.orgId = CONSTANT.CURR_ORG_ID;
     this.prjId = CONSTANT.CURR_PRJ_ID;
 
+    this._route.params.forEach((params: Params) => {
+      this.id = +params['id'];
+    });
+
     this.buildForm();
+
+    // this.loadData();
+  }
+  ngOnInit() {
+
   }
   ngAfterViewInit() {}
 
@@ -63,27 +72,6 @@ export class IssueEdit implements OnInit, AfterViewInit, OnDestroy {
         'name': ['', [Validators.required]],
       }, {},
     );
-
-    this.form.valueChanges.debounceTime(CONSTANT.DebounceTime).subscribe(data => this.onValueChanged(data));
-    this.onValueChanged();
-  }
-  onValueChanged(data?: any) {
-    const that = this;
-    that.formErrors = ValidatorUtils.genMsg(that.form, that.validateMsg, []);
-
-    if (this.model.testType == 'asrLite') {
-      this.model.productBranch = '';
-      this.model.asrLangModel = 'comm';
-    } else {
-      this.model.asrLangModel = '';
-    }
-
-    if (this.model.testType == 'nlu-sent') {
-      this.model.testsetId = '';
-    } else {
-      this.model.isFuse = '';
-    }
-
   }
 
   formErrors = [];
