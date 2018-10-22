@@ -12,34 +12,6 @@
     </div>
 
     <div class="form-group row">
-      <label class="col-sm-3 col-form-label"></label>
-      <div class="col-sm-9">
-        <div class="tabs-container light">
-          <div class="tabs">
-            <ngb-tabset>
-              <ngb-tab id="content">
-                <ng-template ngbTabTitle>任务信息</ng-template>
-                <ng-template ngbTabContent></ng-template>
-              </ngb-tab>
-            </ngb-tabset>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div [class.hidden]="tab != 'content'" class="tab-steps form-group row">
-<!--      <div class="form-group row">
-        <label class="col-sm-3 col-form-label"><span>测试类型</span></label>
-        <label class="col-sm-9 col-form-label text">
-          {{casePropertyMap['type'][model.type]}}
-        </label>
-      </div>
-      <div class="form-group row">
-        <label class="col-sm-3 col-form-label"><span>优先级</span></label>
-        <label class="col-sm-9 col-form-label text">
-          {{casePropertyMap['priority'][model.priority]}}
-        </label>
-      </div>-->
       <div class="form-group row">
         <label class="col-sm-3 col-form-label"><span>耗时(分钟)</span></label>
         <label class="col-sm-9 col-form-label text">

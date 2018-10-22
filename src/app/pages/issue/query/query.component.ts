@@ -57,6 +57,8 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
         this.rule = JSON.parse(this.rule);
         this.loadData(this.init == 0);
       }
+
+      CONSTANT.ISSUE_JQL = JSON.stringify(this.rule);
     });
 
   }
