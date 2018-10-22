@@ -24,28 +24,21 @@ declare var jQuery;
   templateUrl: './edit.html',
 })
 export class IssueEdit implements OnInit, AfterViewInit, OnDestroy {
-  eventCode: string = 'AiTaskEdit';
+  eventCode: string = 'IssueEdit';
   orgId: number;
   prjId: number;
 
   id: number;
-  model: any = { aiTestEnv: '' };
-  asrLangModelVos: any[] = [];
-  aiAudioTypeVos: any[] = [];
-  aiProductBranchVos: any[] = [];
-  aiTestEnvVos: any[] = [];
-  aiTestTypeVos: any[] = [];
-  aiTestSetVos: any[] = [];
+  model: any = { };
 
-  settings: any;
-  data: any;
-  form: any;
-  tab: string = 'content';
-
-  caseTypes: any[] = [];
-  casePriorities: any[] = [];
+  priorities: any[] = [];
+  types: any[] = [];
+  prioritie: any[] = [];
+  statuses: any[] = [];
+  resolutions: any[] = [];
   fields: any[] = [];
-  user: any;
+
+  form: any;
 
   canEdit: boolean;
   @ViewChild('modalWrapper') modalWrapper: PopDialogComponent;
@@ -59,50 +52,8 @@ export class IssueEdit implements OnInit, AfterViewInit, OnDestroy {
     this.canEdit = this.privilegeService.hasPrivilege('issue-update');
     this.orgId = CONSTANT.CURR_ORG_ID;
     this.prjId = CONSTANT.CURR_PRJ_ID;
-    this.user = CONSTANT.PROFILE;
 
     this.buildForm();
-
-    this._state.subscribe(CONSTANT.EVENT_CASE_EDIT, this.eventCode, (data: any) => {
-      const issue = data.node;
-
-      if (!issue || issue.isParent) {
-        this.model = { childrenCount: data.childrenCount };
-        return;
-      }
-
-      this.caseTypes = CONSTANT.CASE_TYPES_FOR_PROJECT;
-      this.casePriorities = CONSTANT.CASE_PRIORITIES_FOR_PROJECT;
-      this.fields = CONSTANT.CUSTOM_FIELD_FOR_PROJECT;
-
-      if (issue) {
-        this.id = issue.id;
-        this.loadData();
-      } else {
-        this.model = null;
-      }
-    });
-
-    this.settings = {
-      canEdit: this.canEdit,
-      columns: {
-        ordr: {
-          title: '顺序',
-        },
-        opt: {
-          title: '操作',
-          editor: {
-            type: 'textarea',
-          },
-        },
-        expect: {
-          title: '期望结果',
-          editor: {
-            type: 'textarea',
-          },
-        },
-      },
-    };
   }
   ngAfterViewInit() {}
 
@@ -146,12 +97,9 @@ export class IssueEdit implements OnInit, AfterViewInit, OnDestroy {
     this.issueService.get(this.id).subscribe((json: any) => {
       this.model = json.data;
 
-      this.asrLangModelVos = json.asrLangModelVos;
-      this.aiAudioTypeVos = json.aiAudioTypeVos;
-      this.aiProductBranchVos = json.aiProductBranchVos;
-      this.aiTestEnvVos = json.aiTestEnvVos;
-      this.aiTestTypeVos = json.aiTestTypeVos;
-      this.aiTestSetVos = json.aiTestSetVos;
+      // this.caseTypes = CONSTANT.CASE_TYPES_FOR_PROJECT;
+      // this.casePriorities = CONSTANT.CASE_PRIORITIES_FOR_PROJECT;
+      // this.fields = CONSTANT.CUSTOM_FIELD_FOR_PROJECT;
     });
   }
 
@@ -170,26 +118,6 @@ export class IssueEdit implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  tabChange(event: any) {
-    this.tab = event.nextId;
-  }
-
-  onCreateConfirm(event: any) {
-    console.log('onCreateConfirm', event);
-    event.confirm.resolve();
-  }
-
-  onEditorKeyup(event: any) {
-    this.model.content = event;
-  }
-
-  review(pass: boolean) {
-    if (!pass) {
-      this._state.notifyDataChanged(CONSTANT.EVENT_COMMENTS_EDIT, { pass: pass, summary: '评审失败' });
-    } else {
-      this._state.notifyDataChanged(CONSTANT.EVENT_COMMENTS_SAVE, { pass: pass, summary: '评审通过' });
-    }
-  }
   back() {
     const url = '/pages/org/' + this.orgId + '/prj/' + this.prjId + '/issue/query/'
        + CONSTANT.ISSUE_JQL;

@@ -45,14 +45,14 @@ export class TqlService {
   }
 
   buildRule(rule: any, filters: any[], condition: any): any {
-    const filter = filters.filter((elem, index) => elem.id == condition.id)[0];
+    const filter = filters.filter((elem, index) => elem.code == condition.code)[0];
     const r = this.newBasicRule(filter, condition.options);
     console.log('filter', filter, r);
 
     let replace = false;
     for (const idx in rule.rules) {
-      console.log('r=', rule.rules[idx]);
-      if (rule.rules[idx].id == condition.id) {
+      console.log('r=', rule.rules[idx], condition);
+      if (rule.rules[idx].id == condition.code) {
         if (r) {
           rule.rules[idx] = r;
         } else {
@@ -82,10 +82,10 @@ export class TqlService {
     if (checkedVals.length == 0) {
       return null;
     } else {
-      console.log('=====', checkedVals);
+      console.log('99999999999', checkedVals);
       return {
-        id: filter.id,
-        field: filter.id,
+        id: filter.code,
+        field: filter.code,
         group: false,
         rules: [],
 

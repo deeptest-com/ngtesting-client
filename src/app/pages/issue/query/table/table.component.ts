@@ -19,8 +19,12 @@ export class IssueTable implements OnInit, AfterViewInit, OnDestroy {
   @Input() issues: any[] = [];
   @Input() columns: any[] = [];
 
-  constructor(private _state: GlobalState, private _issueService: IssueService) {
+  orgId: number;
+  prjId: number;
 
+  constructor(private _state: GlobalState, private _issueService: IssueService) {
+    this.orgId = CONSTANT.CURR_ORG_ID;
+    this.prjId = CONSTANT.CURR_PRJ_ID;
   }
 
   ngOnInit() {

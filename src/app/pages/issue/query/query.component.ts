@@ -55,7 +55,7 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
         this.loadData();
       } else {
         this.rule = JSON.parse(this.rule);
-        this.loadData(this.init++ == 0);
+        this.loadData(this.init == 0);
       }
     });
 
@@ -88,6 +88,7 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
       this.models = json.data;
 
       if (init) {
+        this.init++;
         this.rule = json.rule;
         this.filters = json.filters;
         this.columns = json.columns;
