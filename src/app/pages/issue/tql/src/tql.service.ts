@@ -46,25 +46,25 @@ export class TqlService {
 
   buildRule(rule: any, filters: any[], condition: any): any {
     const filter = filters.filter((elem, index) => elem.code == condition.code)[0];
-    const r = this.newBasicRule(filter, condition.options);
-    console.log('filter', filter, r);
+    const newRule = this.newBasicRule(filter, condition.options);
+    console.log('filter', filter, newRule);
 
-    let replace = false;
+    let found = false;
     for (const idx in rule.rules) {
       console.log('r=', rule.rules[idx], condition);
       if (rule.rules[idx].id == condition.code) {
-        if (r) {
-          rule.rules[idx] = r;
+        if (newRule) {
+          rule.rules[idx] = newRule; // 替换
         } else {
-          rule.rules.splice(rule.rules.indexOf(rule.rules[idx]), 1);
+          rule.rules.splice(rule.rules.indexOf(rule.rules[idx]), 1); // 删除
         }
 
-        replace = true;
+        found = true;
       }
     }
 
-    if (!replace && r != null) {
-      rule.rules.push(r);
+    if (!found && newRule != null) { // 没找到，加入
+      rule.rules.push(newRule);
     }
 
     return rule;
