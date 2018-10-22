@@ -49,10 +49,10 @@ export class CaseTypeEdit implements OnInit, AfterViewInit {
   ngAfterViewInit() {}
 
   buildForm(): void {
-    const that = this;
     this.form = this.fb.group(
       {
         'label': ['', [Validators.required]],
+        'value': ['', [Validators.required]],
         'descr': ['', []],
         'disabled': ['', []],
       }, {},

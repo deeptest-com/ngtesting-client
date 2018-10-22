@@ -1,0 +1,48 @@
+<div class="issue-status-list container-fluid">
+
+  <div class="row">
+    <div class="list-toolbar col-xl-12">
+      <div class="title">
+        问题状态
+      </div>
+
+      <div class="filter">
+      </div>
+
+      <div class="buttons">
+        <button (click)="create()" type="button" class="btn btn-primary btn-with-icon btn-sm">
+          <i class="fa fa-plus-circle"></i>新建
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <table class="table table-hover">
+      <thead class="thead-inverse">
+      <tr>
+        <th>名称</th>
+        <th>终极状态</th>
+        <th>系统內置</th>
+        <th>操作</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of models; let i = index;">
+        <td>{{ item.label }}</td>
+        <td>{{item.isFinal | trueOrFalse}}</td>
+        <td>{{item.isBuildIn | trueOrFalse}}</td>
+        <td>
+          <span *ngIf="i == 0" class="ionic-icon link placeholder"></span>
+          <span (click)="up(item)" *ngIf="i > 0" class="fa fa-arrow-up link"></span>
+
+          <span (click)="down(item)" *ngIf="i < models.length - 1" class="fa fa-arrow-down ionic-icon link"></span>
+          <span *ngIf="i == models.length - 1" class="ionic-icon link placeholder"></span>
+          &nbsp;
+          <span [routerLink]="['/pages/org-admin/issue-settings/issue-status/edit', item.id]" class="link no-underline">编辑</span>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

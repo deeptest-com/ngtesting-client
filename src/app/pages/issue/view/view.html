@@ -1,45 +1,4 @@
 <div class="issue-view">
-  <div [class.hidden]="model.id" class="module-tips">
-    <div *ngIf="model.childrenCount">
-
-      <div class="issue-data">
-        <div class="row header">用例类型：</div>
-        <div *ngIf="model.childrenCount.functional" class="row">
-          <div class="col-sm-2">功能</div>
-          <div class="col-sm-10">{{model.childrenCount.functional}}个</div>
-        </div>
-        <div *ngIf="model.childrenCount.performance" class="row">
-          <div class="col-sm-2">性能</div>
-          <div class="col-sm-10">{{model.childrenCount.performance}}个</div>
-        </div>
-        <div *ngIf="model.childrenCount.security" class="row">
-          <div class="col-sm-2">安全</div>
-          <div class="col-sm-10">{{model.childrenCount.security}}个</div>
-        </div>
-        <div *ngIf="model.childrenCount.others" class="row">
-          <div class="col-sm-2">其他</div>
-          <div class="col-sm-10">{{model.childrenCount.others}}个</div>
-        </div>
-      </div>
-
-      <div class="issue-data">
-        <div class="row header">用例评审：</div>
-        <div class="row">
-          <div class="col-sm-2">未评审</div>
-          <div class="col-sm-10">{{model.childrenCount.notReview}}个</div>
-        </div>
-        <div class="row">
-          <div class="col-sm-2">通过</div>
-          <div class="col-sm-10 pass">{{model.childrenCount.reviewPass}}个</div>
-        </div>
-        <div class="row">
-          <div class="col-sm-2">失败</div>
-          <div class="col-sm-10 fail">{{model.childrenCount.reviewFail}}个</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <div class="my-validate-form small-label">
     <div class="form-group row">
 

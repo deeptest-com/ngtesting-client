@@ -11,6 +11,8 @@ const routes: Routes = [
       { path: 'org-settings', loadChildren: './org-settings/org-settings.module#OrgSettingsModule' },
       { path: 'test-settings', loadChildren: './test-settings/test-settings.module#TestSettingsModule' },
       { path: 'case-settings', loadChildren: './case-settings/case-settings.module#CaseSettingsModule' },
+
+      { path: 'issue-settings', loadChildren: './issue-settings/issue-settings.module#IssueSettingsModule' },
     ],
   },
 ];
