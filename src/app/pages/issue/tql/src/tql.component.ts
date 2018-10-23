@@ -31,6 +31,8 @@ export class Tql implements OnInit, AfterViewInit {
   @Input() set rule(model: any) {
     if (!model.rules || model.rules.length == 0) { return; }
     this.checkedConditions = this._tqlService.basicJqlToMap(model);
+
+    console.log(888888, this.checkedConditions);
   }
 
   constructor(private _route: ActivatedRoute, private _state: GlobalState, private _tqlService: TqlService) {
