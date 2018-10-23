@@ -82,7 +82,6 @@ export class TqlService {
     if (checkedVals.length == 0) {
       return null;
     } else {
-      console.log('99999999999', checkedVals);
       return {
         id: filter.code,
         field: filter.code,

@@ -1,8 +1,9 @@
 <div class="issue-table">
     <div class="row">
-      <table class="table table-bordered table-striped">
+      <table class="table table-bordered table-hover">
         <thead class="thead-inverse">
         <tr>
+          <th>编号</th>
           <ng-container *ngFor="let col of columns">
             <th *ngIf="col.display">
               {{col.label}}
@@ -13,18 +14,37 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let item of issues">
-          <ng-container *ngFor="let col of columns">
-            <td *ngIf="col.display">
-              <item-prop [item]="item" [col]="col"></item-prop>
-            </td>
-          </ng-container>
+          <tr *ngFor="let item of issues">
+            <td (click)="clickOptMenu(item, 'view')" class="link">{{item.id}}</td>
+            <ng-container *ngFor="let col of columns">
+              <td *ngIf="col.display">
+                <item-prop [item]="item" [col]="col"></item-prop>
+              </td>
+            </ng-container>
 
-          <td>
-            <span [routerLink]="['/pages/org/' + orgId + '/prj/' + prjId + '/issue/' + item.id + '/view']" class="link no-underline">查看</span>
-            <span [routerLink]="['/pages/org/' + orgId + '/prj/' + prjId + '/issue/' + item.id + '/edit']" class="link no-underline">编辑</span>
-          </td>
-        </tr>
+            <td>
+              <div style="position: relative">
+                <div ngbDropdown placement="bottom-right" class="btn-group">
+                  <button class="btn btn-default opt" ngbDropdownToggle>
+                    <span class="text">...</span>
+                  </button>
+                  <div class="dropdown-menu">
+                    <button (click)="clickOptMenu(item, 'view')" class="dropdown-item">
+                      <span class="link">查看</span></button>
+                    <button (click)="clickOptMenu(item, 'edit')" class="dropdown-item">
+                      <span class="link">编辑</span></button>
+
+                    <li class="dropdown-divider"></li>
+
+                    <button (click)="clickOptMenu(item, '')" class="dropdown-item">
+                      <span class="link">解决</span></button>
+                    <button (click)="clickOptMenu(item, '')" class="dropdown-item">
+                      <span class="link">完成</span></button>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
         </tbody>
       </table>
 

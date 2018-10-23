@@ -3,6 +3,7 @@ import { Component, ViewEncapsulation, NgModule, Pipe, Input,
 
 import { GlobalState } from '../../../../global.state';
 import { CONSTANT } from '../../../../utils/constant';
+import { RouteService } from '../../../../service/route';
 import { IssueService } from '../../../../service/client/issue';
 
 declare var jQuery;
@@ -22,7 +23,7 @@ export class IssueTable implements OnInit, AfterViewInit, OnDestroy {
   orgId: number;
   prjId: number;
 
-  constructor(private _state: GlobalState, private _issueService: IssueService) {
+  constructor(private _routeService: RouteService, private _state: GlobalState, private _issueService: IssueService) {
     this.orgId = CONSTANT.CURR_ORG_ID;
     this.prjId = CONSTANT.CURR_PRJ_ID;
   }
@@ -32,8 +33,16 @@ export class IssueTable implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit() {}
 
+  clickOptMenu(item: any, act: string) {
+    console.log(item, act);
+
+    if (act === 'view' || act === 'edit') {
+      const url = '/pages/org/' + this.orgId + '/prj/' + this.prjId + '/issue/' + item.id + '/' + act;
+      this._routeService.navTo(url);
+    }
+  }
+
   ngOnDestroy(): void {
 
   }
 }
-
