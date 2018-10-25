@@ -30,8 +30,6 @@ export class TqlConditionComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): any {
-    console.log('9999999', this.model.values, this.checkedItems);
-
     for (const key in this.model.values) {
       this.selectOptions.push({ key: key, value: this.model.values[key],
         checked: this.checkedItems ? this.checkedItems[key] : false });

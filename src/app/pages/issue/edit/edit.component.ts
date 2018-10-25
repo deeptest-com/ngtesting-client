@@ -31,17 +31,10 @@ export class IssueEdit implements OnInit, AfterViewInit, OnDestroy {
   canEdit: boolean;
 
   id: number;
-  model: any = { };
-
-  priorities: any[] = [];
-  types: any[] = [];
-  prioritie: any[] = [];
-  statuses: any[] = [];
-  resolutions: any[] = [];
-  fields: any[] = [];
+  model: any = {};
+  propMap: any = {};
 
   form: any;
-
 
   @ViewChild('modalWrapper') modalWrapper: PopDialogComponent;
 
@@ -55,11 +48,11 @@ export class IssueEdit implements OnInit, AfterViewInit, OnDestroy {
 
     this._route.params.forEach((params: Params) => {
       this.id = +params['id'];
+
+      console.log('id', params, this.id);
     });
 
-    this.buildForm();
-
-    // this.loadData();
+    this.loadData();
   }
   ngOnInit() {
 
@@ -84,10 +77,9 @@ export class IssueEdit implements OnInit, AfterViewInit, OnDestroy {
   loadData() {
     this.issueService.get(this.id).subscribe((json: any) => {
       this.model = json.data;
+      this.propMap = json.propMap;
 
-      // this.caseTypes = CONSTANT.CASE_TYPES_FOR_PROJECT;
-      // this.casePriorities = CONSTANT.CASE_PRIORITIES_FOR_PROJECT;
-      // this.fields = CONSTANT.CUSTOM_FIELD_FOR_PROJECT;
+      this.buildForm();
     });
   }
 

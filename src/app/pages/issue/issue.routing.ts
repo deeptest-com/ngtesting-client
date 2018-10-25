@@ -21,15 +21,8 @@ const routes: Routes = [
       { path: 'filter/:filterId',
         component: IssueQuery,
       },
-
-      {
-        path: ':id',
-        component: Issue,
-        children: [
-          { path: 'view', component: IssueView },
-          { path: 'edit', component: IssueEdit },
-        ],
-      },
+      { path: ':id/view', component: IssueView },
+      { path: ':id/edit', component: IssueEdit },
     ],
   },
 ];
