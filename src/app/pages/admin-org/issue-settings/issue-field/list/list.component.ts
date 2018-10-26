@@ -5,7 +5,7 @@ import { GlobalState } from '../../../../../global.state';
 import { CONSTANT } from '../../../../../utils/constant';
 import { Utils } from '../../../../../utils/utils';
 import { RouteService } from '../../../../../service/route';
-import { IssueFieldService } from '../../../../../service/admin/issue-field';
+import { IssueCustomFieldService } from '../../../../../service/admin/issue-custom-field';
 
 @Component({
   selector: 'issue-field-list',
@@ -14,43 +14,34 @@ import { IssueFieldService } from '../../../../../service/admin/issue-field';
   templateUrl: './list.html',
 })
 export class IssueFieldList implements OnInit, AfterViewInit {
+
   models: any[];
 
-  constructor(private _routeService: RouteService, private _state: GlobalState, private fb: FormBuilder, private el: ElementRef,
-              private issueFieldService: IssueFieldService) {
+  constructor(private _routeService: RouteService, private _state: GlobalState,
+              private fb: FormBuilder, private el: ElementRef,
+              private issueFieldService: IssueCustomFieldService) {
   }
 
   ngOnInit() {
-    const that = this;
-
-    that.loadData();
+    this.loadData();
   }
 
   ngAfterViewInit() {
-
   }
 
   create(): void {
     this._routeService.navTo('/pages/org-admin/issue-settings/issue-field/edit/null');
   }
-
   edit(item: any): void {
     this._routeService.navTo('/pages/org-admin/issue-settings/issue-field/edit/' + item.id);
   }
-
-  setDefault(item: any): void {
-    this.issueFieldService.setDefault(item.id).subscribe((json: any) => {
-      if (json.code == 1) {
-        this.models = json.data;
-      }
-    });
+  delete($event: any): void {
+    console.log($event);
   }
 
   loadData() {
-    const that = this;
-
-    that.issueFieldService.list().subscribe((json: any) => {
-      that.models = json.data;
+    this.issueFieldService.list().subscribe((json: any) => {
+      this.models = json.data;
     });
   }
 

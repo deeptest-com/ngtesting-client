@@ -12,6 +12,9 @@ const routes: Routes = [
       { path: 'issue-priority', loadChildren: './issue-priority/issue-priority.module#IssuePriorityModule' },
       { path: 'issue-status', loadChildren: './issue-status/issue-status.module#IssueStatusModule' },
       { path: 'issue-resolution', loadChildren: './issue-resolution/issue-resolution.module#IssueResolutionModule' },
+
+      { path: 'issue-field', loadChildren: './issue-field/issue-field.module#IssueFieldModule' },
+      { path: 'issue-page', loadChildren: './issue-page/issue-page.module#IssuePageModule' },
     ],
   },
 ];

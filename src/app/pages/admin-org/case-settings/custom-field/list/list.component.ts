@@ -5,7 +5,7 @@ import { GlobalState } from '../../../../../global.state';
 import { CONSTANT } from '../../../../../utils/constant';
 import { Utils } from '../../../../../utils/utils';
 import { RouteService } from '../../../../../service/route';
-import { CustomFieldService } from '../../../../../service/admin/custom-field';
+import { TestCustomFieldService } from '../../../../../service/admin/test-custom-field';
 
 @Component({
   selector: 'custom-field-list',
@@ -18,7 +18,7 @@ export class CustomFieldList implements OnInit, AfterViewInit {
   models: any[];
 
   constructor(private _routeService: RouteService, private _state: GlobalState, private fb: FormBuilder, private el: ElementRef,
-              private customFieldService: CustomFieldService) {
+              private customFieldService: TestCustomFieldService) {
   }
 
   ngOnInit() {

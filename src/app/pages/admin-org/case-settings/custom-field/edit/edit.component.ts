@@ -13,7 +13,7 @@ import { Utils } from '../../../../../utils/utils';
 import { ValidatorUtils, CustomValidator } from '../../../../../validator';
 import { RouteService } from '../../../../../service/route';
 
-import { CustomFieldService } from '../../../../../service/admin/custom-field';
+import { TestCustomFieldService } from '../../../../../service/admin/test-custom-field';
 import { PopDialogComponent } from '../../../../../components/pop-dialog';
 
 import { DropdownOptionsComponent } from '../../../../../components/dropdown-options';
@@ -42,7 +42,7 @@ export class CustomFieldEdit implements OnInit, AfterViewInit {
   public dropdownOptionsModal: any;
 
   constructor(private _state: GlobalState, private _routeService: RouteService, private _route: ActivatedRoute,
-              private fb: FormBuilder, private customFieldService: CustomFieldService,
+              private fb: FormBuilder, private customFieldService: TestCustomFieldService,
               private compiler: Compiler, private modalService: NgbModal) {
 
   }

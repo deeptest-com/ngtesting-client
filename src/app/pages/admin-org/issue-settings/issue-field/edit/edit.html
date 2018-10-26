@@ -3,8 +3,8 @@
   <div class="row">
     <div class="edit-toolbar col-xl-12">
       <div class="title">
-        <span *ngIf="!model?.id">新建类型</span>
-        <span *ngIf="model?.id">编辑类型</span>
+        <span *ngIf="!model?.id">新建字段</span>
+        <span *ngIf="model?.id">编辑字段</span>
       </div>
       <div class="buttons">
         <button (click)="back()" type="button"
@@ -16,20 +16,67 @@
   </div>
   <hr/>
 
-  <form [formGroup]="form" class="my-validate-form">
-      <div class="form-group row">
-        <label class="col-sm-2 col-form-label"><span>名称</span></label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" name="label" formControlName="label"
-                 [(ngModel)]="model.label" #label>
-        </div>
-      </div>
+  <form *ngIf="model" [formGroup]="form" class="my-validate-form">
     <div class="form-group row">
-      <label class="col-sm-2 col-form-label"><span>取值</span></label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" name="value" formControlName="value"
-               [(ngModel)]="model.value" #value>
+      <label class="col-sm-2 col-form-label"><span>名称</span></label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" name="label" formControlName="label"
+               [(ngModel)]="model.label" #label>
       </div>
+
+      <label class="col-sm-2 col-form-label"><span>编码</span></label>
+      <label class="col-sm-4 col-form-label left">
+        {{model.myColumn}}
+        <input type="hidden" class="form-control" name="myColumn" formControlName="myColumn"
+               [(ngModel)]="model.myColumn" #myColumn>
+      </label>
+    </div>
+
+    <div class="form-group row">
+
+      <label class="col-sm-2 col-form-label"><span>类型</span></label>
+      <div *ngIf="!model.buildIn" class="col-sm-4">
+        <select [(ngModel)]="model.type" formControlName="type" name="type" class="form-control form-control-sm">
+          <option value=""></option>
+          <option *ngFor="let item of typeList" value="{{item}}">{{item | fieldType}}</option>
+        </select>
+      </div>
+      <label *ngIf="model.buildIn" class="col-sm-4 col-form-label left">
+        {{model.type | fieldType}}
+        <input type="hidden" class="form-control" name="type" formControlName="type"
+               [(ngModel)]="model.type" #type>
+      </label>
+      <label *ngIf="model.type == 'dropdown'" class="col-sm-2 col-form-label">
+        <span (click)="editDropdownOptions()" class="link">管理选项列表({{model.options.length}})</span>
+      </label>
+    </div>
+
+   <div *ngIf="model.type == 'text'" class="form-group row">
+      <label class="col-sm-2 col-form-label"><span>行数</span></label>
+      <div *ngIf="!model.buildIn" class="col-sm-10">
+        <input type="text" class="form-control" name="rows" formControlName="rows"
+               [(ngModel)]="model.rows" #rows>
+      </div>
+      <label *ngIf="model.buildIn" class="col-sm-10 col-form-label left">
+        {{model.rows }}
+        <input type="hidden" class="form-control" name="rows" formControlName="rows"
+               [(ngModel)]="model.rows" #rows>
+      </label>
+    </div>
+
+    <div *ngIf="model.type == 'text'" class="form-group row">
+      <label class="col-sm-2 col-form-label"><span>格式</span></label>
+      <div *ngIf="!model.buildIn" class="col-sm-10">
+        <select [(ngModel)]="model.format" formControlName="format" name="format" class="form-control form-control-sm">
+          <option value=""></option>
+          <option *ngFor="let item of formatList" value="{{item}}">{{item | fieldFormat}}</option>
+        </select>
+      </div>
+      <label *ngIf="model.buildIn" class="col-sm-10 col-form-label left">
+        {{model.format | fieldFormat}}
+        <input type="hidden" class="form-control" name="format" formControlName="format"
+               [(ngModel)]="model.format" #format>
+      </label>
     </div>
 
     <div class="form-group row">
@@ -40,29 +87,25 @@
       </div>
     </div>
 
-      <div class="form-group row just-label">
-        <label class="col-sm-2 col-form-label"><span>是否默认</span></label>
-        <label class="col-sm-10 col-form-label left">
-          {{model.isDefault | trueOrFalse}}
-        </label>
-      </div>
-
-<!--      <div class="form-group row">
-        <div class="offset-sm-2 col-sm-10">
-          <div class="form-check">
-            <label class="form-check-label">
-              <input type="checkbox" class="form-check-input" name="disabled" formControlName="disabled"
-                     [(ngModel)]="model.disabled" #disabled>
-              &nbsp;&nbsp;禁用
-            </label>
-          </div>
+<!--    <div class="form-group row just-label">
+      <div class="offset-sm-2 col-sm-10">
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="checkbox" class="form-check-input" name="disabled" formControlName="disabled"
+                   [(ngModel)]="model.disabled" #disabled>
+            &nbsp;&nbsp;禁用
+          </label>
         </div>
-      </div>-->
+      </div>
+    </div>-->
 
     <div class="form-group row">
       <label class="col-sm-2 col-form-label"></label>
       <div class="col-sm-10">
-        <button (click)="save()" type="button" class="btn btn-primary" [disabled]="!form.valid">保存</button>
+        <button (click)="save()" type="button" class="btn btn-primary"
+                [disabled]="!form.valid || (model.type == 'dropdown' && model.options.length < 1)">
+          保存
+        </button>
         &nbsp;
         <button (click)="back()" type="button" class="btn btn-default">取消</button>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -83,8 +126,11 @@
 
   </form>
 
+  <div *ngIf="!model">
+    自定制字段超过了20个
+  </div>
 </div>
 
 <pop-dialog #modalWrapper (confirm)="delete()" [title]="'提示'">
-  确认删除名为"{{model.label}}"的用例类型?
+  确认删除名为"{{model?.label}}"的自定义字段?
 </pop-dialog>

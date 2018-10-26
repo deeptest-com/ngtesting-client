@@ -5,9 +5,9 @@ import { Injectable } from '@angular/core';
 import { RequestService } from '../request';
 
 @Injectable()
-export class CustomFieldService {
+export class IssueCustomFieldService {
   constructor(private _reqService: RequestService) { }
-  _apiBase = 'admin/custom_field/';
+  _apiBase = 'admin/issue_custom_field/';
 
   list() {
     return this._reqService.post(this._apiBase + 'list', {});
@@ -18,8 +18,8 @@ export class CustomFieldService {
     return this._reqService.post(this._apiBase + 'get', model);
   }
 
-  save(model: any, relations: any[]) {
-    return this._reqService.post(this._apiBase + 'save', { model: model, relations: relations });
+  save(model: any) {
+    return this._reqService.post(this._apiBase + 'save', { model: model });
   }
 
   delete(id: number) {

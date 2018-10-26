@@ -1,4 +1,4 @@
-import { Component, OnDestroy, AfterViewInit, OnChanges, ViewChild, Input, Output, EventEmitter, Injector, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit, OnChanges, ViewChild, Input, Output, EventEmitter, Injector, ElementRef } from '@angular/core';
 
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
@@ -6,7 +6,9 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CONSTANT } from '../../../utils/constant';
 import { Utils } from '../../../utils/utils';
 import { ValidatorUtils } from '../../../validator';
-import { CustomFieldOptionService } from '../../../service/admin/custom-field-option';
+
+import { TestCustomFieldOptionService } from '../../../service/admin/test-custom-field-option';
+import { IssueCustomFieldOptionService } from '../../../service/admin/issue-custom-field-option';
 
 import * as _ from 'lodash';
 
@@ -15,20 +17,32 @@ import * as _ from 'lodash';
   templateUrl: './dropdown-options.html',
   styleUrls: ['./dropdown-options.scss'],
 })
-export class DropdownOptionsComponent implements OnDestroy, AfterViewInit, OnChanges {
+export class DropdownOptionsComponent implements OnInit, OnDestroy, AfterViewInit, OnChanges {
   @Input() title: string;
   @Output() confirm = new EventEmitter<any>();
 
   @Input() field: any;
+  @Input() applyTo: string = 'test';
   @Input() height: number;
 
   form: FormGroup;
   model: any = {};
   optionOrdr: number = 10;
+  service: any;
 
   constructor(private fb: FormBuilder, private host: ElementRef, public activeModal: NgbActiveModal,
-              private customFieldOptionService: CustomFieldOptionService) {
+              private testCustomFieldOptionService: TestCustomFieldOptionService,
+              private issueCustomFieldOptionService: IssueCustomFieldOptionService) {
     this.buildForm();
+
+  }
+
+  ngOnInit() {
+    if (this.applyTo === 'issue') {
+      this.service = this.issueCustomFieldOptionService;
+    } else {
+      this.service = this.testCustomFieldOptionService;
+    }
   }
 
   dismiss(): any {
@@ -58,7 +72,7 @@ export class DropdownOptionsComponent implements OnDestroy, AfterViewInit, OnCha
   }
   save(): any {
     if (this.field.id) {
-      this.customFieldOptionService.save(this.model, this.field.id).subscribe((json: any) => {
+      this.service.save(this.model, this.field.id).subscribe((json: any) => {
         if (json.code == 1) {
           this.form.reset();
           this.model = {};
@@ -75,7 +89,7 @@ export class DropdownOptionsComponent implements OnDestroy, AfterViewInit, OnCha
     }
   }
   delete(item: any) {
-    this.customFieldOptionService.delete(item.id, this.field.id).subscribe((json: any) => {
+    this.service.delete(item.id, this.field.id).subscribe((json: any) => {
       if (json.code == 1) {
         this.form.reset();
         this.model = {};
@@ -87,7 +101,7 @@ export class DropdownOptionsComponent implements OnDestroy, AfterViewInit, OnCha
     if (!item.id) { // 未保存
       Utils.changeOrder(this.field.options, act, idx);
     } else {
-      this.customFieldOptionService.changeOrder(item.id, act, this.field.id).subscribe((json: any) => {
+      this.service.changeOrder(item.id, act, this.field.id).subscribe((json: any) => {
         if (json.code == 1) {
           this.model = {};
           this.field.options = json.data;
@@ -114,10 +128,10 @@ export class DropdownOptionsComponent implements OnDestroy, AfterViewInit, OnCha
   formErrors = [];
   validateMsg = {
     'value': {
-      'required':      '取值不能为空',
+      'required': '取值不能为空',
     },
     'label': {
-      'required':      '名称不能为空',
+      'required': '名称不能为空',
     },
   };
 

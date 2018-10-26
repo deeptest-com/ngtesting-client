@@ -11,11 +11,14 @@ import { NgbModalModule, NgbPaginationModule, NgbDropdownModule,
 import { PipeModule } from '../../../../pipe/pipe.module';
 import { DirectiveModule } from '../../../../directive/directive.module';
 import { PopDialogModule } from '../../../../components/pop-dialog';
+import { DropdownOptionsModule } from '../../../../components/dropdown-options';
+import { DropdownOptionsComponent } from '../../../../components/dropdown-options';
 
 import { RouteService } from '../../../../service/route';
 import { RequestService } from '../../../../service/request';
 import { DatetimePickerService } from '../../../../service/datetime-picker';
-import { IssueFieldService } from '../../../../service/admin/issue-field';
+import { IssueCustomFieldService } from '../../../../service/admin/issue-custom-field';
+import { IssueCustomFieldOptionService } from '../../../../service/admin/issue-custom-field-option';
 
 import { IssueField } from './issue-field.component';
 import { IssueFieldList } from './list';
@@ -31,18 +34,20 @@ import { IssueFieldEdit } from './edit';
     NgbModalModule, NgbPaginationModule, NgbDropdownModule,
     NgbTabsetModule, NgbButtonsModule, NgbCollapseModule,
 
-    PipeModule, DirectiveModule, PopDialogModule
+    PipeModule, DirectiveModule, PopDialogModule, DropdownOptionsModule,
   ],
   declarations: [
     IssueField,
     IssueFieldList,
-    IssueFieldEdit
+    IssueFieldEdit,
   ],
   providers: [
     RouteService,
     RequestService,
     DatetimePickerService,
-    IssueFieldService
-  ]
+    IssueCustomFieldService, IssueCustomFieldOptionService,
+  ],
+  entryComponents: [DropdownOptionsComponent],
 })
 export class IssueFieldModule {}
+

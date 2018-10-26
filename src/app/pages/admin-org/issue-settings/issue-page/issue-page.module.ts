@@ -31,18 +31,18 @@ import { IssuePageEdit } from './edit';
     NgbModalModule, NgbPaginationModule, NgbDropdownModule,
     NgbTabsetModule, NgbButtonsModule, NgbCollapseModule,
 
-    PipeModule, DirectiveModule, PopDialogModule
+    PipeModule, DirectiveModule, PopDialogModule,
   ],
   declarations: [
     IssuePage,
     IssuePageList,
-    IssuePageEdit
+    IssuePageEdit,
   ],
   providers: [
     RouteService,
     RequestService,
     DatetimePickerService,
-    IssuePageService
+    IssuePageService,
   ]
 })
 export class IssuePageModule {}

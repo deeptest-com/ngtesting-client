@@ -17,7 +17,8 @@ import { DropdownOptionsComponent } from '../../../../components/dropdown-option
 import { RouteService } from '../../../../service/route';
 import { RequestService } from '../../../../service/request';
 import { DatetimePickerService } from '../../../../service/datetime-picker';
-import { CustomFieldService } from '../../../../service/admin/custom-field';
+import { TestCustomFieldService } from '../../../../service/admin/test-custom-field';
+import { TestCustomFieldOptionService } from '../../../../service/admin/test-custom-field-option';
 
 import { CustomField } from './custom-field.component';
 import { CustomFieldList } from './list';
@@ -33,18 +34,18 @@ import { CustomFieldEdit } from './edit';
     NgbModalModule, NgbPaginationModule, NgbDropdownModule,
     NgbTabsetModule, NgbButtonsModule, NgbCollapseModule,
 
-    PipeModule, DirectiveModule, PopDialogModule, DropdownOptionsModule
+    PipeModule, DirectiveModule, PopDialogModule, DropdownOptionsModule,
   ],
   declarations: [
     CustomField,
     CustomFieldList,
-    CustomFieldEdit
+    CustomFieldEdit,
   ],
   providers: [
     RouteService,
     RequestService,
     DatetimePickerService,
-    CustomFieldService
+    TestCustomFieldService, TestCustomFieldOptionService,
   ],
   entryComponents: [DropdownOptionsComponent]
 })

@@ -5,9 +5,9 @@ import { Injectable } from '@angular/core';
 import { RequestService } from '../request';
 
 @Injectable()
-export class CustomFieldOptionService {
+export class TestCustomFieldOptionService {
   constructor(private _reqService: RequestService) { }
-  _apiBase = 'admin/custom_field_option/';
+  _apiBase = 'admin/test_custom_field_option/';
 
   save(model: any, fieldId: number) {
     return this._reqService.post(this._apiBase + 'save', { model: model, fieldId: fieldId });

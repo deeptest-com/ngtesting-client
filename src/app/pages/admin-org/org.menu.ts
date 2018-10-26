@@ -199,7 +199,7 @@ export const ORG_MENU = [
             },
           },
           {
-            path: 'org-admin/issue-settings/field/list',
+            path: 'org-admin/issue-settings/issue-field/list',
             data: {
               menu: {
                 title: '问题字段',
@@ -210,7 +210,7 @@ export const ORG_MENU = [
             },
           },
           {
-            path: 'org-admin/issue-settings/field/list',
+            path: 'org-admin/issue-settings/issue-page/main',
             data: {
               menu: {
                 title: '问题界面',

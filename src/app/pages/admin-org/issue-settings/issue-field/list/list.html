@@ -3,7 +3,7 @@
   <div class="row">
     <div class="list-toolbar col-xl-12">
       <div class="title">
-        问题类型
+        自定义字段
       </div>
 
       <div class="filter">
@@ -22,18 +22,25 @@
       <thead class="thead-inverse">
       <tr>
         <th>名称</th>
-        <th>值</th>
-        <th style="width: 250px;">是否默认</th>
-        <th style="width: 250px;">操作</th>
+        <th>编码</th>
+        <th>类型</th>
+        <th>文本格式</th>
+        <th>操作</th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let item of models; let i = index;">
         <td>{{ item.label }}</td>
-        <td>{{ item.value }}</td>
+        <td>{{ item.myColumn }}</td>
+
+        <td>{{ item.type | fieldType }}</td>
         <td>
-          <input *ngIf="!item.isDefault" (change)="setDefault(item)" [(ngModel)]="item.isDefault" type="checkbox" name="isDefault" #isDefault>
-          <input *ngIf="item.isDefault" onclick="return false;" [(ngModel)]="item.isDefault" type="checkbox" name="isDefault" #isDefault>
+          <span *ngIf="item.type == 'text'">
+            {{ item.format | fieldFormat }} ({{item.rows}})
+          </span>
+          <span *ngIf="item.type != 'text'">
+            N/A
+          </span>
         </td>
         <td>
           <span *ngIf="i == 0" class="ionic-icon link placeholder"></span>
@@ -49,3 +56,4 @@
     </table>
   </div>
 </div>
+
