@@ -210,15 +210,40 @@ export const ORG_MENU = [
             },
           },
           {
-            path: 'org-admin/issue-settings/issue-page/main',
+            path: '',
             data: {
               menu: {
                 title: '问题界面',
                 icon: 'ion-edit',
-                selected: false,
+                selected: true,
+                expanded: true,
                 order: 1,
               },
             },
+            children: [
+              {
+                path: 'org-admin/issue-settings/issue-page/page-list',
+                data: {
+                  menu: {
+                    title: '界面',
+                    icon: 'ion-edit',
+                    selected: false,
+                    order: 1,
+                  },
+                },
+              },
+              {
+                path: 'org-admin/issue-settings/issue-page/solution-list',
+                data: {
+                  menu: {
+                    title: '界面方案',
+                    icon: 'ion-edit',
+                    selected: false,
+                    order: 1,
+                  },
+                },
+              },
+            ],
           },
           {
             path: 'org-admin/issue-settings/field/list',

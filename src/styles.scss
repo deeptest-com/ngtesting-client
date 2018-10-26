@@ -163,6 +163,11 @@ main {
   margin: 0 0 15px 0;
   padding: 0;
   line-height: 30px;
+
+  &.with-descr {
+    margin-bottom: 0;
+  }
+
   .title {
     width: 300px;
     font-size: 20px;

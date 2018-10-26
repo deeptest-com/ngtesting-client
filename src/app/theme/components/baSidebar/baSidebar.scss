@@ -24,7 +24,7 @@ $angle-right: '\f101';
       font-size: 13px;
       text-decoration: none;
       color: $sidebar-text;
-      padding-left: 18px;
+      padding-left: 13px;
       height: auto;
       line-height: 29px;
       &:hover {
@@ -164,6 +164,10 @@ $angle-right: '\f101';
 
   .al-sidebar-sublist {
     @include default-sublist();
+
+    .al-sidebar-sublist > ba-menu-item > li a {
+      padding-left: 26px;
+    }
   }
 
   .sidebar-hover-elem {

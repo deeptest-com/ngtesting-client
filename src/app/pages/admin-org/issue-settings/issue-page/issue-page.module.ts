@@ -18,8 +18,11 @@ import { DatetimePickerService } from '../../../../service/datetime-picker';
 import { IssuePageService } from '../../../../service/admin/issue-page';
 
 import { IssuePage } from './issue-page.component';
-import { IssuePageMain } from './main';
+
+import { IssuePageList } from './page-list';
 import { IssuePageEdit } from './page-edit';
+
+import { IssueSolutionList } from './solution-list';
 import { IssueSolutionEdit } from './solution-edit';
 
 @NgModule({
@@ -36,8 +39,9 @@ import { IssueSolutionEdit } from './solution-edit';
   ],
   declarations: [
     IssuePage,
-    IssuePageMain,
+    IssuePageList,
     IssuePageEdit,
+    IssueSolutionList,
     IssueSolutionEdit,
   ],
   providers: [
