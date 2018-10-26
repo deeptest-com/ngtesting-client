@@ -20,12 +20,12 @@ import { PopDialogComponent } from '../../../../../components/pop-dialog';
 declare var jQuery;
 
 @Component({
-  selector: 'issue-page-edit',
+  selector: 'issue-solution-edit',
   encapsulation: ViewEncapsulation.None,
-  styleUrls: ['./edit.scss'],
-  templateUrl: './edit.html',
+  styleUrls: ['./solution-edit.scss'],
+  templateUrl: './solution-edit.html',
 })
-export class IssuePageEdit implements OnInit, AfterViewInit {
+export class IssueSolutionEdit implements OnInit, AfterViewInit {
 
   id: number;
 
@@ -75,10 +75,9 @@ export class IssuePageEdit implements OnInit, AfterViewInit {
   };
 
   loadData() {
-    const that = this;
-    that.issuePageService.get(that.id).subscribe((json: any) => {
-      that.model = json.data;
-    });
+    // this.issuePageService.get(this.id).subscribe((json: any) => {
+    //   this.model = json.data;
+    // });
   }
 
   save() {
@@ -96,7 +95,7 @@ export class IssuePageEdit implements OnInit, AfterViewInit {
     });
   }
   back() {
-    this._routeService.navTo('/pages/org-admin/issue-settings/issue-page/list');
+    this._routeService.navTo('/pages/org-admin/issue-settings/issue-page/main');
   }
 
   delete() {

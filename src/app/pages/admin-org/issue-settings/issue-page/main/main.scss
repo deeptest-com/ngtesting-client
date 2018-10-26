@@ -3,34 +3,42 @@
   padding: 10px 15px;
 
   .page {
-    width: 50%;
+    padding: 10px 15px 10px 10px;
+    border-right: 1px solid #e1e4e8;
+    width: 45%;
+    height: 100%;
   }
 
   .page-solution {
-    width: 50%;
+    padding: 10px 10px 10px 15px;
+    width: 55%;
+    height: 100%;
+  }
+
+  .header {
+    display: flex;
+    .title {
+      flex: 1;
+    }
+    .buttons {
+      width: 60px;
+      text-align: right;
+      line-height: 25px;
+    }
   }
 
   .title {
     font-size: 15px;
     font-weight: bolder;
-    line-height: 30px;
+    line-height: 25px;
   }
   .descr {
-    font-size: 12px;
+    font-size: 14px;
+    line-height: 25px;
   }
 
   .page-list {
-    padding: 5px 5px 5px 10px;
-    .item {
-      line-height: 18px;
-      .dict {
-        color: black;
-        font-style: italic;
-      }
-    }
-    .more {
-      text-align: right;
-    }
+
   }
 
 }

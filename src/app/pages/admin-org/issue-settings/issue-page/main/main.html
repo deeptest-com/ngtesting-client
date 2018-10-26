@@ -1,37 +1,74 @@
 <div class="issue-page-main">
 
-  <div class="page">
-    <div class="title">
-      问题界面
+  <div class="page" [style.height]="contentHeight">
+    <div class="header">
+      <div class="title">
+        问题界面
+      </div>
+      <div class="buttons">
+        <span (click)="editPage(null)" class="link">新建</span>
+      </div>
     </div>
     <div class="descr">
-      列出页面所包含的字段、及其属性
+      设置页面所包含的字段、及其属性
     </div>
 
     <div class="page-list">
-      <div class="item" *ngFor="let env of pages; let i = index;">
-        <div>
-          <span class="dict">{{item.name}}</span>
-        </div>
-      </div>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th style="width: 200px">名称</th>
+            <th style="width: 200px">操作</th>
+          </tr>
+        </thead>
+
+        <tbody>
+        <tr *ngFor="let item of pages; let i = index;">
+          <td>{{item.name}}</td>
+          <td>
+            <span (click)="configPage(item)" class="link no-underline">编辑</span>
+            <span (click)="editPage(item)" class="link no-underline">编辑</span>
+          </td>
+        </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 
-  <div class="page-solution">
-    <div class="title">
-      问题界面方案
+  <div class="page-solution" [style.height]="contentHeight">
+    <div class="header">
+      <div class="title">
+        问题界面方案
+      </div>
+      <div (click)="editSolution(null)" class="buttons">
+        <span class="link">新建</span>
+      </div>
     </div>
+
     <div class="descr">
-      关联界面到问题的创建、编辑、查看操作
+      关联界面到问题的创建、编辑、查看操作，并在项目中指定给某个问题类型
     </div>
 
     <div class="page-list">
       <div>
-        <div class="item" *ngFor="let item of solutions; let i = index;">
-          <div>
-            <span class="dict">{{item.name}}</span>
-          </div>
-        </div>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th style="width: 200px">名称</th>
+              <th style="width: 200px">操作</th>
+            </tr>
+          </thead>
+
+          <tbody>
+          <tr *ngFor="let item of solutions; let i = index;">
+            <td>{{item.name}}</td>
+            <td>
+              <span (click)="configSolution(item)" class="link no-underline">配置</span>
+              <span (click)="editSolution(item)" class="link no-underline">编辑</span>
+            </td>
+          </tr>
+          </tbody>
+        </table>
       </div>
   </div>
   </div>

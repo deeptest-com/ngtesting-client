@@ -17,6 +17,8 @@ export class IssuePageMain implements OnInit, AfterViewInit {
   pages: any[];
   solutions: any[];
 
+  contentHeight = Utils.getContainerHeight(CONSTANT.HEAD_HEIGHT + CONSTANT.FOOTER_HEIGHT);
+
   constructor(private _routeService: RouteService, private _state: GlobalState,
               private fb: FormBuilder, private el: ElementRef,
               private issuePageService: IssuePageService) {
@@ -30,6 +32,16 @@ export class IssuePageMain implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
 
+  }
+
+  editPage(item: any) {
+    this._routeService.navTo('/pages/org-admin/issue-settings/issue-page/page-edit/'
+      + (item ? item.id : null) );
+  }
+
+  editSolution(item: any) {
+    this._routeService.navTo('/pages/org-admin/issue-settings/issue-page/solution-edit/'
+      + (item ? item.id : null) );
   }
 
   loadData() {

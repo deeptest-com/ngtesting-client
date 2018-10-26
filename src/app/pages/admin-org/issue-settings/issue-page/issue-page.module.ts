@@ -19,8 +19,8 @@ import { IssuePageService } from '../../../../service/admin/issue-page';
 
 import { IssuePage } from './issue-page.component';
 import { IssuePageMain } from './main';
-import { IssuePageList } from './list';
-import { IssuePageEdit } from './edit';
+import { IssuePageEdit } from './page-edit';
+import { IssueSolutionEdit } from './solution-edit';
 
 @NgModule({
   imports: [
@@ -37,14 +37,14 @@ import { IssuePageEdit } from './edit';
   declarations: [
     IssuePage,
     IssuePageMain,
-    IssuePageList,
     IssuePageEdit,
+    IssueSolutionEdit,
   ],
   providers: [
     RouteService,
     RequestService,
     DatetimePickerService,
     IssuePageService,
-  ]
+  ],
 })
 export class IssuePageModule {}
