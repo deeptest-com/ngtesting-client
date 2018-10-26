@@ -1,0 +1,39 @@
+<div class="issue-page-main">
+
+  <div class="page">
+    <div class="title">
+      问题界面
+    </div>
+    <div class="descr">
+      列出页面所包含的字段、及其属性
+    </div>
+
+    <div class="page-list">
+      <div class="item" *ngFor="let env of pages; let i = index;">
+        <div>
+          <span class="dict">{{item.name}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-solution">
+    <div class="title">
+      问题界面方案
+    </div>
+    <div class="descr">
+      关联界面到问题的创建、编辑、查看操作
+    </div>
+
+    <div class="page-list">
+      <div>
+        <div class="item" *ngFor="let item of solutions; let i = index;">
+          <div>
+            <span class="dict">{{item.name}}</span>
+          </div>
+        </div>
+      </div>
+  </div>
+  </div>
+
+</div>

@@ -49,9 +49,9 @@ export class IssuePageList implements OnInit, AfterViewInit {
   loadData() {
     const that = this;
 
-    that.issuePageService.list().subscribe((json: any) => {
-      that.models = json.data;
-    });
+    // that.issuePageService.load().subscribe((json: any) => {
+    //   that.models = json.data;
+    // });
   }
 
   up(item: any) {

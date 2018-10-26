@@ -18,6 +18,7 @@ import { DatetimePickerService } from '../../../../service/datetime-picker';
 import { IssuePageService } from '../../../../service/admin/issue-page';
 
 import { IssuePage } from './issue-page.component';
+import { IssuePageMain } from './main';
 import { IssuePageList } from './list';
 import { IssuePageEdit } from './edit';
 
@@ -35,6 +36,7 @@ import { IssuePageEdit } from './edit';
   ],
   declarations: [
     IssuePage,
+    IssuePageMain,
     IssuePageList,
     IssuePageEdit,
   ],

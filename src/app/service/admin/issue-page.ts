@@ -9,8 +9,8 @@ export class IssuePageService {
   constructor(private _reqService: RequestService) { }
   _apiBase = 'admin/issue_page/';
 
-  list() {
-    return this._reqService.post(this._apiBase + 'list', {});
+  load() {
+    return this._reqService.post(this._apiBase + 'load', {});
   }
 
   get(id: number) {
