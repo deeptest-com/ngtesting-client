@@ -42,7 +42,6 @@ export class IssuePageList implements OnInit, AfterViewInit {
   loadData() {
     this.issuePageService.load().subscribe((json: any) => {
       this.pages = json.pages;
-      this.solutions = json.solutions;
     });
   }
 

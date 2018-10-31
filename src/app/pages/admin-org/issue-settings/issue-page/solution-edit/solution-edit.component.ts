@@ -95,7 +95,7 @@ export class IssueSolutionEdit implements OnInit, AfterViewInit {
     });
   }
   back() {
-    this._routeService.navTo('/pages/org-admin/issue-settings/issue-page/main');
+    this._routeService.navTo('/pages/org-admin/issue-settings/issue-page/solution-list');
   }
 
   delete() {

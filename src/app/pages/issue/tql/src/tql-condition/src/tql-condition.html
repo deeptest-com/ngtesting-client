@@ -7,11 +7,11 @@
         <button *ngIf="search" class="dropdown-item">
           <input [(ngModel)]="keywords" formControlName="keywords" type="search"
                  class="keywords form-control form-control-sm" name="keywords"
-                 placeholder="{{model.input==='select'?'过滤':''}}">
+                 placeholder="{{model.input==='dropdown'?'过滤':''}}">
           <i class="fa fa-search"></i>
         </button>
 
-        <ng-container *ngIf="model.input=='select'">
+        <ng-container *ngIf="model.input=='dropdown'">
           <li class="dropdown-divider"></li>
 
           <!--<button class="dropdown-item">所有</button>-->

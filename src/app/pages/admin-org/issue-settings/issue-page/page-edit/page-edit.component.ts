@@ -3,9 +3,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { NgModule, Pipe, OnInit, AfterViewInit }      from '@angular/core';
 
-import { NgbModalModule, NgbPaginationModule, NgbDropdownModule,
-  NgbTabsetModule, NgbButtonsModule, NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
-import { BrowserModule } from '@angular/platform-browser';
+import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 
 import { GlobalState } from '../../../../../global.state';
 
@@ -29,10 +27,14 @@ export class IssuePageEdit implements OnInit, AfterViewInit {
 
   id: number;
 
-  model: any = {};
+  page: any = { tabs: [] };
+  fields: any[] = [];
+  selectedField: any;
+  tab: any = {};
   form: FormGroup;
-  isSubmitted: boolean;
+
   @ViewChild('modalWrapper') modalWrapper: PopDialogComponent;
+  @ViewChild('tabset') tabset: NgbTabset;
 
   constructor(private _state: GlobalState, private _routeService: RouteService, private _route: ActivatedRoute,
               private fb: FormBuilder, private issuePageService: IssuePageService) {
@@ -49,13 +51,10 @@ export class IssuePageEdit implements OnInit, AfterViewInit {
   ngAfterViewInit() {}
 
   buildForm(): void {
-    const that = this;
     this.form = this.fb.group(
       {
-        'label': ['', [Validators.required]],
-        'value': ['', [Validators.required]],
-        'descr': ['', []],
-        'disabled': ['', []],
+        'name': ['', [Validators.required]],
+        'field': ['', []],
       }, {},
     );
 
@@ -63,27 +62,47 @@ export class IssuePageEdit implements OnInit, AfterViewInit {
     this.onValueChanged();
   }
   onValueChanged(data?: any) {
-    const that = this;
-    that.formErrors = ValidatorUtils.genMsg(that.form, that.validateMsg, []);
+    this.formErrors = ValidatorUtils.genMsg(this.form, this.validateMsg, []);
   }
 
   formErrors = [];
   validateMsg = {
-    'label': {
+    'name': {
       'required': '名称不能为空',
     },
   };
 
   loadData() {
-    // this.issuePageService.get(that.id).subscribe((json: any) => {
-    //   this.model = json.data;
-    // });
+    this.issuePageService.get(this.id).subscribe((json: any) => {
+      this.page = json.page;
+      this.tab = this.page.tabs[0];
+      this.fields = json.fields;
+    });
+  }
+
+  addField() {
+    console.log('addField');
+  }
+  addTab() {
+    const tab = { id: (Math.abs(this.page.tabs[this.page.tabs.length-1].id) + 1) * -1, name: '新标签' };
+    this.page.tabs.push(tab);
+
+    this.tab = tab;
+
+    setTimeout(() => {
+      this.tabset.select(this.tab.id + '');
+    }, 10);
+  }
+  tabChange(tabId: any) {
+    this.tab = this.page.tabs.filter(el => el.id == tabId)[0];
+
+    console.log('tabChange', this.tab);
   }
 
   save() {
     const that = this;
 
-    that.issuePageService.save(that.model).subscribe((json: any) => {
+    that.issuePageService.save(that.page).subscribe((json: any) => {
       if (json.code == 1) {
         CONSTANT.CASE_PROPERTY_MAP = json.issuePropertyMap;
 
@@ -95,13 +114,13 @@ export class IssuePageEdit implements OnInit, AfterViewInit {
     });
   }
   back() {
-    this._routeService.navTo('/pages/org-admin/issue-settings/issue-page/main');
+    this._routeService.navTo('/pages/org-admin/issue-settings/issue-page/page-list');
   }
 
   delete() {
     const that = this;
 
-    that.issuePageService.delete(that.model.id).subscribe((json: any) => {
+    that.issuePageService.delete(that.page.id).subscribe((json: any) => {
       if (json.code == 1) {
         that.formErrors = ['删除成功'];
         this.modalWrapper.closeModal();

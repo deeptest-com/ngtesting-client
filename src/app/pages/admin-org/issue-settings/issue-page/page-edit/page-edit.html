@@ -3,8 +3,8 @@
   <div class="row">
     <div class="edit-toolbar col-xl-12">
       <div class="title">
-        <span *ngIf="!model?.id">新建类型</span>
-        <span *ngIf="model?.id">编辑类型</span>
+        <span *ngIf="!page?.id">新建界面</span>
+        <span *ngIf="page?.id">编辑界面</span>
       </div>
       <div class="buttons">
         <button (click)="back()" type="button"
@@ -17,56 +17,65 @@
   <hr/>
 
   <form [formGroup]="form" class="my-validate-form">
-      <div class="form-group row">
-        <label class="col-sm-2 col-form-label"><span>名称</span></label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" name="label" formControlName="label"
-                 [(ngModel)]="model.label" #label>
-        </div>
-      </div>
-    <div class="form-group row">
-      <label class="col-sm-2 col-form-label"><span>取值</span></label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" name="value" formControlName="value"
-               [(ngModel)]="model.value" #value>
-      </div>
-    </div>
-
-    <div class="form-group row">
-      <label class="col-sm-2 col-form-label"><span>描述</span></label>
-      <div class="col-sm-10">
-        <textarea type="text" class="form-control" name="descr" formControlName="descr" rows="3"
-                  [(ngModel)]="model.descr" #descr></textarea>
-      </div>
-    </div>
-
-      <div class="form-group row just-label">
-        <label class="col-sm-2 col-form-label"><span>是否默认</span></label>
-        <label class="col-sm-10 col-form-label left">
-          {{model.isDefault | trueOrFalse}}
-        </label>
-      </div>
-
-<!--      <div class="form-group row">
-        <div class="offset-sm-2 col-sm-10">
-          <div class="form-check">
-            <label class="form-check-label">
-              <input type="checkbox" class="form-check-input" name="disabled" formControlName="disabled"
-                     [(ngModel)]="model.disabled" #disabled>
-              &nbsp;&nbsp;禁用
-            </label>
-          </div>
-        </div>
-      </div>-->
-
     <div class="form-group row">
       <label class="col-sm-2 col-form-label"></label>
-      <div class="col-sm-10">
+      <div class="col-sm-8">
         <button (click)="save()" type="button" class="btn btn-primary" [disabled]="!form.valid">保存</button>
         &nbsp;
         <button (click)="back()" type="button" class="btn btn-default">取消</button>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <button (click)="showModal()" *ngIf="model.id" type="button" class="btn btn-danger">删除</button>
+        <button (click)="showModal()" *ngIf="page.id" type="button" class="btn btn-danger">删除</button>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label"><span>名称</span></label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" name="name" formControlName="name"
+               [(ngModel)]="page.name" #name>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label"><span>已选字段</span></label>
+      <div class="col-sm-8">
+        <div class="tabs-container light">
+          <div class="tabs">
+            <ngb-tabset #tabset="ngbTabset" (tabChange)="tabChange($event.nextId)">
+              <ngb-tab *ngFor="let tab of page.tabs" id="{{tab.id}}">
+                <ng-template ngbTabTitle>{{tab.name}}</ng-template>
+                <ng-template ngbTabContent></ng-template>
+              </ngb-tab>
+            </ngb-tabset>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-2 field-selection">
+        <i (click)="addTab()" class="fa fa-plus-circle link text-in-row">新增标签</i>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label"></label>
+
+      <div *ngIf="!page.tabs.fields || page.tabs.fields.length == 0" class="col-sm-10">
+        <span class="text-in-row">暂无字段</span>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label"><span>可选字段</span></label>
+
+      <div class="col-sm-8">
+        <select [(ngModel)]="selectedField" formControlName="field"
+                class="form-control form-control-sm" id="field" name="field">
+          <option value=""></option>
+          <option *ngFor="let field of fields" value="{{field.code}}">{{field.label}}</option>
+        </select>
+      </div>
+
+      <div class="col-sm-2 field-selection">
+        <i *ngIf="field" (click)="addField()" class="fa fa-plus-circle link text-in-row">添加字段</i>
+        <i *ngIf="!field" class="fa fa-plus-circle text-in-row">添加字段</i>
       </div>
     </div>
 
@@ -86,5 +95,5 @@
 </div>
 
 <pop-dialog #modalWrapper (confirm)="delete()" [title]="'提示'">
-  确认删除名为"{{model.label}}"的用例类型?
+  确认删除名为"{{page.label}}"的用例类型?
 </pop-dialog>
