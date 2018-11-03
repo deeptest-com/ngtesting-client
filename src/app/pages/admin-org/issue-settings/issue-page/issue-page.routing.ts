@@ -4,6 +4,7 @@ import { IssuePage } from './issue-page.component';
 
 import { IssuePageList } from './page-list';
 import { IssuePageEdit } from './page-edit';
+import { IssuePageConfig } from './page-config';
 
 import { IssueSolutionList } from './solution-list';
 import { IssueSolutionEdit } from './solution-edit';
@@ -16,6 +17,7 @@ const routes: Routes = [
     children: [
       { path: 'page-list', component: IssuePageList },
       { path: 'page-edit/:id', component: IssuePageEdit },
+      { path: 'page-config/:id', component: IssuePageConfig },
 
       { path: 'solution-list', component: IssueSolutionList },
       { path: 'solution-edit/:id', component: IssueSolutionEdit },

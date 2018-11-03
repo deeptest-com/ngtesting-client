@@ -37,49 +37,6 @@
     </div>
 
     <div class="form-group row">
-      <label class="col-sm-2 col-form-label"><span>已选字段</span></label>
-      <div class="col-sm-8">
-        <div class="tabs-container light">
-          <div class="tabs">
-            <ngb-tabset #tabset="ngbTabset" (tabChange)="tabChange($event.nextId)">
-              <ngb-tab *ngFor="let tab of page.tabs" id="{{tab.id}}">
-                <ng-template ngbTabTitle>{{tab.name}}</ng-template>
-                <ng-template ngbTabContent></ng-template>
-              </ngb-tab>
-            </ngb-tabset>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-2 field-selection">
-        <i (click)="addTab()" class="fa fa-plus-circle link text-in-row">新增标签</i>
-      </div>
-    </div>
-    <div class="form-group row">
-      <label class="col-sm-2 col-form-label"></label>
-
-      <div *ngIf="!page.tabs.fields || page.tabs.fields.length == 0" class="col-sm-10">
-        <span class="text-in-row">暂无字段</span>
-      </div>
-    </div>
-
-    <div class="form-group row">
-      <label class="col-sm-2 col-form-label"><span>可选字段</span></label>
-
-      <div class="col-sm-8">
-        <select [(ngModel)]="selectedField" formControlName="field"
-                class="form-control form-control-sm" id="field" name="field">
-          <option value=""></option>
-          <option *ngFor="let field of fields" value="{{field.code}}">{{field.label}}</option>
-        </select>
-      </div>
-
-      <div class="col-sm-2 field-selection">
-        <i *ngIf="field" (click)="addField()" class="fa fa-plus-circle link text-in-row">添加字段</i>
-        <i *ngIf="!field" class="fa fa-plus-circle text-in-row">添加字段</i>
-      </div>
-    </div>
-
-    <div class="form-group row">
       <label class="col-sm-2 col-form-label"></label>
       <div class="col-sm-10">
         <div class="validate-errors">

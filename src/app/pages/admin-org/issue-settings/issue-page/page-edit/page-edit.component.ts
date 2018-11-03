@@ -28,13 +28,9 @@ export class IssuePageEdit implements OnInit, AfterViewInit {
   id: number;
 
   page: any = { tabs: [] };
-  fields: any[] = [];
-  selectedField: any;
-  tab: any = {};
   form: FormGroup;
 
   @ViewChild('modalWrapper') modalWrapper: PopDialogComponent;
-  @ViewChild('tabset') tabset: NgbTabset;
 
   constructor(private _state: GlobalState, private _routeService: RouteService, private _route: ActivatedRoute,
               private fb: FormBuilder, private issuePageService: IssuePageService) {
@@ -54,7 +50,6 @@ export class IssuePageEdit implements OnInit, AfterViewInit {
     this.form = this.fb.group(
       {
         'name': ['', [Validators.required]],
-        'field': ['', []],
       }, {},
     );
 
@@ -75,41 +70,19 @@ export class IssuePageEdit implements OnInit, AfterViewInit {
   loadData() {
     this.issuePageService.get(this.id).subscribe((json: any) => {
       this.page = json.page;
-      this.tab = this.page.tabs[0];
-      this.fields = json.fields;
     });
   }
 
-  addField() {
-    console.log('addField');
-  }
-  addTab() {
-    const tab = { id: (Math.abs(this.page.tabs[this.page.tabs.length-1].id) + 1) * -1, name: '新标签' };
-    this.page.tabs.push(tab);
-
-    this.tab = tab;
-
-    setTimeout(() => {
-      this.tabset.select(this.tab.id + '');
-    }, 10);
-  }
-  tabChange(tabId: any) {
-    this.tab = this.page.tabs.filter(el => el.id == tabId)[0];
-
-    console.log('tabChange', this.tab);
-  }
-
   save() {
-    const that = this;
-
-    that.issuePageService.save(that.page).subscribe((json: any) => {
+    this.issuePageService.save(this.page).subscribe((json: any) => {
       if (json.code == 1) {
-        CONSTANT.CASE_PROPERTY_MAP = json.issuePropertyMap;
+        this.page = json.page;
 
-        that.formErrors = ['保存成功'];
+        this.formErrors = ['保存成功'];
+
         this.back();
       } else {
-        that.formErrors = [json.msg];
+        this.formErrors = [json.msg];
       }
     });
   }

@@ -21,6 +21,7 @@ import { IssuePage } from './issue-page.component';
 
 import { IssuePageList } from './page-list';
 import { IssuePageEdit } from './page-edit';
+import { IssuePageConfig } from './page-config';
 
 import { IssueSolutionList } from './solution-list';
 import { IssueSolutionEdit } from './solution-edit';
@@ -40,7 +41,7 @@ import { IssueSolutionEdit } from './solution-edit';
   declarations: [
     IssuePage,
     IssuePageList,
-    IssuePageEdit,
+    IssuePageEdit, IssuePageConfig,
     IssueSolutionList,
     IssueSolutionEdit,
   ],

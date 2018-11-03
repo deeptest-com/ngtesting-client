@@ -36,7 +36,11 @@ export class IssuePageList implements OnInit, AfterViewInit {
 
   editPage(item: any) {
     this._routeService.navTo('/pages/org-admin/issue-settings/issue-page/page-edit/'
-      + (item ? item.id : null) );
+      + (item ? item.id : null));
+  }
+
+  configPage(item: any) {
+    this._routeService.navTo('/pages/org-admin/issue-settings/issue-page/page-config/' + item.id);
   }
 
   loadData() {

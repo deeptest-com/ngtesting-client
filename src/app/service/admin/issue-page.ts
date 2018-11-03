@@ -17,9 +17,21 @@ export class IssuePageService {
     const model = { id: id };
     return this._reqService.post(this._apiBase + 'get', model);
   }
+  getDetail(id: number) {
+    const model = { id: id };
+    return this._reqService.post(this._apiBase + 'getDetail', model);
+  }
+
+  addTab(tab: any) {
+    return this._reqService.post(this._apiBase + 'addTab', tab);
+  }
+
+  addField(elem: any) {
+    return this._reqService.post(this._apiBase + 'addField', elem);
+  }
 
   save(model: any) {
-    return this._reqService.post(this._apiBase + 'save', { model: model });
+    return this._reqService.post(this._apiBase + 'save', model);
   }
 
   delete(id: number) {
