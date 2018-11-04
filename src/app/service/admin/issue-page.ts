@@ -25,6 +25,10 @@ export class IssuePageService {
   addTab(tab: any) {
     return this._reqService.post(this._apiBase + 'addTab', tab);
   }
+  getTab(id: number) {
+    const model = { id: id };
+    return this._reqService.post(this._apiBase + 'getTab', model);
+  }
 
   addField(elem: any) {
     return this._reqService.post(this._apiBase + 'addField', elem);

@@ -8,6 +8,8 @@ import { routing }       from './issue-page.routing';
 import { NgbModalModule, NgbPaginationModule, NgbDropdownModule,
   NgbTabsetModule, NgbButtonsModule, NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { DndModule, SortableContainer } from '../../../../components/ng2-dnd';
+
 import { PipeModule } from '../../../../pipe/pipe.module';
 import { DirectiveModule } from '../../../../directive/directive.module';
 import { PopDialogModule } from '../../../../components/pop-dialog';
@@ -36,6 +38,7 @@ import { IssueSolutionEdit } from './solution-edit';
     NgbModalModule, NgbPaginationModule, NgbDropdownModule,
     NgbTabsetModule, NgbButtonsModule, NgbCollapseModule,
 
+    DndModule.forRoot(),
     PipeModule, DirectiveModule, PopDialogModule,
   ],
   declarations: [
@@ -48,6 +51,7 @@ import { IssueSolutionEdit } from './solution-edit';
   providers: [
     RouteService,
     RequestService,
+    SortableContainer,
     DatetimePickerService,
     IssuePageService,
   ],

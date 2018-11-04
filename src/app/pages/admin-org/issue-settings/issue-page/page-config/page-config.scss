@@ -1,0 +1,57 @@
+.issue-page-config {
+  padding: 15px;
+
+  .field-selection {
+    .link {
+      margin: 0;
+    }
+  }
+  .tabs .nav-item .nav-link.active {
+    cursor: default;
+
+    .act {
+      display: inline-block;
+      margin: 0;
+      cursor: pointer;
+    }
+  }
+
+  ul.list-group {
+    li.list-group-item {
+      &.dragging {
+        background-color: #eaeaea;
+      }
+      .my-row {
+        display: flex;
+        width: 100%;
+
+        .link {
+          font-size: 16px;
+        }
+        .move {
+          width: 30px;
+        }
+        .text {
+          flex: 1;
+        }
+        .opt {
+          width: 30px;
+        }
+      }
+
+    }
+  }
+  
+  .recycle-wapper {
+    height: 100%;
+    min-height: 100%;
+
+    background: transparent no-repeat center;
+    opacity: 0.1;
+    background-size:contain;
+
+    &.dragging {
+      opacity: 0.3;
+    }
+  }
+}
