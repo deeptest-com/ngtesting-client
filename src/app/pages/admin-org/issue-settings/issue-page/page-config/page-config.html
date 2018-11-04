@@ -57,10 +57,11 @@
                         </form>
                       </div>
                       <div class="opt editing">
-                        <span *ngIf="!t.name==''" (click)="saveTabName($event, t)">
+                        <span *ngIf="!t.name==''" (click)="saveTabName($event, t)" title="保存">
                           <i class="fa fa-check"></i>
                         </span>
-                        <span (click)="cancelTabName($event, t)"><i class="fa fa-times"></i></span>
+                        <span (click)="cancelTabName($event, t)" title="取消"><i class="fa fa-times"></i></span>
+                        <span (click)="removeTab($event, t)" title="删除"><i class="fa fa-trash"></i></span>
                       </div>
                   </div>
                 </li>
@@ -97,7 +98,9 @@
                   {{item.label}} - {{item.ordr}}
                 </div>
                 <div class="link opt">
-                  <i *ngIf="item.hover" (click)="removeElem(item)" class="link fa fa-trash"></i>
+                  <span *ngIf="item.hover" (click)="removeElem($event, item)">
+                    <i class="link fa fa-trash"></i>
+                  </span>
                 </div>
               </div>
             </li>

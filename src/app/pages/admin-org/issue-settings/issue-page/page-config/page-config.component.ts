@@ -161,6 +161,10 @@ export class IssuePageConfig implements OnInit, AfterViewInit {
     tab.editing = true;
     $event.stopPropagation();
   }
+  removeTab($event, tab) {
+    console.log('removeTab', tab);
+    tab.editing = false;
+  }
   saveTabName($event, tab) {
     console.log('saveTabName', tab);
     tab.editing = false;
@@ -173,7 +177,7 @@ export class IssuePageConfig implements OnInit, AfterViewInit {
     $event.stopPropagation();
   }
 
-  removeElem(elem) {
+  removeElem($event, elem) {
     console.log('removeElem', elem);
   }
 
