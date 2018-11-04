@@ -26,21 +26,45 @@
       <label class="col-sm-2 col-form-label"><span>已选字段</span></label>
       <div class="col-sm-8">
         <div class="tabs-container light">
-          <div class="tabs">
-            <ngb-tabset #tabset="ngbTabset" (tabChange)="tabChange($event.nextId)">
-              <ngb-tab *ngFor="let t of page.tabs" id="{{t.id}}">
-                <ng-template ngbTabTitle>
-                  <span *ngIf="tab.id != t.id"> {{t.name}} </span>
+          <div dnd-sortable-container [dropZones]="['tab-dropZone']" [sortableData]="page.tabs" class="tabs">
+              <ul class="nav nav-tabs justify-content-start">
+                <li *ngFor="let t of page.tabs; let i = index" class="nav-item"
+                    (mouseenter)="t.hover = true" (mouseleave)="t.hover = false"
 
-                  <span *ngIf="tab.id == t.id">
-                    <i (click)="toLeft(t)" class="act fa fa-arrow-left"></i>
-                    <i (click)="editTab(t)" class="act">{{t.name}}</i>
-                    <i (click)="toRight(t)" class="act fa fa-arrow-right"></i>
-                  </span>
-                </ng-template>
-                <ng-template ngbTabContent></ng-template>
-              </ngb-tab>
-            </ngb-tabset>
+                    dnd-sortable [sortableIndex]="i"
+                    (onDragStart)="onTabDragStart(t)" (onDragEnd)="onTabDragEnd(t)"
+                    (onDragSuccess)="onTabDragSuccess(t)" (onDropSuccess)="onTabDropSuccess(t)">
+
+                  <div *ngIf="!t.editing" (click)="selectTab($event, t)" [class.active]="tab.id == t.id" class="my-row nav-link">
+                    <div class="move">
+                      <i *ngIf="t.hover" class="fa fa-arrows"></i>
+                    </div>
+                    <div *ngIf="!t.editing" class="text">
+                      {{t.name}}
+                    </div>
+                    <div class="opt">
+                      <i *ngIf="t.hover" (click)="editTab($event, t)" class="fa fa-pencil"></i>
+                    </div>
+                  </div>
+
+                  <div *ngIf="t.editing" [class.active]="tab.id == t.id" class="my-row nav-link">
+                      <div class="edit">
+                        <form ngForm>
+                          <input type="text" [class.ng-invalid]="!t.name==''"
+                                 [(ngModel)]="t.name" name="tabName"
+                                 (click)="$event.stopPropagation()"
+                                 (keydown.enter)="save($event)">
+                        </form>
+                      </div>
+                      <div class="opt editing">
+                        <span *ngIf="!t.name==''" (click)="saveTabName($event, t)">
+                          <i class="fa fa-check"></i>
+                        </span>
+                        <span (click)="cancelTabName($event, t)"><i class="fa fa-times"></i></span>
+                      </div>
+                  </div>
+                </li>
+              </ul>
           </div>
         </div>
       </div>
@@ -55,15 +79,15 @@
         <span class="text-in-row">暂无字段</span>
       </div>
 
-        <div dnd-sortable-container [sortableData]="tab.elements" class="col-sm-8">
+        <div dnd-sortable-container [dropZones]="['elem-dropZone']" [sortableData]="tab.elements" class="col-sm-8">
           <ul class="list-group">
             <li *ngFor="let item of tab.elements; let i = index" class="list-group-item"
                 (mouseenter)="item.hover = true" (mouseleave)="item.hover = false"
 
                 [class.dragging]="item.id == draggingId"
                 dnd-sortable [sortableIndex]="i"
-                (onDragStart)="onDragStart(item)" (onDragEnd)="onDragEnd(item)"
-                (onDragSuccess)="onDragSuccess(item)" (onDropSuccess)="onDropSuccess(item)">
+                (onDragStart)="onElemDragStart(item)" (onDragEnd)="onElemDragEnd(item)"
+                (onDragSuccess)="onElemDragSuccess(item)" (onDropSuccess)="onElemDropSuccess(item)">
 
               <div class="my-row">
                 <div class="link move">

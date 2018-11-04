@@ -114,13 +114,14 @@ export class IssuePageConfig implements OnInit, AfterViewInit {
     });
   }
 
-  tabChange(tabId: any) {
-    this.issuePageService.getTab(tabId).subscribe((json: any) => {
+  selectTab($event, tab: any) {
+    console.log('selectTab', tab);
+
+    $event.preventDefault();
+    this.issuePageService.getTab(tab.id).subscribe((json: any) => {
       this.tab = json.tab;
       this.fields = json.fields;
     });
-
-    console.log('tabChange', this.tab);
   }
 
   save() {
@@ -154,40 +155,54 @@ export class IssuePageConfig implements OnInit, AfterViewInit {
     });
   }
 
-  editTab(tab) {
+  editTab($event, tab) {
     console.log('editTab', tab);
+    tab.oldName = tab.name;
+    tab.editing = true;
+    $event.stopPropagation();
   }
-  toLeft(tab) {
-    console.log('toLeft', tab);
+  saveTabName($event, tab) {
+    console.log('saveTabName', tab);
+    tab.editing = false;
+    $event.stopPropagation();
   }
-  toRight(tab) {
-    console.log('toRight', tab);
+  cancelTabName($event, tab) {
+    console.log('cancelTabName', tab);
+    tab.name = tab.oldName;
+    tab.editing = false;
+    $event.stopPropagation();
   }
 
   removeElem(elem) {
     console.log('removeElem', elem);
   }
 
-  onDragStart($event: any) {
-    console.log('onDragStart', $event);
-    this.draggingId = $event.id;
+  onTabDragStart(tab: any) {
+    console.log('onTabDragStart', tab);
+  }
+  onTabDragEnd(tab) {
+    console.log('onTabDragEnd', tab);
+  }
+  onTabDragSuccess(tab) {
+    console.log('onTabDragSuccess', tab);
+  }
+  onTabDropSuccess(tab) {
+    console.log('onTabDropSuccess', tab);
   }
 
-  onDragOver($event) {
-    console.log('onDragOver', $event);
+  onElemDragStart(elem: any) {
+    console.log('onElemDragStart', elem);
+    this.draggingId = elem.id;
   }
-
-  onDragEnd($event) {
-    console.log('onDragEnd', $event);
+  onElemDragEnd(elem) {
+    console.log('onElemDragEnd', elem);
     this.draggingId = -1;
   }
-
-  onDragSuccess($event) {
-    console.log('onDragSuccess', $event);
+  onElemDragSuccess(elem) {
+    console.log('onElemDragSuccess', elem);
   }
-
-  onDropSuccess($event) {
-    console.log('onDropSuccess', $event);
+  onElemDropSuccess(elem) {
+    console.log('onElemDropSuccess', elem);
   }
 
   showModal($event): void {
