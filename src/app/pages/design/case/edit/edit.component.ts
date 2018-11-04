@@ -63,6 +63,8 @@ export class CaseEdit implements OnInit, AfterViewInit, OnDestroy {
     this.buildForm();
 
     this._state.subscribe(CONSTANT.EVENT_CASE_EDIT, this.eventCode, (data: any) => {
+      console.log(CONSTANT.EVENT_CASE_EDIT, data);
+
       this.projectId = CONSTANT.CURR_PRJ_ID;
       const testCase = data.node;
 
