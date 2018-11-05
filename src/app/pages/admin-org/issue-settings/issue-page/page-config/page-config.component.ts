@@ -151,6 +151,11 @@ export class IssuePageConfig implements OnInit, AfterViewInit {
     console.log('removeTab', tab);
 
     this.tabService.remove(tab.id, tab.pageId, this.tab.id).subscribe((json: any) => {
+      if (json.code != 1) {
+        this.formErrors = [json.msg];
+        return;
+      }
+
       this.page = json.page;
 
       if (this.tab.id == tab.id) {
