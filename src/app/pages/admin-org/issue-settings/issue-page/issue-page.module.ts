@@ -18,6 +18,8 @@ import { RouteService } from '../../../../service/route';
 import { RequestService } from '../../../../service/request';
 import { DatetimePickerService } from '../../../../service/datetime-picker';
 import { IssuePageService } from '../../../../service/admin/issue-page';
+import { IssuePageTabService } from '../../../../service/admin/issue-page-tab';
+import { IssuePageElemService } from '../../../../service/admin/issue-page-elem';
 
 import { IssuePage } from './issue-page.component';
 
@@ -53,7 +55,7 @@ import { IssueSolutionEdit } from './solution-edit';
     RequestService,
     SortableContainer,
     DatetimePickerService,
-    IssuePageService,
+    IssuePageService, IssuePageTabService, IssuePageElemService,
   ],
 })
 export class IssuePageModule {}

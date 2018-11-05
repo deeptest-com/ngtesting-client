@@ -13,6 +13,9 @@ import { ValidatorUtils, PhoneValidator } from '../../../../../validator';
 import { RouteService } from '../../../../../service/route';
 
 import { IssuePageService } from '../../../../../service/admin/issue-page';
+import { IssuePageTabService } from '../../../../../service/admin/issue-page-tab';
+import { IssuePageElemService } from '../../../../../service/admin/issue-page-elem';
+
 import { PopDialogComponent } from '../../../../../components/pop-dialog';
 
 declare var jQuery;
@@ -39,9 +42,11 @@ export class IssuePageConfig implements OnInit, AfterViewInit {
   @ViewChild('modalWrapper') modalWrapper: PopDialogComponent;
   @ViewChild('tabset') tabset: NgbTabset;
 
-  constructor(private elementRef: ElementRef, private _state: GlobalState,
+  constructor(private elementRef: ElementRef, private _state: GlobalState, private fb: FormBuilder,
               private _routeService: RouteService, private _route: ActivatedRoute,
-              private fb: FormBuilder, private issuePageService: IssuePageService) {
+              private pageService: IssuePageService,
+              private tabService: IssuePageTabService,
+              private elemService: IssuePageElemService) {
 
   }
   ngOnInit() {
@@ -74,58 +79,15 @@ export class IssuePageConfig implements OnInit, AfterViewInit {
   };
 
   loadData() {
-    this.issuePageService.getDetail(this.id).subscribe((json: any) => {
+    this.pageService.getDetail(this.id).subscribe((json: any) => {
       this.page = json.page;
       this.tab = this.page.tabs[0];
       this.fields = json.fields;
     });
   }
 
-  addTab() {
-    const tab = { name: '新标签', pageId: this.page.id };
-
-    this.issuePageService.addTab(tab).subscribe((json: any) => {
-      this.tab = json.tab;
-      this.fields = json.fields;
-
-      this.page.tabs.push(this.tab);
-
-      setTimeout(() => {
-        this.tabset.select(this.tab.id + '');
-      }, 10);
-    });
-
-  }
-
-  addField() {
-    const elem = this.fields.filter(el => el.id == this.selectedFieldId)[0];
-    elem.tabId = this.tab.id;
-    elem.pageId = this.page.id;
-
-    elem.fieldId = elem.id;
-    elem.id = null;
-    elem.ordr = null;
-
-    console.log(elem);
-
-    this.issuePageService.addField(elem).subscribe((json: any) => {
-      this.tab = json.tab;
-      this.fields = json.fields;
-    });
-  }
-
-  selectTab($event, tab: any) {
-    console.log('selectTab', tab);
-
-    $event.preventDefault();
-    this.issuePageService.getTab(tab.id).subscribe((json: any) => {
-      this.tab = json.tab;
-      this.fields = json.fields;
-    });
-  }
-
   save() {
-    this.issuePageService.save(this.page).subscribe((json: any) => {
+    this.pageService.save(this.page).subscribe((json: any) => {
       if (json.code == 1) {
         this.page = json.page;
         this.tab = this.page.tabs[0];
@@ -142,17 +104,41 @@ export class IssuePageConfig implements OnInit, AfterViewInit {
   }
 
   delete() {
-    const that = this;
-
-    that.issuePageService.delete(that.page.id).subscribe((json: any) => {
+    this.pageService.delete(this.page.id).subscribe((json: any) => {
       if (json.code == 1) {
-        that.formErrors = ['删除成功'];
+        this.formErrors = ['删除成功'];
         this.modalWrapper.closeModal();
         this.back();
       } else {
-        that.formErrors = ['删除失败'];
+        this.formErrors = ['删除失败'];
       }
     });
+  }
+
+  selectTab($event, tab: any) {
+    console.log('selectTab', tab);
+
+    $event.preventDefault();
+    this.tabService.get(tab.id).subscribe((json: any) => {
+      this.tab = json.tab;
+      this.fields = json.fields;
+    });
+  }
+
+  addTab() {
+    const tab = { name: '新标签', pageId: this.page.id };
+
+    this.tabService.add(tab).subscribe((json: any) => {
+      this.tab = json.tab;
+      this.fields = json.fields;
+
+      this.page.tabs.push(this.tab);
+
+      setTimeout(() => {
+        this.tabset.select(this.tab.id + '');
+      }, 10);
+    });
+
   }
 
   editTab($event, tab) {
@@ -163,7 +149,17 @@ export class IssuePageConfig implements OnInit, AfterViewInit {
   }
   removeTab($event, tab) {
     console.log('removeTab', tab);
-    tab.editing = false;
+
+    this.tabService.remove(tab.id, tab.pageId, this.tab.id).subscribe((json: any) => {
+      this.page = json.page;
+
+      if (this.tab.id == tab.id) {
+        this.tab = this.page.tabs[0];
+        this.fields = json.fields;
+      } else {
+        this.tab = this.page.tabs.filter(el => el.id == this.tab.id)[0];
+      }
+    });
   }
   saveTabName($event, tab) {
     console.log('saveTabName', tab);
@@ -177,8 +173,29 @@ export class IssuePageConfig implements OnInit, AfterViewInit {
     $event.stopPropagation();
   }
 
+  addElem() {
+    const elem = this.fields.filter(el => el.id == this.selectedFieldId)[0];
+    elem.tabId = this.tab.id;
+    elem.pageId = this.page.id;
+
+    elem.fieldId = elem.id;
+    elem.id = null;
+    elem.ordr = null;
+
+    console.log(elem);
+
+    this.elemService.add(elem).subscribe((json: any) => {
+      this.tab = json.tab;
+      this.fields = json.fields;
+    });
+  }
   removeElem($event, elem) {
     console.log('removeElem', elem);
+
+    this.elemService.remove(elem.id, elem.tabId).subscribe((json: any) => {
+      this.tab = json.tab;
+      this.fields = json.fields;
+    });
   }
 
   onTabDragStart(tab: any) {
