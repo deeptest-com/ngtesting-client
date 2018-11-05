@@ -57,7 +57,7 @@
                         </form>
                       </div>
                       <div class="opt editing">
-                        <span *ngIf="!t.name==''" (click)="saveTabName($event, t)" title="保存">
+                        <span *ngIf="!t.name==''" (click)="updateTabName($event, t)" title="保存">
                           <i class="fa fa-check"></i>
                         </span>
                         <span (click)="cancelTabName($event, t)" title="取消"><i class="fa fa-times"></i></span>

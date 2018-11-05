@@ -166,10 +166,15 @@ export class IssuePageConfig implements OnInit, AfterViewInit {
       }
     });
   }
-  saveTabName($event, tab) {
-    console.log('saveTabName', tab);
-    tab.editing = false;
+  updateTabName($event, tab) {
     $event.stopPropagation();
+    console.log('saveTabName', tab);
+
+    tab.editing = false;
+
+    this.tabService.updateName(tab.id, tab.name).subscribe((json: any) => {
+      tab.editing = false;
+    });
   }
   cancelTabName($event, tab) {
     console.log('cancelTabName', tab);

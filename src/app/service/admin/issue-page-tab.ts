@@ -17,6 +17,11 @@ export class IssuePageTabService {
     return this._reqService.post(this._apiBase + 'get', model);
   }
 
+  updateName(id: number, name: number) {
+    const model = { id: id, name: name };
+    return this._reqService.post(this._apiBase + 'updateName', model);
+  }
+
   remove(id: number, pageId: number, currTabId: number) {
     const model = { id: id, pageId: pageId, currTabId: currTabId };
     return this._reqService.post(this._apiBase + 'remove', model);
