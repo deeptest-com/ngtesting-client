@@ -221,8 +221,9 @@ export class IssuePageConfig implements OnInit, AfterViewInit {
     console.log('onTabDropSuccess', tab);
   }
 
-  onElementDropSuccess(field) {
-    console.log('onFieldDropSuccess', field, this.tab.elements);
+  onElementDropSuccess($event) {
+    console.log('onFieldDropSuccess', $event, this.tab.elements);
+    $event.data.hover = false;
   }
 
   showModal($event): void {

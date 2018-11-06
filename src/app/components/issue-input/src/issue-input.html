@@ -1,7 +1,12 @@
 <ng-container [ngSwitch]="field.input">
-  <div class="row issue-input">
+  <div class="row issue-input"
+       (mouseenter)="field.hover = true" (mouseleave)="field.hover = false">
+
     <label class="col-form-label col-sm-{{labelColNum}}">
       {{field.label}}
+      <span *ngIf="!forSelection" class="link">
+        <i class="fa fa-cog" [class.transparent]="!field.hover"></i>
+      </span>
     </label>
 
     <div class="col-sm-{{12 - labelColNum}}">

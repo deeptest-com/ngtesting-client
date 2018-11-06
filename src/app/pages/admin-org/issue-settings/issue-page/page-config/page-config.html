@@ -27,8 +27,7 @@
                       (mouseenter)="t.hover = true" (mouseleave)="t.hover = false"
 
                       dnd-sortable [sortableIndex]="i"
-                      (onDragStart)="onTabDragStart(t)" (onDragEnd)="onTabDragEnd(t)"
-                      (onDragSuccess)="onTabDragSuccess(t)" (onDropSuccess)="onTabDropSuccess(t)">
+                      (onDropSuccess)="onTabDropSuccess(t)">
 
                     <div *ngIf="!t.editing" (click)="selectTab($event, t)" [class.active]="tab.id == t.id"
                          class="my-row nav-link">
