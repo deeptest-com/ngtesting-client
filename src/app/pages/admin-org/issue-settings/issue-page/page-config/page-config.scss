@@ -10,12 +10,16 @@
       flex-direction: column;
 
       .left-top {
-
         .field-selection {
+          position: absolute;
+          top: 0;
+          right: 15px;
+
           .link {
             margin: 0;
           }
         }
+
         .tabs {
           .nav-tabs {
             .nav-item {
@@ -72,11 +76,9 @@
 
       .left-main {
         flex: 1;
-        padding-top: 15px;
 
         .elements {
-          padding-bottom: 60px;
-
+          padding-top: 15px;
           .element {
             float: left;
             width: 50%;
@@ -96,7 +98,7 @@
     }
 
     .right {
-      width: 360px;
+      width: 320px;
       overflow: auto;
 
       .field-row {

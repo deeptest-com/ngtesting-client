@@ -39,7 +39,7 @@ export class IssuePageConfig implements OnInit, AfterViewInit {
 
   listRecycled: Array<string> = [];
 
-  contentHeight = Utils.getContainerHeight(CONSTANT.HEAD_HEIGHT + CONSTANT.FOOTER_HEIGHT);
+  contentHeight = Utils.getContainerHeight(CONSTANT.HEAD_HEIGHT + CONSTANT.FOOTER_HEIGHT + 70);
 
   @ViewChild('modalWrapper') modalWrapper: PopDialogComponent;
   @ViewChild('tabset') tabset: NgbTabset;
