@@ -9,7 +9,7 @@ import { Input, Component, OnInit, OnChanges, SimpleChanges } from '@angular/cor
 export class IssueInputComponent implements OnInit, OnChanges {
   @Input() field: any;
   @Input() forSelection: boolean = false;
-  labelColNum: number = 4;
+  labelColNum: number = 2;
 
   public constructor() {
 
@@ -23,7 +23,7 @@ export class IssueInputComponent implements OnInit, OnChanges {
     if (this.forSelection) {
       this.labelColNum = 3;
     } else if (this.field.fullLine) {
-      this.labelColNum = 2;
+      this.labelColNum = 1;
     }
   }
 }
