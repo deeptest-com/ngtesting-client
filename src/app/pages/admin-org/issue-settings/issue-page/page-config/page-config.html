@@ -3,7 +3,7 @@
   <div class="row">
     <div class="edit-toolbar col-xl-12">
       <div class="title">
-        <span>配置界面</span>
+        <span>配置界面 - {{page.name}}</span>
       </div>
       <div class="buttons">
         <button (click)="back()" type="button"
@@ -46,14 +46,14 @@
                     <div *ngIf="t.editing" [class.active]="tab.id == t.id" class="my-row nav-link">
                       <div class="edit">
                         <form ngForm>
-                          <input type="text" [class.ng-invalid]="!t.name==''"
+                          <input type="text"
                                  [(ngModel)]="t.name" name="tabName"
                                  (click)="$event.stopPropagation()"
                                  (keydown.enter)="save($event)">
                         </form>
                       </div>
                       <div class="opt editing">
-                        <span *ngIf="!t.name==''" (click)="updateTabName($event, t)" title="保存">
+                        <span *ngIf="t.name" (click)="updateTabName($event, t)" title="保存">
                           <i class="fa fa-check"></i>
                         </span>
                         <span (click)="cancelTabName($event, t)" title="取消"><i class="fa fa-times"></i></span>
