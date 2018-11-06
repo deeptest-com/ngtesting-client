@@ -7,7 +7,9 @@ import { Input, Component, OnInit, OnChanges, SimpleChanges } from '@angular/cor
   providers: [],
 })
 export class IssueInputComponent implements OnInit, OnChanges {
-  @Input() field: string;
+  @Input() field: any;
+  @Input() forSelection: boolean = false;
+  labelColNum: number = 4;
 
   public constructor() {
 
@@ -18,6 +20,10 @@ export class IssueInputComponent implements OnInit, OnChanges {
   }
 
   public ngOnInit(): void {
-
+    if (this.forSelection) {
+      this.labelColNum = 3;
+    } else if (this.field.fullLine) {
+      this.labelColNum = 2;
+    }
   }
 }

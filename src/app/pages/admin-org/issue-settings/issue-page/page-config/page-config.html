@@ -76,7 +76,9 @@
                [draggable]="false" [dropZones]="['fields-zone']" [sortableData]="tab.elements"
                (onDropSuccess)="onElementDropSuccess($event)">
 
-            <div id="sortable-left-{{field.id}}" *ngFor="let field of tab.elements; let i = index;" class="element"
+            <div id="sortable-left-{{field.id}}" class="element" [class.full-line]="field.fullLine"
+                 *ngFor="let field of tab.elements; let i = index;"
+
                  dnd-sortable [sortableIndex]="i" [dragData]="field"
                  (onDropSuccess)="onElementDropSuccess($event)">
               <issue-input [field]="field"></issue-input>
@@ -106,7 +108,7 @@
       <div id="sortable-right-{{field.id}}" *ngFor="let field of fields; let i = index;" class="field-row"
            dnd-sortable [sortableIndex]="i" [dragData]="field"
            >
-        <issue-input [field]="field"></issue-input>
+        <issue-input [field]="field" [forSelection]="true"></issue-input>
       </div>
     </div>
 

@@ -1,7 +1,10 @@
 .issue-input {
+  padding: 5px;
+
   .col-form-label {
     white-space: nowrap;
     text-overflow:ellipsis;
+    text-align: right;
   }
   .input-group {
     margin-bottom: 0;

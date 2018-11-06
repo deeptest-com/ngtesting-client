@@ -1,9 +1,10 @@
 <ng-container [ngSwitch]="field.input">
-  <div class="form-group row issue-input">
-    <label class="col-sm-3 col-form-label">
+  <div class="row issue-input">
+    <label class="col-form-label col-sm-{{labelColNum}}">
       {{field.label}}
     </label>
-    <div class="col-sm-9">
+
+    <div class="col-sm-{{12 - labelColNum}}">
       <ng-container *ngSwitchCase="'textarea'">
         <textarea type="text" class="form-control form-control-sm"></textarea>
       </ng-container>

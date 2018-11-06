@@ -80,6 +80,9 @@
           .element {
             float: left;
             width: 50%;
+            &.full-line {
+              width: 100%;
+            }
           }
         }
 
