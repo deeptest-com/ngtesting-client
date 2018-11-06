@@ -200,6 +200,7 @@ export abstract class AbstractComponent {
     //****** Droppable *******//
     private _onDragEnter(event: Event): void {
         // console.log('ondragenter._isDropAllowed', this._isDropAllowed);
+
         if (this._isDropAllowed(event)) {
             // event.preventDefault();
             this._onDragEnterCallback(event);
@@ -207,6 +208,7 @@ export abstract class AbstractComponent {
     }
 
     private _onDragOver(event: Event) {
+
         // // console.log('ondragover._isDropAllowed', this._isDropAllowed);
         if (this._isDropAllowed(event)) {
             // The element is over the same source element - do nothing
@@ -228,11 +230,13 @@ export abstract class AbstractComponent {
     }
 
     private _onDrop(event: Event): void {
+      console.log('---1-_onDrop--', this._elem.id);
+
         // Necessary. Allows us to drop.
         this._preventAndStop(event);
         // console.log('ondrop._isDropAllowed', this._isDropAllowed);
-        if (this._isDropAllowed(event)) {            
-
+        if (this._isDropAllowed(event)) {
+            console.log('---2-_onDrop--', this._elem.id);
             this._onDropCallback(event);
 
             this.detectChanges();
@@ -240,6 +244,8 @@ export abstract class AbstractComponent {
     }
 
     private _isDropAllowed(event: any): boolean {
+      console.log('-----_isDropAllowed-0-', this._elem.id, this.dropEnabled);
+
         if ((this._dragDropService.isDragged || (event.dataTransfer && event.dataTransfer.files)) && this.dropEnabled) {
             // First, if `allowDrop` is set, call it to determine whether the
             // dragged element can be dropped here.
@@ -251,6 +257,7 @@ export abstract class AbstractComponent {
             if (this.dropZones.length === 0 && this._dragDropService.allowedDropZones.length === 0) {
                 return true;
             }
+
             for (let i: number = 0; i < this._dragDropService.allowedDropZones.length; i++) {
                 let dragZone: string = this._dragDropService.allowedDropZones[i];
                 if (this.dropZones.indexOf(dragZone) !== -1) {
@@ -273,6 +280,8 @@ export abstract class AbstractComponent {
     //*********** Draggable **********//
 
     private _onDragStart(event: Event): void {
+      console.log('---0-_onDragStart--', this._elem.id);
+
         //console.log('ondragstart.dragEnabled', this._dragEnabled);
         if (this._dragEnabled) {
             this._dragDropService.allowedDropZones = this.dropZones;
@@ -291,7 +300,7 @@ export abstract class AbstractComponent {
     _onDragEnterCallback(event: Event) { }
     _onDragOverCallback(event: Event) { }
     _onDragLeaveCallback(event: Event) { }
-    _onDropCallback(event: Event) { }
+    _onDropCallback(event: Event) { console.log('---333-_onDropCallback--', this._elem.id); }
 
     //**** Drag Callbacks ****//
     _onDragStartCallback(event: Event) { }

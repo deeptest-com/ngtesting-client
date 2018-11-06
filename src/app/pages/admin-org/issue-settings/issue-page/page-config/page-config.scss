@@ -1,100 +1,105 @@
 .issue-page-config {
   padding: 15px;
 
-  .field-selection {
-    .link {
-      margin: 0;
-    }
-  }
-  .tabs {
-    .nav-tabs {
-      .nav-item {
-        .my-row {
-          display: flex;
-          width: 100%;
+  .main {
+    display: flex;
 
-          .move {
-            width: 16px;
-            cursor: pointer;
-          }
-          .text {
-            flex: 1;
-            margin: 0 5px;
-          }
-          .edit {
-            flex: 1;
-            margin: 0 5px;
-            input {
-              padding: 3px;
-              width: 80px;
-              height: 30px;
-              border: 0;
-              background-color: #fffff0;
-              outline: none;
-            }
-          }
-          .opt {
-            width: 16px;
-            cursor: pointer;
-            &.editing {
-              width: 48px;
-            }
+    .left {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+
+      .left-top {
+
+        .field-selection {
+          .link {
+            margin: 0;
           }
         }
+        .tabs {
+          .nav-tabs {
+            .nav-item {
+              .my-row {
+                display: flex;
+                width: 100%;
 
-        .nav-link {
-          padding: 2px 7px;
-          line-height: 30px;
-          &.active {
-            cursor: default;
+                .move {
+                  width: 16px;
+                  cursor: pointer;
+                }
+                .text {
+                  flex: 1;
+                  margin: 0 5px;
+                }
+                .edit {
+                  flex: 1;
+                  margin: 0 5px;
+                  input {
+                    padding: 3px;
+                    width: 80px;
+                    height: 30px;
+                    border: 0;
+                    background-color: #fffff0;
+                    outline: none;
+                  }
+                }
+                .opt {
+                  width: 16px;
+                  cursor: pointer;
+                  &.editing {
+                    width: 48px;
+                  }
+                }
+              }
 
-            .act {
-              display: inline-block;
-              margin: 0;
-              cursor: pointer;
+              .nav-link {
+                padding: 2px 7px;
+                line-height: 30px;
+                &.active {
+                  cursor: default;
+
+                  .act {
+                    display: inline-block;
+                    margin: 0;
+                    cursor: pointer;
+                  }
+                }
+              }
             }
           }
         }
       }
-    }
-  }
 
-  ul.list-group {
-    li.list-group-item {
-      &.dragging {
-        background-color: #eaeaea;
-      }
-      .my-row {
-        display: flex;
-        width: 100%;
+      .left-main {
+        flex: 1;
+        padding-top: 15px;
 
-        .link {
-          font-size: 16px;
+        .elements {
+          padding-bottom: 60px;
+
+          .element {
+            float: left;
+            width: 50%;
+          }
         }
-        .move {
-          width: 30px;
-        }
-        .text {
-          flex: 1;
-        }
-        .opt {
-          width: 30px;
+
+        .no-elems {
+          width: 100px;
+          margin: auto;
         }
       }
 
+      overflow: auto;
     }
-  }
-  
-  .recycle-wapper {
-    height: 100%;
-    min-height: 100%;
 
-    background: transparent no-repeat center;
-    opacity: 0.1;
-    background-size:contain;
+    .right {
+      width: 360px;
+      overflow: auto;
 
-    &.dragging {
-      opacity: 0.3;
+      .field-row {
+        margin: 8px;
+      }
     }
   }
 }
+

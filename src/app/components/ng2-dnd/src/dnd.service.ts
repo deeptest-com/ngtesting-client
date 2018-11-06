@@ -20,7 +20,7 @@ export function dragDropServiceFactory(): DragDropService  {
 @Injectable()
 export class DragDropService {
     allowedDropZones: Array<string> = [];
-    onDragSuccessCallback: EventEmitter<DragDropData>;
+    onDragSuccessCallback: EventEmitter<any>;
     dragData: any;
     isDragged: boolean;
 }

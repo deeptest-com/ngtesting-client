@@ -1,0 +1,51 @@
+<ng-container [ngSwitch]="field.input">
+  <div class="form-group row issue-input">
+    <label class="col-sm-3 col-form-label">
+      {{field.label}}
+    </label>
+    <div class="col-sm-9">
+      <ng-container *ngSwitchCase="'textarea'">
+        <textarea type="text" class="form-control form-control-sm"></textarea>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'dropdown'">
+        <select class="form-control form-control-sm">
+          <option value="">选项一</option>
+        </select>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'radio'">
+        <input name="issue-input" type="radio" class="form-check-input">选项一
+        <input name="issue-input" type="radio" class="form-check-input">选项二
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'checkbox'">
+        <input name="issue-input" type="radio" class="form-check-input">选项一
+        <input name="issue-input" type="radio" class="form-check-input">选项二
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'multi_select'">
+        <select multiple class="form-control form-control-sm">
+          <option value="">选项一</option>
+          <option value="">选项二</option>
+          <option value="">选项三</option>
+        </select>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'date'">
+        <div class="input-group">
+          <input class="form-control form-control-sm" placeholder="yyyy-mm-dd">
+          <div class="input-group-addon">
+            <i class="fa fa-calendar"></i>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-container *ngSwitchDefault>
+        <input type="text" class="form-control form-control-sm">
+      </ng-container>
+
+    </div>
+  </div>
+
+</ng-container>

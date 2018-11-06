@@ -19,6 +19,7 @@ export class SortableContainer extends AbstractComponent {
 
   @Input() set sortableData(sortableData: Array<any>) {
     this._sortableData = sortableData;
+
     //
     this.dropEnabled = !!this._sortableData;
     // console.log("collection is changed, drop enabled: " + this.dropEnabled);
@@ -31,6 +32,8 @@ export class SortableContainer extends AbstractComponent {
   @Input('dropZones') set dropzones(value: Array<string>) {
     this.dropZones = value;
   }
+
+  @Output('onDropSuccess') onDropSuccessCallback: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(public elemRef: ElementRef, dragDropService: DragDropService, config: DragDropConfig, cdr: ChangeDetectorRef,
               private _sortableDataService: DragDropSortableService) {
@@ -52,12 +55,26 @@ export class SortableContainer extends AbstractComponent {
           this._sortableDataService.sortableContainer.dropEnabled = true;
         }
         // Add item to new list
-        this._sortableData.unshift(item);
+        console.log('=================', this._sortableData, item);
+        this._sortableData.push(item);
         this._sortableDataService.sortableContainer = this;
-        this._sortableDataService.index = 0;
+        this._sortableDataService.index = this._sortableData.length - 1;
       }
       // Refresh changes in properties of container component
       this.detectChanges();
+    }
+  }
+
+  _onDropCallback(event: Event) {
+    console.log('---3-_onDropCallback--', this._elem.id);
+
+    if (this._sortableDataService.isDragged) {
+      // console.log('onDropCallback.onDropSuccessCallback.dragData', this._dragDropService.dragData);
+      this.onDropSuccessCallback.emit({ elem: this._elem.id, data: this._dragDropService.dragData });
+      if (this._dragDropService.onDragSuccessCallback) {
+        // console.log('onDropCallback.onDragSuccessCallback.dragData', this._dragDropService.dragData);
+        this._dragDropService.onDragSuccessCallback.emit(this._dragDropService.dragData);
+      }
     }
   }
 }
@@ -167,10 +184,11 @@ export class SortableComponent extends AbstractComponent {
           this._sortableDataService.sortableContainer.dropEnabled = true;
         }
         // Add item to new list
+        console.log('=================', this._sortableContainer.sortableData, this.index, item);
         this._sortableContainer.sortableData.splice(this.index, 0, item);
-        if (this._sortableContainer.dropEnabled) {
-          this._sortableContainer.dropEnabled = false;
-        }
+        // if (this._sortableContainer.dropEnabled) {
+        //   this._sortableContainer.dropEnabled = false;
+        // }
         this._sortableDataService.sortableContainer = this._sortableContainer;
         this._sortableDataService.index = this.index;
       }
@@ -178,9 +196,11 @@ export class SortableComponent extends AbstractComponent {
   }
 
   _onDropCallback(event: Event) {
+    console.log('---3-_onDropCallback--', this._elem.id);
+
     if (this._sortableDataService.isDragged) {
       // console.log('onDropCallback.onDropSuccessCallback.dragData', this._dragDropService.dragData);
-      this.onDropSuccessCallback.emit(this._dragDropService.dragData);
+      this.onDropSuccessCallback.emit({ elem: this._elem.id, data: this._dragDropService.dragData } );
       if (this._dragDropService.onDragSuccessCallback) {
         // console.log('onDropCallback.onDragSuccessCallback.dragData', this._dragDropService.dragData);
         this._dragDropService.onDragSuccessCallback.emit(this._dragDropService.dragData);

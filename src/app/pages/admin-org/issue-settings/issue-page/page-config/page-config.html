@@ -15,39 +15,35 @@
   </div>
   <hr/>
 
-  <form [formGroup]="form" class="my-validate-form">
-    <div class="form-group row">
-      <label class="col-sm-2 col-form-label"></label>
-      <div class="col-sm-8">
-      </div>
-    </div>
+  <div class="main">
+    <div class="left" [style.height]="contentHeight">
 
-    <div class="form-group row">
-      <label class="col-sm-2 col-form-label"><span>已选字段</span></label>
-      <div class="col-sm-8">
-        <div class="tabs-container light">
-          <div dnd-sortable-container [dropZones]="['tab-dropZone']" [sortableData]="page.tabs" class="tabs">
-              <ul class="nav nav-tabs justify-content-start">
-                <li *ngFor="let t of page.tabs; let i = index" class="nav-item"
-                    (mouseenter)="t.hover = true" (mouseleave)="t.hover = false"
+        <div class="left-top row">
+          <div class="col-sm-10">
+            <div class="tabs-container light">
+              <div dnd-sortable-container [dropZones]="['tab-dropZone']" [sortableData]="page.tabs" class="tabs">
+                <ul class="nav nav-tabs justify-content-start">
+                  <li *ngFor="let t of page.tabs; let i = index" class="nav-item"
+                      (mouseenter)="t.hover = true" (mouseleave)="t.hover = false"
 
-                    dnd-sortable [sortableIndex]="i"
-                    (onDragStart)="onTabDragStart(t)" (onDragEnd)="onTabDragEnd(t)"
-                    (onDragSuccess)="onTabDragSuccess(t)" (onDropSuccess)="onTabDropSuccess(t)">
+                      dnd-sortable [sortableIndex]="i"
+                      (onDragStart)="onTabDragStart(t)" (onDragEnd)="onTabDragEnd(t)"
+                      (onDragSuccess)="onTabDragSuccess(t)" (onDropSuccess)="onTabDropSuccess(t)">
 
-                  <div *ngIf="!t.editing" (click)="selectTab($event, t)" [class.active]="tab.id == t.id" class="my-row nav-link">
-                    <div class="move">
-                      <i *ngIf="t.hover" class="fa fa-arrows"></i>
+                    <div *ngIf="!t.editing" (click)="selectTab($event, t)" [class.active]="tab.id == t.id"
+                         class="my-row nav-link">
+                      <div class="move">
+                        <i *ngIf="t.hover" class="fa fa-arrows"></i>
+                      </div>
+                      <div *ngIf="!t.editing" class="text">
+                        {{t.name}}
+                      </div>
+                      <div class="opt">
+                        <i *ngIf="t.hover" (click)="editTab($event, t)" class="fa fa-pencil"></i>
+                      </div>
                     </div>
-                    <div *ngIf="!t.editing" class="text">
-                      {{t.name}}
-                    </div>
-                    <div class="opt">
-                      <i *ngIf="t.hover" (click)="editTab($event, t)" class="fa fa-pencil"></i>
-                    </div>
-                  </div>
 
-                  <div *ngIf="t.editing" [class.active]="tab.id == t.id" class="my-row nav-link">
+                    <div *ngIf="t.editing" [class.active]="tab.id == t.id" class="my-row nav-link">
                       <div class="edit">
                         <form ngForm>
                           <input type="text" [class.ng-invalid]="!t.name==''"
@@ -63,83 +59,61 @@
                         <span (click)="cancelTabName($event, t)" title="取消"><i class="fa fa-times"></i></span>
                         <span (click)="removeTab($event, t)" title="删除"><i class="fa fa-trash"></i></span>
                       </div>
-                  </div>
-                </li>
-              </ul>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-2 field-selection">
-        <i (click)="addTab()" class="fa fa-plus-circle link text-in-row">新增标签</i>
-      </div>
-    </div>
-    <div class="form-group row">
-      <label class="col-sm-2 col-form-label"></label>
-
-      <div *ngIf="!tab.elements || tab.elements.length == 0" class="col-sm-10">
-        <span class="text-in-row">暂无字段</span>
-      </div>
-
-        <div dnd-sortable-container [dropZones]="['elem-dropZone']" [sortableData]="tab.elements" class="col-sm-8">
-          <ul class="list-group">
-            <li *ngFor="let item of tab.elements; let i = index" class="list-group-item"
-                (mouseenter)="item.hover = true" (mouseleave)="item.hover = false"
-
-                [class.dragging]="item.id == draggingId"
-                dnd-sortable [sortableIndex]="i"
-                (onDragStart)="onElemDragStart(item)" (onDragEnd)="onElemDragEnd(item)"
-                (onDragSuccess)="onElemDragSuccess(item)" (onDropSuccess)="onElemDropSuccess(item)">
-
-              <div class="my-row">
-                <div class="link move">
-                  <i *ngIf="item.hover" class="link fa fa-arrows"></i>
-                </div>
-                <div class="text">
-                  {{item.label}} - {{item.ordr}}
-                </div>
-                <div class="link opt">
-                  <span *ngIf="item.hover" (click)="removeElem($event, item)">
-                    <i class="link fa fa-trash"></i>
-                  </span>
-                </div>
+                    </div>
+                  </li>
+                </ul>
               </div>
-            </li>
-          </ul>
-        </div>
-    </div>
-
-    <div class="form-group row">
-      <label class="col-sm-2 col-form-label"><span>可选字段</span></label>
-
-      <div class="col-sm-8">
-        <select [(ngModel)]="selectedFieldId" formControlName="field"
-                class="form-control form-control-sm" id="field" name="field">
-          <option value=""></option>
-          <option *ngFor="let field of fields" value="{{field.id}}">{{field.label}}</option>
-        </select>
-      </div>
-
-      <div class="col-sm-2 field-selection">
-        <i *ngIf="form.valid && selectedFieldId" (click)="addElem()" class="fa fa-plus-circle link text-in-row">添加字段</i>
-        <i *ngIf="!selectedFieldId" class="fa fa-plus-circle text-in-row">添加字段</i>
-      </div>
-    </div>
-
-    <div class="form-group row">
-      <label class="col-sm-2 col-form-label"></label>
-      <div class="col-sm-10">
-        <div class="validate-errors">
-          <div class="validate-error" *ngFor="let msg of formErrors">
-            <div>{{ msg }}</div>
+            </div>
+          </div>
+          <div class="col-sm-2 field-selection">
+            <i (click)="addTab()" class="fa fa-plus-circle link text-in-row">新增</i>
           </div>
         </div>
+
+        <div class="left-main form-group row">
+          <div id="sortable-container-left" class="col-sm-10 elements"
+               dnd-sortable-container
+               [draggable]="false" [dropZones]="['fields-zone']" [sortableData]="tab.elements"
+               (onDropSuccess)="onElementDropSuccess($event)">
+
+            <div id="sortable-left-{{field.id}}" *ngFor="let field of tab.elements; let i = index;" class="element"
+                 dnd-sortable [sortableIndex]="i" [dragData]="field"
+                 (onDropSuccess)="onElementDropSuccess($event)">
+              <issue-input [field]="field"></issue-input>
+            </div>
+
+            <div *ngIf="!tab || !tab.elements || tab.elements.length==0" class="no-elems">
+              拖动字段到此处
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label"></label>
+          <div class="col-sm-10">
+            <div class="validate-errors">
+              <div class="validate-error" *ngFor="let msg of formErrors">
+                <div>{{ msg }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    </div>
+
+    <div id="sortable-container-right" class="right" [style.height]="contentHeight"
+         dnd-sortable-container [draggable]="false" [dropZones]="['fields-zone']" [sortableData]="fields">
+      <div id="sortable-right-{{field.id}}" *ngFor="let field of fields; let i = index;" class="field-row"
+           dnd-sortable [sortableIndex]="i" [dragData]="field"
+           >
+        <issue-input [field]="field"></issue-input>
       </div>
     </div>
 
-  </form>
+  </div>
+
+  <pop-dialog #modalWrapper (confirm)="delete()" [title]="'提示'">
+    确认删除名为"{{page.label}}"的用例类型?
+  </pop-dialog>
 
 </div>
-
-<pop-dialog #modalWrapper (confirm)="delete()" [title]="'提示'">
-  确认删除名为"{{page.label}}"的用例类型?
-</pop-dialog>

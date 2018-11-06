@@ -9,7 +9,7 @@ import { GlobalState } from '../../../../../global.state';
 
 import { CONSTANT } from '../../../../../utils/constant';
 import { Utils } from '../../../../../utils/utils';
-import { ValidatorUtils, PhoneValidator } from '../../../../../validator';
+import { ValidatorUtils } from '../../../../../validator';
 import { RouteService } from '../../../../../service/route';
 
 import { IssuePageService } from '../../../../../service/admin/issue-page';
@@ -39,6 +39,8 @@ export class IssuePageConfig implements OnInit, AfterViewInit {
 
   listRecycled: Array<string> = [];
 
+  contentHeight = Utils.getContainerHeight(CONSTANT.HEAD_HEIGHT + CONSTANT.FOOTER_HEIGHT);
+
   @ViewChild('modalWrapper') modalWrapper: PopDialogComponent;
   @ViewChild('tabset') tabset: NgbTabset;
 
@@ -49,6 +51,7 @@ export class IssuePageConfig implements OnInit, AfterViewInit {
               private elemService: IssuePageElemService) {
 
   }
+
   ngOnInit() {
     this._route.params.forEach(params => {
       this.id = +params['id'];
@@ -123,6 +126,8 @@ export class IssuePageConfig implements OnInit, AfterViewInit {
       this.tab = json.tab;
       this.fields = json.fields;
     });
+
+    this.formErrors = [];
   }
 
   addTab() {
@@ -133,18 +138,17 @@ export class IssuePageConfig implements OnInit, AfterViewInit {
       this.fields = json.fields;
 
       this.page.tabs.push(this.tab);
-
-      setTimeout(() => {
-        this.tabset.select(this.tab.id + '');
-      }, 10);
     });
 
+    this.formErrors = [];
   }
 
   editTab($event, tab) {
     console.log('editTab', tab);
     tab.oldName = tab.name;
     tab.editing = true;
+
+    this.formErrors = [];
     $event.stopPropagation();
   }
   removeTab($event, tab) {
@@ -197,7 +201,10 @@ export class IssuePageConfig implements OnInit, AfterViewInit {
     this.elemService.add(elem).subscribe((json: any) => {
       this.tab = json.tab;
       this.fields = json.fields;
+      this.selectedFieldId = null;
     });
+
+    this.formErrors = [];
   }
   removeElem($event, elem) {
     console.log('removeElem', elem);
@@ -206,34 +213,16 @@ export class IssuePageConfig implements OnInit, AfterViewInit {
       this.tab = json.tab;
       this.fields = json.fields;
     });
+
+    this.formErrors = [];
   }
 
-  onTabDragStart(tab: any) {
-    console.log('onTabDragStart', tab);
-  }
-  onTabDragEnd(tab) {
-    console.log('onTabDragEnd', tab);
-  }
-  onTabDragSuccess(tab) {
-    console.log('onTabDragSuccess', tab);
-  }
   onTabDropSuccess(tab) {
     console.log('onTabDropSuccess', tab);
   }
 
-  onElemDragStart(elem: any) {
-    console.log('onElemDragStart', elem);
-    this.draggingId = elem.id;
-  }
-  onElemDragEnd(elem) {
-    console.log('onElemDragEnd', elem);
-    this.draggingId = -1;
-  }
-  onElemDragSuccess(elem) {
-    console.log('onElemDragSuccess', elem);
-  }
-  onElemDropSuccess(elem) {
-    console.log('onElemDropSuccess', elem);
+  onElementDropSuccess(field) {
+    console.log('onFieldDropSuccess', field, this.tab.elements);
   }
 
   showModal($event): void {
@@ -241,4 +230,3 @@ export class IssuePageConfig implements OnInit, AfterViewInit {
   }
 
 }
-
