@@ -35,8 +35,8 @@
       <tr *ngFor="let item of solutions; let i = index;">
         <td>{{item.name}}</td>
         <td>
-          <span (click)="configSolution(item)" class="link no-underline">配置</span>
           <span (click)="editSolution(item)" class="link no-underline">编辑</span>
+          <span (click)="configSolution(item)" class="link no-underline">配置</span>
         </td>
       </tr>
       </tbody>

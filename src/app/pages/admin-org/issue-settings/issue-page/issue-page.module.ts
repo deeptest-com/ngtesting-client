@@ -21,6 +21,7 @@ import { DatetimePickerService } from '../../../../service/datetime-picker';
 import { IssuePageService } from '../../../../service/admin/issue-page';
 import { IssuePageTabService } from '../../../../service/admin/issue-page-tab';
 import { IssuePageElemService } from '../../../../service/admin/issue-page-elem';
+import { IssuePageSolutionService } from '../../../../service/admin/issue-page-solution';
 
 import { IssuePage } from './issue-page.component';
 
@@ -30,6 +31,7 @@ import { IssuePageConfig } from './page-config';
 
 import { IssuePageSolutionList } from './page-solution-list';
 import { IssuePageSolutionEdit } from './page-solution-edit';
+import { IssuePageSolutionConfig } from './page-solution-config';
 
 @NgModule({
   imports: [
@@ -51,13 +53,14 @@ import { IssuePageSolutionEdit } from './page-solution-edit';
     IssuePageEdit, IssuePageConfig,
     IssuePageSolutionList,
     IssuePageSolutionEdit,
+    IssuePageSolutionConfig,
   ],
   providers: [
     RouteService,
     RequestService,
     SortableContainer,
     DatetimePickerService,
-    IssuePageService, IssuePageTabService, IssuePageElemService,
+    IssuePageService, IssuePageTabService, IssuePageElemService, IssuePageSolutionService,
   ],
 })
 export class IssuePageModule {}

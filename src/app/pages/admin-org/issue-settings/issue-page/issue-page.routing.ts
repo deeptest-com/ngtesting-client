@@ -8,6 +8,7 @@ import { IssuePageConfig } from './page-config';
 
 import { IssuePageSolutionList } from './page-solution-list';
 import { IssuePageSolutionEdit } from './page-solution-edit';
+import { IssuePageSolutionConfig } from './page-solution-config';
 
 // noinspection TypeScriptValidateTypes
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
 
       { path: 'page-solution-list', component: IssuePageSolutionList },
       { path: 'page-solution-edit/:id', component: IssuePageSolutionEdit },
+      { path: 'page-solution-config/:id', component: IssuePageSolutionConfig },
     ],
   },
 ];
