@@ -20,10 +20,21 @@ export class IssueInputComponent implements OnInit, OnChanges {
   }
 
   public ngOnInit(): void {
+
+  }
+
+  public getCol(): number {
     if (this.forSelection) {
       this.labelColNum = 3;
-    } else if (this.field.fullLine) {
-      this.labelColNum = 2;
+    } else {
+      if (this.field.fullLine) {
+        this.labelColNum = 2;
+      } else {
+        this.labelColNum = 4;
+      }
     }
+
+    return this.labelColNum;
   }
+
 }

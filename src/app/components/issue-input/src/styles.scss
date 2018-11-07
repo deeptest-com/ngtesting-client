@@ -2,20 +2,36 @@
   padding: 5px;
 
   .col-form-label {
-    padding-right: 0;
-    padding-left: 0;
-
-    cursor: pointer;
+    padding: 0;
 
     white-space: nowrap;
     text-overflow:ellipsis;
     text-align: right;
 
-    .link {
-      margin: 0;
+    .require {
+      line-height: 23px;
+      color: red;
+    }
+
+    button {
+      padding: 3px;
+      border: none;
+      outline:none;
+      box-shadow: none;
+    }
+
+    .dropdown-menu {
+      padding: 5px;
+
+      .dropdown-item {
+        margin: 5px;
+      }
     }
   }
-  .input-group {
-    margin-bottom: 0;
+  .controls {
+    .input-group {
+      margin-bottom: 0;
+    }
   }
+
 }
