@@ -15,8 +15,11 @@
       </div>
     </div>
 
-    <div class="descr">
-      设置<span [outerHTML]="'界面' | term"></span>所包含的字段及其属性。
+    <div class="descr no-span">
+        <span>设置</span>
+        <span [outerHTML]="'界面' | term"></span><span>所包含的字段及属性。其可关联到</span>
+        <span [outerHTML]="'界面方案' | term"></span><span>，或在</span>
+        <span [outerHTML]="'工作流' | term"></span><span>的状态转换中被引用。</span>
     </div>
   </div>
 

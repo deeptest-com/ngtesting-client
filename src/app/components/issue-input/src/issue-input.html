@@ -1,6 +1,5 @@
 <ng-container [ngSwitch]="field.input">
-  <div class="row issue-input"
-       (mouseenter)="field.hover = true" (mouseleave)="field.hover = false">
+  <div class="row issue-input">
 
     <label class="col-form-label col-sm-{{getCol()}}">
       <div *ngIf="!forSelection" ngbDropdown #projectDropdown="ngbDropdown" [autoClose]="'outside'" class="btn-group">
@@ -9,10 +8,10 @@
         <button class="btn btn-default dropdown" id="conditionDropdownMenu" ngbDropdownToggle>{{field.label}}</button>
         <div class="dropdown-menu" aria-labelledby="conditionDropdownMenu" ngbDropdownMenu>
           <button class="dropdown-item">
-            <a>是否必填</a> <input [(ngModel)]="field.isRequired" type="checkbox">
+            <a>沾满整行</a> <input [(ngModel)]="field.fullLine" type="checkbox">
           </button>
           <button class="dropdown-item">
-            <a>沾满整行</a> <input [(ngModel)]="field.fullLine" type="checkbox">
+            <a>是否必填</a> <input [(ngModel)]="field.isRequired" type="checkbox">
           </button>
         </div>
       </div>

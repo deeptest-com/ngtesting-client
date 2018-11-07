@@ -70,7 +70,7 @@ export class SortableContainer extends AbstractComponent {
 
     if (this._sortableDataService.isDragged) {
       // console.log('onDropCallback.onDropSuccessCallback.dragData', this._dragDropService.dragData);
-      this.onDropSuccessCallback.emit({ elem: this._elem.id, data: this._dragDropService.dragData });
+      this.onDropSuccessCallback.emit({ target: this._elem.id, data: this._dragDropService.dragData });
       if (this._dragDropService.onDragSuccessCallback) {
         // console.log('onDropCallback.onDragSuccessCallback.dragData', this._dragDropService.dragData);
         this._dragDropService.onDragSuccessCallback.emit(this._dragDropService.dragData);
@@ -200,7 +200,7 @@ export class SortableComponent extends AbstractComponent {
 
     if (this._sortableDataService.isDragged) {
       // console.log('onDropCallback.onDropSuccessCallback.dragData', this._dragDropService.dragData);
-      this.onDropSuccessCallback.emit({ elem: this._elem.id, data: this._dragDropService.dragData } );
+      this.onDropSuccessCallback.emit({ target: this._elem.id, data: this._dragDropService.dragData } );
       if (this._dragDropService.onDragSuccessCallback) {
         // console.log('onDropCallback.onDragSuccessCallback.dragData', this._dragDropService.dragData);
         this._dragDropService.onDragSuccessCallback.emit(this._dragDropService.dragData);

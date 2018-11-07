@@ -2,6 +2,12 @@ body {
   min-width: 1250px;
 }
 
+.no-span {
+  span {
+    float: left;
+  }
+}
+
 .y-scrollable {
   overflow-y: auto;
 }
