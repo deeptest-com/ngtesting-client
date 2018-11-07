@@ -233,7 +233,7 @@ export const ORG_MENU = [
                 },
               },
               {
-                path: 'org-admin/issue-settings/issue-page/solution-list',
+                path: 'org-admin/issue-settings/issue-page/page-solution-list',
                 data: {
                   menu: {
                     title: '界面方案',

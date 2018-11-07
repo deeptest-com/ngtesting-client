@@ -17,15 +17,15 @@
       </div>
     </label>
 
-    <label *ngIf="forSelection">{{field.label}}</label>
+    <label *ngIf="forSelection" class="in-selection col-form-label col-sm-{{getCol()}}">{{field.label}}</label>
 
     <div class="controls col-sm-{{12 - labelColNum}}">
       <ng-container *ngSwitchCase="'textarea'">
-        <textarea type="text" class="form-control form-control-sm"></textarea>
+        <textarea type="text" class="form-control"></textarea>
       </ng-container>
 
       <ng-container *ngSwitchCase="'dropdown'">
-        <select class="form-control form-control-sm">
+        <select class="form-control">
           <option value="">选项一</option>
         </select>
       </ng-container>
@@ -41,7 +41,7 @@
       </ng-container>
 
       <ng-container *ngSwitchCase="'multi_select'">
-        <select multiple class="form-control form-control-sm">
+        <select multiple class="form-control">
           <option value="">选项一</option>
           <option value="">选项二</option>
           <option value="">选项三</option>
@@ -50,7 +50,7 @@
 
       <ng-container *ngSwitchCase="'date'">
         <div class="input-group">
-          <input class="form-control form-control-sm" placeholder="yyyy-mm-dd">
+          <input class="form-control" placeholder="yyyy-mm-dd">
           <div class="input-group-addon">
             <i class="fa fa-calendar"></i>
           </div>
@@ -58,7 +58,7 @@
       </ng-container>
 
       <ng-container *ngSwitchDefault>
-        <input type="text" class="form-control form-control-sm">
+        <input type="text" class="form-control">
       </ng-container>
 
     </div>

@@ -6,8 +6,8 @@ import { IssuePageList } from './page-list';
 import { IssuePageEdit } from './page-edit';
 import { IssuePageConfig } from './page-config';
 
-import { IssueSolutionList } from './solution-list';
-import { IssueSolutionEdit } from './solution-edit';
+import { IssuePageSolutionList } from './page-solution-list';
+import { IssuePageSolutionEdit } from './page-solution-edit';
 
 // noinspection TypeScriptValidateTypes
 const routes: Routes = [
@@ -19,8 +19,8 @@ const routes: Routes = [
       { path: 'page-edit/:id', component: IssuePageEdit },
       { path: 'page-config/:id', component: IssuePageConfig },
 
-      { path: 'solution-list', component: IssueSolutionList },
-      { path: 'solution-edit/:id', component: IssueSolutionEdit },
+      { path: 'page-solution-list', component: IssuePageSolutionList },
+      { path: 'page-solution-edit/:id', component: IssuePageSolutionEdit },
     ],
   },
 ];

@@ -5,15 +5,15 @@ import { GlobalState } from '../../../../../global.state';
 import { CONSTANT } from '../../../../../utils/constant';
 import { Utils } from '../../../../../utils/utils';
 import { RouteService } from '../../../../../service/route';
-import { IssuePageService } from '../../../../../service/admin/issue-page';
+import { IssuePageSolutionService } from '../../../../../service/admin/issue-page-solution';
 
 @Component({
-  selector: 'issue-solution-list',
+  selector: 'issue-page-solution-list',
   encapsulation: ViewEncapsulation.None,
-  styleUrls: ['./solution-list.scss'],
-  templateUrl: './solution-list.html',
+  styleUrls: ['./page-solution-list.scss'],
+  templateUrl: './page-solution-list.html',
 })
-export class IssueSolutionList implements OnInit, AfterViewInit {
+export class IssuePageSolutionList implements OnInit, AfterViewInit {
   pages: any[];
   solutions: any[];
 
@@ -21,7 +21,7 @@ export class IssueSolutionList implements OnInit, AfterViewInit {
 
   constructor(private _routeService: RouteService, private _state: GlobalState,
               private fb: FormBuilder, private el: ElementRef,
-              private issuePageService: IssuePageService) {
+              private solutionService: IssuePageSolutionService) {
   }
 
   ngOnInit() {
@@ -40,7 +40,7 @@ export class IssueSolutionList implements OnInit, AfterViewInit {
   }
 
   loadData() {
-    this.issuePageService.load().subscribe((json: any) => {
+    this.solutionService.load().subscribe((json: any) => {
       this.solutions = json.solutions;
     });
   }

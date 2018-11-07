@@ -3,7 +3,11 @@
 
   .col-form-label {
     &.in-page {
+      padding: 6px 0 0 0;
+    }
+    &.in-selection {
       padding: 0;
+      line-height: 38px;
     }
 
     white-space: nowrap;

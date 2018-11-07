@@ -94,9 +94,12 @@
     </div>
 
     <div id="sortable-container-right" class="right" [style.height]="contentHeight"
-         dnd-sortable-container [draggable]="false" [dropZones]="['fields-zone']" [sortableData]="fields">
+         dnd-sortable-container [draggable]="false" [dropZones]="['fields-zone']" [sortableData]="fields"
+         (onDropSuccess)="onElementDropSuccess($event)">
+
       <div id="sortable-right-{{field.id}}" *ngFor="let field of fields; let i = index;" class="field-row"
            dnd-sortable [sortableIndex]="i" [dragData]="field"
+           (onDropSuccess)="onElementDropSuccess($event)"
            >
         <issue-input [field]="field" [forSelection]="true"></issue-input>
       </div>

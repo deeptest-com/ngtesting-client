@@ -28,8 +28,8 @@ import { IssuePageList } from './page-list';
 import { IssuePageEdit } from './page-edit';
 import { IssuePageConfig } from './page-config';
 
-import { IssueSolutionList } from './solution-list';
-import { IssueSolutionEdit } from './solution-edit';
+import { IssuePageSolutionList } from './page-solution-list';
+import { IssuePageSolutionEdit } from './page-solution-edit';
 
 @NgModule({
   imports: [
@@ -49,8 +49,8 @@ import { IssueSolutionEdit } from './solution-edit';
     IssuePage,
     IssuePageList,
     IssuePageEdit, IssuePageConfig,
-    IssueSolutionList,
-    IssueSolutionEdit,
+    IssuePageSolutionList,
+    IssuePageSolutionEdit,
   ],
   providers: [
     RouteService,
