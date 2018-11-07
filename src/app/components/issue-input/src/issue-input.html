@@ -1,8 +1,8 @@
 <ng-container [ngSwitch]="field.input">
   <div class="row issue-input">
 
-    <label class="col-form-label col-sm-{{getCol()}}">
-      <div *ngIf="!forSelection" ngbDropdown #projectDropdown="ngbDropdown" [autoClose]="'outside'" class="btn-group">
+    <label *ngIf="!forSelection" class="in-page col-form-label col-sm-{{getCol()}}">
+      <div ngbDropdown #projectDropdown="ngbDropdown" [autoClose]="'outside'" class="btn-group">
         <div *ngIf="field.isRequired" class="require">*</div>
 
         <button class="btn btn-default dropdown" id="conditionDropdownMenu" ngbDropdownToggle>{{field.label}}</button>
@@ -11,13 +11,13 @@
             <a>沾满整行</a> <input [(ngModel)]="field.fullLine" type="checkbox">
           </button>
           <button class="dropdown-item">
-            <a>是否必填</a> <input [(ngModel)]="field.isRequired" type="checkbox">
+            <a>是否必填</a> <input [(ngModel)]="field.required" type="checkbox">
           </button>
         </div>
       </div>
-
-      <span *ngIf="forSelection">{{field.label}}</span>
     </label>
+
+    <label *ngIf="forSelection">{{field.label}}</label>
 
     <div class="controls col-sm-{{12 - labelColNum}}">
       <ng-container *ngSwitchCase="'textarea'">

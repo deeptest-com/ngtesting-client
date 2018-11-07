@@ -31,13 +31,8 @@ export class IssuePageConfig implements OnInit, AfterViewInit {
 
   page: any = { tabs: [] };
   fields: any[] = [];
-  selectedFieldId: any;
   tab: any = {};
   form: FormGroup;
-
-  draggingId: number = -1;
-
-  listRecycled: Array<string> = [];
 
   contentHeight = Utils.getContainerHeight(CONSTANT.HEAD_HEIGHT + CONSTANT.FOOTER_HEIGHT + 70);
 
@@ -187,42 +182,23 @@ export class IssuePageConfig implements OnInit, AfterViewInit {
     $event.stopPropagation();
   }
 
-  addElem() {
-    const elem = this.fields.filter(el => el.id == this.selectedFieldId)[0];
-    elem.tabId = this.tab.id;
-    elem.pageId = this.page.id;
-
-    elem.fieldId = elem.id;
-    elem.id = null;
-    elem.ordr = null;
-
-    console.log(elem);
-
-    this.elemService.add(elem).subscribe((json: any) => {
-      this.tab = json.tab;
-      this.fields = json.fields;
-      this.selectedFieldId = null;
-    });
-
-    this.formErrors = [];
-  }
-  removeElem($event, elem) {
-    console.log('removeElem', elem);
-
-    this.elemService.remove(elem.id, elem.tabId).subscribe((json: any) => {
-      this.tab = json.tab;
-      this.fields = json.fields;
-    });
-
-    this.formErrors = [];
-  }
-
   onTabDropSuccess(tab) {
     console.log('onTabDropSuccess', tab);
   }
 
   onElementDropSuccess($event) {
     console.log('onFieldDropSuccess', $event);
+
+    const elems: any[] = this.tab.elements.map(function (item) {
+      return { id: item.id, key: item.key };
+    });
+
+    this.elemService.saveAll(this.page.id, this.tab.id, elems).subscribe((json: any) => {
+      this.tab = json.tab;
+      this.fields = json.fields;
+    });
+
+    this.formErrors = [];
   }
 
   showModal($event): void {
