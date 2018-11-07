@@ -201,6 +201,14 @@ export class IssuePageConfig implements OnInit, AfterViewInit {
     this.formErrors = [];
   }
 
+  setProp($event: any) {
+    console.log('$event', $event);
+
+    this.elemService.updateProp($event).subscribe((json: any) => {
+    });
+    this.formErrors = [];
+  }
+
   showModal($event): void {
     this.modalWrapper.showModal();
   }

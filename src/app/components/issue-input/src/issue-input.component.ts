@@ -1,4 +1,4 @@
-import { Input, Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import {Input, Component, OnInit, OnChanges, SimpleChanges, Output, EventEmitter} from '@angular/core';
 
 @Component({
   selector: 'issue-input',
@@ -9,6 +9,9 @@ import { Input, Component, OnInit, OnChanges, SimpleChanges } from '@angular/cor
 export class IssueInputComponent implements OnInit, OnChanges {
   @Input() field: any;
   @Input() forSelection: boolean = false;
+
+  @Output() propEvent = new EventEmitter<any>();
+
   labelColNum: number = 4;
 
   public constructor() {
@@ -35,6 +38,12 @@ export class IssueInputComponent implements OnInit, OnChanges {
     }
 
     return this.labelColNum;
+  }
+
+  set (prop: string, val: any) {
+    console.log('setFullLine', prop, val);
+
+    this.propEvent.emit({ id: this.field.id, prop: prop, val: val });
   }
 
 }

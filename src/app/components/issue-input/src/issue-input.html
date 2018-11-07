@@ -3,15 +3,15 @@
 
     <label *ngIf="!forSelection" class="in-page col-form-label col-sm-{{getCol()}}">
       <div ngbDropdown #projectDropdown="ngbDropdown" [autoClose]="'outside'" class="btn-group">
-        <div *ngIf="field.isRequired" class="require">*</div>
+        <div *ngIf="field.required" class="require">*</div>
 
         <button class="btn btn-default dropdown" id="conditionDropdownMenu" ngbDropdownToggle>{{field.label}}</button>
         <div class="dropdown-menu" aria-labelledby="conditionDropdownMenu" ngbDropdownMenu>
           <button class="dropdown-item">
-            <a>沾满整行</a> <input [(ngModel)]="field.fullLine" type="checkbox">
+            <a>沾满整行</a> <input (change)="set('fullLine', field.fullLine)" [(ngModel)]="field.fullLine" type="checkbox">
           </button>
           <button class="dropdown-item">
-            <a>是否必填</a> <input [(ngModel)]="field.required" type="checkbox">
+            <a>是否必填</a> <input (change)="set('required', field.required)" [(ngModel)]="field.required" type="checkbox">
           </button>
         </div>
       </div>

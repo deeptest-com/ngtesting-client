@@ -82,7 +82,7 @@
 
                  dnd-sortable [sortableIndex]="i" [dragData]="field"
                  (onDropSuccess)="onElementDropSuccess($event)">
-              <issue-input [field]="field"></issue-input>
+              <issue-input (propEvent)="setProp($event)" [field]="field"></issue-input>
             </div>
 
             <div *ngIf="!tab || !tab.elements || tab.elements.length==0" class="no-elems">

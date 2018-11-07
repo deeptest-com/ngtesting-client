@@ -14,6 +14,10 @@ export class IssuePageElemService {
     return this._reqService.post(this._apiBase + 'saveAll', model);
   }
 
+  updateProp(data: any) {
+    return this._reqService.post(this._apiBase + 'updateProp', data);
+  }
+
   // add(elem: any) {
   //   return this._reqService.post(this._apiBase + 'add', elem);
   // }
