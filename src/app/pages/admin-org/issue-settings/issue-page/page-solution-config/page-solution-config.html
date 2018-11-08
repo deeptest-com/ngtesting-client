@@ -3,7 +3,7 @@
   <div class="row">
     <div class="edit-toolbar col-xl-12">
       <div class="title">
-        <span *ngIf="solution?.id">配置界面方案 - {{solution.name}}</span>
+        <span>配置界面方案 - {{solution.name}}</span>
       </div>
       <div class="buttons">
         <button (click)="back()" type="button"
@@ -16,7 +16,29 @@
   <hr/>
 
   <div>
-    CONFIG
+    <table class="table table-bordered table-striped">
+      <thead class="thead-inverse">
+      <tr>
+        <th style="width: 200px">问题类型</th>
+        <th style="width: 200px">创建界面</th>
+        <th style="width: 200px">编辑界面</th>
+        <th style="width: 200px">查看界面</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr *ngFor="let typeKey of itemMap; let i = index;">
+        <td>{{typeKey}}</td>
+        <td *ngFor="let opt of ['create', 'edit', 'view']; let i = index;">
+          <select [(ngModel)]="itemMap[typeKey][opt]" class="form-control form-control-sm" name="parentId">
+            <option *ngFor="let page of pages" value="{{page.id}}">
+              <span>{{page.name}}</span>
+            </option>
+          </select>
+        </td>
+      </tr>
+      </tbody>
+    </table>
   </div>
 
 </div>

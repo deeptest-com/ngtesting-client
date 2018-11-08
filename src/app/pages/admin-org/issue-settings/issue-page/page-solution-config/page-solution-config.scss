@@ -1,6 +1,20 @@
 .issue-page-solution-config {
   padding: 15px;
 
+  table {
+    th {
+      text-align: center !important;
+    }
+
+    td {
+      padding: 8px 5px 5px 5px !important;
+      text-align: center !important;
+
+      select {
+
+      }
+    }
+  }
 
 }
 

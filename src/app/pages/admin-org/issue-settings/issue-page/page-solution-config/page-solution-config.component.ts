@@ -22,11 +22,10 @@ declare var jQuery;
   templateUrl: './page-solution-config.html',
 })
 export class IssuePageSolutionConfig implements OnInit, AfterViewInit {
-
   id: number;
 
-  solution: any = { tabs: [] };
-  form: FormGroup;
+  solution: any = {};
+  items: any[] = [];
 
   constructor(private _state: GlobalState, private _routeService: RouteService, private _route: ActivatedRoute,
               private fb: FormBuilder, private solutionService: IssuePageSolutionService) {
@@ -41,31 +40,25 @@ export class IssuePageSolutionConfig implements OnInit, AfterViewInit {
   }
   ngAfterViewInit() {}
 
-  formErrors = [];
-  validateMsg = {
-    'name': {
-      'required': '名称不能为空',
-    },
-  };
-
   loadData() {
-    this.solutionService.get(this.id).subscribe((json: any) => {
+    this.solutionService.getConfig(this.id).subscribe((json: any) => {
       this.solution = json.solution;
+      this.items = json.items;
     });
   }
 
   save() {
-    this.solutionService.save(this.solution).subscribe((json: any) => {
-      if (json.code == 1) {
-        this.solution = json.solution;
-
-        this.formErrors = ['保存成功'];
-
-        this.back();
-      } else {
-        this.formErrors = [json.msg];
-      }
-    });
+    // this.solutionService.save(this.solution).subscribe((json: any) => {
+    //   if (json.code == 1) {
+    //     this.solution = json.solution;
+    //
+    //     this.formErrors = ['保存成功'];
+    //
+    //     this.back();
+    //   } else {
+    //     this.formErrors = [json.msg];
+    //   }
+    // });
   }
 
   back() {

@@ -17,9 +17,9 @@ export class IssuePageSolutionService {
     const model = { id: id };
     return this._reqService.post(this._apiBase + 'get', model);
   }
-  getDetail(id: number) {
+  getConfig(id: number) {
     const model = { id: id };
-    return this._reqService.post(this._apiBase + 'getDetail', model);
+    return this._reqService.post(this._apiBase + 'getConfig', model);
   }
 
   addTab(tab: any) {
