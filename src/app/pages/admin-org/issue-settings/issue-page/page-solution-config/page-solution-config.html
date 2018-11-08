@@ -27,11 +27,11 @@
       </thead>
 
       <tbody>
-      <tr *ngFor="let typeKey of itemMap; let i = index;">
-        <td>{{typeKey}}</td>
+      <tr *ngFor="let item of itemMap | mapToArray; let i = index;">
+        <td>{{item.key | section:1}}</td>
         <td *ngFor="let opt of ['create', 'edit', 'view']; let i = index;">
-          <select [(ngModel)]="itemMap[typeKey][opt]" class="form-control form-control-sm" name="parentId">
-            <option *ngFor="let page of pages" value="{{page.id}}">
+          <select [(ngModel)]="item.value[opt]" class="form-control form-control-sm" name="parentId">
+            <option *ngFor="let page of pages" value="{{page.id+'-'+page.name}}">
               <span>{{page.name}}</span>
             </option>
           </select>

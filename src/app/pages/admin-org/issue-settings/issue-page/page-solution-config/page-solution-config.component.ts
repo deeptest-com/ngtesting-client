@@ -25,7 +25,8 @@ export class IssuePageSolutionConfig implements OnInit, AfterViewInit {
   id: number;
 
   solution: any = {};
-  items: any[] = [];
+  itemMap: any = {};
+  pages: any[] = [];
 
   constructor(private _state: GlobalState, private _routeService: RouteService, private _route: ActivatedRoute,
               private fb: FormBuilder, private solutionService: IssuePageSolutionService) {
@@ -43,7 +44,8 @@ export class IssuePageSolutionConfig implements OnInit, AfterViewInit {
   loadData() {
     this.solutionService.getConfig(this.id).subscribe((json: any) => {
       this.solution = json.solution;
-      this.items = json.items;
+      this.itemMap = json.itemMap;
+      this.pages = json.pages;
     });
   }
 

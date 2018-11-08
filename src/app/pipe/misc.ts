@@ -17,3 +17,12 @@ export class TermPipe implements PipeTransform {
     return this.sanitized.bypassSecurityTrustHtml('<span style="font-weight: bolder">「' + str + '」</span>');
   }
 }
+
+@Pipe({ name: 'section' })
+export class SectionPipe implements PipeTransform {
+  constructor() {}
+  transform(str: string, index: number, separator: string = '-') {
+    const arr = str.split(separator);
+    return arr[index];
+  }
+}

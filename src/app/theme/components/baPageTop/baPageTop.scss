@@ -201,6 +201,15 @@
 .menu {
   position: relative;
   margin: 20px 0 0 30px;
+  .dropdown-menu .dropdown-item {
+    color: #292b2c !important;
+    cursor: pointer;
+    line-height: 1.2;
+
+    &.next {
+      margin-top: 6px;
+    }
+  }
 /*  width: 700px;*/
   float: left;
   .dropdown {
@@ -208,17 +217,6 @@
       color: #ffffff;
       border: 0;
     }
-    .dropdown-menu {
-      .dropdown-item {
-        cursor: pointer;
-        line-height: 1.2;
-        &.next {
-          margin-top: 6px;
-        }
-
-      }
-    }
-
   }
 
   button {
