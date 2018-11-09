@@ -38,17 +38,17 @@ export class CustomFieldComponent implements OnInit, OnChanges {
   public ngOnInit(): void {
     // console.log('===field===', this.model, this.field);
 
-    this.validateMsg[this.field.myColumn] = {};
-    let control: FormControl = new FormControl(this.field.myColumn);
+    this.validateMsg[this.field.colCode] = {};
+    let control: FormControl = new FormControl(this.field.colCode);
     if (this.field.required) {
       control.setValidators([Validators.required]);
-      this.validateMsg[this.field.myColumn]['required'] = this.field.label + '不能为空';
+      this.validateMsg[this.field.colCode]['required'] = this.field.label + '不能为空';
     }
 
-    this.form.addControl(this.field.myColumn, control);
+    this.form.addControl(this.field.colCode, control);
   }
 
   onChange(event: any) {
-    this.model[this.field.myColumn] = event;
+    this.model[this.field.colCode] = event;
   }
 }

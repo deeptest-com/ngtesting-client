@@ -67,7 +67,7 @@ export class CustomFieldEdit implements OnInit, AfterViewInit {
       {
         label: ['', [Validators.required]],
         applyTo: ['', [Validators.required]],
-        myColumn: ['', [Validators.required]],
+        colCode: ['', [Validators.required]],
         type: ['', [Validators.required]],
         rows: ['', [Validators.pattern('^[1-9]$'),
           CustomValidator.validate('required_if_other_is', 'required_rows', 'rows', 'type', 'text')]],

@@ -2,17 +2,17 @@
 
   <ng-container [ngSwitch]="field.type">
     <ng-container *ngSwitchCase="'string'">
-      <input name="{{field.myColumn}}" formControlName="{{field.myColumn}}" maxlength="1000"
-             [(ngModel)]="model[field.myColumn]" #{{field.myColumn}} type="text" class="form-control">
+      <input name="{{field.colCode}}" formControlName="{{field.colCode}}" maxlength="1000"
+             [(ngModel)]="model[field.colCode]" #{{field.colCode}} type="text" class="form-control">
     </ng-container>
     <ng-container *ngSwitchCase="'number'">
-      <input name="{{field.myColumn}}" formControlName="{{field.myColumn}}" maxlength="1000"
-             [(ngModel)]="model[field.myColumn]" #{{field.myColumn}} type="number" class="form-control">
+      <input name="{{field.colCode}}" formControlName="{{field.colCode}}" maxlength="1000"
+             [(ngModel)]="model[field.colCode]" #{{field.colCode}} type="number" class="form-control">
     </ng-container>
 
     <ng-container *ngSwitchCase="'dropdown'">
-      <select name="{{field.myColumn}}" formControlName="{{field.myColumn}}"
-              [(ngModel)]="model[field.myColumn]" #{{field.myColumn}} class="form-control form-control-sm">
+      <select name="{{field.colCode}}" formControlName="{{field.colCode}}"
+              [(ngModel)]="model[field.colCode]" #{{field.colCode}} class="form-control form-control-sm">
         <option value="">请选择</option>
         <option *ngFor="let opt of field.options; let i = index;" value="{{opt.value}}">{{opt.label}}</option>
       </select>
@@ -20,33 +20,33 @@
 
     <ng-container *ngSwitchCase="'text'">
       <ng-container *ngIf="field.format=='plain_text'">
-        <textarea name="{{field.myColumn}}" formControlName="{{field.myColumn}}" maxlength="1000"
-                  [(ngModel)]="model[field.myColumn]" #{{field.myColumn}} type="text" class="form-control">
+        <textarea name="{{field.colCode}}" formControlName="{{field.colCode}}" maxlength="1000"
+                  [(ngModel)]="model[field.colCode]" #{{field.colCode}} type="text" class="form-control">
         </textarea>
       </ng-container>
       <ng-container *ngIf="field.format=='rich_text'">
-        <tiny-mce [elemId]="'custom-field-'+field.myColumn" [content]="model[field.myColumn]" [height]="'200px'"
+        <tiny-mce [elemId]="'custom-field-'+field.colCode" [content]="model[field.colCode]" [height]="'200px'"
                   (changed)="onChange($event)"></tiny-mce>
       </ng-container>
     </ng-container>
 
 <!--    <ng-container *ngSwitchCase="'url'">
-      <input type="text" class="form-control" name="{{field.myColumn}}" formControlName="{{field.myColumn}}"
-             [(ngModel)]="model[field.myColumn]" #{{field.myColumn}}>
+      <input type="text" class="form-control" name="{{field.colCode}}" formControlName="{{field.colCode}}"
+             [(ngModel)]="model[field.colCode]" #{{field.colCode}}>
     </ng-container>
 
     <ng-container *ngSwitchCase="'radio'">
-      <input type="radio" class="form-check-input" name="{{field.myColumn}}" formControlName="{{field.myColumn}}"
-             [(ngModel)]="model[field.myColumn]" #isRequired>
+      <input type="radio" class="form-check-input" name="{{field.colCode}}" formControlName="{{field.colCode}}"
+             [(ngModel)]="model[field.colCode]" #isRequired>
     </ng-container>
 
     <ng-container *ngSwitchCase="'checkbox'">
-      <input type="checkbox" class="form-check-input" name="{{field.myColumn}}" formControlName="{{field.myColumn}}"
-             [(ngModel)]="model[field.myColumn]" #isRequired>
+      <input type="checkbox" class="form-check-input" name="{{field.colCode}}" formControlName="{{field.colCode}}"
+             [(ngModel)]="model[field.colCode]" #isRequired>
     </ng-container>
 
     <ng-container *ngSwitchCase="'multi_select'">
-      <select multiple [(ngModel)]="model[field.myColumn]" formControlName="{{field.myColumn}}" name="{{field.myColumn}}"
+      <select multiple [(ngModel)]="model[field.colCode]" formControlName="{{field.colCode}}" name="{{field.colCode}}"
               class="form-control form-control-sm">
         <option value=""></option>
       </select>

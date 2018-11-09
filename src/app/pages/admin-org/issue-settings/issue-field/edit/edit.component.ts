@@ -65,7 +65,7 @@ export class IssueFieldEdit implements OnInit, AfterViewInit {
     this.form = this.fb.group(
       {
         label: ['', [Validators.required]],
-        myColumn: ['', [Validators.required]],
+        colCode: ['', [Validators.required]],
         type: ['', [Validators.required]],
         rows: ['', [Validators.pattern('^[1-9]$'),
           CustomValidator.validate('required_if_other_is', 'required_rows', 'rows', 'type', 'text')]],
