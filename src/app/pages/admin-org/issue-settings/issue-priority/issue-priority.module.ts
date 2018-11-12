@@ -15,11 +15,16 @@ import { PopDialogModule } from '../../../../components/pop-dialog';
 import { RouteService } from '../../../../service/route';
 import { RequestService } from '../../../../service/request';
 import { DatetimePickerService } from '../../../../service/datetime-picker';
-import { IssuePriorityService } from '../../../../service/admin/issue-priority';
 
-import { IssuePriority } from './issue-priority.component';
-import { IssuePriorityList } from './list';
-import {IssuePriorityEdit } from './edit';
+import { IssuePriorityService } from '../../../../service/admin/issue-priority';
+import { IssuePrioritySolutionService } from '../../../../service/admin/issue-priority-solution';
+
+import { IssuePriority } from '.';
+import { IssuePriorityList } from './priority-list';
+import { IssuePriorityEdit } from './priority-edit';
+
+import { IssuePrioritySolutionList } from './priority-solution-list';
+import { IssuePrioritySolutionEdit } from './priority-solution-edit';
 
 @NgModule({
   imports: [
@@ -31,19 +36,24 @@ import {IssuePriorityEdit } from './edit';
     NgbModalModule, NgbPaginationModule, NgbDropdownModule,
     NgbTabsetModule, NgbButtonsModule, NgbCollapseModule,
 
-    PipeModule, DirectiveModule, PopDialogModule
+    PipeModule, DirectiveModule, PopDialogModule,
   ],
   declarations: [
     IssuePriority,
     IssuePriorityList,
-    IssuePriorityEdit
+    IssuePriorityEdit,
+    IssuePriorityList,
+    IssuePriorityEdit,
+    IssuePrioritySolutionList,
+    IssuePrioritySolutionEdit,
   ],
   providers: [
     RouteService,
     RequestService,
     DatetimePickerService,
-    IssuePriorityService
-  ]
+    IssuePriorityService,
+    IssuePrioritySolutionService,
+  ],
 })
 export class IssuePriorityModule {}
 

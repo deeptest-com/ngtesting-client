@@ -1,0 +1,38 @@
+<div class="issue-type-solution-list container-fluid">
+
+  <div class="row">
+    <div class="list-toolbar col-xl-12">
+      <div class="title">
+        问题类型方案
+      </div>
+
+      <div class="filter">
+      </div>
+
+      <div class="buttons">
+        <button (click)="create()" type="button" class="btn btn-primary btn-with-icon btn-sm">
+          <i class="fa fa-plus-circle"></i>新建
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <table class="table table-hover">
+      <thead class="thead-inverse">
+      <tr>
+        <th>名称</th>
+        <th style="width: 250px;">操作</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of models; let i = index;">
+        <td>{{ item.name }}</td>
+        <td>
+          <span (click)="edit(item)" class="link no-underline">编辑</span>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

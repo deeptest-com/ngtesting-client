@@ -10,8 +10,8 @@ import { IssueTypeService } from '../../../../../service/admin/issue-type';
 @Component({
   selector: 'issue-type-list',
   encapsulation: ViewEncapsulation.None,
-  styleUrls: ['./list.scss'],
-  templateUrl: './list.html',
+  styleUrls: ['./type-list.scss'],
+  templateUrl: './type-list.html',
 })
 export class IssueTypeList implements OnInit, AfterViewInit {
   models: any[];
@@ -31,11 +31,11 @@ export class IssueTypeList implements OnInit, AfterViewInit {
   }
 
   create(): void {
-    this._routeService.navTo('/pages/org-admin/issue-settings/issue-type/edit/null');
+    this._routeService.navTo('/pages/org-admin/issue-settings/issue-type/type-edit/null');
   }
 
   edit(item: any): void {
-    this._routeService.navTo('/pages/org-admin/issue-settings/issue-type/edit/' + item.id);
+    this._routeService.navTo('/pages/org-admin/issue-settings/issue-type/type-edit/' + item.id);
   }
 
   setDefault(item: any): void {

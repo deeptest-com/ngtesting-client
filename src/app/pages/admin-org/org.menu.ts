@@ -155,17 +155,6 @@ export const ORG_MENU = [
         },
         children: [
           {
-            path: 'org-admin/issue-settings/issue-type/list',
-            data: {
-              menu: {
-                title: '问题类型',
-                icon: 'ion-edit',
-                selected: false,
-                order: 1,
-              },
-            },
-          },
-          {
             path: 'org-admin/issue-settings/issue-status/list',
             data: {
               menu: {
@@ -177,16 +166,78 @@ export const ORG_MENU = [
             },
           },
           {
-            path: 'org-admin/issue-settings/issue-priority/list',
+            path: '',
             data: {
               menu: {
-                title: '优先级',
+                title: '问题类型',
                 icon: 'ion-edit',
-                selected: false,
+                selected: true,
+                expanded: true,
                 order: 1,
               },
             },
+            children: [
+              {
+                path: 'org-admin/issue-settings/issue-type/type-list',
+                data: {
+                  menu: {
+                    title: '类型',
+                    icon: 'ion-edit',
+                    selected: false,
+                    order: 1,
+                  },
+                },
+              },
+              {
+                path: 'org-admin/issue-settings/issue-type/type-solution-list',
+                data: {
+                  menu: {
+                    title: '类型方案',
+                    icon: 'ion-edit',
+                    selected: false,
+                    order: 1,
+                  },
+                },
+              },
+            ],
           },
+          {
+            path: '',
+            data: {
+              menu: {
+                title: '问题优先级',
+                icon: 'ion-edit',
+                selected: true,
+                expanded: true,
+                order: 1,
+              },
+            },
+            children: [
+              {
+                path: 'org-admin/issue-settings/issue-priority/priority-list',
+                data: {
+                  menu: {
+                    title: '优先级',
+                    icon: 'ion-edit',
+                    selected: false,
+                    order: 1,
+                  },
+                },
+              },
+              {
+                path: 'org-admin/issue-settings/issue-priority/priority-solution-list',
+                data: {
+                  menu: {
+                    title: '优先级方案',
+                    icon: 'ion-edit',
+                    selected: false,
+                    order: 1,
+                  },
+                },
+              },
+            ],
+          },
+
           {
             path: 'org-admin/issue-settings/issue-resolution/list',
             data: {
