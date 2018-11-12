@@ -67,7 +67,7 @@ export class IssuePrioritySolutionEdit implements OnInit, AfterViewInit {
 
   formErrors = [];
   validateMsg = {
-    'label': {
+    'name': {
       'required': '名称不能为空',
     },
   };

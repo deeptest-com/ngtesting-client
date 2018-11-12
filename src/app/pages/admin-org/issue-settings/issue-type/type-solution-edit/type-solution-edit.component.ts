@@ -113,6 +113,7 @@ export class IssueTypeSolutionEdit implements OnInit, AfterViewInit {
       this.otherItems = json.otherItems;
     });
   }
+
   removeType(item) {
     console.log('remove', item);
 
