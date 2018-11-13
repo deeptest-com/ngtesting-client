@@ -22,7 +22,7 @@
       <thead class="thead-inverse">
       <tr>
         <th>名称</th>
-        <th>终极状态</th>
+        <th>类别</th>
         <th>系统內置</th>
         <th>操作</th>
       </tr>
@@ -30,7 +30,7 @@
       <tbody>
       <tr *ngFor="let item of models; let i = index;">
         <td>{{ item.label }}</td>
-        <td>{{item.isFinal | trueOrFalse}}</td>
+        <td>{{item.categoryName}}</td>
         <td>{{item.isBuildIn | trueOrFalse}}</td>
         <td>
           <span *ngIf="i == 0" class="ionic-icon link placeholder"></span>

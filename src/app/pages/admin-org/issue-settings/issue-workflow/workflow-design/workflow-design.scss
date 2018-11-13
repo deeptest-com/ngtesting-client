@@ -1,0 +1,41 @@
+.issue-workflow-design {
+  padding: 15px;
+
+  table {
+    .table-header-td {
+      position: relative;
+      padding: 0;
+      width: 100px;
+
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100px;
+        height: 25px;
+        box-sizing: border-box;
+        border-bottom: 1px solid gainsboro;
+        transform-origin: bottom center;
+        transform: rotateZ(25deg) scale(1.12);
+      }
+
+      table.table-header {
+        border: 0;
+        td {
+          padding: 0;
+          width: 50px;
+          border: 0;
+          line-height: 23px;
+          text-align: center !important;
+        }
+      }
+    }
+
+    td, td:first-child {
+      text-align: center !important;
+    }
+  }
+}
+
+

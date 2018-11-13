@@ -14,29 +14,28 @@ import { Utils } from '../../../../../utils/utils';
 import { ValidatorUtils, PhoneValidator } from '../../../../../validator';
 import { RouteService } from '../../../../../service/route';
 
-import { IssueStatusService } from '../../../../../service/admin/issue-status';
+import { IssueWorkflowService } from '../../../../../service/admin/issue-workflow';
 import { PopDialogComponent } from '../../../../../components/pop-dialog';
 
 declare var jQuery;
 
 @Component({
-  selector: 'issue-status-edit',
+  selector: 'issue-workflow-edit',
   encapsulation: ViewEncapsulation.None,
-  styleUrls: ['./edit.scss'],
-  templateUrl: './edit.html',
+  styleUrls: ['./workflow-edit.scss'],
+  templateUrl: './workflow-edit.html',
 })
-export class IssueStatusEdit implements OnInit, AfterViewInit {
+export class IssueWorkflowEdit implements OnInit, AfterViewInit {
 
   id: number;
 
   model: any = {};
-  categories: any[] = [];
   form: FormGroup;
 
   @ViewChild('modalWrapper') modalWrapper: PopDialogComponent;
 
   constructor(private _state: GlobalState, private _routeService: RouteService, private _route: ActivatedRoute,
-              private fb: FormBuilder, private issueStatusService: IssueStatusService) {
+              private fb: FormBuilder, private issueWorkflowService: IssueWorkflowService) {
 
   }
   ngOnInit() {
@@ -50,12 +49,10 @@ export class IssueStatusEdit implements OnInit, AfterViewInit {
   ngAfterViewInit() {}
 
   buildForm(): void {
+    const that = this;
     this.form = this.fb.group(
       {
-        'label': ['', [Validators.required]],
-        'value': ['', [Validators.required]],
-        'categoryId': ['', [Validators.required]],
-        'descr': ['', []],
+        'name': ['', [Validators.required]],
       }, {},
     );
 
@@ -69,47 +66,44 @@ export class IssueStatusEdit implements OnInit, AfterViewInit {
 
   formErrors = [];
   validateMsg = {
-    'label': {
-      'required': '标签不能为空',
-    },
-    'value': {
-      'required': '取值不能为空',
+    'name': {
+      'required': '名称不能为空',
     },
   };
 
   loadData() {
     const that = this;
-    that.issueStatusService.get(that.id).subscribe((json: any) => {
+    that.issueWorkflowService.get(that.id).subscribe((json: any) => {
       that.model = json.data;
-      this.categories = json.categories;
     });
-  }
-
-  create(): void {
-    this._routeService.navTo('/pages/org-admin/issue-settings/issue-status/edit/null');
   }
 
   save() {
     const that = this;
 
-    that.issueStatusService.save(that.model).subscribe((json: any) => {
+    that.issueWorkflowService.save(that.model).subscribe((json: any) => {
       if (json.code == 1) {
+        CONSTANT.CASE_PROPERTY_MAP = json.issuePropertyMap;
 
         that.formErrors = ['保存成功'];
-        that._routeService.navTo('/pages/org-admin/issue-settings/issue-status/list');
+        this.back();
       } else {
         that.formErrors = [json.msg];
       }
     });
   }
+  back() {
+    this._routeService.navTo('/pages/org-admin/issue-settings/issue-workflow/workflow-list');
+  }
 
   delete() {
     const that = this;
 
-    that.issueStatusService.delete(that.model.id).subscribe((json: any) => {
+    that.issueWorkflowService.delete(that.model.id).subscribe((json: any) => {
       if (json.code == 1) {
         that.formErrors = ['删除成功'];
-        that._routeService.navTo('/pages/org-admin/issue-settings/issue-status/list');
+        this.modalWrapper.closeModal();
+        this.back();
       } else {
         that.formErrors = ['删除失败'];
       }

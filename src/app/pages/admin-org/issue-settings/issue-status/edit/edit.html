@@ -11,8 +11,30 @@
     <div class="form-group row">
       <label class="col-sm-2 col-form-label"><span>取值</span></label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" name="value" formControlName="value"
+        <input *ngIf="!model.isBuildIn" type="text" class="form-control" name="value" formControlName="value"
                [(ngModel)]="model.value" #value>
+
+        <label *ngIf="model.isBuildIn" class="col-form-label">
+          {{model.value}}
+          <input type="hidden" name="value" formControlName="value" [(ngModel)]="model.value" #value>
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label"><span>类别</span></label>
+      <div class="col-sm-10">
+        <label *ngIf="model.isBuildIn" class="col-form-label">
+          {{model.categoryName}}
+          <input type="hidden" name="categoryId" formControlName="categoryId" [(ngModel)]="model.categoryId" #categoryId>
+        </label>
+
+        <select *ngIf="!model.isBuildIn" [(ngModel)]="model.categoryId" formControlName="categoryId" class="form-control" name="categoryId">
+          <option value=""></option>
+          <option *ngFor="let entry of categories" value="{{entry.id}}">
+            <span>{{entry.name}}</span>
+          </option>
+        </select>
       </div>
     </div>
 
@@ -23,42 +45,13 @@
                   [(ngModel)]="model.descr" #descr></textarea>
       </div>
     </div>
+
     <div class="form-group row just-label">
       <label class="col-sm-2 col-form-label"><span>是否內置</span></label>
       <label class="col-sm-10 col-form-label left">
         {{model.isBuildIn | trueOrFalse}}
       </label>
     </div>
-
-    <div *ngIf="model.isBuildIn" class="form-group row just-label">
-      <label class="col-sm-2 col-form-label"><span>终极状态</span></label>
-      <label class="col-sm-10 col-form-label left">
-        {{model.isFinal | trueOrFalse}}
-      </label>
-    </div>
-    <div *ngIf="!model.isBuildIn" class="form-group row">
-      <div class="offset-sm-2 col-sm-10">
-        <div class="form-check">
-          <label class="form-check-label">
-            <input type="checkbox" class="form-check-input" name="isFinal" formControlName="isFinal"
-                   [(ngModel)]="model.isFinal" #isFinal>
-            &nbsp;&nbsp;终极状态
-          </label>
-        </div>
-      </div>
-    </div>
-
-<!--      <div *ngIf="!model.isBuildIn" class="form-group row">
-        <div class="offset-sm-2 col-sm-10">
-          <div class="form-check">
-            <label class="form-check-label">
-              <input type="checkbox" class="form-check-input" name="disabled" formControlName="disabled"
-                     [(ngModel)]="model.disabled" #disabled>
-              &nbsp;&nbsp;禁用
-            </label>
-          </div>
-        </div>
-      </div>-->
 
     <div class="form-group row">
       <label class="col-sm-2 col-form-label"></label>

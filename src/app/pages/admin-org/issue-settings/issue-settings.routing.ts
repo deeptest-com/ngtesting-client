@@ -15,6 +15,8 @@ const routes: Routes = [
 
       { path: 'issue-field', loadChildren: './issue-field/issue-field.module#IssueFieldModule' },
       { path: 'issue-page', loadChildren: './issue-page/issue-page.module#IssuePageModule' },
+
+      { path: 'issue-workflow', loadChildren: './issue-workflow/issue-workflow.module#IssueWorkflowModule' },
     ],
   },
 ];

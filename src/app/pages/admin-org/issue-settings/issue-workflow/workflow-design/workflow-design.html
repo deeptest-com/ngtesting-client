@@ -1,0 +1,66 @@
+<div class="issue-workflow-design container-fluid">
+
+  <div class="row">
+    <div class="edit-toolbar col-xl-12">
+      <div class="title">
+        <span>{{model.name}}</span>
+      </div>
+      <div class="buttons">
+        <button (click)="back()" type="button" class="btn btn-secondary btn-with-icon btn-sm back">
+          <i class="fa fa-arrow-circle-left"></i>返回
+        </button>
+      </div>
+    </div>
+  </div>
+  <hr/>
+
+  <div>
+
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <td class="table-header-td">
+            <table class="table-header">
+              <thead>
+                <tr class="a-ca-ht-day">
+                  <td></td>
+                  <td>日期</td>
+                </tr>
+                <tr class="a-ca-ht-worker">
+                  <td>员工</td>
+                  <td></td>
+                </tr>
+              </thead>
+            </table>
+          </td>
+          <td>打开</td>
+          <td>已解决</td>
+          <td>关闭</td>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>打开</td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>已解决</td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>关闭</td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+</div>

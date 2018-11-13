@@ -296,17 +296,44 @@ export const ORG_MENU = [
               },
             ],
           },
+
           {
-            path: 'org-admin/issue-settings/field/list',
+            path: '',
             data: {
               menu: {
-                title: '工作流',
+                title: '问题工作流',
                 icon: 'ion-edit',
-                selected: false,
+                selected: true,
+                expanded: true,
                 order: 1,
               },
             },
+            children: [
+              {
+                path: 'org-admin/issue-settings/issue-workflow/workflow-list',
+                data: {
+                  menu: {
+                    title: '工作流',
+                    icon: 'ion-edit',
+                    selected: false,
+                    order: 1,
+                  },
+                },
+              },
+              {
+                path: 'org-admin/issue-settings/issue-workflow/workflow-solution-list',
+                data: {
+                  menu: {
+                    title: '工作流方案',
+                    icon: 'ion-edit',
+                    selected: false,
+                    order: 1,
+                  },
+                },
+              },
+            ],
           },
+
           {
             path: 'org-admin/issue-settings/privilege/list',
             data: {
