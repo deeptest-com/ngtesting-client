@@ -16,6 +16,7 @@ import { RouteService } from '../../../../../service/route';
 
 import { IssueWorkflowService } from '../../../../../service/admin/issue-workflow';
 import { PopDialogComponent } from '../../../../../components/pop-dialog';
+import * as _ from "lodash";
 
 declare var jQuery;
 
@@ -30,6 +31,7 @@ export class IssueWorkflowEdit implements OnInit, AfterViewInit {
   id: number;
 
   model: any = {};
+  statuses: any[] = [];
   form: FormGroup;
 
   @ViewChild('modalWrapper') modalWrapper: PopDialogComponent;
@@ -49,7 +51,6 @@ export class IssueWorkflowEdit implements OnInit, AfterViewInit {
   ngAfterViewInit() {}
 
   buildForm(): void {
-    const that = this;
     this.form = this.fb.group(
       {
         'name': ['', [Validators.required]],
@@ -60,8 +61,7 @@ export class IssueWorkflowEdit implements OnInit, AfterViewInit {
     this.onValueChanged();
   }
   onValueChanged(data?: any) {
-    const that = this;
-    that.formErrors = ValidatorUtils.genMsg(that.form, that.validateMsg, []);
+    this.formErrors = ValidatorUtils.genMsg(this.form, this.validateMsg, []);
   }
 
   formErrors = [];
@@ -72,23 +72,25 @@ export class IssueWorkflowEdit implements OnInit, AfterViewInit {
   };
 
   loadData() {
-    const that = this;
-    that.issueWorkflowService.get(that.id).subscribe((json: any) => {
-      that.model = json.data;
+    this.issueWorkflowService.get(this.id).subscribe((json: any) => {
+      this.model = json.data;
+      this.statuses = json.statuses;
+
+      _.forEach(this.statuses, (item: any, index: number) => {
+        this.form.addControl('status-' + item.id, new FormControl('', []));
+      });
     });
   }
 
   save() {
-    const that = this;
-
-    that.issueWorkflowService.save(that.model).subscribe((json: any) => {
+    this.issueWorkflowService.save(this.model, this.statuses).subscribe((json: any) => {
       if (json.code == 1) {
         CONSTANT.CASE_PROPERTY_MAP = json.issuePropertyMap;
 
-        that.formErrors = ['保存成功'];
+        this.formErrors = ['保存成功'];
         this.back();
       } else {
-        that.formErrors = [json.msg];
+        this.formErrors = [json.msg];
       }
     });
   }
@@ -97,17 +99,22 @@ export class IssueWorkflowEdit implements OnInit, AfterViewInit {
   }
 
   delete() {
-    const that = this;
-
-    that.issueWorkflowService.delete(that.model.id).subscribe((json: any) => {
+    this.issueWorkflowService.delete(this.model.id).subscribe((json: any) => {
       if (json.code == 1) {
-        that.formErrors = ['删除成功'];
+        this.formErrors = ['删除成功'];
         this.modalWrapper.closeModal();
         this.back();
       } else {
-        that.formErrors = ['删除失败'];
+        this.formErrors = ['删除失败'];
       }
     });
+  }
+
+  select(key: string) {
+    const val = key === 'all' ? true : false;
+    for (const status of this.statuses) {
+      status.selected = val;
+    }
   }
 
   showModal(): void {

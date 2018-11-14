@@ -18,8 +18,14 @@ export class IssueWorkflowService {
     return this._reqService.post(this._apiBase + 'get', model);
   }
 
-  save(model: any) {
-    return this._reqService.post(this._apiBase + 'save', { model: model });
+  save(model: any, statuses: any[]) {
+    const statusIds: number[] = statuses
+      .filter(function (item) { return item.selected; })
+      .map(function (item) {
+        return item.id;
+      });
+
+    return this._reqService.post(this._apiBase + 'save', { model: model, statusIds: statusIds });
   }
 
   delete(id: number) {

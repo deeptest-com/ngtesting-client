@@ -2,31 +2,35 @@
   padding: 15px;
 
   table {
+    thead > tr > td {
+      line-height: 26px;
+    }
+
     .table-header-td {
       position: relative;
       padding: 0;
-      width: 100px;
+      width: 120px;
 
       &::before {
         content: '';
         position: absolute;
-        left: 0;
+        left: 9px;
         top: 0;
         width: 100px;
-        height: 25px;
+        height: 26px;
         box-sizing: border-box;
         border-bottom: 1px solid gainsboro;
         transform-origin: bottom center;
-        transform: rotateZ(25deg) scale(1.12);
+        transform: rotateZ(23deg) scale(1.32);
       }
 
       table.table-header {
         border: 0;
         td {
           padding: 0;
-          width: 50px;
+          width: 60px;
           border: 0;
-          line-height: 23px;
+          line-height: 25px;
           text-align: center !important;
         }
       }
@@ -34,6 +38,7 @@
 
     td, td:first-child {
       text-align: center !important;
+      font-weight: bold;
     }
   }
 }
