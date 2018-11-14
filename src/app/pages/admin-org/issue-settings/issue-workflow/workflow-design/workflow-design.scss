@@ -40,6 +40,18 @@
       text-align: center !important;
       font-weight: bold;
     }
+
+    .tran {
+      position: relative;
+      .acts {
+        position: absolute;
+        top: 0;
+        right: -9px;
+        line-height: normal;
+      }
+    }
+
+
   }
 }
 

@@ -18,6 +18,11 @@ export class IssueWorkflowService {
     return this._reqService.post(this._apiBase + 'get', model);
   }
 
+  design(id: number) {
+    const model = { id: id };
+    return this._reqService.post(this._apiBase + 'design', model);
+  }
+
   save(model: any, statuses: any[]) {
     const statusIds: number[] = statuses
       .filter(function (item) { return item.selected; })

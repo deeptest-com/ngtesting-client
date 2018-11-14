@@ -30,6 +30,8 @@ export class IssueWorkflowDesign implements OnInit, AfterViewInit {
   id: number;
   model: any = {};
   statuses: any[] = [];
+  tranMap: any = {};
+  colWidth: number;
 
   @ViewChild('modalWrapper') modalWrapper: PopDialogComponent;
 
@@ -47,10 +49,21 @@ export class IssueWorkflowDesign implements OnInit, AfterViewInit {
   ngAfterViewInit() {}
 
   loadData() {
-    this.issueWorkflowService.get(this.id).subscribe((json: any) => {
+    this.issueWorkflowService.design(this.id).subscribe((json: any) => {
       this.model = json.data;
       this.statuses = json.statuses;
+      this.tranMap = json.tranMap;
     });
+  }
+
+  addTran() {
+    console.log('addTran');
+  }
+  editTran(tran) {
+    console.log('editTran', tran);
+  }
+  removeTran(tran) {
+    console.log('removeTran', tran);
   }
 
   // save() {
