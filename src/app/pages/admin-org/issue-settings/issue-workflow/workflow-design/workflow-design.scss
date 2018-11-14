@@ -41,13 +41,20 @@
       font-weight: bold;
     }
 
-    .tran {
+    .acts-col {
       position: relative;
       .acts {
+        display: none;
         position: absolute;
         top: 0;
-        right: -9px;
+        right: 0;
         line-height: normal;
+      }
+      &.hover .acts {
+        display: block;
+      }
+      &.na {
+        background-color: #dddddd;
       }
     }
 

@@ -40,22 +40,23 @@
       <tbody>
       <tr *ngFor="let row of statuses;">
         <td>{{row.label}}</td>
-        <td *ngFor="let col of statuses;">
+        <td *ngFor="let col of statuses;" [class.na]="row.id == col.id" class="acts-col"
+            (mouseenter)="mouseenter($event);" (mouseleave)="mouseleave($event);">
+
           <div *ngIf="row.id != col.id">
-            <div *ngIf="tranMap[row.id+'-'+col.id] as tran" (mouseenter)="tran.hover = true" (mouseleave)="tran.hover = false"
-                class="tran">
+            <div *ngIf="tranMap[row.id+'-'+col.id] as tran" class="tran">
               <span>{{tran.actionName}}</span>
 
-              <div *ngIf="tran.hover" class="acts link">
+              <div class="acts link">
                 <span (click)="editTran(tran)"><i class="fa fa-pencil"></i></span>
                 <span (click)="removeTran(tran)"><i class="fa fa-trash"></i></span>
               </div>
             </div>
 
             <div *ngIf="!tranMap[row.id+'-'+col.id]">
-                <span class="link">
-                  <i (click)="addTran()" class="fa fa-plus"></i>
-                </span>
+              <div class="acts link">
+                <span (click)="addTran()"><i class="fa fa-plus"></i></span>
+              </div>
             </div>
           </div>
         </td>
