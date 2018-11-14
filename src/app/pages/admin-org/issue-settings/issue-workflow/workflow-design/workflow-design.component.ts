@@ -29,6 +29,7 @@ export class IssueWorkflowDesign implements OnInit, AfterViewInit {
 
   id: number;
   model: any = {};
+  statuses: any[] = [];
 
   @ViewChild('modalWrapper') modalWrapper: PopDialogComponent;
 
@@ -46,16 +47,16 @@ export class IssueWorkflowDesign implements OnInit, AfterViewInit {
   ngAfterViewInit() {}
 
   loadData() {
-    const that = this;
-    that.issueWorkflowService.get(that.id).subscribe((json: any) => {
-      that.model = json.data;
+    this.issueWorkflowService.get(this.id).subscribe((json: any) => {
+      this.model = json.data;
+      this.statuses = json.statuses;
     });
   }
 
   // save() {
-  //   const that = this;
+  //   const this = this;
   //
-  //   that.issueWorkflowService.save(that.model).subscribe((json: any) => {
+  //   this.issueWorkflowService.save(this.model).subscribe((json: any) => {
   //     if (json.code == 1) {
   //       CONSTANT.CASE_PROPERTY_MAP = json.issuePropertyMap;
   //

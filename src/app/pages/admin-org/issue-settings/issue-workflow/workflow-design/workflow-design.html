@@ -33,54 +33,14 @@
               </thead>
             </table>
           </td>
-          <td>打开</td>
-          <td>已解决</td>
-          <td>关闭</td>
-          <td>打开</td>
-          <td>已解决</td>
-          <td>关闭</td>
-          <td>打开</td>
-          <td>已解决</td>
-          <td>关闭</td>
+          <td *ngFor="let item of statuses;">{{item.label}}</td>
         </tr>
       </thead>
 
       <tbody>
-        <tr>
-          <td>打开</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td>已解决</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td>关闭</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+        <tr *ngFor="let item of statuses;">
+          <td>{{item.label}}</td>
+          <td *ngFor="let item of statuses;"></td>
         </tr>
       </tbody>
     </table>
