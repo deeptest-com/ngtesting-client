@@ -17,7 +17,7 @@ import * as _ from 'lodash';
   styleUrls: ['./workflow-transition.scss'],
 })
 export class WorkflowTransitionComponent implements OnInit, OnDestroy, AfterViewInit, OnChanges {
-  @Input() model: number;
+  @Input() model: any;
   @Input() projectRoles: any[];
 
   @Output() confirm = new EventEmitter<any>();
@@ -27,18 +27,10 @@ export class WorkflowTransitionComponent implements OnInit, OnDestroy, AfterView
   constructor(private fb: FormBuilder, private host: ElementRef, public activeModal: NgbActiveModal,
               private tranService: IssueWorkflowTransitionService) {
     this.buildForm();
-
   }
 
   ngOnInit() {
-
-  }
-
-  dismiss(): any {
-    this.activeModal.dismiss({ act: 'cancel' });
-  }
-  close(): any {
-    this.activeModal.close({ act: 'close' });
+    this.loadData();
   }
 
   ngOnChanges() {
@@ -50,6 +42,12 @@ export class WorkflowTransitionComponent implements OnInit, OnDestroy, AfterView
   }
   ngOnDestroy() {
 
+  }
+
+  loadData(): any {
+    this.tranService.get(this.model.id).subscribe((json: any) => {
+      this.projectRoles = json.projectRoles;
+    });
   }
 
   save(): any {
@@ -80,6 +78,13 @@ export class WorkflowTransitionComponent implements OnInit, OnDestroy, AfterView
     for (const item of this.projectRoles) {
       item.selected = val;
     }
+  }
+
+  dismiss(): any {
+    this.activeModal.dismiss({ act: 'cancel' });
+  }
+  close(): any {
+    this.activeModal.close({ act: 'close' });
   }
 
   onValueChanged(data?: any) {

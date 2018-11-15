@@ -37,7 +37,6 @@ export class IssueWorkflowDesign implements OnInit, AfterViewInit {
   currTran: any = {};
 
   pages: any[] = [];
-  projectRoles: any[] = [];
 
   workflowTransition: any;
   @ViewChild('modalWrapper') modalWrapper: PopDialogComponent;
@@ -73,7 +72,6 @@ export class IssueWorkflowDesign implements OnInit, AfterViewInit {
       this.tranMap = json.tranMap;
 
       this.pages = json.pages;
-      this.projectRoles = json.projectRoles;
     });
   }
 
@@ -87,7 +85,6 @@ export class IssueWorkflowDesign implements OnInit, AfterViewInit {
         { workflowId: this.id, srcStatusId: srcStatusId, dictStatusId: dictStatusId };
 
     this.workflowTransition.componentInstance.pages = this.pages;
-    this.workflowTransition.componentInstance.projectRoles = this.projectRoles;
 
     this.workflowTransition.result.then((result) => {
       this.tranMap[srcStatusId + '-' + dictStatusId] = result.model;
@@ -108,7 +105,6 @@ export class IssueWorkflowDesign implements OnInit, AfterViewInit {
       { windowClass: 'pop-modal' });
     this.workflowTransition.componentInstance.model = tran;
     this.workflowTransition.componentInstance.pages = this.pages;
-    this.workflowTransition.componentInstance.projectRoles = this.projectRoles;
 
     this.workflowTransition.result.then((result) => {
       tran = result.model;

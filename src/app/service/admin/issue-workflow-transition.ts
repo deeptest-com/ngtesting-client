@@ -9,6 +9,11 @@ export class IssueWorkflowTransitionService {
   constructor(private _reqService: RequestService) { }
   _apiBase = 'admin/issue_workflow_transition/';
 
+  get(id: number) {
+    const model = { id: id };
+    return this._reqService.post(this._apiBase + 'get', model);
+  }
+
   save(model: any, projectRoles: any[]) {
     const projectRoleIds: number[] = projectRoles
       .filter(function (item) { return item.selected; })
