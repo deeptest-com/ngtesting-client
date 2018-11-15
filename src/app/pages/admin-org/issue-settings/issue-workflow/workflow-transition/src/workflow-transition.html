@@ -30,7 +30,7 @@
       <div class="form-group row">
         <label class="col-sm-1 col-form-label">状态转换</label>
         <div class="col-sm-5 col-form-label no-span">
-          <span>{{model}}
+          <span *ngIf="model.srcStatusName">
             <span [outerHTML]="model.srcStatusName | term"></span>
             <span>至</span>
             <span [outerHTML]="model.dictStatusName | term"></span>
