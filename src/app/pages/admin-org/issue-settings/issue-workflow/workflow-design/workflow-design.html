@@ -38,13 +38,13 @@
       </thead>
 
       <tbody>
-      <tr *ngFor="let row of statuses;">
-        <td>{{row.label}}</td>
-        <td *ngFor="let col of statuses;" [class.na]="row.id == col.id" class="acts-col"
+      <tr *ngFor="let src of statuses;">
+        <td>{{src.label}}</td>
+        <td *ngFor="let dict of statuses;" [class.na]="src.id == dict.id" class="acts-col"
             (mouseenter)="mouseenter($event);" (mouseleave)="mouseleave($event);">
 
-          <div *ngIf="row.id != col.id">
-            <div *ngIf="tranMap[row.id+'-'+col.id] as tran" class="tran">
+          <div *ngIf="src.id != dict.id">
+            <div *ngIf="tranMap[src.id+'-'+dict.id] as tran" class="tran">
               <span>{{tran.actionName}}</span>
 
               <div class="acts link">
@@ -53,9 +53,9 @@
               </div>
             </div>
 
-            <div *ngIf="!tranMap[row.id+'-'+col.id]">
+            <div *ngIf="!tranMap[src.id+'-'+dict.id]">
               <div class="acts link">
-                <span (click)="addTran()"><i class="fa fa-plus"></i></span>
+                <span (click)="addTran(src.id, dict.id)"><i class="fa fa-plus"></i></span>
               </div>
             </div>
           </div>

@@ -18,6 +18,7 @@ import { DatetimePickerService } from '../../../../service/datetime-picker';
 
 import { IssueWorkflowService } from '../../../../service/admin/issue-workflow';
 import { IssueWorkflowSolutionService } from '../../../../service/admin/issue-workflow-solution';
+import { IssueWorkflowTransitionService } from '../../../../service/admin/issue-workflow-transition';
 
 import { IssueWorkflow } from '.';
 import { IssueWorkflowList } from './workflow-list';
@@ -25,6 +26,7 @@ import { IssueWorkflowEdit } from './workflow-edit';
 import { IssueWorkflowDesign } from './workflow-design';
 import { IssueWorkflowSolutionList } from './workflow-solution-list';
 import { IssueWorkflowSolutionEdit } from './workflow-solution-edit';
+import { WorkflowTransitionComponent } from './workflow-transition';
 
 @NgModule({
   imports: [
@@ -45,6 +47,7 @@ import { IssueWorkflowSolutionEdit } from './workflow-solution-edit';
     IssueWorkflowDesign,
     IssueWorkflowSolutionList,
     IssueWorkflowSolutionEdit,
+    WorkflowTransitionComponent,
   ],
   providers: [
     RouteService,
@@ -52,6 +55,10 @@ import { IssueWorkflowSolutionEdit } from './workflow-solution-edit';
     DatetimePickerService,
     IssueWorkflowService,
     IssueWorkflowSolutionService,
+    IssueWorkflowTransitionService,
+  ],
+  entryComponents: [
+    WorkflowTransitionComponent,
   ],
 })
 export class IssueWorkflowModule {}

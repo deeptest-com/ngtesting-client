@@ -1,0 +1,54 @@
+<div class="workflow-transition">
+
+  <div class="modal-header">
+    <h4 class="modal-title">状态转换</h4>
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <form [formGroup]="form" class="my-validate-form">
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label"><span>名称</span></label>
+        <div class="col-sm-10">
+          <input workflow="text" class="form-control" name="name" formControlName="name"
+                 [(ngModel)]="model.name" #name>
+        </div>
+      </div>
+    </form>
+    <div class="my-validate-form">
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label"><span>项目角色</span></label>
+        <div class="col-sm-10">
+          <div class="checkbox-list">
+            <div class="checkbox-list-inner">
+              <div class="toolbar">
+                <div class="toolbar-inner">
+                  <span (click)="select('all')" class="link">全选</span> |
+                  <span (click)="select('none')" class="link">全不选</span>
+                </div>
+              </div>
+              <div>
+                <div *ngFor="let item of projectRoles" class="checkbox-list-item">
+                  <label>
+                    <span class="checkbox-name">{{item.name}}<span></span></span>
+                    <input type="checkbox" class="form-check-input"
+                           [(ngModel)]="item.selected">
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button [disabled]="!form.valid" type="button" class="btn btn-primary" (click)="save()">保存</button>
+      <button type="button" class="btn btn-default" (click)="dismiss()">取消</button>
+    </div>
+
+  </div>
+
+</div>

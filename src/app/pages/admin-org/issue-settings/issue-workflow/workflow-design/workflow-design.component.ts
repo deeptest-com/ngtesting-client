@@ -1,20 +1,23 @@
-import { Component, ViewEncapsulation, ViewChild } from '@angular/core';
+import { Component, ViewEncapsulation, ViewChild, Compiler } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { NgModule, Pipe, OnInit, AfterViewInit }      from '@angular/core';
 
-import { NgbModalModule, NgbPaginationModule, NgbDropdownModule,
-  NgbTabsetModule, NgbButtonsModule, NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbModalModule, NgbPaginationModule, NgbDropdownModule,
+  NgbTabsetModule, NgbButtonsModule, NgbCollapseModule, NgbModal,
+} from '@ng-bootstrap/ng-bootstrap';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { GlobalState } from '../../../../../global.state';
 
 import { CONSTANT } from '../../../../../utils/constant';
-import { Utils } from '../../../../../utils/utils';
+import { logger, Utils } from '../../../../../utils/utils';
 import { ValidatorUtils, PhoneValidator } from '../../../../../validator';
 import { RouteService } from '../../../../../service/route';
 
 import { IssueWorkflowService } from '../../../../../service/admin/issue-workflow';
+import { WorkflowTransitionComponent } from '../workflow-transition';
 import { PopDialogComponent } from '../../../../../components/pop-dialog';
 
 declare var jQuery;
@@ -31,11 +34,14 @@ export class IssueWorkflowDesign implements OnInit, AfterViewInit {
   model: any = {};
   statuses: any[] = [];
   tranMap: any = {};
+  projectRoles: any[] = [];
 
+  workflowTransition: any;
   @ViewChild('modalWrapper') modalWrapper: PopDialogComponent;
 
   constructor(private _state: GlobalState, private _routeService: RouteService, private _route: ActivatedRoute,
-              private fb: FormBuilder, private issueWorkflowService: IssueWorkflowService) {
+              private fb: FormBuilder, private compiler: Compiler, private modalService: NgbModal,
+              private issueWorkflowService: IssueWorkflowService) {
 
   }
   ngOnInit() {
@@ -60,12 +66,27 @@ export class IssueWorkflowDesign implements OnInit, AfterViewInit {
       this.model = json.data;
       this.statuses = json.statuses;
       this.tranMap = json.tranMap;
+      this.projectRoles = json.projectRoles;
     });
   }
 
-  addTran() {
-    console.log('addTran');
+  addTran(srcId, dictId) {
+    console.log('addTran', srcId, dictId);
+
+    this.compiler.clearCacheFor(WorkflowTransitionComponent);
+    this.workflowTransition = this.modalService.open(WorkflowTransitionComponent, { windowClass: 'pop-modal' });
+    this.workflowTransition.componentInstance.workflowId = this.id;
+    this.workflowTransition.componentInstance.srcId = srcId;
+    this.workflowTransition.componentInstance.dictId = dictId;
+    this.workflowTransition.componentInstance.projectRoles = this.projectRoles;
+
+    this.workflowTransition.result.then((result) => {
+      logger.log('result', result);
+    }, (reason) => {
+      logger.log('reason', reason);
+    });
   }
+
   editTran(tran) {
     console.log('editTran', tran);
   }

@@ -1,0 +1,24 @@
+.workflow-transition {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+
+  .modal-header {
+
+  }
+  .modal-body {
+    flex: 1;
+    font-size: smaller;
+
+    form {
+      margin-bottom: 20px;
+    }
+  }
+  .modal-footer {
+    border: none;
+  }
+
+  .modal {
+    top: calc(40% - 100px);
+  }
+}
