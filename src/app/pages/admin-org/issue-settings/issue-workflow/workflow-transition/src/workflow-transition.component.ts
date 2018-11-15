@@ -17,7 +17,7 @@ import * as _ from 'lodash';
   styleUrls: ['./workflow-transition.scss'],
 })
 export class WorkflowTransitionComponent implements OnInit, OnDestroy, AfterViewInit, OnChanges {
-  @Input() model: any;
+  @Input() model: any = {};
   @Input() projectRoles: any[];
 
   @Output() confirm = new EventEmitter<any>();
@@ -45,7 +45,8 @@ export class WorkflowTransitionComponent implements OnInit, OnDestroy, AfterView
   }
 
   loadData(): any {
-    this.tranService.get(this.model.id).subscribe((json: any) => {
+    this.tranService.get(this.model).subscribe((json: any) => {
+      this.model = json.data;
       this.projectRoles = json.projectRoles;
     });
   }

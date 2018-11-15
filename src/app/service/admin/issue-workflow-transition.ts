@@ -9,8 +9,7 @@ export class IssueWorkflowTransitionService {
   constructor(private _reqService: RequestService) { }
   _apiBase = 'admin/issue_workflow_transition/';
 
-  get(id: number) {
-    const model = { id: id };
+  get(model: any) {
     return this._reqService.post(this._apiBase + 'get', model);
   }
 

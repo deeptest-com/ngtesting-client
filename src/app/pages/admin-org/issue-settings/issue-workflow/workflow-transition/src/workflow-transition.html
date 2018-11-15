@@ -10,7 +10,7 @@
 
     <form [formGroup]="form" class="my-validate-form">
       <div class="form-group row">
-        <label class="col-sm-1 col-form-label"><span>名称</span></label>
+        <label class="col-sm-1 col-form-label"><span>动作名称</span></label>
         <div class="col-sm-5">
           <input workflow="text" class="form-control" name="name" formControlName="name"
                  [(ngModel)]="model.name" #name>
@@ -29,8 +29,12 @@
 
       <div class="form-group row">
         <label class="col-sm-1 col-form-label">状态转换</label>
-        <div class="col-sm-5">
-          <span>{{model.srcStatusName}} 至 {{model.dictStatusName}}</span>
+        <div class="col-sm-5 col-form-label no-span">
+          <span>{{model}}
+            <span [outerHTML]="model.srcStatusName | term"></span>
+            <span>至</span>
+            <span [outerHTML]="model.dictStatusName | term"></span>
+          </span>
         </div>
       </div>
     </form>

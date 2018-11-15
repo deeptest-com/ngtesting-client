@@ -14,6 +14,9 @@ export class PathToLinkPipe implements PipeTransform {
 export class TermPipe implements PipeTransform {
   constructor(private sanitized: DomSanitizer) {}
   transform(str: string) {
+    if (!str) {
+      return '<span></span>';
+    }
     return this.sanitized.bypassSecurityTrustHtml('<span style="font-weight: bolder">「' + str + '」</span>');
   }
 }
