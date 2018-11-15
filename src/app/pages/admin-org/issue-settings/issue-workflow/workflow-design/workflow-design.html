@@ -45,7 +45,7 @@
 
           <div *ngIf="src.id != dict.id">
             <div *ngIf="tranMap[src.id+'-'+dict.id] as tran" class="tran">
-              <span>{{tran.actionName}}</span>
+              <span>{{tran.name}}</span>
 
               <div class="acts link">
                 <span (click)="editTran(tran)"><i class="fa fa-pencil"></i></span>
@@ -67,3 +67,7 @@
   </div>
 
 </div>
+
+<pop-dialog #modalWrapper (confirm)="delete(currTran)" [title]="'提示'">
+  确认删除名为"{{currTran.name}}"的转换?
+</pop-dialog>

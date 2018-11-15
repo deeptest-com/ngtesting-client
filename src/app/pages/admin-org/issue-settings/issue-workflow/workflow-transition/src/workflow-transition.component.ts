@@ -17,15 +17,12 @@ import * as _ from 'lodash';
   styleUrls: ['./workflow-transition.scss'],
 })
 export class WorkflowTransitionComponent implements OnInit, OnDestroy, AfterViewInit, OnChanges {
-  @Input() workflowId: number;
-  @Input() srcId: number;
-  @Input() dictId: number;
+  @Input() model: number;
   @Input() projectRoles: any[];
 
   @Output() confirm = new EventEmitter<any>();
 
   form: FormGroup;
-  model: any = {};
 
   constructor(private fb: FormBuilder, private host: ElementRef, public activeModal: NgbActiveModal,
               private tranService: IssueWorkflowTransitionService) {
@@ -56,11 +53,13 @@ export class WorkflowTransitionComponent implements OnInit, OnDestroy, AfterView
   }
 
   save(): any {
-    this.tranService.save(this.workflowId, this.srcId, this.dictId, this.projectRoles)
+    this.tranService.save(this.model, this.projectRoles)
       .subscribe((json: any) => {
-      if (json.code == 1) {
-        this.activeModal.close({ act: 'save' } );
-      }
+
+        this.model = json.data;
+        if (json.code == 1) {
+          this.activeModal.close({ act: 'save', model: this.model } );
+        }
     });
   }
 
@@ -68,6 +67,7 @@ export class WorkflowTransitionComponent implements OnInit, OnDestroy, AfterView
     this.form = this.fb.group(
       {
         name: ['', [Validators.required]],
+        actionPageId: ['', []],
       }, {},
     );
 

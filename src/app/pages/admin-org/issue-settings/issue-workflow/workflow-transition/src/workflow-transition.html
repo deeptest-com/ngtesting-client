@@ -10,17 +10,28 @@
 
     <form [formGroup]="form" class="my-validate-form">
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label"><span>名称</span></label>
-        <div class="col-sm-10">
+        <label class="col-sm-1 col-form-label"><span>名称</span></label>
+        <div class="col-sm-5">
           <input workflow="text" class="form-control" name="name" formControlName="name"
                  [(ngModel)]="model.name" #name>
         </div>
+
+        <label class="col-sm-1 col-form-label">界面</label>
+        <div class="col-sm-5">
+          <select [(ngModel)]="model.actionPageId" formControlName="actionPageId" class="form-control" name="actionPageId">
+            <option value=""></option>
+            <option *ngFor="let entry of pages" value="{{entry.id}}">
+              <span>{{entry.name}}</span>
+            </option>
+          </select>
+        </div>
       </div>
     </form>
+
     <div class="my-validate-form">
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label"><span>项目角色</span></label>
-        <div class="col-sm-10">
+        <label class="col-sm-1 col-form-label"><span>项目角色</span></label>
+        <div class="col-sm-11">
           <div class="checkbox-list">
             <div class="checkbox-list-inner">
               <div class="toolbar">

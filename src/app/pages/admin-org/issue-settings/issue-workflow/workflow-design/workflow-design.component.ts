@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, ViewChild, Compiler } from '@angular/core';
+import { Component, ViewEncapsulation, ViewChild, Compiler, ChangeDetectorRef } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { NgModule, Pipe, OnInit, AfterViewInit }      from '@angular/core';
@@ -12,11 +12,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { GlobalState } from '../../../../../global.state';
 
 import { CONSTANT } from '../../../../../utils/constant';
-import { logger, Utils } from '../../../../../utils/utils';
-import { ValidatorUtils, PhoneValidator } from '../../../../../validator';
 import { RouteService } from '../../../../../service/route';
 
 import { IssueWorkflowService } from '../../../../../service/admin/issue-workflow';
+import { IssueWorkflowTransitionService } from '../../../../../service/admin/issue-workflow-transition';
+
 import { WorkflowTransitionComponent } from '../workflow-transition';
 import { PopDialogComponent } from '../../../../../components/pop-dialog';
 
@@ -34,14 +34,19 @@ export class IssueWorkflowDesign implements OnInit, AfterViewInit {
   model: any = {};
   statuses: any[] = [];
   tranMap: any = {};
+  currTran: any = {};
+
+  pages: any[] = [];
   projectRoles: any[] = [];
 
   workflowTransition: any;
   @ViewChild('modalWrapper') modalWrapper: PopDialogComponent;
 
   constructor(private _state: GlobalState, private _routeService: RouteService, private _route: ActivatedRoute,
-              private fb: FormBuilder, private compiler: Compiler, private modalService: NgbModal,
-              private issueWorkflowService: IssueWorkflowService) {
+              private changeDetectorRef: ChangeDetectorRef, private fb: FormBuilder,
+              private compiler: Compiler, private modalService: NgbModal,
+              private issueWorkflowService: IssueWorkflowService,
+              private tranService: IssueWorkflowTransitionService) {
 
   }
   ngOnInit() {
@@ -66,49 +71,68 @@ export class IssueWorkflowDesign implements OnInit, AfterViewInit {
       this.model = json.data;
       this.statuses = json.statuses;
       this.tranMap = json.tranMap;
+
+      this.pages = json.pages;
       this.projectRoles = json.projectRoles;
     });
   }
 
-  addTran(srcId, dictId) {
-    console.log('addTran', srcId, dictId);
+  addTran(srcStatusId, dictStatusId) {
+    console.log('addTran', srcStatusId, dictStatusId);
 
     this.compiler.clearCacheFor(WorkflowTransitionComponent);
-    this.workflowTransition = this.modalService.open(WorkflowTransitionComponent, { windowClass: 'pop-modal' });
-    this.workflowTransition.componentInstance.workflowId = this.id;
-    this.workflowTransition.componentInstance.srcId = srcId;
-    this.workflowTransition.componentInstance.dictId = dictId;
+    this.workflowTransition = this.modalService.open(WorkflowTransitionComponent,
+      { windowClass: 'pop-modal' });
+    this.workflowTransition.componentInstance.model =
+        { workflowId: this.id, srcStatusId: srcStatusId, dictStatusId: dictStatusId };
+
+    this.workflowTransition.componentInstance.pages = this.pages;
     this.workflowTransition.componentInstance.projectRoles = this.projectRoles;
 
     this.workflowTransition.result.then((result) => {
-      logger.log('result', result);
+      this.tranMap[srcStatusId + '-' + dictStatusId] = result.model;
+      // this.changeDetectorRef.markForCheck();
+      // this.changeDetectorRef.detectChanges();
+
+      console.log('result', srcStatusId + '-' + dictStatusId.id, result.model);
     }, (reason) => {
-      logger.log('reason', reason);
+      console.log('reason', reason);
     });
   }
 
   editTran(tran) {
     console.log('editTran', tran);
+
+    this.compiler.clearCacheFor(WorkflowTransitionComponent);
+    this.workflowTransition = this.modalService.open(WorkflowTransitionComponent,
+      { windowClass: 'pop-modal' });
+    this.workflowTransition.componentInstance.model = tran;
+    this.workflowTransition.componentInstance.pages = this.pages;
+    this.workflowTransition.componentInstance.projectRoles = this.projectRoles;
+
+    this.workflowTransition.result.then((result) => {
+      tran = result.model;
+
+      console.log('result', tran);
+    }, (reason) => {
+      console.log('reason', reason);
+    });
   }
   removeTran(tran) {
     console.log('removeTran', tran);
+    this.currTran = tran;
+
+    this.modalWrapper.showModal();
   }
 
-  add() {
-
+  delete(tran: any): any {
+    this.tranService.delete(tran.id).subscribe((json: any) => {
+        this.currTran = null;
+      });
   }
 
-  // save() {
-  //   const this = this;
-  //
-  //   this.issueWorkflowService.save(this.model).subscribe((json: any) => {
-  //     if (json.code == 1) {
-  //       CONSTANT.CASE_PROPERTY_MAP = json.issuePropertyMap;
-  //
-  //       this.back();
-  //     } else {
-  //     }
-  //   });
+  // public trackItem (src: any, dict: any) {
+  //   return !src ? '' : src.id + '-' + !dict ? '' : dict.id;
   // }
 
   back() {
