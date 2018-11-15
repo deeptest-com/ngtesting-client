@@ -125,9 +125,13 @@ export class IssueWorkflowDesign implements OnInit, AfterViewInit {
     this.modalWrapper.showModal();
   }
 
-  delete(tran: any): any {
-    this.tranService.delete(tran.id).subscribe((json: any) => {
+  delete(): any {
+    const srcStatusId = this.currTran.srcStatusId;
+    const dictStatusId = this.currTran.dictStatusId;
+
+    this.tranService.delete(this.currTran.id).subscribe((json: any) => {
       this.currTran = {};
+      this.tranMap[srcStatusId + '-' + dictStatusId] = null;
       this.modalWrapper.closeModal();
     });
   }
