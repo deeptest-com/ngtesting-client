@@ -40,6 +40,9 @@
       text-align: center !important;
       font-weight: bold;
     }
+    td.col-hover {
+      background-color: rgba(0, 0, 0, 0.075);
+    }
 
     .acts-col {
       position: relative;
@@ -54,7 +57,7 @@
         display: block;
       }
       &.na {
-        background-color: #dddddd;
+        background-color: #FFFFF0;
       }
     }
 

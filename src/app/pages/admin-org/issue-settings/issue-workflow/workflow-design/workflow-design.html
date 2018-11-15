@@ -16,31 +16,32 @@
 
   <div>
 
-    <table class="table table-bordered">
+    <table class="table table-hover table-bordered">
       <thead>
-      <tr>
-        <td class="table-header-td">
-          <table class="table-header">
-            <thead>
-            <tr class="a-ca-ht-day">
-              <td></td>
-              <td>目标状态</td>
-            </tr>
-            <tr class="a-ca-ht-worker">
-              <td>起始状态</td>
-              <td></td>
-            </tr>
-            </thead>
-          </table>
-        </td>
-        <td *ngFor="let item of statuses;" width="120px">{{item.label}}</td>
-      </tr>
+        <tr>
+          <td class="table-header-td">
+            <table class="table-header">
+              <thead>
+              <tr class="a-ca-ht-day">
+                <td></td>
+                <td>目标状态</td>
+              </tr>
+              <tr class="a-ca-ht-worker">
+                <td>起始状态</td>
+                <td></td>
+              </tr>
+              </thead>
+            </table>
+          </td>
+          <td *ngFor="let item of statuses;" width="120px" class="col-{{item.id}}"
+              (mouseenter)="enterCol(item.id);" (mouseleave)="leaveCol(item.id);">{{item.label}}</td>
+        </tr>
       </thead>
 
       <tbody>
       <tr *ngFor="let src of statuses;">
         <td>{{src.label}}</td>
-        <td *ngFor="let dict of statuses;" [class.na]="src.id == dict.id" class="acts-col"
+        <td *ngFor="let dict of statuses;" class="acts-col col-{{dict.id}}" [class.na]="src.id == dict.id"
             (mouseenter)="mouseenter($event);" (mouseleave)="mouseleave($event);">
 
           <div *ngIf="src.id != dict.id">

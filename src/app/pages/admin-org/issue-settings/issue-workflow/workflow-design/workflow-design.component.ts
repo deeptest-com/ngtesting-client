@@ -140,6 +140,13 @@ export class IssueWorkflowDesign implements OnInit, AfterViewInit {
     this._routeService.navTo('/pages/org-admin/issue-settings/issue-workflow/workflow-list');
   }
 
+  enterCol(id) {
+    jQuery('td.col-' + id).addClass('col-hover');
+  }
+  leaveCol(id) {
+    jQuery('td.col-' + id).removeClass('col-hover');
+  }
+
   showModal(): void {
     this.modalWrapper.showModal();
   }
