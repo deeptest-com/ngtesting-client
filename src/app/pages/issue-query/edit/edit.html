@@ -27,7 +27,7 @@
       <div class="offset-sm-1  col-sm-11">
         <button (click)="update()" type="button" class="btn btn-primary" [disabled]="!form.valid">保存</button>
         &nbsp;
-        <button [routerLink]="['/pages/org/' + orgId + '/prj/' + prjId + '/issue-query/list']" type="button"
+        <button (click)="back()" type="button"
                 class="btn btn-default">取消
         </button>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -50,4 +50,3 @@
   </form>
 
 </div>
-
