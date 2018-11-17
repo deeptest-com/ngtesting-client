@@ -10,8 +10,9 @@ import { RouteService } from '../../../../service/route';
 
 @Injectable()
 export class TqlService {
-  _apiUrl = 'client/tql/';
+  _apiUrl = 'client/issue_tql/';
   _query = this._apiUrl + 'query';
+  _queryById = this._apiUrl + 'queryById';
   _changeColumns = this._apiUrl + 'changeColumns';
 
   constructor(private _reqService: RequestService) {
@@ -24,6 +25,11 @@ export class TqlService {
 
   query(rule: string, page: number, pageSize: number, init: boolean) {
     return this._reqService.post(this._query, { rule: rule,
+      page: page, pageSize: pageSize, init: init } );
+  }
+
+  queryById(queryId: number, page: number, pageSize: number, init: boolean) {
+    return this._reqService.post(this._queryById, { queryId: queryId,
       page: page, pageSize: pageSize, init: init } );
   }
 

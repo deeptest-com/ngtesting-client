@@ -1,9 +1,7 @@
-import { Routes, RouterModule }  from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 
 import { Issue } from './issue.component';
 import { IssueQuery } from './query/query.component';
-import { IssueTable } from './query/table/table.component';
-import { IssueBrowse } from './query/browse/browse.component';
 
 import { IssueEdit } from './edit/edit.component';
 import { IssueView } from './view/view.component';

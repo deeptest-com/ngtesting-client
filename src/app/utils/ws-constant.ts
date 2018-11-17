@@ -8,6 +8,8 @@ export let WS_CONSTANT = {
   WS_RECENT_PROJECTS: 'ws_recent_projects',
   WS_PRJ_SETTINGS: 'ws_prj_settings',
 
+  WS_RECENT_QUERIES: 'ws_recent_queries',
+
   WS_ENTER_CHAT_ROOM: 'ws_enter_chat_room',
   WS_CHAT: 'ws_chat',
 };

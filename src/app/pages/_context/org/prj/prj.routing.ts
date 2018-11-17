@@ -20,6 +20,7 @@ export const routes: Routes = [
       { path: 'implement', loadChildren: '../../../implement/implement.module#ImplementModule' },
 
       { path: 'issue', loadChildren: '../../../issue/issue.module#IssueModule' },
+      { path: 'issue-query', loadChildren: '../../../issue-query/issue-query.module#IssueQueryModule' },
     ],
   },
 ];

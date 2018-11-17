@@ -74,8 +74,37 @@
       <button (click)="gotoModule('implement')" class="btn btn-default">执行</button>
     </div>
 
-    <div *ngIf="prjId" ngbDropdown class="btn-group">
-      <button (click)="gotoModule('issue')" class="btn btn-default">问题</button>
+    <div ngbDropdown class="btn-group">
+      <button class="btn btn-default dropdown" ngbDropdownToggle>问题</button>
+
+      <div class="dropdown-menu">
+        <button (click)="gotoModule('issue', 'lastest')" class="dropdown-item">
+          <a href="javacript:void(0);">当前查询</a>
+        </button>
+        <button (click)="gotoModule('issue')" class="dropdown-item">
+          <a href="javacript:void(0);">重新查询</a>
+        </button>
+
+        <li class="dropdown-divider"></li>
+
+        <button class="dropdown-item next">最近查询</button>
+        <ng-container *ngFor="let item of queries; let i = index">
+            <button class="dropdown-item" class="dropdown-item">
+              <a (click)="selectQuery(item.id)" class="link">
+                {{item.name}}</a>
+            </button>
+        </ng-container>
+        <button *ngIf="!queries || queries.length < 1" class="dropdown-item" style="margin: 0 5px;">
+          无
+        </button>
+
+        <li class="dropdown-divider"></li>
+
+        <button class="dropdown-item">
+          <a [routerLink]="['/pages/org/' + orgId + '/prj/' + prjId + '/issue-query/list']">管理查询</a>
+        </button>
+
+      </div>
     </div>
 
     <!-- <div *ngIf="prjId && !environment.production" ngbDropdown class="btn-group">

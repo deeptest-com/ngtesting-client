@@ -33,7 +33,7 @@
               </thead>
             </table>
           </td>
-          <td *ngFor="let item of statuses;" width="120px" class="col-{{item.id}}"
+          <td *ngFor="let item of statuses;" class="col-{{item.id}}"
               (mouseenter)="enterCol(item.id);" (mouseleave)="leaveCol(item.id);">{{item.label}}</td>
         </tr>
       </thead>

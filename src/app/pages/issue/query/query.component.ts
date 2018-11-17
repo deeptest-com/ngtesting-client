@@ -1,5 +1,7 @@
-import { Component, ViewEncapsulation, OnInit, AfterViewInit, OnDestroy,
-  ElementRef, Inject, Renderer2 } from '@angular/core';
+import {
+  Component, ViewEncapsulation, OnInit, AfterViewInit, OnDestroy,
+  ElementRef, Inject, Renderer2, ViewChild
+} from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import 'rxjs/add/operator/debounceTime';
@@ -16,6 +18,8 @@ import { ClientService } from '../../../service/client/client';
 import { IssueService } from '../../../service/client/issue';
 
 import { TqlService } from '../tql/src/tql.service';
+import { IssueQueryService } from './query.service';
+import {PopDialogComponent} from "../../../components/pop-dialog";
 
 @Component({
   selector: 'issue-query',
@@ -35,6 +39,7 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
   page: number = 1;
   pageSize: number = 3;
 
+  queryName: string;
   rule: any = {};
   checkedConditions: any = {};
   filters: any[] = [];
@@ -42,10 +47,11 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
   init = 0;
 
   layout: string = CONSTANT.PROFILE.issueView;
+  @ViewChild('modalWrapper') modalWrapper: PopDialogComponent;
 
   constructor(private _activeRoute: ActivatedRoute, private _router: Router,
-              private _tqlService: TqlService, private _issueService: IssueService,
-              private _clientService: ClientService) {
+              private _tqlService: TqlService, private _clientService: ClientService,
+              private _queryService: IssueQueryService, private _issueService: IssueService) {
 
     this.routeSub = this._activeRoute.params.subscribe(params => {
       this.rule = params['rule'];
@@ -53,7 +59,20 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
       if (this.rule == 'all') {
         this.rule = {};
         this.loadData();
+      } else if (this.rule == 'lastest') {
+        const rule = localStorage.getItem('issue_query');
+        if (!rule) {
+          this.rule = {};
+        } else {
+          this.rule = JSON.parse(rule);
+        }
+
+        this.loadData(this.init == 0);
+      } else if (this.rule.startsWith('q_')) {
+        this.loadDataByQueryId(this.rule.split('_')[1], this.init == 0);
       } else {
+        localStorage.setItem('issue_query', this.rule);
+
         this.rule = JSON.parse(this.rule);
         this.loadData(this.init == 0);
       }
@@ -98,9 +117,25 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
+  loadDataByQueryId(queryId: number, init: boolean) {
+    this._tqlService.queryById(queryId, this.page, this.pageSize, init).subscribe((json: any) => {
+      this.collectionSize = json.total;
+      this.models = json.data;
+
+      this.rule = json.rule;
+
+      if (init) {
+        this.init++;
+        this.filters = json.filters;
+        this.columns = json.columns;
+      }
+    });
+  }
+
   search(data: any) {
     this.loadData(false);
   }
+
   changeColumns(data: any) {
     let columnsForShow = '';
     let i = 0;
@@ -116,14 +151,20 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  create(): void {
-
-  }
-
   changeLayout(layout: string): void {
     this.layout = layout;
 
     this._clientService.setIssueView(layout).subscribe((json: any) => {
+    });
+  }
+
+  showModal(): void {
+    this.modalWrapper.showModal();
+  }
+
+  addToFavorites(): void {
+    this._queryService.addToFavorites(this.queryName, this.rule).subscribe((json: any) => {
+      this.modalWrapper.closeModal();
     });
   }
 

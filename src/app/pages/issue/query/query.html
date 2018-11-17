@@ -7,7 +7,8 @@
 
       <div class="filter">
         <tql [rule]="rule" [filters]="filters"
-             (queryChanged)="queryChanged($event)" (searchEvent)="search($event)"></tql>
+             (queryChanged)="queryChanged($event)" (searchEvent)="search($event)"
+             (favoritesEvent)="showModal($event)"></tql>
       </div>
 
       <div class="buttons">
@@ -55,3 +56,7 @@
   </div>
 
 </div>
+
+<pop-dialog #modalWrapper (confirm)="addToFavorites()" [title]="'请输入查询名称'">
+  <input type="text" class="form-control" name="queryName" [(ngModel)]="queryName">
+</pop-dialog>

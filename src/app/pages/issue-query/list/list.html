@@ -1,0 +1,58 @@
+<div class="issue-query-list container-fluid">
+  <div class="row">
+    <div class="list-toolbar col-xl-12">
+      <div class="title">
+        问题查询器
+      </div>
+
+      <div class="filter">
+        <form [formGroup]="queryForm" class="form-inline">
+          <label for="keywords">关键字</label>
+          <input [(ngModel)]="queryModel.keywords" formControlName="keywords"
+                 type="search" class="form-control form-control-sm" placeholder="" id="keywords" name="keywords">
+        </form>
+      </div>
+
+      <div class="buttons">
+
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <table class="table table-bordered table-striped">
+        <thead class="thead-inverse">
+        <tr>
+          <th style="width: 200px">名称</th>
+          <th>创建时间</th>
+          <th>最后使用时间</th>
+          <th style="width: 250px">操作</th>
+        </tr>
+        </thead>
+      <tbody>
+        <tr *ngFor="let item of models">
+          <td>{{ item.name }}</td>
+          <td>{{ item.createTime | date:'y/MM/dd HH:mm:ss' }}</td>
+          <td>{{ item.useTime | date:'y/MM/dd HH:mm:ss' }}</td>
+          <td>
+            <span (click)="view(item.id)" class="link no-underline">查看问题</span>
+            <span (click)="edit(item.id)" class="link no-underline">编辑</span>
+
+            <span (click)="deleteConfirm(item)" class="link no-underline">删除</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="page-container">
+    <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
+                    (pageChange)="pageChange($event)">
+    </ngb-pagination>
+  </div>
+
+</div>
+
+<pop-dialog #modalDelete (confirm)="delete()" [title]="'提示'">
+  确认删除名为"{{model.name}}"的查询？
+</pop-dialog>

@@ -20,6 +20,7 @@ export const CONSTANT: CONSTANT_INTERFACE = {
   ORG_PRIVILEGES: undefined,
   RECENT_PROJECTS: undefined,
   PRJ_PRIVILEGES: undefined,
+  RECENT_QUERIES: undefined,
 
   CASE_PRIORITIES_FOR_PROJECT: undefined,
   CASE_TYPES_FOR_PROJECT: undefined,
@@ -75,6 +76,7 @@ export interface CONSTANT_INTERFACE {
   MY_ORGS: any[];
   ORG_PRIVILEGES: any;
   RECENT_PROJECTS: any[];
+  RECENT_QUERIES: any[];
 
   CASE_PRIORITIES_FOR_PROJECT: any;
   CASE_TYPES_FOR_PROJECT: any;

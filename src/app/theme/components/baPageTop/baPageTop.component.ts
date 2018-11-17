@@ -29,6 +29,7 @@ export class BaPageTop implements OnInit, AfterViewInit, OnDestroy {
   profile: any = {};
   project: any = {};
   projects: any[] = [];
+  queries: any[] = [];
 
   orgs: any[] = [];
   keywords: string;
@@ -90,6 +91,12 @@ export class BaPageTop implements OnInit, AfterViewInit, OnDestroy {
       CONSTANT.PRJ_PRIVILEGES = json.prjPrivileges;
     });
 
+    this._state.subscribe(WS_CONSTANT.WS_RECENT_QUERIES, this.eventCode, (json) => {
+      console.log(WS_CONSTANT.WS_RECENT_QUERIES + ' in ' + this.eventCode, json);
+
+      this.queries = json.recentQueries;
+    });
+
   }
 
   ngOnInit() {
@@ -99,6 +106,7 @@ export class BaPageTop implements OnInit, AfterViewInit, OnDestroy {
     this.profile = CONSTANT.PROFILE;
     this.orgs = CONSTANT.MY_ORGS;
     this.projects = CONSTANT.RECENT_PROJECTS;
+    this.queries = CONSTANT.RECENT_QUERIES;
   }
   ngAfterViewInit() {}
 
@@ -106,7 +114,7 @@ export class BaPageTop implements OnInit, AfterViewInit, OnDestroy {
     this.isScrolled = isScrolled;
   }
 
-  gotoModule(module: string) {
+  gotoModule(module: string, param: string = 'all') {
     let url = '';
     if (module == 'design') {
       url = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + CONSTANT.CURR_PRJ_ID + '/design/case';
@@ -117,9 +125,15 @@ export class BaPageTop implements OnInit, AfterViewInit, OnDestroy {
     } else if (module == 'autotest') {
       url = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + CONSTANT.CURR_PRJ_ID + '/autotest/aitask';
     } else if (module == 'issue') {
-      url = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + CONSTANT.CURR_PRJ_ID + '/issue/query/all';
+      url = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + CONSTANT.CURR_PRJ_ID + '/issue/query/' + param;
     }
 
+    this._routeService.navTo(url);
+  }
+
+  selectQuery(id: number) {
+    const url = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + CONSTANT.CURR_PRJ_ID
+      + '/issue/query/q_' + id;
     this._routeService.navTo(url);
   }
 
@@ -167,6 +181,8 @@ export class BaPageTop implements OnInit, AfterViewInit, OnDestroy {
     this._state.unsubscribe(WS_CONSTANT.WS_ORG_SETTINGS, this.eventCode);
     this._state.unsubscribe(WS_CONSTANT.WS_RECENT_PROJECTS, this.eventCode);
     this._state.unsubscribe(WS_CONSTANT.WS_PRJ_SETTINGS, this.eventCode);
+
+    this._state.unsubscribe(WS_CONSTANT.WS_RECENT_QUERIES, this.eventCode);
   }
 
 }

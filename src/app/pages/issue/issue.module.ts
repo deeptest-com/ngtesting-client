@@ -1,6 +1,8 @@
 import { NgModule }      from '@angular/core';
 import { CommonModule }  from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { ToastyModule } from 'ng2-toasty';
 
 import { NgbModalModule, NgbPaginationModule, NgbDropdownModule,
@@ -22,6 +24,7 @@ import { RequestService } from '../../service/request';
 import { DatetimePickerService } from '../../service/datetime-picker';
 
 import { ClientService } from '../../service/client/client';
+import { IssueQueryService } from './query/query.service';
 import { IssueService } from '../../service/client/issue';
 import { PrivilegeService } from '../../service/privilege';
 
@@ -38,7 +41,7 @@ import { IssueView } from './view/view.component';
 @NgModule({
   imports: [
     CommonModule,
-    ReactiveFormsModule,
+    FormsModule, ReactiveFormsModule,
     NgaModule,
     routing,
 
@@ -66,7 +69,7 @@ import { IssueView } from './view/view.component';
     RequestService,
     DatetimePickerService,
     ClientService,
-    IssueService,
+    IssueService, IssueQueryService,
     PrivilegeService,
   ],
 })

@@ -44,6 +44,8 @@ export class ClientService {
           CONSTANT.RECENT_PROJECTS = json.recentProjects;
           CONSTANT.PRJ_PRIVILEGES = json.prjPrivileges;
 
+          CONSTANT.RECENT_QUERIES = json.recentQueries;
+
           return Observable.of(true);
         } else {
           this._routeService.navTo('/login');
