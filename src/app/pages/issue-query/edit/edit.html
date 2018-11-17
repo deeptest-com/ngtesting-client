@@ -2,11 +2,10 @@
   <div class="row">
     <div class="edit-toolbar col-xl-12">
       <div class="title">
-        <span *ngIf="!model?.id">新建计划</span>
-        <span *ngIf="model?.id">编辑计划</span>
+        <span *ngIf="model?.id">编辑查询</span>
       </div>
       <div class="buttons">
-        <button [routerLink]="['/pages/org/' + orgId + '/prj/' + prjId + '/implement/issue-query/list']" type="button"
+        <button (click)="back()" type="button"
                 class="btn btn-primary btn-with-icon btn-sm back">
           <i class="fa fa-arrow-circle-left"></i>返回
         </button>

@@ -19,6 +19,7 @@ import * as _ from 'lodash';
 export class WorkflowTransitionComponent implements OnInit, OnDestroy, AfterViewInit, OnChanges {
   @Input() model: any = {};
   @Input() projectRoles: any[];
+  @Input() pages: any[];
 
   @Output() confirm = new EventEmitter<any>();
 

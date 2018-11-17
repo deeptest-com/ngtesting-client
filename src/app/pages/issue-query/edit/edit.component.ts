@@ -80,12 +80,16 @@ export class IssueQueryEdit implements OnInit, AfterViewInit {
   update() {
     this._issueQueryService.update(this.model).subscribe((json: any) => {
       if (json.code == 1) {
-        this._routeService.navTo('/pages/org/'
-          + CONSTANT.CURR_ORG_ID + '/prj/' + CONSTANT.CURR_PRJ_ID + '/issue-query/list');
+        this.back();
       } else {
         this.formErrors = [json.msg];
       }
     });
+  }
+
+  back() {
+    this._routeService.navTo('/pages/org/'
+      + CONSTANT.CURR_ORG_ID + '/prj/' + CONSTANT.CURR_PRJ_ID + '/issue-query/list');
   }
 
 }
