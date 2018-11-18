@@ -1,8 +1,8 @@
-<div class="ver-list container-fluid">
+<div class="module-list container-fluid">
 
   <div class="row">
     <div class="list-toolbar col-xl-12">
-      <div class="title">版本列表</div>
+      <div class="title">模块列表</div>
       <div class="filter">
         <form [formGroup]="queryForm" class="form-inline">
           <label for="disabled">状态</label>
@@ -17,11 +17,8 @@
         </form>
       </div>
       <div class="buttons">
-        <button (click)="create()" type="button" class="btn btn-primary btn-with-icon btn-sm">
+        <button (click)="create()" type="button" class="btn btn-secondary btn-with-icon btn-sm">
           <i class="fa fa-plus-circle"></i>新建
-        </button>
-        <button (click)="gotoProject()" type="button" class="btn btn-with-icon btn-sm">
-          <i class="fa fa-plus-circle"></i>返回
         </button>
       </div>
     </div>

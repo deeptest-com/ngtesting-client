@@ -1,0 +1,79 @@
+<div class="module-edit container-fluid">
+
+  <div class="row">
+    <div class="list-toolbar col-xl-12">
+      <div class="title">
+        <span>编辑版本</span>
+      </div>
+
+      <div class="filter">
+
+      </div>
+
+      <div class="buttons">
+        <button (click)="gotoList()" type="button" class="btn btn-primary btn-with-icon btn-sm">
+          <i class="fa fa-plus-circle"></i>返回
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <form [formGroup]="form" (ngSubmit)="save()" class="my-validate-form">
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label"><span>名称</span></label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" name="name" formControlName="name"
+                   [(ngModel)]="model.name" #name>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label"><span>简介</span></label>
+          <div class="col-sm-10">
+              <textarea type="text" class="form-control" name="descr" formControlName="descr"
+                        [(ngModel)]="model.descr" #descr></textarea>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="offset-sm-2 col-sm-10">
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" name="disabled" formControlName="disabled"
+                       [(ngModel)]="model.disabled" #disabled>
+                &nbsp;&nbsp;关闭
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label"></label>
+          <div class="col-sm-10">
+            <button (click)="save()" type="button" class="btn btn-primary" [disabled]="!form.valid">保存</button>
+            &nbsp;
+            <button (click)="gotoList()" type="button" class="btn btn-default">取消</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button (click)="showModal()" type="button" class="btn btn-danger">删除</button>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label"></label>
+          <div class="col-sm-10">
+            <div class="validate-errors">
+              <div class="validate-error" *ngFor="let msg of formErrors">
+                <div>{{ msg }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </form>
+  </div>
+
+<pop-dialog #modalWrapper (confirm)="delete()" [title]="'提示'">
+  确认删除名为"{{model.name}}"的模块?
+</pop-dialog>
+
+

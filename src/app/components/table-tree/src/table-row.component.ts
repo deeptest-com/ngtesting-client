@@ -1,9 +1,10 @@
 import { Input, Output, EventEmitter, Component, OnInit, OnDestroy, ElementRef, Inject } from '@angular/core';
-
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import {GlobalState} from '../../../global.state';
 
 import { CONSTANT } from '../../../utils/constant';
 import { WS_CONSTANT } from '../../../utils/ws-constant';
+import {RouteService} from "../../../service/route";
 
 @Component({
   selector: '[table-row]',
@@ -22,9 +23,8 @@ export class TableRowComponent implements OnInit, OnDestroy {
 
   orgPrivileges: any;
 
-  counter = Array;
-
-  constructor(private _state: GlobalState, private el: ElementRef) {
+  constructor(private _state: GlobalState, private el: ElementRef,
+              private _routeService: RouteService) {
     this.orgId = CONSTANT.CURR_ORG_ID;
     this.orgPrivileges = CONSTANT.ORG_PRIVILEGES;
 
@@ -33,11 +33,16 @@ export class TableRowComponent implements OnInit, OnDestroy {
     //
     //   this.orgPrivileges = json.orgPrivileges;
     // });
-
   }
 
   public ngOnInit(): void {
 
+  }
+
+  config(item) {
+    CONSTANT.WORK_PRJ_NAME = item.name;
+
+    this._routeService.navTo('/pages/org/' + this.orgId + '/prjs/' + item.id + '/config');
   }
 
   ngOnDestroy(): void {

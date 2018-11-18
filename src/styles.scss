@@ -568,3 +568,24 @@ ul.al-share {
 .text-in-row {
   line-height: 30px;
 }
+
+.al-sidebar-light-wapper {
+  .al-sidebar {
+    background-color: rgba(9,30,66,0.08) !important;
+
+    a.al-sidebar-list-link {
+      color: #666666;
+      b {
+        color: #666666;
+      }
+
+      span {
+        font-size: 14px;
+      }
+    }
+
+    .slimScrollBar {
+      background-color: transparent !important;
+    }
+  }
+}

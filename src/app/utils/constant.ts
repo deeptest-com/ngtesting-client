@@ -11,6 +11,8 @@ export const CONSTANT: CONSTANT_INTERFACE = {
   CURR_ORG_NAME: undefined,
   CURR_PRJ_NAME: undefined,
 
+  WORK_PRJ_NAME: undefined, // 不一定是当期那项目
+
   TOKEN: undefined,
 
   PROFILE: undefined,
@@ -67,6 +69,8 @@ export interface CONSTANT_INTERFACE {
   CURR_ORG_NAME: string;
   CURR_PRJ_ID: number;
   CURR_PRJ_NAME: string;
+
+  WORK_PRJ_NAME: String,
 
   TOKEN: string;
 

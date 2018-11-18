@@ -3,16 +3,16 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgModule, Pipe, OnInit, AfterViewInit }      from '@angular/core';
 
-import { GlobalState } from '../../../../../global.state';
+import { GlobalState } from '../../../../global.state';
 
-import { CONSTANT, VARI, Utils } from '../../../../../utils';
-import { ValidatorUtils } from '../../../../../validator/validator.utils';
-import { RouteService } from '../../../../../service/route';
+import { CONSTANT, VARI, Utils } from '../../../../utils';
+import { ValidatorUtils } from '../../../../validator/validator.utils';
+import { RouteService } from '../../../../service/route';
 
-import { PopDialogComponent } from '../../../../../components/pop-dialog';
+import { PopDialogComponent } from '../../../../components/pop-dialog';
 
-import { ProjectService } from '../../../../../service/client/project';
-import { UserAndGroupService } from '../../../../../service/client/userAndGroup';
+import { ProjectMemberService } from '../../../../service/client/project-member';
+import { UserAndGroupService } from '../../../../service/client/userAndGroup';
 
 declare var jQuery;
 
@@ -24,7 +24,7 @@ declare var jQuery;
 })
 export class ProjectEditMember implements OnInit, AfterViewInit {
   orgId: number;
-  id: number;
+  projectId: number;
 
   formInfo: FormGroup;
   formAdd: FormGroup;
@@ -42,13 +42,15 @@ export class ProjectEditMember implements OnInit, AfterViewInit {
   @ViewChild('modalWrapper') modalWrapper: PopDialogComponent;
 
   constructor(private _state: GlobalState, private _routeService: RouteService, private _route: ActivatedRoute,
-              private fb: FormBuilder, private _projectService: ProjectService,
+              private fb: FormBuilder, private _projectMemberService: ProjectMemberService,
               private _userAndGroupService: UserAndGroupService) {
     this.orgId = CONSTANT.CURR_ORG_ID;
 
-    this._route.params.forEach(params => {
-      this.id = +params['id'];
+    this._route.pathFromRoot[6].params.forEach(params => {
+        this.projectId = +params['id'];
     });
+    console.log('projectId', this.projectId);
+
     this.loadData();
 
     this.buildForm();
@@ -67,7 +69,7 @@ export class ProjectEditMember implements OnInit, AfterViewInit {
   }
 
   loadData() {
-    this._projectService.getUsers(this.id).subscribe((json: any) => {
+    this._projectMemberService.getUsers(this.projectId).subscribe((json: any) => {
       this.projectRoles = json.projectRoles;
       this.entityInRoles = json.entityInRoles;
     });
@@ -77,12 +79,12 @@ export class ProjectEditMember implements OnInit, AfterViewInit {
     $event.preventDefault();
     $event.stopPropagation();
 
-    this.modelAdd.projectId = this.id;
+    this.modelAdd.projectId = this.projectId;
 
     const entityTypeAndIds: string[] = [];
     this.selectedModels.forEach(item => { entityTypeAndIds.push(item.type + ',' + item.id); });
 
-    this._projectService.saveMembers(this.modelAdd, entityTypeAndIds).subscribe((json: any) => {
+    this._projectMemberService.saveMembers(this.modelAdd, entityTypeAndIds).subscribe((json: any) => {
       if (json.code == 1) {
         this.searchModel = {};
         this.modelAdd = { roleId: this.modelAdd.roleId };
@@ -106,7 +108,7 @@ export class ProjectEditMember implements OnInit, AfterViewInit {
   }
 
   changeRole(roleId: number, entityId: number) {
-    this._projectService.changeRole(this.id, roleId, entityId).subscribe((json: any) => {
+    this._projectMemberService.changeRole(this.projectId, roleId, entityId).subscribe((json: any) => {
       if (json.code == 1) {
         this.entityInRoles = json.entityInRoles;
       }
@@ -114,7 +116,7 @@ export class ProjectEditMember implements OnInit, AfterViewInit {
   }
 
   gotoProject() {
-    this._routeService.navTo('/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + this.id + '/view');
+    this._routeService.navTo('/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + this.projectId + '/view');
   }
 
 }

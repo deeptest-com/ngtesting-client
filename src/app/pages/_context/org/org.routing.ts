@@ -16,7 +16,7 @@ export const routes: Routes = [
     children: [
       { path: 'view', component: OrgView },
 
-      { path: 'prjs', loadChildren: '../../project/project/project.module#ProjectModule' },
+      { path: 'prjs', loadChildren: '../../project/project.module#ProjectModule' },
       { path: 'prj', loadChildren: './prj/prj.module#PrjModule' },
     ],
   },

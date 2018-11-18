@@ -49,7 +49,7 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
   layout: string = CONSTANT.PROFILE.issueView;
   @ViewChild('modalWrapper') modalWrapper: PopDialogComponent;
 
-  constructor(private _activeRoute: ActivatedRoute, private _router: Router,
+  constructor(private _activeRoute: ActivatedRoute, private _router: Router, private _routeService: RouteService,
               private _tqlService: TqlService, private _clientService: ClientService,
               private _queryService: IssueQueryService, private _issueService: IssueService) {
 
@@ -156,6 +156,11 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
 
     this._clientService.setIssueView(layout).subscribe((json: any) => {
     });
+  }
+
+  create() {
+    const url = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + CONSTANT.CURR_PRJ_ID + '/issue/null/edit';
+    this._routeService.navTo(url);
   }
 
   showModal(): void {

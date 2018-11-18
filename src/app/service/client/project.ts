@@ -15,6 +15,11 @@ export class ProjectService {
     return this._reqService.post(this._apiBase + 'list', query);
   }
 
+  get(id: number) {
+    const model = { id: id };
+    return this._reqService.post(this._apiBase + 'get', model);
+  }
+
   getInfo(id: number) {
     const model = { id: id };
     return this._reqService.post(this._apiBase + 'getInfo', model);
@@ -32,7 +37,8 @@ export class ProjectService {
     return this._reqService.post(this._apiBase + 'saveMembers', model);
   }
   changeRole(projectId: number, roleId: number, entityId: number) {
-    return this._reqService.post(this._apiBase + 'changeRole', { projectId: projectId, roleId: roleId, entityId: entityId });
+    return this._reqService.post(this._apiBase + 'changeRole',
+      { projectId: projectId, roleId: roleId, entityId: entityId });
   }
 
   delete(id: number) {

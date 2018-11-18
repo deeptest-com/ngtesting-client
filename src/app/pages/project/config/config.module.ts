@@ -18,22 +18,28 @@ import { RouteService } from '../../../service/route';
 import { RequestService } from '../../../service/request';
 import { DatetimePickerService } from '../../../service/datetime-picker';
 
-import { routing }       from './project.routing';
-import { ProjectService } from '../../../service/client/project';
+import { routing } from './config.routing';
+
+import { BaMenuService } from '../../../theme';
 import { UserService } from '../../../service/client/user';
 import { UserAndGroupService } from '../../../service/client/userAndGroup';
+import { ProjectService } from '../../../service/client/project';
+
+import { ProjectConfigService } from '../../../service/client/project-config';
+import { ProjectMemberService } from '../../../service/client/project-member';
+
+import { ModuleService } from '../../../service/client/module';
 import { VerService } from '../../../service/client/ver';
 import { EnvService } from '../../../service/client/env';
 
-import { Project } from './project.component';
-import { ProjectList } from './list/list.component';
-
-import { ProjectEditInfo } from './edit/info/info.component';
-import { ProjectEditMember } from './edit/member/member.component';
-import { ProjectVerList } from './edit/ver/list.component';
-import { ProjectVerEdit } from './edit/ver/edit.component';
-import { ProjectEnvList } from './edit/env/list.component';
-import { ProjectEnvEdit } from './edit/env/edit.component';
+import { ProjectConfig } from './config.component';
+import { ProjectEditMember } from './member/member.component';
+import { ProjectModuleList } from './module/list.component';
+import { ProjectModuleEdit } from './module/edit.component';
+import { ProjectVerList } from './ver/list.component';
+import { ProjectVerEdit } from './ver/edit.component';
+import { ProjectEnvList } from './env/list.component';
+import { ProjectEnvEdit } from './env/edit.component';
 
 @NgModule({
   imports: [
@@ -53,25 +59,29 @@ import { ProjectEnvEdit } from './edit/env/edit.component';
     AppTranslationModule,
   ],
   declarations: [
-    Project,
-    ProjectList,
-    ProjectEditInfo,
     ProjectEditMember,
+    ProjectModuleList,
+    ProjectModuleEdit,
     ProjectVerList,
     ProjectVerEdit,
     ProjectEnvList,
     ProjectEnvEdit,
+    ProjectConfig,
   ],
   providers: [
     RouteService,
     RequestService,
     DatetimePickerService,
-    ProjectService,
+    BaMenuService,
     UserService,
     UserAndGroupService,
+
+    ProjectService, ProjectConfigService,
+    ProjectMemberService,
+    ModuleService,
     VerService,
     EnvService,
   ],
 })
-export class ProjectModule {}
+export class ConfigModule {}
 

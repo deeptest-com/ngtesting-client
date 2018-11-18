@@ -99,8 +99,7 @@ export class IssueEdit implements OnInit, AfterViewInit, OnDestroy {
   }
 
   back() {
-    const url = '/pages/org/' + this.orgId + '/prj/' + this.prjId + '/issue/query/' + CONSTANT.ISSUE_JQL;
-    console.log(url);
+    const url = '/pages/org/' + this.orgId + '/prj/' + this.prjId + '/issue/query/lastest';
     this._routeService.navTo(url);
   }
 

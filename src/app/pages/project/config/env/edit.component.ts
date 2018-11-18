@@ -3,15 +3,15 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgModule, Pipe, OnInit, AfterViewInit }      from '@angular/core';
 
-import { GlobalState } from '../../../../../global.state';
+import { GlobalState } from '../../../../global.state';
 
-import { CONSTANT, VARI, Utils } from '../../../../../utils';
-import { ValidatorUtils } from '../../../../../validator/validator.utils';
-import { RouteService } from '../../../../../service/route';
+import { CONSTANT, VARI, Utils } from '../../../../utils';
+import { ValidatorUtils } from '../../../../validator/validator.utils';
+import { RouteService } from '../../../../service/route';
 
-import { PopDialogComponent } from '../../../../../components/pop-dialog';
+import { PopDialogComponent } from '../../../../components/pop-dialog';
 
-import { EnvService } from '../../../../../service/client/env';
+import { EnvService } from '../../../../service/client/env';
 
 declare var jQuery;
 

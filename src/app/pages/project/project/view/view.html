@@ -12,7 +12,8 @@
         </div>
 
         <div class="buttons">
-          <button [routerLink]="['/pages/org/' + orgId + '/prjs']" type="button" class="btn btn-primary btn-with-icon btn-sm">
+          <button [routerLink]="['/pages/org/' + orgId + '/prjs']" type="button"
+                  class="btn btn-secondary btn-with-icon btn-sm">
             <i class="fa fa-plus-circle"></i>返回
           </button>
         </div>
@@ -66,85 +67,6 @@
   </div>
 
   <div class="info">
-    <div *ngIf="project.type=='project' && project.privs != null && project.privs['project-maintain']" class="manage">
-      <div class="tabs-container light">
-        <div class="tabs">
-          <ngb-tabset  (tabChange)="tabChange($event.nextId)">
-            <ngb-tab id="ver">
-              <ng-template ngbTabTitle>版本</ng-template>
-              <ng-template ngbTabContent></ng-template>
-            </ngb-tab>
-            <ngb-tab id="env">
-              <ng-template ngbTabTitle>环境</ng-template>
-              <ng-template ngbTabContent></ng-template>
-            </ngb-tab>
-            <ngb-tab id="user">
-              <ng-template ngbTabTitle>用户</ng-template>
-              <ng-template ngbTabContent></ng-template>
-            </ngb-tab>
-            <ngb-tab id="team">
-              <ng-template ngbTabTitle>团队</ng-template>
-              <ng-template ngbTabContent></ng-template>
-            </ngb-tab>
-          </ngb-tabset>
-        </div>
-      </div>
-      <div class="tab-bottom-space"></div>
-
-      <div [class.hidden]="tab != 'ver'" class="project-manage">
-        <div class="more">
-              <span [routerLink]="['/pages/org/' + orgId + '/prjs/' +project.id+ '/edit/ver/list']"
-                    class="link no-underline">管理</span>
-        </div>
-
-        <div>
-          <div class="item" *ngFor="let ver of vers; let i = index;">
-            <div><span class="dict">{{ver.name}}</span> 创建于 {{ver.createTime | date:'y/MM/dd'}}</div>
-          </div>
-        </div>
-      </div>
-
-      <div [class.hidden]="tab != 'env'" class="project-manage">
-        <div class="more">
-              <span [routerLink]="['/pages/org/' + orgId + '/prjs/' +project.id+ '/edit/env/list']"
-                    class="link no-underline">管理</span>
-        </div>
-
-        <div>
-          <div class="item" *ngFor="let env of envs; let i = index;">
-            <div><span class="dict">{{env.name}}</span> 创建于 {{env.createTime | date:'y/MM/dd'}}</div>
-          </div>
-        </div>
-      </div>
-
-      <div [class.hidden]="tab != 'user'" class="project-manage">
-        <div class="more">
-              <span [routerLink]="['/pages/org/' + orgId + '/prjs/' +project.id+ '/edit/member']"
-                    class="link no-underline">管理</span>
-        </div>
-
-        <div>
-          <div class="item" *ngFor="let usr of users; let i = index;">
-            <div><span class="dict">{{usr.nickname}}</span> {{usr.createTime | date:'y/MM/dd'}} 加入</div>
-          </div>
-        </div>
-      </div>
-
-      <div [class.hidden]="tab != 'team'" class="project-manage">
-        <div class="more">
-              <span [routerLink]="['/pages/org/' + orgId + '/prjs/' +project.id+ '/edit/member']"
-                    class="link no-underline">管理</span>
-        </div>
-
-        <div>
-          <div class="item" *ngFor="let grp of groups; let i = index;">
-            <div><span class="dict">{{grp.name}}</span> {{grp.createTime | date:'y/MM/dd'}} 加入</div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
     <div class="activity">
       <div class="title">
         项目活动

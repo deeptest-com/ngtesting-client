@@ -78,6 +78,12 @@
       <button class="btn btn-default dropdown" ngbDropdownToggle>问题</button>
 
       <div class="dropdown-menu">
+        <button class="dropdown-item">
+          <a [routerLink]="['/pages/org/' + orgId + '/prj/' + prjId + '/issue/null/edit']">新建问题</a>
+        </button>
+
+        <li class="dropdown-divider"></li>
+
         <button (click)="gotoModule('issue', 'lastest')" class="dropdown-item">
           <a href="javacript:void(0);">当前查询</a>
         </button>
