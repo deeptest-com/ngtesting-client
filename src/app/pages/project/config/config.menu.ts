@@ -41,7 +41,7 @@ export let configMenu = function (orgId, prjId, prjName) {
             },
             {
               path: 'org/' + orgId + '/prjs/' + prjId + '/config/member',
-              data: { menu: { title: '用户', icon: 'ion-edit', selected: false, order: 4 } },
+              data: { menu: { title: '成员', icon: 'ion-edit', selected: false, order: 4 } },
             },
 
           ],

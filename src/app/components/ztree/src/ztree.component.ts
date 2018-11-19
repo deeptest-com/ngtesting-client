@@ -88,6 +88,9 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.settings.jumpTo) {
       this.jumpTo(this.settings.jumpTo);
     }
+
+    this.currNode = this.ztree.getNodes()[0];
+    this.notifyCaseChange(this.currNode);
   }
 
   public constructor(private _state: GlobalState, private _routeService: RouteService,

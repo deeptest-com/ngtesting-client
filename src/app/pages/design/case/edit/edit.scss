@@ -10,27 +10,13 @@
   }
 
   .module-tips {
+    position: relative;
     padding: 0 20px;
 
-    .case-data {
-      margin-bottom: 10px;
-      .row {
-        line-height: 20px;
-        label {
-          max-width: 80px;
-        }
-
-        &.header {
-          line-height: 30px;
-          font-size: 15px;
-        }
-        .pass {
-          color: #209e91;
-        }
-        .fail {
-          color: #e85656;
-        }
-      }
+    .export {
+      position: absolute;
+      top: 6px;
+      right: 6px;
     }
   }
 

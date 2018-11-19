@@ -1,7 +1,6 @@
 <div class="case-edit">
   <div [class.hidden]="model.id" class="module-tips">
     <div *ngIf="model.childrenCount">
-
       <div class="case-data">
         <div class="row header">用例类型：</div>
         <div *ngIf="model.childrenCount.functional" class="row">
@@ -39,6 +38,9 @@
       </div>
     </div>
 
+    <div class="export">
+      <span (click)="exportAll()" class="link">导出用例</span>
+    </div>
   </div>
 
   <div [class.hidden]="!model.id" class="row">

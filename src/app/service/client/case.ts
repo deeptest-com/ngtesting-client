@@ -57,4 +57,8 @@ export class CaseService {
     return this._reqService.post(this._apiBase + 'reviewResult', { id: id, result: result });
   }
 
+  exportAll() {
+    return this._reqService.post(this._apiBase + 'exportAll', {});
+  }
+
 }

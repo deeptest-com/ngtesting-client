@@ -3,7 +3,7 @@ import {Component, ViewEncapsulation, NgModule, Pipe, OnInit, AfterViewInit, OnD
 import {GlobalState} from '../../../../global.state';
 
 import { CONSTANT } from '../../../../utils/constant';
-
+import { Utils } from '../../../../utils/utils';
 import { CaseService } from '../../../../service/client/case';
 import { CaseStepService } from '../../../../service/client/case-step';
 import { CaseCommentsService } from '../../../../service/client/case-comments';
@@ -100,8 +100,14 @@ export class CaseView implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
+  exportAll() {
+    this._caseService.exportAll().subscribe((json: any) => {
+      Utils.download(json.excelPath);
+    });
+  }
+
   ngOnDestroy(): void {
     this._state.unsubscribe(CONSTANT.EVENT_CASE_EDIT, this.eventCode);
-  };
+  }
 }
 

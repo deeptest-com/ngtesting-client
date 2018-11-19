@@ -7,6 +7,7 @@ import { ToastyService, ToastyConfig, ToastOptions, ToastData } from 'ng2-toasty
 import { GlobalState } from '../../../../global.state';
 import { WS_CONSTANT } from '../../../../utils/ws-constant';
 import { CONSTANT } from '../../../../utils/constant';
+import { Utils } from '../../../../utils/utils';
 import { ValidatorUtils } from '../../../../validator/validator.utils';
 
 import { CaseService } from '../../../../service/client/case';
@@ -229,6 +230,12 @@ export class CaseEdit implements OnInit, AfterViewInit, OnDestroy {
     } else {
       this._state.notifyDataChanged(CONSTANT.EVENT_COMMENTS_SAVE, { result: result, summary: '评审通过' });
     }
+  }
+
+  exportAll() {
+    this._caseService.exportAll().subscribe((json: any) => {
+      Utils.download(json.excelPath);
+    });
   }
 
   ngOnDestroy(): void {

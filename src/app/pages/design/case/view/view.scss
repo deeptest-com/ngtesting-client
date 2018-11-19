@@ -4,7 +4,14 @@
   margin: 5px;
 
   .module-tips {
+    position: relative;
     padding: 0 20px;
+
+    .export {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+    }
   }
 
   .comments {

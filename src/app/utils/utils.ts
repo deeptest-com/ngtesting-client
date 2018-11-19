@@ -189,6 +189,16 @@ export let Utils: any = {
     arr[otherIdx].ordr = tempOrdr;
   },
 
+  download(url) {
+    const form = $('<form>');
+    form.attr('style', 'display:none');
+    form.attr('target', '');
+    form.attr('method', 'get');
+    form.attr('action', CONSTANT.SERVICE_URL + url);
+    $('body').append(form);
+    form.submit();
+  },
+
 };
 
 export class Deferred {
