@@ -29,6 +29,12 @@ body {
 .dict {
   color: black;
 }
+
+table.th-bolder {
+  th {
+    font-weight: 700;
+  }
+}
 tr.selected {
   color: #209e91;
 }
