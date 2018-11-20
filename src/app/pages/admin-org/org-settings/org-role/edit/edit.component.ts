@@ -112,7 +112,7 @@ export class OrgRoleEdit implements OnInit, AfterViewInit {
   selectUsers(key: string) {
     const val = key === 'all' ? true : false;
     for (const item of this.users) {
-      if (this.orgRole.code != 'org_admin' || this.currUserId != item.userId) {
+      if (this.orgRole.code != 'org_admin' || this.currUserId != item.userId) { // 不改变当前用户的组织管理员身份
         item.selecting = val;
       }
     }
