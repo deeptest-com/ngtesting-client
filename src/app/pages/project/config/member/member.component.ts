@@ -126,5 +126,13 @@ export class ProjectEditMember implements OnInit, AfterViewInit {
     });
   }
 
+  remove(item) {
+    this._projectMemberService.remove(this.projectId, item).subscribe((json: any) => {
+      if (json.code == 1) {
+        this.entityInRoles = json.entityInRoles;
+      }
+    });
+  }
+
 }
 

@@ -30,7 +30,7 @@ export class GroupEdit implements OnInit, AfterViewInit {
   group: any = {};
   relations: any[] = [];
   form: FormGroup;
-  isSubmitted: boolean;
+
   @ViewChild('modalWrapper') modalWrapper: PopDialogComponent;
 
   constructor(private _state: GlobalState, private _routeService: RouteService, private _route: ActivatedRoute,
@@ -73,7 +73,7 @@ export class GroupEdit implements OnInit, AfterViewInit {
   formErrors = [];
   validateMsg = {
     'name': {
-      'required':      '姓名不能为空',
+      'required': '姓名不能为空',
     },
     'descr': {},
   };

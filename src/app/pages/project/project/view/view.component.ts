@@ -44,8 +44,6 @@ export class ProjectView implements OnInit, AfterViewInit, OnDestroy {
       if (this.id != +params['prjId']) {
         this.id = +params['prjId'];
         this.loadData();
-
-        this.tabChange(this.tab);
       }
     });
   }
@@ -71,28 +69,6 @@ export class ProjectView implements OnInit, AfterViewInit, OnDestroy {
     this._reportService.projectReport(this.id).subscribe((json: any) => {
       this.chartData = json.data;
     });
-  }
-
-  tabChange(tab: any) {
-    if (this.tab != tab) {
-      this.tab = tab;
-    }
-
-    if (this.tab === 'ver') {
-      this._verService.listLastest().subscribe((json: any) => {
-        this.vers = json.data;
-      });
-    } else if (this.tab === 'env') {
-      this._envService.listLastest().subscribe((json: any) => {
-        this.envs = json.data;
-      });
-    } else if (this.tab === 'user') {
-      this._userService.listLastest().subscribe((json: any) => {
-        this.users = json.data;
-      });
-    } else if (this.tab === 'team') {
-
-    }
   }
 
   ngOnDestroy(): void {

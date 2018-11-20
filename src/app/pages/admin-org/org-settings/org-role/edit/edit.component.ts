@@ -31,12 +31,14 @@ export class OrgRoleEdit implements OnInit, AfterViewInit {
   users: any[] = [];
   groups: any[] = [];
 
+  currUserId: any;
+
   form: any;
   @ViewChild('modalWrapper') modalWrapper: PopDialogComponent;
 
   constructor(private _state: GlobalState, private _routeService: RouteService, private _route: ActivatedRoute,
               private fb: FormBuilder, private orgRoleService: OrgRoleService) {
-
+    this.currUserId = CONSTANT.PROFILE.id;
   }
   ngOnInit() {
     const that = this;
@@ -101,12 +103,27 @@ export class OrgRoleEdit implements OnInit, AfterViewInit {
     });
   }
 
-  select(key: string) {
+  selectPrivileges(key: string) {
     const val = key === 'all' ? true : false;
     for (const item of this.privileges) {
       item.selecting = val;
     }
   }
+  selectUsers(key: string) {
+    const val = key === 'all' ? true : false;
+    for (const item of this.users) {
+      if (this.orgRole.code != 'org_admin' || this.currUserId != item.userId) {
+        item.selecting = val;
+      }
+    }
+  }
+  selectGroups(key: string) {
+    const val = key === 'all' ? true : false;
+    for (const item of this.groups) {
+      item.selecting = val;
+    }
+  }
+
   tabChange(event: any) {
     this.tab = event.nextId;
   }

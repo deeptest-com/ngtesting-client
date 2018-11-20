@@ -25,5 +25,10 @@ export class ProjectMemberService {
       { projectId: projectId, roleId: roleId, entityId: entityId });
   }
 
+  remove(projectId: number, item: any) {
+    return this._reqService.post(this._apiBase + 'remove',
+      { projectId: projectId, type: item.type, entityId: item.entityId });
+  }
+
 }
 

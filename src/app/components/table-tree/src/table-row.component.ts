@@ -21,12 +21,12 @@ export class TableRowComponent implements OnInit, OnDestroy {
   @Input()
   public keywords: string;
 
-  orgPrivileges: any;
+  // orgPrivileges: any;
 
   constructor(private _state: GlobalState, private el: ElementRef,
               private _routeService: RouteService) {
     this.orgId = CONSTANT.CURR_ORG_ID;
-    this.orgPrivileges = CONSTANT.ORG_PRIVILEGES;
+    // this.orgPrivileges = CONSTANT.ORG_PRIVILEGES;
 
     // this._state.subscribe(WS_CONSTANT.WS_ORG_SETTINGS, this.eventCode, (json) => {
     //   console.log(WS_CONSTANT.WS_ORG_SETTINGS + ' in ' + this.eventCode, json);
@@ -43,6 +43,21 @@ export class TableRowComponent implements OnInit, OnDestroy {
     CONSTANT.WORK_PRJ_NAME = item.name;
 
     this._routeService.navTo('/pages/org/' + this.orgId + '/prjs/' + item.id + '/config');
+  }
+
+  canView(project: any) {
+    return project.privs != null && project.privs['project-view'];
+  }
+  canEditProject(project: any) {
+    console.log('===', CONSTANT.ORG_PRIVILEGES);
+    return CONSTANT.ORG_PRIVILEGES['org-admin'] || CONSTANT.ORG_PRIVILEGES['project-admin'] ||
+      (project.privs != null && project.privs['project-maintain']);
+  }
+  canDesign(project: any) {
+    return project.privs != null && (project.privs['test_case-view'] || project.privs['test_case-maintain']);
+  }
+  canExe(project: any) {
+    return project.privs != null && (project.privs['test_task-view'] || project.privs['test_task-exe']);
   }
 
   ngOnDestroy(): void {
