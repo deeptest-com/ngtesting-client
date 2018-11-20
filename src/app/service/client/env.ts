@@ -31,9 +31,9 @@ export class EnvService {
     return this._reqService.post(this.apiBase + 'delete', model);
   }
 
-  changeOrder(id: number, act: string) {
-    let model = { id: id, act: act };
-    return this._reqService.post(this.apiBase + 'changeOrder', model);
+  changeOrder(id: number, act: string, queryModel: any) {
+    _.merge(queryModel, { id: id, act: act } );
+    return this._reqService.post(this.apiBase + 'changeOrder', queryModel);
   }
 
 }

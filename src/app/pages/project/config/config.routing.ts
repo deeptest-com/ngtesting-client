@@ -20,13 +20,13 @@ const routes: Routes = [
     component: ProjectConfig,
     children: [
       { path: 'module/list', component: ProjectModuleList },
-      { path: 'module/:vid', component: ProjectModuleEdit },
+      { path: 'module/:id', component: ProjectModuleEdit },
 
       { path: 'ver/list', component: ProjectVerList },
-      { path: 'ver/:vid', component: ProjectVerEdit },
+      { path: 'ver/:id', component: ProjectVerEdit },
 
       { path: 'env/list', component: ProjectEnvList },
-      { path: 'env/:eid', component: ProjectEnvEdit },
+      { path: 'env/:id', component: ProjectEnvEdit },
 
       { path: 'member', component: ProjectEditMember },
     ],

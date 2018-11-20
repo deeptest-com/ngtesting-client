@@ -11,7 +11,7 @@
       </div>
 
       <div class="buttons">
-        <button (click)="gotoList()" type="button" class="btn btn-primary btn-with-icon btn-sm">
+        <button (click)="gotoList()" type="button" class="btn btn-secondary btn-with-icon btn-sm">
           <i class="fa fa-plus-circle"></i>返回
         </button>
       </div>
@@ -41,7 +41,7 @@
               <label class="form-check-label">
                 <input type="checkbox" class="form-check-input" name="disabled" formControlName="disabled"
                        [(ngModel)]="model.disabled" #disabled>
-                &nbsp;&nbsp;关闭
+                &nbsp;&nbsp;归档
               </label>
             </div>
           </div>
@@ -71,7 +71,5 @@
     </form>
 
 <pop-dialog #modalWrapper (confirm)="delete()" [title]="'提示'">
-  确认删除名为"{{model.name}}"的环境配置?
+  确认删除名为"{{model.name}}"的环境?
 </pop-dialog>
-
-

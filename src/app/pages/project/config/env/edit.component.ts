@@ -38,10 +38,13 @@ export class ProjectEnvEdit implements OnInit, AfterViewInit {
     const that = this;
     this.orgId = CONSTANT.CURR_ORG_ID;
 
-    this._route.params.forEach(params => {
-      that.projectId = +params['id'];
-      that.id = +params['eid'];
+    this._route.pathFromRoot[6].params.forEach(params => {
+      this.projectId = +params['id'];
     });
+    this._route.params.forEach(params => {
+      that.id = +params['id'];
+    });
+    console.log('projectId', this.projectId, 'id', this.id);
 
     that.loadData();
 
@@ -109,7 +112,7 @@ export class ProjectEnvEdit implements OnInit, AfterViewInit {
   }
 
   gotoList() {
-    const uri = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prjs/' + this.projectId + '/edit/env/list';
+    const uri = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prjs/' + this.projectId + '/config/env/list';
     this._routeService.navTo(uri);
   }
   showModal(): void {

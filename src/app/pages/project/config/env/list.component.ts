@@ -29,6 +29,7 @@ export class ProjectEnvList implements OnInit, AfterViewInit {
       this.projectId = +params['id'];
     });
     console.log('projectId', this.projectId);
+    this.queryModel.projectId = this.projectId;
 
     this.queryForm = this.fb.group(
       {
@@ -48,13 +49,13 @@ export class ProjectEnvList implements OnInit, AfterViewInit {
 
   create() {
     const uri = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prjs/' + this.projectId
-      + '/edit/env/null';
+      + '/config/env/null';
     this._routeService.navTo(uri);
   }
 
   edit(id: number): void {
     const uri = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prjs/' + this.projectId
-      + '/edit/env/' + id;
+      + '/config/env/' + id;
     this._routeService.navTo(uri);
   }
   delete($event: any): void {
@@ -63,14 +64,14 @@ export class ProjectEnvList implements OnInit, AfterViewInit {
     logger.log($event);
   }
   up(item: any) {
-    this._envService.changeOrder(item.id, 'up').subscribe((json: any) => {
+    this._envService.changeOrder(item.id, 'up', this.queryModel).subscribe((json: any) => {
       if (json.code == 1) {
         this.models = json.data;
       }
     });
   }
   down(item: any) {
-    this._envService.changeOrder(item.id, 'down').subscribe((json: any) => {
+    this._envService.changeOrder(item.id, 'down', this.queryModel).subscribe((json: any) => {
       if (json.code == 1) {
         this.models = json.data;
       }

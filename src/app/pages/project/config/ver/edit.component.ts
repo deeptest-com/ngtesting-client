@@ -34,17 +34,19 @@ export class ProjectVerEdit implements OnInit, AfterViewInit {
 
   constructor(private _state: GlobalState, private _routeService: RouteService, private _route: ActivatedRoute,
               private fb: FormBuilder, private _verService: VerService) {
-    const that = this;
     this.orgId = CONSTANT.CURR_ORG_ID;
 
-    this._route.params.forEach(params => {
-      that.projectId = +params['id'];
-      that.id = +params['vid'];
+    this._route.pathFromRoot[6].params.forEach(params => {
+      this.projectId = +params['id'];
     });
+    this._route.params.forEach(params => {
+      this.id = +params['id'];
+    });
+    console.log('projectId', this.projectId, 'id', this.id);
 
     this.loadData();
 
-    that.buildForm();
+    this.buildForm();
   }
   ngOnInit() {
 
@@ -107,7 +109,7 @@ export class ProjectVerEdit implements OnInit, AfterViewInit {
   }
 
   gotoList() {
-    const uri = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prjs/' + this.projectId + '/edit/ver/list';
+    const uri = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prjs/' + this.projectId + '/config/ver/list';
     this._routeService.navTo(uri);
   }
 

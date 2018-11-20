@@ -95,10 +95,21 @@ export class ProjectEditMember implements OnInit, AfterViewInit {
   }
 
   changeSearch(searchModel: any): void {
-    const ids = [];
-    this.selectedModels.forEach(item => { ids.push(item.id); });
+    const userIds = [];
+    this.selectedModels.forEach(item => {
+      if (item.type == 'user') {
+        userIds.push(item.id);
+      }
+    });
 
-    this._userAndGroupService.search(searchModel.keywords, ids).subscribe((json: any) => {
+    const groupIds = [];
+    this.selectedModels.forEach(item => {
+      if (item.type == 'group') {
+        groupIds.push(item.id);
+      }
+    });
+
+    this._userAndGroupService.search(searchModel.keywords, userIds, groupIds).subscribe((json: any) => {
       if (json.data.length == 0) {
         this.entitySearchResult = null;
       } else {
@@ -113,10 +124,6 @@ export class ProjectEditMember implements OnInit, AfterViewInit {
         this.entityInRoles = json.entityInRoles;
       }
     });
-  }
-
-  gotoProject() {
-    this._routeService.navTo('/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + this.projectId + '/view');
   }
 
 }

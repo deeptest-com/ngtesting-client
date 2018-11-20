@@ -12,7 +12,7 @@ export class ProjectMemberService {
   _apiBase = 'client/project_member/';
 
   getUsers(id: number) {
-    const model = { id: id };
+    const model = { projectId: id };
     return this._reqService.post(this._apiBase + 'getUsers', model);
   }
 

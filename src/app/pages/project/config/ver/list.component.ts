@@ -28,6 +28,7 @@ export class ProjectVerList implements OnInit, AfterViewInit {
       this.projectId = +params['id'];
     });
     console.log('projectId', this.projectId);
+    this.queryModel.projectId = this.projectId;
 
     this.queryForm = this.fb.group(
       {
@@ -47,27 +48,27 @@ export class ProjectVerList implements OnInit, AfterViewInit {
 
   create() {
     const uri = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prjs/' + this.projectId
-      + '/edit/ver/null';
+      + '/config/ver/null';
     this._routeService.navTo(uri);
   }
 
   edit(id: number): void {
     const uri = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prjs/' + this.projectId
-      + '/edit/ver/' + id;
+      + '/config/ver/' + id;
     this._routeService.navTo(uri);
   }
   delete($event: any): void {
     console.log($event);
   }
   up(item: any) {
-    this._verService.changeOrder(item.id, 'up').subscribe((json:any) => {
+    this._verService.changeOrder(item.id, 'up', this.queryModel).subscribe((json:any) => {
       if (json.code == 1) {
         this.models = json.data;
       }
     });
   }
   down(item: any) {
-    this._verService.changeOrder(item.id, 'down').subscribe((json:any) => {
+    this._verService.changeOrder(item.id, 'down', this.queryModel).subscribe((json:any) => {
       if (json.code == 1) {
         this.models = json.data;
       }
