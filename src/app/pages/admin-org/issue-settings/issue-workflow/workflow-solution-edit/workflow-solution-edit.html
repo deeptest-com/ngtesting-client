@@ -24,7 +24,7 @@
         &nbsp;
         <button (click)="back()" type="button" class="btn btn-default">取消</button>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <button (click)="showModal()" *ngIf="solution.id" type="button" class="btn btn-danger">删除</button>
+        <button (click)="showModal()" *ngIf="solution.id && !solution.buildIn" type="button" class="btn btn-danger">删除</button>
       </div>
     </div>
 

@@ -42,6 +42,14 @@ export class IssuePrioritySolutionList implements OnInit, AfterViewInit {
     console.log($event);
   }
 
+  setDefault(item: any): void {
+    this.issuePrioritySolutionService.setDefault(item.id).subscribe((json: any) => {
+      if (json.code == 1) {
+        this.models = json.data;
+      }
+    });
+  }
+
   loadData() {
     this.issuePrioritySolutionService.list().subscribe((json: any) => {
       this.models = json.data;

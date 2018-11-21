@@ -42,6 +42,14 @@ export class IssuePageSolutionList implements OnInit, AfterViewInit {
     this._routeService.navTo('/pages/org-admin/issue-settings/issue-page/page-solution-config/' + item.id);
   }
 
+  setDefault(item: any): void {
+    this.solutionService.setDefault(item.id).subscribe((json: any) => {
+      if (json.code == 1) {
+        this.solutions = json.solutions;
+      }
+    });
+  }
+
   loadData() {
     this.solutionService.load().subscribe((json: any) => {
       this.solutions = json.solutions;

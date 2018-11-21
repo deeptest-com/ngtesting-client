@@ -38,6 +38,14 @@ export class IssueTypeSolutionList implements OnInit, AfterViewInit {
     this._routeService.navTo('/pages/org-admin/issue-settings/issue-type/type-solution-edit/' + item.id);
   }
 
+  setDefault(item: any): void {
+    this.issueTypeSolutionService.setDefault(item.id).subscribe((json: any) => {
+      if (json.code == 1) {
+        this.models = json.data;
+      }
+    });
+  }
+
   loadData() {
     const that = this;
 

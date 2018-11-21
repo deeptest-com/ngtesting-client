@@ -22,7 +22,8 @@
       <thead class="thead-inverse">
       <tr>
         <th>名称</th>
-        <th>状态</th>
+        <th style="width: 250px;">是否默认</th>
+        <th style="width: 250px;">是否內置</th>
         <th>更新时间</th>
         <th style="width: 250px;">操作</th>
       </tr>
@@ -30,11 +31,11 @@
       <tbody>
       <tr *ngFor="let item of models; let i = index;">
         <td>{{ item.name }}</td>
-        <td>{{ item.statuses }}</td>
         <td>
-          <span *ngIf="item.updateTime">{{ item.updateTime | date:'y/MM/dd HH:mm:ss' }}</span>
-          <span *ngIf="!item.updateTime">{{ item.createTime | date:'y/MM/dd HH:mm:ss' }}</span>
+          <input *ngIf="!item.default" (change)="setDefault(item)" [(ngModel)]="item.default" type="checkbox" name="default" #default>
+          <input *ngIf="item.default" onclick="return false;" [(ngModel)]="item.default" type="checkbox" name="default" #default>
         </td>
+        <td>{{ item.buildIn | trueOrFalse }}</td>
         <td>
           <span (click)="edit(item)" class="link no-underline">编辑</span>
           <span (click)="design(item)" class="link no-underline">状态转换</span>

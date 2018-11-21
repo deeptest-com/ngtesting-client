@@ -40,6 +40,14 @@ export class IssueWorkflowList implements OnInit, AfterViewInit {
     this._routeService.navTo('/pages/org-admin/issue-settings/issue-workflow/workflow-design/' + item.id);
   }
 
+  setDefault(item: any): void {
+    this.issueWorkflowService.setDefault(item.id).subscribe((json: any) => {
+      if (json.code == 1) {
+        this.models = json.data;
+      }
+    });
+  }
+
   loadData() {
     const that = this;
 

@@ -34,6 +34,14 @@ export class IssuePageList implements OnInit, AfterViewInit {
 
   }
 
+  setDefault(item: any): void {
+    this.issuePageService.setDefault(item.id).subscribe((json: any) => {
+      if (json.code == 1) {
+        this.pages = json.pages;
+      }
+    });
+  }
+
   editPage(item: any) {
     this._routeService.navTo('/pages/org-admin/issue-settings/issue-page/page-edit/'
       + (item ? item.id : null));

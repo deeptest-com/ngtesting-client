@@ -24,6 +24,7 @@
         <th>名称</th>
         <th>值</th>
         <th style="width: 250px;">是否默认</th>
+        <th style="width: 250px;">是否內置</th>
         <th style="width: 250px;">操作</th>
       </tr>
       </thead>
@@ -32,9 +33,10 @@
         <td>{{ item.label }}</td>
         <td>{{ item.value }}</td>
         <td>
-          <input *ngIf="!item.isDefault" (change)="setDefault(item)" [(ngModel)]="item.isDefault" type="checkbox" name="isDefault" #isDefault>
-          <input *ngIf="item.isDefault" onclick="return false;" [(ngModel)]="item.isDefault" type="checkbox" name="isDefault" #isDefault>
+          <input *ngIf="!item.default" (change)="setDefault(item)" [(ngModel)]="item.default" type="checkbox" name="default" #default>
+          <input *ngIf="item.default" onclick="return false;" [(ngModel)]="item.default" type="checkbox" name="default" #default>
         </td>
+        <td>{{ item.buildIn | trueOrFalse }}</td>
         <td>
           <span *ngIf="i == 0" class="ionic-icon link placeholder"></span>
           <span (click)="up(item)" *ngIf="i > 0" class="fa fa-arrow-up ionic-icon link"></span>

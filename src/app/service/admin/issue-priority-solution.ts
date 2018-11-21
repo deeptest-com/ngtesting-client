@@ -44,5 +44,10 @@ export class IssuePrioritySolutionService {
     const model = { solutionId: solutionId };
     return this._reqService.post(this._apiBase + 'removeAll', model);
   }
+
+  setDefault(id: number) {
+    const model = { id: id };
+    return this._reqService.post(this._apiBase + 'setDefault', model);
+  }
 }
 

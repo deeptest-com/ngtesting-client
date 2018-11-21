@@ -22,12 +22,19 @@
       <thead class="thead-inverse">
       <tr>
         <th>名称</th>
+        <th style="width: 250px;">是否默认</th>
+        <th style="width: 250px;">是否內置</th>
         <th style="width: 250px;">操作</th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let item of models; let i = index;">
         <td>{{ item.name }}</td>
+        <td>
+          <input *ngIf="!item.default" (change)="setDefault(item)" [(ngModel)]="item.default" type="checkbox" name="default" #default>
+          <input *ngIf="item.default" onclick="return false;" [(ngModel)]="item.default" type="checkbox" name="default" #default>
+        </td>
+        <td>{{ item.buildIn | trueOrFalse }}</td>
         <td>
           <span (click)="edit(item)" class="link no-underline">编辑</span>
         </td>

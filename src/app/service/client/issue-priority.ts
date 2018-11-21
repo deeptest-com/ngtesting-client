@@ -9,32 +9,19 @@ export class IssuePriorityService {
   constructor(private _reqService: RequestService) { }
   _apiBase = 'client/issue_priority/';
 
-  list() {
-    return this._reqService.post(this._apiBase + 'list', {});
+  getByProject(projectId: number) {
+    const model = { projectId: projectId };
+    return this._reqService.post(this._apiBase + 'getByProject', model);
   }
 
-  get(id: number) {
-    const model = { id: id };
-    return this._reqService.post(this._apiBase + 'get', model);
+  setByProject(projectId: number, solutionId: number) {
+    const model = { projectId: projectId, solutionId: solutionId };
+    return this._reqService.post(this._apiBase + 'setByProject', model);
   }
 
   save(model: any) {
     return this._reqService.post(this._apiBase + 'save', { model: model });
   }
 
-  delete(id: number) {
-    const model = { id: id };
-    return this._reqService.post(this._apiBase + 'delete', model);
-  }
-
-  setDefault(id: number) {
-    const model = { id: id };
-    return this._reqService.post(this._apiBase + 'setDefault', model);
-  }
-
-  changeOrder(id: number, act: string) {
-    const model = { id: id, act: act };
-    return this._reqService.post(this._apiBase + 'changeOrder', model);
-  }
 }
 

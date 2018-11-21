@@ -45,5 +45,10 @@ export class IssueTypeSolutionService {
     return this._reqService.post(this._apiBase + 'removeAll', model);
   }
 
+  setDefault(id: number) {
+    const model = { id: id };
+    return this._reqService.post(this._apiBase + 'setDefault', model);
+  }
+
 }
 

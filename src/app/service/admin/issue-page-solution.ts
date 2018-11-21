@@ -37,5 +37,10 @@ export class IssuePageSolutionService {
     return this._reqService.post(this._apiBase + 'changeItem', model);
   }
 
+  setDefault(id: number) {
+    const model = { id: id };
+    return this._reqService.post(this._apiBase + 'setDefault', model);
+  }
+
 }
 

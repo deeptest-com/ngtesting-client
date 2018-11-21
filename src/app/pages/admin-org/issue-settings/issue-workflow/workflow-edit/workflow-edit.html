@@ -24,7 +24,7 @@
         &nbsp;
         <button (click)="back()" workflow="button" class="btn btn-default">取消</button>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <button (click)="showModal()" *ngIf="model.id" workflow="button" class="btn btn-danger">删除</button>
+        <button (click)="showModal()" *ngIf="model.id && !model.buildIn" workflow="button" class="btn btn-danger">删除</button>
       </div>
     </div>
 

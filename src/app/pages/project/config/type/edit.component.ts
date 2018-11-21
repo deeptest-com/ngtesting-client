@@ -50,8 +50,11 @@ export class ProjectTypeEdit implements OnInit, AfterViewInit {
     });
   }
 
-  select() {
-
+  change(solutionId) {
+    this._typeService.setByProject(this.projectId, solutionId).subscribe((json: any) => {
+      this.model = json.model;
+      this.models = json.models;
+    });
   }
 
 }

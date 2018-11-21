@@ -14,6 +14,11 @@ export class IssueTypeService {
     return this._reqService.post(this._apiBase + 'getByProject', model);
   }
 
+  setByProject(projectId: number, solutionId: number) {
+    const model = { projectId: projectId, solutionId: solutionId };
+    return this._reqService.post(this._apiBase + 'setByProject', model);
+  }
+
   save(model: any) {
     return this._reqService.post(this._apiBase + 'save', { model: model });
   }

@@ -25,6 +25,17 @@
                [(ngModel)]="model.name" #name>
       </div>
     </div>
+    <div class="form-group row just-label">
+      <label class="col-sm-1 col-form-label"><span>是否默认</span></label>
+      <label class="col-sm-5 col-form-label left">
+        {{model.default | trueOrFalse}}
+      </label>
+
+      <label class="col-sm-1 col-form-label"><span>是否內置</span></label>
+      <label class="col-sm-5 col-form-label left">
+        {{model.buildIn | trueOrFalse}}
+      </label>
+    </div>
 
     <div class="form-group row">
       <label class="col-sm-2 col-form-label"></label>
@@ -102,5 +113,5 @@
 </div>
 
 <pop-dialog #modalWrapper (confirm)="delete()" [title]="'提示'">
-  确认删除名为"{{model.label}}"的用例类型?
+  确认删除名为"{{model.name}}"的优先级方案?
 </pop-dialog>

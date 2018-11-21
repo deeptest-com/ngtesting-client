@@ -83,7 +83,6 @@ export class IssueTypeSolutionEdit implements OnInit, AfterViewInit {
 
     that.issueTypeSolutionService.save(that.model).subscribe((json: any) => {
       if (json.code == 1) {
-        CONSTANT.CASE_PROPERTY_MAP = json.issuePropertyMap;
 
         that.formErrors = ['保存成功'];
         this.back();
@@ -111,6 +110,7 @@ export class IssueTypeSolutionEdit implements OnInit, AfterViewInit {
     this.issueTypeSolutionService.addType(item.id, this.id).subscribe((json: any) => {
       this.model = json.data;
       this.otherItems = json.otherItems;
+      this.id = this.model.id;
     });
   }
 
@@ -120,6 +120,7 @@ export class IssueTypeSolutionEdit implements OnInit, AfterViewInit {
     this.issueTypeSolutionService.removeType(item.id, this.id).subscribe((json: any) => {
       this.model = json.data;
       this.otherItems = json.otherItems;
+      this.id = this.model.id;
     });
   }
 

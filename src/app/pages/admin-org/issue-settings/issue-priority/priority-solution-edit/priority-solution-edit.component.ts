@@ -85,8 +85,6 @@ export class IssuePrioritySolutionEdit implements OnInit, AfterViewInit {
 
     that.issuePrioritySolutionService.save(that.model).subscribe((json: any) => {
       if (json.code == 1) {
-        CONSTANT.CASE_PROPERTY_MAP = json.issuePropertyMap;
-
         that.formErrors = ['保存成功'];
         this.back();
       } else {
@@ -118,6 +116,7 @@ export class IssuePrioritySolutionEdit implements OnInit, AfterViewInit {
     this.issuePrioritySolutionService.addPriority(item.id, this.id).subscribe((json: any) => {
       this.model = json.data;
       this.otherItems = json.otherItems;
+      this.id = this.model.id;
     });
   }
   removePriority(item) {
@@ -133,6 +132,7 @@ export class IssuePrioritySolutionEdit implements OnInit, AfterViewInit {
     this.issuePrioritySolutionService.addAll(this.id).subscribe((json: any) => {
       this.model = json.data;
       this.otherItems = json.otherItems;
+      this.id = this.model.id;
     });
   }
   removeAll() {

@@ -24,94 +24,37 @@ declare var jQuery;
 export class ProjectPriorityEdit implements OnInit, AfterViewInit {
   orgId: number;
   projectId: number;
-  id: number;
-
-  form: FormGroup;
-
   model: any = {};
-
-  @ViewChild('modalWrapper') modalWrapper: PopDialogComponent;
+  models: any[] = [];
 
   constructor(private _state: GlobalState, private _routeService: RouteService, private _route: ActivatedRoute,
-              private fb: FormBuilder, private _priorityService: IssuePriorityService) {
+              private _priorityService: IssuePriorityService) {
     this.orgId = CONSTANT.CURR_ORG_ID;
 
     this._route.pathFromRoot[6].params.forEach(params => {
       this.projectId = +params['id'];
     });
-    console.log('projectId', this.projectId, 'id', this.id);
+    console.log('projectId', this.projectId);
 
     this.loadData();
-
-    this.buildForm();
   }
   ngOnInit() {
 
   }
   ngAfterViewInit() {}
 
-  buildForm(): void {
-    this.form = this.fb.group(
-      {
-        'name': ['', [Validators.required]],
-        'descr': ['', []],
-        'disabled': ['', []],
-      }, {},
-    );
-
-    this.form.valueChanges.debounceTime(500).subscribe(data => this.onValueChanged(data));
-    this.onValueChanged();
-  }
-  onValueChanged(data?: any) {
-    this.formErrors = ValidatorUtils.genMsg(this.form, this.validateMsg, []);
-  }
-
-  formErrors = [];
-  validateMsg = {
-    'name': {
-      'required': '名称不能为空',
-    },
-  };
-
   loadData() {
-    if (!this.id) {
-      this.model = { projectId: this.projectId, disabled: false };
-      return;
-    }
-
-    this._priorityService.get(this.id).subscribe((json: any) => {
-      this.model = json.data;
+    this._priorityService.getByProject(this.projectId).subscribe((json: any) => {
+      this.model = json.model;
+      this.models = json.models;
     });
   }
 
-  save() {
-    this._priorityService.save(this.model).subscribe((json: any) => {
-      if (json.code == 1) {
-        this.gotoList();
-      } else {
-        this.formErrors = ['保存失败'];
-      }
+  change(solutionId) {
+    this._priorityService.setByProject(this.projectId, solutionId).subscribe((json: any) => {
+      this.model = json.model;
+      this.models = json.models;
     });
-  }
-
-  delete() {
-    this._priorityService.delete(this.model.id).subscribe((json: any) => {
-      if (json.code == 1) {
-        this.modalWrapper.closeModal();
-        this.gotoList();
-      } else {
-        this.formErrors = ['删除失败'];
-      }
-    });
-  }
-
-  gotoList() {
-    const uri = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prjs/' + this.projectId + '/config/priority/list';
-    this._routeService.navTo(uri);
-  }
-
-  showModal(): void {
-    this.modalWrapper.showModal();
   }
 
 }
