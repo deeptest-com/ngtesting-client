@@ -60,19 +60,19 @@ export let configMenu = function (orgId, prjId, prjName) {
           },
           children: [
             {
-              path: 'org-admin/org-settings/org/list',
+              path: 'org/' + orgId + '/prjs/' + prjId + '/config/type/edit',
               data: { menu: { title: '类型', icon: 'ion-edit', selected: false, order: 1 } },
             },
             {
-              path: 'org-admin/org-settings/org/list',
+              path: 'org/' + orgId + '/prjs/' + prjId + '/config/priority/edit',
               data: { menu: { title: '优先级', icon: 'ion-edit', selected: false, order: 2 } },
             },
             {
-              path: 'org-admin/org-settings/org/list',
+              path: 'org/' + orgId + '/prjs/' + prjId + '/config/page/edit',
               data: { menu: { title: '界面', icon: 'ion-edit', selected: false, order: 3 } },
             },
             {
-              path: 'org-admin/org-settings/org/list',
+              path: 'org/' + orgId + '/prjs/' + prjId + '/config/workflow/edit',
               data: { menu: { title: '工作流', icon: 'ion-edit', selected: false, order: 4 } },
             },
           ],

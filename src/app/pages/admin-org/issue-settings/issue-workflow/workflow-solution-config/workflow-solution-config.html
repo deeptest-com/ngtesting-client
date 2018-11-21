@@ -1,4 +1,4 @@
-<div class="issue-page-solution-config container-fluid">
+<div class="issue-workflow-solution-config container-fluid">
 
   <div class="row">
     <div class="edit-toolbar col-xl-12">
@@ -20,19 +20,17 @@
       <thead class="thead-inverse">
       <tr>
         <th style="width: 200px">问题类型</th>
-        <th style="width: 200px">创建界面</th>
-        <th style="width: 200px">编辑界面</th>
-        <th style="width: 200px">查看界面</th>
+        <th style="width: 200px">对应工作流</th>
       </tr>
       </thead>
 
       <tbody>
       <tr *ngFor="let item of itemMap | mapToArray; let i = index;">
         <td>{{item.key | section:1}}</td>
-        <td *ngFor="let opt of ['create', 'edit', 'view']; let i = index;">
-          <select (change)="change(item.key, opt, item.value[opt])" [(ngModel)]="item.value[opt]" class="form-control form-control-sm" name="parentId">
-            <option *ngFor="let page of pages" value="{{page.id+'-'+page.name}}">
-              <span>{{page.name}}</span>
+        <td>
+          <select (change)="change(item.key, item.value)" [(ngModel)]="item.value" class="form-control form-control-sm" name="parentId">
+            <option *ngFor="let workflow of workflows" value="{{workflow.id+'-'+workflow.name}}">
+              <span>{{workflow.name}}</span>
             </option>
           </select>
         </td>

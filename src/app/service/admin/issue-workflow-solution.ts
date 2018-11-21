@@ -9,17 +9,21 @@ export class IssueWorkflowSolutionService {
   constructor(private _reqService: RequestService) { }
   _apiBase = 'admin/issue_workflow_solution/';
 
-  list() {
-    return this._reqService.post(this._apiBase + 'list', {});
+  load() {
+    return this._reqService.post(this._apiBase + 'load', {});
   }
 
   get(id: number) {
     const model = { id: id };
     return this._reqService.post(this._apiBase + 'get', model);
   }
+  getConfig(id: number) {
+    const model = { id: id };
+    return this._reqService.post(this._apiBase + 'getConfig', model);
+  }
 
   save(model: any) {
-    return this._reqService.post(this._apiBase + 'save', { model: model });
+    return this._reqService.post(this._apiBase + 'save', model);
   }
 
   delete(id: number) {
@@ -27,22 +31,10 @@ export class IssueWorkflowSolutionService {
     return this._reqService.post(this._apiBase + 'delete', model);
   }
 
-  addWorkflow(workflowId: number, solutionId: number) {
-    const model = { workflowId: workflowId, solutionId: solutionId };
-    return this._reqService.post(this._apiBase + 'addWorkflow', model);
-  }
-  removeWorkflow(workflowId: number, solutionId: number) {
-    const model = { workflowId: workflowId, solutionId: solutionId };
-    return this._reqService.post(this._apiBase + 'removeWorkflow', model);
-  }
-
-  addAll(solutionId: number) {
-    const model = { solutionId: solutionId };
-    return this._reqService.post(this._apiBase + 'addAll', model);
-  }
-  removeAll(solutionId: number) {
-    const model = { solutionId: solutionId };
-    return this._reqService.post(this._apiBase + 'removeAll', model);
+  changeItem(type: string, workflow: string, solutionId: number) {
+    const model = { type: type.split('-')[0], workflow: workflow.split('-')[0],
+      solutionId: solutionId};
+    return this._reqService.post(this._apiBase + 'changeItem', model);
   }
 
 }

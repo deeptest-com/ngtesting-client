@@ -22,18 +22,6 @@ export class IssuePageSolutionService {
     return this._reqService.post(this._apiBase + 'getConfig', model);
   }
 
-  addTab(tab: any) {
-    return this._reqService.post(this._apiBase + 'addTab', tab);
-  }
-  getTab(id: number) {
-    const model = { id: id };
-    return this._reqService.post(this._apiBase + 'getTab', model);
-  }
-
-  addField(elem: any) {
-    return this._reqService.post(this._apiBase + 'addField', elem);
-  }
-
   save(model: any) {
     return this._reqService.post(this._apiBase + 'save', model);
   }
@@ -43,13 +31,10 @@ export class IssuePageSolutionService {
     return this._reqService.post(this._apiBase + 'delete', model);
   }
 
-  setDefault(id: number) {
-    const model = { id: id };
-    return this._reqService.post(this._apiBase + 'setDefault', model);
-  }
-  changeOrder(id: number, act: string) {
-    const model = { id: id, act: act };
-    return this._reqService.post(this._apiBase + 'changeOrder', model);
+  changeItem(type: string, opt: string, page: string, solutionId: number) {
+    const model = { type: type.split('-')[0], opt: opt, page: page.split('-')[0],
+      solutionId: solutionId};
+    return this._reqService.post(this._apiBase + 'changeItem', model);
   }
 
 }

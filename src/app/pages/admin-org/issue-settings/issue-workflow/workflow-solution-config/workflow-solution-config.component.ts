@@ -11,25 +11,25 @@ import { CONSTANT } from '../../../../../utils/constant';
 import { Utils } from '../../../../../utils/utils';
 import { RouteService } from '../../../../../service/route';
 
-import { IssuePageSolutionService } from '../../../../../service/admin/issue-page-solution';
+import { IssueWorkflowSolutionService } from '../../../../../service/admin/issue-workflow-solution';
 
 declare var jQuery;
 
 @Component({
-  selector: 'issue-page-solution-config',
+  selector: 'issue-workflow-solution-config',
   encapsulation: ViewEncapsulation.None,
-  styleUrls: ['./page-solution-config.scss'],
-  templateUrl: './page-solution-config.html',
+  styleUrls: ['./workflow-solution-config.scss'],
+  templateUrl: './workflow-solution-config.html',
 })
-export class IssuePageSolutionConfig implements OnInit, AfterViewInit {
+export class IssueWorkflowSolutionConfig implements OnInit, AfterViewInit {
   id: number;
 
   solution: any = {};
   itemMap: any = {};
-  pages: any[] = [];
+  workflows: any[] = [];
 
   constructor(private _state: GlobalState, private _routeService: RouteService, private _route: ActivatedRoute,
-              private fb: FormBuilder, private solutionService: IssuePageSolutionService) {
+              private fb: FormBuilder, private solutionService: IssueWorkflowSolutionService) {
 
   }
   ngOnInit() {
@@ -45,24 +45,24 @@ export class IssuePageSolutionConfig implements OnInit, AfterViewInit {
     this.solutionService.getConfig(this.id).subscribe((json: any) => {
       this.solution = json.solution;
       this.itemMap = json.itemMap;
-      this.pages = json.pages;
+      this.workflows = json.workflows;
     });
   }
 
-  change(type, opt, page) {
-    console.log(type, opt, page);
+  change(type, workflow) {
+    console.log(type, workflow);
 
-    this.solutionService.changeItem(type, opt, page, this.id).subscribe((json: any) => {
+    this.solutionService.changeItem(type, workflow, this.id).subscribe((json: any) => {
       if (json.code == 1) {
         this.solution = json.solution;
         this.itemMap = json.itemMap;
-        this.pages = json.pages;
+        this.workflows = json.workflows;
       }
     });
   }
 
   back() {
-    this._routeService.navTo('/pages/org-admin/issue-settings/issue-page/page-solution-list');
+    this._routeService.navTo('/pages/org-admin/issue-settings/issue-workflow/workflow-solution-list');
   }
 
 }

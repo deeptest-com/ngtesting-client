@@ -3,9 +3,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { NgModule, Pipe, OnInit, AfterViewInit }      from '@angular/core';
 
-import { NgbModalModule, NgbPaginationModule, NgbDropdownModule,
-  NgbTabsetModule, NgbButtonsModule, NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
-import { BrowserModule } from '@angular/platform-browser';
+import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 
 import { GlobalState } from '../../../../../global.state';
 
@@ -29,14 +27,13 @@ export class IssueWorkflowSolutionEdit implements OnInit, AfterViewInit {
 
   id: number;
 
-  model: any = {};
-  otherItems: any[] = [];
+  solution: any = { tabs: [] };
   form: FormGroup;
 
   @ViewChild('modalWrapper') modalWrapper: PopDialogComponent;
 
   constructor(private _state: GlobalState, private _routeService: RouteService, private _route: ActivatedRoute,
-              private fb: FormBuilder, private issueWorkflowSolutionService: IssueWorkflowSolutionService) {
+              private fb: FormBuilder, private solutionService: IssueWorkflowSolutionService) {
 
   }
   ngOnInit() {
@@ -50,7 +47,6 @@ export class IssueWorkflowSolutionEdit implements OnInit, AfterViewInit {
   ngAfterViewInit() {}
 
   buildForm(): void {
-    const that = this;
     this.form = this.fb.group(
       {
         'name': ['', [Validators.required]],
@@ -72,72 +68,40 @@ export class IssueWorkflowSolutionEdit implements OnInit, AfterViewInit {
   };
 
   loadData() {
-    this.issueWorkflowSolutionService.get(this.id).subscribe((json: any) => {
-      this.model = json.data;
-      this.otherItems = json.otherItems;
+    this.solutionService.get(this.id).subscribe((json: any) => {
+      this.solution = json.solution;
     });
   }
 
   save() {
-    const that = this;
-
-    that.issueWorkflowSolutionService.save(that.model).subscribe((json: any) => {
+    this.solutionService.save(this.solution).subscribe((json: any) => {
       if (json.code == 1) {
-        CONSTANT.CASE_PROPERTY_MAP = json.issuePropertyMap;
+        this.solution = json.solution;
 
-        that.formErrors = ['保存成功'];
+        this.formErrors = ['保存成功'];
+
         this.back();
       } else {
-        that.formErrors = [json.msg];
+        this.formErrors = [json.msg];
       }
     });
+  }
+  back() {
+    this._routeService.navTo('/pages/org-admin/issue-settings/issue-workflow/workflow-solution-list');
   }
 
   delete() {
-    this.issueWorkflowSolutionService.delete(this.model.id).subscribe((json: any) => {
+    const that = this;
+
+    that.solutionService.delete(that.solution.id).subscribe((json: any) => {
       if (json.code == 1) {
-        this.formErrors = ['删除成功'];
+        that.formErrors = ['删除成功'];
         this.modalWrapper.closeModal();
         this.back();
       } else {
-        this.formErrors = ['删除失败'];
+        that.formErrors = ['删除失败'];
       }
     });
-  }
-
-  addWorkflow (item) {
-    console.log('add', item);
-
-    this.issueWorkflowSolutionService.addWorkflow(item.id, this.id).subscribe((json: any) => {
-      this.model = json.data;
-      this.otherItems = json.otherItems;
-    });
-  }
-
-  removeWorkflow(item) {
-    console.log('remove', item);
-
-    this.issueWorkflowSolutionService.removeWorkflow(item.id, this.id).subscribe((json: any) => {
-      this.model = json.data;
-      this.otherItems = json.otherItems;
-    });
-  }
-
-  addAll () {
-    this.issueWorkflowSolutionService.addAll(this.id).subscribe((json: any) => {
-      this.model = json.data;
-      this.otherItems = json.otherItems;
-    });
-  }
-  removeAll() {
-    this.issueWorkflowSolutionService.removeAll(this.id).subscribe((json: any) => {
-      this.model = json.data;
-      this.otherItems = json.otherItems;
-    });
-  }
-
-  back() {
-    this._routeService.navTo('/pages/org-admin/issue-settings/issue-workflow/workflow-solution-list');
   }
 
   showModal(): void {
@@ -145,4 +109,3 @@ export class IssueWorkflowSolutionEdit implements OnInit, AfterViewInit {
   }
 
 }
-

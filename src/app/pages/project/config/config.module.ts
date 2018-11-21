@@ -32,6 +32,11 @@ import { ModuleService } from '../../../service/client/module';
 import { VerService } from '../../../service/client/ver';
 import { EnvService } from '../../../service/client/env';
 
+import { IssueTypeService } from '../../../service/client/issue-type';
+import { IssuePriorityService } from '../../../service/client/issue-priority';
+import { IssuePageService } from '../../../service/client/issue-page';
+import { IssueWorkflowService } from '../../../service/client/issue-workflow';
+
 import { ProjectConfig } from './config.component';
 import { ProjectEditMember } from './member/member.component';
 import { ProjectModuleList } from './module/list.component';
@@ -40,6 +45,11 @@ import { ProjectVerList } from './ver/list.component';
 import { ProjectVerEdit } from './ver/edit.component';
 import { ProjectEnvList } from './env/list.component';
 import { ProjectEnvEdit } from './env/edit.component';
+
+import { ProjectTypeEdit } from './type/edit.component';
+import { ProjectPriorityEdit } from './priority/edit.component';
+import { ProjectPageEdit } from './page/edit.component';
+import { ProjectWorkflowEdit } from './workflow/edit.component';
 
 @NgModule({
   imports: [
@@ -67,6 +77,11 @@ import { ProjectEnvEdit } from './env/edit.component';
     ProjectEnvList,
     ProjectEnvEdit,
     ProjectConfig,
+
+    ProjectTypeEdit,
+    ProjectPriorityEdit,
+    ProjectPageEdit,
+    ProjectWorkflowEdit,
   ],
   providers: [
     RouteService,
@@ -81,6 +96,11 @@ import { ProjectEnvEdit } from './env/edit.component';
     ModuleService,
     VerService,
     EnvService,
+
+    IssueTypeService,
+    IssuePriorityService,
+    IssuePageService,
+    IssueWorkflowService,
   ],
 })
 export class ConfigModule {}

@@ -8,16 +8,20 @@ import { RouteService } from '../../../../../service/route';
 import { IssueWorkflowSolutionService } from '../../../../../service/admin/issue-workflow-solution';
 
 @Component({
-  selector: 'issue-workflow-solution-list',
+  selector: 'issue-Module-solution-list',
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['./workflow-solution-list.scss'],
   templateUrl: './workflow-solution-list.html',
 })
 export class IssueWorkflowSolutionList implements OnInit, AfterViewInit {
-  models: any[];
+  Modules: any[];
+  solutions: any[];
 
-  constructor(private _routeService: RouteService, private _state: GlobalState, private fb: FormBuilder, private el: ElementRef,
-              private issueWorkflowSolutionService: IssueWorkflowSolutionService) {
+  contentHeight = Utils.getContainerHeight(CONSTANT.HEAD_HEIGHT + CONSTANT.FOOTER_HEIGHT);
+
+  constructor(private _routeService: RouteService, private _state: GlobalState,
+              private fb: FormBuilder, private el: ElementRef,
+              private solutionService: IssueWorkflowSolutionService) {
   }
 
   ngOnInit() {
@@ -30,19 +34,17 @@ export class IssueWorkflowSolutionList implements OnInit, AfterViewInit {
 
   }
 
-  create(): void {
-    this._routeService.navTo('/pages/org-admin/issue-settings/issue-workflow/workflow-solution-edit/null');
+  editSolution(item: any) {
+    this._routeService.navTo('/pages/org-admin/issue-settings/issue-workflow/workflow-solution-edit/'
+      + (item ? item.id : null) );
   }
-
-  edit(item: any): void {
-    this._routeService.navTo('/pages/org-admin/issue-settings/issue-workflow/workflow-solution-edit/' + item.id);
+  configSolution(item: any) {
+    this._routeService.navTo('/pages/org-admin/issue-settings/issue-workflow/workflow-solution-config/' + item.id);
   }
 
   loadData() {
-    const that = this;
-
-    that.issueWorkflowSolutionService.list().subscribe((json: any) => {
-      that.models = json.data;
+    this.solutionService.load().subscribe((json: any) => {
+      this.solutions = json.solutions;
     });
   }
 

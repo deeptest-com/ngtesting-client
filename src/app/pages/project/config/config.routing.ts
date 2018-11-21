@@ -13,6 +13,11 @@ import { ProjectVerEdit } from './ver/edit.component';
 import { ProjectEnvList } from './env/list.component';
 import { ProjectEnvEdit } from './env/edit.component';
 
+import { ProjectTypeEdit } from './type/edit.component';
+import { ProjectPriorityEdit } from './priority/edit.component';
+import { ProjectPageEdit } from './page/edit.component';
+import { ProjectWorkflowEdit } from './workflow/edit.component';
+
 // noinspection TypeScriptValidateTypes
 const routes: Routes = [
   {
@@ -29,6 +34,12 @@ const routes: Routes = [
       { path: 'env/:id', component: ProjectEnvEdit },
 
       { path: 'member', component: ProjectEditMember },
+
+      { path: 'type/edit', component: ProjectTypeEdit },
+      { path: 'priority/edit', component: ProjectPriorityEdit },
+      { path: 'page/edit', component: ProjectPageEdit },
+      { path: 'workflow/edit', component: ProjectWorkflowEdit },
+
     ],
   },
 ];

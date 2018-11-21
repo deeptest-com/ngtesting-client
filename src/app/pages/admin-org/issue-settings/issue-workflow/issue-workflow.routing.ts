@@ -8,6 +8,7 @@ import { IssueWorkflowDesign } from './workflow-design';
 
 import { IssueWorkflowSolutionList } from './workflow-solution-list';
 import { IssueWorkflowSolutionEdit } from './workflow-solution-edit';
+import { IssueWorkflowSolutionConfig } from './workflow-solution-config';
 
 const routes: Routes = [
   {
@@ -20,6 +21,7 @@ const routes: Routes = [
 
       { path: 'workflow-solution-list', component: IssueWorkflowSolutionList },
       { path: 'workflow-solution-edit/:id', component: IssueWorkflowSolutionEdit },
+      { path: 'workflow-solution-config/:id', component: IssueWorkflowSolutionConfig },
     ],
   },
 ];

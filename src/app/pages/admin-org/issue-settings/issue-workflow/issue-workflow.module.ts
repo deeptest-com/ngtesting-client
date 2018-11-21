@@ -26,6 +26,7 @@ import { IssueWorkflowEdit } from './workflow-edit';
 import { IssueWorkflowDesign } from './workflow-design';
 import { IssueWorkflowSolutionList } from './workflow-solution-list';
 import { IssueWorkflowSolutionEdit } from './workflow-solution-edit';
+import { IssueWorkflowSolutionConfig } from './workflow-solution-config';
 import { WorkflowTransitionComponent } from './workflow-transition';
 
 @NgModule({
@@ -47,6 +48,7 @@ import { WorkflowTransitionComponent } from './workflow-transition';
     IssueWorkflowDesign,
     IssueWorkflowSolutionList,
     IssueWorkflowSolutionEdit,
+    IssueWorkflowSolutionConfig,
     WorkflowTransitionComponent,
   ],
   providers: [

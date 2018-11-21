@@ -49,7 +49,7 @@ export class TableRowComponent implements OnInit, OnDestroy {
     return project.privs != null && project.privs['project-view'];
   }
   canEditProject(project: any) {
-    console.log('===', CONSTANT.ORG_PRIVILEGES);
+    // console.log('===', CONSTANT.ORG_PRIVILEGES);
     return CONSTANT.ORG_PRIVILEGES['org-admin'] || CONSTANT.ORG_PRIVILEGES['project-admin'] ||
       (project.privs != null && project.privs['project-maintain']);
   }
