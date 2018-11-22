@@ -19,9 +19,5 @@ export class IssuePriorityService {
     return this._reqService.post(this._apiBase + 'setByProject', model);
   }
 
-  save(model: any) {
-    return this._reqService.post(this._apiBase + 'save', { model: model });
-  }
-
 }
 
