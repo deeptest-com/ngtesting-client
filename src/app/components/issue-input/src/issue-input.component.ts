@@ -7,6 +7,7 @@ import {Input, Component, OnInit, OnChanges, SimpleChanges, Output, EventEmitter
   providers: [],
 })
 export class IssueInputComponent implements OnInit, OnChanges {
+  @Input() issuePropMap: any = {};
   @Input() field: any;
   @Input() forSelection: boolean = false;
 

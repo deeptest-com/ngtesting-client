@@ -58,7 +58,7 @@
         &nbsp;
         <button (click)="back()" type="button" class="btn btn-default">取消</button>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <button (click)="showModal()" *ngIf="model.id && !buildIn" type="button" class="btn btn-danger">删除</button>
+        <button (click)="showModal()" *ngIf="model.id && !model.buildIn" type="button" class="btn btn-danger">删除</button>
       </div>
     </div>
 

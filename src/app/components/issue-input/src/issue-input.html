@@ -32,25 +32,23 @@
 
         <ng-container *ngSwitchCase="'dropdown'">
           <select [disabled]="field.readonly" class="form-control">
-            <option value="">选项一</option>
+            <option *ngFor="let item of issuePropMap[field.code]" value="{{item?.value}}">{{item?.label}}</option>
           </select>
         </ng-container>
 
         <ng-container *ngSwitchCase="'radio'">
-          <input [disabled]="field.readonly" name="issue-input" type="radio" class="form-check-input">选项一
-          <input [disabled]="field.readonly" name="issue-input" type="radio" class="form-check-input">选项二
+          <input *ngFor="let item of issuePropMap[field.code]" value="{{item?.value}}"
+                 [disabled]="field.readonly" name="issue-input" type="radio" class="form-check-input">{{item?.label}}
         </ng-container>
 
         <ng-container *ngSwitchCase="'checkbox'">
-          <input [disabled]="field.readonly" name="issue-input" type="radio" class="form-check-input">选项一
-          <input [disabled]="field.readonly" name="issue-input" type="radio" class="form-check-input">选项二
+          <input *ngFor="let item of issuePropMap[field.code]" value="{{item?.value}}"
+                 [disabled]="field.readonly" name="issue-input" type="radio" class="form-check-input">{{item?.label}}
         </ng-container>
 
         <ng-container *ngSwitchCase="'multi_select'">
           <select [disabled]="field.readonly" multiple class="form-control">
-            <option value="">选项一</option>
-            <option value="">选项二</option>
-            <option value="">选项三</option>
+            <option *ngFor="let item of issuePropMap[field.code]" value="{{item?.value}}">{{item?.label}}</option>
           </select>
         </ng-container>
 

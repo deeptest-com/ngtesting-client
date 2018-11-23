@@ -82,7 +82,7 @@
 
                  dnd-sortable [sortableIndex]="i" [dragData]="field"
                  (onDropSuccess)="onElementDropSuccess($event)">
-              <issue-input (propEvent)="setProp($event)" [field]="field"></issue-input>
+              <issue-input (propEvent)="setProp($event)" [field]="field" [issuePropMap]="issuePropMap"></issue-input>
             </div>
 
             <div *ngIf="!tab || !tab.elements || tab.elements.length==0" class="no-elems">
@@ -101,7 +101,7 @@
            dnd-sortable [sortableIndex]="i" [dragData]="field"
            (onDropSuccess)="onElementDropSuccess($event)"
            >
-        <issue-input [field]="field" [forSelection]="true"></issue-input>
+        <issue-input [field]="field" [forSelection]="true" [issuePropMap]="issuePropMap"></issue-input>
       </div>
     </div>
 

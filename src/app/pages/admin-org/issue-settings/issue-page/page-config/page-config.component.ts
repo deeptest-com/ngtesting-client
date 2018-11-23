@@ -31,6 +31,7 @@ export class IssuePageConfig implements OnInit, AfterViewInit {
 
   page: any = { tabs: [] };
   fields: any[] = [];
+  issuePropMap: any = {};
   tab: any = {};
   form: FormGroup;
 
@@ -81,6 +82,7 @@ export class IssuePageConfig implements OnInit, AfterViewInit {
       this.page = json.page;
       this.tab = this.page.tabs[0];
       this.fields = json.fields;
+      this.issuePropMap = json.issuePropMap;
     });
   }
 
