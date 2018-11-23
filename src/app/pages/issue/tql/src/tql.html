@@ -1,7 +1,7 @@
 <div class="tql">
   <div class="form-inline">
     <ng-container *ngFor="let item of filters; let i = index">
-      <tql-condition *ngIf="i < 5" [model]="item"
+      <tql-condition *ngIf="i < 5" [model]="item" [issuePropMap]="issuePropMap"
                      [checkedItems]="checkedConditions[item.code]" (selected)="selectItem($event)"></tql-condition>
     </ng-container>
 
@@ -27,7 +27,7 @@
 
   <div class="form-inline">
     <ng-container *ngFor="let item of filters; let i = index;">
-      <tql-condition *ngIf="i >= 5 && item.display" [model]="item"
+      <tql-condition *ngIf="i >= 5 && item.display" [model]="item" [issuePropMap]="issuePropMap"
                      [checkedItems]="checkedConditions[item.code]" (selected)="selectItem($event)"></tql-condition>
     </ng-container>
   </div>

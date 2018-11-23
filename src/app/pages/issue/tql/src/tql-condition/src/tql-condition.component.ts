@@ -19,6 +19,7 @@ export class TqlConditionComponent implements OnInit, AfterViewInit {
   @Input() search: boolean = true;
   @Input() model: any;
   @Input() checkedItems: any = {};
+  @Input() issuePropMap: any = {};
 
   @Output() selected = new EventEmitter<any>();
 
@@ -30,14 +31,16 @@ export class TqlConditionComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): any {
-    for (const key in this.model.values) {
-      this.selectOptions.push({ key: key, value: this.model.values[key],
-        checked: this.checkedItems ? this.checkedItems[key] : false });
-    }
+    this.selectOptions = this.issuePropMap[this.model.code];
+
+    _.forEach(this.selectOptions, (item: any, index: number) => {
+        item.checked = this.checkedItems ? this.checkedItems[item.id] : false;
+    });
+    console.log('!!!!!!!!', this.selectOptions, this.checkedItems);
 
     this.form.addControl('keywords', new FormControl('', []));
     _.forEach(this.selectOptions, (item: any, index: number) => {
-      this.form.addControl('menu-item-' + item.key, new FormControl('', []));
+        this.form.addControl('menu-item-' + item.code, new FormControl('', []));
     });
   }
   ngAfterViewInit() {

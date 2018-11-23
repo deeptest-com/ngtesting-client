@@ -81,7 +81,7 @@ export class TqlService {
 
     options.forEach((option: any) => {
       if (option.checked) {
-        checkedVals.push(option.key);
+        checkedVals.push(option.id);
       }
     });
 

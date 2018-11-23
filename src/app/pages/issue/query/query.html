@@ -6,7 +6,7 @@
       </div>
 
       <div class="filter">
-        <tql [rule]="rule" [filters]="filters"
+        <tql [rule]="rule" [filters]="filters" [issuePropMap]="issuePropMap"
              (queryChanged)="queryChanged($event)" (searchEvent)="search($event)"
              (favoritesEvent)="showModal()"></tql>
       </div>

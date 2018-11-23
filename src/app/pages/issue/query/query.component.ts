@@ -43,8 +43,9 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
   rule: any = {};
   checkedConditions: any = {};
   filters: any[] = [];
+  issuePropMap: any = {};
   columns: any[] = [];
-  init = 0;
+  init: number = 0;
 
   layout: string = CONSTANT.PROFILE.issueView;
   @ViewChild('modalWrapper') modalWrapper: PopDialogComponent;
@@ -113,6 +114,7 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
         this.rule = json.rule;
         this.filters = json.filters;
         this.columns = json.columns;
+        this.issuePropMap = json.issuePropMap;
       }
     });
   }
@@ -128,6 +130,7 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
         this.init++;
         this.filters = json.filters;
         this.columns = json.columns;
+        this.issuePropMap = json.issuePropMap;
       }
     });
   }
