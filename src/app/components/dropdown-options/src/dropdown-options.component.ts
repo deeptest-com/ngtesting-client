@@ -76,6 +76,10 @@ export class DropdownOptionsComponent implements OnInit, OnDestroy, AfterViewIni
         if (json.code == 1) {
           this.form.reset();
           this.model = {};
+
+          if (json.field) {
+            this.field = json.field;
+          }
           this.field.options = json.data;
         }
       });
