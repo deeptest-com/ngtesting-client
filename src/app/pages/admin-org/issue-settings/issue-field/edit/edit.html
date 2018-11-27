@@ -63,7 +63,8 @@
     <div *ngIf="model.input == 'dropdown'" class="form-group row">
       <label class="col-sm-8"></label>
       <div class="col-sm-2">
-        <span (click)="editDropdownOptions()" class="link">管理选项列表({{model.options.length}})</span>
+        <span *ngIf="form.valid"
+          (click)="editDropdownOptions()" class="link">管理选项列表({{model.options.length}})</span>
       </div>
     </div>
 
@@ -102,18 +103,6 @@
                   [(ngModel)]="model.descr" #descr></textarea>
       </div>
     </div>
-
-<!--    <div class="form-group row just-label">
-      <div class="offset-sm-2 col-sm-10">
-        <div class="form-check">
-          <label class="form-check-label">
-            <input type="checkbox" class="form-check-input" name="disabled" formControlName="disabled"
-                   [(ngModel)]="model.disabled" #disabled>
-            &nbsp;&nbsp;禁用
-          </label>
-        </div>
-      </div>
-    </div>-->
 
     <div class="form-group row">
       <label class="col-sm-2 col-form-label"></label>

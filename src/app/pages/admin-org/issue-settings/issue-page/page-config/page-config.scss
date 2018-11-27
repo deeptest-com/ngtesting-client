@@ -6,92 +6,21 @@
 
     .left {
       flex: 1;
-      display: flex;
-      flex-direction: column;
 
-      .left-top {
-        .field-selection {
-          position: absolute;
-          top: 0;
-          right: 15px;
-
-          .link {
-            margin: 0;
-          }
-        }
-
-        .tabs {
-          .nav-tabs {
-            .nav-item {
-              .my-row {
-                display: flex;
-                width: 100%;
-
-                .move {
-                  width: 16px;
-                  cursor: pointer;
-                }
-                .text {
-                  flex: 1;
-                  margin: 0 5px;
-                }
-                .edit {
-                  flex: 1;
-                  margin: 0 5px;
-                  input {
-                    padding: 3px;
-                    width: 80px;
-                    height: 30px;
-                    border: 0;
-                    background-color: #fffff0;
-                    outline: none;
-                  }
-                }
-                .opt {
-                  width: 16px;
-                  cursor: pointer;
-                  &.editing {
-                    width: 48px;
-                  }
-                }
-              }
-
-              .nav-link {
-                padding: 2px 7px;
-                line-height: 30px;
-                &.active {
-                  cursor: default;
-
-                  .act {
-                    display: inline-block;
-                    margin: 0;
-                    cursor: pointer;
-                  }
-                }
-              }
-            }
+      .elements {
+        padding-top: 15px;
+        .element {
+          float: left;
+          width: 50%;
+          &.full-line {
+            width: 100%;
           }
         }
       }
 
-      .left-main {
-        flex: 1;
-
-        .elements {
-          padding-top: 15px;
-          .element {
-            float: left;
-            width: 50%;
-            &.full-line {
-              width: 100%;
-            }
-          }
-        }
-
-        .no-elems {
-          width: 100px;
-          margin: auto;
-        }
+      .no-elems {
+        width: 100px;
+        margin: auto;
       }
 
       overflow: auto;

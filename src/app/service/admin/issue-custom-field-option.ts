@@ -9,8 +9,15 @@ export class IssueCustomFieldOptionService {
   constructor(private _reqService: RequestService) { }
   _apiBase = 'admin/issue_custom_field_option/';
 
-  save(model: any, fieldId: number) {
-    return this._reqService.post(this._apiBase + 'save', { model: model, fieldId: fieldId });
+  save(model: any, field: any = {}) {
+    let data: any = { model: model };
+    if (field.id == null) {
+      data.field = field;
+    } else {
+      data.fieldId = field.id;
+    }
+
+    return this._reqService.post(this._apiBase + 'save', data);
   }
 
   delete(id: number, fieldId: number) {

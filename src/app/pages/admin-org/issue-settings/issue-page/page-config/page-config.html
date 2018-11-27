@@ -17,80 +17,26 @@
 
   <div class="main">
     <div class="left" [style.height]="contentHeight">
+      <div class="form-group row">
+        <div id="sortable-container-left" class="col-sm-12 elements"
+             dnd-sortable-container
+             [draggable]="false" [dropZones]="['fields-zone']" [sortableData]="page.elements"
+             (onDropSuccess)="onElementDropSuccess($event)">
 
-        <div class="left-top row">
-          <div class="col-sm-12">
-            <div class="tabs-container light">
-              <div dnd-sortable-container [dropZones]="['tab-dropZone']" [sortableData]="page.tabs" class="tabs">
-                <ul class="nav nav-tabs justify-content-start">
-                  <li *ngFor="let t of page.tabs; let i = index" class="nav-item"
-                      (mouseenter)="t.hover = true" (mouseleave)="t.hover = false"
+          <div id="sortable-left-{{field.id}}" class="element" [class.full-line]="field.fullLine"
+               *ngFor="let field of page.elements; let i = index;"
 
-                      dnd-sortable [sortableIndex]="i"
-                      (onDropSuccess)="onTabDropSuccess(t)">
-
-                    <div *ngIf="!t.editing" (click)="selectTab($event, t)" [class.active]="tab.id == t.id"
-                         class="my-row nav-link">
-                      <div class="move">
-                        <i *ngIf="t.hover" class="fa fa-arrows"></i>
-                      </div>
-                      <div *ngIf="!t.editing" class="text">
-                        {{t.name}}
-                      </div>
-                      <div class="opt">
-                        <i *ngIf="t.hover" (click)="editTab($event, t)" class="fa fa-pencil"></i>
-                      </div>
-                    </div>
-
-                    <div *ngIf="t.editing" [class.active]="tab.id == t.id" class="my-row nav-link">
-                      <div class="edit">
-                        <form ngForm>
-                          <input type="text"
-                                 [(ngModel)]="t.name" name="tabName"
-                                 (click)="$event.stopPropagation()"
-                                 (keydown.enter)="save($event)">
-                        </form>
-                      </div>
-                      <div class="opt editing">
-                        <span *ngIf="t.name" (click)="updateTabName($event, t)" title="保存">
-                          <i class="fa fa-check"></i>
-                        </span>
-                        <span (click)="cancelTabName($event, t)" title="取消"><i class="fa fa-times"></i></span>
-                        <span (click)="removeTab($event, t)" title="删除"><i class="fa fa-trash"></i></span>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <div class="field-selection">
-              <i (click)="addTab()" class="fa fa-plus-circle link text-in-row">&nbsp;新增</i>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="left-main form-group row">
-          <div id="sortable-container-left" class="col-sm-12 elements"
-               dnd-sortable-container
-               [draggable]="false" [dropZones]="['fields-zone']" [sortableData]="tab.elements"
+               dnd-sortable [sortableIndex]="i" [dragData]="field"
                (onDropSuccess)="onElementDropSuccess($event)">
+            <issue-input-design (propEvent)="setProp($event)" [field]="field"
+                                [issuePropMap]="issuePropMap"></issue-input-design>
+          </div>
 
-            <div id="sortable-left-{{field.id}}" class="element" [class.full-line]="field.fullLine"
-                 *ngFor="let field of tab.elements; let i = index;"
-
-                 dnd-sortable [sortableIndex]="i" [dragData]="field"
-                 (onDropSuccess)="onElementDropSuccess($event)">
-              <issue-input-design (propEvent)="setProp($event)" [field]="field" [issuePropMap]="issuePropMap"></issue-input-design>
-            </div>
-
-            <div *ngIf="!tab || !tab.elements || tab.elements.length==0" class="no-elems">
-              拖动字段到此处
-            </div>
+          <div *ngIf="!page.elements || page.elements.length==0" class="no-elems">
+            拖动字段到此处
           </div>
         </div>
-
+      </div>
     </div>
 
     <div id="sortable-container-right" class="right" [style.height]="contentHeight"
@@ -100,7 +46,7 @@
       <div id="sortable-right-{{field.id}}" *ngFor="let field of fields; let i = index;" class="field-row"
            dnd-sortable [sortableIndex]="i" [dragData]="field"
            (onDropSuccess)="onElementDropSuccess($event)"
-           >
+      >
         <issue-input-design [field]="field" [forSelection]="true" [issuePropMap]="issuePropMap"></issue-input-design>
       </div>
     </div>

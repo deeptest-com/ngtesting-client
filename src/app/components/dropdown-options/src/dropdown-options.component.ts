@@ -71,22 +71,22 @@ export class DropdownOptionsComponent implements OnInit, OnDestroy, AfterViewIni
     this.model = {};
   }
   save(): any {
-    if (this.field.id) {
-      this.service.save(this.model, this.field.id).subscribe((json: any) => {
+    // if (this.field.id) {
+      this.service.save(this.model, this.field).subscribe((json: any) => {
         if (json.code == 1) {
           this.form.reset();
           this.model = {};
           this.field.options = json.data;
         }
       });
-    } else {
-      this.model.ordr = this.optionOrdr;
-      this.optionOrdr += 10;
-      this.field.options[this.field.options.length] = _.clone(this.model);
-
-      this.form.reset();
-      this.model = {};
-    }
+    // } else {
+    //   this.model.ordr = this.optionOrdr;
+    //   this.optionOrdr += 10;
+    //   this.field.options[this.field.options.length] = _.clone(this.model);
+    //
+    //   this.form.reset();
+    //   this.model = {};
+    // }
   }
   delete(item: any) {
     this.service.delete(item.id, this.field.id).subscribe((json: any) => {
@@ -98,16 +98,16 @@ export class DropdownOptionsComponent implements OnInit, OnDestroy, AfterViewIni
     });
   }
   changeOrder(item: any, act: string, idx: number) {
-    if (!item.id) { // 未保存
-      Utils.changeOrder(this.field.options, act, idx);
-    } else {
+    // if (!item.id) { // 未保存
+    //   Utils.changeOrder(this.field.options, act, idx);
+    // } else {
       this.service.changeOrder(item.id, act, this.field.id).subscribe((json: any) => {
         if (json.code == 1) {
           this.model = {};
           this.field.options = json.data;
         }
       });
-    }
+    // }
   }
 
   setDefault(item: any): void {

@@ -35,7 +35,6 @@ export class IssueEdit implements OnInit, AfterViewInit, OnDestroy {
   issuePropMap: any = {};
 
   page: any = {};
-  tab: any = {};
 
   form: any;
 
@@ -85,7 +84,6 @@ export class IssueEdit implements OnInit, AfterViewInit, OnDestroy {
       this.issuePropMap = json.issuePropMap;
 
       this.page = json.page;
-      this.tab = json.page.tabs[0];
 
       this.buildForm();
     });

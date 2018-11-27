@@ -22,7 +22,7 @@
   <div *ngIf="form" class="row">
     <form [formGroup]="form" (ngSubmit)="save()">
       <div class="form-group row elements">
-        <div *ngFor="let elem of tab.elements; let i = index;" [class.full-line]="elem.fullLine" class="element">
+        <div *ngFor="let elem of page.elements; let i = index;" [class.full-line]="elem.fullLine" class="element">
           <issue-input-edit [(issue)]="issue" [elem]="elem" [issuePropMap]="issuePropMap"></issue-input-edit>
         </div>
       </div>

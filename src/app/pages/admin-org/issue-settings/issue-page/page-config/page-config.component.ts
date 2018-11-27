@@ -32,18 +32,15 @@ export class IssuePageConfig implements OnInit, AfterViewInit {
   page: any = { tabs: [] };
   fields: any[] = [];
   issuePropMap: any = {};
-  tab: any = {};
   form: FormGroup;
 
   contentHeight = Utils.getContainerHeight(CONSTANT.HEAD_HEIGHT + CONSTANT.FOOTER_HEIGHT + 70);
 
   @ViewChild('modalWrapper') modalWrapper: PopDialogComponent;
-  @ViewChild('tabset') tabset: NgbTabset;
 
   constructor(private elementRef: ElementRef, private _state: GlobalState, private fb: FormBuilder,
               private _routeService: RouteService, private _route: ActivatedRoute,
               private pageService: IssuePageService,
-              private tabService: IssuePageTabService,
               private elemService: IssuePageElemService) {
 
   }
@@ -80,7 +77,6 @@ export class IssuePageConfig implements OnInit, AfterViewInit {
   loadData() {
     this.pageService.getDetail(this.id).subscribe((json: any) => {
       this.page = json.page;
-      this.tab = this.page.tabs[0];
       this.fields = json.fields;
       this.issuePropMap = json.issuePropMap;
     });
@@ -90,7 +86,6 @@ export class IssuePageConfig implements OnInit, AfterViewInit {
     this.pageService.save(this.page).subscribe((json: any) => {
       if (json.code == 1) {
         this.page = json.page;
-        this.tab = this.page.tabs[0];
         this.fields = json.fields;
 
         this.formErrors = ['保存成功'];
@@ -115,88 +110,15 @@ export class IssuePageConfig implements OnInit, AfterViewInit {
     });
   }
 
-  selectTab($event, tab: any) {
-    console.log('selectTab', tab);
-
-    $event.preventDefault();
-    this.tabService.get(tab.id).subscribe((json: any) => {
-      this.tab = json.tab;
-      this.fields = json.fields;
-    });
-
-    this.formErrors = [];
-  }
-
-  addTab() {
-    const tab = { name: '新标签', pageId: this.page.id };
-
-    this.tabService.add(tab).subscribe((json: any) => {
-      this.tab = json.tab;
-      this.fields = json.fields;
-
-      this.page.tabs.push(this.tab);
-    });
-
-    this.formErrors = [];
-  }
-
-  editTab($event, tab) {
-    console.log('editTab', tab);
-    tab.oldName = tab.name;
-    tab.editing = true;
-
-    this.formErrors = [];
-    $event.stopPropagation();
-  }
-  removeTab($event, tab) {
-    console.log('removeTab', tab);
-
-    this.tabService.remove(tab.id, tab.pageId, this.tab.id).subscribe((json: any) => {
-      if (json.code != 1) {
-        this.formErrors = [json.msg];
-        return;
-      }
-
-      this.page = json.page;
-
-      if (this.tab.id == tab.id) {
-        this.tab = this.page.tabs[0];
-        this.fields = json.fields;
-      } else {
-        this.tab = this.page.tabs.filter(el => el.id == this.tab.id)[0];
-      }
-    });
-  }
-  updateTabName($event, tab) {
-    $event.stopPropagation();
-    console.log('saveTabName', tab);
-
-    tab.editing = false;
-
-    this.tabService.updateName(tab.id, tab.name).subscribe((json: any) => {
-      tab.editing = false;
-    });
-  }
-  cancelTabName($event, tab) {
-    console.log('cancelTabName', tab);
-    tab.name = tab.oldName;
-    tab.editing = false;
-    $event.stopPropagation();
-  }
-
-  onTabDropSuccess(tab) {
-    console.log('onTabDropSuccess', tab);
-  }
-
   onElementDropSuccess($event) {
     console.log('onFieldDropSuccess', $event);
 
-    const elems: any[] = this.tab.elements.map(function (item) {
+    const elems: any[] = this.page.elements.map(function (item) {
       return { id: item.id, key: item.key };
     });
 
-    this.elemService.saveAll(this.page.id, this.tab.id, elems).subscribe((json: any) => {
-      this.tab = json.tab;
+    this.elemService.saveAll(this.page.id, elems).subscribe((json: any) => {
+      this.page = json.page;
       this.fields = json.fields;
     });
 
