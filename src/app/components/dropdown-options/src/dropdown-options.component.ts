@@ -110,6 +110,16 @@ export class DropdownOptionsComponent implements OnInit, OnDestroy, AfterViewIni
     }
   }
 
+  setDefault(item: any): void {
+    this.service.setDefault(item.id, this.field.id).subscribe((json: any) => {
+      if (json.code == 1) {
+        this.form.reset();
+        this.model = {};
+        this.field.options = json.data;
+      }
+    });
+  }
+
   buildForm(): void {
     this.form = this.fb.group(
       {

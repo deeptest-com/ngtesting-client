@@ -13,7 +13,7 @@ import { DndModule, SortableContainer } from '../../../../components/ng2-dnd';
 import { PipeModule } from '../../../../pipe/pipe.module';
 import { DirectiveModule } from '../../../../directive/directive.module';
 import { PopDialogModule } from '../../../../components/pop-dialog';
-import { IssueInputModule } from '../../../../components/issue-input';
+import { IssueInputDesignModule } from '../../../../components/issue-input/issue-input-design';
 
 import { RouteService } from '../../../../service/route';
 import { RequestService } from '../../../../service/request';
@@ -45,7 +45,7 @@ import { IssuePageSolutionConfig } from './page-solution-config';
 
     DndModule.forRoot(),
     PipeModule, DirectiveModule, PopDialogModule,
-    IssueInputModule,
+    IssueInputDesignModule,
   ],
   declarations: [
     IssuePage,

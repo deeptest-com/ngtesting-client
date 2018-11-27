@@ -1,0 +1,51 @@
+<div class="row issue-input-edit">
+  <label class="col-form-label col-sm-{{getCol()}}">
+    <span *ngIf="elem.required" class="require">*</span>
+    <span>{{elem.label}}</span>
+  </label>
+
+  <div class="controls col-sm-{{12 - labelColNum}}">
+    <ng-container [ngSwitch]="elem.input">
+
+      <ng-container *ngSwitchCase="'textarea'">
+        <textarea [disabled]="elem.readonly" type="text" class="form-control"></textarea>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'dropdown'">
+        <select [(ngModel)]="issue[elem.code]" [disabled]="elem.readonly" class="form-control">
+          <option *ngFor="let item of issuePropMap[elem.code]" value="{{item?.id}}">{{item?.label}}</option>
+        </select>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'radio'">
+        <input *ngFor="let item of issuePropMap[elem.code]" value="{{item?.id}}"
+               [disabled]="elem.readonly" name="issue-input" type="radio" class="form-check-input">{{item?.label}}
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'checkbox'">
+        <input *ngFor="let item of issuePropMap[elem.code]" value="{{item?.id}}"
+               [disabled]="elem.readonly" name="issue-input" type="radio" class="form-check-input">{{item?.label}}
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'multi_select'">
+        <select [disabled]="elem.readonly" multiple class="form-control">
+          <option *ngFor="let item of issuePropMap[elem.code]" value="{{item?.id}}">{{item?.label}}</option>
+        </select>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'date'">
+        <div class="input-group">
+          <input [disabled]="elem.readonly" class="form-control" placeholder="yyyy-mm-dd">
+          <div class="input-group-addon">
+            <i class="fa fa-calendar"></i>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-container *ngSwitchDefault>
+        <input [disabled]="elem.readonly" type="text" class="form-control">
+      </ng-container>
+
+    </ng-container>
+  </div>
+</div>

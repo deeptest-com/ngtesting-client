@@ -33,8 +33,7 @@
     </div>
 
     <div class="form-group row">
-
-      <label class="col-sm-2 col-form-label"><span>类型</span></label>
+      <label class="col-sm-2 col-form-label"><span>取值类型</span></label>
       <div *ngIf="!model.buildIn" class="col-sm-4">
         <select [(ngModel)]="model.type" formControlName="type" name="type" class="form-control form-control-sm">
           <option value=""></option>
@@ -46,9 +45,26 @@
         <input type="hidden" class="form-control" name="type" formControlName="type"
                [(ngModel)]="model.type" #type>
       </label>
-      <label *ngIf="model.type == 'dropdown'" class="col-sm-2 col-form-label">
-        <span (click)="editDropdownOptions()" class="link">管理选项列表({{model.options.length}})</span>
+
+      <label class="col-sm-2 col-form-label"><span>控件类型</span></label>
+      <div *ngIf="!model.buildIn" class="col-sm-4">
+        <select [(ngModel)]="model.input" formControlName="input" name="input" class="form-control form-control-sm">
+          <option value=""></option>
+          <option *ngFor="let item of inputList" value="{{item}}">{{item | fieldInput}}</option>
+        </select>
+      </div>
+      <label *ngIf="model.buildIn" class="col-sm-4 col-form-label left">
+        {{model.input | fieldInput}}
+        <input type="hidden" class="form-control" name="input" formControlName="input"
+               [(ngModel)]="model.input" #input>
       </label>
+    </div>
+
+    <div *ngIf="model.input == 'dropdown'" class="form-group row">
+      <label class="col-sm-8"></label>
+      <div class="col-sm-2">
+        <span (click)="editDropdownOptions()" class="link">管理选项列表({{model.options.length}})</span>
+      </div>
     </div>
 
    <div *ngIf="model.type == 'text'" class="form-group row">

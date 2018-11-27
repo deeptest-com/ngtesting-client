@@ -58,7 +58,7 @@ export class IssueView implements OnInit, AfterViewInit, OnDestroy {
   ngAfterViewInit() {}
 
   loadData() {
-    this._issueService.get(this.id).subscribe((json: any) => {
+    this._issueService.get(this.id, 'view').subscribe((json: any) => {
       this.model = json.data;
     });
   }

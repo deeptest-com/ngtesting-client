@@ -17,8 +17,8 @@ export class IssueService {
     return this._reqService.post(this._apiBase + 'query', query);
   }
 
-  get(id: number) {
-    const model = { id: id };
+  get(id: number, opt: string) {
+    const model = { id: id, opt: opt };
     return this._reqService.post(this._apiBase + 'get', model);
   }
   delete(id: any) {

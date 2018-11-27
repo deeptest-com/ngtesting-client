@@ -58,7 +58,7 @@ export class ProjectEnvEdit implements OnInit, AfterViewInit {
   buildForm(): void {
     this.form = this.fb.group(
       {
-        'name': ['', [Validators.required]],
+        'label': ['', [Validators.required]],
         'descr': ['', []],
         'disabled': ['', []],
       }, {},
@@ -72,7 +72,7 @@ export class ProjectEnvEdit implements OnInit, AfterViewInit {
 
   formErrors = [];
   validateMsg = {
-    'name': {
+    'label': {
       'required': '名称不能为空',
     },
   };

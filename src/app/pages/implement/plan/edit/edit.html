@@ -60,7 +60,7 @@
           <select [(ngModel)]="model.verId" formControlName="verId" class="form-control" name="verId">
             <option value="null">请选择</option>
             <option *ngFor="let entry of vers" value="{{entry.id}}">
-              <span>{{entry.name}}</span>
+              <span>{{entry.label}}</span>
             </option>
           </select>
         </div>

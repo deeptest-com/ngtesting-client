@@ -3,8 +3,8 @@
   <div class="row">
     <div class="list-toolbar col-xl-12">
       <div class="title">
-        <span *ngIf="!model.id">新建问题</span>
-        <span *ngIf="model.id">编辑问题</span>
+        <span *ngIf="!issue.id">新建问题</span>
+        <span *ngIf="issue.id">编辑问题</span>
       </div>
 
       <div class="filter">
@@ -20,9 +20,12 @@
   </div>
 
   <div *ngIf="form" class="row">
-    <form [formGroup]="form" (ngSubmit)="save()" class="my-validate-form">
-
-
+    <form [formGroup]="form" (ngSubmit)="save()">
+      <div class="form-group row elements">
+        <div *ngFor="let elem of tab.elements; let i = index;" [class.full-line]="elem.fullLine" class="element">
+          <issue-input-edit [(issue)]="issue" [elem]="elem" [issuePropMap]="issuePropMap"></issue-input-edit>
+        </div>
+      </div>
 
       <div class="form-group row">
         <label class="col-sm-2 col-form-label"></label>
@@ -49,7 +52,7 @@
   </div>
 
   <pop-dialog #modalWrapper (confirm)="delete()" [title]="'提示'">
-    确认删除名为"{{model.name}}"的问题?
+    确认删除名为"{{issue.title}}"的问题?
   </pop-dialog>
 
 </div>

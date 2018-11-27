@@ -14,9 +14,11 @@
         <label>名称</label>
         <input type="text" class="form-control" name="label" formControlName="label"
                [(ngModel)]="model.label" #label>
+
         <label>取值</label>
         <input type="text" class="form-control" name="value" formControlName="value"
                [(ngModel)]="model.value" #value>
+
         <button (click)="save()" type="button" class="btn btn-primary" [disabled]="!form.valid">
           <span *ngIf="!model.id">保存</span>
           <span *ngIf="model.id">更新</span>
@@ -41,6 +43,7 @@
         <tr>
           <th>名称</th>
           <th>取值</th>
+          <th>是否默认</th>
           <th>操作</th>
         </tr>
         </thead>
@@ -48,6 +51,10 @@
         <tr *ngFor="let item of field.options; let i = index;">
           <td>{{ item.label }}</td>
           <td>{{ item.value }}</td>
+          <td>
+            <input *ngIf="!item.default" (change)="setDefault(item)" [(ngModel)]="item.default" type="checkbox" name="default" #default>
+            <input *ngIf="item.default" onclick="return false;" [(ngModel)]="item.default" type="checkbox" name="default" #default>
+          </td>
           <td>
             <span *ngIf="i == 0" class="ionic-icon link placeholder"></span>
             <span (click)="changeOrder(item, 'up', i)" *ngIf="i > 0" class="fa fa-arrow-up ionic-icon link"></span>

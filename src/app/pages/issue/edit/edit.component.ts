@@ -31,8 +31,11 @@ export class IssueEdit implements OnInit, AfterViewInit, OnDestroy {
   canEdit: boolean;
 
   id: number;
-  model: any = {};
-  propMap: any = {};
+  issue: any = {};
+  issuePropMap: any = {};
+
+  page: any = {};
+  tab: any = {};
 
   form: any;
 
@@ -75,19 +78,24 @@ export class IssueEdit implements OnInit, AfterViewInit, OnDestroy {
   };
 
   loadData() {
-    this.issueService.get(this.id).subscribe((json: any) => {
-      this.model = json.data;
-      this.propMap = json.propMap;
+    const opt = this.id ? 'edit' : 'create';
+
+    this.issueService.get(this.id, opt).subscribe((json: any) => {
+      this.issue = json.data;
+      this.issuePropMap = json.issuePropMap;
+
+      this.page = json.page;
+      this.tab = json.page.tabs[0];
 
       this.buildForm();
     });
   }
 
   save() {
-    this.issueService.save(this.prjId, this.model).subscribe((json: any) => {
+    this.issueService.save(this.prjId, this.issue).subscribe((json: any) => {
       if (json.code == 1) {
-        this.model = json.data;
-        this._state.notifyDataChanged(CONSTANT.EVENT_CASE_UPDATE, { node: this.model, random: Math.random() });
+        this.issue = json.data;
+        this._state.notifyDataChanged(CONSTANT.EVENT_CASE_UPDATE, { node: this.issue, random: Math.random() });
 
         const toastOptions: ToastOptions = {
           title: '保存成功',

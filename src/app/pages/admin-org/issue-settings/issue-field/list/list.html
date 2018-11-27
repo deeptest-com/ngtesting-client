@@ -23,7 +23,8 @@
       <tr>
         <th>名称</th>
         <th>编码</th>
-        <th>类型</th>
+        <th>取值类型</th>
+        <th>控件类型</th>
         <th>文本格式</th>
         <th>操作</th>
       </tr>
@@ -34,6 +35,7 @@
         <td>{{ item.colCode }}</td>
 
         <td>{{ item.type | fieldType }}</td>
+        <td>{{ item.input | fieldInput }}</td>
         <td>
           <span *ngIf="item.type == 'text'">
             {{ item.format | fieldFormat }} ({{item.rows}})

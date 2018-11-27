@@ -23,5 +23,10 @@ export class IssueCustomFieldOptionService {
     return this._reqService.post(this._apiBase + 'changeOrder', model);
   }
 
+  setDefault(id: number, fieldId: number) {
+    const model = { id: id, fieldId: fieldId };
+    return this._reqService.post(this._apiBase + 'setDefault', model);
+  }
+
 }
 

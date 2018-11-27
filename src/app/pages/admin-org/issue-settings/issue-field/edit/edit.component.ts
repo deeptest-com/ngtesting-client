@@ -34,6 +34,7 @@ export class IssueFieldEdit implements OnInit, AfterViewInit {
   model: any = { applyTo: 'test_case' };
   applyToList: string[];
   typeList: string[];
+  inputList: string[];
   formatList: string[];
 
   form: FormGroup;
@@ -67,6 +68,7 @@ export class IssueFieldEdit implements OnInit, AfterViewInit {
         label: ['', [Validators.required]],
         colCode: ['', [Validators.required]],
         type: ['', [Validators.required]],
+        input: ['', [Validators.required]],
         rows: ['', [Validators.pattern('^[1-9]$'),
           CustomValidator.validate('required_if_other_is', 'required_rows', 'rows', 'type', 'text')]],
         format: ['', [CustomValidator.validate('required_if_other_is', 'required_format', 'format', 'type', 'text')]],
@@ -88,7 +90,10 @@ export class IssueFieldEdit implements OnInit, AfterViewInit {
       'required': '名称不能为空',
     },
     'type': {
-      'required': '类型不能为空',
+      'required': '取值类型不能为空',
+    },
+    'input': {
+      'required': '控件类型不能为空',
     },
     'rows': {
       'pattern': '字段行数必须为1-9的整数',
@@ -106,6 +111,7 @@ export class IssueFieldEdit implements OnInit, AfterViewInit {
 
       that.applyToList = json.applyToList;
       that.typeList = json.typeList;
+      that.inputList = json.inputList;
       that.formatList = json.formatList;
     });
   }
