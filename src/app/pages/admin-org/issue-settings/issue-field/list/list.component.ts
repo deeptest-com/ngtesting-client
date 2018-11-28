@@ -16,6 +16,8 @@ import { IssueCustomFieldService } from '../../../../../service/admin/issue-cust
 export class IssueFieldList implements OnInit, AfterViewInit {
 
   models: any[];
+  inputMap: any = {};
+  typeMap: any = {};
 
   constructor(private _routeService: RouteService, private _state: GlobalState,
               private fb: FormBuilder, private el: ElementRef,
@@ -42,6 +44,8 @@ export class IssueFieldList implements OnInit, AfterViewInit {
   loadData() {
     this.issueFieldService.list().subscribe((json: any) => {
       this.models = json.data;
+      this.inputMap = json.inputMap;
+      this.typeMap = json.typeMap;
     });
   }
 

@@ -33,34 +33,34 @@
     </div>
 
     <div class="form-group row">
-      <label class="col-sm-2 col-form-label"><span>取值类型</span></label>
-      <div *ngIf="!model.buildIn" class="col-sm-4">
-        <select [(ngModel)]="model.type" formControlName="type" name="type" class="form-control form-control-sm">
-          <option value=""></option>
-          <option *ngFor="let item of typeList" value="{{item}}">{{item | fieldType}}</option>
-        </select>
-      </div>
-      <label *ngIf="model.buildIn" class="col-sm-4 col-form-label left">
-        {{model.type | fieldType}}
-        <input type="hidden" class="form-control" name="type" formControlName="type"
-               [(ngModel)]="model.type" #type>
-      </label>
-
       <label class="col-sm-2 col-form-label"><span>控件类型</span></label>
       <div *ngIf="!model.buildIn" class="col-sm-4">
-        <select [(ngModel)]="model.input" formControlName="input" name="input" class="form-control form-control-sm">
-          <option value=""></option>
-          <option *ngFor="let item of inputList" value="{{item}}">{{item | fieldInput}}</option>
+        <select [(ngModel)]="model.input" (change)="changeInput()" formControlName="input" name="input" class="form-control form-control-sm">
+          <option *ngFor="let item of inputMap | mapToArray" value="{{item.key}}">{{item.value.label}}</option>
         </select>
       </div>
       <label *ngIf="model.buildIn" class="col-sm-4 col-form-label left">
-        {{model.input | fieldInput}}
+        {{model.input}}
         <input type="hidden" class="form-control" name="input" formControlName="input"
                [(ngModel)]="model.input" #input>
       </label>
+
+      <label class="col-sm-2 col-form-label"><span>数据类型</span></label>
+      <div *ngIf="!model.buildIn" class="col-sm-4">
+        <select [(ngModel)]="model.type" formControlName="type" name="type" class="form-control form-control-sm">
+          <option *ngFor="let item of typeList" value="{{item.value}}">{{item.label}}</option>
+        </select>
+      </div>
+      <label *ngIf="model.buildIn" class="col-sm-4 col-form-label left">
+        {{model.type}}
+        <input type="hidden" class="form-control" name="type" formControlName="type"
+               [(ngModel)]="model.type" #type>
+      </label>
     </div>
 
-    <div *ngIf="model.input == 'dropdown'" class="form-group row">
+    <div *ngIf="model.input=='dropdown' || model.input=='multi_select'
+                || model.input=='radio' || model.input=='checkbox'"
+         class="form-group row">
       <label class="col-sm-8"></label>
       <div class="col-sm-2">
         <span *ngIf="form.valid"

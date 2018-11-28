@@ -10,7 +10,7 @@ import { PercentPipe } from './percent';
 import { MarkErrorPipe } from './mark-error';
 import { ShowIfContainsPipe } from './contains';
 import { PathToLinkPipe } from './misc';
-import { FieldTypePipe, FieldInputPipe, FieldApplyToPipe, FieldFormatPipe, TrueOrFalsePipe, DisableOrNotPipe } from './field-property';
+import { FieldApplyToPipe, FieldFormatPipe, TrueOrFalsePipe, DisableOrNotPipe } from './field-property';
 import { PathToNamePipe } from './path-to-name';
 import { MyFilterPipe } from './my-filter';
 import { IdToNamePipe } from './id-to-name';
@@ -21,12 +21,14 @@ import { TermPipe, SectionPipe } from './misc';
   imports: [],
 
   declarations: [MsgReadPipe, ExeStatusPipe, PathToNamePipe, ImgPathPipe, ThumbPathPipe, MapToArrayPipe, TimePassedPipe,
-    ModelStatusPipe, MarkErrorPipe, FieldTypePipe, FieldInputPipe, FieldApplyToPipe, FieldFormatPipe, TrueOrFalsePipe,
-    DisableOrNotPipe, PercentPipe, ShowIfContainsPipe, PathToLinkPipe, MyFilterPipe, IdToNamePipe, TermPipe, SectionPipe],
+    ModelStatusPipe, MarkErrorPipe, FieldApplyToPipe, FieldFormatPipe, TrueOrFalsePipe,
+    DisableOrNotPipe, PercentPipe, ShowIfContainsPipe, PathToLinkPipe, MyFilterPipe,
+    IdToNamePipe, TermPipe, SectionPipe],
 
   exports: [MsgReadPipe, ExeStatusPipe, PathToNamePipe, ImgPathPipe, ThumbPathPipe, MapToArrayPipe, TimePassedPipe,
-    ModelStatusPipe, MarkErrorPipe, FieldTypePipe, FieldInputPipe, FieldApplyToPipe, FieldFormatPipe, TrueOrFalsePipe,
-    DisableOrNotPipe, ShowIfContainsPipe, PathToLinkPipe, MyFilterPipe, IdToNamePipe, TermPipe, SectionPipe],
+    ModelStatusPipe, MarkErrorPipe, FieldApplyToPipe, FieldFormatPipe, TrueOrFalsePipe,
+    DisableOrNotPipe, PercentPipe, ShowIfContainsPipe, PathToLinkPipe, MyFilterPipe,
+    IdToNamePipe, TermPipe, SectionPipe],
 })
 export class PipeModule {
 

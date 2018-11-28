@@ -33,8 +33,10 @@ export class IssueFieldEdit implements OnInit, AfterViewInit {
 
   model: any = { applyTo: 'test_case' };
   applyToList: string[];
-  typeList: string[];
-  inputList: string[];
+
+  inputMap: any;
+  typeList: any[];
+
   formatList: string[];
 
   form: FormGroup;
@@ -105,14 +107,25 @@ export class IssueFieldEdit implements OnInit, AfterViewInit {
   };
 
   loadData() {
-    const that = this;
-    that.issueFieldService.get(that.id).subscribe((json: any) => {
-      that.model = json.data;
+    this.issueFieldService.get(this.id).subscribe((json: any) => {
+      this.model = json.data;
 
-      that.applyToList = json.applyToList;
-      that.typeList = json.typeList;
-      that.inputList = json.inputList;
-      that.formatList = json.formatList;
+      this.applyToList = json.applyToList;
+      this.formatList = json.formatList;
+
+      this.inputMap = json.inputMap;
+
+      if (!this.id) {
+        for (const key in this.inputMap) {
+          this.model.input = this.inputMap[key].value;
+          break;
+        }
+
+        this.typeList = this.inputMap[this.model.input].types;
+        this.model.type = this.typeList[0].value;
+      } else {
+        this.typeList = this.inputMap[this.model.input].types;
+      }
     });
   }
 
@@ -157,6 +170,11 @@ export class IssueFieldEdit implements OnInit, AfterViewInit {
     }, (reason) => {
       console.log('reason', reason);
     });
+  }
+
+  changeInput() {
+    this.typeList = this.inputMap[this.model.input].types;
+    this.model.type = this.inputMap[this.model.input].types[0].value;
   }
 
   showModal(): void {
