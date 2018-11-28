@@ -1,5 +1,5 @@
-import { Component, ViewEncapsulation, NgModule, Pipe, OnInit, AfterViewInit, OnDestroy, ViewChild }
-  from '@angular/core';
+import { Component, ViewEncapsulation, NgModule, Pipe, OnInit, AfterViewInit, OnDestroy,
+  ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
@@ -15,6 +15,7 @@ import { IssueService } from '../../../service/client/issue';
 
 import { PrivilegeService } from '../../../service/privilege';
 import { PopDialogComponent } from '../../../components/pop-dialog';
+import { IssueInputEditComponent } from '../../../components/issue-input/issue-input-edit';
 
 declare var jQuery;
 
@@ -38,6 +39,7 @@ export class IssueEdit implements OnInit, AfterViewInit, OnDestroy {
 
   form: any;
 
+  @ViewChildren('input') inputs: QueryList<IssueInputEditComponent>;
   @ViewChild('modalWrapper') modalWrapper: PopDialogComponent;
 
   constructor(private _routeService: RouteService, private _state: GlobalState, private _route: ActivatedRoute,
@@ -62,19 +64,10 @@ export class IssueEdit implements OnInit, AfterViewInit, OnDestroy {
   ngAfterViewInit() {}
 
   buildForm(): void {
-    this.form = this.fb.group(
-      {
-        'name': ['', [Validators.required]],
-      }, {},
-    );
+    this.form = this.fb.group({}, {},);
   }
 
   formErrors = [];
-  validateMsg = {
-    'name': {
-      'required': '名称不能为空',
-    },
-  };
 
   loadData() {
     const opt = this.id ? 'edit' : 'create';
@@ -86,22 +79,27 @@ export class IssueEdit implements OnInit, AfterViewInit, OnDestroy {
       this.page = json.page;
 
       this.buildForm();
+      this.validateForm();
     });
   }
 
   save() {
-    this.issueService.save(this.prjId, this.issue).subscribe((json: any) => {
-      if (json.code == 1) {
-        this.issue = json.data;
-        this._state.notifyDataChanged(CONSTANT.EVENT_CASE_UPDATE, { node: this.issue, random: Math.random() });
+    console.log('===', this.issue, this.inputs.toArray());
 
-        const toastOptions: ToastOptions = {
-          title: '保存成功',
-          timeout: 2000,
-        };
-        this.toastyService.success(toastOptions);
-      }
-    });
+    this.validateForm();
+
+    // this.issueService.save(this.prjId, this.issue).subscribe((json: any) => {
+    //   if (json.code == 1) {
+    //     this.issue = json.data;
+    //     this._state.notifyDataChanged(CONSTANT.EVENT_CASE_UPDATE, { node: this.issue, random: Math.random() });
+    //
+    //     const toastOptions: ToastOptions = {
+    //       title: '保存成功',
+    //       timeout: 2000,
+    //     };
+    //     this.toastyService.success(toastOptions);
+    //   }
+    // });
   }
 
   back() {
@@ -111,6 +109,12 @@ export class IssueEdit implements OnInit, AfterViewInit, OnDestroy {
 
   delete() {
 
+  }
+
+  validateForm(): void {
+    this.page.elements.forEach(elem => {
+      console.log(elem.code + ': ' + elem.required + ' --> ' + this.issue[elem.code]);
+    });
   }
 
   showModal(): void {

@@ -35,15 +35,16 @@
 
       <ng-container *ngSwitchCase="'date'">
         <div class="input-group">
-          <input [disabled]="elem.readonly" class="form-control" placeholder="yyyy-mm-dd">
-          <div class="input-group-addon">
+          <input [(ngModel)]="issue[elem.code]" [disabled]="elem.readonly" #dp="ngbDatepicker"
+                 ngbDatepicker [minDate]="startDate" class="form-control" placeholder="yyyy-mm-dd">
+          <div class="input-group-addon" (click)="dp.toggle()">
             <i class="fa fa-calendar"></i>
           </div>
         </div>
       </ng-container>
 
       <ng-container *ngSwitchDefault>
-        <input [disabled]="elem.readonly" type="text" class="form-control">
+        <input [(ngModel)]="issue[elem.code]" [disabled]="elem.readonly" type="text" class="form-control">
       </ng-container>
 
     </ng-container>

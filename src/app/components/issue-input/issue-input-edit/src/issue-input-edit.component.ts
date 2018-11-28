@@ -1,4 +1,6 @@
-import {Input, Component, OnInit, OnChanges, SimpleChanges, Output, EventEmitter} from '@angular/core';
+import {Input, Component, OnInit, OnChanges, SimpleChanges, Output, ViewChildren, QueryList, EventEmitter} from '@angular/core';
+
+import { NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'issue-input-edit',
@@ -13,10 +15,14 @@ export class IssueInputEditComponent implements OnInit, OnChanges {
 
   @Output() propEvent = new EventEmitter<any>();
 
+  @ViewChildren('datepicker') datepickers: NgbDatepicker;
+
   labelColNum: number = 4;
+  startDate: any;
 
   public constructor() {
-
+    const now = new Date();
+    this.startDate = { day: now.getDate(), month: now.getMonth() + 1, year: now.getFullYear() };
   }
 
   public ngOnInit(): void {
@@ -48,6 +54,12 @@ export class IssueInputEditComponent implements OnInit, OnChanges {
     console.log('set', prop, val);
 
     this.propEvent.emit({ id: this.elem.id, prop: prop, val: val });
+  }
+
+  clickDatepicker() {
+    console.log('datepicker', this.datepickers);
+
+    this.datepickers[0].toggle();
   }
 
 }

@@ -20,10 +20,11 @@
   </div>
 
   <div *ngIf="form" class="row">
-    <form [formGroup]="form" (ngSubmit)="save()">
+    <form [formGroup]="form">
       <div class="form-group row elements">
         <div *ngFor="let elem of page.elements; let i = index;" [class.full-line]="elem.fullLine" class="element">
-          <issue-input-edit [(issue)]="issue" [elem]="elem" [issuePropMap]="issuePropMap"></issue-input-edit>
+          <issue-input-edit [(issue)]="issue" [elem]="elem" [issuePropMap]="issuePropMap" #input>
+          </issue-input-edit>
         </div>
       </div>
 
