@@ -116,10 +116,7 @@ export class IssueFieldEdit implements OnInit, AfterViewInit {
       this.inputMap = json.inputMap;
 
       if (!this.id) {
-        for (const key in this.inputMap) {
-          this.model.input = this.inputMap[key].value;
-          break;
-        }
+        this.model.input = _.values(this.inputMap)[0]['value'];
 
         this.typeList = this.inputMap[this.model.input].types;
         this.model.type = this.typeList[0].value;
