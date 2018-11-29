@@ -10,10 +10,7 @@
         <div class="dropdown-menu" aria-labelledby="conditionDropdownMenu" ngbDropdownMenu>
           <button class="dropdown-item">
             <a>沾满整行</a>
-            <input *ngIf="field.input!='datetime'" (change)="set('fullLine', field.fullLine)"
-                   [(ngModel)]="field.fullLine" type="checkbox">
-            <input *ngIf="field.input=='datetime'" disabled="true"
-                   [(ngModel)]="field.fullLine" type="checkbox">
+            <input (change)="set('fullLine', field.fullLine)" [(ngModel)]="field.fullLine" type="checkbox">
           </button>
           <button class="dropdown-item">
             <a>是否必填</a> <input (change)="set('required', field.required)" [(ngModel)]="field.required" type="checkbox">

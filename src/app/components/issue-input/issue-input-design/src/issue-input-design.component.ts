@@ -49,11 +49,6 @@ export class IssueInputDesignComponent implements OnInit, OnChanges {
 
   set (prop: string, val: any) {
     console.log('setFullLine', prop, val, this.field);
-    if (this.field.input == 'datetime') {
-      this.field.fullLine = true;
-      return;
-    }
-
     this.propEvent.emit({ id: this.field.id, prop: prop, val: val });
   }
 
