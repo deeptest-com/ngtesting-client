@@ -49,23 +49,7 @@
       </ng-container>
 
       <ng-container *ngSwitchCase="'time'">
-        <ngb-timepicker formControlName="{{'elem-'+elem.id}}"></ngb-timepicker>
-      </ng-container>
-
-      <ng-container *ngSwitchCase="'datetime'">
-        <div class="datetime">
-          <div class="input-group date">
-            <input [(ngModel)]="issue[elem.code]" formControlName="{{'elem-'+elem.id}}" #dp="ngbDatepicker"
-                   ngbDatepicker [minDate]="startDate" class="form-control" placeholder="yyyy-mm-dd">
-            <div class="input-group-addon" (click)="dp.toggle()">
-              <i class="fa fa-calendar"></i>
-            </div>
-          </div>
-          <div class="gap"></div>
-          <div class="time">
-            <ngb-timepicker formControlName="{{'elem-'+elem.id}}"></ngb-timepicker>
-          </div>
-        </div>
+        <ngb-timepicker [(ngModel)]="issue[elem.code]" formControlName="{{'elem-'+elem.id}}"></ngb-timepicker>
       </ng-container>
 
       <ng-container *ngSwitchDefault>

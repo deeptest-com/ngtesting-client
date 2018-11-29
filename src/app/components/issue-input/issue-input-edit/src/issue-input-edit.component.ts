@@ -1,8 +1,13 @@
 import { Input, Component, OnInit, OnChanges, SimpleChanges, Output, ViewChildren, QueryList, EventEmitter } from '@angular/core';
 
-import { NgbDatepicker, NgbTimepickerConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgbTimepickerConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+
 
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+
+import { Utils } from '../../../../utils/utils';
+
 import * as _ from "lodash";
 
 @Component({
@@ -12,7 +17,6 @@ import * as _ from "lodash";
   providers: [NgbTimepickerConfig],
 })
 export class IssueInputEditComponent implements OnInit, OnChanges {
-  @Input() issue: any = {};
   @Input() elem: any = {};
   @Input() issuePropMap: any = {};
   @Input() form: FormGroup;
@@ -20,12 +24,32 @@ export class IssueInputEditComponent implements OnInit, OnChanges {
 
   @Output() propEvent = new EventEmitter<any>();
 
-  @ViewChildren('datepicker') datepickers: NgbDatepicker;
+  _issue: any = {};
+  get issue(): any {
+    return this._issue;
+  }
+  @Input('issue')
+  set issue(value: any) {
+    this._issue = value;
+
+    if (this.elem.input == 'time') {
+      if (!this._issue[this.elem.code]) {
+        this._issue[this.elem.code] = Utils.timeStructFromStr('10:00:00');
+      } else {
+        this._issue[this.elem.code] = Utils.timeStructFromStr(this._issue[this.elem.code]);
+      }
+    }
+
+    if (this.elem.input == 'date') {
+      console.log('2222222', this._issue[this.elem.code]);
+      this._issue[this.elem.code] = this.ngbDateParserFormatter.parse(this._issue[this.elem.code]);
+    }
+  }
 
   labelColNum: number = 4;
   startDate: any;
 
-  public constructor(config: NgbTimepickerConfig) {
+  public constructor(config: NgbTimepickerConfig, private ngbDateParserFormatter: NgbDateParserFormatter) {
     config.seconds = true;
     config.spinners = false;
 
@@ -34,15 +58,15 @@ export class IssueInputEditComponent implements OnInit, OnChanges {
   }
 
   public ngOnInit(): void {
-    if (!this.issue[this.elem.code] && this.issuePropMap[this.elem.code]) {
+    if (!this._issue[this.elem.code] && this.issuePropMap[this.elem.code]) {
       const defaults: any[] = this.issuePropMap[this.elem.code].filter(
         (option, index) => option.isDefault == true);
       if (defaults.length > 0) {
-        this.issue[this.elem.code] = defaults[0].id;
+        this._issue[this.elem.code] = defaults[0].id;
       }
     }
 
-    let validators: any[] = [];
+    const validators: any[] = [];
     if (this.elem.required) {
       validators.push(Validators.required);
       this.validateMsg['elem-' + this.elem.id] = {
@@ -64,12 +88,6 @@ export class IssueInputEditComponent implements OnInit, OnChanges {
       this.labelColNum = 4;
     }
     return this.labelColNum;
-  }
-
-  clickDatepicker() {
-    console.log('datepicker', this.datepickers);
-
-    this.datepickers[0].toggle();
   }
 
 }

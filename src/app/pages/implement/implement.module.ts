@@ -22,14 +22,14 @@ import { AccountService } from '../../service/client/account';
     routing,
 
     NgbModalModule, NgbPaginationModule, NgbDropdownModule,
-    NgbTabsetModule, NgbButtonsModule, NgbCollapseModule
+    NgbTabsetModule, NgbButtonsModule, NgbCollapseModule,
   ],
   declarations: [
-    Implement
+    Implement,
   ],
   providers: [
     I18n, CustomDatepickerI18n,
-    AccountService, ProjectService
+    AccountService, ProjectService,
   ]
 })
 export class ImplementModule {}

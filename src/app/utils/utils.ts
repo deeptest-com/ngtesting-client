@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateStruct, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
 
 import { CONSTANT } from '../utils/constant';
 import { environment } from '../../environments/environment';
@@ -62,6 +62,24 @@ export let Utils: any = {
   dateCombine: function(model: any, dateKey: any, timeKey: any, datetimeKey: string) {
     const dateStr = model[dateKey] + ' ' + model[timeKey];
     model[datetimeKey] = Utils.strToDate(dateStr);
+  },
+
+  timeStructToStr: function(tm: NgbTimeStruct) {
+    return `${Utils.pad(tm.hour)}:${Utils.pad(tm.minute)}:${Utils.pad(tm.second)}`;
+  },
+  timeStructFromStr: function(str: string) {
+    if (!str) {
+      return null;
+    }
+    const split = str.split(':');
+    return {
+      hour: parseInt(split[0], 10),
+      minute: parseInt(split[1], 10),
+      second: parseInt(split[2], 10)
+    };
+  },
+  pad(i: number): string {
+    return i < 10 ? `0${i}` : `${i}`;
   },
 
   imgUrl: function(url: string, external: boolean, defaultt: string){

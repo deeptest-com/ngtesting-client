@@ -39,7 +39,7 @@ import { PlanView } from './view/view.component';
 import { PlanEdit } from './edit/edit.component';
 
 export function myDateParserFormatterFactory() {
-  return new MyDateParserFormatter('y-MM-dd');
+  return new MyDateParserFormatter('yyyy-MM-dd');
 }
 
 @NgModule({

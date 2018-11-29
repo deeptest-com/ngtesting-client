@@ -17,6 +17,8 @@ import { PrivilegeService } from '../../../service/privilege';
 import { PopDialogComponent } from '../../../components/pop-dialog';
 import { IssueInputEditComponent } from '../../../components/issue-input/issue-input-edit';
 import * as _ from "lodash";
+import {Utils} from "../../../utils";
+import {CustomValidator} from "../../../validator";
 
 declare var jQuery;
 
@@ -28,8 +30,6 @@ declare var jQuery;
 })
 export class IssueEdit implements OnInit, AfterViewInit, OnDestroy {
   eventCode: string = 'IssueEdit';
-  orgId: number;
-  prjId: number;
   canEdit: boolean;
 
   id: number;
@@ -41,6 +41,8 @@ export class IssueEdit implements OnInit, AfterViewInit, OnDestroy {
   form: any;
   validateMsg: any = {};
 
+  routeSub: any;
+
   @ViewChildren('input') inputs: QueryList<IssueInputEditComponent>;
   @ViewChild('modalWrapper') modalWrapper: PopDialogComponent;
 
@@ -49,10 +51,8 @@ export class IssueEdit implements OnInit, AfterViewInit, OnDestroy {
               private issueService: IssueService, private privilegeService: PrivilegeService) {
 
     this.canEdit = this.privilegeService.hasPrivilege('issue-update');
-    this.orgId = CONSTANT.CURR_ORG_ID;
-    this.prjId = CONSTANT.CURR_PRJ_ID;
 
-    this._route.params.forEach((params: Params) => {
+    this.routeSub = this._route.params.subscribe((params: Params) => {
       this.id = +params['id'];
 
       console.log('id', params, this.id);
@@ -82,25 +82,35 @@ export class IssueEdit implements OnInit, AfterViewInit, OnDestroy {
   }
 
   save() {
+    let data = _.clone(this.issue);
+    this.page.elements.forEach(elem => {
+      if (elem.input == 'date' && data[elem.code]) {
+        data[elem.code] = Utils.dateStructToDate(data[elem.code]);
+      } else if (elem.input == 'time' && data[elem.code]) {
+        data[elem.code] = Utils.timeStructToStr(data[elem.code]);
+      }
+    });
     console.log('===', this.issue, this.inputs.toArray());
-    this.onValueChanged();
 
-    // this.issueService.save(this.prjId, this.issue).subscribe((json: any) => {
-    //   if (json.code == 1) {
-    //     this.issue = json.data;
-    //     this._state.notifyDataChanged(CONSTANT.EVENT_CASE_UPDATE, { node: this.issue, random: Math.random() });
-    //
-    //     const toastOptions: ToastOptions = {
-    //       title: '保存成功',
-    //       timeout: 2000,
-    //     };
-    //     this.toastyService.success(toastOptions);
-    //   }
-    // });
+    this.issueService.save(data, this.page.id).subscribe((json: any) => {
+      if (json.code == 1) {
+        this.issue = json.data;
+
+        const toastOptions: ToastOptions = {
+          title: '保存成功',
+          timeout: 2000,
+        };
+        this.toastyService.success(toastOptions);
+
+        const url = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + CONSTANT.CURR_PRJ_ID + '/issue/' +
+          this.issue.id + '/edit';
+        this._routeService.navTo(url);
+      }
+    });
   }
 
   back() {
-    const url = '/pages/org/' + this.orgId + '/prj/' + this.prjId + '/issue/query/lastest';
+    const url = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + CONSTANT.CURR_PRJ_ID + '/issue/query/lastest';
     this._routeService.navTo(url);
   }
 
@@ -113,11 +123,12 @@ export class IssueEdit implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this._state.unsubscribe(CONSTANT.EVENT_CASE_EDIT, this.eventCode);
+    this.routeSub.unsubscribe();
   }
 
   buildForm() {
     this.form = this.fb.group({});
+
     this.form.valueChanges.debounceTime(CONSTANT.DebounceTime).subscribe(data => this.onValueChanged(data));
     this.onValueChanged();
   }
@@ -125,10 +136,6 @@ export class IssueEdit implements OnInit, AfterViewInit, OnDestroy {
   onValueChanged(data?: any) {
     console.log('onValueChanged');
     this.formErrors = ValidatorUtils.genMsg(this.form, this.validateMsg, []);
-
-    // this.page.elements.forEach(elem => {
-    //  console.log(elem.code + ': ' + elem.required + ' --> ' + this.issue[elem.code]);
-    // });
   }
 
 }

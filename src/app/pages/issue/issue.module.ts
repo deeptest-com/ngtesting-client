@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ToastyModule } from 'ng2-toasty';
 
-import { NgbModalModule, NgbPaginationModule, NgbDropdownModule,
+import { NgbModalModule, NgbPaginationModule, NgbDropdownModule, NgbDateParserFormatter,
   NgbTabsetModule, NgbButtonsModule, NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { NgaModule } from '../../theme/nga.module';
@@ -38,6 +38,7 @@ import { TableColumnSelectionModule } from './query/table-column-selection';
 import { IssueBrowse } from './query/browse/browse.component';
 import { IssueEdit } from './edit/edit.component';
 import { IssueView } from './view/view.component';
+import { MyDateParserFormatter } from '../../service/my-date-parser-formatter';
 
 @NgModule({
   imports: [

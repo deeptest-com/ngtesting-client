@@ -8,7 +8,7 @@ import { IssueInputEditComponent } from './issue-input-edit.component';
 import { MyDateParserFormatter } from '../../../../service/my-date-parser-formatter';
 
 export function myDateParserFormatterFactory() {
-  return new MyDateParserFormatter('y-MM-dd');
+  return new MyDateParserFormatter('yyyy-MM-dd');
 }
 
 @NgModule({

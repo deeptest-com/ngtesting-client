@@ -26,11 +26,8 @@ export class IssueService {
     return this._reqService.post(this._apiBase + 'delete', model);
   }
 
-  save(projectId: number, model: any) {
-    const data = _.clone(model);
-    data.steps = null;
-    _.merge(data, { projectId: projectId });
-    return this._reqService.post(this._apiBase + 'save', data);
+  save(model: any, pageId: number) {
+    return this._reqService.post(this._apiBase + 'save', { issue: model, pageId: pageId });
   }
 
   saveField(id: number, field: any) {
