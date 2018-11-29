@@ -1,10 +1,11 @@
 import {Input, Component, OnInit, OnChanges, SimpleChanges, Output, EventEmitter} from '@angular/core';
+import { NgbDatepicker, NgbTimepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'issue-input-design',
   templateUrl: './issue-input-design.html',
   styleUrls: ['./styles.scss'],
-  providers: [],
+  providers: [NgbTimepickerConfig],
 })
 export class IssueInputDesignComponent implements OnInit, OnChanges {
   @Input() issuePropMap: any = {};
@@ -14,9 +15,14 @@ export class IssueInputDesignComponent implements OnInit, OnChanges {
   @Output() propEvent = new EventEmitter<any>();
 
   labelColNum: number = 4;
+  startDate: any;
 
-  public constructor() {
+  public constructor(config: NgbTimepickerConfig) {
+    config.seconds = true;
+    config.spinners = false;
 
+    const now = new Date();
+    this.startDate = { day: now.getDate(), month: now.getMonth() + 1, year: now.getFullYear() };
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
@@ -42,7 +48,11 @@ export class IssueInputDesignComponent implements OnInit, OnChanges {
   }
 
   set (prop: string, val: any) {
-    console.log('setFullLine', prop, val);
+    console.log('setFullLine', prop, val, this.field);
+    if (this.field.input == 'datetime') {
+      this.field.fullLine = true;
+      return;
+    }
 
     this.propEvent.emit({ id: this.field.id, prop: prop, val: val });
   }

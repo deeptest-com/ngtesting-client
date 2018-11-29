@@ -16,6 +16,7 @@ import { IssueService } from '../../../service/client/issue';
 import { PrivilegeService } from '../../../service/privilege';
 import { PopDialogComponent } from '../../../components/pop-dialog';
 import { IssueInputEditComponent } from '../../../components/issue-input/issue-input-edit';
+import * as _ from "lodash";
 
 declare var jQuery;
 
@@ -38,6 +39,7 @@ export class IssueEdit implements OnInit, AfterViewInit, OnDestroy {
   page: any = {};
 
   form: any;
+  validateMsg: any = {};
 
   @ViewChildren('input') inputs: QueryList<IssueInputEditComponent>;
   @ViewChild('modalWrapper') modalWrapper: PopDialogComponent;
@@ -57,15 +59,12 @@ export class IssueEdit implements OnInit, AfterViewInit, OnDestroy {
     });
 
     this.loadData();
+    this.buildForm();
   }
   ngOnInit() {
 
   }
   ngAfterViewInit() {}
-
-  buildForm(): void {
-    this.form = this.fb.group({}, {},);
-  }
 
   formErrors = [];
 
@@ -78,15 +77,13 @@ export class IssueEdit implements OnInit, AfterViewInit, OnDestroy {
 
       this.page = json.page;
 
-      this.buildForm();
-      this.validateForm();
+      this.onValueChanged();
     });
   }
 
   save() {
     console.log('===', this.issue, this.inputs.toArray());
-
-    this.validateForm();
+    this.onValueChanged();
 
     // this.issueService.save(this.prjId, this.issue).subscribe((json: any) => {
     //   if (json.code == 1) {
@@ -111,18 +108,27 @@ export class IssueEdit implements OnInit, AfterViewInit, OnDestroy {
 
   }
 
-  validateForm(): void {
-    this.page.elements.forEach(elem => {
-      console.log(elem.code + ': ' + elem.required + ' --> ' + this.issue[elem.code]);
-    });
-  }
-
   showModal(): void {
     this.modalWrapper.showModal();
   }
 
   ngOnDestroy(): void {
     this._state.unsubscribe(CONSTANT.EVENT_CASE_EDIT, this.eventCode);
+  }
+
+  buildForm() {
+    this.form = this.fb.group({});
+    this.form.valueChanges.debounceTime(CONSTANT.DebounceTime).subscribe(data => this.onValueChanged(data));
+    this.onValueChanged();
+  }
+
+  onValueChanged(data?: any) {
+    console.log('onValueChanged');
+    this.formErrors = ValidatorUtils.genMsg(this.form, this.validateMsg, []);
+
+    // this.page.elements.forEach(elem => {
+    //  console.log(elem.code + ': ' + elem.required + ' --> ' + this.issue[elem.code]);
+    // });
   }
 
 }

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgbDropdownModule, NgbDatepickerModule, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdownModule, NgbDatepickerModule, NgbDateParserFormatter, NgbTimepickerModule, NgbTimepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 
 import { IssueInputEditComponent } from './issue-input-edit.component';
 
@@ -12,10 +12,11 @@ export function myDateParserFormatterFactory() {
 }
 
 @NgModule({
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, NgbDropdownModule, NgbDatepickerModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, NgbDropdownModule,
+    NgbDatepickerModule, NgbTimepickerModule],
   declarations: [IssueInputEditComponent],
   exports: [IssueInputEditComponent],
-  providers: [
+  providers: [NgbTimepickerConfig,
     {
       provide: NgbDateParserFormatter,
       useFactory: myDateParserFormatterFactory,

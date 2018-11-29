@@ -42,6 +42,19 @@
     .input-group {
       margin-bottom: 0;
     }
+
+    .datetime {
+      display: flex;
+      .date {
+        flex: 1;
+      }
+      .gap {
+        width: 10px;
+      }
+      .time {
+        width: 150px;
+      }
+    }
   }
 
 }

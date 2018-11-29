@@ -1,17 +1,22 @@
-import {Input, Component, OnInit, OnChanges, SimpleChanges, Output, ViewChildren, QueryList, EventEmitter} from '@angular/core';
+import { Input, Component, OnInit, OnChanges, SimpleChanges, Output, ViewChildren, QueryList, EventEmitter } from '@angular/core';
 
-import { NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDatepicker, NgbTimepickerConfig } from '@ng-bootstrap/ng-bootstrap';
+
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import * as _ from "lodash";
 
 @Component({
   selector: 'issue-input-edit',
   templateUrl: './issue-input-edit.html',
   styleUrls: ['./styles.scss'],
-  providers: [],
+  providers: [NgbTimepickerConfig],
 })
 export class IssueInputEditComponent implements OnInit, OnChanges {
   @Input() issue: any = {};
   @Input() elem: any = {};
   @Input() issuePropMap: any = {};
+  @Input() form: FormGroup;
+  @Input() validateMsg: any = {};
 
   @Output() propEvent = new EventEmitter<any>();
 
@@ -20,7 +25,10 @@ export class IssueInputEditComponent implements OnInit, OnChanges {
   labelColNum: number = 4;
   startDate: any;
 
-  public constructor() {
+  public constructor(config: NgbTimepickerConfig) {
+    config.seconds = true;
+    config.spinners = false;
+
     const now = new Date();
     this.startDate = { day: now.getDate(), month: now.getMonth() + 1, year: now.getFullYear() };
   }
@@ -31,10 +39,18 @@ export class IssueInputEditComponent implements OnInit, OnChanges {
         (option, index) => option.isDefault == true);
       if (defaults.length > 0) {
         this.issue[this.elem.code] = defaults[0].id;
-
-        console.log('====', this.elem.code, this.issue[this.elem.code]);
       }
     }
+
+    let validators: any[] = [];
+    if (this.elem.required) {
+      validators.push(Validators.required);
+      this.validateMsg['elem-' + this.elem.id] = {
+        'required': this.elem.label + '不能为空',
+      };
+    }
+    this.form.addControl('elem-' + this.elem.id,
+      new FormControl({ value: '', disabled: this.elem.readonly }, validators));
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
@@ -48,12 +64,6 @@ export class IssueInputEditComponent implements OnInit, OnChanges {
       this.labelColNum = 4;
     }
     return this.labelColNum;
-  }
-
-  set (prop: string, val: any) {
-    console.log('set', prop, val);
-
-    this.propEvent.emit({ id: this.elem.id, prop: prop, val: val });
   }
 
   clickDatepicker() {
