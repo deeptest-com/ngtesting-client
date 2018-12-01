@@ -47,6 +47,8 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
   columns: any[] = [];
   init: number = 0;
 
+  batchModel: boolean = false;
+
   layout: string = CONSTANT.PROFILE.issueView;
   @ViewChild('modalWrapper') modalWrapper: PopDialogComponent;
 
@@ -162,7 +164,7 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
   }
 
   create() {
-    const url = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + CONSTANT.CURR_PRJ_ID + '/issue/null/edit';
+    const url = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + CONSTANT.CURR_PRJ_ID + '/issue/create';
     this._routeService.navTo(url);
   }
 
@@ -174,6 +176,14 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
     this._queryService.addToFavorites(this.queryName, this.rule).subscribe((json: any) => {
       this.modalWrapper.closeModal();
     });
+  }
+
+  changeModel() {
+    this.batchModel = !this.batchModel;
+  }
+
+  dealWithIssue($event) {
+    console.log('dealWithIssue', $event);
   }
 
   ngOnDestroy(): void {

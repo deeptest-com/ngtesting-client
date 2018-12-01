@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { Issue } from './issue.component';
 import { IssueQuery } from './query/query.component';
 
+import { IssueCreate } from './create/create.component';
 import { IssueEdit } from './edit/edit.component';
 import { IssueView } from './view/view.component';
 
@@ -19,8 +20,9 @@ const routes: Routes = [
       { path: 'filter/:filterId',
         component: IssueQuery,
       },
-      { path: ':id/view', component: IssueView },
+      { path: 'create', component: IssueCreate },
       { path: ':id/edit', component: IssueEdit },
+      { path: ':id/view', component: IssueView },
     ],
   },
 ];

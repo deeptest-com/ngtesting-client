@@ -1,5 +1,7 @@
-import { Component, ViewEncapsulation, NgModule, Pipe, Input,
-  OnInit, AfterViewInit, OnDestroy, ViewChild } from '@angular/core';
+import {
+  Component, ViewEncapsulation, NgModule, Pipe, Input,
+  OnInit, AfterViewInit, OnDestroy, ViewChild, Output, EventEmitter
+} from '@angular/core';
 
 import { GlobalState } from '../../../../global.state';
 import { CONSTANT } from '../../../../utils/constant';
@@ -19,6 +21,7 @@ export class IssueTable implements OnInit, AfterViewInit, OnDestroy {
 
   @Input() issues: any[] = [];
   @Input() columns: any[] = [];
+  @Output() dealWithIssueEvent = new EventEmitter<any>();
 
   orgId: number;
   prjId: number;
@@ -33,13 +36,15 @@ export class IssueTable implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit() {}
 
-  clickOptMenu(item: any, act: string) {
-    console.log(item, act);
+  dealWithIssue($event) {
+    console.log($event);
 
-    if (act === 'view' || act === 'edit') {
-      const url = '/pages/org/' + this.orgId + '/prj/' + this.prjId + '/issue/' + item.id + '/' + act;
-      this._routeService.navTo(url);
-    }
+    // if (act === 'view' || act === 'edit') {
+    //   const url = '/pages/org/' + this.orgId + '/prj/' + this.prjId + '/issue/' + item.id + '/' + act;
+    //   this._routeService.navTo(url);
+    // }
+
+    this.dealWithIssueEvent.emit($event);
   }
 
   ngOnDestroy(): void {

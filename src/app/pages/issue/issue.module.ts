@@ -34,11 +34,12 @@ import { IssueQuery } from './query/query.component';
 import { IssueTable } from './query/table/table.component';
 import { ItemProp } from './query/table/item-prop';
 import { TableColumnSelectionModule } from './query/table-column-selection';
+import { IssueOptModule } from './query/issue-opt';
 
 import { IssueBrowse } from './query/browse/browse.component';
+import { IssueCreate } from './create/create.component';
 import { IssueEdit } from './edit/edit.component';
 import { IssueView } from './view/view.component';
-import { MyDateParserFormatter } from '../../service/my-date-parser-formatter';
 
 @NgModule({
   imports: [
@@ -58,12 +59,14 @@ import { MyDateParserFormatter } from '../../service/my-date-parser-formatter';
     PopDialogModule,
     PageInfoModule,
     TqlModule,
+    IssueOptModule,
     TableColumnSelectionModule,
     IssueInputEditModule,
   ],
   declarations: [
     Issue,
     IssueQuery, IssueTable, ItemProp, IssueBrowse,
+    IssueCreate,
     IssueEdit,
     IssueView,
   ],

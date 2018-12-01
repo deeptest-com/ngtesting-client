@@ -8,7 +8,7 @@
     }
 
     .buttons {
-      width: 200px;
+      width: 150px;
       .layout {
         display: inline-block;
         padding: 3px;
@@ -19,7 +19,6 @@
         }
       }
       &.table-column-selection-wrap {
-        width: 65px;
         button.dropdown {
           border: 0;
         }

@@ -23,8 +23,6 @@ declare var jQuery;
 })
 export class IssueView implements OnInit, AfterViewInit, OnDestroy {
   eventCode: string = 'IssueView';
-  orgId: number;
-  prjId: number;
   canEdit: boolean;
 
   projectId: number;
@@ -38,39 +36,39 @@ export class IssueView implements OnInit, AfterViewInit, OnDestroy {
   issuePropertyMap: any;
   fields: any[] = [];
 
+  routeSub: any;
+
   constructor(private _routeService: RouteService, private _route: ActivatedRoute, private _state: GlobalState,
               private fb: FormBuilder, private toastyService: ToastyService,
-              private _issueService: IssueService, private privilegeService: PrivilegeService) {
+              private issueService: IssueService, private privilegeService: PrivilegeService) {
     this.issuePropertyMap = CONSTANT.CASE_PROPERTY_MAP;
 
     this.canEdit = this.privilegeService.hasPrivilege('issue-update');
-    this.orgId = CONSTANT.CURR_ORG_ID;
-    this.prjId = CONSTANT.CURR_PRJ_ID;
 
-    this._route.params.forEach((params: Params) => {
+    this.routeSub = this._route.params.subscribe((params: Params) => {
       this.id = +params['id'];
-    });
 
-    // this.loadData();
+      console.log('id', params, this.id);
+
+      this.loadData();
+    });
   }
   ngOnInit() {
   }
   ngAfterViewInit() {}
 
   loadData() {
-    this._issueService.get(this.id, 'view').subscribe((json: any) => {
+    this.issueService.view(this.id).subscribe((json: any) => {
       this.model = json.data;
     });
   }
 
   back() {
-    const url = '/pages/org/' + this.orgId + '/prj/' + this.prjId + '/issue/query/' + CONSTANT.ISSUE_JQL;
-    console.log(url);
-    this._routeService.navTo(url);
+    this.issueService.gotoList();
   }
 
   ngOnDestroy(): void {
-    this._state.unsubscribe(CONSTANT.EVENT_CASE_EDIT, this.eventCode);
+    this.routeSub.unsubscribe();
   }
 }
 

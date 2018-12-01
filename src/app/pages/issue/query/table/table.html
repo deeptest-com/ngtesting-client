@@ -15,33 +15,16 @@
         </thead>
         <tbody>
           <tr *ngFor="let item of issues">
-            <td (click)="clickOptMenu(item, 'view')" class="link">{{item.id}}</td>
+            <td (click)="dealWithIssue(item, 'view')" class="link">{{item.id}}</td>
             <ng-container *ngFor="let col of columns">
-              <td *ngIf="col.display">
+              <td (click)="dealWithIssue(item, 'view')" *ngIf="col.display" class="link">
                 <item-prop [item]="item" [col]="col"></item-prop>
               </td>
             </ng-container>
 
             <td>
               <div style="position: relative">
-                <div ngbDropdown placement="bottom-right" class="btn-group">
-                  <button class="btn btn-default opt" ngbDropdownToggle>
-                    <span class="text">...</span>
-                  </button>
-                  <div class="dropdown-menu">
-                    <button (click)="clickOptMenu(item, 'view')" class="dropdown-item">
-                      <span class="link">查看</span></button>
-                    <button (click)="clickOptMenu(item, 'edit')" class="dropdown-item">
-                      <span class="link">编辑</span></button>
-
-                    <li class="dropdown-divider"></li>
-
-                    <button (click)="clickOptMenu(item, '')" class="dropdown-item">
-                      <span class="link">解决</span></button>
-                    <button (click)="clickOptMenu(item, '')" class="dropdown-item">
-                      <span class="link">完成</span></button>
-                  </div>
-                </div>
+                <issue-opt [item]="item" (dealWithIssueEvent)="dealWithIssue($event)"></issue-opt>
               </div>
             </td>
           </tr>

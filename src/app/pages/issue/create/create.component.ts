@@ -23,16 +23,15 @@ import { CustomValidator } from '../../../validator';
 declare var jQuery;
 
 @Component({
-  selector: 'issue-edit',
+  selector: 'issue-create',
   encapsulation: ViewEncapsulation.None,
-  styleUrls: ['./edit.scss'],
-  templateUrl: './edit.html',
+  styleUrls: ['./create.scss'],
+  templateUrl: './create.html',
 })
-export class IssueEdit implements OnInit, AfterViewInit, OnDestroy {
-  eventCode: string = 'IssueEdit';
-  canEdit: boolean;
+export class IssueCreate implements OnInit, AfterViewInit, OnDestroy {
+  eventCode: string = 'IssueCreate';
+  canCreate: boolean;
 
-  id: number;
   issue: any = {};
   issuePropMap: any = {};
 
@@ -41,24 +40,15 @@ export class IssueEdit implements OnInit, AfterViewInit, OnDestroy {
   form: any;
   validateMsg: any = {};
 
-  routeSub: any;
-
   @ViewChildren('input') inputs: QueryList<IssueInputEditComponent>;
-  @ViewChild('modalWrapper') modalWrapper: PopDialogComponent;
 
   constructor(private _routeService: RouteService, private _state: GlobalState, private _route: ActivatedRoute,
               private fb: FormBuilder, private toastyService: ToastyService,
               private issueService: IssueService, private privilegeService: PrivilegeService) {
 
-    this.canEdit = this.privilegeService.hasPrivilege('issue-update');
+    this.canCreate = this.privilegeService.hasPrivilege('issue-maintain');
 
-    this.routeSub = this._route.params.subscribe((params: Params) => {
-      this.id = +params['id'];
-
-      console.log('id', params, this.id);
-      this.loadData();
-    });
-
+    this.loadData();
     this.buildForm();
   }
   ngOnInit() {
@@ -66,8 +56,10 @@ export class IssueEdit implements OnInit, AfterViewInit, OnDestroy {
   }
   ngAfterViewInit() {}
 
+  formErrors = [];
+
   loadData() {
-    this.issueService.edit(this.id).subscribe((json: any) => {
+    this.issueService.create().subscribe((json: any) => {
       this.issue = json.data;
       this.issuePropMap = json.issuePropMap;
 
@@ -77,7 +69,7 @@ export class IssueEdit implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  update() {
+  save() {
     const data = _.clone(this.issue);
     this.page.elements.forEach(elem => {
       if (elem.input == 'date' && data[elem.code]) {
@@ -88,18 +80,10 @@ export class IssueEdit implements OnInit, AfterViewInit, OnDestroy {
     });
     console.log('===', this.issue, this.inputs.toArray());
 
-    this.issueService.update(data, this.page.id).subscribe((json: any) => {
+    this.issueService.save(data, this.page.id).subscribe((json: any) => {
       if (json.code == 1) {
-        this.issue = json.data;
-
-        const toastOptions: ToastOptions = {
-          title: '保存成功',
-          timeout: 2000,
-        };
-        this.toastyService.success(toastOptions);
-
         const url = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + CONSTANT.CURR_PRJ_ID + '/issue/' +
-          this.issue.id + '/edit';
+          json.id + '/edit';
         this._routeService.navTo(url);
       }
     });
@@ -109,17 +93,7 @@ export class IssueEdit implements OnInit, AfterViewInit, OnDestroy {
     this.issueService.gotoList();
   }
 
-  delete() {
-
-  }
-
-  onValueChanged(data?: any) {
-    console.log('onValueChanged');
-    this.formErrors = ValidatorUtils.genMsg(this.form, this.validateMsg, []);
-  }
-
-  showModal(): void {
-    this.modalWrapper.showModal();
+  ngOnDestroy(): void {
   }
 
   buildForm() {
@@ -128,10 +102,10 @@ export class IssueEdit implements OnInit, AfterViewInit, OnDestroy {
     this.form.valueChanges.debounceTime(CONSTANT.DebounceTime).subscribe(data => this.onValueChanged(data));
     this.onValueChanged();
   }
-  formErrors = [];
 
-  ngOnDestroy(): void {
-    this.routeSub.unsubscribe();
+  onValueChanged(data?: any) {
+    console.log('onValueChanged');
+    this.formErrors = ValidatorUtils.genMsg(this.form, this.validateMsg, []);
   }
 
 }

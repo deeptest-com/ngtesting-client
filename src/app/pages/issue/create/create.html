@@ -1,9 +1,9 @@
-<div class="issue-edit container-fluid">
+<div class="issue-create container-fluid">
 
   <div class="row">
     <div class="list-toolbar col-xl-12">
       <div class="title">
-        <span>编辑问题</span>
+        <span>新建问题</span>
       </div>
 
       <div class="filter">
@@ -31,11 +31,9 @@
       <div class="form-group row">
         <label class="col-sm-2 col-form-label"></label>
         <div class="col-sm-10">
-          <button (click)="update()" type="button" class="btn btn-primary" [disabled]="!form.valid">保存</button>
+          <button (click)="save()" type="button" class="btn btn-primary" [disabled]="!form.valid">保存</button>
           &nbsp;
           <button (click)="back()" type="button" class="btn btn-default">取消</button>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <button (click)="showModal()" type="button" class="btn btn-danger">删除</button>
         </div>
       </div>
 
@@ -51,9 +49,5 @@
       </div>
     </form>
   </div>
-
-  <pop-dialog #modalWrapper (confirm)="delete()" [title]="'提示'">
-    确认删除名为"{{issue.title}}"的问题?
-  </pop-dialog>
 
 </div>
