@@ -23,8 +23,8 @@ export class TqlService {
     return this._reqService.post(this._changeColumns, { columns: columns } );
   }
 
-  query(rule: string, page: number, pageSize: number, init: boolean) {
-    return this._reqService.post(this._query, { rule: rule,
+  query(rule: string, orderBy: any[], page: number, pageSize: number, init: boolean) {
+    return this._reqService.post(this._query, { rule: rule, orderBy: orderBy,
       page: page, pageSize: pageSize, init: init } );
   }
 

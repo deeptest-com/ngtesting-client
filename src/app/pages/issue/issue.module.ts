@@ -31,12 +31,15 @@ import { PrivilegeService } from '../../service/privilege';
 
 import { Issue } from './issue.component';
 import { IssueQuery } from './query/query.component';
-import { IssueTable } from './query/table/table.component';
-import { ItemProp } from './query/table/item-prop';
+import { IssuePage } from './issue-page/issue-page.component';
+
+import { IssueTable } from './query/result-table/table.component';
+import { ItemProp } from './query/result-table/item-prop';
+import { IssueBrowse } from './query/result-browse/browse.component';
+
 import { TableColumnSelectionModule } from './query/table-column-selection';
 import { IssueOptModule } from './query/issue-opt';
 
-import { IssueBrowse } from './query/browse/browse.component';
 import { IssueCreate } from './create/create.component';
 import { IssueEdit } from './edit/edit.component';
 import { IssueView } from './view/view.component';
@@ -65,7 +68,7 @@ import { IssueView } from './view/view.component';
   ],
   declarations: [
     Issue,
-    IssueQuery, IssueTable, ItemProp, IssueBrowse,
+    IssueQuery, IssuePage, IssueTable, ItemProp, IssueBrowse,
     IssueCreate,
     IssueEdit,
     IssueView,

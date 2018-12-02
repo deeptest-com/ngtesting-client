@@ -4,10 +4,18 @@
         <thead class="thead-inverse">
         <tr>
           <th *ngIf="batchModel">选择</th>
-          <th>编号</th>
+          <th (click)="order('id')" class="link">
+            <span>编号</span>
+
+            <span *ngIf="orderByMap.id=='asc'" class="fa fa-long-arrow-up"></span>
+            <span *ngIf="orderByMap.id=='desc'" class="fa fa-long-arrow-down"></span>
+          </th>
           <ng-container *ngFor="let col of columns">
-            <th *ngIf="col.display">
-              {{col.label}}
+            <th *ngIf="col.display" (click)="order(col.code)" class="link">
+              <span>{{col.label}}</span>
+
+              <span *ngIf="orderByMap[col.code]=='asc'" class="fa fa-long-arrow-up"></span>
+              <span *ngIf="orderByMap[col.code]=='desc'" class="fa fa-long-arrow-down"></span>
             </th>
           </ng-container>
 

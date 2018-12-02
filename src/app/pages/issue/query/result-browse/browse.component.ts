@@ -1,5 +1,7 @@
-import { Component, ViewEncapsulation, NgModule, Pipe, OnInit, AfterViewInit, OnDestroy, ViewChild,
-  OnChanges, DoCheck, SimpleChanges, ElementRef, Inject, Renderer2 } from '@angular/core';
+import {
+  Component, ViewEncapsulation, NgModule, Pipe, OnInit, AfterViewInit, OnDestroy, ViewChild,
+  OnChanges, DoCheck, SimpleChanges, ElementRef, Inject, Renderer2, Input, Output, EventEmitter
+} from '@angular/core';
 
 import { GlobalState } from '../../../../global.state';
 import { CONSTANT } from '../../../../utils/constant';
@@ -14,15 +16,20 @@ declare var jQuery;
   styleUrls: ['./browse.scss'],
   templateUrl: './browse.html',
 })
-export class IssueBrowse implements OnInit, AfterViewInit, OnDestroy, OnChanges, DoCheck {
+export class IssueBrowse implements OnInit, AfterViewInit, OnDestroy, OnChanges {
   eventCode: string = 'IssueView';
 
   contentHeight: number;
   leftWidth: number = CONSTANT.PROFILE.leftSizeIssue;
 
-  issue: any[] = [];
+  @Input() issues: any[] = [];
+  @Input() orderBy: any = {};
+  @Output() dealWithIssueEvent = new EventEmitter<any>();
 
-  constructor(private _state: GlobalState, private _issueService: IssueService,
+  issue: any;
+  page: any;
+
+  constructor(private _state: GlobalState, private issueService: IssueService,
               @Inject(ElementRef) public element: ElementRef, @Inject(Renderer2) private renderer: Renderer2) {
 
   }
@@ -32,21 +39,19 @@ export class IssueBrowse implements OnInit, AfterViewInit, OnDestroy, OnChanges,
   }
 
   ngAfterViewInit() {
-
-  }
-
-  ngDoCheck(): void {
-    console.log('ngDoCheck');
     const tqlElem = jQuery('.tql');
     this.contentHeight = Utils.getContainerHeight(CONSTANT.HEAD_HEIGHT + CONSTANT.FOOTER_HEIGHT
       + CONSTANT.ISSUE_TQL_SPAN + tqlElem.height());
   }
+
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('ngOnChanges', changes);
+
   }
 
-  loadData() {
-
+  viewIssue(item): any {
+    this.issueService.view(item.id).subscribe((json: any) => {
+      this.issue = json.data;
+    });
   }
 
   ngOnDestroy(): void {

@@ -217,6 +217,29 @@ export let Utils: any = {
     form.submit();
   },
 
+  reverseOrder(newCond, orderBy: any[]): any[] {
+    let indx = -1;
+    let newVal = 'asc';
+    orderBy.forEach((it, index) => {
+      if (it.key == newCond) {
+        indx = index;
+        if (it.val == 'asc') {
+          newVal = 'desc';
+        }
+      }
+    });
+
+    if (indx > -1) {
+      orderBy.splice(indx, 1);
+    }
+    orderBy.unshift({ key: newCond, val: newVal });
+
+    orderBy = orderBy.slice(0, 2);
+
+    console.log('Utils.reverseOrder', orderBy);
+
+    return orderBy;
+  }
 };
 
 export class Deferred {

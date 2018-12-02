@@ -51,18 +51,24 @@
       </div>
     </div>
 
-    <issue-table [issues]="models" [columns]="columns"
-                 [batchModel]="batchModel" (dealWithIssueEvent)="dealWithIssue($event)"></issue-table>
+    <issue-table [issues]="models" [columns]="columns" [orderBy]="orderBy" [batchModel]="batchModel"
+                 (orderEvent)="reOrder($event)" (dealWithIssueEvent)="dealWithIssue($event)"></issue-table>
 
-    <div class="page-container">
+    <div class="page-container row">
       <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
                       (pageChange)="pageChange($event)">
       </ngb-pagination>
+      <div class="page-size-wapper row">
+        <span class="text">每页记录数</span> &nbsp;
+        <select [(ngModel)]="pageSize" (change)="pageChange()" name="pageSize" class="">
+          <option *ngFor="let item of [20,50,100]" value="{{item}}">{{item}}</option>
+        </select>
+      </div>
     </div>
   </div>
 
   <div *ngIf="layout=='browse'">
-    <issue-browse></issue-browse>
+    <issue-browse [issues]="models" [orderBy]="orderBy" (dealWithIssueEvent)="dealWithIssue($event)"></issue-browse>
   </div>
 
 </div>

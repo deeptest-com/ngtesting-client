@@ -45,6 +45,19 @@
     }
   }
 
+  .page-container {
+    .page-size-wapper {
+      margin-left: 20px !important;
+      padding: 12px 0;
+      .text {
+        line-height: 32px;
+      }
+      select {
+        height: 32px;
+      }
+    }
+  }
+
   .link {
     margin: 0 1px !important;
   }

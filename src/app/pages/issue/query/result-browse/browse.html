@@ -1,13 +1,18 @@
 <div class="issue-browse">
   <div class="main" [resize]="'issue'">
     <div class="left resize-left" [style.width]="leftWidth+'px'" [style.height]="contentHeight">
-
+      <div *ngFor="let item of issues" (click)="viewIssue(item)" class="row link">
+        <div>IS-{{item.id}}</div>
+        <div class="link">
+          <span>{{item.title}}</span>
+        </div>
+      </div>
     </div>
 
     <div class="resize-handle" [style.left]="leftWidth+'px'"></div>
 
     <div class="content resize-right y-scrollable" [style.height]="contentHeight">
-
+      <issue-page [issue]="issue" [page]="page"></issue-page>
     </div>
   </div>
 </div>

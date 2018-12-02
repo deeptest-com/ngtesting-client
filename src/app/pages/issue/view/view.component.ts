@@ -25,16 +25,10 @@ export class IssueView implements OnInit, AfterViewInit, OnDestroy {
   eventCode: string = 'IssueView';
   canEdit: boolean;
 
-  projectId: number;
   id: number;
-  model: any = {};
-
-  settings: any;
-  data: any;
-  form: any;
+  issue: any = {};
 
   issuePropertyMap: any;
-  fields: any[] = [];
 
   routeSub: any;
 
@@ -59,7 +53,7 @@ export class IssueView implements OnInit, AfterViewInit, OnDestroy {
 
   loadData() {
     this.issueService.view(this.id).subscribe((json: any) => {
-      this.model = json.data;
+      this.issue = json.data;
     });
   }
 

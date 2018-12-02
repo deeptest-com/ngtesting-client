@@ -7,6 +7,7 @@ import { GlobalState } from '../../../../global.state';
 import { CONSTANT } from '../../../../utils/constant';
 import { RouteService } from '../../../../service/route';
 import { IssueService } from '../../../../service/client/issue';
+import {Utils} from "../../../../utils";
 
 declare var jQuery;
 
@@ -21,8 +22,13 @@ export class IssueTable implements OnInit, AfterViewInit, OnDestroy {
 
   @Input() issues: any[] = [];
   @Input() columns: any[] = [];
+  @Input() orderBy: any[] = [];
   @Input() batchModel: boolean;
+
   @Output() dealWithIssueEvent = new EventEmitter<any>();
+  @Output() orderEvent = new EventEmitter<any>();
+
+  orderByMap: any = {};
 
   orgId: number;
   prjId: number;
@@ -33,19 +39,35 @@ export class IssueTable implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.dealwithOrderMap();
   }
 
   ngAfterViewInit() {}
 
   dealWithIssue($event) {
     console.log($event);
-
-    // if (act === 'view' || act === 'edit') {
-    //   const url = '/pages/org/' + this.orgId + '/prj/' + this.prjId + '/issue/' + item.id + '/' + act;
-    //   this._routeService.navTo(url);
-    // }
-
     this.dealWithIssueEvent.emit($event);
+  }
+
+  order(col) {
+    console.log('order', this.orderBy);
+
+    this.orderBy = Utils.reverseOrder(col, this.orderBy);
+    console.log('reOrder', this.orderBy);
+
+    this.dealwithOrderMap();
+
+    console.log('this.orderByMap', this.orderByMap);
+
+    this.orderEvent.emit(this.orderBy);
+  }
+
+  dealwithOrderMap () {
+    this.orderByMap = {};
+    this.orderBy.forEach((it, index) => {
+      console.log('it', it, it.key);
+      this.orderByMap[it.key] = it.val;
+    });
   }
 
   ngOnDestroy(): void {

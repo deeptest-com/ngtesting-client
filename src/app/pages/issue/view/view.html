@@ -18,28 +18,6 @@
     </div>
   </div>
 
-  <div class="my-validate-form small-label">
+  <issue-page [issue]="issue" [page]="page"></issue-page>
 
-    <div class="form-group row">
-      <label class="col-sm-3 col-form-label" style="user-select: text;">TC-{{model.id}}</label>
-      <label class="col-sm-9 col-form-label text">
-        {{model.name}}
-      </label>
-    </div>
-
-    <div class="form-group row">
-      <label class="col-sm-3 col-form-label"><span>耗时(分钟)</span></label>
-      <label class="col-sm-9 col-form-label text">
-        {{model.estimate}}
-      </label>
-    </div>
-
-    <div class="form-group row">
-      <label class="col-sm-3 col-form-label"><span>测试目的</span></label>
-      <label class="col-sm-9 col-form-label text">
-        {{model.objective}}
-      </label>
-    </div>
-
-  </div>
 </div>

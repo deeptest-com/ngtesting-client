@@ -37,10 +37,11 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
   models: any[];
   collectionSize: number = 0;
   page: number = 1;
-  pageSize: number = 3;
+  pageSize: number = 20;
 
   queryName: string;
   rule: any = {};
+  orderBy: any[] = [];
   checkedConditions: any = {};
   filters: any[] = [];
   issuePropMap: any = {};
@@ -57,26 +58,35 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
               private _queryService: IssueQueryService, private _issueService: IssueService) {
 
     this.routeSub = this._activeRoute.params.subscribe(params => {
-      this.rule = params['rule'];
+      const ruleStr = params['rule'];
+      const orderByStr = params['orderBy'];
 
-      if (this.rule == 'all') {
+      if (ruleStr == 'all') {
         this.rule = {};
         this.loadData();
-      } else if (this.rule == 'lastest') {
-        const rule = localStorage.getItem('issue_query');
-        if (!rule) {
+      } else if (ruleStr == 'lastest') {
+        const ruleStore = localStorage.getItem('issue_query');
+        const orderByStore = localStorage.getItem('order_by');
+        if (!ruleStore) {
           this.rule = {};
         } else {
-          this.rule = JSON.parse(rule);
+          this.rule = JSON.parse(ruleStore);
+        }
+        if (!orderByStore) {
+          this.orderBy = [];
+        } else {
+          this.orderBy = JSON.parse(orderByStore);
         }
 
         this.loadData(this.init == 0);
-      } else if (this.rule.startsWith('q_')) {
+      } else if (ruleStr.startsWith('q_')) {
         this.loadDataByQueryId(this.rule.split('_')[1], this.init == 0);
       } else {
-        localStorage.setItem('issue_query', this.rule);
+        localStorage.setItem('issue_query', ruleStr);
+        localStorage.setItem('order_by', orderByStr);
 
-        this.rule = JSON.parse(this.rule);
+        this.rule = JSON.parse(ruleStr);
+        this.orderBy = JSON.parse(orderByStr);
         this.loadData(this.init == 0);
       }
 
@@ -96,9 +106,7 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
     this.rule = this._tqlService.buildRule(this.rule, this.filters, data);
     console.log('---queryChange ', this.rule);
 
-    const url = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + CONSTANT.CURR_PRJ_ID
-      + '/issue/query/' + JSON.stringify(this.rule);
-    this._router.navigateByUrl(url);
+    this.goto();
   }
 
   pageChange(event: any): void {
@@ -106,7 +114,7 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
   }
 
   loadData(init: boolean = true) {
-    this._tqlService.query(this.rule, this.page, this.pageSize, init).subscribe((json: any) => {
+    this._tqlService.query(this.rule, this.orderBy, this.page, this.pageSize, init).subscribe((json: any) => {
       console.log('===', json);
       this.collectionSize = json.total;
       this.models = json.data;
@@ -114,9 +122,13 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
       if (init) {
         this.init++;
         this.rule = json.rule;
+        this.orderBy = json.orderBy;
         this.filters = json.filters;
         this.columns = json.columns;
+
         this.issuePropMap = json.issuePropMap;
+
+        console.log('this.orderBy', this.orderBy);
       }
     });
   }
@@ -156,6 +168,13 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
+  reOrder(orderBy) {
+    this.orderBy = orderBy;
+    console.log('reOrder', this.orderBy);
+
+    this.goto();
+  }
+
   changeLayout(layout: string): void {
     this.layout = layout;
 
@@ -185,6 +204,9 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
   dealWithIssue($event) {
     console.log('dealWithIssue', $event, this.batchModel);
 
+    const url = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + CONSTANT.CURR_PRJ_ID + '/issue/'
+      + $event.item.id + '/' + $event.act;
+    this._routeService.navTo(url);
   }
 
   selectAll() {
@@ -200,6 +222,13 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.routeSub.unsubscribe();
+  }
+
+  goto(): void {
+    const url = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + CONSTANT.CURR_PRJ_ID
+      + '/issue/query/' + JSON.stringify(this.rule) + '/' + JSON.stringify(this.orderBy);
+    console.log('url=', this.orderBy, url);
+    this._router.navigateByUrl(url);
   }
 
 }

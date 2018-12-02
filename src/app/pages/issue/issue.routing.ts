@@ -14,7 +14,7 @@ const routes: Routes = [
     component: Issue,
     children: [
       {
-        path: 'query/:rule',
+        path: 'query/:rule/:orderBy',
         component: IssueQuery,
       },
       { path: 'filter/:filterId',

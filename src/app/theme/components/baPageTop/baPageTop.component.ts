@@ -114,7 +114,7 @@ export class BaPageTop implements OnInit, AfterViewInit, OnDestroy {
     this.isScrolled = isScrolled;
   }
 
-  gotoModule(module: string, param: string = 'all') {
+  gotoModule(module: string, param: string = 'all', orderBy: string = 'null') {
     let url = '';
     if (module == 'design') {
       url = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + CONSTANT.CURR_PRJ_ID + '/design/case';
@@ -125,7 +125,8 @@ export class BaPageTop implements OnInit, AfterViewInit, OnDestroy {
     } else if (module == 'autotest') {
       url = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + CONSTANT.CURR_PRJ_ID + '/autotest/aitask';
     } else if (module == 'issue') {
-      url = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + CONSTANT.CURR_PRJ_ID + '/issue/query/' + param;
+      url = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + CONSTANT.CURR_PRJ_ID + '/issue/query/'
+        + param + '/' + orderBy;
     }
 
     this._routeService.navTo(url);
