@@ -14,34 +14,38 @@ import { TqlConditionService } from './tql-condition.service';
   styleUrls: ['./styles.scss'],
 })
 export class TqlConditionComponent implements OnInit, AfterViewInit {
-  form: FormGroup;
-
   @Input() search: boolean = true;
   @Input() model: any;
-  @Input() checkedItems: any = {};
+  @Input() _checkedItems: any = {};
+
+  @Input() set checkedItems(models: any) {
+    this._checkedItems = models;
+    if (!this.init) {
+      this.computerSelected();
+    } else {
+      this.init = false;
+    }
+  }
+  get checkedItems() {
+    return this._checkedItems;
+  }
+
   @Input() issuePropMap: any = {};
 
   @Output() selected = new EventEmitter<any>();
 
   keywords: string = '';
   selectOptions: any[] = [];
+  hasChecked: boolean = false;
+  init: boolean = true;
 
   constructor(private fb: FormBuilder, private tqlConditionService: TqlConditionService) {
-    this.form = this.fb.group({});
+
   }
 
   ngOnInit(): any {
     this.selectOptions = this.issuePropMap[this.model.code];
-
-    _.forEach(this.selectOptions, (item: any, index: number) => {
-        item.checked = this.checkedItems ? this.checkedItems[item.id] : false;
-    });
-    console.log('!!!!!!!!', this.selectOptions, this.checkedItems);
-
-    this.form.addControl('keywords', new FormControl('', []));
-    _.forEach(this.selectOptions, (item: any, index: number) => {
-        this.form.addControl('menu-item-' + item.code, new FormControl('', []));
-    });
+    this.computerSelected();
   }
   ngAfterViewInit() {
 
@@ -54,6 +58,25 @@ export class TqlConditionComponent implements OnInit, AfterViewInit {
     item.checked = !item.checked;
 
     this.selected.emit({ code: this.model.code, options: this.selectOptions });
+    this._hasChecked();
+  }
+
+  _hasChecked() {
+    for(let i = 0; i < this.selectOptions.length; i++) {
+      if (this.selectOptions[i].checked) {
+        this.hasChecked = true;
+        return;
+      }
+    }
+    this.hasChecked = false;
+  }
+
+  computerSelected() {
+    _.forEach(this.selectOptions, (item: any, index: number) => {
+      item.checked = this.checkedItems ? this.checkedItems[item.id] : false;
+    });
+    this._hasChecked();
+    console.log('!!!!!!!!', this.selectOptions, this.checkedItems);
   }
 
 }

@@ -1,11 +1,13 @@
 <div class="tql-condition">
-  <form [formGroup]="form">
-    <div ngbDropdown #projectDropdown="ngbDropdown" [autoClose]="'outside'" class="btn-group">
+  <div>
+    <div ngbDropdown #projectDropdown="ngbDropdown" [autoClose]="'outside'"
+         [class.has-checked]="hasChecked" class="btn-group">
+
       <button class="btn btn-default dropdown" id="conditionDropdownMenu" ngbDropdownToggle>{{model.label}}</button>
 
       <div (click)="clickMenu($event)" class="dropdown-menu" aria-labelledby="conditionDropdownMenu" ngbDropdownMenu>
         <button *ngIf="search" class="dropdown-item">
-          <input [(ngModel)]="keywords" formControlName="keywords" type="search"
+          <input [(ngModel)]="keywords" type="search"
                  class="keywords form-control form-control-sm" name="keywords"
                  placeholder="{{model.input==='dropdown'?'过滤':''}}">
           <i class="fa fa-search"></i>
@@ -16,7 +18,7 @@
           <!--<button class="dropdown-item">所有</button>-->
           <ng-container *ngFor="let item of selectOptions | myFilter:'label':keywords">
             <button (click)="selectItem(item)" class="dropdown-item list-item">
-              <input [checked]="item.checked" formControlName="{{'menu-item-' + item.code}}"
+              <input [checked]="item.checked"
                      class="form-check-input" type="checkbox" value="{{item.id}}">
               <a>{{item.label}}</a>
             </button>
@@ -25,5 +27,5 @@
 
       </div>
     </div>
-  </form>
+  </div>
 </div>

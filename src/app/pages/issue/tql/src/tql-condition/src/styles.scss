@@ -1,6 +1,13 @@
 .tql-condition {
   .btn-group {
     margin: 0 5px;
+
+    &.has-checked {
+      .dropdown-toggle::after {
+        color: #209e91;
+      }
+    }
+
     input.keywords {
       margin-right: 20px;
     }

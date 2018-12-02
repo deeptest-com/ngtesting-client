@@ -9,6 +9,8 @@
 
       .elements {
         padding-top: 15px;
+        padding-bottom: 60px;
+
         .element {
           float: left;
           width: 50%;
@@ -19,8 +21,11 @@
       }
 
       .no-elems {
-        width: 100px;
         margin: auto;
+        width: 100px;
+        height: 60px;
+        line-height: 60px;
+        font-style: italic;
       }
 
       overflow: auto;
