@@ -38,18 +38,21 @@
 
         <div class="buttons row table-column-selection-wrap">
           <span *ngIf="!batchModel" class="row">
-            <span (click)="changeModel()" class="link">普通模式</span>
+            <span (click)="changeModel()" class="link">普通模式：</span>
             <table-column-selection (selected)="changeColumns($event)" [columns]="columns"></table-column-selection>
           </span>
           <span *ngIf="batchModel" class="row">
-            <span (click)="changeModel()" class="link">批量模式</span>
+            <span (click)="changeModel()" class="link">批量模式：</span>
+            <span (click)="selectAll()" class="link">全选</span>&nbsp;
+            <span (click)="selectNone()" class="link">全不选</span>
             <span><issue-opt (dealWithIssueEvent)="dealWithIssue($event)"></issue-opt></span>
           </span>
         </div>
       </div>
     </div>
 
-    <issue-table [issues]="models" [columns]="columns" (dealWithIssueEvent)="dealWithIssue($event)"></issue-table>
+    <issue-table [issues]="models" [columns]="columns"
+                 [batchModel]="batchModel" (dealWithIssueEvent)="dealWithIssue($event)"></issue-table>
 
     <div class="page-container">
       <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"

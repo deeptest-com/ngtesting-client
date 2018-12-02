@@ -15,8 +15,8 @@ export class IssueOpt implements OnInit, AfterViewInit {
   form: FormGroup;
 
   @Output() dealWithIssueEvent = new EventEmitter<any>();
-
   @Input() item: any;
+  @Input() batchModel: boolean;
 
   constructor(private fb: FormBuilder) {
   }

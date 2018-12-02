@@ -9,6 +9,9 @@
 
     .buttons {
       width: 150px;
+      &.table-column-selection-wrap {
+        width: 250px;
+      }
       .layout {
         display: inline-block;
         padding: 3px;
@@ -19,8 +22,17 @@
         }
       }
       &.table-column-selection-wrap {
-        button.dropdown {
-          border: 0;
+        .row {
+          position: absolute;
+          right: 0;
+
+          .link {
+            line-height: 33px;
+          }
+
+          button.dropdown {
+            border: 0;
+          }
         }
       }
     }

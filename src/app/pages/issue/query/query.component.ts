@@ -183,7 +183,19 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
   }
 
   dealWithIssue($event) {
-    console.log('dealWithIssue', $event);
+    console.log('dealWithIssue', $event, this.batchModel);
+
+  }
+
+  selectAll() {
+    this.models.forEach(item => {
+      item.batchSelected = true;
+    });
+  }
+  selectNone() {
+    this.models.forEach(item => {
+      item.batchSelected = false;
+    });
   }
 
   ngOnDestroy(): void {

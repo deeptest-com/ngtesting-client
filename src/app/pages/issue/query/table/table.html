@@ -3,6 +3,7 @@
       <table class="table table-bordered table-hover">
         <thead class="thead-inverse">
         <tr>
+          <th *ngIf="batchModel">选择</th>
           <th>编号</th>
           <ng-container *ngFor="let col of columns">
             <th *ngIf="col.display">
@@ -10,21 +11,32 @@
             </th>
           </ng-container>
 
-          <th>操作</th>
+          <th *ngIf="!batchModel">操作</th>
         </tr>
         </thead>
         <tbody>
           <tr *ngFor="let item of issues">
-            <td (click)="dealWithIssue(item, 'view')" class="link">{{item.id}}</td>
+            <td *ngIf="batchModel">
+              <input [(ngModel)]="item.batchSelected" type="checkbox" name="batchSelected">
+            </td>
+
+            <td *ngIf="!batchModel" (click)="dealWithIssue({ act: 'view', item: item})" class="link">
+              IS-{{item.id}}
+            </td>
+            <td *ngIf="batchModel">IS-{{item.id}}</td>
+
             <ng-container *ngFor="let col of columns">
-              <td (click)="dealWithIssue(item, 'view')" *ngIf="col.display" class="link">
+              <td *ngIf="!batchModel && col.display" (click)="dealWithIssue({ act: 'view', item: item})" class="link">
+                <item-prop [item]="item" [col]="col"></item-prop>
+              </td>
+
+              <td *ngIf="batchModel && col.display">
                 <item-prop [item]="item" [col]="col"></item-prop>
               </td>
             </ng-container>
-
-            <td>
+            <td *ngIf="!batchModel">
               <div style="position: relative">
-                <issue-opt [item]="item" (dealWithIssueEvent)="dealWithIssue($event)"></issue-opt>
+                <issue-opt [item]="item" [batchModel]="batchModel" (dealWithIssueEvent)="dealWithIssue($event)"></issue-opt>
               </div>
             </td>
           </tr>

@@ -21,6 +21,7 @@ export class IssueTable implements OnInit, AfterViewInit, OnDestroy {
 
   @Input() issues: any[] = [];
   @Input() columns: any[] = [];
+  @Input() batchModel: boolean;
   @Output() dealWithIssueEvent = new EventEmitter<any>();
 
   orgId: number;
