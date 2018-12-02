@@ -20,10 +20,10 @@ export class TqlConditionComponent implements OnInit, AfterViewInit {
 
   @Input() set checkedItems(models: any) {
     this._checkedItems = models;
-    if (!this.init) {
-      this.computerSelected();
-    } else {
+    if (this.init) {
       this.init = false;
+    } else {
+      this.computerSelected();
     }
   }
   get checkedItems() {
