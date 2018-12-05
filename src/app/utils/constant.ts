@@ -37,6 +37,12 @@ export const CONSTANT: CONSTANT_INTERFACE = {
   EntityDisabled: { 'false': '启用', 'true': '归档', '': '所有' },
   EntityRead: { '': '所有', 'false': '未读', 'true': '已读' },
 
+  TrueOrFalse: { 'true': '是', 'false': '否' },
+  DisableOrNot: { 'true': '禁用', 'false': '启动' },
+
+  FieldApplyTo: { 'test_case': '测试用例', 'test_result': '测试结果', 'issue': '问题' },
+  FieldFormat: { 'rich_text': '富文本', 'plain_text': '纯文本' },
+
   ScreenSize: { h: 0, w: 0 },
   DebounceTime: 500,
 
@@ -70,7 +76,7 @@ export interface CONSTANT_INTERFACE {
   CURR_PRJ_ID: number;
   CURR_PRJ_NAME: string;
 
-  WORK_PRJ_NAME: String,
+  WORK_PRJ_NAME: String;
 
   TOKEN: string;
 
@@ -97,6 +103,12 @@ export interface CONSTANT_INTERFACE {
   ExeStatus: any;
   EntityDisabled: any;
   EntityRead: any;
+
+  TrueOrFalse: any;
+  DisableOrNot: any;
+
+  FieldApplyTo: any;
+  FieldFormat: any;
 
   ScreenSize: any;
   DebounceTime: number;

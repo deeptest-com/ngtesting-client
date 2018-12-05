@@ -4,7 +4,7 @@ import { CONSTANT } from '../utils/constant';
 
 @Pipe({ name: 'fieldApplyTo' })
 export class FieldApplyToPipe implements PipeTransform {
-  map: any = { 'test_case': '测试用例', 'test_result': '测试结果' };
+  map: any = CONSTANT.FieldApplyTo;
 
   transform(s: string) : string {
     return this.map[s];
@@ -13,7 +13,7 @@ export class FieldApplyToPipe implements PipeTransform {
 
 @Pipe({ name: 'fieldFormat' })
 export class FieldFormatPipe implements PipeTransform {
-  map: any = { 'rich_text': '富文本', 'plain_text': '纯文本' };
+  map: any = CONSTANT.FieldFormat;
 
   transform(s: string) : string {
     if (!s) {
@@ -25,7 +25,7 @@ export class FieldFormatPipe implements PipeTransform {
 
 @Pipe({ name: 'trueOrFalse' })
 export class TrueOrFalsePipe implements PipeTransform {
-  map: any = { 'true': '是', 'false': '否' };
+  map: any = CONSTANT.TrueOrFalse;
 
   transform(b: boolean) : string {
     if (!b) {
@@ -38,7 +38,7 @@ export class TrueOrFalsePipe implements PipeTransform {
 
 @Pipe({ name: 'disableOrNot' })
 export class DisableOrNotPipe implements PipeTransform {
-  map: any = { 'true': '禁用', 'false': '启动' };
+  map: any = CONSTANT.DisableOrNot;
 
   transform(disabled: boolean) : string {
     return this.map['' + disabled];

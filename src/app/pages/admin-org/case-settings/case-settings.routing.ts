@@ -8,10 +8,11 @@ const routes: Routes = [
     path: '',
     component: CaseSettings,
     children: [
-      { path: 'custom-field', loadChildren: './custom-field/custom-field.module#CustomFieldModule' },
+      { path: 'case-field', loadChildren: '../common-settings/custom-field/custom-field.module#CustomFieldModule' },
+
       { path: 'case-type', loadChildren: './case-type/case-type.module#CaseTypeModule' },
       { path: 'case-priority', loadChildren: './case-priority/case-priority.module#CasePriorityModule' },
-      { path: 'case-exe-status', loadChildren: './case-exe-status/case-exe-status.module#CaseExeStatusModule' }
+      { path: 'case-exe-status', loadChildren: './case-exe-status/case-exe-status.module#CaseExeStatusModule' },
     ],
   },
 ];

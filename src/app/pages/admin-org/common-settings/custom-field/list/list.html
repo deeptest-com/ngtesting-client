@@ -1,12 +1,27 @@
-<div class="issue-field-list container-fluid">
+<div class="custom-field-list container-fluid">
 
   <div class="row">
     <div class="list-toolbar col-xl-12">
       <div class="title">
-        问题字段
+        <span *ngIf="module!='issue'">自定义字段</span>
+        <span *ngIf="module=='issue'">问题字段</span>
       </div>
 
       <div class="filter">
+        <form [formGroup]="queryForm" class="form-inline">
+          <ng-container *ngIf="module!='issue'">
+            <label>应用于</label>
+            <select [(ngModel)]="queryModel.applyTo"  formControlName="applyTo"
+                    class="form-control form-control-sm" name="applyTo">
+              <option value="test_case">测试用例</option>
+              <option value="test_result">测试结果</option>
+            </select>
+            &nbsp;&nbsp;&nbsp;
+          </ng-container>
+          <label>关键字</label>
+          <input [(ngModel)]="queryModel.keywords" formControlName="keywords"
+                 type="search" class="form-control form-control-sm" placeholder="" name="keywords">
+        </form>
       </div>
 
       <div class="buttons">
@@ -23,6 +38,7 @@
       <tr>
         <th>名称</th>
         <th>编码</th>
+        <th>应用于</th>
 
         <th>控件类型</th>
         <th>数据类型</th>
@@ -35,6 +51,8 @@
       <tr *ngFor="let item of models; let i = index;">
         <td>{{ item.label }}</td>
         <td>{{ item.colCode }}</td>
+
+        <td>{{ item.applyTo | fieldApplyTo }}</td>
 
         <td>{{ inputMap[item.input] }}</td>
         <td>{{ typeMap[item.type] }}</td>

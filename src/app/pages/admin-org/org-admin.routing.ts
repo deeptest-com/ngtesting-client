@@ -9,6 +9,8 @@ const routes: Routes = [
     component: OrgAdminComponent,
     children: [
       { path: 'org-settings', loadChildren: './org-settings/org-settings.module#OrgSettingsModule' },
+      // { path: 'common-settings', loadChildren: './common-settings/common-settings.module#CommonSettingsModule' },
+
       { path: 'test-settings', loadChildren: './test-settings/test-settings.module#TestSettingsModule' },
       { path: 'case-settings', loadChildren: './case-settings/case-settings.module#CaseSettingsModule' },
 

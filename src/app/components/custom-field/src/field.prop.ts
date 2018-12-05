@@ -18,24 +18,3 @@ export class Field {
 export class InputField extends Field {
 
 }
-
-export enum FieldType {
-  string,
-  text,
-  number,
-  url,
-
-  radio,
-  checkbox,
-
-  dropdown,
-  multi_select,
-
-  date,
-
-  user,
-  version,
-  steps,
-  results
-}
-

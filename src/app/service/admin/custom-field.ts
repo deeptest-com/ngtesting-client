@@ -5,12 +5,12 @@ import { Injectable } from '@angular/core';
 import { RequestService } from '../request';
 
 @Injectable()
-export class TestCustomFieldService {
+export class CustomFieldService {
   constructor(private _reqService: RequestService) { }
-  _apiBase = 'admin/test_custom_field/';
+  _apiBase = 'admin/custom_field/';
 
-  list() {
-    return this._reqService.post(this._apiBase + 'list', {});
+  list(queryModel: any) {
+    return this._reqService.post(this._apiBase + 'list', queryModel);
   }
 
   get(id: number) {
@@ -18,8 +18,8 @@ export class TestCustomFieldService {
     return this._reqService.post(this._apiBase + 'get', model);
   }
 
-  save(model: any, relations: any[]) {
-    return this._reqService.post(this._apiBase + 'save', { model: model, relations: relations });
+  save(model: any) {
+    return this._reqService.post(this._apiBase + 'save', { model: model });
   }
 
   delete(id: number) {
@@ -27,9 +27,9 @@ export class TestCustomFieldService {
     return this._reqService.post(this._apiBase + 'delete', model);
   }
 
-  changeOrder(id: number, act: string) {
-    const model = { id: id, act: act };
-    return this._reqService.post(this._apiBase + 'changeOrder', model);
+  changeOrder(id: number, act: string, queryModel: any) {
+    _.merge(queryModel, { id: id, act: act });
+    return this._reqService.post(this._apiBase + 'changeOrder', queryModel);
   }
 }
 

@@ -161,11 +161,13 @@ export let Utils: any = {
   },
 
   getContainerHeight: function (h: number) {
-    h = CONSTANT.ScreenSize.h - h;
-    if (h < 300) {
-      h = 300;
+    let height = CONSTANT.ScreenSize.h - h;
+    if (height < 300) {
+      height = 300;
     }
-    return h + 'px';
+
+    console.log(CONSTANT.ScreenSize.h, h, height);
+    return height + 'px';
   },
 
   getOrgAndPrjId: function (url: string) {

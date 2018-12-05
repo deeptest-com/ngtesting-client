@@ -26,6 +26,7 @@ export class IssueBrowse implements OnInit, AfterViewInit, OnDestroy, OnChanges 
 
   @Output() dealWithIssueEvent = new EventEmitter<any>();
 
+  page: any = {};
   issue: any;
 
   constructor(private _state: GlobalState, private issueService: IssueService,

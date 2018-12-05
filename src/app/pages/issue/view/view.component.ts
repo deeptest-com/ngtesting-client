@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, NgModule, Pipe, OnInit, AfterViewInit, OnDestroy, ViewChild }
+import { Component, ViewEncapsulation, NgModule, Pipe, OnInit, AfterViewInit, OnDestroy, Input }
   from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
@@ -26,6 +26,7 @@ export class IssueView implements OnInit, AfterViewInit, OnDestroy {
   canEdit: boolean;
 
   id: number;
+  page: any = {};
   issue: any = {};
 
   issuePropertyMap: any;

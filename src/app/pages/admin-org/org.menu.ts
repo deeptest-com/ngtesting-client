@@ -82,7 +82,6 @@ export const ORG_MENU = [
           },
         ],
       },
-
       {
         path: '',
         data: {
@@ -107,13 +106,25 @@ export const ORG_MENU = [
             },
           },
           {
+            path: 'org-admin/case-settings/case-field/list/test_case',
+            data: {
+              menu: {
+                title: '自定义字段',
+                icon: 'ion-edit',
+                selected: false,
+                expanded: true,
+                order: 2,
+              },
+            },
+          },
+          {
             path: 'org-admin/case-settings/case-type/list',
             data: {
               menu: {
                 title: '用例类型',
                 icon: 'ion-edit',
                 selected: false,
-                order: 1,
+                order: 3,
               },
             },
           },
@@ -124,18 +135,7 @@ export const ORG_MENU = [
                 title: '用例优先级',
                 icon: 'ion-edit',
                 selected: false,
-                order: 1,
-              },
-            },
-          },
-          {
-            path: 'org-admin/case-settings/custom-field/list',
-            data: {
-              menu: {
-                title: '自定义字段',
-                icon: 'ion-edit',
-                selected: false,
-                order: 1,
+                order: 4,
               },
             },
           },
@@ -250,12 +250,13 @@ export const ORG_MENU = [
             },
           },
           {
-            path: 'org-admin/issue-settings/issue-field/list',
+            path: 'org-admin/issue-settings/issue-field/list/issue',
             data: {
               menu: {
                 title: '问题字段',
                 icon: 'ion-edit',
                 selected: false,
+                expanded: true,
                 order: 1,
               },
             },

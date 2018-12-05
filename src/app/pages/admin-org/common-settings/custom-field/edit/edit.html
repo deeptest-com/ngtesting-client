@@ -1,4 +1,4 @@
-<div class="issue-field-edit container-fluid">
+<div class="custom-field-edit container-fluid">
 
   <div class="row">
     <div class="edit-toolbar col-xl-12">
@@ -33,16 +33,21 @@
     </div>
 
     <div class="form-group row">
-      <label class="col-sm-2 col-form-label"><span>控件类型</span></label>
+      <label class="col-sm-2 col-form-label"><span>应用对象</span></label>
       <div *ngIf="!model.buildIn" class="col-sm-4">
-        <select [(ngModel)]="model.input" (change)="changeInput()" formControlName="input" name="input" class="form-control form-control-sm">
-          <option *ngFor="let item of inputMap | mapToArray" value="{{item.key}}">{{item.value.label}}</option>
+        <select *ngIf="module!='issue'" [(ngModel)]="model.applyTo" formControlName="applyTo" name="applyTo" class="form-control form-control-sm">
+          <option value="test_case">测试用例</option>
+          <option value="test_result">测试结果</option>
+        </select>
+
+        <select *ngIf="module=='issue'" [(ngModel)]="model.applyTo" formControlName="applyTo" name="applyTo" class="form-control form-control-sm">
+          <option value="issue">问题</option>
         </select>
       </div>
       <label *ngIf="model.buildIn" class="col-sm-4 col-form-label left">
-        {{model.input}}
-        <input type="hidden" class="form-control" name="input" formControlName="input"
-               [(ngModel)]="model.input" #input>
+        {{model.applyTo | fieldApplyTo}}
+        <input type="hidden" class="form-control" name="applyTo" formControlName="applyTo"
+               [(ngModel)]="model.applyTo" #applyTo>
       </label>
 
       <label class="col-sm-2 col-form-label"><span>数据类型</span></label>
@@ -52,20 +57,34 @@
         </select>
       </div>
       <label *ngIf="model.buildIn" class="col-sm-4 col-form-label left">
-        {{model.type}}
+        {{typeMap[model.type]}}
         <input type="hidden" class="form-control" name="type" formControlName="type"
                [(ngModel)]="model.type" #type>
       </label>
     </div>
 
-    <div *ngIf="model.input=='dropdown' || model.input=='multi_select'
-                || model.input=='radio' || model.input=='checkbox'"
-         class="form-group row">
-      <label class="col-sm-8"></label>
-      <div class="col-sm-2">
-        <span *ngIf="form.valid"
-          (click)="editDropdownOptions()" class="link">管理选项列表({{model.options.length}})</span>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label"><span>控件类型</span></label>
+      <div *ngIf="!model.buildIn" class="col-sm-4">
+        <select [(ngModel)]="model.input" (change)="changeInput()" formControlName="input" name="input" class="form-control form-control-sm">
+          <option *ngFor="let item of inputMap | mapToArray" value="{{item.key}}">{{item.value.label}}</option>
+        </select>
       </div>
+
+      <label *ngIf="model.buildIn" class="col-sm-4 col-form-label left">
+        {{inputMap[model.input].label}}
+        <input type="hidden" class="form-control" name="input" formControlName="input"
+               [(ngModel)]="model.input" #input>
+      </label>
+
+      <ng-container *ngIf="model.input=='dropdown' || model.input=='multi_select'
+                || model.input=='radio' || model.input=='checkbox'"
+                    class="form-group row">
+        <label class="col-sm-2">选项列表</label>
+        <div class="col-sm-4">
+        <span *ngIf="form.valid" (click)="editDropdownOptions()" class="link">({{model.options.length}})</span>
+        </div>
+      </ng-container>
     </div>
 
    <div *ngIf="model.type == 'text'" class="form-group row">

@@ -3,12 +3,11 @@ import { Component, OnInit, OnDestroy, AfterViewInit, OnChanges, ViewChild, Inpu
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { CONSTANT } from '../../../utils/constant';
-import { Utils } from '../../../utils/utils';
-import { ValidatorUtils } from '../../../validator';
+import { CONSTANT } from '../../../../../../utils/constant';
+import { Utils } from '../../../../../../utils/utils';
+import { ValidatorUtils } from '../../../../../../validator';
 
-import { TestCustomFieldOptionService } from '../../../service/admin/test-custom-field-option';
-import { IssueCustomFieldOptionService } from '../../../service/admin/issue-custom-field-option';
+import { CustomFieldOptionService } from '../../../../../../service/admin/custom-field-option';
 
 import * as _ from 'lodash';
 
@@ -28,21 +27,15 @@ export class DropdownOptionsComponent implements OnInit, OnDestroy, AfterViewIni
   form: FormGroup;
   model: any = {};
   optionOrdr: number = 10;
-  service: any;
 
   constructor(private fb: FormBuilder, private host: ElementRef, public activeModal: NgbActiveModal,
-              private testCustomFieldOptionService: TestCustomFieldOptionService,
-              private issueCustomFieldOptionService: IssueCustomFieldOptionService) {
+              private customFieldOptionService: CustomFieldOptionService) {
     this.buildForm();
 
   }
 
   ngOnInit() {
-    if (this.applyTo === 'issue') {
-      this.service = this.issueCustomFieldOptionService;
-    } else {
-      this.service = this.testCustomFieldOptionService;
-    }
+
   }
 
   dismiss(): any {
@@ -71,8 +64,7 @@ export class DropdownOptionsComponent implements OnInit, OnDestroy, AfterViewIni
     this.model = {};
   }
   save(): any {
-    // if (this.field.id) {
-      this.service.save(this.model, this.field).subscribe((json: any) => {
+      this.customFieldOptionService.save(this.model, this.field).subscribe((json: any) => {
         if (json.code == 1) {
           this.form.reset();
           this.model = {};
@@ -83,17 +75,9 @@ export class DropdownOptionsComponent implements OnInit, OnDestroy, AfterViewIni
           this.field.options = json.data;
         }
       });
-    // } else {
-    //   this.model.ordr = this.optionOrdr;
-    //   this.optionOrdr += 10;
-    //   this.field.options[this.field.options.length] = _.clone(this.model);
-    //
-    //   this.form.reset();
-    //   this.model = {};
-    // }
   }
   delete(item: any) {
-    this.service.delete(item.id, this.field.id).subscribe((json: any) => {
+    this.customFieldOptionService.delete(item.id, this.field.id).subscribe((json: any) => {
       if (json.code == 1) {
         this.form.reset();
         this.model = {};
@@ -102,20 +86,16 @@ export class DropdownOptionsComponent implements OnInit, OnDestroy, AfterViewIni
     });
   }
   changeOrder(item: any, act: string, idx: number) {
-    // if (!item.id) { // 未保存
-    //   Utils.changeOrder(this.field.options, act, idx);
-    // } else {
-      this.service.changeOrder(item.id, act, this.field.id).subscribe((json: any) => {
+      this.customFieldOptionService.changeOrder(item.id, act, this.field.id).subscribe((json: any) => {
         if (json.code == 1) {
           this.model = {};
           this.field.options = json.data;
         }
       });
-    // }
   }
 
   setDefault(item: any): void {
-    this.service.setDefault(item.id, this.field.id).subscribe((json: any) => {
+    this.customFieldOptionService.setDefault(item.id, this.field.id).subscribe((json: any) => {
       if (json.code == 1) {
         this.form.reset();
         this.model = {};

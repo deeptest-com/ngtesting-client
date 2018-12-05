@@ -241,8 +241,9 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
     console.log('case.' + this.settings.usage);
   }
   countChildren = (treeNode) => {
-    logger.log(treeNode.name, treeNode.isParent, !treeNode.isLeaf);
-    if (treeNode.isParent){
+    console.log('countChildren', treeNode, treeNode.isParent, !treeNode.leaf);
+
+    if (treeNode.isParent) {
       for (const obj in treeNode.children) {
         this.countChildren(treeNode.children[obj]);
       }

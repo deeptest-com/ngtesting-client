@@ -13,7 +13,7 @@ const routes: Routes = [
       { path: 'issue-status', loadChildren: './issue-status/issue-status.module#IssueStatusModule' },
       { path: 'issue-resolution', loadChildren: './issue-resolution/issue-resolution.module#IssueResolutionModule' },
 
-      { path: 'issue-field', loadChildren: './issue-field/issue-field.module#IssueFieldModule' },
+      { path: 'issue-field', loadChildren: '../common-settings/custom-field/custom-field.module#CustomFieldModule' },
       { path: 'issue-page', loadChildren: './issue-page/issue-page.module#IssuePageModule' },
 
       { path: 'issue-workflow', loadChildren: './issue-workflow/issue-workflow.module#IssueWorkflowModule' },
