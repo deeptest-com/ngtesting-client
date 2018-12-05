@@ -45,17 +45,47 @@
     }
   }
 
-  .page-container {
-    .page-size-wapper {
-      margin-left: 20px !important;
-      padding: 12px 0;
-      .text {
-        line-height: 32px;
-      }
+  .order-bar {
+    padding: 0;
+
+    .row {
+      margin: 0;
+      padding: 0;
+    }
+
+    .order-column {
+      margin-right: 10px;
       select {
         height: 32px;
       }
     }
+    .order-seq {
+      margin: 0 5px;
+      line-height: 32px;
+    }
+    margin-right: 50px !important;
+  }
+
+  .page-container {
+    .pagination {
+      margin: 0;
+    }
+
+    .page-size-wapper {
+      margin-left: 20px !important;
+      padding: 0;
+      .text {
+        line-height: 32px;
+      }
+      select {
+        margin: 0;
+        height: 32px;
+      }
+    }
+  }
+
+  .order-toolbar {
+    margin-right: 10px;
   }
 
   .link {

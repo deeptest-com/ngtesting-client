@@ -8,6 +8,8 @@ import { ToastyModule } from 'ng2-toasty';
 import { NgbModalModule, NgbPaginationModule, NgbDropdownModule, NgbDateParserFormatter,
   NgbTabsetModule, NgbButtonsModule, NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { DndModule, SortableContainer } from '../../components/ng2-dnd';
+
 import { NgaModule } from '../../theme/nga.module';
 import { routing }       from './issue.routing';
 
@@ -53,6 +55,7 @@ import { IssueView } from './view/view.component';
 
     NgbModalModule, NgbPaginationModule, NgbDropdownModule,
     NgbTabsetModule, NgbButtonsModule, NgbCollapseModule,
+    DndModule.forRoot(),
 
     FileUploaderModule,
     PipeModule,
@@ -80,6 +83,7 @@ import { IssueView } from './view/view.component';
     ClientService,
     IssueService, IssueQueryService,
     PrivilegeService,
+    SortableContainer,
   ],
 })
 export class IssueModule {}

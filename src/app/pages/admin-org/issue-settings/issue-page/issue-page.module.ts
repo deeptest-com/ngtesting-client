@@ -19,7 +19,6 @@ import { RouteService } from '../../../../service/route';
 import { RequestService } from '../../../../service/request';
 import { DatetimePickerService } from '../../../../service/datetime-picker';
 import { IssuePageService } from '../../../../service/admin/issue-page';
-import { IssuePageTabService } from '../../../../service/admin/issue-page-tab';
 import { IssuePageElemService } from '../../../../service/admin/issue-page-elem';
 import { IssuePageSolutionService } from '../../../../service/admin/issue-page-solution';
 
@@ -60,7 +59,7 @@ import { IssuePageSolutionConfig } from './page-solution-config';
     RequestService,
     SortableContainer,
     DatetimePickerService,
-    IssuePageService, IssuePageTabService, IssuePageElemService, IssuePageSolutionService,
+    IssuePageService, IssuePageElemService, IssuePageSolutionService,
   ],
 })
 export class IssuePageModule {}

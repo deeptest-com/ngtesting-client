@@ -2,6 +2,11 @@
   table {
     th.link {
       color: #fff !important;
+
+      .move {
+        display: inline-block;
+        width: 15px;
+      }
     }
   }
 }

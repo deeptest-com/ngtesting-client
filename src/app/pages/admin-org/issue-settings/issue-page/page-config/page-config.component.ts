@@ -13,7 +13,6 @@ import { ValidatorUtils } from '../../../../../validator';
 import { RouteService } from '../../../../../service/route';
 
 import { IssuePageService } from '../../../../../service/admin/issue-page';
-import { IssuePageTabService } from '../../../../../service/admin/issue-page-tab';
 import { IssuePageElemService } from '../../../../../service/admin/issue-page-elem';
 
 import { PopDialogComponent } from '../../../../../components/pop-dialog';

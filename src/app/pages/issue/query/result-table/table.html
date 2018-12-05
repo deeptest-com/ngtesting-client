@@ -2,16 +2,27 @@
     <div class="row">
       <table class="table table-bordered table-hover">
         <thead class="thead-inverse">
-        <tr>
+        <tr dnd-sortable-container [dropZones]="['th-dropZone']" [sortableData]="columns" >
           <th *ngIf="batchModel">选择</th>
+
           <th (click)="order('id')" class="link">
             <span>编号</span>
 
             <span *ngIf="orderByMap.id=='asc'" class="fa fa-long-arrow-up"></span>
             <span *ngIf="orderByMap.id=='desc'" class="fa fa-long-arrow-down"></span>
           </th>
-          <ng-container *ngFor="let col of columns">
-            <th *ngIf="col.display" (click)="order(col.code)" class="link">
+
+          <ng-container *ngFor="let col of columns; let i = index">
+            <th *ngIf="col.display" (click)="order(col.code)" class="link"
+                (mouseenter)="col.hover = true" (mouseleave)="col.hover = false"
+
+                dnd-sortable [sortableIndex]="i"
+                (onDropSuccess)="onThDropSuccess(col)"
+            >
+              <span class="move">
+                <i *ngIf="col.hover" class="fa fa-arrows"></i>
+              </span>
+
               <span>{{col.label}}</span>
 
               <span *ngIf="orderByMap[col.code]=='asc'" class="fa fa-long-arrow-up"></span>

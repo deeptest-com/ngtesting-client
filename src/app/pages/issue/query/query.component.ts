@@ -1,6 +1,6 @@
 import {
   Component, ViewEncapsulation, OnInit, AfterViewInit, OnDestroy,
-  ElementRef, Inject, Renderer2, ViewChild
+  ElementRef, Inject, Renderer2, ViewChild, Input
 } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -48,6 +48,9 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
   columns: any[] = [];
   init: number = 0;
 
+  orderColumn: string;
+  orderSeq: string;
+
   batchModel: boolean = false;
 
   layout: string = CONSTANT.PROFILE.issueView;
@@ -66,7 +69,7 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
         this.loadData();
       } else if (ruleStr == 'lastest') {
         const ruleStore = localStorage.getItem('issue_query');
-        const orderByStore = localStorage.getItem('order_by');
+        const orderByStore = localStorage.getItem('order_by_for_' + this.layout);
         if (!ruleStore) {
           this.rule = {};
         } else {
@@ -78,12 +81,13 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
           this.orderBy = JSON.parse(orderByStore);
         }
 
+        this.updateForBrowse();
         this.loadData(this.init == 0);
       } else if (ruleStr.startsWith('q_')) {
         this.loadDataByQueryId(this.rule.split('_')[1], this.init == 0);
       } else {
         localStorage.setItem('issue_query', ruleStr);
-        localStorage.setItem('order_by', orderByStr);
+        localStorage.setItem('order_by_for_' + this.layout, orderByStr);
 
         this.rule = JSON.parse(ruleStr);
         this.orderBy = JSON.parse(orderByStr);
@@ -128,6 +132,7 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
 
         this.issuePropMap = json.issuePropMap;
 
+        this.updateForBrowse();
         console.log('this.orderBy', this.orderBy);
       }
     });
@@ -153,7 +158,7 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
     this.loadData(false);
   }
 
-  changeColumns(data: any) {
+  changeColumns() {
     let columnsForShow = '';
     let i = 0;
 
@@ -172,6 +177,19 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
     this.orderBy = orderBy;
     console.log('reOrder', this.orderBy);
 
+    this.goto();
+  }
+
+  columnReOrder() {
+    console.log('columnReOrder');
+    this.changeColumns();
+  }
+
+  changeOrderSeq(seq?) {
+    if (seq) { this.orderSeq = seq; }
+
+    const map = { key: this.orderColumn, val: this.orderSeq };
+    this.orderBy = [map];
     this.goto();
   }
 
@@ -231,4 +249,12 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
     this._router.navigateByUrl(url);
   }
 
+  updateForBrowse(): void {
+    if (this.orderBy.length > 0) {
+      this.orderColumn = this.orderBy[0].key;
+      this.orderSeq = this.orderBy[0].val;
+    }
+
+    console.log('updateForBrowse', this.orderBy, this.orderColumn, this.orderSeq);
+  }
 }

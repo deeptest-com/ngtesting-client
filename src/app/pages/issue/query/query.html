@@ -39,7 +39,7 @@
         <div class="buttons row table-column-selection-wrap">
           <span *ngIf="!batchModel" class="row">
             <span (click)="changeModel()" class="link">普通模式：</span>
-            <table-column-selection (selected)="changeColumns($event)" [columns]="columns"></table-column-selection>
+            <table-column-selection (selected)="changeColumns()" [columns]="columns"></table-column-selection>
           </span>
           <span *ngIf="batchModel" class="row">
             <span (click)="changeModel()" class="link">批量模式：</span>
@@ -52,7 +52,8 @@
     </div>
 
     <issue-table [issues]="models" [columns]="columns" [orderBy]="orderBy" [batchModel]="batchModel"
-                 (orderEvent)="reOrder($event)" (dealWithIssueEvent)="dealWithIssue($event)"></issue-table>
+                 (orderEvent)="reOrder($event)" (columnOrderEvent)="columnReOrder()"
+                 (dealWithIssueEvent)="dealWithIssue($event)"></issue-table>
 
     <div class="page-container row">
       <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
@@ -68,7 +69,37 @@
   </div>
 
   <div *ngIf="layout=='browse'">
-    <issue-browse [issues]="models" [orderBy]="orderBy" (dealWithIssueEvent)="dealWithIssue($event)"></issue-browse>
+    <issue-browse [issues]="models" (dealWithIssueEvent)="dealWithIssue($event)"></issue-browse>
+
+    <div class="row">
+      <div class="order-bar row">
+        <div class="order-seq">
+          排序
+        </div>
+        <div class="order-column">
+          <select [(ngModel)]="orderColumn" (change)="changeOrderSeq()" name="orderColumn">
+            <option value="id">编号</option>
+            <option *ngFor="let item of columns" value="{{item.code}}">{{item.label}}</option>
+          </select>
+        </div>
+        <div class="order-seq">
+          <i (click)="changeOrderSeq('desc')" *ngIf="orderSeq == 'asc'" class="fa fa-long-arrow-up link"></i>
+          <i (click)="changeOrderSeq('asc')" *ngIf="orderSeq == 'desc'" class="fa fa-long-arrow-down link"></i>
+        </div>
+      </div>
+
+      <div class="page-container row">
+        <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
+                        (pageChange)="pageChange($event)">
+        </ngb-pagination>
+        <div class="page-size-wapper row">
+          <span class="text">每页记录数</span> &nbsp;
+          <select [(ngModel)]="pageSize" (change)="pageChange()" name="pageSize" class="">
+            <option *ngFor="let item of [20,50,100]" value="{{item}}">{{item}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
   </div>
 
 </div>

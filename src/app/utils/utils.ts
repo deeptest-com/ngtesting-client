@@ -162,8 +162,8 @@ export let Utils: any = {
 
   getContainerHeight: function (h: number) {
     h = CONSTANT.ScreenSize.h - h;
-    if (h < 500) {
-      h = 500;
+    if (h < 300) {
+      h = 300;
     }
     return h + 'px';
   },

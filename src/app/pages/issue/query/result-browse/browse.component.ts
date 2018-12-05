@@ -23,11 +23,10 @@ export class IssueBrowse implements OnInit, AfterViewInit, OnDestroy, OnChanges 
   leftWidth: number = CONSTANT.PROFILE.leftSizeIssue;
 
   @Input() issues: any[] = [];
-  @Input() orderBy: any = {};
+
   @Output() dealWithIssueEvent = new EventEmitter<any>();
 
   issue: any;
-  page: any;
 
   constructor(private _state: GlobalState, private issueService: IssueService,
               @Inject(ElementRef) public element: ElementRef, @Inject(Renderer2) private renderer: Renderer2) {
@@ -41,7 +40,7 @@ export class IssueBrowse implements OnInit, AfterViewInit, OnDestroy, OnChanges 
   ngAfterViewInit() {
     const tqlElem = jQuery('.tql');
     this.contentHeight = Utils.getContainerHeight(CONSTANT.HEAD_HEIGHT + CONSTANT.FOOTER_HEIGHT
-      + CONSTANT.ISSUE_TQL_SPAN + tqlElem.height());
+      + CONSTANT.ISSUE_TQL_SPAN + tqlElem.height() + 36);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
