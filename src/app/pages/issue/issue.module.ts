@@ -20,7 +20,8 @@ import { FileUploaderModule } from '../../components/file-uploader';
 import { PopDialogModule } from '../../components/pop-dialog';
 import { PageInfoModule } from '../../components/page-info';
 import { TqlModule } from './tql';
-import { IssueInputEditModule } from '../../components/issue-input/issue-input-edit';
+
+import { FieldModule } from '../../components/field';
 
 import { RouteService } from '../../service/route';
 import { RequestService } from '../../service/request';
@@ -67,7 +68,7 @@ import { IssueView } from './view/view.component';
     TqlModule,
     IssueOptModule,
     TableColumnSelectionModule,
-    IssueInputEditModule,
+    FieldModule,
   ],
   declarations: [
     Issue,

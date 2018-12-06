@@ -16,7 +16,7 @@ import { DirectiveModule } from '../../../directive/directive.module';
 import { SlimLoadingBarModule } from '../../../components/ng2-loading-bar';
 import { ZtreeModule } from '../../../components/ztree';
 import { StepsTableModule } from '../../../components/steps-table';
-import { CustomFieldModule } from '../../../components/custom-field';
+import { FieldModule } from '../../../components/field';
 import { TinyMCEModule } from '../../../components/tiny-mce';
 import { CaseCommentsModule } from '../../../components/case-comments';
 
@@ -54,7 +54,7 @@ import { CaseView } from './view/view.component';
     CaseCommentsModule,
     ZtreeModule,
     StepsTableModule,
-    CustomFieldModule,
+    FieldModule,
     TinyMCEModule,
     FileUploaderModule,
   ],
@@ -74,7 +74,7 @@ import { CaseView } from './view/view.component';
     CaseCommentsService,
     PrivilegeService,
     CaseAttachmentService,
-  ]
+  ],
 })
 export class CaseModule {}
 

@@ -15,7 +15,6 @@ import { IssueService } from '../../../service/client/issue';
 
 import { PrivilegeService } from '../../../service/privilege';
 import { PopDialogComponent } from '../../../components/pop-dialog';
-import { IssueInputEditComponent } from '../../../components/issue-input/issue-input-edit';
 import * as _ from 'lodash';
 import { Utils } from '../../../utils';
 import { CustomValidator } from '../../../validator';
@@ -43,7 +42,6 @@ export class IssueEdit implements OnInit, AfterViewInit, OnDestroy {
 
   routeSub: any;
 
-  @ViewChildren('input') inputs: QueryList<IssueInputEditComponent>;
   @ViewChild('modalWrapper') modalWrapper: PopDialogComponent;
 
   constructor(private _routeService: RouteService, private _state: GlobalState, private _route: ActivatedRoute,
@@ -86,7 +84,6 @@ export class IssueEdit implements OnInit, AfterViewInit, OnDestroy {
         data[elem.code] = Utils.timeStructToStr(data[elem.code]);
       }
     });
-    console.log('===', this.issue, this.inputs.toArray());
 
     this.issueService.update(data, this.page.id).subscribe((json: any) => {
       if (json.code == 1) {

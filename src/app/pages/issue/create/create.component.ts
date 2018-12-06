@@ -15,7 +15,6 @@ import { IssueService } from '../../../service/client/issue';
 
 import { PrivilegeService } from '../../../service/privilege';
 import { PopDialogComponent } from '../../../components/pop-dialog';
-import { IssueInputEditComponent } from '../../../components/issue-input/issue-input-edit';
 import * as _ from 'lodash';
 import { Utils } from '../../../utils';
 import { CustomValidator } from '../../../validator';
@@ -39,8 +38,6 @@ export class IssueCreate implements OnInit, AfterViewInit, OnDestroy {
 
   form: any;
   validateMsg: any = {};
-
-  @ViewChildren('input') inputs: QueryList<IssueInputEditComponent>;
 
   constructor(private _routeService: RouteService, private _state: GlobalState, private _route: ActivatedRoute,
               private fb: FormBuilder, private toastyService: ToastyService,
@@ -78,7 +75,6 @@ export class IssueCreate implements OnInit, AfterViewInit, OnDestroy {
         data[elem.code] = Utils.timeStructToStr(data[elem.code]);
       }
     });
-    console.log('===', this.issue, this.inputs.toArray());
 
     this.issueService.save(data, this.page.id).subscribe((json: any) => {
       if (json.code == 1) {

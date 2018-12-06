@@ -155,12 +155,10 @@
         </div>
 
         <ng-container *ngIf="model.id">
-          <div *ngFor="let field of fields; let i = index;" class="form-group row">
-            <label class="col-sm-3 col-form-label"><span>{{field.label}}</span></label>
-            <div class="col-sm-9">
-              <custom-field [form]="form" [model]="model" [field]="field" [validateMsg]="validateMsg"></custom-field>
-            </div>
-          </div>
+          <ng-container *ngFor="let field of fields; let i = index;">
+              <case-field-edit [form]="form" [model]="model"
+                                 [elem]="field" [validateMsg]="validateMsg"></case-field-edit>
+          </ng-container>
         </ng-container>
       </div>
 

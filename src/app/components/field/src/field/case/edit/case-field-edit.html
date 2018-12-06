@@ -1,0 +1,12 @@
+<div class="form-group row case-field-edit">
+
+  <label class="col-sm-{{labelColNum}} col-form-label">
+      <label-show [elem]="elem"></label-show>
+  </label>
+
+  <div class="col-sm-{{inputColNum}}">
+    <input-edit [form]="form" [validateMsg]="validateMsg"
+                [model]="model" [elem]="elem" [options]="elem.options"></input-edit>
+  </div>
+
+</div>

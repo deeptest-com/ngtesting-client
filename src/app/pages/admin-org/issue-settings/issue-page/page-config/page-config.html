@@ -3,7 +3,7 @@
   <div class="row">
     <div class="edit-toolbar col-xl-12">
       <div class="title">
-        <span>配置界面 - {{page.name}}</span>
+        <span>{{page.name}}</span>
       </div>
       <div class="buttons">
         <button (click)="back()" type="button"
@@ -28,8 +28,8 @@
 
                dnd-sortable [sortableIndex]="i" [dragData]="field"
                (onDropSuccess)="onElementDropSuccess($event)">
-            <issue-input-design (propEvent)="setProp($event)" [field]="field"
-                                [issuePropMap]="issuePropMap"></issue-input-design>
+            <issue-field-design [form]="form" (propEvent)="setProp($event)" [field]="field"
+                                [issuePropMap]="issuePropMap"></issue-field-design>
           </div>
 
           <div class="no-elems clear-both"> 拖动字段到此处 </div>
@@ -45,7 +45,7 @@
            dnd-sortable [sortableIndex]="i" [dragData]="field"
            (onDropSuccess)="onElementDropSuccess($event)"
       >
-        <issue-input-design [field]="field" [forSelection]="true" [issuePropMap]="issuePropMap"></issue-input-design>
+        <issue-field-design [form]="form" [field]="field" [forSelection]="true" [issuePropMap]="issuePropMap"></issue-field-design>
       </div>
     </div>
 

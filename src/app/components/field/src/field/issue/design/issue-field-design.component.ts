@@ -1,28 +1,25 @@
 import {Input, Component, OnInit, OnChanges, SimpleChanges, Output, EventEmitter} from '@angular/core';
 import { NgbDatepicker, NgbTimepickerConfig } from '@ng-bootstrap/ng-bootstrap';
+import {FormGroup} from "@angular/forms";
 
 @Component({
-  selector: 'issue-input-design',
-  templateUrl: './issue-input-design.html',
+  selector: 'issue-field-design',
+  templateUrl: './issue-field-design.html',
   styleUrls: ['./styles.scss'],
   providers: [NgbTimepickerConfig],
 })
-export class IssueInputDesignComponent implements OnInit, OnChanges {
+export class IssueFieldDesignComponent implements OnInit, OnChanges {
   @Input() issuePropMap: any = {};
   @Input() field: any;
   @Input() forSelection: boolean = false;
 
+  @Input() form: FormGroup;
+
   @Output() propEvent = new EventEmitter<any>();
 
   labelColNum: number = 4;
-  startDate: any;
 
   public constructor(config: NgbTimepickerConfig) {
-    config.seconds = true;
-    config.spinners = false;
-
-    const now = new Date();
-    this.startDate = { day: now.getDate(), month: now.getMonth() + 1, year: now.getFullYear() };
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
@@ -47,9 +44,9 @@ export class IssueInputDesignComponent implements OnInit, OnChanges {
     return this.labelColNum;
   }
 
-  set (prop: string, val: any) {
-    console.log('setFullLine', prop, val, this.field);
-    this.propEvent.emit({ id: this.field.id, prop: prop, val: val });
+  setProp ($event: any) {
+    console.log('set', $event);
+    this.propEvent.emit($event);
   }
 
 }

@@ -1,0 +1,12 @@
+<div class="form-group row issue-field-edit">
+
+  <label class="col-sm-{{getCol()}} col-form-label">
+      <label-show [elem]="elem"></label-show>
+  </label>
+
+  <div class="col-sm-{{12-getCol()}}">
+    <input-edit [form]="form" [validateMsg]="validateMsg"
+                [model]="model" [elem]="elem" [options]="issuePropMap[elem.colCode]"></input-edit>
+  </div>
+
+</div>

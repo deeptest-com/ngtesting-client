@@ -1,0 +1,19 @@
+<span class="field-label label-issue-design">
+    <div ngbDropdown #projectDropdown="ngbDropdown" [autoClose]="'outside'" class="btn-group">
+      <div *ngIf="elem.required" class="require">*</div>
+
+      <button class="btn btn-default dropdown" id="conditionDropdownMenu" ngbDropdownToggle>{{elem.label}}</button>
+      <div class="dropdown-menu" aria-labelledby="conditionDropdownMenu" ngbDropdownMenu>
+        <button class="dropdown-item">
+          <a>沾满整行</a>
+          <input (change)="set('fullLine', elem.fullLine)" [(ngModel)]="elem.fullLine" type="checkbox">
+        </button>
+        <button class="dropdown-item">
+          <a>是否必填</a> <input (change)="set('required', elem.required)" [(ngModel)]="elem.required" type="checkbox">
+        </button>
+        <button class="dropdown-item">
+          <a>是否只读</a> <input (change)="set('readonly', elem.readonly)" [(ngModel)]="elem.readonly" type="checkbox">
+        </button>
+      </div>
+    </div>
+</span>

@@ -1,0 +1,12 @@
+<div class="row issue-field-design">
+
+  <label class="col-sm-{{getCol()}} col-form-label">
+      <label-show *ngIf="forSelection" [elem]="field"></label-show>
+      <label-issue-design *ngIf="!forSelection" [elem]="field" (propEvent)="setProp($event)"></label-issue-design>
+  </label>
+
+  <div class="col-sm-{{12 - getCol()}}">
+    <input-design [elem]="field" [options]="issuePropMap[field.code]"></input-design>
+  </div>
+
+</div>

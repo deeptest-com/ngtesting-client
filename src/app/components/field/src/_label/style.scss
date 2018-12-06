@@ -1,0 +1,12 @@
+.field-label {
+  width: 100%;
+  white-space: nowrap;
+  text-overflow: clip;
+  text-align: right;
+  overflow-x: hidden;
+
+  .require {
+    line-height: 23px;
+    color: red;
+  }
+}
