@@ -35,16 +35,19 @@
 
       <ng-container *ngSwitchCase="'date'">
         <div class="input-group">
-          <input ngbDatepicker [minDate]="startDate" #dp="ngbDatepicker"
-                 class="form-control form-control-sm" placeholder="yyyy-mm-dd">
-          <div class="input-group-addon" (click)="dp.toggle()">
-            <i class="fa fa-calendar"></i>
-          </div>
+          <input type="text" placeholder="" readonly="readonly"
+                 class="my-flatpickr-date form-control form-control-sm">
         </div>
       </ng-container>
 
       <ng-container *ngSwitchCase="'time'">
-        <ngb-timepicker></ngb-timepicker>
+        <input type="text" placeholder="" readonly="readonly"
+               class="my-flatpickr-date form-control form-control-sm">
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'datetime'">
+        <input type="text" placeholder="" readonly="readonly"
+               class="my-flatpickr-date form-control form-control-sm">
       </ng-container>
 
       <ng-container *ngSwitchDefault>

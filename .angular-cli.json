@@ -38,10 +38,14 @@
         "../node_modules/bootstrap/dist/js/bootstrap.js",
 
         "../node_modules/echarts/dist/echarts.min.js",
+
         "./assets/vendor/sockjs/sockjs.min.js",
         "./assets/vendor/sockjs/stomp.min.js",
+
         "./assets/vendor/ztree/js/jquery.ztree.all.js",
-        "./assets/vendor/ztree/js/jquery.ztree.exhide.js"
+        "./assets/vendor/ztree/js/jquery.ztree.exhide.js",
+
+        "./assets/vendor/flatpickr/flatpickr.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

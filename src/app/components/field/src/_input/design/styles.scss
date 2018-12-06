@@ -1,3 +1,5 @@
 .field-input-design {
-
+  .form-control[readonly] {
+    color: #666666 !important;
+  }
 }

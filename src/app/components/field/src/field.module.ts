@@ -1,10 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgbDropdownModule, NgbDatepickerModule, NgbDateParserFormatter,
-  NgbTimepickerModule, NgbTimepickerConfig } from '@ng-bootstrap/ng-bootstrap';
-
-import { MyDateParserFormatter } from '../../../service/my-date-parser-formatter';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { LabelShowComponent } from './_label/show/label-show.component';
 import { LabelIssueDesignComponent } from './_label/issue/design/label-issue-design.component';
@@ -18,13 +15,9 @@ import { IssueFieldEditComponent } from './field/issue/edit/issue-field-edit.com
 
 import { CaseFieldEditComponent } from './field/case/edit/case-field-edit.component';
 
-export function myDateParserFormatterFactory() {
-  return new MyDateParserFormatter('yyyy-MM-dd');
-}
-
 @NgModule({
   imports: [CommonModule, FormsModule, ReactiveFormsModule, NgbDropdownModule,
-    NgbDatepickerModule, NgbTimepickerModule],
+    ],
   declarations: [
     LabelShowComponent, LabelIssueDesignComponent,
     InputEditComponent, InputViewComponent, InputDesignComponent,
@@ -39,12 +32,7 @@ export function myDateParserFormatterFactory() {
     IssueFieldDesignComponent, IssueFieldEditComponent,
     CaseFieldEditComponent,
   ],
-  providers: [NgbTimepickerConfig,
-    {
-      provide: NgbDateParserFormatter,
-      useFactory: myDateParserFormatterFactory,
-    },
-  ],
+  providers: [],
 })
 export class FieldModule {
 
