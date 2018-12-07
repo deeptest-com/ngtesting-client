@@ -43,19 +43,19 @@
       <ng-container *ngSwitchCase="'date'">
         <input [(ngModel)]="model[elem.colCode]" formControlName="{{'elem-'+elem.id}}"
                type="text" placeholder="" readonly="readonly"
-               class="my-flatpickr-date form-control form-control-sm">
+               class="my-flatpickr-date form-control">
       </ng-container>
 
       <ng-container *ngSwitchCase="'time'">
         <input [(ngModel)]="model[elem.colCode]" formControlName="{{'elem-'+elem.id}}"
                type="text" placeholder="" readonly="readonly"
-               class="my-flatpickr-date form-control form-control-sm">
+               class="my-flatpickr-date form-control">
       </ng-container>
 
       <ng-container *ngSwitchCase="'datetime'">
         <input [(ngModel)]="model[elem.colCode]" formControlName="{{'elem-'+elem.id}}"
                type="text" placeholder="" readonly="readonly"
-               class="my-flatpickr-date form-control form-control-sm">
+               class="my-flatpickr-date form-control">
       </ng-container>
 
       <ng-container *ngSwitchDefault>

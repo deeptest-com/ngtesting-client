@@ -45,7 +45,8 @@
         "./assets/vendor/ztree/js/jquery.ztree.all.js",
         "./assets/vendor/ztree/js/jquery.ztree.exhide.js",
 
-        "./assets/vendor/flatpickr/flatpickr.js"
+        "./assets/vendor/flatpickr/flatpickr.js",
+        "./assets/vendor/flatpickr/zh.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

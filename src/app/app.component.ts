@@ -12,10 +12,8 @@ import { layoutPaths } from './theme/theme.constants';
 import {CONSTANT} from './utils/constant';
 import {Utils} from './utils/utils';
 
-/*
- * App Component
- * Top Level Component
- */
+declare var flatpickr;
+
 @Component({
   selector: 'app',
   styleUrls: ['./app.component.scss'],
@@ -40,6 +38,7 @@ export class App {
 
     this._loadImages();
 
+    flatpickr.localize(flatpickr.l10ns.zh);
     Utils.config();
 
     CONSTANT.ScreenSize = Utils.getScreenSize();

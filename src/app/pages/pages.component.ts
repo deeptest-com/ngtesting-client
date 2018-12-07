@@ -24,7 +24,6 @@ import {Location} from '@angular/common';
     `
 })
 export class Pages {
-
   constructor() {
 
   }
