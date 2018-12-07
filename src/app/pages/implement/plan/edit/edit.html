@@ -33,23 +33,29 @@
       <div class="form-group row">
         <label class="col-sm-1 col-form-label"><span>开始时间</span></label>
         <div class="col-sm-5">
-          <div class="input-group">
-            <input class="form-control" placeholder="yyyy-mm-dd" name="startTime" formControlName="startTime" #startTime="ngbDatepicker"
-                   [(ngModel)]="model.startTime" ngbDatepicker [minDate]="startDate">
-            <div class="input-group-addon" (click)="startTime.toggle()" >
+          <div class="input-group my-flatpickr-date">
+            <input [(ngModel)]="model.startTime" formControlName="startTime" type="text" readonly="readonly"
+                   class=" form-control form-control-sm" placeholder="yyyy-mm-dd" data-input #startTime>
+            <a class="input-group-addon" title="选择" data-toggle>
               <i class="fa fa-calendar"></i>
-            </div>
+            </a>
+            <a class="input-group-addon" title="清除" data-clear>
+              <i class="fa fa-remove"></i>
+            </a>
           </div>
         </div>
 
         <label class="col-sm-1 col-form-label"><span>结束时间</span></label>
         <div class="col-sm-5">
-          <div class="input-group">
-            <input class="form-control" placeholder="yyyy-mm-dd" name="endTime" formControlName="endTime"
-                   [(ngModel)]="model.endTime" ngbDatepicker [minDate]="startDate" #endTime="ngbDatepicker">
-            <div class="input-group-addon" (click)="endTime.toggle()" >
+          <div class="input-group my-flatpickr-date">
+            <input [(ngModel)]="model.endTime" formControlName="endTime" type="text" readonly="readonly"
+                   class=" form-control form-control-sm" placeholder="yyyy-mm-dd" data-input>
+            <a class="input-group-addon" title="选择" data-toggle>
               <i class="fa fa-calendar"></i>
-            </div>
+            </a>
+            <a class="input-group-addon" title="清除" data-clear>
+              <i class="fa fa-remove"></i>
+            </a>
           </div>
         </div>
       </div>

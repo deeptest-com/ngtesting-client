@@ -34,20 +34,42 @@
       </ng-container>
 
       <ng-container *ngSwitchCase="'date'">
-        <div class="input-group">
-          <input type="text" placeholder="" readonly="readonly"
-                 class="my-flatpickr-date form-control form-control-sm">
+        <div class="input-group my-flatpickr-date">
+            <input type="text" readonly="readonly"
+                   class=" form-control form-control-sm" placeholder="yyyy-mm-dd" data-input>
+            <a class="input-group-addon" title="选择" data-toggle>
+              <i class="fa fa-calendar"></i>
+            </a>
+            <a class="input-group-addon" title="清除" data-clear>
+              <i class="fa fa-remove"></i>
+            </a>
         </div>
       </ng-container>
 
       <ng-container *ngSwitchCase="'time'">
-        <input type="text" placeholder="" readonly="readonly"
-               class="my-flatpickr-date form-control form-control-sm">
+        <div class="input-group my-flatpickr-time">
+          <input type="text" readonly="readonly"
+                 class=" form-control form-control-sm" placeholder="yyyy-mm-dd" data-input>
+          <a class="input-group-addon" title="选择" data-toggle>
+            <i class="fa fa-calendar"></i>
+          </a>
+          <a class="input-group-addon" title="清除" data-clear>
+            <i class="fa fa-remove"></i>
+          </a>
+        </div>
       </ng-container>
 
       <ng-container *ngSwitchCase="'datetime'">
-        <input type="text" placeholder="" readonly="readonly"
-               class="my-flatpickr-date form-control form-control-sm">
+        <div class="input-group my-flatpickr-datetime">
+          <input type="text" readonly="readonly"
+                 class=" form-control form-control-sm" placeholder="yyyy-mm-dd" data-input>
+          <a class="input-group-addon" title="选择" data-toggle>
+            <i class="fa fa-calendar"></i>
+          </a>
+          <a class="input-group-addon" title="清除" data-clear>
+            <i class="fa fa-remove"></i>
+          </a>
+        </div>
       </ng-container>
 
       <ng-container *ngSwitchDefault>

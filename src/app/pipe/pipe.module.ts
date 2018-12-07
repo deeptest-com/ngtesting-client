@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { MsgReadPipe } from './msg-read';
 import { ImgPathPipe, ThumbPathPipe } from './img-path';
 import { MapToArrayPipe } from './map-to-array';
-import { TimePassedPipe } from './date';
+import { DateFormatPipe, TimePassedPipe } from './date';
 import { ModelStatusPipe } from './model-status';
 import { ExeStatusPipe } from './exe-status';
 import { PercentPipe } from './percent';
@@ -20,12 +20,14 @@ import { TermPipe, SectionPipe } from './misc';
 @NgModule({
   imports: [],
 
-  declarations: [MsgReadPipe, ExeStatusPipe, PathToNamePipe, ImgPathPipe, ThumbPathPipe, MapToArrayPipe, TimePassedPipe,
+  declarations: [MsgReadPipe, ExeStatusPipe, PathToNamePipe, ImgPathPipe, ThumbPathPipe, MapToArrayPipe,
+    DateFormatPipe, TimePassedPipe,
     ModelStatusPipe, MarkErrorPipe, FieldApplyToPipe, FieldFormatPipe, TrueOrFalsePipe,
     DisableOrNotPipe, PercentPipe, ShowIfContainsPipe, PathToLinkPipe, MyFilterPipe,
     IdToNamePipe, TermPipe, SectionPipe],
 
-  exports: [MsgReadPipe, ExeStatusPipe, PathToNamePipe, ImgPathPipe, ThumbPathPipe, MapToArrayPipe, TimePassedPipe,
+  exports: [MsgReadPipe, ExeStatusPipe, PathToNamePipe, ImgPathPipe, ThumbPathPipe, MapToArrayPipe,
+    DateFormatPipe, TimePassedPipe,
     ModelStatusPipe, MarkErrorPipe, FieldApplyToPipe, FieldFormatPipe, TrueOrFalsePipe,
     DisableOrNotPipe, PercentPipe, ShowIfContainsPipe, PathToLinkPipe, MyFilterPipe,
     IdToNamePipe, TermPipe, SectionPipe],

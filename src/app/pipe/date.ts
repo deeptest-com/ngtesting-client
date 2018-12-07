@@ -33,3 +33,10 @@ export class TimePassedPipe implements PipeTransform {
     return result;
   }
 }
+
+@Pipe({ name: 'dateFormat' })
+export class DateFormatPipe extends DatePipe implements PipeTransform {
+  transform(value: any, format: string = 'yyyy-MM-dd'): any {
+    return super.transform(value, format);
+  }
+}

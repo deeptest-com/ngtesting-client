@@ -3,7 +3,7 @@ import { CommonModule }  from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { NgbModalModule, NgbPaginationModule, NgbDropdownModule,
-  NgbTabsetModule, NgbButtonsModule, NgbCollapseModule, NgbDatepickerModule, NgbDateParserFormatter }
+  NgbTabsetModule, NgbButtonsModule, NgbCollapseModule }
   from '@ng-bootstrap/ng-bootstrap';
 
 import { NgaModule } from '../../../theme/nga.module';
@@ -21,8 +21,8 @@ import { ExecutionBarModule } from '../../../components/execution-bar';
 
 import { RouteService } from '../../../service/route';
 import { RequestService } from '../../../service/request';
+import { DateFormatPipe } from '../../../pipe/date';
 import { DatetimePickerService } from '../../../service/datetime-picker';
-import { MyDateParserFormatter } from '../../../service/my-date-parser-formatter';
 import { PlanService } from '../../../service/client/plan';
 import { TaskService } from '../../../service/client/task';
 import { SuiteService } from '../../../service/client/suite';
@@ -38,10 +38,6 @@ import { PlanList } from './list/list.component';
 import { PlanView } from './view/view.component';
 import { PlanEdit } from './edit/edit.component';
 
-export function myDateParserFormatterFactory() {
-  return new MyDateParserFormatter('yyyy-MM-dd');
-}
-
 @NgModule({
   imports: [
     CommonModule,
@@ -50,7 +46,7 @@ export function myDateParserFormatterFactory() {
     routing,
 
     NgbModalModule, NgbPaginationModule, NgbDropdownModule,
-    NgbTabsetModule, NgbButtonsModule, NgbCollapseModule, NgbDatepickerModule,
+    NgbTabsetModule, NgbButtonsModule, NgbCollapseModule,
 
     DirectiveModule,
     PipeModule,
@@ -71,13 +67,9 @@ export function myDateParserFormatterFactory() {
   providers: [
     RouteService,
     RequestService,
-    DatetimePickerService,
+    DatetimePickerService, DateFormatPipe,
     PlanService, TaskService, SuiteService, CaseService, UserService,
     AccountService, ProjectService, ReportService,
-    {
-      provide: NgbDateParserFormatter,
-      useFactory: myDateParserFormatterFactory,
-    },
   ],
   entryComponents: [
     TaskEditComponent,

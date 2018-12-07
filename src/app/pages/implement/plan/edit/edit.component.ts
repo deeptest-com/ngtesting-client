@@ -1,8 +1,8 @@
-import { Component, ViewEncapsulation, NgModule, Pipe, Input, Compiler, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, ViewEncapsulation, Compiler, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
-import { NgbDatepickerI18n, NgbDateParserFormatter, NgbDateStruct, NgbModal, NgbModalRef, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { I18n, CustomDatepickerI18n } from '../../../../service/datepicker-I18n';
 
@@ -10,6 +10,8 @@ import { GlobalState } from '../../../../global.state';
 
 import { CONSTANT } from '../../../../utils/constant';
 import { Utils, logger } from '../../../../utils/utils';
+import { DateFormatPipe } from '../../../../pipe/date';
+
 import { ValidatorUtils, CustomValidator } from '../../../../validator';
 import { RouteService } from '../../../../service/route';
 
@@ -19,7 +21,6 @@ import { CaseService } from '../../../../service/client/case';
 import { UserService } from '../../../../service/client/user';
 
 import { CaseSelectionComponent } from '../../../../components/case-selection';
-import { EnvironmentConfigComponent } from '../../../../components/environment-config';
 import { PopDialogComponent } from '../../../../components/pop-dialog';
 
 import { TaskEditComponent } from '../../task/edit';
@@ -34,7 +35,7 @@ import * as _ from 'lodash';
     '../../../../../assets/vendor/ztree/css/zTreeStyle/zTreeStyle.css',
     '../../../../components/ztree/src/styles.scss'],
   templateUrl: './edit.html',
-  providers: [I18n, { provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n }],
+  providers: [I18n],
 })
 export class PlanEdit implements OnInit, AfterViewInit {
   orgId: number;
@@ -44,7 +45,6 @@ export class PlanEdit implements OnInit, AfterViewInit {
 
   treeSettings: any = { usage: 'selection', isExpanded: true, sonSign: false };
 
-  startDate: any;
   model: any = { verId: 'null', tasks: [] };
   vers: any = [];
   envs: any = [];
@@ -64,12 +64,11 @@ export class PlanEdit implements OnInit, AfterViewInit {
 
   taskEditModal: any;
   caseSelectionModal: any;
-  envSelectionModal: any;
 
   constructor(private _state: GlobalState, private _routeService: RouteService,
               private _route: ActivatedRoute, private fb: FormBuilder,
+              private _dateFormatPipe: DateFormatPipe,
               private _i18n: I18n, private modalService: NgbModal, private compiler: Compiler,
-              private ngbDateParserFormatter: NgbDateParserFormatter,
               private _planService: PlanService, private _taskService: TaskService,
               private _caseService: CaseService, private _userService: UserService) {
 
@@ -86,11 +85,10 @@ export class PlanEdit implements OnInit, AfterViewInit {
     this.loadData();
 
     this.buildForm();
-
-    const now = new Date();
-    this.startDate = { day: now.getDate(), month: now.getMonth() + 1, year: now.getFullYear() };
   }
-  ngAfterViewInit() {}
+  ngAfterViewInit() {
+    jQuery('.my-flatpickr-date').flatpickr({ wrap: true, minDate: 'today', dateFormat: 'Y-m-d' });
+  }
 
   buildForm(): void {
     this.form = this.fb.group(
@@ -131,8 +129,8 @@ export class PlanEdit implements OnInit, AfterViewInit {
       that.vers = json.vers;
       that.envs = json.envs;
 
-      this.model.startTime = this.ngbDateParserFormatter.parse(that.model.startTime);
-      this.model.endTime = this.ngbDateParserFormatter.parse(that.model.endTime);
+      this.model.startTime = this._dateFormatPipe.transform(this.model.startTime);
+      this.model.endTime = this._dateFormatPipe.transform(this.model.endTime);
     });
   }
 
@@ -266,10 +264,6 @@ export class PlanEdit implements OnInit, AfterViewInit {
         this.formErrors = ['删除失败'];
       }
     });
-  }
-
-  endTimeChanged() {
-    console.log('===', this.model);
   }
 
 }

@@ -56,8 +56,8 @@ export let CustomValidator: any = {
         return null;
       }
 
-      const startDate = Utils.dateStructToDate(start.value);
-      const endDate = Utils.dateStructToDate(end.value);
+      const startDate = Utils.strToTimestamp(start.value);
+      const endDate = Utils.strToTimestamp(end.value);
 
       const pass = startDate <= endDate;
 
@@ -65,7 +65,7 @@ export let CustomValidator: any = {
         logger.log('compareDate fail');
 
         start.setErrors({});
-        end.setErrors({sdf: 'DSF'});
+        end.setErrors({});
 
         const ret = {};
         ret[resultKey] = {

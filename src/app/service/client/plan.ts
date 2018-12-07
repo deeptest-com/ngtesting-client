@@ -28,8 +28,6 @@ export class PlanService {
     data.projectId = projectId;
 
     data.tasks = null;
-    data.startTime = !!data.startTime ? Utils.dateStructToDate(data.startTime) : null;
-    data.endTime = !!data.endTime ? Utils.dateStructToDate(data.endTime) : null;
     return this._reqService.post(this._apiBase + 'save', data);
   }
 
