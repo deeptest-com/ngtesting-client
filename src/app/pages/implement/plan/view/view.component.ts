@@ -1,10 +1,7 @@
-import { Component, ViewEncapsulation, NgModule, Pipe, Compiler, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
-import { NgbDatepickerI18n, NgbDateParserFormatter, NgbDateStruct, NgbModal, NgbModalRef, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-
-import { I18n, CustomDatepickerI18n } from '../../../../service/datepicker-I18n';
+import { I18n } from '../../../../service/datepicker-I18n';
 
 import { GlobalState } from '../../../../global.state';
 
@@ -24,7 +21,7 @@ declare var jQuery;
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['./view.scss'],
   templateUrl: './view.html',
-  providers: [I18n, { provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n }],
+  providers: [I18n],
 })
 export class PlanView implements OnInit, AfterViewInit {
   orgId: number;

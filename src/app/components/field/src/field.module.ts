@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { DateFormatPipe } from '../../../pipe/date';
+
 import { LabelShowComponent } from './_label/show/label-show.component';
 import { LabelIssueDesignComponent } from './_label/issue/design/label-issue-design.component';
 
@@ -32,7 +34,7 @@ import { CaseFieldEditComponent } from './field/case/edit/case-field-edit.compon
     IssueFieldDesignComponent, IssueFieldEditComponent,
     CaseFieldEditComponent,
   ],
-  providers: [],
+  providers: [DateFormatPipe],
 })
 export class FieldModule {
 

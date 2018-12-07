@@ -1,10 +1,6 @@
 import { Component, ViewEncapsulation, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
-import { NgbDatepickerI18n } from '@ng-bootstrap/ng-bootstrap';
-
-import { I18n, CustomDatepickerI18n } from '../../../../service/datepicker-I18n';
-
 import { CONSTANT } from '../../../../utils/constant';
 import { RouteService } from '../../../../service/route';
 
@@ -17,7 +13,7 @@ declare var jQuery;
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['./view.scss'],
   templateUrl: './view.html',
-  providers: [I18n, { provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n }],
+  providers: [],
 })
 export class SuiteViewComponent implements OnInit, AfterViewInit {
   orgId: number;

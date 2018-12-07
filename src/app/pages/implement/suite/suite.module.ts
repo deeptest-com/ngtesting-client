@@ -3,8 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { NgbModalModule, NgbPaginationModule, NgbDropdownModule,
-  NgbTabsetModule, NgbButtonsModule, NgbCollapseModule,
-  NgbDatepickerModule, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+  NgbTabsetModule, NgbButtonsModule, NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { NgaModule } from '../../../theme/nga.module';
 import { routing } from './suite.routing';
@@ -47,7 +46,7 @@ export function myDateParserFormatterFactory() {
     routing,
 
     NgbModalModule, NgbPaginationModule, NgbDropdownModule,
-    NgbTabsetModule, NgbButtonsModule, NgbCollapseModule, NgbDatepickerModule,
+    NgbTabsetModule, NgbButtonsModule, NgbCollapseModule,
 
     DirectiveModule,
     PipeModule,
@@ -67,11 +66,7 @@ export function myDateParserFormatterFactory() {
     RequestService,
     DatetimePickerService,
     PlanService, TaskService, SuiteService, CaseService, UserService,
-    AccountService, ProjectService, ReportService,
-    {
-      provide: NgbDateParserFormatter,
-      useFactory: myDateParserFormatterFactory,
-    },
+    AccountService, ProjectService, ReportService
   ],
   entryComponents: [
     TaskEditComponent,

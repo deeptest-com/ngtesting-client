@@ -3,6 +3,7 @@ import { Input, Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { Utils } from '../../../../../utils/utils';
+import { DateFormatPipe } from '../../../../../pipe/date';
 
 import * as _ from 'lodash';
 
@@ -28,19 +29,30 @@ export class InputEditComponent implements OnInit, AfterViewInit {
   @Input('model')
   set model(value: any) {
     this._model = value;
+
+    if (this.elem.input == 'date') {
+      this._model[this.elem.colCode] = this._dateFormatPipe.transform(this._model[this.elem.colCode]);
+    } else if (this.elem.input == 'time') {
+      this._model[this.elem.colCode] = this._dateFormatPipe.transform(
+        this._model[this.elem.colCode], 'HH:mm');
+    } else if (this.elem.input == 'datetime') {
+      this._model[this.elem.colCode] = this._dateFormatPipe.transform(
+        this._model[this.elem.colCode], 'yyyy-MM-dd HH:mm');
+    }
   }
 
-  public constructor() {
+  public constructor(private _dateFormatPipe: DateFormatPipe) {
 
   }
 
   public ngOnInit(): void {
+    console.log('???this.elem', this.elem);
 
     if (this.options) {
       const defaults: any[] = this.options.filter(
         (option, index) => option.isDefault == true);
       if (defaults.length > 0) {
-        this._model[this.elem.code] = defaults[0].id;
+        this._model[this.elem.colCode] = this.elem.buildIn ? defaults[0].id : defaults[0].value;
       }
     }
 
@@ -57,9 +69,22 @@ export class InputEditComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    jQuery('.my-flatpickr-date').flatpickr({});
-    jQuery('.my-flatpickr-time').flatpickr({});
-    jQuery('.my-flatpickr-datetime').flatpickr({});
+    jQuery('.my-flatpickr-date').flatpickr({ wrap: true });
+
+    jQuery('.my-flatpickr-time').flatpickr({
+      wrap: true,
+      enableTime: true,
+      noCalendar: true,
+      time_24hr: true,
+      minuteIncrement: 15,
+    });
+
+    jQuery('.my-flatpickr-datetime').flatpickr({
+      wrap: true,
+      enableTime: true,
+      time_24hr: true,
+      minuteIncrement: 15,
+    });
   }
 
   getVal(elem, option) {

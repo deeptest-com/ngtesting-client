@@ -34,16 +34,22 @@ export class InputDesignComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    jQuery('.my-flatpickr-date').flatpickr({wrap: true});
+    jQuery('.my-flatpickr-date').flatpickr({ wrap: true });
 
     jQuery('.my-flatpickr-time').flatpickr({
+      wrap: true,
       enableTime: true,
       noCalendar: true,
       time_24hr: true,
       minuteIncrement: 15,
     });
 
-    jQuery('.my-flatpickr-datetime').flatpickr({ enableTime: true });
+    jQuery('.my-flatpickr-datetime').flatpickr({
+      wrap: true,
+      enableTime: true,
+      time_24hr: true,
+      minuteIncrement: 15,
+    });
   }
 
 }

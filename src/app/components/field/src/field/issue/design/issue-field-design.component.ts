@@ -1,14 +1,14 @@
-import {Input, Component, OnInit, OnChanges, SimpleChanges, Output, EventEmitter} from '@angular/core';
-import { NgbDatepicker, NgbTimepickerConfig } from '@ng-bootstrap/ng-bootstrap';
+import {Input, Component, OnInit, Output, EventEmitter} from '@angular/core';
+
 import {FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'issue-field-design',
   templateUrl: './issue-field-design.html',
   styleUrls: ['./styles.scss'],
-  providers: [NgbTimepickerConfig],
+  providers: [],
 })
-export class IssueFieldDesignComponent implements OnInit, OnChanges {
+export class IssueFieldDesignComponent implements OnInit {
   @Input() issuePropMap: any = {};
   @Input() field: any;
   @Input() forSelection: boolean = false;
@@ -19,11 +19,7 @@ export class IssueFieldDesignComponent implements OnInit, OnChanges {
 
   labelColNum: number = 4;
 
-  public constructor(config: NgbTimepickerConfig) {
-  }
-
-  public ngOnChanges(changes: SimpleChanges): void {
-
+  public constructor() {
   }
 
   public ngOnInit(): void {

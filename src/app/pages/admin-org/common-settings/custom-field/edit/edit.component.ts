@@ -188,10 +188,6 @@ export class CustomFieldEdit implements OnInit, AfterViewInit {
   changeInput() {
     this.typeList = this.inputMap[this.model.input].types;
     this.model.type = this.inputMap[this.model.input].types[0].value;
-
-    if (this.model.input == 'datetime') {
-      this.model.fullLine = true;
-    }
   }
 
   showModal(): void {

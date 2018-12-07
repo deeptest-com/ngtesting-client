@@ -10,7 +10,7 @@ import { Utils } from '../../../../../utils/utils';
   styleUrls: ['./styles.scss'],
   providers: [],
 })
-export class InputViewComponent implements OnInit, OnChanges {
+export class InputViewComponent implements OnInit {
   @Input() elem: any = {};
   _model: any = {};
 
@@ -37,10 +37,6 @@ export class InputViewComponent implements OnInit, OnChanges {
   }
 
   public ngOnInit(): void {
-
-  }
-
-  public ngOnChanges(): void {
 
   }
 

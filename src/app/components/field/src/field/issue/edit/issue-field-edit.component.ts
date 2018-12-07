@@ -7,7 +7,7 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./styles.scss'],
   providers: [],
 })
-export class IssueFieldEditComponent implements OnInit, OnChanges {
+export class IssueFieldEditComponent implements OnInit {
   @Input() model: any = {};
   @Input() elem: any;
   @Input() issuePropMap: any = {};
@@ -20,12 +20,8 @@ export class IssueFieldEditComponent implements OnInit, OnChanges {
   public constructor() {
   }
 
-  public ngOnChanges(changes: SimpleChanges): void {
-
-  }
-
   public ngOnInit(): void {
-    console.log(this.elem, this.issuePropMap);
+    // console.log(this.elem, this.issuePropMap);
   }
 
   public getCol(): number {

@@ -68,14 +68,6 @@ export class IssueCreate implements OnInit, AfterViewInit, OnDestroy {
 
   save() {
     const data = _.clone(this.issue);
-    this.page.elements.forEach(elem => {
-      if (elem.input == 'date' && data[elem.code]) {
-        data[elem.code] = Utils.dateStructToDate(data[elem.code]);
-      } else if (elem.input == 'time' && data[elem.code]) {
-        data[elem.code] = Utils.timeStructToStr(data[elem.code]);
-      }
-    });
-
     this.issueService.save(data, this.page.id).subscribe((json: any) => {
       if (json.code == 1) {
         const url = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + CONSTANT.CURR_PRJ_ID + '/issue/' +

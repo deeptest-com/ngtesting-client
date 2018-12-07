@@ -1,18 +1,17 @@
-import { Component, ViewEncapsulation, NgModule, Pipe, Input, Compiler, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { NgbDatepickerI18n, NgbDateParserFormatter, NgbDateStruct, NgbModal, NgbModalRef, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { GlobalState } from '../../../global.state';
 
 import { CONSTANT } from '../../../utils/constant';
 import { Utils, logger } from '../../../utils/utils';
-import { ValidatorUtils, CustomValidator } from '../../../validator';
+import { ValidatorUtils } from '../../../validator';
 import { RouteService } from '../../../service/route';
 
 import { IssueQueryService } from '../../../service/client/issue-query';
-import { PopDialogComponent } from '../../../components/pop-dialog';
 
 declare var jQuery;
 import * as _ from 'lodash';
@@ -30,7 +29,7 @@ export class IssueQueryEdit implements OnInit, AfterViewInit {
   form: FormGroup;
 
   constructor(private _state: GlobalState, private _routeService: RouteService,
-              private _route: ActivatedRoute, private fb: FormBuilder,private modalService: NgbModal,
+              private _route: ActivatedRoute, private fb: FormBuilder,
               private _issueQueryService: IssueQueryService) {
 
 

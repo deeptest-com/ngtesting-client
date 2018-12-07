@@ -7,7 +7,7 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./styles.scss'],
   providers: [],
 })
-export class CaseFieldEditComponent implements OnInit, OnChanges {
+export class CaseFieldEditComponent implements OnInit {
   @Input() model: any = {};
   @Input() elem: any;
   @Input() form: FormGroup;
@@ -17,10 +17,6 @@ export class CaseFieldEditComponent implements OnInit, OnChanges {
   inputColNum: number = 9;
 
   public constructor() {
-  }
-
-  public ngOnChanges(changes: SimpleChanges): void {
-
   }
 
   public ngOnInit(): void {

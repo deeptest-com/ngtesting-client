@@ -3,7 +3,7 @@ import { CommonModule }  from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { NgbModalModule, NgbPaginationModule, NgbDropdownModule,
-  NgbTabsetModule, NgbButtonsModule, NgbCollapseModule, NgbDatepickerModule, NgbDateParserFormatter }
+  NgbTabsetModule, NgbButtonsModule, NgbCollapseModule }
   from '@ng-bootstrap/ng-bootstrap';
 
 import { NgaModule } from '../../theme/nga.module';
@@ -29,7 +29,7 @@ import { IssueQueryEdit } from './edit/edit.component';
     routing,
 
     NgbModalModule, NgbPaginationModule, NgbDropdownModule,
-    NgbTabsetModule, NgbButtonsModule, NgbCollapseModule, NgbDatepickerModule,
+    NgbTabsetModule, NgbButtonsModule, NgbCollapseModule,
 
     DirectiveModule,
     PipeModule,

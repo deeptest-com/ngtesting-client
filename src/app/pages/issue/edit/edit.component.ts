@@ -77,14 +77,6 @@ export class IssueEdit implements OnInit, AfterViewInit, OnDestroy {
 
   update() {
     const data = _.clone(this.issue);
-    this.page.elements.forEach(elem => {
-      if (elem.input == 'date' && data[elem.code]) {
-        data[elem.code] = Utils.dateStructToDate(data[elem.code]);
-      } else if (elem.input == 'time' && data[elem.code]) {
-        data[elem.code] = Utils.timeStructToStr(data[elem.code]);
-      }
-    });
-
     this.issueService.update(data, this.page.id).subscribe((json: any) => {
       if (json.code == 1) {
         this.issue = json.data;

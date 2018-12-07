@@ -1,7 +1,7 @@
 
 import { Component, Input, OnInit } from '@angular/core';
 
-import {NgbDatepickerI18n, NgbDateStruct, NgbModal, NgbModalRef, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 import { EnvironmentConfigService } from './environment-config.service';
 

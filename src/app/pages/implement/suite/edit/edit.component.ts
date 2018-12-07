@@ -2,7 +2,7 @@ import { AfterViewInit, Compiler, Component, OnInit, ViewChild, ViewEncapsulatio
 import { ActivatedRoute, Params } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { NgbDateParserFormatter, NgbDatepickerI18n, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { CustomDatepickerI18n, I18n } from '../../../../service/datepicker-I18n';
 
@@ -32,7 +32,7 @@ declare var jQuery;
     '../../../../../assets/vendor/ztree/css/zTreeStyle/zTreeStyle.css',
     '../../../../components/ztree/src/styles.scss'],
   templateUrl: './edit.html',
-  providers: [I18n, { provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n }],
+  providers: [I18n],
 })
 export class SuiteEditComponent implements OnInit, AfterViewInit {
   orgId: number;
@@ -54,14 +54,13 @@ export class SuiteEditComponent implements OnInit, AfterViewInit {
   testSet: any;
   modalTitle: string;
 
-  taskEditModal: any;
   caseSelectionModal: any;
   envSelectionModal: any;
 
   constructor(private _state: GlobalState, private _routeService: RouteService,
               private _route: ActivatedRoute, private fb: FormBuilder,
               private _i18n: I18n, private modalService: NgbModal,
-              private compiler: Compiler, private ngbDateParserFormatter: NgbDateParserFormatter,
+              private compiler: Compiler,
               private _suiteService: SuiteService, private _taskService: TaskService,
               private _caseService: CaseService, private _userService: UserService) {
 
@@ -126,9 +125,6 @@ export class SuiteEditComponent implements OnInit, AfterViewInit {
     that._suiteService.get(this.suiteId).subscribe((json: any) => {
       that.model = json.data;
       that.caseProjectId = that.model.caseProjectId;
-
-      this.model.startTime = this.ngbDateParserFormatter.parse(that.model.startTime);
-      this.model.endTime = this.ngbDateParserFormatter.parse(that.model.endTime);
     });
   }
 

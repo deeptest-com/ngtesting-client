@@ -1,5 +1,5 @@
 <div class="field-input-edit">
-  <div [formGroup]="form">
+  <div [formGroup]="form">{{elem.colCode}}-{{elem.label}}
 
     <ng-container [ngSwitch]="elem.input">
 
@@ -41,21 +41,45 @@
       </ng-container>
 
       <ng-container *ngSwitchCase="'date'">
-        <input [(ngModel)]="model[elem.colCode]" formControlName="{{'elem-'+elem.id}}"
-               type="text" placeholder="" readonly="readonly"
-               class="my-flatpickr-date form-control">
+        <div class="input-group my-flatpickr-date">
+          <input [(ngModel)]="model[elem.colCode]" formControlName="{{'elem-'+elem.id}}"
+                 type="text" placeholder="yyyy-mm-dd" readonly="readonly"
+                 class=" form-control form-control-sm" data-input #startTime>
+          <a class="input-group-addon" title="选择" data-toggle>
+            <i class="fa fa-calendar"></i>
+          </a>
+          <a class="input-group-addon" title="清除" data-clear>
+            <i class="fa fa-remove"></i>
+          </a>
+        </div>
       </ng-container>
 
       <ng-container *ngSwitchCase="'time'">
-        <input [(ngModel)]="model[elem.colCode]" formControlName="{{'elem-'+elem.id}}"
-               type="text" placeholder="" readonly="readonly"
-               class="my-flatpickr-date form-control">
+        <div class="input-group my-flatpickr-time">
+          <input [(ngModel)]="model[elem.colCode]" formControlName="{{'elem-'+elem.id}}"
+                 type="text" placeholder="hh:mm" readonly="readonly"
+                 class=" form-control form-control-sm" data-input>
+          <a class="input-group-addon" title="选择" data-toggle>
+            <i class="fa fa-calendar"></i>
+          </a>
+          <a class="input-group-addon" title="清除" data-clear>
+            <i class="fa fa-remove"></i>
+          </a>
+        </div>
       </ng-container>
 
       <ng-container *ngSwitchCase="'datetime'">
-        <input [(ngModel)]="model[elem.colCode]" formControlName="{{'elem-'+elem.id}}"
-               type="text" placeholder="" readonly="readonly"
-               class="my-flatpickr-date form-control">
+        <div class="input-group my-flatpickr-datetime">
+          <input [(ngModel)]="model[elem.colCode]" formControlName="{{'elem-'+elem.id}}"
+                 type="text" placeholder="yyyy-mm-dd hh:mm" readonly="readonly"
+                 class=" form-control form-control-sm" data-input>
+          <a class="input-group-addon" title="选择" data-toggle>
+            <i class="fa fa-calendar"></i>
+          </a>
+          <a class="input-group-addon" title="清除" data-clear>
+            <i class="fa fa-remove"></i>
+          </a>
+        </div>
       </ng-container>
 
       <ng-container *ngSwitchDefault>
