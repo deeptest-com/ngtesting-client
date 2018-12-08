@@ -9,7 +9,9 @@ import { FormGroup } from '@angular/forms';
 })
 export class CaseFieldEditComponent implements OnInit {
   @Input() model: any = {};
-  @Input() elem: any;
+  @Input() elem: any = {};
+  @Input() casePropMap: any = {};
+
   @Input() form: FormGroup;
   @Input() validateMsg: any = {};
 

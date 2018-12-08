@@ -1,11 +1,9 @@
 <div class="field-input-view">
-
-  <span *ngIf="elem.input!='text'">{{model[prop]}}</span>
+  <span *ngIf="elem.input!='text'">{{model[elem.colCode]}}</span>
 
   <span *ngIf="elem.input=='text' && elem.textFormat!='rich_text'"
-        [innerHTML]="model[prop]"></span>
+        [innerHTML]="model[elem.colCode]"></span>
 
   <pre *ngIf="elem.input=='text' && elem.textFormat=='rich_text'" style="display: inline;"
-       [innerHTML]="model[prop]"></pre>
-
+       [innerHTML]="model[elem.colCode]"></pre>
 </div>

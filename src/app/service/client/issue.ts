@@ -42,9 +42,9 @@ export class IssueService {
     return this._reqService.post(this._apiBase + 'update', { issue: model, pageId: pageId });
   }
 
-  saveField(id: number, field: any) {
+  updateField(id: number, field: any) {
     const model = _.merge(field, { id: id });
-    return this._reqService.post(this._apiBase + 'saveField', model);
+    return this._reqService.post(this._apiBase + 'updateField', model);
   }
 
   gotoList() {

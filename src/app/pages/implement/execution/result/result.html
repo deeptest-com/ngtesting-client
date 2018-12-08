@@ -79,7 +79,9 @@
       <div class="form-group row">
         <div class="col-sm-2 case-id">TC-{{model.id}}</div>
         <div class="col-sm-10">
-          <field-show [readonly]="!canEdit" (onSave)="saveField($event)" [(model)]="model" [prop]="'name'" [type]="'string'" [required]="true"></field-show>
+          <case-field-show [model]="model" [elemCode]="'name'" [casePropMap]="casePropMap"
+                           (onSave)="saveField($event)" [form]="form">
+          </case-field-show>
         </div>
       </div>
 
@@ -117,25 +119,29 @@
               <tr>
                 <td style="width: 25%">
                   <div class="label">状态</div>
-                  <field-show (onSave)="saveField($event)" [(model)]="model" [prop]="'status'" [type]="'string'"
-                              [required]="true" [readonly]="true"></field-show>
+                  <case-field-show [model]="model" [elemCode]="'status'" [casePropMap]="casePropMap"
+                                   (onSave)="saveField($event)" [form]="form">
+                  </case-field-show>
                 </td>
 
                 <td style="width: 25%">
                   <div class="label">类型</div>
-                  <field-show (onSave)="saveField($event)" [(model)]="model" [prop]="'type'" [type]="'dropdown'" [options]="caseTypes"
-                              [required]="true" [readonly]="!canEdit"></field-show>
+                  <case-field-show [model]="model" [elemCode]="'type'" [casePropMap]="casePropMap"
+                                   (onSave)="saveField($event)" [form]="form">
+                  </case-field-show>
                 </td>
                 <td style="width: 25%">
                   <div class="label">优先级</div>
-                  <field-show (onSave)="saveField($event)" [(model)]="model" [prop]="'priority'" [type]="'dropdown'" [options]="casePriorities"
-                              [required]="true" [readonly]="!canEdit"></field-show>
+                  <case-field-show [model]="model" [elemCode]="'priority'" [casePropMap]="casePropMap"
+                                   (onSave)="saveField($event)" [form]="form">
+                  </case-field-show>
                 </td>
                 <td style="width: 25%">
                   <div class="label">耗时(分钟)</div>
                   <div class="value">
-                    <field-show (onSave)="saveField($event)" [(model)]="model" [prop]="'estimate'" [type]="'number'"
-                                [required]="true" [readonly]="!canEdit"></field-show>
+                    <case-field-show [model]="model" [elemCode]="'estimate'" [casePropMap]="casePropMap"
+                                     (onSave)="saveField($event)" [form]="form">
+                    </case-field-show>
                   </div>
                 </td>
               </tr>
@@ -147,17 +153,20 @@
       </div>
 
       <div class="row field-show-container">
-        <div class="col-sm-12">
-          <field-show (onSave)="saveField($event)" [(model)]="model" [readonly]="!canEdit"
-                      [label]="'目标'" [prop]="'objective'" [type]="'string'"></field-show>
+        <div class="col-sm-2 field-show-label">测试目标</div>
+        <div class="col-sm-11">
+          <case-field-show [model]="model" [elemCode]="'objective'" [casePropMap]="casePropMap"
+                           (onSave)="saveField($event)" [form]="form">
+          </case-field-show>
         </div>
       </div>
 
-      <div *ngFor="let field of fields;" class="row field-show-container">
-        <div class="col-sm-12">
-          <field-show (onSave)="saveField($event)" [(model)]="model" [readonly]="!canEdit"
-                      [label]="field.label" [prop]="field.colCode" [type]="field.type" [options]="field.options"
-                      [format]="field.format" [rows]="field.rows" [required]="field.isRequired"></field-show>
+      <div *ngFor="let elem of customFields;" class="row field-show-container">
+        <div class="col-sm-2 field-show-label">{{elem.label}}</div>
+        <div class="col-sm-10">
+          <case-field-show [model]="model" [elem]="elem" [casePropMap]="casePropMap"
+                           (onSave)="saveField($event)" [form]="form">
+          </case-field-show>
         </div>
       </div>
 
@@ -199,8 +208,9 @@
             ></steps-table>
           </div>
           <div *ngIf="'richText'==model.contentType">
-            <field-show (onSave)="saveField($event)" [(model)]="model" [readonly]="!canEdit"
-                        [label]="'操作'" [prop]="'content'" [type]="'text'" [format]="model.contentType"></field-show>
+            <!--<case-field-show [model]="model" [elem]="elem" [propMap]="propMap"
+                             (onSave)="saveField($event)" [form]="form">
+            </case-field-show>-->
           </div>
         </div>
       </div>
@@ -208,7 +218,7 @@
 
     <div [class.hidden]="tab != 'result'" class="tab-summary">
       <div class="form-group row">
-        <label class="col-sm-1 col-form-label"><span>实际<br/>结果</span></label>
+        <label class="col-sm-1 col-form-label"><span>实际结果</span></label>
         <div *ngIf="canExe" class="col-sm-11">
             <textarea type="text" class="form-control" name="result" formControlName="result"
                       [(ngModel)]="model.result" #result></textarea>
@@ -236,16 +246,16 @@
 
       <div class="form-group row">
         <label class="col-sm-1"><span>附件</span></label>
-        <div class="col-sm-1">
+        <div class="col-sm-11">
           <file-uploader (uploadedEvent)="uploadedEvent($event)"
                          [ifile]="model.testsetPath" [mimeType]="[]" [showDropZone]="false"></file-uploader>
         </div>
-        <div class="col-sm-10">
+        <div class="col-sm-11 offset-1">
           <label class="attach-list">
-          <span *ngFor="let attach of model.attachments; let i = index;" class="attach-item">
-            <span (click)="removeAttachment(attach)" class="fa fa-times pointer" tabindex="-1"></span>
-            <a href="{{attach.uri | pathToLink}}" target="_blank" class="download pointer" >{{attach.name}}</a>
-          </span>
+            <span *ngFor="let attach of model.attachments; let i = index;" class="attach-item">
+              <span (click)="removeAttachment(attach)" class="fa fa-times pointer" tabindex="-1"></span>
+              <a href="{{attach.uri | pathToLink}}" target="_blank" class="download pointer" >{{attach.name}}</a>
+            </span>
           </label>
         </div>
       </div>

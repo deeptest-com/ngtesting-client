@@ -23,14 +23,14 @@
              [draggable]="false" [dropZones]="['fields-zone']" [sortableData]="page.elements"
              (onDropSuccess)="onElementDropSuccess($event)">
 
-          <div id="sortable-left-{{field.id}}" class="element" [class.full-line]="field.fullLine"
-               *ngFor="let field of page.elements; let i = index;"
-
-               dnd-sortable [sortableIndex]="i" [dragData]="field"
-               (onDropSuccess)="onElementDropSuccess($event)">
-            <issue-field-design [form]="form" (propEvent)="setProp($event)" [field]="field"
-                                [issuePropMap]="issuePropMap"></issue-field-design>
-          </div>
+          <ng-container *ngFor="let elem of page.elements; let i = index;">
+            <div dnd-sortable [dragEnabled]="elem.colCode!='title'" [sortableIndex]="i" [dragData]="elem"
+                 (onDropSuccess)="onElementDropSuccess($event)"
+                 id="sortable-left-{{elem.id}}" [class.full-line]="elem.fullLine" class="element">
+              <issue-field-design [form]="form" (propEvent)="setProp($event)" [field]="elem"
+                                  [issuePropMap]="issuePropMap"></issue-field-design>
+            </div>
+          </ng-container>
 
           <div class="no-elems clear-both"> 拖动字段到此处 </div>
         </div>

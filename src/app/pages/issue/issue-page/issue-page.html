@@ -1,12 +1,12 @@
 <div class="issue-page">
 
-  <div *ngIf="issue" class="my-validate-form">
-    <div class="form-group row">
-      <label class="col-sm-2 col-form-label" style="user-select: text;">标题</label>
-      <label class="col-sm-10 col-form-label text">
-        IS-{{issue.id}}-{{issue.title}}
-      </label>
+  <form [formGroup]="form" class="my-validate-form">
+    <div class="form-group row elements">
+      <div *ngFor="let elem of page.elements; let i = index;" [class.full-line]="elem.fullLine" class="element">
+        <issue-field-show [model]="issue" [elem]="elem" [issuePropMap]="issuePropMap"
+                          (onSave)="saveField($event)" [form]="form"></issue-field-show>
+      </div>
     </div>
-  </div>
+  </form>
 
 </div>

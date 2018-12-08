@@ -37,9 +37,8 @@ export class CaseEdit implements OnInit, AfterViewInit, OnDestroy {
   form: any;
   tab: string = 'content';
 
-  caseTypes: any[] = [];
-  casePriorities: any[] = [];
-  fields: any[] = [];
+  casePropMap: any = {};
+  customFields: any[] = [];
   user: any;
 
   canEdit: boolean;
@@ -74,9 +73,9 @@ export class CaseEdit implements OnInit, AfterViewInit, OnDestroy {
         return;
       }
 
-      this.caseTypes = CONSTANT.CASE_TYPES_FOR_PROJECT;
-      this.casePriorities = CONSTANT.CASE_PRIORITIES_FOR_PROJECT;
-      this.fields = CONSTANT.CUSTOM_FIELD_FOR_PROJECT;
+      console.log('111', CONSTANT.CASE_PROPERTY_MAP);
+      this.casePropMap = CONSTANT.CASE_PROPERTY_MAP;
+      this.customFields = CONSTANT.CASE_CUSTOM_FIELDS;
 
       if (testCase) {
         this.id = testCase.id;

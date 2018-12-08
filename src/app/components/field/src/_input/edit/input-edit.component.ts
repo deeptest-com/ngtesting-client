@@ -59,9 +59,12 @@ export class InputEditComponent implements OnInit, AfterViewInit {
     const validators: any[] = [];
     if (this.elem.required) {
       validators.push(Validators.required);
-      this.validateMsg['elem-' + this.elem.id] = {
-        'required': this.elem.label + '不能为空',
-      };
+
+      if (this.validateMsg) {
+        this.validateMsg['elem-' + this.elem.id] = {
+          'required': this.elem.label + '不能为空',
+        };
+      }
     }
 
     this.form.addControl('elem-' + this.elem.id,

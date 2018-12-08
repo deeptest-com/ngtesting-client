@@ -25,24 +25,50 @@ export class IssuePage implements OnInit, AfterViewInit, OnDestroy {
   eventCode: string = 'IssuePage';
   canEdit: boolean;
 
-  @Input() issue: any;
-  @Input() page: any = {};
-  issuePropertyMap: any;
+  form: any;
 
-  routeSub: any;
+  @Input() page: any = {};
+  @Input() issuePropMap: any = {};
+
+  _issue: any = {};
+  @Input() set issue (val) {
+    this._issue = val;
+  }
+  get issue () {
+    return this._issue;
+  }
 
   constructor(private _routeService: RouteService, private _route: ActivatedRoute, private _state: GlobalState,
-              private toastyService: ToastyService, private privilegeService: PrivilegeService,
+              private fb: FormBuilder, private toastyService: ToastyService, private privilegeService: PrivilegeService,
               private issueService: IssueService) {
-    this.issuePropertyMap = CONSTANT.CASE_PROPERTY_MAP;
+
     this.canEdit = this.privilegeService.hasPrivilege('issue-maintain');
+
+    this.buildForm();
   }
   ngOnInit() {
+
   }
+
   ngAfterViewInit() {}
+
+  saveField($event: any) {
+    console.log($event);
+
+    this.issueService.updateField(this._issue.id, $event.data).subscribe((json: any) => {
+      if (json.code == 1) {
+        $event.deferred.resolve();
+      }
+    });
+  }
 
   ngOnDestroy(): void {
 
   }
+
+  buildForm() {
+    this.form = this.fb.group({});
+  }
+
 }
 

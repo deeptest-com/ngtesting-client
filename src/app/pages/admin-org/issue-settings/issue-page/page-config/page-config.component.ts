@@ -124,6 +124,12 @@ export class IssuePageConfig implements OnInit, AfterViewInit {
     this.formErrors = [];
   }
 
+  allowDropFunction(elem: any): any {
+    console.log(elem);
+
+    return elem.code != 'title';
+  }
+
   setProp($event: any) {
     console.log('$event', $event);
 

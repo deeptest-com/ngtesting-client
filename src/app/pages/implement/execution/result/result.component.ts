@@ -39,9 +39,9 @@ export class ExecutionResult implements OnInit, AfterViewInit, OnDestroy {
   form: any;
   tab: string = 'info';
 
-  caseTypes: any[] = [];
-  casePriorities: any[] = [];
-  fields: any;
+  casePropMap: any = {};
+  customFields: any[] = [];
+
   next: boolean = true;
 
   user: any;
@@ -82,9 +82,9 @@ export class ExecutionResult implements OnInit, AfterViewInit, OnDestroy {
         return;
       }
 
-      this.caseTypes = CONSTANT.CASE_TYPES_FOR_PROJECT;
-      this.casePriorities = CONSTANT.CASE_PRIORITIES_FOR_PROJECT;
-      this.fields = CONSTANT.CUSTOM_FIELD_FOR_PROJECT;
+      console.log('111', CONSTANT.CASE_CUSTOM_FIELDS);
+      this.casePropMap = CONSTANT.CASE_PROPERTY_MAP;
+      this.customFields = CONSTANT.CASE_CUSTOM_FIELDS;
 
       if (testCase) {
         this.id = testCase.entityId;
@@ -151,7 +151,8 @@ export class ExecutionResult implements OnInit, AfterViewInit, OnDestroy {
       next = this._ztreeService.getNextNode(this.model.id);
     }
 
-    this._caseInTaskService.setResult(this.model.entityId, this.model.id, this.model.result, next ? next.entityId : null, status)
+    this._caseInTaskService.setResult(this.model.entityId, this.model.id, this.model.result,
+      next ? next.entityId : null, status)
         .subscribe((json: any) => {
       if (json.code == 1) {
         this.model.status = status;

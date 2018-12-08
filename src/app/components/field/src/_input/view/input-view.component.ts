@@ -1,8 +1,13 @@
-import { Input, Component, OnInit, OnChanges } from '@angular/core';
+import { Input, Component, OnInit, AfterViewInit } from '@angular/core';
 
-import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { Utils } from '../../../../../utils/utils';
+import { DateFormatPipe } from '../../../../../pipe/date';
+
+import * as _ from 'lodash';
+
+declare var jQuery;
 
 @Component({
   selector: 'input-view',
@@ -10,33 +15,22 @@ import { Utils } from '../../../../../utils/utils';
   styleUrls: ['./styles.scss'],
   providers: [],
 })
-export class InputViewComponent implements OnInit {
+export class InputViewComponent implements OnInit, AfterViewInit {
+  @Input() form: FormGroup;
+  @Input() validateMsg: any = {};
+
   @Input() elem: any = {};
-  _model: any = {};
+  @Input('model') model: any = {};
 
-  get model(): any {
-    return this._model;
-  }
-  @Input('model')
-  set model(value: any) {
-    this._model = value;
-
-    // if (this.elem.input == 'time') {
-    //   if (!this._model[this.elem.code]) {
-    //     this._model[this.elem.code] = Utils.timeStructFromStr('10:00:00');
-    //   } else {
-    //     this._model[this.elem.code] = Utils.timeStructFromStr(this._model[this.elem.code]);
-    //   }
-    // } else if (this.elem.input == 'date') {
-    //   this._model[this.elem.code] = this.ngbDateParserFormatter.parse(this._model[this.elem.code]);
-    // }
-  }
-
-  public constructor(private ngbDateParserFormatter: NgbDateParserFormatter) {
+  public constructor() {
 
   }
 
   public ngOnInit(): void {
+
+  }
+
+  ngAfterViewInit() {
 
   }
 

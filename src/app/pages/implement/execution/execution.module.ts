@@ -16,7 +16,7 @@ import { SlimLoadingBarModule } from '../../../components/ng2-loading-bar';
 import { ZtreeModule } from '../../../components/ztree';
 import { StepsTableModule } from '../../../components/steps-table';
 import { CustomFieldModule } from '../../../components/custom-field';
-import { FieldShowModule } from '../../../components/field-show';
+import { FieldModule } from '../../../components/field';
 import { CaseCommentsModule } from '../../../components/case-comments';
 
 import { RouteService } from '../../../service/route';
@@ -54,7 +54,7 @@ import { ExecutionResult } from './result/result.component';
     ZtreeModule,
     StepsTableModule,
     CustomFieldModule,
-    FieldShowModule,
+    FieldModule,
     CaseCommentsModule,
   ],
   declarations: [

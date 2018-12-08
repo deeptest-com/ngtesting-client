@@ -6,7 +6,7 @@
 
   <div class="col-sm-{{inputColNum}}">
     <input-edit [form]="form" [validateMsg]="validateMsg"
-                [model]="model" [elem]="elem" [options]="elem.options"></input-edit>
+                [model]="model" [elem]="elem" [options]="casePropMap[elem.colCode]"></input-edit>
   </div>
 
 </div>

@@ -1,0 +1,21 @@
+<div class="form-group row case-field-show">
+
+    <label *ngIf="!isEditing" class="text-label row col-form-label">
+      <input-view [model]="model" [elem]="elem"></input-view>
+      &nbsp;&nbsp;
+      <span *ngIf="!elem.readonly" (click)="edit($event)" class="smart-edit link"><i class="fa fa-pencil"></i></span>
+    </label>
+
+    <div *ngIf="isEditing" [class.full-line]="elem.fullLine" class="editing">
+      <div class="editing-input">
+        <input-edit [form]="form" [validateMsg]="validateMsg"
+                    [model]="model" [elem]="elem" [options]="casePropMap[elem.colCode]"></input-edit>
+      </div>
+      <label class="editing-label text-label col-form-label">
+        <span *ngIf="!form.valid" class="smart-edit"><i class="fa fa-check"></i></span>
+        <span *ngIf="form.valid" (click)="save($event)" class="smart-edit link"><i class="fa fa-check"></i></span>
+        <span (click)="cancel($event)" class="smart-edit"><i class="fa fa-times link"></i></span>
+      </label>
+    </div>
+
+</div>

@@ -1,0 +1,33 @@
+:host /deep/ {
+  .issue-field-show {
+    label.text-label {
+      text-align: left;
+      line-height: 25px;
+    }
+
+    .editing {
+      display: flex;
+      .editing-input {
+        flex: 1;
+        input.form-control {
+
+        }
+      }
+      .editing-label {
+        margin-left: 6px;
+        width: 50px;
+
+        .smart-edit {
+          display: inline-block;
+          width: 16px;
+        }
+      }
+      &.full-line .editing-label {
+        width: 200px;
+      }
+    }
+
+
+  }
+}
+
