@@ -20,7 +20,8 @@ export class InputViewComponent implements OnInit, AfterViewInit {
   @Input() validateMsg: any = {};
 
   @Input() elem: any = {};
-  @Input('model') model: any = {};
+  @Input() model: any = {};
+  @Input() propValMap: any = {};
 
   public constructor() {
 
@@ -28,6 +29,19 @@ export class InputViewComponent implements OnInit, AfterViewInit {
 
   public ngOnInit(): void {
 
+  }
+
+  getLabel() {
+    console.log('????', this.elem, this.model, this.propValMap);
+
+    const code = this.elem.colCode;
+    const val = this.model[code];
+
+    if ((this.elem.isBuildIn || this.elem.buildIn) && this.elem.input == 'dropdown') {
+      return this.propValMap[code][val];
+    }
+
+    return val;
   }
 
   ngAfterViewInit() {

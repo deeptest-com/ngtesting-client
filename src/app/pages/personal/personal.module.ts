@@ -9,7 +9,6 @@ import { NgbModalModule, NgbPaginationModule, NgbDropdownModule,
   NgbTabsetModule, NgbButtonsModule, NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { PictureUploaderModule } from '../../components/picture-uploader';
-import { FieldShowModule } from '../../components/field-show';
 import { PipeModule } from '../../pipe/pipe.module';
 
 import { RouteService } from '../../service/route';
@@ -35,7 +34,7 @@ import { ProfileEdit } from './profile/profile-edit';
 
     NgbModalModule, NgbPaginationModule, NgbDropdownModule,
     NgbTabsetModule, NgbButtonsModule, NgbCollapseModule,
-    PictureUploaderModule, FieldShowModule, PipeModule,
+    PictureUploaderModule, PipeModule,
   ],
   declarations: [
     Personal,

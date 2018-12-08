@@ -85,7 +85,7 @@ export class CaseTypeEdit implements OnInit, AfterViewInit {
 
     that.caseTypeService.save(that.model).subscribe((json: any) => {
       if (json.code == 1) {
-        CONSTANT.CASE_PROPERTY_MAP = json.casePropertyMap;
+        CONSTANT.CASE_PROPERTY_VAL_MAP = json.casePropertyValMap;
 
         that.formErrors = ['保存成功'];
         this.back();

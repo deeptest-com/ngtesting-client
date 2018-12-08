@@ -94,13 +94,13 @@
       <div class="form-group row">
         <label class="col-sm-3 col-form-label"><span>测试类型</span></label>
         <label class="col-sm-9 col-form-label text">
-          {{casePropertyMap['type'][model.type]}}
+          {{casePropMap['type'][model.type]}}
         </label>
       </div>
       <div class="form-group row">
         <label class="col-sm-3 col-form-label"><span>优先级</span></label>
         <label class="col-sm-9 col-form-label text">
-          {{casePropertyMap['priority'][model.priority]}}
+          {{casePropMap['priority'][model.priority]}}
         </label>
       </div>
       <div class="form-group row">
@@ -118,7 +118,7 @@
       </div>
 
       <ng-container *ngIf="model.id">
-        <div *ngFor="let field of fields; let i = index;" class="form-group row">
+        <div *ngFor="let field of customFields; let i = index;" class="form-group row">
           <label class="col-sm-3 col-form-label"><span>{{field.label}}</span></label>
           <label class="col-sm-9 col-form-label text">
             {{model[field]}}

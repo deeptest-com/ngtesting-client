@@ -39,7 +39,7 @@ export class ClientService {
           CONSTANT.SYS_PRIVILEGES = json.sysPrivileges;
           CONSTANT.MY_ORGS = json.myOrgs;
           CONSTANT.ORG_PRIVILEGES = json.orgPrivileges;
-          CONSTANT.CASE_PROPERTY_MAP = json.casePropertyMap;
+          CONSTANT.CASE_PROPERTY_VAL_MAP = json.casePropertyValMap;
 
           CONSTANT.RECENT_PROJECTS = json.recentProjects;
           CONSTANT.PRJ_PRIVILEGES = json.prjPrivileges;

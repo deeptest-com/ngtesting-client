@@ -1,6 +1,7 @@
 import { Input, Component, OnInit, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Deferred } from '../../../../../../utils/utils';
+import {CONSTANT} from "../../../../../../utils";
 
 @Component({
   selector: 'case-field-show',
@@ -22,10 +23,12 @@ export class CaseFieldShowComponent implements OnInit {
   isEditing: boolean = false;
   labelColNum: number = 4;
 
+  casePropValMap: any = {};
+
   _elemCode: any; // 系统字段
   @Input() set elemCode(val) {
-    this.elem = { colCode: val, fullLine: true };
-    if (['type', 'priority', 'status'].indexOf(val)) {
+    this.elem = { colCode: val, fullLine: true, isBuildIn: true };
+    if (['type', 'priority', 'status'].indexOf(val) > -1) {
       this.elem.input = 'dropdown';
     }
   }
@@ -36,6 +39,7 @@ export class CaseFieldShowComponent implements OnInit {
 
   public ngOnInit(): void {
     // console.log('ngOnInit', this.model, this.elem.colCode, this.temp);
+    this.casePropValMap = CONSTANT.CASE_PROPERTY_VAL_MAP;
   }
 
   edit () {

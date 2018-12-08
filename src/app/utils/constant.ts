@@ -26,7 +26,10 @@ export const CONSTANT: CONSTANT_INTERFACE = {
 
   CASE_CUSTOM_FIELDS: undefined,
   CASE_PROPERTY_MAP: undefined,
+  CASE_PROPERTY_VAL_MAP: undefined,
+
   ISU_PROPERTY_MAP: undefined,
+  ISU_PROPERTY_VAL_MAP: undefined,
 
   TOKEN_KEY: 'com.ngtesting.token',
   TOKEN_EXPIRE: 'com.ngtesting.expire',
@@ -88,7 +91,10 @@ export interface CONSTANT_INTERFACE {
 
   CASE_CUSTOM_FIELDS: any[];
   CASE_PROPERTY_MAP: any;
+  CASE_PROPERTY_VAL_MAP: any;
+
   ISU_PROPERTY_MAP: any;
+  ISU_PROPERTY_VAL_MAP: any;
 
   PRJ_PRIVILEGES: any;
 

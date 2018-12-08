@@ -29,14 +29,15 @@ export class CaseView implements OnInit, AfterViewInit, OnDestroy {
   form: any;
   tab: string = 'content';
 
-  casePropertyMap: any;
-  fields: any[] = [];
+  casePropMap: any;
+  customFields: any[] = [];
   user: any;
 
   constructor(private _state: GlobalState,
               private _caseService: CaseService, private _caseStepService: CaseStepService,
               private _caseCommentsService: CaseCommentsService) {
-    this.casePropertyMap = CONSTANT.CASE_PROPERTY_MAP;
+
+    this.casePropMap = CONSTANT.CASE_PROPERTY_MAP;
   }
   ngOnInit() {
     this.projectId = CONSTANT.CURR_PRJ_ID;
@@ -50,7 +51,8 @@ export class CaseView implements OnInit, AfterViewInit, OnDestroy {
         return;
       }
 
-      this.fields = CONSTANT.CUSTOM_FIELD_FOR_PROJECT;
+      this.casePropMap = CONSTANT.CASE_PROPERTY_MAP;
+      this.customFields = CONSTANT.CASE_CUSTOM_FIELDS;
 
       if (testCase) {
         this.id = testCase.id;

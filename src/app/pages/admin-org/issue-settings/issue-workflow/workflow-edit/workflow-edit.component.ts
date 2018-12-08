@@ -85,7 +85,6 @@ export class IssueWorkflowEdit implements OnInit, AfterViewInit {
   save() {
     this.issueWorkflowService.save(this.model, this.statuses).subscribe((json: any) => {
       if (json.code == 1) {
-        CONSTANT.CASE_PROPERTY_MAP = json.issuePropertyMap;
 
         this.formErrors = ['保存成功'];
         this.back();

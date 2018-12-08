@@ -86,8 +86,6 @@ export class IssueTypeEdit implements OnInit, AfterViewInit {
 
     that.issueTypeService.save(that.model).subscribe((json: any) => {
       if (json.code == 1) {
-        CONSTANT.CASE_PROPERTY_MAP = json.issuePropertyMap;
-
         that.formErrors = ['保存成功'];
         this.back();
       } else {

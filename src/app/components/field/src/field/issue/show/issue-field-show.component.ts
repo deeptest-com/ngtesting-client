@@ -1,6 +1,7 @@
 import { Input, Component, OnInit, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import {Deferred} from "../../../../../../utils/utils";
+import {CONSTANT} from "../../../../../../utils";
 
 @Component({
   selector: 'issue-field-show',
@@ -22,12 +23,16 @@ export class IssueFieldShowComponent implements OnInit {
   isEditing: boolean = false;
   labelColNum: number = 4;
 
+  isuPropValMap: any;
+
   public constructor() {
 
   }
 
   public ngOnInit(): void {
-    console.log('ngOnInit', this.model, this.elem.colCode, this.temp);
+    this.isuPropValMap = CONSTANT.ISU_PROPERTY_VAL_MAP;
+
+    console.log('ngOnInit', this.isuPropValMap);
   }
 
   edit () {

@@ -35,7 +35,7 @@ export class IssueView implements OnInit, AfterViewInit, OnDestroy {
   constructor(private _routeService: RouteService, private _route: ActivatedRoute, private _state: GlobalState,
               private fb: FormBuilder, private toastyService: ToastyService,
               private issueService: IssueService, private privilegeService: PrivilegeService) {
-    this.issuePropMap = CONSTANT.CASE_PROPERTY_MAP;
+    this.issuePropMap = CONSTANT.ISU_PROPERTY_MAP;
 
     this.canEdit = this.privilegeService.hasPrivilege('issue-update');
 
@@ -57,6 +57,7 @@ export class IssueView implements OnInit, AfterViewInit, OnDestroy {
       this.issue = json.data;
       this.page = json.page
       this.issuePropMap = json.issuePropMap;
+      CONSTANT.ISU_PROPERTY_VAL_MAP = json.issuePropValMap;
     });
   }
 

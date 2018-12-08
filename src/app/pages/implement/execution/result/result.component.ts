@@ -40,6 +40,7 @@ export class ExecutionResult implements OnInit, AfterViewInit, OnDestroy {
   tab: string = 'info';
 
   casePropMap: any = {};
+  casePropValMap: any = {};
   customFields: any[] = [];
 
   next: boolean = true;
@@ -82,7 +83,6 @@ export class ExecutionResult implements OnInit, AfterViewInit, OnDestroy {
         return;
       }
 
-      console.log('111', CONSTANT.CASE_CUSTOM_FIELDS);
       this.casePropMap = CONSTANT.CASE_PROPERTY_MAP;
       this.customFields = CONSTANT.CASE_CUSTOM_FIELDS;
 

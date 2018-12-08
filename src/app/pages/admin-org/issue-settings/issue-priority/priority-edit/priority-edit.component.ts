@@ -84,7 +84,6 @@ export class IssuePriorityEdit implements OnInit, AfterViewInit {
 
     that.issuePriorityService.save(that.model).subscribe((json: any) => {
       if (json.code == 1) {
-        CONSTANT.CASE_PROPERTY_MAP = json.issuePropertyMap;
 
         that.formErrors = ['保存成功'];
         this.back();
