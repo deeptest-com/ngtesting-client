@@ -27,7 +27,7 @@ export class CaseFieldShowComponent implements OnInit {
 
   _elemCode: any; // 系统字段
   @Input() set elemCode(val) {
-    this.elem = { colCode: val, fullLine: true, isBuildIn: true };
+    this.elem = { colCode: val, fullLine: true, buildIn: true };
     if (['type', 'priority', 'status'].indexOf(val) > -1) {
       this.elem.input = 'dropdown';
     }

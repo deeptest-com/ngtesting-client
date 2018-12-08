@@ -10,7 +10,7 @@ export class Field {
   format: string;
   isMulti: boolean;
   isGlobal: boolean;
-  isBuildIn: boolean;
+  buildIn: boolean;
 
   displayOrder: number;
 }

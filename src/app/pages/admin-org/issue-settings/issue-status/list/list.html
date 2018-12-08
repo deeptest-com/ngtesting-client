@@ -31,7 +31,7 @@
       <tr *ngFor="let item of models; let i = index;">
         <td>{{ item.label }}</td>
         <td>{{item.categoryName}}</td>
-        <td>{{item.isBuildIn | trueOrFalse}}</td>
+        <td>{{item.buildIn | trueOrFalse}}</td>
         <td>
           <span *ngIf="i == 0" class="ionic-icon link placeholder"></span>
           <span (click)="up(item)" *ngIf="i > 0" class="fa fa-arrow-up link"></span>

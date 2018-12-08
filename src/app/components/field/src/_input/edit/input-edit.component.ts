@@ -50,7 +50,7 @@ export class InputEditComponent implements OnInit, AfterViewInit {
 
     if (this.options) {
       const defaults: any[] = this.options.filter(
-        (option, index) => option.isDefault == true);
+        (option, index) => option.defaultVal == true);
       if (defaults.length > 0) {
         this._model[this.elem.colCode] = this.elem.buildIn ? defaults[0].id : defaults[0].value;
       }

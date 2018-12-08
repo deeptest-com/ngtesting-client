@@ -1,0 +1,24 @@
+<div [formGroup]="form" class="my-validate-form field-show">
+
+  <div *ngIf="status == 'view'" class="form-inline">
+      <field-show-label [label]="label"></field-show-label>
+      <field-show-value [model]="model" [prop]="prop" [valType]="type" [valFormat]="format"></field-show-value>
+      <a href="#" class="smart-edit" (click)="edit($event)"><i class="fa fa-pencil"></i></a>
+  </div>
+
+  <div *ngIf="status == 'edit'" class="form-inline edit-mode">
+    <field-show-label [label]="label"></field-show-label>
+          <span class="field-input-container">
+            <span>
+              <input type="text" [class.ng-invalid]="!form.valid" class="form-control" name="{{prop}}" formControlName="{{prop}}"
+                     (keydown.enter)="save($event)" [(ngModel)]="model[prop]" #{{prop}}>
+            </span>
+
+            <span *ngIf="!form.valid" class="smart-edit"><i class="fa fa-check"></i></span>
+            <a *ngIf="form.valid" href="#" class="smart-edit" (click)="save($event)"><i class="fa fa-check"></i></a>
+            <a href="#" class="smart-edit" (click)="cancel($event)"><i class="fa fa-times"></i></a>
+
+          </span>
+  </div>
+
+</div>

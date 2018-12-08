@@ -1,6 +1,5 @@
 import { Input, Component, OnInit, AfterViewInit } from '@angular/core';
 
-import { FlatpickrOptions } from 'ng2-flatpickr';
 // import { Mandarin } from 'flatpickr/dist/l10n/zh';
 
 import { Utils } from '../../../../../utils/utils';
@@ -26,7 +25,7 @@ export class InputDesignComponent implements OnInit, AfterViewInit {
   public ngOnInit(): void {
     if (this.options) {
       const defaults: any[] = this.options.filter(
-        (option, index) => option.isDefault == true);
+        (option, index) => option.defaultVal == true);
       if (defaults.length > 0) {
         this._model[this.elem.code] = defaults[0].id;
       }

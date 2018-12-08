@@ -11,6 +11,8 @@ import { NgbModalModule, NgbPaginationModule, NgbDropdownModule,
 import { PictureUploaderModule } from '../../components/picture-uploader';
 import { PipeModule } from '../../pipe/pipe.module';
 
+import { FieldShowModule } from '../../components/field/src/field/simple';
+
 import { RouteService } from '../../service/route';
 import { RequestService } from '../../service/request';
 import { DatetimePickerService } from '../../service/datetime-picker';
@@ -34,7 +36,7 @@ import { ProfileEdit } from './profile/profile-edit';
 
     NgbModalModule, NgbPaginationModule, NgbDropdownModule,
     NgbTabsetModule, NgbButtonsModule, NgbCollapseModule,
-    PictureUploaderModule, PipeModule,
+    PictureUploaderModule, PipeModule, FieldShowModule,
   ],
   declarations: [
     Personal,

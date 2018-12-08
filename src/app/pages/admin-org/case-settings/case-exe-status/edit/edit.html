@@ -26,17 +26,17 @@
     <div class="form-group row just-label">
       <label class="col-sm-2 col-form-label"><span>是否內置</span></label>
       <label class="col-sm-10 col-form-label left">
-        {{model.isBuildIn | trueOrFalse}}
+        {{model.buildIn | trueOrFalse}}
       </label>
     </div>
 
-    <div *ngIf="model.isBuildIn" class="form-group row just-label">
+    <div *ngIf="model.buildIn" class="form-group row just-label">
       <label class="col-sm-2 col-form-label"><span>终极状态</span></label>
       <label class="col-sm-10 col-form-label left">
         {{model.isFinal | trueOrFalse}}
       </label>
     </div>
-    <div *ngIf="!model.isBuildIn" class="form-group row">
+    <div *ngIf="!model.buildIn" class="form-group row">
       <div class="offset-sm-2 col-sm-10">
         <div class="form-check">
           <label class="form-check-label">
@@ -48,7 +48,7 @@
       </div>
     </div>
 
-<!--      <div *ngIf="!model.isBuildIn" class="form-group row">
+<!--      <div *ngIf="!model.buildIn" class="form-group row">
         <div class="offset-sm-2 col-sm-10">
           <div class="form-check">
             <label class="form-check-label">
@@ -67,7 +67,7 @@
         &nbsp;
         <button [routerLink]="['/pages/org-admin/case-settings/case-exe-status/list']" type="button" class="btn btn-default">取消</button>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <button (click)="showModal()" *ngIf="model.id || model.isBuildIn" type="button" class="btn btn-danger">删除</button>
+        <button (click)="showModal()" *ngIf="model.id || model.buildIn" type="button" class="btn btn-danger">删除</button>
       </div>
     </div>
 
