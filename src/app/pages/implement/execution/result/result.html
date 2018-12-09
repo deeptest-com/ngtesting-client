@@ -119,9 +119,7 @@
               <tr>
                 <td style="width: 25%">
                   <div class="label">状态</div>
-                  <case-field-show [model]="model" [elemCode]="'status'" [casePropMap]="casePropMap"
-                                   (onSave)="saveField($event)" [form]="form">
-                  </case-field-show>
+                  {{model.status | caseExeStatus}}
                 </td>
 
                 <td style="width: 25%">

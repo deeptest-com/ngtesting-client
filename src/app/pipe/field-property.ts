@@ -6,7 +6,7 @@ import { CONSTANT } from '../utils/constant';
 export class FieldApplyToPipe implements PipeTransform {
   map: any = CONSTANT.FieldApplyTo;
 
-  transform(s: string) : string {
+  transform(s: string): string {
     return this.map[s];
   }
 }
@@ -15,7 +15,7 @@ export class FieldApplyToPipe implements PipeTransform {
 export class FieldFormatPipe implements PipeTransform {
   map: any = CONSTANT.FieldFormat;
 
-  transform(s: string) : string {
+  transform(s: string): string {
     if (!s) {
       return 'N/A';
     }
@@ -27,7 +27,7 @@ export class FieldFormatPipe implements PipeTransform {
 export class TrueOrFalsePipe implements PipeTransform {
   map: any = CONSTANT.TrueOrFalse;
 
-  transform(b: boolean) : string {
+  transform(b: boolean): string {
     if (!b) {
       return '否';
     }
@@ -40,7 +40,16 @@ export class TrueOrFalsePipe implements PipeTransform {
 export class DisableOrNotPipe implements PipeTransform {
   map: any = CONSTANT.DisableOrNot;
 
-  transform(disabled: boolean) : string {
+  transform(disabled: boolean): string {
+    return this.map['' + disabled];
+  }
+}
+
+@Pipe({ name: 'caseExeStatus' })
+export class CaseExeStatusPipe implements PipeTransform {
+  map: any = CONSTANT.CaseExeStatus;
+
+  transform(disabled: boolean): string {
     return this.map['' + disabled];
   }
 }

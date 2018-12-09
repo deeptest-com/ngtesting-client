@@ -40,6 +40,7 @@ export const CONSTANT: CONSTANT_INTERFACE = {
 
   TrueOrFalse: { 'true': '是', 'false': '否' },
   DisableOrNot: { 'true': '禁用', 'false': '启动' },
+  CaseExeStatus: { 'untest': '未执行', 'pass': '通过', 'fail': '失败', block: '阻塞' },
 
   FieldApplyTo: { 'test_case': '测试用例', 'test_result': '测试结果', 'issue': '问题' },
   FieldFormat: { 'rich_text': '富文本', 'plain_text': '纯文本' },
@@ -107,6 +108,7 @@ export interface CONSTANT_INTERFACE {
 
   TrueOrFalse: any;
   DisableOrNot: any;
+  CaseExeStatus: any;
 
   FieldApplyTo: any;
   FieldFormat: any;
