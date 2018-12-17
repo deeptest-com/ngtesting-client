@@ -44,8 +44,11 @@ export class TqlConditionComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): any {
+    console.log('this.model', this.model);
     if (this.model.input === 'dropdown') {
       this.selectOptions = this.issuePropMap[this.model.code];
+    } else {
+      this.keywords = this._checkedItems['keywords'];
     }
     this.computerSelected();
   }
@@ -55,20 +58,22 @@ export class TqlConditionComponent implements OnInit, AfterViewInit {
   }
 
   keywordsChange() {
-    this.conditionChangeEvent.emit({ code: this.model.code, keywords: this.keywords });
-    this._hasChecked();
+    if (this.model.input != 'dropdown') {
+      this.conditionChangeEvent.emit({ code: this.model.code, keywords: this.keywords });
+      this._apply();
+    }
   }
 
   selectItem(item): any {
     item.checked = !item.checked;
 
     this.conditionChangeEvent.emit({ code: this.model.code, options: this.selectOptions });
-    this._hasChecked();
+    this._apply();
   }
 
-  _hasChecked() {
+  _apply() {
     if (this.model.input === 'dropdown') {
-      for(let i = 0; i < this.selectOptions.length; i++) {
+      for (let i = 0; i < this.selectOptions.length; i++) {
         if (this.selectOptions[i].checked) {
           this.hasChecked = true;
           return;
@@ -83,10 +88,12 @@ export class TqlConditionComponent implements OnInit, AfterViewInit {
   }
 
   computerSelected() {
-    _.forEach(this.selectOptions, (item: any, index: number) => {
-      item.checked = this.checkedItems ? this.checkedItems[item.id] : false;
-    });
-    this._hasChecked();
+    if (this.model.input === 'dropdown') {
+      _.forEach(this.selectOptions, (item: any, index: number) => {
+        item.checked = this.checkedItems ? this.checkedItems[item.id] : false;
+      });
+    }
+    this._apply();
   }
 
 }

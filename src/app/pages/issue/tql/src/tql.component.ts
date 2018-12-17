@@ -20,11 +20,6 @@ export class Tql implements OnInit, AfterViewInit {
   @Output() public searchEvent: EventEmitter<any> = new EventEmitter();
   @Output() public favoritesEvent: EventEmitter<any> = new EventEmitter();
 
-  projects: any[] = [
-    { id: 1, name: 'ngtesting-web' },
-    { id: 2, name: 'ngtesting-client' },
-    { id: 3, name: 'ngtesting-mindmap' }];
-
   keywords: string;
   @Input() filters: any[];
   @Input() issuePropMap: any = {};

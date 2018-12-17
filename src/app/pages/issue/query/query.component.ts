@@ -152,9 +152,7 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
   }
 
   search(data: any) {
-    console.log('--------', data);
-
-    this.loadData(false);
+    this.goto();
   }
 
   changeColumns() {

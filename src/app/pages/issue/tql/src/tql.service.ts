@@ -38,12 +38,17 @@ export class TqlService {
 
     rule.rules.forEach((r: any) => {
       const selecteds = {};
-      if (r.operator === 'equal') {
-        selecteds[r.value] = true;
-      } else if (r.operator === 'in') {
-        r.value.forEach((val: string) => {
-          selecteds[val] = true;
-        });
+
+      if (r.input != 'dropdown') {
+        selecteds['keywords'] = r.value;
+      } else {
+        if (r.operator === 'equal') {
+          selecteds[r.value] = true;
+        } else if (r.operator === 'in') {
+          r.value.forEach((val: string) => {
+            selecteds[val] = true;
+          });
+        }
       }
       ret[r.id] = selecteds;
     });
