@@ -55,10 +55,21 @@ export class IssueView implements OnInit, AfterViewInit, OnDestroy {
   loadData() {
     this.issueService.view(this.id).subscribe((json: any) => {
       this.issue = json.data;
-      this.page = json.page
+      this.page = json.page;
       this.issuePropMap = json.issuePropMap;
       CONSTANT.ISU_PROPERTY_VAL_MAP = json.issuePropValMap;
     });
+  }
+
+  optResult($event) {
+    console.log('$event', $event);
+    if ($event.act == 'update') {
+      this.loadData();
+    } else if ($event.act == 'delete') {
+      this.back();
+    } else if ($event.act == 'watch') {
+
+    }
   }
 
   back() {

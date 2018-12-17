@@ -1,0 +1,18 @@
+.issue-edit {
+  margin: 5px;
+
+  form {
+    width: 100%;
+  }
+  .elements {
+    padding-top: 15px;
+    .element {
+      float: left;
+      width: 50%;
+      &.full-line {
+        width: 100%;
+      }
+    }
+  }
+
+}

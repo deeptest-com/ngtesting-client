@@ -33,6 +33,12 @@
           <button (click)="save()" type="button" class="btn btn-primary" [disabled]="!form.valid">保存</button>
           &nbsp;
           <button (click)="back()" type="button" class="btn btn-default">取消</button>
+          &nbsp;&nbsp;
+          <label class="col-form-label form-check-label">
+            <input [(ngModel)]="next" formControlName="next" name="next"
+                   class="form-check-input form-control-lg" type="checkbox" value="true">
+            创建另一个
+          </label>
         </div>
       </div>
 

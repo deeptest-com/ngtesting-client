@@ -48,7 +48,7 @@ export class InputEditComponent implements OnInit, AfterViewInit {
   public ngOnInit(): void {
     console.log('???this.elem', this.elem);
 
-    if (this.options) {
+    if (!this._model[this.elem.colCode] && this.options) {
       const defaults: any[] = this.options.filter(
         (option, index) => option.defaultVal == true);
       if (defaults.length > 0) {

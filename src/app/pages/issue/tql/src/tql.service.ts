@@ -51,13 +51,17 @@ export class TqlService {
   }
 
   buildRule(rule: any, filters: any[], condition: any): any {
-    const filter = filters.filter((elem, index) => elem.code == condition.code)[0];
-    const newRule = this.newBasicRule(filter, condition.options);
+    let filter = filters.filter((elem, index) => elem.code == condition.code)[0];
+
+    if (filter == null) {
+      filter = condition;
+    }
+
+    const newRule = this.newBasicRule(filter, condition);
     console.log('filter', filter, newRule);
 
     let found = false;
     for (const idx in rule.rules) {
-      console.log('r=', rule.rules[idx], condition);
       if (rule.rules[idx].id == condition.code) {
         if (newRule) {
           rule.rules[idx] = newRule; // 替换
@@ -76,10 +80,27 @@ export class TqlService {
     return rule;
   }
 
-  newBasicRule(filter: any, options: any[]): any {
-    const checkedVals = [];
+  newBasicRule(filter: any, condition: any): any {
+    if (filter.input != 'dropdown') {
+      if (!condition.keywords) {
+        return null;
+      } else {
+        return {
+          id: filter.code,
+          field: filter.code,
+          group: false,
+          rules: [],
 
-    options.forEach((option: any) => {
+          input: filter.input,
+          operator: 'contains',
+          type: filter.type,
+          value: condition.keywords,
+        };
+      }
+    }
+
+    const checkedVals = [];
+    condition.options.forEach((option: any) => {
       if (option.checked) {
         checkedVals.push(option.id);
       }

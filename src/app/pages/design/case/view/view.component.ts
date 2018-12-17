@@ -1,23 +1,22 @@
-import {Component, ViewEncapsulation, NgModule, Pipe, OnInit, AfterViewInit, OnDestroy, ViewChild} from '@angular/core';
+import { Component, ViewEncapsulation, NgModule, Pipe, OnInit, AfterViewInit, OnDestroy, ViewChild } from '@angular/core';
 
-import {GlobalState} from '../../../../global.state';
+import { GlobalState } from '../../../../global.state';
 
 import { CONSTANT } from '../../../../utils/constant';
 import { Utils } from '../../../../utils/utils';
 import { CaseService } from '../../../../service/client/case';
 import { CaseStepService } from '../../../../service/client/case-step';
-import { CaseCommentsService } from '../../../../service/client/case-comments';
 
 declare var jQuery;
 
 @Component({
   selector: 'case-view',
   encapsulation: ViewEncapsulation.None,
-  styleUrls: ['./view.scss', '../../../../components/case-comments/comment-edit/src/styles.scss'],
-  templateUrl: './view.html'
+  styleUrls: ['./view.scss', '../../../../components/comments/comment-edit/src/styles.scss'],
+  templateUrl: './view.html',
 })
 export class CaseView implements OnInit, AfterViewInit, OnDestroy {
-  eventCode:string = 'CaseView';
+  eventCode: string = 'CaseView';
 
   projectId: number;
   id: number;
@@ -34,8 +33,7 @@ export class CaseView implements OnInit, AfterViewInit, OnDestroy {
   user: any;
 
   constructor(private _state: GlobalState,
-              private _caseService: CaseService, private _caseStepService: CaseStepService,
-              private _caseCommentsService: CaseCommentsService) {
+              private _caseService: CaseService) {
 
     this.casePropMap = CONSTANT.CASE_PROPERTY_MAP;
   }
@@ -44,10 +42,10 @@ export class CaseView implements OnInit, AfterViewInit, OnDestroy {
     this.user = CONSTANT.PROFILE;
 
     this._state.subscribe(CONSTANT.EVENT_CASE_EDIT, this.eventCode, (data: any) => {
-      let testCase = data.node;
+      const testCase = data.node;
 
       if (!testCase || testCase.isParent) {
-        this.model = {childrenCount: data.childrenCount};
+        this.model = { childrenCount: data.childrenCount };
         return;
       }
 
@@ -71,7 +69,7 @@ export class CaseView implements OnInit, AfterViewInit, OnDestroy {
         opt: {
           title: '操作',
           editor: {
-            type: 'textarea'
+            type: 'textarea',
           },
         },
         expect: {
@@ -79,14 +77,14 @@ export class CaseView implements OnInit, AfterViewInit, OnDestroy {
           editor: {
             type: 'textarea',
           },
-        }
+        },
       },
     };
   }
   ngAfterViewInit() {}
 
   loadData() {
-    this._caseService.get(this.id).subscribe((json:any) => {
+    this._caseService.get(this.id).subscribe((json: any) => {
       this.model = json.data;
     });
   }
@@ -95,7 +93,7 @@ export class CaseView implements OnInit, AfterViewInit, OnDestroy {
     this.tab = event.nextId;
   }
   changeContentType(contentType: string) {
-    this._caseService.changeContentType(contentType, this.model.id).subscribe((json:any) => {
+    this._caseService.changeContentType(contentType, this.model.id).subscribe((json: any) => {
       if (json.code == 1) {
         this.model.contentType = contentType;
       }

@@ -1,0 +1,31 @@
+.issue-page {
+  margin: 15px;
+
+  .buttons {
+    .btn-group {
+      margin-right: 6px;
+      button {
+        margin: 0 3px;
+        padding: 4px 6px;
+        i {
+          margin-right: 5px;
+          width: 13px;
+        }
+      }
+    }
+  }
+
+  form {
+    width: 100%;
+  }
+  .elements {
+    padding-top: 15px;
+    .element {
+      float: left;
+      width: 50%;
+      &.full-line {
+        width: 100%;
+      }
+    }
+  }
+}

@@ -47,17 +47,15 @@ export class Tql implements OnInit, AfterViewInit {
 
   }
 
-
-  selectItem(data: any) {
+  conditionChange(data: any) {
     this.queryChanged.emit(data);
   }
-  selectCondition($event: any) {
-    console.log('---selectCondition ', $event);
-    // 此处处理
+  keywordsChange() {
+    this.queryChanged.emit({ code: 'title', input: 'text', type: 'string', keywords: this.keywords });
   }
 
-  search($event) {
-    this.searchEvent.emit({});
+  search() {
+    this.searchEvent.emit();
   }
 
   addToFavorites() {

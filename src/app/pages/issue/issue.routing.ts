@@ -4,7 +4,6 @@ import { Issue } from './issue.component';
 import { IssueQuery } from './query/query.component';
 
 import { IssueCreate } from './create/create.component';
-import { IssueEdit } from './edit/edit.component';
 import { IssueView } from './view/view.component';
 
 // noinspection TypeScriptValidateTypes
@@ -21,7 +20,6 @@ const routes: Routes = [
         component: IssueQuery,
       },
       { path: 'create', component: IssueCreate },
-      { path: ':id/edit', component: IssueEdit },
       { path: ':id/view', component: IssueView },
     ],
   },

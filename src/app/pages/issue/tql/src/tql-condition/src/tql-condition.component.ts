@@ -32,7 +32,7 @@ export class TqlConditionComponent implements OnInit, AfterViewInit {
 
   @Input() issuePropMap: any = {};
 
-  @Output() selected = new EventEmitter<any>();
+  @Output() conditionChangeEvent = new EventEmitter<any>();
 
   keywords: string = '';
   selectOptions: any[] = [];
@@ -44,31 +44,42 @@ export class TqlConditionComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): any {
-    this.selectOptions = this.issuePropMap[this.model.code];
+    if (this.model.input === 'dropdown') {
+      this.selectOptions = this.issuePropMap[this.model.code];
+    }
     this.computerSelected();
   }
+
   ngAfterViewInit() {
 
   }
 
-  clickMenu($event): any {
-    $event.stopPropagation();
+  keywordsChange() {
+    this.conditionChangeEvent.emit({ code: this.model.code, keywords: this.keywords });
+    this._hasChecked();
   }
+
   selectItem(item): any {
     item.checked = !item.checked;
 
-    this.selected.emit({ code: this.model.code, options: this.selectOptions });
+    this.conditionChangeEvent.emit({ code: this.model.code, options: this.selectOptions });
     this._hasChecked();
   }
 
   _hasChecked() {
-    for(let i = 0; i < this.selectOptions.length; i++) {
-      if (this.selectOptions[i].checked) {
-        this.hasChecked = true;
-        return;
+    if (this.model.input === 'dropdown') {
+      for(let i = 0; i < this.selectOptions.length; i++) {
+        if (this.selectOptions[i].checked) {
+          this.hasChecked = true;
+          return;
+        }
       }
+      this.hasChecked = false;
+    } else {
+      this.hasChecked = this.keywords != null && this.keywords != '';
     }
-    this.hasChecked = false;
+
+    console.log('this.model.input', this.model.input);
   }
 
   computerSelected() {
@@ -76,7 +87,6 @@ export class TqlConditionComponent implements OnInit, AfterViewInit {
       item.checked = this.checkedItems ? this.checkedItems[item.id] : false;
     });
     this._hasChecked();
-    console.log('!!!!!!!!', this.selectOptions, this.checkedItems);
   }
 
 }

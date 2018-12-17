@@ -22,19 +22,23 @@ import { PageInfoModule } from '../../components/page-info';
 import { TqlModule } from './tql';
 
 import { FieldModule } from '../../components/field';
+import { IssueCompModule } from '../../components/issue';
 
 import { RouteService } from '../../service/route';
 import { RequestService } from '../../service/request';
 import { DatetimePickerService } from '../../service/datetime-picker';
 
+// import { CommentsService } from '../../service/client/comments';
 import { ClientService } from '../../service/client/client';
 import { IssueQueryService } from './query/query.service';
 import { IssueService } from '../../service/client/issue';
+import { IssueOptService } from '../../service/client/issue-opt';
+import { IssueTagService } from '../../service/client/issue-tag';
+import { IssueLinkService } from '../../service/client/issue-link';
 import { PrivilegeService } from '../../service/privilege';
 
 import { Issue } from './issue.component';
 import { IssueQuery } from './query/query.component';
-import { IssuePage } from './issue-page/issue-page.component';
 
 import { IssueTable } from './query/result-table/table.component';
 import { ItemProp } from './query/result-table/item-prop';
@@ -44,7 +48,6 @@ import { TableColumnSelectionModule } from './query/table-column-selection';
 import { IssueOptModule } from './query/issue-opt';
 
 import { IssueCreate } from './create/create.component';
-import { IssueEdit } from './edit/edit.component';
 import { IssueView } from './view/view.component';
 
 @NgModule({
@@ -69,12 +72,12 @@ import { IssueView } from './view/view.component';
     IssueOptModule,
     TableColumnSelectionModule,
     FieldModule,
+    IssueCompModule,
   ],
   declarations: [
     Issue,
-    IssueQuery, IssuePage, IssueTable, ItemProp, IssueBrowse,
+    IssueQuery, IssueTable, ItemProp, IssueBrowse,
     IssueCreate,
-    IssueEdit,
     IssueView,
   ],
   providers: [
@@ -82,7 +85,7 @@ import { IssueView } from './view/view.component';
     RequestService,
     DatetimePickerService,
     ClientService,
-    IssueService, IssueQueryService,
+    IssueQueryService, IssueService, IssueOptService, IssueTagService, IssueLinkService,
     PrivilegeService,
     SortableContainer,
   ],

@@ -5,12 +5,12 @@
 
       <button class="btn btn-default dropdown" id="conditionDropdownMenu" ngbDropdownToggle>{{model.label}}</button>
 
-      <div (click)="clickMenu($event)" class="dropdown-menu" aria-labelledby="conditionDropdownMenu" ngbDropdownMenu>
+      <div class="dropdown-menu" aria-labelledby="conditionDropdownMenu" ngbDropdownMenu>
         <button *ngIf="search" class="dropdown-item">
-          <input [(ngModel)]="keywords" type="search"
+          <input [(ngModel)]="keywords" (change)="keywordsChange()" type="search"
                  class="keywords form-control form-control-sm" name="keywords"
-                 placeholder="{{model.input==='dropdown'?'过滤':''}}">
-          <i class="fa fa-search"></i>
+                 placeholder="{{model.input==='dropdown'?'过滤':'关键字'}}">
+          <i *ngIf="model.input=='dropdown'" class="fa fa-search"></i>
         </button>
 
         <ng-container *ngIf="model.input=='dropdown'">

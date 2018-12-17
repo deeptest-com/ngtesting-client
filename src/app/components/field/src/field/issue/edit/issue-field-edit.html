@@ -1,6 +1,7 @@
 <div class="form-group row issue-field-edit">
 
-  <label class="col-sm-{{getCol()}} col-form-label">
+  <label [class.required]="elem.required"
+         [ngClass]="[elem.required?'required':'', 'col-sm-'+getCol(), 'col-sm', 'col-form-label']">
       <label-show [elem]="elem"></label-show>
   </label>
 

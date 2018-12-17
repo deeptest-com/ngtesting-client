@@ -27,7 +27,8 @@ export class IssueBrowse implements OnInit, AfterViewInit, OnDestroy, OnChanges 
   @Output() dealWithIssueEvent = new EventEmitter<any>();
 
   page: any = {};
-  issue: any;
+  issue: any = {};
+  issuePropMap: any = {};
 
   constructor(private _state: GlobalState, private issueService: IssueService,
               @Inject(ElementRef) public element: ElementRef, @Inject(Renderer2) private renderer: Renderer2) {
@@ -51,6 +52,9 @@ export class IssueBrowse implements OnInit, AfterViewInit, OnDestroy, OnChanges 
   viewIssue(item): any {
     this.issueService.view(item.id).subscribe((json: any) => {
       this.issue = json.data;
+      this.page = json.page;
+      this.issuePropMap = json.issuePropMap;
+      CONSTANT.ISU_PROPERTY_VAL_MAP = json.issuePropValMap;
     });
   }
 

@@ -50,8 +50,8 @@ export const CONSTANT: CONSTANT_INTERFACE = {
 
   EVENT_LOADING_COMPLETE: 'loading.complete',
   // EVENT_PROPERTY_STATUS: 'property.status',
-  EVENT_COMMENTS_EDIT: 'comments.edit',
-  EVENT_COMMENTS_SAVE: 'comments.save',
+  // EVENT_COMMENTS_EDIT: 'comments.edit',
+  // EVENT_COMMENTS_SAVE: 'comments.save',
 
   EVENT_CASE_EDIT: 'case.edit',
   EVENT_CASE_UPDATE: 'case.update',
@@ -118,8 +118,8 @@ export interface CONSTANT_INTERFACE {
 
   EVENT_LOADING_COMPLETE: string;
   // EVENT_PROPERTY_STATUS: string;
-  EVENT_COMMENTS_EDIT: string;
-  EVENT_COMMENTS_SAVE: string;
+  // EVENT_COMMENTS_EDIT: string;
+  // EVENT_COMMENTS_SAVE: string;
 
   EVENT_CASE_EDIT: string;
   EVENT_CASE_UPDATE: string;

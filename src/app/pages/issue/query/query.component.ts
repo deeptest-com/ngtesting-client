@@ -106,11 +106,8 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
 
   }
 
-  queryChanged(data): void {
-    this.rule = this._tqlService.buildRule(this.rule, this.filters, data);
-    console.log('---queryChange ', this.rule);
-
-    this.goto();
+  queryChanged(condition): void {
+    this.rule = this._tqlService.buildRule(this.rule, this.filters, condition);
   }
 
   pageChange(event: any): void {
@@ -155,6 +152,8 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
   }
 
   search(data: any) {
+    console.log('--------', data);
+
     this.loadData(false);
   }
 

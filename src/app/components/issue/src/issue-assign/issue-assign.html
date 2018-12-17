@@ -1,0 +1,63 @@
+<div class="issue-assign container-fluid">
+
+  <div class="row">
+    <div class="list-toolbar col-xl-12">
+      <div class="title">
+        <span>编辑问题</span>
+      </div>
+
+      <div class="filter">
+
+      </div>
+
+      <div class="buttons">
+        <button (click)="cancel()" type="button" class="btn btn-secondary btn-with-icon btn-sm">
+          <i class="fa fa-plus-circle"></i>返回
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <form [formGroup]="form" class="my-validate-form">
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">经办人</label>
+        <div class="col-sm-10">
+          <select [(ngModel)]="issue.assigneeId" class="form-control" name="assigneeId" formControlName="assigneeId">
+            <option *ngFor="let item of users" value="{{item.id}}">{{item.label}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">注释</label>
+        <div class="col-sm-10">
+          <textarea [(ngModel)]="assignComments" name="assignComments" formControlName="assignComments"
+                    maxlength="1000" type="text" class="form-control" #comments></textarea>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+          <button (click)="assign()" type="button" class="btn btn-primary">保存</button>
+          &nbsp;
+          <button (click)="cancel()" type="button" class="btn btn-default">取消</button>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-10 offset-2">
+          <div class="validate-errors">
+            <div class="validate-error" *ngFor="let msg of formErrors">
+              <div>{{ msg }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </form>
+
+  </div>
+
+</div>

@@ -36,8 +36,10 @@ export class IssueCreate implements OnInit, AfterViewInit, OnDestroy {
 
   page: any = {};
 
-  form: any;
+  form: FormGroup;
   validateMsg: any = {};
+
+  next: boolean = false;
 
   constructor(private _routeService: RouteService, private _state: GlobalState, private _route: ActivatedRoute,
               private fb: FormBuilder, private toastyService: ToastyService,
@@ -70,9 +72,13 @@ export class IssueCreate implements OnInit, AfterViewInit, OnDestroy {
     const data = _.clone(this.issue);
     this.issueService.save(data, this.page.id).subscribe((json: any) => {
       if (json.code == 1) {
-        const url = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + CONSTANT.CURR_PRJ_ID + '/issue/' +
-          json.id + '/edit';
-        this._routeService.navTo(url);
+        if (this.next) {
+          this.form.markAsPristine();
+          this.next = true;
+          this.loadData();
+        } else {
+          this.issueService.gotoView(json.id);
+        }
       }
     });
   }
@@ -85,7 +91,7 @@ export class IssueCreate implements OnInit, AfterViewInit, OnDestroy {
   }
 
   buildForm() {
-    this.form = this.fb.group({});
+    this.form = this.fb.group({ next: [] });
 
     this.form.valueChanges.debounceTime(CONSTANT.DebounceTime).subscribe(data => this.onValueChanged(data));
     this.onValueChanged();

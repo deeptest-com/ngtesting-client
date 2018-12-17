@@ -4,14 +4,14 @@ import { RequestService } from '../request';
 import * as _ from 'lodash';
 
 @Injectable()
-export class CaseCommentsService {
+export class CommentsService {
   constructor(private _reqService: RequestService) {
   }
 
-  _apiBase = 'client/case_comments/';
+  _apiBase = 'client/comments/';
 
-  save(caseId: number, comment: string) {
-    _.merge(comment, { caseId: caseId });
+  save(modelId: number, modelType: string, comment: string) {
+    _.merge(comment, { modelId: modelId, modelType: modelType });
     return this._reqService.post(this._apiBase + 'save', comment);
   }
   remove(id: number) {

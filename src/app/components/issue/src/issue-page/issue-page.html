@@ -1,0 +1,124 @@
+<div *ngIf="issue.id" class="issue-page">
+  <div class="buttons form-inline">
+    <div class="btn-group">
+      <button (click)="edit()" type="button" class="btn btn-default btn-with-icon btn-sm">
+        <i class="fa fa-pencil"></i>编辑
+      </button>
+      <button (click)="assign()" type="button" class="btn btn-default btn-with-icon btn-sm">
+        <i class="fa fa-user-o"></i>分配
+      </button>
+
+      <div ngbDropdown #projectDropdown="ngbDropdown" [autoClose]="'outside'" class="btn-group">
+        <button class="btn btn-default dropdown" id="conditionDropdownMenu" ngbDropdownToggle>更多</button>
+        <div class="dropdown-menu" aria-labelledby="conditionDropdownMenu" ngbDropdownMenu>
+          <button (click)="tag()" class="dropdown-item list-item">
+            <i class="fa fa-tag"></i><a>标签</a>
+          </button>
+          <button (click)="link()" class="dropdown-item list-item">
+            <i class="fa fa-link"></i><a>链接</a>
+          </button>
+<!--          <button (click)="selectItem()" class="dropdown-item list-item">
+            <i class="fa fa-indent"></i><a>移动</a>
+          </button>
+          <button (click)="selectItem()" class="dropdown-item list-item">
+            <i class="fa fa-copy"></i><a>复制</a>
+          </button>-->
+          <button (click)="showDeleteModal()" class="dropdown-item list-item">
+            <i class="fa fa-copy"></i><a>删除</a>
+          </button>
+
+          <li class="dropdown-divider"></li>
+
+          <button (click)="watch()" class="dropdown-item list-item">
+            <a *ngIf="issue.watched">
+              <i class="fa fa-star"></i><span>取消关注</span>
+            </a>
+            <a *ngIf="!issue.watched">
+              <i class="fa fa-star-o"></i><span>关注</span>
+            </a>
+          </button>
+
+          <button (click)="watchList()" class="dropdown-item list-item">
+            <a>管理关注列表</a>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="btn-group">
+      <button (click)="search($event)" type="button" class="btn btn-default btn-with-icon btn-sm">
+        <i class="fa fa-search"></i>待办
+      </button>
+      <button (click)="search($event)" type="button" class="btn btn-default btn-with-icon btn-sm">
+        <i class="fa fa-search"></i>处理中
+      </button>
+      <button (click)="search($event)" type="button" class="btn btn-default btn-with-icon btn-sm">
+        <i class="fa fa-search"></i>完成
+      </button>
+    </div>
+  </div>
+
+  <form [formGroup]="form" class="my-validate-form">
+    <div class="form-group row elements">
+      <div *ngFor="let elem of page.elements; let i = index;" [class.full-line]="elem.fullLine" class="element">
+        <issue-field-show [model]="issue" [elem]="elem" [issuePropMap]="issuePropMap"
+                          (onSave)="saveField($event)" [form]="form"></issue-field-show>
+      </div>
+    </div>
+  </form>
+
+  <div>
+    <div class="tabs-container light">
+      <div class="tabs">
+        <ngb-tabset  (tabChange)="tabChange($event)">
+          <ngb-tab id="comments">
+            <ng-template ngbTabTitle>备注</ng-template>
+            <ng-template ngbTabContent></ng-template>
+          </ngb-tab>
+          <ngb-tab id="history">
+            <ng-template ngbTabTitle>历史</ng-template>
+            <ng-template ngbTabContent></ng-template>
+          </ngb-tab>
+        </ngb-tabset>
+      </div>
+    </div>
+
+    <div [class.hidden]="tab != 'comments'" class="tab-history">
+      <comment-list [model]="issue" [modelType]="'issue'"></comment-list>
+    </div>
+
+    <div [class.hidden]="tab != 'history'" class="tab-history">
+      <div class="activity">
+        <div class="list">
+          <div *ngFor="let his of issue.histories; let i = index;" class="item">
+            <div class="descr">
+              <span [innerHTML]="his.title" class="content"></span> -
+              <span>{{his.createTime | date:'y/MM/dd HH:mm:ss'}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label"><span>附件</span></label>
+      <div class="col-sm-1">
+        <file-uploader (uploadedEvent)="uploadedEvent($event)"
+                       [ifile]="issue.testsetPath" [mimeType]="[]" [showDropZone]="false"></file-uploader>
+      </div>
+      <div class="col-sm-8">
+        <label class="attach-list">
+          <span *ngFor="let attach of issue.attachments; let i = index;" class="attach-item">
+            <span (click)="removeAttachment(attach)" class="fa fa-times pointer" tabindex="-1"></span>
+            <a href="{{attach.uri | pathToLink}}" target="_blank" class="download pointer" >{{attach.name}}</a>
+          </span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<pop-dialog #deleteModalWrapper (confirm)="delete()" [title]="'提示'">
+  确认删除名为"{{issue.title}}"的问题?
+</pop-dialog>

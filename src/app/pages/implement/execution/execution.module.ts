@@ -17,7 +17,7 @@ import { ZtreeModule } from '../../../components/ztree';
 import { StepsTableModule } from '../../../components/steps-table';
 import { CustomFieldModule } from '../../../components/custom-field';
 import { FieldModule } from '../../../components/field';
-import { CaseCommentsModule } from '../../../components/case-comments';
+import { CommentsModule } from '../../../components/comments';
 
 import { RouteService } from '../../../service/route';
 import { RequestService } from '../../../service/request';
@@ -30,7 +30,7 @@ import { CaseStepService } from '../../../service/client/case-step';
 import { CaseInTaskService } from '../../../service/client/case-in-task';
 import { CaseAttachmentService } from '../../../service/client/case-attachment';
 import { PrivilegeService } from '../../../service/privilege';
-import { CaseCommentsService } from '../../../service/client/case-comments';
+import { CommentsService } from '../../../service/client/comments';
 
 import { Execution } from './execution.component';
 import { ExecutionSuite } from './suite/suite.component';
@@ -55,7 +55,7 @@ import { ExecutionResult } from './result/result.component';
     StepsTableModule,
     CustomFieldModule,
     FieldModule,
-    CaseCommentsModule,
+    CommentsModule,
   ],
   declarations: [
     Execution,
@@ -72,7 +72,7 @@ import { ExecutionResult } from './result/result.component';
     CaseStepService,
     CaseInTaskService,
     PrivilegeService,
-    CaseCommentsService,
+    CommentsService,
     CaseAttachmentService,
   ],
 })

@@ -6,7 +6,7 @@ import { CONSTANT } from '../../../../utils/constant';
 import { GlobalState } from '../../../../global.state';
 
 import { CaseService } from '../../../../service/client/case';
-import { CaseCommentsService } from '../../../../service/client/case-comments';
+import { CommentsService } from '../../../../service/client/comments';
 import { CommentEditComponent } from '../../comment-edit/src/comment-edit.component';
 
 @Component({
@@ -16,6 +16,7 @@ import { CommentEditComponent } from '../../comment-edit/src/comment-edit.compon
 })
 export class CommentListComponent implements OnInit, AfterViewInit, OnDestroy{
   @Input() @Output() model: any = {};
+  @Input() modelType: string;
   userId: number;
 
   @ViewChild('modalWrapper') modalWrapper: CommentEditComponent;
@@ -23,17 +24,17 @@ export class CommentListComponent implements OnInit, AfterViewInit, OnDestroy{
   eventCode: string = 'CommentListComponent';
 
   constructor(private _state: GlobalState, private modalService: NgbModal,
-              private _caseService: CaseService, private _caseCommentsService: CaseCommentsService) {
-    this._state.subscribe(CONSTANT.EVENT_COMMENTS_EDIT, this.eventCode, (json) => {
-      console.log(CONSTANT.EVENT_COMMENTS_EDIT + ' in ' + this.eventCode, json);
-      this.addComments(json);
-    });
-
-    this._state.subscribe(CONSTANT.EVENT_COMMENTS_SAVE, this.eventCode, (json) => {
-      console.log(CONSTANT.EVENT_COMMENTS_SAVE + ' in ' + this.eventCode, json);
-      this.comment = json;
-      this.saveComments(json.result);
-    });
+              private _commentsService: CommentsService) {
+    // this._state.subscribe(CONSTANT.EVENT_COMMENTS_EDIT, this.eventCode, (json) => {
+    //   console.log(CONSTANT.EVENT_COMMENTS_EDIT + ' in ' + this.eventCode, json);
+    //   this.addComments(json);
+    // });
+    //
+    // this._state.subscribe(CONSTANT.EVENT_COMMENTS_SAVE, this.eventCode, (json) => {
+    //   console.log(CONSTANT.EVENT_COMMENTS_SAVE + ' in ' + this.eventCode, json);
+    //   this.comment = json;
+    //   this.saveComments(json.result);
+    // });
   }
 
   public ngOnInit(): void {
@@ -61,7 +62,7 @@ export class CommentListComponent implements OnInit, AfterViewInit, OnDestroy{
   }
 
   saveComments(result: boolean) {
-    this._caseCommentsService.save(this.model.id, this.comment).subscribe((json: any) => {
+    this._commentsService.save(this.model.id, this.modelType, this.comment).subscribe((json: any) => {
       if (json.code == 1) {
         if (this.comment.result != undefined) { // 评审
           this.reviewRequest(this.model.id, this.comment.result);
@@ -79,23 +80,23 @@ export class CommentListComponent implements OnInit, AfterViewInit, OnDestroy{
   }
 
   removeComments(id: number, indx: number) {
-    this._caseCommentsService.remove(id).subscribe((json: any) => {
+    this._commentsService.remove(id).subscribe((json: any) => {
       this.model.comments.splice(indx, 1);
     });
   }
 
   reviewRequest(id: number, result: boolean) {
-    this._caseService.reviewResult(id, result).subscribe((json: any) => {
-      if (json.code == 1) {
-        this.model.reviewResult = result;
-        this._state.notifyDataChanged(CONSTANT.EVENT_CASE_UPDATE, { node: this.model, random: Math.random() });
-      }
-    });
+    // this._caseService.reviewResult(id, result).subscribe((json: any) => {
+    //   if (json.code == 1) {
+    //     this.model.reviewResult = result;
+    //     this._state.notifyDataChanged(CONSTANT.EVENT_CASE_UPDATE, { node: this.model, random: Math.random() });
+    //   }
+    // });
   }
 
   ngOnDestroy(): void {
-    this._state.unsubscribe(CONSTANT.EVENT_COMMENTS_EDIT, this.eventCode);
-    this._state.unsubscribe(CONSTANT.EVENT_COMMENTS_SAVE, this.eventCode);
+    // this._state.unsubscribe(CONSTANT.EVENT_COMMENTS_EDIT, this.eventCode);
+    // this._state.unsubscribe(CONSTANT.EVENT_COMMENTS_SAVE, this.eventCode);
   };
 
 }

@@ -538,6 +538,14 @@ ul.al-share {
   }
 }
 
+label.required {
+  clear: both;
+  &:after {
+    position: absolute;
+    content: '*';
+    color: red;
+  }
+}
 .col-form-label.left{
   text-align: left;
 }

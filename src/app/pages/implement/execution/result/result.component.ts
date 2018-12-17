@@ -23,7 +23,7 @@ declare var jQuery;
 @Component({
   selector: 'execution-result',
   encapsulation: ViewEncapsulation.None,
-  styleUrls: ['./result.scss', '../../../../components/case-comments/comment-edit/src/styles.scss'],
+  styleUrls: ['./result.scss', '../../../../components/comments/comment-edit/src/styles.scss'],
   templateUrl: './result.html',
 })
 export class ExecutionResult implements OnInit, AfterViewInit, OnDestroy {

@@ -32,7 +32,7 @@ export class IssueFieldShowComponent implements OnInit {
   public ngOnInit(): void {
     this.isuPropValMap = CONSTANT.ISU_PROPERTY_VAL_MAP;
 
-    console.log('ngOnInit', this.isuPropValMap);
+    // console.log('ngOnInit', this.isuPropValMap);
   }
 
   edit () {

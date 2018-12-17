@@ -12,6 +12,7 @@ export class IssueService {
   }
 
   _apiBase = 'client/issue/';
+  _apiBaseOpt = 'client/issue_opt/';
 
   query(filter: number, query: any) {
     query.filter = filter;
@@ -30,16 +31,15 @@ export class IssueService {
     return this._reqService.post(this._apiBase + 'view', model);
   }
 
-  delete(id: any) {
-    const model = { id: id };
-    return this._reqService.post(this._apiBase + 'delete', model);
-  }
-
   save(model: any, pageId: number) {
     return this._reqService.post(this._apiBase + 'save', { issue: model, pageId: pageId });
   }
   update(model: any, pageId: number) {
     return this._reqService.post(this._apiBase + 'update', { issue: model, pageId: pageId });
+  }
+  delete(id: number) {
+    const model = {id: id};
+    return this._reqService.post(this._apiBase + 'delete', model);
   }
 
   updateField(id: number, field: any) {
@@ -48,7 +48,16 @@ export class IssueService {
   }
 
   gotoList() {
-    const url = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + CONSTANT.CURR_PRJ_ID + '/issue/query/lastest';
+    const url = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + CONSTANT.CURR_PRJ_ID + '/issue/query/lastest/null';
+    this._routeService.navTo(url);
+  }
+  gotoView(id) {
+    const url = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + CONSTANT.CURR_PRJ_ID + '/issue/' +
+      id + '/view';
+    this._routeService.navTo(url);
+  }
+  gotoCreate() {
+    const url = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + CONSTANT.CURR_PRJ_ID + '/issue/create';
     this._routeService.navTo(url);
   }
 }

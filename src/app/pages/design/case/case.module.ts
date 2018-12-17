@@ -18,7 +18,7 @@ import { ZtreeModule } from '../../../components/ztree';
 import { StepsTableModule } from '../../../components/steps-table';
 import { FieldModule } from '../../../components/field';
 import { TinyMCEModule } from '../../../components/tiny-mce';
-import { CaseCommentsModule } from '../../../components/case-comments';
+import { CommentsModule } from '../../../components/comments';
 
 import { RouteService } from '../../../service/route';
 import { RequestService } from '../../../service/request';
@@ -28,7 +28,7 @@ import { SuiteService } from '../../../service/client/suite';
 import { CaseService } from '../../../service/client/case';
 import { CaseAttachmentService } from '../../../service/client/case-attachment';
 import { CaseStepService } from '../../../service/client/case-step';
-import { CaseCommentsService } from '../../../service/client/case-comments';
+import { CommentsService } from '../../../service/client/comments';
 import { PrivilegeService } from '../../../service/privilege';
 
 import { Case } from './case.component';
@@ -51,7 +51,7 @@ import { CaseView } from './view/view.component';
     DirectiveModule,
     ToastyModule,
     SlimLoadingBarModule.forRoot(),
-    CaseCommentsModule,
+    CommentsModule,
     ZtreeModule,
     StepsTableModule,
     FieldModule,
@@ -71,7 +71,7 @@ import { CaseView } from './view/view.component';
     SuiteService,
     CaseService,
     CaseStepService,
-    CaseCommentsService,
+    CommentsService,
     PrivilegeService,
     CaseAttachmentService,
   ],

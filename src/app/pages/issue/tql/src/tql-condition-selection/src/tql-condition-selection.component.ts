@@ -16,7 +16,6 @@ import { TqlConditionSelectionService } from './tql-condition-selection.service'
 export class TqlConditionSelectionComponent implements OnInit, AfterViewInit {
   form: FormGroup;
 
-  @Output() selected = new EventEmitter<any>();
   keywords: string = '';
 
   _filters: any[] = [];

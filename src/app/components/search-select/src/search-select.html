@@ -23,6 +23,7 @@
           <div class="image">
             <span *ngIf="item.type=='user'" class="fa fa-user"></span>
             <span *ngIf="item.type=='group'" class="fa fa-users"></span>
+            <span *ngIf="item.type=='tag'" class="fa fa-tag"></span>
           </div>
           <div *ngIf="item.type=='user'" class="user-name">
             <div>{{item.nickname}}</div>
@@ -30,6 +31,9 @@
           </div>
           <div *ngIf="item.type=='group'" class="group-name">
             <div>{{item.name}}</div>
+          </div>
+          <div *ngIf="item.type=='tag'" class="group-name">
+            <div>{{item.name}} <span *ngIf="!item.id">(新标签)</span></div>
           </div>
         </div>
       </div>

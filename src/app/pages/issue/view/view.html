@@ -11,13 +11,13 @@
       </div>
 
       <div class="buttons">
-        <button (click)="back()" type="button" class="btn btn-primary btn-with-icon btn-sm">
+        <button (click)="back()" type="button" class="btn btn-secondary btn-with-icon btn-sm">
           <i class="fa fa-plus-circle"></i>返回
         </button>
       </div>
     </div>
   </div>
 
-  <issue-page [issue]="issue" [issuePropMap]="issuePropMap" [page]="page"></issue-page>
+  <issue-page [issue]="issue" [issuePropMap]="issuePropMap" [page]="page" (optEvent)="optResult($event)"></issue-page>
 
 </div>
