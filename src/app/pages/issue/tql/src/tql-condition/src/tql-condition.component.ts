@@ -20,7 +20,7 @@ export class TqlConditionComponent implements OnInit, AfterViewInit {
 
   @Input() set checkedItems(models: any) {
     this._checkedItems = models;
-    if (this.init) {
+    if (this.init) { // 第一次忽略，在ngOnInit中初始化
       this.init = false;
     } else {
       this.computerSelected();
@@ -58,7 +58,7 @@ export class TqlConditionComponent implements OnInit, AfterViewInit {
   }
 
   keywordsChange() {
-    if (this.model.input != 'dropdown') {
+    if (this.model.input != 'dropdown') { // 修改查询条件，而不是过滤选项
       this.conditionChangeEvent.emit({ code: this.model.code, keywords: this.keywords });
       this._apply();
     }
