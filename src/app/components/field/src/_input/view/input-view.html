@@ -2,7 +2,7 @@
   <span *ngIf="elem.input!='text'">{{getLabel()}}</span>
 
   <span *ngIf="elem.input=='text' && elem.textFormat!='rich_text'"
-        [innerHTML]="model[elem.colCode]"></span>
+        [innerHTML]="getLabel()"></span>
 
   <pre *ngIf="elem.input=='text' && elem.textFormat=='rich_text'" style="display: inline;"
        [innerHTML]="model[elem.colCode]"></pre>

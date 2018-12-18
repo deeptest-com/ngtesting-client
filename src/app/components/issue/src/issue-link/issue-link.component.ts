@@ -12,6 +12,8 @@ import { ValidatorUtils } from '../../../../validator/validator.utils';
 
 import { RouteService } from '../../../../service/route';
 import { PrivilegeService } from '../../../../service/privilege';
+import { IssueService } from '../../../../service/client/issue';
+import { IssueSearchService } from '../../../../service/client/issue-search';
 import { IssueLinkService } from '../../../../service/client/issue-link';
 
 import * as _ from 'lodash';
@@ -26,33 +28,59 @@ declare var jQuery;
 })
 export class IssueLink implements OnInit, AfterViewInit, OnDestroy {
   issue: any = {};
-  users: any[] = [];
-
   dictIssueId: number;
-  reason: string;
+
+  reasonId: number;
+  issueLinkReasons: any[] = [];
+
+  searchModel: any = {};
+  searchResult: any[];
+  selectedModels: any[] = [];
 
   form: FormGroup;
 
   constructor(private _routeService: RouteService, private _state: GlobalState, private _route: ActivatedRoute,
-              private fb: FormBuilder,
-              public activeModal: NgbActiveModal, private issueLinkService: IssueLinkService) {
+              private fb: FormBuilder, public activeModal: NgbActiveModal,
+              private issueSearchService: IssueSearchService, private issueLinkService: IssueLinkService) {
     this.buildForm();
   }
   ngOnInit() {
-
+    this.loadData();
   }
   ngAfterViewInit() {}
 
   link() {
-    this.issueLinkService.link(this.issue.id, this.dictIssueId, this.reason).subscribe((json: any) => {
+    const reason = this.issueLinkReasons.filter(it => it.id == this.reasonId)[0];
+
+    this.issueLinkService.link(this.issue.id, this.selectedModels[0].id,
+        this.reasonId, reason.label).subscribe((json: any) => {
       if (json.code == 1) {
         this.activeModal.close({ act: 'link', success: true });
       }
     });
   }
 
+  loadData() {
+    this.issueLinkService.listIssueLinkReasons().subscribe((json: any) => {
+      if (json.code == 1) {
+        this.issueLinkReasons = json.data;
+      }
+    });
+  }
+
   cancel() {
       this.activeModal.dismiss({ act: 'cancel' });
+  }
+
+  changeSearch(searchModel: any): void {
+    const ids = [];
+    this.selectedModels.forEach(item => { ids.push(item.id); });
+
+    this.issueSearchService.idAndTitleSearch(searchModel.keywords, ids).subscribe((json: any) => {
+      if (json.data.length == 1) {
+        this.searchResult = json.data;
+      }
+    });
   }
 
   ngOnDestroy(): void {

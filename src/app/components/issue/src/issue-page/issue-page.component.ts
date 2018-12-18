@@ -21,6 +21,7 @@ import { RouteService } from '../../../../service/route';
 
 import { PrivilegeService } from '../../../../service/privilege';
 import { IssueService } from '../../../../service/client/issue';
+import { IssueOptService } from '../../../../service/client/issue-opt';
 
 import { IssueEditService } from '../issue-edit/issue-edit.service';
 import { IssueAssignService } from '../issue-assign/issue-assign.service';
@@ -69,6 +70,7 @@ export class IssuePage implements OnInit, AfterViewInit, OnDestroy {
   constructor(private _routeService: RouteService, private _route: ActivatedRoute, private _state: GlobalState,
               private fb: FormBuilder, private toastyService: ToastyService, private privilegeService: PrivilegeService,
               private issueService: IssueService, private issueEditService: IssueEditService,
+              private issueOptService: IssueOptService,
               private issueAssignService: IssueAssignService, private issueWatchService: IssueWatchService,
               private issueTagService: IssueTagService, private issueLinkService: IssueLinkService, ) {
 
@@ -153,7 +155,7 @@ export class IssuePage implements OnInit, AfterViewInit, OnDestroy {
   link() {
     this.issueLinkModal = this.issueLinkService.genPage(this._issue);
 
-    this.issueLinkModal.result.then((result) => {
+      this.issueLinkModal.result.then((result) => {
       console.log('result', result);
       if (result.success) {
         this.optEvent.emit(result);
@@ -173,6 +175,21 @@ export class IssuePage implements OnInit, AfterViewInit, OnDestroy {
         this.deleteModalWrapper.closeModal();
         this.optEvent.emit({ act: 'delete' });
       }
+    });
+  }
+
+  uploadedEvent(event: any) {
+    this.issueOptService.saveAttachment(this._issue.id, event.data.name, event.data.path)
+      .subscribe((json: any) => {
+        this._issue.attachments = json.attachments;
+        this._issue.histories = json.histories;
+        event.deferred.resolve();
+      });
+  }
+  removeAttachment(item: any) {
+    this.issueOptService.removeAttachment(this._issue.id, item.id).subscribe((json: any) => {
+      this._issue.attachments = json.attachments;
+      this._issue.histories = json.histories;
     });
   }
 

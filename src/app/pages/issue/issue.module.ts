@@ -35,6 +35,7 @@ import { IssueService } from '../../service/client/issue';
 import { IssueOptService } from '../../service/client/issue-opt';
 import { IssueTagService } from '../../service/client/issue-tag';
 import { IssueLinkService } from '../../service/client/issue-link';
+import { IssueSearchService } from '../../service/client/issue-search';
 import { PrivilegeService } from '../../service/privilege';
 
 import { Issue } from './issue.component';
@@ -85,7 +86,7 @@ import { IssueView } from './view/view.component';
     RequestService,
     DatetimePickerService,
     ClientService,
-    IssueQueryService, IssueService, IssueOptService, IssueTagService, IssueLinkService,
+    IssueQueryService, IssueService, IssueOptService, IssueTagService, IssueLinkService, IssueSearchService,
     PrivilegeService,
     SortableContainer,
   ],

@@ -13,8 +13,13 @@ export class IssueLinkService {
 
   _apiBase = 'client/issue_link/';
 
-  link(srcId, dictId, reason): any {
+  link(srcIssueId, dictIssueId, reasonId, reasonName): any {
+    const model = { srcIssueId: srcIssueId, dictIssueId: dictIssueId, reasonId: reasonId, reasonName: reasonName };
+    return this._reqService.post(this._apiBase + 'link', model);
+  }
 
+  listIssueLinkReasons(): any {
+    return this._reqService.post(this._apiBase + 'listIssueLinkReasons', {});
   }
 
 }

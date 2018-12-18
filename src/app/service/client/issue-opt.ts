@@ -12,6 +12,7 @@ export class IssueOptService {
   }
 
   _apiBase = 'client/issue_opt/';
+  _apiAttachmentBase = 'client/issue_attachment/';
 
   watch(id: number, status: boolean) {
     const model = { id: id, status: status };
@@ -20,6 +21,16 @@ export class IssueOptService {
   assign(id: number, userId: number, comments: string) {
     const model = { id: id, userId: userId, comments: comments };
     return this._reqService.post(this._apiBase + 'assign', model);
+  }
+
+  saveAttachment(issueId: number, name: string, path: any) {
+    return this._reqService.post(this._apiAttachmentBase + 'save',
+      { issueId: issueId, name: name, path: path });
+  }
+
+  removeAttachment(issueId: number, id: number) {
+    return this._reqService.post(this._apiAttachmentBase + 'remove',
+      { issueId: issueId, id: id });
   }
 
 }

@@ -5,7 +5,7 @@ import { CONSTANT } from '../../../utils/constant';
 import { RouteService } from '../../../service/route';
 import { Utils } from '../../../utils/utils';
 import { Deferred } from '../../../service/deferred';
-import { ToastyService, ToastyConfig, ToastOptions, ToastData } from 'ng2-toasty';
+import { ToastyService } from 'ng2-toasty';
 
 @Component({
   selector: 'file-uploader',

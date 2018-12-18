@@ -46,7 +46,7 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
   filters: any[] = [];
   issuePropMap: any = {};
   columns: any[] = [];
-  init: number = 0;
+  init: boolean = true;
 
   orderColumn: string;
   orderSeq: string;
@@ -65,9 +65,13 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
       const orderByStr = params['orderBy'];
 
       if (ruleStr == 'all') {
+        this.init = true;
         this.rule = {};
+
         this.loadData();
       } else if (ruleStr == 'lastest') {
+        this.init = true;
+
         const ruleStore = localStorage.getItem('issue_query');
         const orderByStore = localStorage.getItem('order_by_for_' + this.layout);
         if (!ruleStore) {
@@ -82,16 +86,18 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
         }
 
         this.updateForBrowse();
-        this.loadData(this.init == 0);
+        this.loadData();
       } else if (ruleStr.startsWith('q_')) {
-        this.loadDataByQueryId(this.rule.split('_')[1], this.init == 0);
+        this.init = true;
+
+        this.loadDataByQueryId(this.rule.split('_')[1]);
       } else {
         localStorage.setItem('issue_query', ruleStr);
         localStorage.setItem('order_by_for_' + this.layout, orderByStr);
 
         this.rule = JSON.parse(ruleStr);
         this.orderBy = JSON.parse(orderByStr);
-        this.loadData(this.init == 0);
+        this.loadData();
       }
 
       CONSTANT.ISSUE_JQL = JSON.stringify(this.rule);
@@ -114,36 +120,34 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
     this.loadData();
   }
 
-  loadData(init: boolean = true) {
-    this._tqlService.query(this.rule, this.orderBy, this.page, this.pageSize, init).subscribe((json: any) => {
+  loadData() {
+    this._tqlService.query(this.rule, this.orderBy, this.page, this.pageSize, this.init).subscribe((json: any) => {
       console.log('===', json);
       this.collectionSize = json.total;
       this.models = json.data;
 
-      if (init) {
-        this.init++;
+      if (this.init) {
+        this.init = false;
         this.rule = json.rule;
-        this.orderBy = json.orderBy;
         this.filters = json.filters;
+        this.orderBy = json.orderBy;
         this.columns = json.columns;
-
         this.issuePropMap = json.issuePropMap;
 
         this.updateForBrowse();
-        console.log('this.orderBy', this.orderBy);
       }
     });
   }
 
-  loadDataByQueryId(queryId: number, init: boolean) {
-    this._tqlService.queryById(queryId, this.page, this.pageSize, init).subscribe((json: any) => {
+  loadDataByQueryId(queryId: number) {
+    this._tqlService.queryById(queryId, this.page, this.pageSize, this.init).subscribe((json: any) => {
       this.collectionSize = json.total;
       this.models = json.data;
 
       this.rule = json.rule;
 
-      if (init) {
-        this.init++;
+      if (this.init) {
+        this.init = false;
         this.filters = json.filters;
         this.columns = json.columns;
         this.issuePropMap = json.issuePropMap;
@@ -166,7 +170,7 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
     });
 
     this._tqlService.changeColumns(columnsForShow).subscribe((json: any) => {
-      this.loadData(false);
+      this.loadData();
     });
   }
 
