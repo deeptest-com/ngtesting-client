@@ -3,7 +3,7 @@ import { IssueAssign } from './issue-assign.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Injectable()
-export class IssueAssignService {
+export class IssueAssignPopupService {
 
     constructor(private modalService: NgbModal, private compiler: Compiler) {
 

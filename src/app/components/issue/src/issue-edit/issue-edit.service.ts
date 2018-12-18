@@ -3,7 +3,7 @@ import { IssueEdit } from './issue-edit.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Injectable()
-export class IssueEditService {
+export class IssueEditPopupService {
 
     constructor(private modalService: NgbModal, private compiler: Compiler) {
 

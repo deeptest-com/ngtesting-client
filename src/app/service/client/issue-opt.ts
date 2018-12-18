@@ -14,10 +14,6 @@ export class IssueOptService {
   _apiBase = 'client/issue_opt/';
   _apiAttachmentBase = 'client/issue_attachment/';
 
-  watch(id: number, status: boolean) {
-    const model = { id: id, status: status };
-    return this._reqService.post(this._apiBase + 'watch', model);
-  }
   assign(id: number, userId: number, comments: string) {
     const model = { id: id, userId: userId, comments: comments };
     return this._reqService.post(this._apiBase + 'assign', model);

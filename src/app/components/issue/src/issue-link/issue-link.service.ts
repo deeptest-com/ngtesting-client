@@ -3,7 +3,7 @@ import { IssueLink } from './issue-link.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Injectable()
-export class IssueLinkService {
+export class IssueLinkPopupService {
 
     constructor(private modalService: NgbModal, private compiler: Compiler) {
 

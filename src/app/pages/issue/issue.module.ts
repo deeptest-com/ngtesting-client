@@ -31,11 +31,14 @@ import { DatetimePickerService } from '../../service/datetime-picker';
 // import { CommentsService } from '../../service/client/comments';
 import { ClientService } from '../../service/client/client';
 import { IssueQueryService } from './query/query.service';
+
 import { IssueService } from '../../service/client/issue';
 import { IssueOptService } from '../../service/client/issue-opt';
 import { IssueTagService } from '../../service/client/issue-tag';
 import { IssueLinkService } from '../../service/client/issue-link';
 import { IssueSearchService } from '../../service/client/issue-search';
+import { IssueWatchService } from '../../service/client/issue-watch';
+
 import { PrivilegeService } from '../../service/privilege';
 
 import { Issue } from './issue.component';
@@ -86,7 +89,8 @@ import { IssueView } from './view/view.component';
     RequestService,
     DatetimePickerService,
     ClientService,
-    IssueQueryService, IssueService, IssueOptService, IssueTagService, IssueLinkService, IssueSearchService,
+    IssueQueryService, IssueService, IssueOptService,
+    IssueTagService, IssueLinkService, IssueSearchService, IssueWatchService,
     PrivilegeService,
     SortableContainer,
   ],

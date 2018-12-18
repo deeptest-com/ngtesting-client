@@ -22,12 +22,13 @@ import { RouteService } from '../../../../service/route';
 import { PrivilegeService } from '../../../../service/privilege';
 import { IssueService } from '../../../../service/client/issue';
 import { IssueOptService } from '../../../../service/client/issue-opt';
+import { IssueWatchService } from '../../../../service/client/issue-watch';
 
-import { IssueEditService } from '../issue-edit/issue-edit.service';
-import { IssueAssignService } from '../issue-assign/issue-assign.service';
-import { IssueWatchService } from '../issue-watch/issue-watch.service';
-import { IssueTagService } from '../issue-tag/issue-tag.service';
-import { IssueLinkService } from '../issue-link/issue-link.service';
+import { IssueEditPopupService } from '../issue-edit/issue-edit.service';
+import { IssueAssignPopupService } from '../issue-assign/issue-assign.service';
+import { IssueWatchPopupService } from '../issue-watch/issue-watch.service';
+import { IssueTagPopupService } from '../issue-tag/issue-tag.service';
+import { IssueLinkPopupService } from '../issue-link/issue-link.service';
 
 import { PopDialogComponent } from '../../../pop-dialog';
 
@@ -69,10 +70,16 @@ export class IssuePage implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(private _routeService: RouteService, private _route: ActivatedRoute, private _state: GlobalState,
               private fb: FormBuilder, private toastyService: ToastyService, private privilegeService: PrivilegeService,
-              private issueService: IssueService, private issueEditService: IssueEditService,
+
+              private issueService: IssueService,
               private issueOptService: IssueOptService,
-              private issueAssignService: IssueAssignService, private issueWatchService: IssueWatchService,
-              private issueTagService: IssueTagService, private issueLinkService: IssueLinkService, ) {
+              private issueWatchService: IssueWatchService,
+
+              private issueEditPopupService: IssueEditPopupService,
+              private issueWatchPopupService: IssueWatchPopupService,
+              private issueAssignPopupService: IssueAssignPopupService,
+              private issueTagPopupService: IssueTagPopupService,
+              private issueLinkPopupService: IssueLinkPopupService ) {
 
     this.canEdit = this.privilegeService.hasPrivilege('issue-maintain');
 
@@ -101,7 +108,7 @@ export class IssuePage implements OnInit, AfterViewInit, OnDestroy {
   }
 
   edit() {
-    this.issueEditModal = this.issueEditService.genPage(this._issue.id);
+    this.issueEditModal = this.issueEditPopupService.genPage(this._issue.id);
 
     this.issueEditModal.result.then((result) => {
       console.log('result', result);
@@ -114,7 +121,7 @@ export class IssuePage implements OnInit, AfterViewInit, OnDestroy {
   }
 
   assign() {
-    this.issueAssignModal = this.issueAssignService.genPage(this._issue, this.issuePropMap.assigneeId);
+    this.issueAssignModal = this.issueAssignPopupService.genPage(this._issue, this.issuePropMap.assigneeId);
 
     this.issueAssignModal.result.then((result) => {
       console.log('result', result);
@@ -126,8 +133,17 @@ export class IssuePage implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
+  watch() {
+    this.issueWatchService.watch(this._issue.id, !this._issue.watched).subscribe((json: any) => {
+      if (json.code == 1) {
+        this._issue.watched = !this._issue.watched;
+        this.optEvent.emit({ act: 'watch' });
+      }
+    });
+  }
+
   watchList() {
-    this.issueWatchModal = this.issueWatchService.genPage(this._issue.id);
+    this.issueWatchModal = this.issueWatchPopupService.genPage(this._issue);
 
     this.issueWatchModal.result.then((result) => {
       console.log('result', result);
@@ -140,7 +156,7 @@ export class IssuePage implements OnInit, AfterViewInit, OnDestroy {
   }
 
   tag() {
-    this.issueTagModal = this.issueTagService.genPage(this._issue);
+    this.issueTagModal = this.issueTagPopupService.genPage(this._issue);
 
     this.issueTagModal.result.then((result) => {
       console.log('result', result);
@@ -153,7 +169,7 @@ export class IssuePage implements OnInit, AfterViewInit, OnDestroy {
   }
 
   link() {
-    this.issueLinkModal = this.issueLinkService.genPage(this._issue);
+    this.issueLinkModal = this.issueLinkPopupService.genPage(this._issue);
 
       this.issueLinkModal.result.then((result) => {
       console.log('result', result);

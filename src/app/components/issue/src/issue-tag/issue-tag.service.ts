@@ -3,7 +3,7 @@ import { IssueTag } from './issue-tag.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Injectable()
-export class IssueTagService {
+export class IssueTagPopupService {
 
     constructor(private modalService: NgbModal, private compiler: Compiler) {
 

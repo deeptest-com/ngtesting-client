@@ -90,23 +90,21 @@
         margin: 1px;
         padding: 5px;
         cursor: pointer;
+        line-height: 34px;
+        font-size: 13px;
+
         .image {
           margin-right: 5px;
           height: 34px;
           width: 34px;
           font-size: 20px;
-          line-height: 34px;
           text-align: center;
         }
         .user-name {
           flex: 1;
-          line-height: 17px;
-          font-size: 13px;
         }
         .group-name {
           flex: 1;
-          line-height: 34px;
-          font-size: 13px;
         }
         &.active {
           background-color: #eceeef;

@@ -12,7 +12,7 @@ import { CONSTANT } from '../../../../utils/constant';
 import { ValidatorUtils } from '../../../../validator/validator.utils';
 
 import { RouteService } from '../../../../service/route';
-import { IssueService } from '../../../../service/client/issue';
+import { IssueWatchService } from '../../../../service/client/issue-watch';
 
 import { PrivilegeService } from '../../../../service/privilege';
 import * as _ from 'lodash';
@@ -28,53 +28,48 @@ declare var jQuery;
   templateUrl: './issue-watch.html',
 })
 export class IssueWatch implements OnInit, AfterViewInit, OnDestroy {
-  eventCode: string = 'IssueEdit';
-  canEdit: boolean;
+  issue: any = {};
 
-  _id: number;
-  set id(val: any) {
-    this._id = val;
-    console.log('id', this._id);
+  userId: number;
+  users: any[] = [];
+
+  searchModel: any = {};
+  searchResult: any[];
+  selectedModels: any[] = [];
+
+  constructor(private _routeService: RouteService, private _state: GlobalState, private _route: ActivatedRoute,
+              public activeModal: NgbActiveModal, private toastyService: ToastyService,
+              private issueWatchService: IssueWatchService, private privilegeService: PrivilegeService) {
+
+  }
+
+  ngOnInit() {
     this.loadData();
   }
 
-  issue: any = {};
-  issuePropMap: any = {};
-
-  page: any = {};
-
-  form: any;
-  validateMsg: any = {};
-
-  constructor(private _routeService: RouteService, private _state: GlobalState, private _route: ActivatedRoute,
-              public activeModal: NgbActiveModal, private fb: FormBuilder, private toastyService: ToastyService,
-              private issueService: IssueService, private privilegeService: PrivilegeService) {
-
-    this.canEdit = this.privilegeService.hasPrivilege('issue-update');
-
-    this.buildForm();
-  }
-  ngOnInit() {
-
-  }
   ngAfterViewInit() {}
 
   loadData() {
-    this.issueService.edit(this._id).subscribe((json: any) => {
-      this.issue = json.data;
-      this.issuePropMap = json.issuePropMap;
-
-      this.page = json.page;
-
-      this.onValueChanged();
+    this.issueWatchService.list(this.issue.id).subscribe((json: any) => {
+      this.users = json.data;
     });
   }
 
-  update() {
-    const data = _.clone(this.issue);
-    this.issueService.update(data, this.page.id).subscribe((json: any) => {
+  batchSave() {
+    const ids = [];
+    this.selectedModels.forEach(item => { ids.push(item.id); });
+
+    this.issueWatchService.batchSave(this.issue.id, ids).subscribe((json: any) => {
       if (json.code == 1) {
-        this.activeModal.close({ act: 'update', success: true });
+        // this.activeModal.close({ act: 'save', success: true });
+      }
+    });
+  }
+
+  remove(item) {
+    this.issueWatchService.remove(item.id).subscribe((json: any) => {
+      if (json.code == 1) {
+        this.loadData();
       }
     });
   }
@@ -83,18 +78,17 @@ export class IssueWatch implements OnInit, AfterViewInit, OnDestroy {
       this.activeModal.dismiss({ act: 'cancel' });
   }
 
-  onValueChanged(data?: any) {
-    console.log('onValueChanged');
-    this.formErrors = ValidatorUtils.genMsg(this.form, this.validateMsg, []);
-  }
+  changeSearch(searchModel: any): void {
+    const ids = [];
+    this.selectedModels.forEach(item => { ids.push(item.id); });
 
-  buildForm() {
-    this.form = this.fb.group({});
-
-    this.form.valueChanges.debounceTime(CONSTANT.DebounceTime).subscribe(data => this.onValueChanged(data));
-    this.onValueChanged();
+    this.issueWatchService.search(this.issue.id, this.searchModel.keywords, ids).subscribe((json: any) => {
+      if (json.code == 1) {
+        this.searchResult = json.data;
+        console.log('this.searchResult', this.searchResult);
+      }
+    });
   }
-  formErrors = [];
 
   ngOnDestroy(): void {
 

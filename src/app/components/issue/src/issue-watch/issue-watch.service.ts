@@ -3,17 +3,17 @@ import { IssueWatch } from './issue-watch.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Injectable()
-export class IssueWatchService {
+export class IssueWatchPopupService {
 
     constructor(private modalService: NgbModal, private compiler: Compiler) {
 
     }
 
-    genPage(id): any {
+    genPage(issue): any {
       this.compiler.clearCacheFor(IssueWatch);
       const page = this.modalService.open(IssueWatch, { windowClass: 'pop-modal' });
 
-      page.componentInstance.id = id;
+      page.componentInstance.issue = issue;
 
       return page;
     }

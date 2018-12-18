@@ -25,11 +25,11 @@ import { IssueWatch } from './issue-watch/issue-watch.component';
 import { IssueTag } from './issue-tag/issue-tag.component';
 import { IssueLink } from './issue-link/issue-link.component';
 
-import { IssueEditService } from './issue-edit/issue-edit.service';
-import { IssueAssignService } from './issue-assign/issue-assign.service';
-import { IssueWatchService } from './issue-watch/issue-watch.service';
-import { IssueTagService } from './issue-tag/issue-tag.service';
-import { IssueLinkService } from './issue-link/issue-link.service';
+import { IssueEditPopupService } from './issue-edit/issue-edit.service';
+import { IssueAssignPopupService } from './issue-assign/issue-assign.service';
+import { IssueWatchPopupService } from './issue-watch/issue-watch.service';
+import { IssueTagPopupService } from './issue-tag/issue-tag.service';
+import { IssueLinkPopupService } from './issue-link/issue-link.service';
 
 @NgModule({
   imports: [
@@ -48,7 +48,8 @@ import { IssueLinkService } from './issue-link/issue-link.service';
     IssuePage, IssueEdit, IssueAssign, IssueWatch, IssueTag, IssueLink,
   ],
   providers: [DateFormatPipe, CommentsService,
-    IssueEditService, IssueAssignService, IssueWatchService, IssueTagService, IssueLinkService],
+    IssueEditPopupService, IssueAssignPopupService, IssueWatchPopupService,
+    IssueTagPopupService, IssueLinkPopupService],
   entryComponents: [
     IssueEdit, IssueAssign, IssueWatch, IssueTag, IssueLink,
   ],
