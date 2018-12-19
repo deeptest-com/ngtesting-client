@@ -77,7 +77,7 @@ export class IssueLink implements OnInit, AfterViewInit, OnDestroy {
     this.selectedModels.forEach(item => { ids.push(item.id); });
 
     this.issueSearchService.idAndTitleSearch(searchModel.keywords, ids).subscribe((json: any) => {
-      if (json.data.length == 1) {
+      if (json.data.length > 0) {
         this.searchResult = json.data;
       }
     });

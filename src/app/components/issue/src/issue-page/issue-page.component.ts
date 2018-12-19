@@ -31,6 +31,7 @@ import { IssueTagPopupService } from '../issue-tag/issue-tag.service';
 import { IssueLinkPopupService } from '../issue-link/issue-link.service';
 
 import { PopDialogComponent } from '../../../pop-dialog';
+import {CONSTANT} from "../../../../utils";
 
 declare var jQuery;
 
@@ -57,11 +58,13 @@ export class IssuePage implements OnInit, AfterViewInit, OnDestroy {
 
   @Input() page: any = {};
   @Input() issuePropMap: any = {};
+  @Input() issueTransMap: any = {};
   @Output() optEvent = new EventEmitter<any>();
 
   _issue: any = {};
   @Input() set issue(val) {
     this._issue = val;
+    this.dealwithLinks();
   }
 
   get issue() {
@@ -94,11 +97,17 @@ export class IssuePage implements OnInit, AfterViewInit, OnDestroy {
   }
 
   saveField($event: any) {
-    console.log($event);
-
     this.issueService.updateField(this._issue.id, $event.data).subscribe((json: any) => {
       if (json.code == 1) {
         $event.deferred.resolve();
+      }
+    });
+  }
+
+  statusTran(tran) {
+    this.issueOptService.statusTran(this._issue.id, tran.dictStatusId).subscribe((json: any) => {
+      if (json.code == 1) {
+        this.optEvent.emit({ act: 'tran' });
       }
     });
   }
@@ -207,6 +216,26 @@ export class IssuePage implements OnInit, AfterViewInit, OnDestroy {
       this._issue.attachments = json.attachments;
       this._issue.histories = json.histories;
     });
+  }
+
+  dealwithLinks() {
+    if (!this._issue.links) {
+      return;
+    }
+    let reasonId = -1;
+    this._issue.links.forEach(link => {
+      if (reasonId == link.reasonId) {
+        link.reasonName = '';
+      } else {
+        reasonId = link.reasonId;
+      }
+    });
+  }
+
+  viewLink(item) {
+    const url = '#/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + CONSTANT.CURR_PRJ_ID + '/issue/'
+      + item.id + '/view';
+    return url;
   }
 
   ngOnDestroy(): void {

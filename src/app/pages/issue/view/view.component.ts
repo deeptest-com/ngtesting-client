@@ -29,6 +29,7 @@ export class IssueView implements OnInit, AfterViewInit, OnDestroy {
   page: any = {};
   issue: any = {};
   issuePropMap: any = {};
+  issueTransMap: any = {};
 
   routeSub: any;
 
@@ -57,13 +58,14 @@ export class IssueView implements OnInit, AfterViewInit, OnDestroy {
       this.issue = json.data;
       this.page = json.page;
       this.issuePropMap = json.issuePropMap;
+      this.issueTransMap = json.issueTransMap;
       CONSTANT.ISU_PROPERTY_VAL_MAP = json.issuePropValMap;
     });
   }
 
   optResult($event) {
     console.log('$event', $event);
-    if ($event.act == 'update') {
+    if ($event.act == 'tran' || $event.act == 'update' || $event.act == 'link') {
       this.loadData();
     } else if ($event.act == 'delete') {
       this.back();

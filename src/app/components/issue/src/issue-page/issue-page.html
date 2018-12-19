@@ -46,14 +46,9 @@
     </div>
 
     <div class="btn-group">
-      <button (click)="search($event)" type="button" class="btn btn-default btn-with-icon btn-sm">
-        <i class="fa fa-search"></i>待办
-      </button>
-      <button (click)="search($event)" type="button" class="btn btn-default btn-with-icon btn-sm">
-        <i class="fa fa-search"></i>处理中
-      </button>
-      <button (click)="search($event)" type="button" class="btn btn-default btn-with-icon btn-sm">
-        <i class="fa fa-search"></i>完成
+      <button *ngFor="let tran of issueTransMap[issue.typeId][issue.statusId]"
+              (click)="statusTran(tran)" type="button" class="btn btn-default btn-with-icon btn-sm">
+        <i class="fa fa-search"></i>{{tran.name}}
       </button>
     </div>
   </div>
@@ -75,6 +70,10 @@
             <ng-template ngbTabTitle>备注</ng-template>
             <ng-template ngbTabContent></ng-template>
           </ngb-tab>
+          <ngb-tab id="link">
+            <ng-template ngbTabTitle>链接</ng-template>
+            <ng-template ngbTabContent></ng-template>
+          </ngb-tab>
           <ngb-tab id="history">
             <ng-template ngbTabTitle>历史</ng-template>
             <ng-template ngbTabContent></ng-template>
@@ -85,6 +84,22 @@
 
     <div [class.hidden]="tab != 'comments'" class="tab-history">
       <comment-list [model]="issue" [modelType]="'issue'"></comment-list>
+    </div>
+
+    <div [class.hidden]="tab != 'link'" class="tab-link">
+      <div class="activity">
+        <div class="list">
+          <div *ngFor="let item of issue.links; let i = index;" class="item">
+            <div class="descr">
+              <span class="reason-name">{{item.reasonName}}</span>
+              <a [href]="viewLink(item)" target="_blank" class="link">
+                <span>IS-{{item.id}}</span>
+                <span>{{item.title}}</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div [class.hidden]="tab != 'history'" class="tab-history">
