@@ -20,48 +20,14 @@
       width: 100%;
       background-color: #fff;
     }
-    .cards {
-      .col {
-        padding: 0;
-        &.col1 {
-          margin-right: 10px;
-        }
-        &.col2 {
-          margin-left: 10px;
-        }
-
-        .card {
-          box-shadow: none;
-          .card-block {
-            padding: 10px;
-            .table > tbody > tr > td {
-              border-top: none;
-              border-bottom: 1px solid gainsboro;
-            }
-          }
-        }
-      }
-    }
-
   }
 
   .info {
-    width: 450px;
+    width: 500px;
 
-    .manage {
-      .project-manage {
-        padding: 5px 5px 5px 10px;
-        .item {
-          line-height: 18px;
-          .dict {
-            color: black;
-            font-style: italic;
-          }
-        }
-        .more {
-          text-align: right;
-        }
-      }
+    .activity .title {
+      height: 36px;
+      line-height: 36px;
     }
   }
 }
