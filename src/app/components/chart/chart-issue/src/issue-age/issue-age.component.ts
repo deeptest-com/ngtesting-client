@@ -28,6 +28,10 @@ export class IssueAgeComponent implements OnInit {
     let legendData = [];
     let seriesData = [];
 
+    this._data.xList = this._data.xList.map(function (item) {
+      return item + '天';
+    });
+
     for (const key in this._data) {
       if (key == 'xList') {
         continue;
@@ -37,7 +41,7 @@ export class IssueAgeComponent implements OnInit {
         {
           name: key,
           type: 'bar',
-          stack: '过程',
+          stack: '数量',
           data: this._data[key],
         },
       );
@@ -86,7 +90,7 @@ export class IssueAgeComponent implements OnInit {
       ],
       yAxis : [
         {
-          name: '执行数（个）',
+          name: '数量',
           type : 'value',
         },
       ],

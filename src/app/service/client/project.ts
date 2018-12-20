@@ -46,8 +46,8 @@ export class ProjectService {
     return this._reqService.post(this._apiBase + 'delete', model);
   }
 
-  view(projectId: number) {
-    const model = { id: projectId };
+  view(id: number) {
+    const model = { id: id };
     return this._reqService.post(this._apiBase + 'view', model);
   }
   change(projectId: number) {

@@ -51,7 +51,7 @@ export class IssueTrendComponent implements OnInit {
         left: '5%',
         containLabel: true,
       },
-      color: ['#c23531', '#2f4554'],
+      color: ['#2f4554', '#c23531'],
       xAxis: {
         type: 'category',
         name: '',
@@ -66,7 +66,7 @@ export class IssueTrendComponent implements OnInit {
 
       yAxis: [
         {
-          name: '数量（个）',
+          name: '数量',
           type: 'value',
         },
       ],

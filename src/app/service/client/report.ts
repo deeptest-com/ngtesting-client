@@ -10,18 +10,18 @@ export class ReportService {
   _apiTestBase = 'client/report_test/';
   _apiIssueBase = 'client/report_issue/';
 
-  orgTestReport(orgId: number) {
-    return this._reqService.post(this._apiTestBase + 'orgTest', { orgId: orgId });
+  orgTestReport(id: number) {
+    return this._reqService.post(this._apiTestBase + 'orgTest', { id: id });
   }
-  orgIssueReport(orgId: number) {
-    return this._reqService.post(this._apiIssueBase + 'orgIssue', { orgId: orgId });
+  orgIssueReport(id: number) {
+    return this._reqService.post(this._apiIssueBase + 'orgIssue', { id: id });
   }
 
-  projectTestReport(projectId: number) {
-    return this._reqService.post(this._apiTestBase + 'projectTest', { projectId: projectId });
+  projectTestReport(id: number) {
+    return this._reqService.post(this._apiTestBase + 'projectTest', { id: id });
   }
-  projectIssueReport(projectId: number) {
-    return this._reqService.post(this._apiIssueBase + 'projectIssue', { projectId: projectId });
+  projectIssueReport(id: number) {
+    return this._reqService.post(this._apiIssueBase + 'projectIssue', { id: id });
   }
 
   planReport(planId: number) {

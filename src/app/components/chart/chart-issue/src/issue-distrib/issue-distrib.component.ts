@@ -11,7 +11,6 @@ export class IssueDistribComponent implements OnInit {
 
   _data: any = {};
   @Input() set data(model: any) {
-    console.log('===', model);
     if (model) {
       this._data = model;
       this.genChart();
@@ -30,12 +29,17 @@ export class IssueDistribComponent implements OnInit {
       title: {
         text: this.title,
         show: true,
+        top: 'top',
+        left: 'center',
+        textStyle: {
+          fontSize: '15',
+        },
       },
       legend: {
         show: false,
       },
       padding: 0,
-      color: ['#749f83', '#c23531', '#ca8622',  '#c4ccd3'],
+      color: ['#749f83', '#c23531', '#ca8622', '#c4ccd3'],
       tooltip: {
         trigger: 'item',
         formatter: '{a} <br/>{b} : {c} ({d}%)',
@@ -43,7 +47,7 @@ export class IssueDistribComponent implements OnInit {
 
       series: [
         {
-          name: '执行结果',
+          name: '分布',
           type: 'pie',
           radius: '70%',
           center: ['50%', '55%'],

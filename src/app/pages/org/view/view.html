@@ -18,8 +18,12 @@
     </div>
 
     <div class="row chart">
-      <design-progress [data]="chartData.design" [showTitle]="true"></design-progress>
-      <execution-process [data]="chartData.exe" [showTitle]="true"></execution-process>
+      <div class="col-sm-6">
+        <design-progress [data]="testChartData.design" [showTitle]="true"></design-progress>
+      </div>
+      <div class="col-sm-6">
+        <execution-process [data]="testChartData.exe" [showTitle]="true"></execution-process>
+      </div>
     </div>
 
     <div class="row chart">
@@ -39,6 +43,37 @@
   </div>
 
   <div class="info">
+
+    <div class="activity">
+      <div class="title">
+        执行计划
+      </div>
+      <div class="list">
+        <table class="table">
+          <thead>
+          <tr>
+            <th>名称</th>
+            <th>时间</th>
+            <th>状态</th>
+            <th>操作</th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <tr *ngFor="let plan of plans; let i = index;">
+            <td>{{plan.name}}</td>
+            <td>{{plan.startTime | date:'y/MM/dd'}} - {{plan.endTime | date:'y/MM/dd'}}</td>
+            <td>{{plan.status | exeStatus}}</td>
+            <td>
+                      <span prj-privilege [privs]="'test_plan-view'"
+                            [routerLink]="['/pages/org/' + id + '/prj/' + plan.projectId + '/implement/plan/' + plan.id + '/view']" class="link no-underline">查看</span>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
     <div class="activity">
       <div class="title">
         项目活动
@@ -56,38 +91,6 @@
           </div>
         </div>
 
-      </div>
-    </div>
-
-    <div class="activity">
-      <div class="title">
-        项目活动
-      </div>
-      <div class="list">
-        <table class="table">
-          <thead class="thead-inverse">
-          <tr>
-            <th style="width: 200px">名称</th>
-            <th style="width: 150px">计划开始时间</th>
-            <th style="width: 150px">计划结束时间</th>
-            <th style="width: 150px">状态</th>
-            <th style="width: 150px">操作</th>
-          </tr>
-          </thead>
-
-          <tbody>
-          <tr *ngFor="let plan of plans; let i = index;">
-            <td>{{plan.name}}</td>
-            <td>{{plan.startTime | date:'y/MM/dd'}}</td>
-            <td>{{plan.endTime | date:'y/MM/dd'}}</td>
-            <td>{{plan.status | exeStatus}}</td>
-            <td>
-                      <span prj-privilege [privs]="'test_plan-view'"
-                            [routerLink]="['/pages/org/' + id + '/prj/' + plan.projectId + '/implement/plan/' + plan.id + '/view']" class="link no-underline">查看</span>
-            </td>
-          </tr>
-          </tbody>
-        </table>
       </div>
     </div>
 
