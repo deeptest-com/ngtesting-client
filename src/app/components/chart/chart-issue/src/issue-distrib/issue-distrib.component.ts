@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import {CONSTANT} from "../../../../../utils";
 
 @Component({
   selector: 'issue-distrib',
@@ -39,7 +40,8 @@ export class IssueDistribComponent implements OnInit {
         show: false,
       },
       padding: 0,
-      color: ['#749f83', '#c23531', '#ca8622', '#c4ccd3'],
+      color: CONSTANT.CHART_COLORS,
+
       tooltip: {
         trigger: 'item',
         formatter: '{a} <br/>{b} : {c} ({d}%)',

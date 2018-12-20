@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import {CONSTANT} from "../../../../../utils";
 
 @Component({
   selector: 'issue-age',
@@ -75,7 +76,7 @@ export class IssueAgeComponent implements OnInit {
         width: '15%',
         data: legendData,
       },
-      // color: ['#749f83', '#c23531', '#ca8622'],
+      color: CONSTANT.CHART_COLORS,
 
       xAxis : [
         {
