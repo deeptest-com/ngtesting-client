@@ -21,7 +21,9 @@ export class OrgView implements OnInit, AfterViewInit, OnDestroy {
   plans: any[] = [];
   histories: any = {};
 
-  chartData: any = {};
+  testChartData: any = {};
+  issueChartData: any = {};
+
   routeSub: any;
 
   constructor(private _route: ActivatedRoute,
@@ -51,8 +53,11 @@ export class OrgView implements OnInit, AfterViewInit, OnDestroy {
       this.histories = json.histories;
     });
 
-    this._reportService.orgReport(this.id).subscribe((json: any) => {
-      this.chartData = json.data;
+    this._reportService.orgTestReport(this.id).subscribe((json: any) => {
+      this.testChartData = json.data;
+    });
+    this._reportService.orgIssueReport(this.id).subscribe((json: any) => {
+      this.issueChartData = json.data;
     });
   }
 

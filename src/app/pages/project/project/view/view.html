@@ -22,12 +22,28 @@
 
     <div class="row chart">
       <div class="col-sm-6">
-        <design-progress [data]="chartData.design" [showTitle]="true"></design-progress>
+        <design-progress [data]="testChartData.design" [showTitle]="true"></design-progress>
       </div>
       <div class="col-sm-6">
-        <execution-process [data]="chartData.exe" [showTitle]="true"></execution-process>
+        <execution-process [data]="testChartData.exe" [showTitle]="true"></execution-process>
       </div>
     </div>
+
+    <div class="row chart">
+      <div class="col-sm-6">
+        <issue-trend [data]="issueChartData.trend" [title]="'问题趋势'"></issue-trend>
+      </div>
+      <div class="col-sm-6">
+        <issue-age [data]="issueChartData.age" [title]="'问题龄期'"></issue-age>
+      </div>
+      <div class="col-sm-6">
+        <issue-distrib [data]="issueChartData.distribByPriority" [title]="'问题优先级分布'"></issue-distrib>
+      </div>
+      <div class="col-sm-6">
+        <issue-distrib [data]="issueChartData.distribByStatus" [title]="'问题状态分布'"></issue-distrib>
+      </div>
+    </div>
+
   </div>
 
   <div class="info">

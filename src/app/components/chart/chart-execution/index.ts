@@ -1,4 +1,4 @@
-import { NgModule, ModuleWithProviders } from "@angular/core";
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule }  from '@angular/common';
 
 import { NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
@@ -19,13 +19,13 @@ export * from './src/execution-result/execution-result.component';
     exports: [ChartExecutionComponent, ExecutionResultComponent,
       ExecutionProcessComponent, ExecutionProgressComponent, ExecutionProcessByUserComponent],
     providers: [],
-    imports: [CommonModule, NgbTabsetModule, AngularEchartsModule]
+    imports: [CommonModule, NgbTabsetModule, AngularEchartsModule],
 })
 export class ChartExecutionModule {
     static forRoot(): ModuleWithProviders {
         return {
             ngModule: ChartExecutionModule,
-            providers: []
+            providers: [],
         };
     }
 }

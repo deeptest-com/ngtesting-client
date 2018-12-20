@@ -30,7 +30,8 @@ export class ProjectView implements OnInit, AfterViewInit, OnDestroy {
   envs: any[] = [];
   users: any[] = [];
 
-  chartData: any = {};
+  testChartData: any = {};
+  issueChartData: any = {};
 
   routeSub: any;
 
@@ -66,8 +67,11 @@ export class ProjectView implements OnInit, AfterViewInit, OnDestroy {
       }
     });
 
-    this._reportService.projectReport(this.id).subscribe((json: any) => {
-      this.chartData = json.data;
+    this._reportService.projectTestReport(this.id).subscribe((json: any) => {
+      this.testChartData = json.data;
+    });
+    this._reportService.projectIssueReport(this.id).subscribe((json: any) => {
+      this.issueChartData = json.data;
     });
   }
 

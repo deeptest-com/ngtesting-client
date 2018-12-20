@@ -10,6 +10,7 @@ import { DirectiveModule } from '../../../../directive/directive.module';
 import { PipeModule } from '../../../../pipe/pipe.module';
 import { ChartDesignModule } from '../../../../components/chart/chart-design';
 import { ChartExecutionModule } from '../../../../components/chart/chart-execution';
+import { ChartIssueModule } from '../../../../components/chart/chart-issue';
 
 import { ProjectView } from '../../../project/project/view/view.component';
 
@@ -30,12 +31,13 @@ import { Prj } from './prj.component';
     PipeModule,
     ChartDesignModule,
     ChartExecutionModule,
+    ChartIssueModule,
   ],
   declarations: [Prj, ProjectView],
   providers: [
     AccountService, ProjectService, PrjResolve, ReportService,
     UserService, VerService, EnvService,
-  ]
+  ],
 })
 export class PrjModule {
 

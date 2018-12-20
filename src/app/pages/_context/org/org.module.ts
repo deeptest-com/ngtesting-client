@@ -7,6 +7,7 @@ import { NgaModule } from '../../../theme/nga.module';
 import { PipeModule } from '../../../pipe/pipe.module';
 import { ChartDesignModule } from '../../../components/chart/chart-design';
 import { ChartExecutionModule } from '../../../components/chart/chart-execution';
+import { ChartIssueModule } from '../../../components/chart/chart-issue';
 
 import { DirectiveModule } from '../../../directive/directive.module';
 
@@ -25,6 +26,7 @@ import { OrgView } from '../../org/view/view.component';
     PipeModule,
     ChartDesignModule,
     ChartExecutionModule,
+    ChartIssueModule,
   ],
   declarations: [Org, OrgView],
   providers: [
