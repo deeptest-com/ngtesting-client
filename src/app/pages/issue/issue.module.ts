@@ -52,6 +52,7 @@ import { TableColumnSelectionModule } from './query/table-column-selection';
 import { IssueOptModule } from './query/issue-opt';
 
 import { IssueCreate } from './create/create.component';
+import { IssueEdit } from './edit/edit.component';
 import { IssueView } from './view/view.component';
 
 @NgModule({
@@ -82,6 +83,7 @@ import { IssueView } from './view/view.component';
     Issue,
     IssueQuery, IssueTable, ItemProp, IssueBrowse,
     IssueCreate,
+    IssueEdit,
     IssueView,
   ],
   providers: [

@@ -5,6 +5,8 @@ import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { DateFormatPipe } from '../../../pipe/date';
 
+import { TinyMCEModule } from '../../tiny-mce';
+
 import { LabelShowComponent } from './_label/show/label-show.component';
 import { LabelIssueDesignComponent } from './_label/issue/design/label-issue-design.component';
 
@@ -21,7 +23,8 @@ import { CaseFieldShowComponent } from './field/case/show/case-field-show.compon
 
 @NgModule({
   imports: [CommonModule, FormsModule, ReactiveFormsModule, NgbDropdownModule,
-    ],
+    TinyMCEModule,
+  ],
   declarations: [
     LabelShowComponent, LabelIssueDesignComponent,
     InputEditComponent, InputViewComponent, InputDesignComponent,

@@ -21,6 +21,10 @@ export class InputEditComponent implements OnInit, AfterViewInit {
 
   @Input() elem: any = {};
   @Input() options: any[] = [];
+
+  mutiSelectVal: any[] = [];
+  checkboxVal: any = {};
+
   _model: any = {};
 
   get model(): any {
@@ -39,6 +43,15 @@ export class InputEditComponent implements OnInit, AfterViewInit {
       this._model[this.elem.colCode] = this._dateFormatPipe.transform(
         this._model[this.elem.colCode], 'yyyy-MM-dd HH:mm');
     }
+    else if (this.elem.input == 'multi_select' && this._model[this.elem.colCode]) {
+      this.mutiSelectVal = this._model[this.elem.colCode].split(',');
+    } else if (this.elem.input == 'checkbox' && this._model[this.elem.colCode]) {
+      this._model[this.elem.colCode].split(',').forEach(item => {
+        this.checkboxVal[item] = true;
+      });
+    }
+
+    console.log('###', this.mutiSelectVal, this.checkboxVal);
   }
 
   public constructor(private _dateFormatPipe: DateFormatPipe) {
@@ -46,8 +59,6 @@ export class InputEditComponent implements OnInit, AfterViewInit {
   }
 
   public ngOnInit(): void {
-    console.log('???this.elem', this.elem);
-
     if (!this._model[this.elem.colCode] && this.options) {
       const defaults: any[] = this.options.filter(
         (option, index) => option.defaultVal == true);
@@ -59,11 +70,15 @@ export class InputEditComponent implements OnInit, AfterViewInit {
     const validators: any[] = [];
     if (this.elem.required) {
       validators.push(Validators.required);
-
-      if (this.validateMsg) {
-        this.validateMsg['elem-' + this.elem.id] = {
-          'required': this.elem.label + '不能为空',
-        };
+      this.validateMsg['elem-' + this.elem.id] = { 'required': this.elem.label + '不能为空' };
+    }
+    if (this.elem.input == 'number') {
+      if (this.elem.type == 'integer') {
+        validators.push(Validators.pattern('^[0-9]*$'));
+        this.validateMsg['elem-' + this.elem.id] = { 'pattern': this.elem.label + '必须是整数' };
+      } else if (this.elem.type == 'double') {
+        validators.push(Validators.pattern('^(-?\\d+)(\\.\\d+)?$'));
+        this.validateMsg['elem-' + this.elem.id] = { 'pattern': this.elem.label + '必须是小数' };
       }
     }
 
@@ -88,6 +103,28 @@ export class InputEditComponent implements OnInit, AfterViewInit {
       time_24hr: true,
       minuteIncrement: 15,
     });
+  }
+
+  checkboxValChange() {
+    let val: any[] = [];
+    for (const key in this.checkboxVal) {
+      if (this.checkboxVal[key]) {
+        val.push(key);
+      }
+    }
+    this.model[this.elem.colCode] = val.join(',');
+
+    console.log('checkboxValChange', this.model[this.elem.colCode]);
+  }
+
+  mutiSelectValChange() {
+    this.model[this.elem.colCode] = this.mutiSelectVal.join(',');
+    console.log('mutiSelectValChange', this.model[this.elem.colCode]);
+  }
+
+  richtextChange(content: any) {
+    this.model[this.elem.colCode] = content;
+    console.log('richtextChange', this.model[this.elem.colCode]);
   }
 
   getVal(elem, option) {

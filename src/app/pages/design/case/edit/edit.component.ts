@@ -73,7 +73,6 @@ export class CaseEdit implements OnInit, AfterViewInit, OnDestroy {
         return;
       }
 
-      console.log('111', CONSTANT.CASE_PROPERTY_MAP);
       this.casePropMap = CONSTANT.CASE_PROPERTY_MAP;
       this.customFields = CONSTANT.CASE_CUSTOM_FIELDS;
 
@@ -205,6 +204,7 @@ export class CaseEdit implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onChange(event: any) {
+    console.log('onChange', event);
     this.model.content = event;
   }
 

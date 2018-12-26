@@ -4,33 +4,38 @@
     <ng-container [ngSwitch]="elem.input">
 
       <ng-container *ngSwitchCase="'textarea'">
-        <textarea type="text" class="form-control form-control-sm"></textarea>
+        <textarea type="text" rows="3" class="form-control form-control-sm"></textarea>
       </ng-container>
 
       <ng-container *ngSwitchCase="'dropdown'">
         <select class="form-control form-control-sm">
-          <option *ngFor="let item of options" value="{{item?.id}}">{{item?.label}}</option>
+          <option value="">请选择</option>
         </select>
       </ng-container>
 
       <ng-container *ngSwitchCase="'radio'">
-        <ng-container *ngFor="let item of options">
-          <input value="{{item?.id}}"
-                 type="radio" class="form-check-input">{{item?.label}}
-        </ng-container>
+        <label class="col-form-label">
+          <input value="1" type="radio"> <span>选项一</span>&nbsp;
+          <input value="2" type="radio"> <span>选项二</span>
+        </label>
       </ng-container>
 
       <ng-container *ngSwitchCase="'checkbox'">
-        <ng-container *ngFor="let item of options">
-          <input value="{{item?.id}}"
-                 type="radio" class="form-check-input">{{item?.label}}
-        </ng-container>
+        <label class="col-form-label">
+          <input value="1" type="checkbox"> <span>选项一</span>&nbsp;
+          <input value="2" type="checkbox"> <span>选项二</span>
+        </label>
       </ng-container>
 
       <ng-container *ngSwitchCase="'multi_select'">
         <select multiple class="form-control form-control-sm">
-          <option *ngFor="let item of options" value="{{item?.id}}">{{item?.label}}</option>
+          <option value="1">选项一</option>
+          <option value="2">选项二</option>
         </select>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'richtext'">
+        <textarea type="text" rows="3" class="form-control form-control-sm">MarkDown语法支持</textarea>
       </ng-container>
 
       <ng-container *ngSwitchCase="'date'">

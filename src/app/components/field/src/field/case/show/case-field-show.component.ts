@@ -11,7 +11,7 @@ import {CONSTANT} from "../../../../../../utils";
 })
 export class CaseFieldShowComponent implements OnInit {
   @Input() model: any = {};
-  @Input() elem: any;
+  @Input() elem: any = {};
   @Input() casePropMap: any = {};
 
   @Input() form: FormGroup;
@@ -30,6 +30,8 @@ export class CaseFieldShowComponent implements OnInit {
     this.elem = { colCode: val, fullLine: true, buildIn: true };
     if (['type', 'priority', 'status'].indexOf(val) > -1) {
       this.elem.input = 'dropdown';
+    } else if ('content' == val) {
+      this.elem.input = 'richtext';
     }
   }
 

@@ -15,7 +15,6 @@ import { DirectiveModule } from '../../../directive/directive.module';
 import { SlimLoadingBarModule } from '../../../components/ng2-loading-bar';
 import { ZtreeModule } from '../../../components/ztree';
 import { StepsTableModule } from '../../../components/steps-table';
-import { CustomFieldModule } from '../../../components/custom-field';
 import { FieldModule } from '../../../components/field';
 import { CommentsModule } from '../../../components/comments';
 
@@ -53,7 +52,6 @@ import { ExecutionResult } from './result/result.component';
     SlimLoadingBarModule.forRoot(),
     ZtreeModule,
     StepsTableModule,
-    CustomFieldModule,
     FieldModule,
     CommentsModule,
   ],

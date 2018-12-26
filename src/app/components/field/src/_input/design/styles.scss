@@ -2,4 +2,11 @@
   .form-control[readonly] {
     color: #666666 !important;
   }
+
+  select[multiple] {
+    height: 55px !important;
+  }
+  textarea {
+    height: 50px !important;
+  }
 }

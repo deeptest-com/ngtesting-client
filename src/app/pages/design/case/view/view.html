@@ -81,8 +81,7 @@
 
     <div [class.hidden]="tab != 'content'" class="tab-steps form-group row">
       <div [class.hidden]="'richText'!=model.contentType" class="col-sm-12">
-          <pre style="display: inline;"
-               [innerHTML]="model.content"></pre>
+          <pre style="display: inline;" [innerHTML]="model.content"></pre>
       </div>
 
       <div [class.hidden]="'steps'!=model.contentType" class="col-sm-12">

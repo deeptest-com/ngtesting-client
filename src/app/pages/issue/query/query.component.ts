@@ -221,10 +221,9 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
   }
 
   dealWithIssue($event) {
-    console.log('dealWithIssue', $event, this.batchModel);
-
     const url = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + CONSTANT.CURR_PRJ_ID + '/issue/'
       + $event.item.id + '/' + $event.act;
+    console.log('dealWithIssue', url);
     this._routeService.navTo(url);
   }
 

@@ -207,9 +207,9 @@
             ></steps-table>
           </div>
           <div *ngIf="'richText'==model.contentType">
-            <!--<case-field-show [model]="model" [elem]="elem" [propMap]="propMap"
+            <case-field-show [model]="model" [elemCode]="'content'" [casePropMap]="casePropMap"
                              (onSave)="saveField($event)" [form]="form">
-            </case-field-show>-->
+            </case-field-show>
           </div>
         </div>
       </div>

@@ -11,7 +11,6 @@ import { routing }       from './report.routing';
 import { DirectiveModule } from '../../../directive/directive.module';
 import { SlimLoadingBarModule } from '../../../components/ng2-loading-bar';
 import { StepsTableModule } from '../../../components/steps-table';
-import { CustomFieldModule } from '../../../components/custom-field';
 
 import { RouteService } from '../../../service/route';
 import { RequestService } from '../../../service/request';
@@ -36,19 +35,18 @@ import { ReportEdit } from './edit/edit.component';
     DirectiveModule,
     SlimLoadingBarModule.forRoot(),
     StepsTableModule,
-    CustomFieldModule
   ],
   declarations: [
     Report,
     ReportList,
-    ReportEdit
+    ReportEdit,
   ],
   providers: [
     RouteService,
     RequestService,
     DatetimePickerService,
     CaseService,
-    CaseStepService
+    CaseStepService,
   ]
 })
 export class ReportModule {}

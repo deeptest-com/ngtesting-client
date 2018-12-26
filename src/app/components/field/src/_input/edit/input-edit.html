@@ -1,17 +1,10 @@
 <div class="field-input-edit">
   <div [formGroup]="form">
-
     <ng-container [ngSwitch]="elem.input">
 
       <ng-container *ngSwitchCase="'textarea'">
         <textarea [(ngModel)]="model[elem.colCode]" formControlName="{{'elem-'+elem.id}}"
                   type="text" class="form-control"></textarea>
-      </ng-container>
-
-      <ng-container *ngSwitchCase="'richtext'">
-        richtext
-<!--        <tiny-mce [elemId]="'custom-field-'+field.colCode" [content]="model[field.colCode]" [height]="'200px'"
-                  (changed)="onChange($event)"></tiny-mce>-->
       </ng-container>
 
       <ng-container *ngSwitchCase="'dropdown'">
@@ -20,25 +13,41 @@
         </select>
       </ng-container>
 
+
+
       <ng-container *ngSwitchCase="'radio'">
-        <ng-container *ngFor="let item of options">
-          <input [(ngModel)]="model[elem.colCode]" formControlName="{{'elem-'+elem.id}}" value="{{item?.id}}"
-                 type="radio" class="form-check-input">{{item?.label}}
-        </ng-container>
+        <label class="col-form-label">
+            <ng-container *ngFor="let item of options">
+              <input [(ngModel)]="model[elem.colCode]" formControlName="{{'elem-'+elem.id}}"
+                     value="{{getVal(elem,item)}}" type="radio">
+              <span>{{item?.label}}</span>&nbsp;
+            </ng-container>
+        </label>
       </ng-container>
 
       <ng-container *ngSwitchCase="'checkbox'">
-        <ng-container *ngFor="let item of options">
-          <input formControlName="{{'elem-'+elem.id}}" value="{{item?.id}}"
-                 type="radio" class="form-check-input">{{item?.label}}
-        </ng-container>
+        <label class="col-form-label">
+          <ng-container *ngFor="let item of options">
+            <input [(ngModel)]="checkboxVal[item.id]" (change)="checkboxValChange()" [ngModelOptions]="{standalone: true}"
+                   value="{{getVal(elem,item)}}" type="checkbox">
+            <span>{{item?.label}}</span>&nbsp;
+          </ng-container>
+        </label>
       </ng-container>
 
       <ng-container *ngSwitchCase="'multi_select'">
-        <select formControlName="{{'elem-'+elem.id}}" multiple class="form-control">
-          <option *ngFor="let item of options" value="{{item?.id}}">{{item?.label}}</option>
+        <select [(ngModel)]="mutiSelectVal" (change)="mutiSelectValChange()" multiple
+                [ngModelOptions]="{standalone: true}" class="form-control">
+          <option *ngFor="let item of options" value="{{getVal(elem,item)}}">{{item?.label}}</option>
         </select>
       </ng-container>
+
+      <ng-container *ngSwitchCase="'richtext'">
+        <tiny-mce [content]="model[elem.colCode]" [height]="'300px'"
+                  (changed)="richtextChange($event)"></tiny-mce>
+      </ng-container>
+
+
 
       <ng-container *ngSwitchCase="'date'">
         <div class="input-group my-flatpickr-date">

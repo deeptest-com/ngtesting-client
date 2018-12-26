@@ -52,8 +52,8 @@
           <td>{{ item.label }}</td>
           <td>{{ item.value }}</td>
           <td>
-            <input *ngIf="!item.default" (change)="setDefault(item)" [(ngModel)]="item.default" type="checkbox" name="default" #default>
-            <input *ngIf="item.default" onclick="return false;" [(ngModel)]="item.default" type="checkbox" name="default" #default>
+            <input *ngIf="!item.defaultVal" (change)="setDefault(item)" [(ngModel)]="item.defaultVal" type="checkbox" name="default" #default>
+            <input *ngIf="item.defaultVal" onclick="return false;" [(ngModel)]="item.defaultVal" type="checkbox" name="default" #default>
           </td>
           <td>
             <span *ngIf="i == 0" class="ionic-icon link placeholder"></span>
