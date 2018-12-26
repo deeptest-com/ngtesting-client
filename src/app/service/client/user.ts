@@ -15,11 +15,8 @@ export class UserService {
   constructor(private _state: GlobalState, private _routeService: RouteService, private _reqService: RequestService) { }
   private _apiBase = 'client/user/';
 
-  listLastest() {
-    return this._reqService.post(this._apiBase + 'listLastest', {});
-  }
-  getUsers(projectId: number) {
-    const model = { projectId: projectId };
+  getUsers() {
+    const model = { };
     return this._reqService.post(this._apiBase + 'getUsers', model);
   }
   search(keywords: string, exceptIds: any[]) {

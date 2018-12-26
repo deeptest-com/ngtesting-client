@@ -72,10 +72,6 @@ export class PlanList implements OnInit, AfterViewInit, OnDestroy {
         + '/implement/plan/null/edit');
   }
 
-  delete(projectId: string): void {
-
-  }
-
   loadData() {
     this._planService.query(this.queryModel, this.page, this.pageSize).subscribe((json: any) => {
       this.collectionSize = json.total;

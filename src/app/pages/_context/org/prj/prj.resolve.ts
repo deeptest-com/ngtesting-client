@@ -19,13 +19,13 @@ export class PrjResolve implements CanActivate {
     const context = Utils.getOrgAndPrjId(state.url);
     console.log('PrjResolve - canActivate', context.prjId, CONSTANT.CURR_PRJ_ID);
 
-    // CONSTANT.CURR_PRJ_ID，pages.resolve会执行相关操作
-    if (CONSTANT.CURR_PRJ_ID != context.prjId) { // CONSTANT.CURR_PRJ_ID != null &&
-      return this.projectService.change(context.prjId).toPromise().then(result => {
-        const prj = result.data;
-        if (prj.type == 'project') {
-          CONSTANT.CURR_PRJ_ID = prj.id;
-          CONSTANT.CURR_PRJ_NAME = prj.name;
+    // CONSTANT.CURR_PRJ_ID为空时，pages.resolve会执行相关初始化操作
+    if (CONSTANT.CURR_PRJ_ID != null && CONSTANT.CURR_PRJ_ID != context.prjId) {
+      return this.projectService.change(context.projectId).toPromise().then(result => {
+        const project = result.data;
+        if (project.type == 'project') {
+          CONSTANT.CURR_PRJ_ID = project.id;
+          CONSTANT.CURR_PRJ_NAME = project.name;
         }
         return true;
       });

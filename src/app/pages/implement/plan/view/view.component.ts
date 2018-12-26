@@ -65,7 +65,7 @@ export class PlanView implements OnInit, AfterViewInit {
 
   loadData() {
     const that = this;
-    that._planService.get(CONSTANT.CURR_PRJ_ID, that.planId).subscribe((json: any) => {
+    that._planService.get(that.planId).subscribe((json: any) => {
       that.model = json.data;
 
       that.model.tasks.forEach((task: any) => {

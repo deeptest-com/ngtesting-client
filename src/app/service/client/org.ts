@@ -11,12 +11,12 @@ export class OrgService {
   _apiBase = 'client/org/';
 
   view(id: number) {
-    const model = { id: id };
+    const model = { orgId: id };
     return this._reqService.post(this._apiBase + 'view', model);
   }
 
   change(id: number) {
-    const model = { id: id };
+    const model = { orgId: id };
     return this._reqService.post(this._apiBase + 'change', model);
   }
 

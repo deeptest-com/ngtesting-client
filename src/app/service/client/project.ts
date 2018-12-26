@@ -16,43 +16,29 @@ export class ProjectService {
   }
 
   get(id: number) {
-    const model = { id: id };
+    const model = { projectId: id };
     return this._reqService.post(this._apiBase + 'get', model);
   }
-
   getInfo(id: number) {
-    const model = { id: id };
+    const model = { projectId: id };
     return this._reqService.post(this._apiBase + 'getInfo', model);
   }
-  getUsers(id: number) {
-    const model = { id: id };
-    return this._reqService.post(this._apiBase + 'getUsers', model);
-  }
-
-  save(model: any) {
-    return this._reqService.post(this._apiBase + 'save', { model: model });
-  }
-  saveMembers(model: any, entityTypeAndIds: string[]) {
-    _.merge(model, { entityTypeAndIds: entityTypeAndIds });
-    return this._reqService.post(this._apiBase + 'saveMembers', model);
-  }
-  changeRole(projectId: number, roleId: number, entityId: number) {
-    return this._reqService.post(this._apiBase + 'changeRole',
-      { projectId: projectId, roleId: roleId, entityId: entityId });
-  }
-
   delete(id: number) {
-    const model = { id: id };
+    const model = { projectId: id };
     return this._reqService.post(this._apiBase + 'delete', model);
   }
 
   view(id: number) {
-    const model = { id: id };
+    const model = { projectId: id };
     return this._reqService.post(this._apiBase + 'view', model);
   }
   change(projectId: number) {
-    const model = { id: projectId };
+    const model = { projectId: projectId };
     return this._reqService.post(this._apiBase + 'change', model);
+  }
+
+  save(model: any) {
+    return this._reqService.post(this._apiBase + 'save', { model: model });
   }
 }
 

@@ -26,16 +26,16 @@ export class CaseInTaskService {
     return this._reqService.post(this._apiBase + 'setResult', data);
   }
 
-  rename(projectId: number, taskId: number, model: any) {
-    _.merge(model, { projectId: projectId, taskId: taskId });
+  rename(taskId: number, model: any) {
+    _.merge(model, { taskId: taskId });
     return this._reqService.post(this._apiBase + 'rename', model);
   }
   delete(id: number, entityId: number) {
     const model = { id: id, entityId: entityId };
     return this._reqService.post(this._apiBase + 'delete', model);
   }
-  move(projectId: number, taskId: number, data: any) {
-    _.merge(data, { projectId: projectId, taskId: taskId });
+  move(taskId: number, data: any) {
+    _.merge(data, { taskId: taskId });
 
     return this._reqService.post(this._apiBase + 'move', data);
   }

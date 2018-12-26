@@ -13,7 +13,7 @@ export class IssueQueryService {
   _apiBase = 'client/issue_query/';
 
   list(query: any, page: number, pageSize: number) {
-    _.merge(query, { projectId: CONSTANT.CURR_PRJ_ID, page: page, pageSize: pageSize });
+    _.merge(query, { page: page, pageSize: pageSize });
     return this._reqService.post(this._apiBase + 'list', query);
   }
 

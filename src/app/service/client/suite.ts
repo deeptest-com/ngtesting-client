@@ -13,7 +13,7 @@ export class SuiteService {
   _apiBase = 'client/suite/';
 
   query(query: any, page: number, pageSize: number) {
-    _.merge(query, { projectId: CONSTANT.CURR_PRJ_ID, page: page, pageSize: pageSize });
+    _.merge(query, { page: page, pageSize: pageSize });
     return this._reqService.post(this._apiBase + 'query', query);
   }
 
@@ -22,18 +22,17 @@ export class SuiteService {
     return this._reqService.post(this._apiBase + 'get', model);
   }
 
-  save(projectId: number, caseProjectId: number, model: any) {
+  save(caseProjectId: number, model: any) {
     const data = _.clone(model);
-    data.projectId = projectId;
     data.caseProjectId = caseProjectId;
     return this._reqService.post(this._apiBase + 'save', data);
   }
 
-  saveSuiteCases(projectId: number, caseProjectId: number, suiteId: number, cases: any[]) {
+  saveSuiteCases(caseProjectId: number, suiteId: number, cases: any[]) {
     const ids: number[] = cases.map(function (item, index, input) {
       return item.id;
     });
-    return this._reqService.post(this._apiBase + 'saveCases', { projectId: projectId, caseProjectId: caseProjectId, suiteId: suiteId, cases: ids });
+    return this._reqService.post(this._apiBase + 'saveCases', { caseProjectId: caseProjectId, suiteId: suiteId, cases: ids });
   }
 
   delete(id: any) {

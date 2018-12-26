@@ -119,7 +119,7 @@ export let Utils: any = {
   },
 
   getOrgAndPrjId: function (url: string) {
-    let orgId, prjId;
+    let orgId, projectId;
 
     // #/pages/org/5/prjs/18/view
     // #/pages/org/5/prj/18/design/case
@@ -128,12 +128,12 @@ export let Utils: any = {
       const str = url.split('org/')[1];
       orgId = str.split('/')[0];
       if (str.indexOf('prjs/') > -1) {
-        prjId = str.split('prjs/')[1].split('/')[0];
+        projectId = str.split('prjs/')[1].split('/')[0];
       } else if (str.indexOf('prj/') > -1) {
-        prjId = str.split('prj/')[1].split('/')[0];
+        projectId = str.split('prj/')[1].split('/')[0];
       }
     }
-    const ret = { orgId: orgId, prjId: prjId };
+    const ret = { orgId: orgId, projectId: projectId };
     console.log('url params: ', ret);
     return ret;
   },

@@ -1,13 +1,13 @@
 import { Input, Output, EventEmitter, Component, ViewChild, OnInit, AfterViewInit, Injector, ElementRef } from '@angular/core';
 
-import {NgbModal, NgbModalRef, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalRef, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
-import {GlobalState} from '../../../../global.state';
+import { GlobalState } from '../../../../global.state';
 
 @Component({
   selector: 'comment-edit',
   styleUrls: ['./styles.scss'],
-  templateUrl: './comment-edit.html'
+  templateUrl: './comment-edit.html',
 })
 export class CommentEditComponent implements OnInit, AfterViewInit{
   @Input() @Output() model: any = {};
@@ -17,7 +17,7 @@ export class CommentEditComponent implements OnInit, AfterViewInit{
   modalRef: NgbModalRef;
   closeResult: string;
 
-  constructor(private _state:GlobalState, private modalService: NgbModal, private injector: Injector) {
+  constructor(private _state: GlobalState, private modalService: NgbModal, private injector: Injector) {
 
   }
 
@@ -29,7 +29,7 @@ export class CommentEditComponent implements OnInit, AfterViewInit{
   }
 
   public showModal(cls?: string): void {
-    let clsMap = cls? { windowClass: cls }: {};
+    const clsMap = cls ? { windowClass: cls } : {};
     this.modalRef = this.modalService.open(this.content, clsMap);
   }
 
@@ -37,7 +37,7 @@ export class CommentEditComponent implements OnInit, AfterViewInit{
     this.modalRef.close();
   }
 
-  public onConfirm():void {
+  public onConfirm(): void {
     this.confirm.emit();
   }
 
@@ -51,7 +51,7 @@ export class CommentEditComponent implements OnInit, AfterViewInit{
     }
   }
 
-  onModalShow():void {
+  onModalShow(): void {
     // init jquery components if needed
   }
 

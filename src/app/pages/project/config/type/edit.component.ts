@@ -44,14 +44,14 @@ export class ProjectTypeEdit implements OnInit, AfterViewInit {
   ngAfterViewInit() {}
 
   loadData() {
-    this._typeService.getByProject(this.projectId).subscribe((json: any) => {
+    this._typeService.getByProject().subscribe((json: any) => {
       this.model = json.model;
       this.models = json.models;
     });
   }
 
   change(solutionId) {
-    this._typeService.setByProject(this.projectId, solutionId).subscribe((json: any) => {
+    this._typeService.setByProject(solutionId).subscribe((json: any) => {
       this.model = json.model;
       this.models = json.models;
     });

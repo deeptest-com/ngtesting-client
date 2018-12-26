@@ -18,10 +18,10 @@ export class ReportService {
   }
 
   projectTestReport(id: number) {
-    return this._reqService.post(this._apiTestBase + 'projectTest', { id: id });
+    return this._reqService.post(this._apiTestBase + 'projectTest', { projectId: id });
   }
   projectIssueReport(id: number) {
-    return this._reqService.post(this._apiIssueBase + 'projectIssue', { id: id });
+    return this._reqService.post(this._apiIssueBase + 'projectIssue', { projectId: id });
   }
 
   planReport(planId: number) {

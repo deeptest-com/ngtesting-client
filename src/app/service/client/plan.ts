@@ -14,18 +14,17 @@ export class PlanService {
   _apiBase = 'client/plan/';
 
   query(query: any, page: number, pageSize: number) {
-    _.merge(query, { projectId: CONSTANT.CURR_PRJ_ID, page: page, pageSize: pageSize });
+    _.merge(query, { page: page, pageSize: pageSize });
     return this._reqService.post(this._apiBase + 'query', query);
   }
 
-  get(projectId: number, id: number) {
-    const data = { projectId: projectId, id: id };
+  get(id: number) {
+    const data = { id: id };
     return this._reqService.post(this._apiBase + 'get', data);
   }
 
-  save(projectId: number, model: any) {
+  save(model: any) {
     const data = _.clone(model);
-    data.projectId = projectId;
 
     data.tasks = null;
     return this._reqService.post(this._apiBase + 'save', data);

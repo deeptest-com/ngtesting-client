@@ -129,7 +129,7 @@ export class SuiteEditComponent implements OnInit, AfterViewInit {
   }
 
   save() {
-    this._suiteService.save(this.prjId, this.caseProjectId ? this.caseProjectId : this.prjId, this.model)
+    this._suiteService.save(this.caseProjectId ? this.caseProjectId : this.prjId, this.model)
         .subscribe((json: any) => {
       if (json.code == 1) {
         this._routeService.navTo('/pages/org/' + CONSTANT.CURR_ORG_ID
@@ -154,33 +154,33 @@ export class SuiteEditComponent implements OnInit, AfterViewInit {
     this.caseSelectionModal.componentInstance.caseProjectId = this.caseProjectId ? this.caseProjectId : this.prjId;
     this.caseSelectionModal.componentInstance.suiteId = suite.id;
 
-    this._userService.getUsers(CONSTANT.CURR_PRJ_ID).subscribe((json: any) => {
+    this._userService.getUsers().subscribe((json: any) => {
       this.caseSelectionModal.componentInstance.users = json.data;
     });
 
     this.caseSelectionModal.result.then((result) => {
-      this.saveSuiteThenCases(result.projectId, result.caseProjectId, result.data);
+      this.saveSuiteThenCases(result.caseProjectId, result.data);
     }, (reason) => {
       logger.log('reason', reason);
     });
   }
 
-  saveSuiteThenCases(projectId: number, caseProjectId: number, cases: any[]): void {
-      this._suiteService.save(projectId, caseProjectId, this.model).subscribe((json: any) => {
+  saveSuiteThenCases(caseProjectId: number, cases: any[]): void {
+      this._suiteService.save(caseProjectId, this.model).subscribe((json: any) => {
         if (json.code == 1) {
           this.suiteId = json.data.id;
           this.model.id = json.data.id;
           this.caseProjectId = caseProjectId;
 
-          this._saveSuiteCases(projectId, caseProjectId, cases);
+          this._saveSuiteCases(caseProjectId, cases);
         } else {
           this.formErrors = [json.msg];
         }
       });
   }
 
-  _saveSuiteCases(projectId: number, caseProjectId: number, cases: any[]) {
-    this._suiteService.saveSuiteCases(projectId, caseProjectId, this.suiteId, cases).subscribe((json: any) => {
+  _saveSuiteCases(caseProjectId: number, cases: any[]) {
+    this._suiteService.saveSuiteCases(caseProjectId, this.suiteId, cases).subscribe((json: any) => {
       this.model = json.data;
     });
   }

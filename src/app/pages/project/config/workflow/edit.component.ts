@@ -45,7 +45,7 @@ export class ProjectWorkflowEdit implements OnInit, AfterViewInit {
   ngAfterViewInit() {}
 
   loadData() {
-    this._workflowService.getByProject(this.projectId).subscribe((json: any) => {
+    this._workflowService.getByProject().subscribe((json: any) => {
       this.model = json.model;
       this.models = json.models;
       this.itemMap = json.itemMap;
@@ -53,7 +53,7 @@ export class ProjectWorkflowEdit implements OnInit, AfterViewInit {
   }
 
   change(solutionId) {
-    this._workflowService.setByProject(this.projectId, solutionId).subscribe((json: any) => {
+    this._workflowService.setByProject(solutionId).subscribe((json: any) => {
       this.model = json.model;
       this.models = json.models;
     });

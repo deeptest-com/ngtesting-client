@@ -98,7 +98,7 @@ export const ORG_MENU = [
             path: 'org-admin/test-settings/project-role/list',
             data: {
               menu: {
-                title: '角色权限',
+                title: '项目角色',
                 icon: 'ion-edit',
                 selected: false,
                 order: 1,

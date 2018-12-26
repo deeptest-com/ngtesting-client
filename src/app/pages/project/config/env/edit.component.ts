@@ -79,7 +79,7 @@ export class ProjectEnvEdit implements OnInit, AfterViewInit {
 
   loadData() {
     if (!this.id) {
-      this.model = { projectId: this.projectId, disabled: false };
+      this.model = { disabled: false };
       return;
     }
 

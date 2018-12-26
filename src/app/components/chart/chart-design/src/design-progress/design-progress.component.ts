@@ -65,23 +65,23 @@ export class DesignProgressComponent implements OnInit {
 
       yAxis: [
         {
-          name: '新增（个）',
+          name: '新增数',
           type: 'value',
         },
         {
-          name: '累计（个）',
+          name: '累计数',
           type: 'value',
         },
       ],
       series: [
         {
-          name: '新增数量',
+          name: '新增数',
           type: 'bar',
           yAxisIndex: 0,
           data: this._data.numbList,
         },
         {
-          name: '累计数量',
+          name: '累计数',
           type: 'line',
           yAxisIndex: 1,
           data: this._data.totalList,

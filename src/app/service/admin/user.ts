@@ -35,8 +35,8 @@ export class UserAdmin {
     const model = { id: id };
     return this._reqService.post(this._apiBase + 'delete', model);
   }
-  removeFromOrg(userId: number, orgId: number) {
-    const model = { userId: userId, orgId: orgId };
+  removeFromOrg(userId: number) {
+    const model = { userId: userId };
     return this._reqService.post(this._apiBase + 'removeFromOrg', model);
   }
 

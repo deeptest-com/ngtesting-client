@@ -67,7 +67,7 @@ export class IssueWatch implements OnInit, AfterViewInit, OnDestroy {
   }
 
   remove(item) {
-    this.issueWatchService.remove(item.id).subscribe((json: any) => {
+    this.issueWatchService.remove(item.id, this.issue.id).subscribe((json: any) => {
       if (json.code == 1) {
         this.loadData();
       }

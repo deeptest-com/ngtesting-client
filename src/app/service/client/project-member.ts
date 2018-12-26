@@ -11,8 +11,8 @@ export class ProjectMemberService {
 
   _apiBase = 'client/project_member/';
 
-  getUsers(id: number) {
-    const model = { projectId: id };
+  getUsers() {
+    const model = { };
     return this._reqService.post(this._apiBase + 'getUsers', model);
   }
 
@@ -20,14 +20,14 @@ export class ProjectMemberService {
     _.merge(model, { entityTypeAndIds: entityTypeAndIds });
     return this._reqService.post(this._apiBase + 'saveMembers', model);
   }
-  changeRole(projectId: number, roleId: number, entityId: number) {
+  changeRole(roleId: number, entityId: number) {
     return this._reqService.post(this._apiBase + 'changeRole',
-      { projectId: projectId, roleId: roleId, entityId: entityId });
+      { roleId: roleId, entityId: entityId });
   }
 
-  remove(projectId: number, item: any) {
+  remove(item: any) {
     return this._reqService.post(this._apiBase + 'remove',
-      { projectId: projectId, type: item.type, entityId: item.entityId });
+      { type: item.type, entityId: item.entityId });
   }
 
 }

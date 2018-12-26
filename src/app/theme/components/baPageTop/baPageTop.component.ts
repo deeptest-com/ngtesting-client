@@ -67,6 +67,11 @@ export class BaPageTop implements OnInit, AfterViewInit, OnDestroy {
     this._state.subscribe(WS_CONSTANT.WS_ORG_SETTINGS, this.eventCode, (json) => {
       console.log(WS_CONSTANT.WS_ORG_SETTINGS + ' in ' + this.eventCode, json);
 
+      CONSTANT.CURR_ORG_ID = json.defaultOrgId;
+      CONSTANT.CURR_PRJ_ID = json.defaultPrjId;
+      this.orgId = json.defaultOrgId;
+      this.prjId = json.defaultPrjId;
+
       CONSTANT.CURR_ORG_NAME = json.defaultOrgName;
       CONSTANT.CURR_PRJ_NAME = json.defaultPrjName;
       CONSTANT.ORG_PRIVILEGES = json.orgPrivileges;
@@ -156,23 +161,8 @@ export class BaPageTop implements OnInit, AfterViewInit, OnDestroy {
     this.orgId = org.id;
     this._routeService.navTo('/pages/org/' + org.id + '/view');
   }
-  selectProject(prjId: number) {
-    // if (this._router.url.indexOf('/prj/') > -1) {
-    //   // Suite、Plan、Issue回到模块的首页
-    //   if (this._router.url.indexOf('/implement/suite') > -1) {
-    //     this._routeService.navTo('/pages/org/' + this.orgId + '/prj/' + prjId + '/implement/suite/list');
-    //   } else if (this._router.url.indexOf('/implement/plan') > -1) {
-    //     this._routeService.navTo('/pages/org/' + this.orgId + '/prj/' + prjId + '/implement/plan/list');
-    //   } else if (this._router.url.indexOf('/issue/query') > -1) {
-    //     this._routeService.navTo('/pages/org/' + this.orgId + '/prj/' + prjId + '/issue/query/0/all');
-    //   } else {
-    //     const arr = this._router.url.split('/prj/');
-    //     const url = arr[0] + '/prj/' + prjId + arr[1].substr(arr[1].indexOf('/'), arr[1].length);
-    //     this._routeService.navTo(url);
-    //   }
-    // } else { // 回到项目View页
-      this._routeService.navTo('/pages/org/' + this.orgId + '/prj/' + prjId + '/view');
-    // }
+  selectProject(projectId: number) {
+    this._routeService.navTo('/pages/org/' + this.orgId + '/prj/' + projectId + '/view');
   }
 
   ngOnDestroy(): void {

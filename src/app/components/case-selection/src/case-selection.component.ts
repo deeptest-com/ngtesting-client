@@ -61,13 +61,13 @@ export class CaseSelectionComponent implements OnInit {
 
   loadData() {
     if (this.selectFor == 'suite') {
-      this._caseService.queryForSuiteSelection(this.projectId, this.caseProjectId, this.suiteId)
+      this._caseService.queryForSuiteSelection(this.caseProjectId, this.suiteId)
             .subscribe((json: any) => {
         this.treeModel = json.data;
         this.brotherProjects = json.brotherProjects;
       });
     } else if (this.selectFor == 'task') {
-      this._caseService.queryForTaskSelection(this.projectId, this.caseProjectId, this.taskId)
+      this._caseService.queryForTaskSelection(this.caseProjectId, this.taskId)
             .subscribe((json: any) => {
         this.treeModel = json.data;
         this.brotherProjects = json.brotherProjects;
@@ -77,7 +77,7 @@ export class CaseSelectionComponent implements OnInit {
 
   save(): any {
     const ztree = $.fn.zTree.getZTreeObj('tree');
-    this.activeModal.close({ act: 'save', projectId: this.projectId, caseProjectId: this.caseProjectId,
+    this.activeModal.close({ act: 'save', caseProjectId: this.caseProjectId,
       data: ztree.getCheckedNodes(true) });
   }
 
@@ -143,10 +143,13 @@ export class CaseSelectionComponent implements OnInit {
       return !node.isParent && (
           ( typeFilter.length > 0 && _.indexOf(typeFilter, node.type) < 0 )
           || ( priorityFilter.length > 0 && _.indexOf(priorityFilter, node.priority) < 0 )
-          || ( estimateFilter.length > 0 && (parseInt(node.estimate) < parseInt(estimateFilter[0]) || parseInt(node.estimate) > parseInt(estimateFilter[1])) )
+          || ( estimateFilter.length > 0
+            && (parseInt(node.estimate) < parseInt(estimateFilter[0])
+              || parseInt(node.estimate) > parseInt(estimateFilter[1])) )
 
           || ( createTimeFilter && (new Date().getTime() - new Date(node.createTime).getTime()) > createTimeFilter )
-          || ( updateTimeFilter && !node.updateTime && (new Date().getTime() - new Date(node.updateTime).getTime()) > updateTimeFilter )
+          || ( updateTimeFilter && !node.updateTime
+            && (new Date().getTime() - new Date(node.updateTime).getTime()) > updateTimeFilter )
 
           || ( createByFilter.length > 0 && _.indexOf(createByFilter, node.createById) < 0 )
           || ( updateByFilter.length > 0  && !node.updateById && _.indexOf(updateByFilter, node.updateById) < 0 )

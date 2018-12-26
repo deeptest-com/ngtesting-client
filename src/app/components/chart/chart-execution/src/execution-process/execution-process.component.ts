@@ -69,7 +69,7 @@ export class ExecutionProcessComponent implements OnInit {
       ],
       yAxis : [
         {
-          name: '执行数（个）',
+          name: '数量',
           type : 'value',
         },
       ],

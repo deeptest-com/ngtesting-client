@@ -9,13 +9,13 @@ export class IssuePriorityService {
   constructor(private _reqService: RequestService) { }
   _apiBase = 'client/issue_priority/';
 
-  getByProject(projectId: number) {
-    const model = { projectId: projectId };
+  getByProject() {
+    const model = {};
     return this._reqService.post(this._apiBase + 'getByProject', model);
   }
 
-  setByProject(projectId: number, solutionId: number) {
-    const model = { projectId: projectId, solutionId: solutionId };
+  setByProject(solutionId: number) {
+    const model = { solutionId: solutionId };
     return this._reqService.post(this._apiBase + 'setByProject', model);
   }
 

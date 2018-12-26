@@ -123,7 +123,7 @@ export class PlanEdit implements OnInit, AfterViewInit {
 
   loadData() {
     const that = this;
-    that._planService.get(CONSTANT.CURR_PRJ_ID, this.planId).subscribe((json: any) => {
+    that._planService.get(this.planId).subscribe((json: any) => {
       that.model = json.data ? json.data : { verId: 'null', tasks: [] };
       that.suites = json.suites;
       that.vers = json.vers;
@@ -135,7 +135,7 @@ export class PlanEdit implements OnInit, AfterViewInit {
   }
 
   save() {
-    this._planService.save(this.prjId, this.model).subscribe((json: any) => {
+    this._planService.save(this.model).subscribe((json: any) => {
       if (json.code == 1) {
         this._routeService.navTo('/pages/org/' + this.orgId + '/prj/'
           + this.prjId + '/implement/plan/list');
@@ -175,7 +175,7 @@ export class PlanEdit implements OnInit, AfterViewInit {
   }
   saveTask() {
     if (!this.model.id) {
-      this._planService.save(this.prjId, this.model).subscribe((json: any) => {
+      this._planService.save(this.model).subscribe((json: any) => {
         if (json.code == 1) {
           this.planId = json.data.id;
           this.model.id = json.data.id;
@@ -194,7 +194,7 @@ export class PlanEdit implements OnInit, AfterViewInit {
         return { id: item.id, caseProjectId: item.caseProjectId, selecting: item.selecting };
     });
 
-    this._taskService.saveTask(this.prjId, this.planId, this.task, suites).subscribe((json: any) => {
+    this._taskService.saveTask(this.planId, this.task, suites).subscribe((json: any) => {
       this.model.tasks[this.taskIndex] = json.data;
     });
   }
@@ -210,19 +210,19 @@ export class PlanEdit implements OnInit, AfterViewInit {
     this.caseSelectionModal.componentInstance.caseProjectId = task.caseProjectId ? task.caseProjectId : task.prjId;
     this.caseSelectionModal.componentInstance.taskId = task.id;
 
-    this._userService.getUsers(CONSTANT.CURR_PRJ_ID).subscribe((json: any) => {
+    this._userService.getUsers().subscribe((json: any) => {
       this.caseSelectionModal.componentInstance.users = json.data;
     });
 
     this.caseSelectionModal.result.then((result) => {
       const taskId = task ? task.id : undefined;
-      this.saveTaskCases(result.projectId, result.caseProjectId, taskId, result.data, index);
+      this.saveTaskCases(result.caseProjectId, taskId, result.data, index);
     }, (reason) => {
       logger.log('reason', reason);
     });
   }
-  saveTaskCases(projectId: number, caseProjectId: number, taskId: any, cases: any[], index: number): void {
-    this._taskService.saveTaskCases(projectId, caseProjectId, this.planId, taskId, cases).subscribe((json: any) => {
+  saveTaskCases(caseProjectId: number, taskId: any, cases: any[], index: number): void {
+    this._taskService.saveTaskCases(caseProjectId, this.planId, taskId, cases).subscribe((json: any) => {
       this.model.tasks[index] = json.data;
     });
   }

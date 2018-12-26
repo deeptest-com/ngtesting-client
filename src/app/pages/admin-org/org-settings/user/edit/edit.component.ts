@@ -111,7 +111,7 @@ export class UserEdit implements OnInit, AfterViewInit {
   }
 
   remove() {
-    this.userAdmin.removeFromOrg(this.user.id, CONSTANT.CURR_ORG_ID).subscribe((json: any) => {
+    this.userAdmin.removeFromOrg(this.user.id).subscribe((json: any) => {
       if (json.code == 1) {
         this.formErrors = ['删除成功'];
         this._routeService.navTo('/pages/org-admin/org-settings/user/list');

@@ -78,7 +78,7 @@ export class ProjectVerEdit implements OnInit, AfterViewInit {
 
   loadData() {
     if (!this.id) {
-      this.model = { projectId: this.projectId, disabled: false };
+      this.model = { disabled: false };
       return;
     }
 

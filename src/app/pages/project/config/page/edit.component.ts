@@ -45,7 +45,7 @@ export class ProjectPageEdit implements OnInit, AfterViewInit {
   ngAfterViewInit() {}
 
   loadData() {
-    this._pageService.getByProject(this.projectId).subscribe((json: any) => {
+    this._pageService.getByProject().subscribe((json: any) => {
       this.model = json.model;
       this.models = json.models;
       this.itemMap = json.itemMap;
@@ -53,7 +53,7 @@ export class ProjectPageEdit implements OnInit, AfterViewInit {
   }
 
   change(solutionId) {
-    this._pageService.setByProject(this.projectId, solutionId).subscribe((json: any) => {
+    this._pageService.setByProject(solutionId).subscribe((json: any) => {
       this.model = json.model;
       this.models = json.models;
     });

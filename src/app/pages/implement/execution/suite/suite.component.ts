@@ -80,7 +80,7 @@ export class ExecutionSuite implements OnInit, AfterViewInit {
 
   rename(event: any) {
     const testCase = event.data;
-    this._caseInTaskService.rename(this.projectId, this.taskId, testCase).subscribe((json: any) => {
+    this._caseInTaskService.rename(this.taskId, testCase).subscribe((json: any) => {
       event.deferred.resolve(json.data);
     });
   }

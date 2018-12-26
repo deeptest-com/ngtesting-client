@@ -45,13 +45,8 @@ export class TableRowComponent implements OnInit, OnDestroy {
     this._routeService.navTo('/pages/org/' + this.orgId + '/prjs/' + item.id + '/config');
   }
 
-  canView(project: any) {
-    return project.privs != null && project.privs['project-view'];
-  }
   canEditProject(project: any) {
-    // console.log('===', CONSTANT.ORG_PRIVILEGES);
-    return CONSTANT.ORG_PRIVILEGES['org-admin'] || CONSTANT.ORG_PRIVILEGES['project-admin'] ||
-      (project.privs != null && project.privs['project-maintain']);
+    return CONSTANT.ORG_PRIVILEGES['org-admin'] || CONSTANT.ORG_PRIVILEGES['project-admin'];
   }
   canDesign(project: any) {
     return project.privs != null && (project.privs['test_case-view'] || project.privs['test_case-maintain']);
@@ -61,7 +56,7 @@ export class TableRowComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this._state.unsubscribe(WS_CONSTANT.WS_ORG_SETTINGS, this.eventCode);
+    // this._state.unsubscribe(WS_CONSTANT.WS_ORG_SETTINGS, this.eventCode);
   }
 
 }

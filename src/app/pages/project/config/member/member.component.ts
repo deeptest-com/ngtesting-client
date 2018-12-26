@@ -69,7 +69,7 @@ export class ProjectEditMember implements OnInit, AfterViewInit {
   }
 
   loadData() {
-    this._projectMemberService.getUsers(this.projectId).subscribe((json: any) => {
+    this._projectMemberService.getUsers().subscribe((json: any) => {
       this.projectRoles = json.projectRoles;
       this.entityInRoles = json.entityInRoles;
     });
@@ -119,7 +119,7 @@ export class ProjectEditMember implements OnInit, AfterViewInit {
   }
 
   changeRole(roleId: number, entityId: number) {
-    this._projectMemberService.changeRole(this.projectId, roleId, entityId).subscribe((json: any) => {
+    this._projectMemberService.changeRole(roleId, entityId).subscribe((json: any) => {
       if (json.code == 1) {
         this.entityInRoles = json.entityInRoles;
       }
@@ -127,7 +127,7 @@ export class ProjectEditMember implements OnInit, AfterViewInit {
   }
 
   remove(item) {
-    this._projectMemberService.remove(this.projectId, item).subscribe((json: any) => {
+    this._projectMemberService.remove(item).subscribe((json: any) => {
       if (json.code == 1) {
         this.entityInRoles = json.entityInRoles;
       }

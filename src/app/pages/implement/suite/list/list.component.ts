@@ -68,7 +68,7 @@ export class SuiteListComponent implements OnInit, AfterViewInit, OnDestroy {
         + '/implement/suite/null/edit');
   }
 
-  delete(projectId: string): void {
+  delete(): void {
 
   }
 

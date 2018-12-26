@@ -23,8 +23,8 @@ export class IssueWatchService {
     return this._reqService.post(this._apiBase + 'batchSave', model);
   }
 
-  remove(id) {
-    const model = { id: id };
+  remove(id, issueId) {
+    const model = { id: id, issueId: issueId };
     return this._reqService.post(this._apiBase + 'remove', model);
   }
 

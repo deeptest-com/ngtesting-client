@@ -44,14 +44,14 @@ export class ProjectPriorityEdit implements OnInit, AfterViewInit {
   ngAfterViewInit() {}
 
   loadData() {
-    this._priorityService.getByProject(this.projectId).subscribe((json: any) => {
+    this._priorityService.getByProject().subscribe((json: any) => {
       this.model = json.model;
       this.models = json.models;
     });
   }
 
   change(solutionId) {
-    this._priorityService.setByProject(this.projectId, solutionId).subscribe((json: any) => {
+    this._priorityService.setByProject(solutionId).subscribe((json: any) => {
       this.model = json.model;
       this.models = json.models;
     });

@@ -8,14 +8,14 @@ export class CommentsService {
   constructor(private _reqService: RequestService) {
   }
 
-  _apiBase = 'client/comments/';
+  _apiBase = 'client/';
 
   save(modelId: number, modelType: string, comment: string) {
     _.merge(comment, { modelId: modelId, modelType: modelType });
-    return this._reqService.post(this._apiBase + 'save', comment);
+    return this._reqService.post(this._apiBase + modelType + '_comments/save', comment);
   }
-  remove(id: number) {
-    return this._reqService.post(this._apiBase + 'delete', { id: id });
+  remove(id: number, modelType: string) {
+    return this._reqService.post(this._apiBase + modelType + '_comments/delete', { id: id });
   }
 
 }

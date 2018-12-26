@@ -12,7 +12,6 @@ export class IssueService {
   }
 
   _apiBase = 'client/issue/';
-  _apiBaseOpt = 'client/issue_opt/';
 
   query(filter: number, query: any) {
     query.filter = filter;
@@ -38,7 +37,7 @@ export class IssueService {
     return this._reqService.post(this._apiBase + 'update', { issue: model, pageId: pageId });
   }
   delete(id: number) {
-    const model = {id: id};
+    const model = { id: id };
     return this._reqService.post(this._apiBase + 'delete', model);
   }
 

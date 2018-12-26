@@ -12,9 +12,6 @@ export class VerService {
   list(queryModel: any) {
     return this._reqService.post(this.apiBase + 'list', queryModel);
   }
-  listLastest() {
-    return this._reqService.post(this.apiBase + 'listLastest', {});
-  }
 
   get(id: number) {
     const model = { id: id };
