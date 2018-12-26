@@ -60,7 +60,7 @@ export class ExecutionProcessByUserComponent implements OnInit {
       },
       grid: {
         top: '15%',
-        right: '15%',
+        right: '100px',
         bottom: '8%',
         left: '3%',
         containLabel: true,
