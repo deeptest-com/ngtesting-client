@@ -44,7 +44,7 @@ export class ExecutionProcessComponent implements OnInit {
       },
       grid: {
         top: '15%',
-        right: '15%',
+        right: '60px',
         bottom: '8%',
         left: '3%',
         containLabel: true,
