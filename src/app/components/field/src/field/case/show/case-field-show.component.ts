@@ -1,7 +1,7 @@
 import { Input, Component, OnInit, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Deferred } from '../../../../../../utils/utils';
-import {CONSTANT} from "../../../../../../utils";
+import { CONSTANT } from '../../../../../../utils';
 
 @Component({
   selector: 'case-field-show',

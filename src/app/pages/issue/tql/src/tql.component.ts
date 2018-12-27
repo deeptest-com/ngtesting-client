@@ -16,19 +16,15 @@ import { TqlService } from './tql.service';
 })
 export class Tql implements OnInit, AfterViewInit {
 
-  @Output() public queryChanged: EventEmitter<any> = new EventEmitter();
+  @Output() public conditionChangeEvent: EventEmitter<any> = new EventEmitter();
   @Output() public searchEvent: EventEmitter<any> = new EventEmitter();
   @Output() public favoritesEvent: EventEmitter<any> = new EventEmitter();
 
-  keywords: string;
+  @Input() rule: any = {};
   @Input() filters: any[];
   @Input() issuePropMap: any = {};
-  checkedConditions: any = {};
 
-  @Input() set rule(model: any) {
-    if (!model.rules || model.rules.length == 0) { return; }
-    this.checkedConditions = this._tqlService.basicJqlToMap(model);
-  }
+  titleKeywords: string;
 
   constructor(private _route: ActivatedRoute, private _state: GlobalState, private _tqlService: TqlService) {
 
@@ -43,10 +39,11 @@ export class Tql implements OnInit, AfterViewInit {
   }
 
   conditionChange(data: any) {
-    this.queryChanged.emit(data);
+    console.log('conditionChange in tql');
+    this.conditionChangeEvent.emit(data);
   }
-  keywordsChange() {
-    this.queryChanged.emit({ code: 'title', input: 'text', type: 'string', keywords: this.keywords });
+  titleChange() {
+    this.conditionChangeEvent.emit({ code: 'title', input: 'text', type: 'string', keywords: this.titleKeywords });
   }
 
   search() {

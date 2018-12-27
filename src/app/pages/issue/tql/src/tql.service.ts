@@ -33,42 +33,11 @@ export class TqlService {
       page: page, pageSize: pageSize, init: init } );
   }
 
-  basicJqlToMap(rule: any): any {
-    const ret = {};
-
-    rule.rules.forEach((r: any) => {
-      const selecteds = {};
-
-      if (r.input != 'dropdown') {
-        selecteds['keywords'] = r.value;
-      } else {
-        if (r.operator === 'equal') {
-          selecteds[r.value] = true;
-        } else if (r.operator === 'in') {
-          r.value.forEach((val: string) => {
-            selecteds[val] = true;
-          });
-        }
-      }
-      ret[r.id] = selecteds;
-    });
-    return ret;
-  }
-
-  buildRule(rule: any, filters: any[], condition: any): any {
-    let filter = filters.filter((elem, index) => elem.code == condition.code)[0];
-
-    if (filter == null) {
-      filter = condition;
-    }
-
-    const newRule = this.newBasicRule(filter, condition);
-    console.log('filter', filter, newRule);
-
+  buildRule(rule: any, newRule: any): any {
     let found = false;
     for (const idx in rule.rules) {
-      if (rule.rules[idx].id == condition.code) {
-        if (newRule) {
+      if (rule.rules[idx].id == newRule.id) {
+        if (newRule.value || (newRule.group && newRule.rules && newRule.rules.length > 0)) {
           rule.rules[idx] = newRule; // 替换
         } else {
           rule.rules.splice(rule.rules.indexOf(rule.rules[idx]), 1); // 删除
@@ -83,49 +52,6 @@ export class TqlService {
     }
 
     return rule;
-  }
-
-  newBasicRule(filter: any, condition: any): any {
-    if (filter.input != 'dropdown') {
-      if (!condition.keywords) {
-        return null;
-      } else {
-        return {
-          id: filter.code,
-          field: filter.code,
-          group: false,
-          rules: [],
-
-          input: filter.input,
-          operator: 'contains',
-          type: filter.type,
-          value: condition.keywords,
-        };
-      }
-    }
-
-    const checkedVals = [];
-    condition.options.forEach((option: any) => {
-      if (option.checked) {
-        checkedVals.push(option.id);
-      }
-    });
-
-    if (checkedVals.length == 0) {
-      return null;
-    } else {
-      return {
-        id: filter.code,
-        field: filter.code,
-        group: false,
-        rules: [],
-
-        input: filter.input,
-        operator: checkedVals.length == 0 ? 'equal' : 'in',
-        type: filter.type,
-        value: checkedVals,
-      };
-    }
   }
 
 }

@@ -28,7 +28,7 @@ declare var jQuery;
   templateUrl: './edit.html',
 })
 export class IssueEdit implements OnInit, AfterViewInit, OnDestroy {
-  eventCode: string = 'IssueCreate';
+  eventCode: string = 'IssueEdit';
 
   id: number;
   issue: any = {};

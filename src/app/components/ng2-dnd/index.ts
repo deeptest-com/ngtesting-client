@@ -32,7 +32,7 @@ export class DndModule {
   static forRoot(): ModuleWithProviders {
         return {
             ngModule: DndModule,
-            providers: providers
+            providers: providers,
         };
     }
 }

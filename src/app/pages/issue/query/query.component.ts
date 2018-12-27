@@ -45,6 +45,7 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
   checkedConditions: any = {};
   filters: any[] = [];
   issuePropMap: any = {};
+  issuePropValMap: any = {};
   columns: any[] = [];
   init: boolean = true;
 
@@ -112,8 +113,10 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
 
   }
 
-  queryChanged(condition): void {
-    this.rule = this._tqlService.buildRule(this.rule, this.filters, condition);
+  conditionChange(newRole): void {
+    this.rule = this._tqlService.buildRule(this.rule, newRole);
+
+    console.log('conditionChange in query', this.rule);
   }
 
   pageChange(event: any): void {
@@ -133,6 +136,7 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
         this.orderBy = json.orderBy;
         this.columns = json.columns;
         this.issuePropMap = json.issuePropMap;
+        this.issuePropValMap = json.issuePropValMap;
 
         this.updateForBrowse();
       }
@@ -151,6 +155,7 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
         this.filters = json.filters;
         this.columns = json.columns;
         this.issuePropMap = json.issuePropMap;
+        this.issuePropValMap = json.issuePropValMap;
       }
     });
   }

@@ -46,7 +46,7 @@
 
             <ng-container *ngFor="let col of columns">
               <td *ngIf="!batchModel && col.display" (click)="dealWithIssue({ act: 'view', item: item})" class="link">
-                <item-prop [item]="item" [col]="col"></item-prop>
+                <item-prop [item]="item" [col]="col" [issuePropValMap]="issuePropValMap"></item-prop>
               </td>
 
               <td *ngIf="batchModel && col.display">

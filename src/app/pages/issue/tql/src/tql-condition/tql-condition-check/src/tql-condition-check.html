@@ -1,0 +1,31 @@
+<div class="tql-condition-check">
+  <div class="condition-impl">
+    <div ngbDropdown #projectDropdown="ngbDropdown" [autoClose]="'outside'"
+         [class.has-checked]="hasChecked" class="btn-group">
+
+      <button class="btn btn-default dropdown" id="conditionDropdownMenu" ngbDropdownToggle>
+        {{filter.label}}
+      </button>
+
+      <div class="dropdown-menu" aria-labelledby="conditionDropdownMenu" ngbDropdownMenu>
+        <button class="dropdown-item">
+          <input [(ngModel)]="keywords" type="search"
+                 class="keywords form-control form-control-sm" name="keywords"
+                 placeholder="过滤">
+          <i class="fa fa-search"></i>
+        </button>
+
+          <li class="dropdown-divider"></li>
+          <!--<button class="dropdown-item">所有</button>-->
+          <ng-container *ngFor="let option of selectOptions | myFilter:'label':keywords">
+            <button (click)="selectItem(option)" class="dropdown-item list-item">
+              <input [checked]="option.checked" value="{{option.id}}"
+                     class="form-check-input" type="checkbox">
+              <a>{{option.label}}</a>
+            </button>
+          </ng-container>
+
+      </div>
+    </div>
+  </div>
+</div>

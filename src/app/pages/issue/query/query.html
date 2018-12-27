@@ -7,7 +7,7 @@
 
       <div class="filter">
         <tql [rule]="rule" [filters]="filters" [issuePropMap]="issuePropMap"
-             (queryChanged)="queryChanged($event)" (searchEvent)="search($event)"
+             (conditionChangeEvent)="conditionChange($event)" (searchEvent)="search($event)"
              (favoritesEvent)="showModal()"></tql>
       </div>
 
@@ -51,7 +51,8 @@
       </div>
     </div>
 
-    <issue-table [issues]="models" [columns]="columns" [orderBy]="orderBy" [batchModel]="batchModel"
+    <issue-table [issues]="models" [columns]="columns" [issuePropValMap]="issuePropValMap"
+                 [orderBy]="orderBy" [batchModel]="batchModel"
                  (orderEvent)="reOrder($event)" (columnOrderEvent)="columnReOrder()"
                  (dealWithIssueEvent)="dealWithIssue($event)"></issue-table>
 

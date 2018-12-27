@@ -28,9 +28,9 @@
       <ng-container *ngSwitchCase="'checkbox'">
         <label class="col-form-label">
           <ng-container *ngFor="let item of options">
-            <input [(ngModel)]="checkboxVal[item.id]" (change)="checkboxValChange()" [ngModelOptions]="{standalone: true}"
+            <input [(ngModel)]="checkboxVal[getVal(elem,item)]" (change)="checkboxValChange()" [ngModelOptions]="{standalone: true}"
                    value="{{getVal(elem,item)}}" type="checkbox">
-            <span>{{item?.label}}</span>&nbsp;
+            <span>{{item?.label}} - {{getVal(elem,item)}}</span>&nbsp;
           </ng-container>
         </label>
       </ng-container>

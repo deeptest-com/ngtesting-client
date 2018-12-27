@@ -107,9 +107,10 @@ export class InputEditComponent implements OnInit, AfterViewInit {
 
   checkboxValChange() {
     let val: any[] = [];
-    for (const key in this.checkboxVal) {
-      if (this.checkboxVal[key]) {
-        val.push(key);
+    console.log('this.checkboxVal', this.checkboxVal);
+    for (const id in this.checkboxVal) {
+      if (this.checkboxVal[id]) {
+        val.push(id);
       }
     }
     this.model[this.elem.colCode] = val.join(',');

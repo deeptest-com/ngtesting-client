@@ -12,14 +12,16 @@ declare var jQuery;
   encapsulation: ViewEncapsulation.None,
   styleUrls: [],
   template: `
-    <span>{{col.code | idToName}} - </span>
-    <span *ngIf="col.type=='string'">{{item[col.code | idToName]}}</span>
+    <!--<span>{{col.code}} - </span>-->
+    <span *ngIf="col.type=='integer'">{{issuePropValMap[col.code][item[col.code]]}}</span>
+    <span *ngIf="col.type=='string'">{{item[col.code]}}</span>
     <span *ngIf="col.type=='date'">{{item[col.code] | date:'y/MM/dd HH:mm:ss'}}</span>
   `,
 })
 export class ItemProp implements OnInit {
   @Input() item: any = {};
   @Input() col: any = {};
+  @Input() issuePropValMap: any = {};
 
   constructor(private _state: GlobalState, private _issueService: IssueService) {
 

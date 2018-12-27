@@ -1,0 +1,19 @@
+<div class="tql-condition-text">
+  <div class="condition-impl">
+    <div ngbDropdown #projectDropdown="ngbDropdown" [autoClose]="'outside'"
+         [class.has-checked]="hasChecked" class="btn-group">
+
+      <button class="btn btn-default dropdown" id="conditionDropdownMenu" ngbDropdownToggle>
+        {{filter.label}}
+      </button>
+
+      <div class="dropdown-menu" aria-labelledby="conditionDropdownMenu" ngbDropdownMenu>
+        <button class="dropdown-item">
+          <input [(ngModel)]="keywords" (change)="keywordsChange()" type="search"
+                 class="keywords form-control form-control-sm" name="keywords"
+                 placeholder="关键字">
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

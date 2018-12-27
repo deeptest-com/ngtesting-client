@@ -1,14 +1,16 @@
 <div class="tql">
   <div class="form-inline">
-    <ng-container *ngFor="let item of filters; let i = index">
-      <tql-condition *ngIf="i < 6" [model]="item" [issuePropMap]="issuePropMap"
-                     [checkedItems]="checkedConditions[item.code]"
-                     (conditionChangeEvent)="conditionChange($event)"></tql-condition>
+    <ng-container *ngFor="let filter of filters; let i = index">
+      <ng-container *ngIf="i < 6">
+        <tql-condition [rule]="rule" [filter]="filter" [issuePropMap]="issuePropMap"
+                       (conditionChangeEvent)="conditionChange($event)"></tql-condition>
+      </ng-container>
     </ng-container>
 
     <div class="btn-group">
-      <input [(ngModel)]="keywords" (change)="keywordsChange()"
-             type="search" class="form-control form-control-sm keywords" placeholder="关键字" id="keywords" name="keywords">
+      <input [(ngModel)]="titleKeywords" (change)="titleChange()"
+             type="search" class="form-control form-control-sm keywords"
+             id="keywords" name="keywords" placeholder="关键字">
     </div>
 
     <div class="btn-group more">
@@ -27,10 +29,11 @@
   </div>
 
   <div class="form-inline">
-    <ng-container *ngFor="let item of filters; let i = index;">
-      <tql-condition *ngIf="i >= 6 && item.display" [model]="item" [issuePropMap]="issuePropMap"
-                     [checkedItems]="checkedConditions[item.code]"
-                     (conditionChangeEvent)="conditionChange($event)"></tql-condition>
+    <ng-container *ngFor="let filter of filters; let i = index;">
+      <ng-container *ngIf="i >= 6 && filter.display">
+        <tql-condition [rule]="rule" [filter]="filter" [issuePropMap]="issuePropMap"
+                       (conditionChangeEvent)="conditionChange($event)"></tql-condition>
+      </ng-container>
     </ng-container>
   </div>
 

@@ -1,0 +1,15 @@
+<div class="tql-condition-datetime">
+  <div class="condition-impl">
+    <div ngbDropdown #projectDropdown="ngbDropdown" [autoClose]="'outside'"
+         [class.has-checked]="hasChecked" class="btn-group">
+
+      <button class="btn btn-default dropdown" id="conditionDropdownMenu" ngbDropdownToggle>
+        {{filter.label}}
+      </button>
+
+      <div class="dropdown-menu" aria-labelledby="conditionDropdownMenu" ngbDropdownMenu>
+
+      </div>
+    </div>
+  </div>
+</div>
