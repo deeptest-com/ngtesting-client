@@ -45,7 +45,7 @@ import { Issue } from './issue.component';
 import { IssueQuery } from './query/query.component';
 
 import { IssueTable } from './query/result-table/table.component';
-import { ItemProp } from './query/result-table/item-prop';
+import { IssuePropInTable } from './query/result-table/issue-prop-in-table';
 import { IssueBrowse } from './query/result-browse/browse.component';
 
 import { TableColumnSelectionModule } from './query/table-column-selection';
@@ -81,7 +81,7 @@ import { IssueView } from './view/view.component';
   ],
   declarations: [
     Issue,
-    IssueQuery, IssueTable, ItemProp, IssueBrowse,
+    IssueQuery, IssueTable, IssuePropInTable, IssueBrowse,
     IssueCreate,
     IssueEdit,
     IssueView,

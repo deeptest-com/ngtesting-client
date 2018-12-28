@@ -32,10 +32,12 @@ export class InputViewComponent implements OnInit, AfterViewInit {
   }
 
   getLabel() {
+    console.log(this.elem, this.model);
+
     const code = this.elem.colCode;
     let val = this.model[code];
 
-    if (this.elem.buildIn && this.elem.input == 'dropdown') {
+    if (this.elem.buildIn && this.elem.input == 'dropdown') { // buildIn只有一种选项控件
       return this.propValMap[code][val];
     }
 

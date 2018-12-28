@@ -8,18 +8,15 @@ import { IssueService } from '../../../../service/client/issue';
 declare var jQuery;
 
 @Component({
-  selector: 'item-prop',
+  selector: 'issue-prop-in-table',
   encapsulation: ViewEncapsulation.None,
   styleUrls: [],
   template: `
-    <!--<span>{{col.code}} - </span>-->
-    <span *ngIf="col.type=='integer'">{{issuePropValMap[col.code][item[col.code]]}}</span>
-    <span *ngIf="col.type=='string'">{{item[col.code]}}</span>
-    <span *ngIf="col.type=='date'">{{item[col.code] | date:'y/MM/dd HH:mm:ss'}}</span>
+    <span>{{getLabel()}}</span>
   `,
 })
-export class ItemProp implements OnInit {
-  @Input() item: any = {};
+export class IssuePropInTable implements OnInit {
+  @Input() model: any = {};
   @Input() col: any = {};
   @Input() issuePropValMap: any = {};
 
@@ -29,6 +26,19 @@ export class ItemProp implements OnInit {
 
   ngOnInit() {
 
+  }
+
+  getLabel() {
+    console.log(this.col, this.model);
+
+    const code = this.col.code;
+    let val = this.model[code];
+
+    if (this.col.buildIn && this.col.input == 'dropdown') { // buildIn只有一种选项控件
+      return this.issuePropValMap[code][val];
+    }
+
+    return val;
   }
 }
 

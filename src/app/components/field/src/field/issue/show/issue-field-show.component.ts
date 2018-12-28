@@ -23,16 +23,20 @@ export class IssueFieldShowComponent implements OnInit {
   isEditing: boolean = false;
   labelColNum: number = 4;
 
-  isuPropValMap: any;
+  issuePropValMap: any;
 
   public constructor() {
 
   }
 
   public ngOnInit(): void {
-    this.isuPropValMap = CONSTANT.ISU_PROPERTY_VAL_MAP;
+    this.issuePropValMap = CONSTANT.ISU_PROPERTY_VAL_MAP;
 
-    // console.log('ngOnInit', this.isuPropValMap);
+    if (this.elem.colCode == 'statusId') {
+      this.elem.readonly = true;
+    }
+
+    // console.log('ngOnInit', this.elem.colCode, this.elem.readonly);
   }
 
   edit () {

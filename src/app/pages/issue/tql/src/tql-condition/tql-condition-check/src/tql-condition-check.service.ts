@@ -72,7 +72,7 @@ export class TqlConditionCheckService {
   }
 
   genRule(id, field, group, rules, input, type, operator, value) {
-    let ret: any = {
+    const ret: any = {
       id: id,
       field: field,
       group: group,
@@ -92,7 +92,7 @@ export class TqlConditionCheckService {
   }
 
   genGroupRule(id, condition, rules) {
-    let ret: any = {
+    const ret: any = {
       id: id,
       group: true,
       condition: condition,
