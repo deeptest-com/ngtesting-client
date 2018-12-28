@@ -20,7 +20,7 @@ export class TqlConditionComponent implements OnInit, AfterViewInit {
   @Input() filter: any = {};
   @Input() issuePropMap: any = {};
 
-  constructor(private _route: ActivatedRoute, _tqlConditionService: TqlConditionService) {
+  constructor(private _route: ActivatedRoute, private _tqlConditionService: TqlConditionService) {
 
   }
 
@@ -35,6 +35,13 @@ export class TqlConditionComponent implements OnInit, AfterViewInit {
   conditionChange(data: any) {
     console.log('conditionChange in tql-condition');
     this.conditionChangeEvent.emit(data);
+  }
+
+  uiSelect() {
+    return this._tqlConditionService.uiSelect(this.filter.input);
+  }
+  uiText() {
+    return this._tqlConditionService.uiText(this.filter.input);
   }
 
 }

@@ -18,6 +18,7 @@ export class TqlConditionTextComponent implements OnInit, AfterViewInit {
   @Output() conditionChangeEvent = new EventEmitter<any>();
 
   keywords: string = '';
+  hasChecked: boolean = false;
 
   constructor(private fb: FormBuilder, private tqlConditionTextService: TqlConditionTextService) {
 

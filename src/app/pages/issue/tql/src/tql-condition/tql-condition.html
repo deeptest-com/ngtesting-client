@@ -1,10 +1,10 @@
 <div class="tql-condition">
-  <ng-container *ngIf="_tqlConditionService.uiSelect(filter.input)">
+  <ng-container *ngIf="uiSelect()">
     <tql-condition-check [rule]="rule" [filter]="filter" [issuePropMap]="issuePropMap"
                    (conditionChangeEvent)="conditionChange($event)"></tql-condition-check>
   </ng-container>
 
-  <ng-container *ngIf="_tqlConditionService.uiText(filter.input)">
+  <ng-container *ngIf="uiText()">
     <tql-condition-text  [rule]="rule" [filter]="filter"
                          (conditionChangeEvent)="conditionChange($event)"></tql-condition-text>
   </ng-container>
