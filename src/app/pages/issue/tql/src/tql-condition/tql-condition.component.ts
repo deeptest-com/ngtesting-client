@@ -13,8 +13,6 @@ import { TqlConditionService } from './tql-condition.service';
 export class TqlConditionComponent implements OnInit, AfterViewInit {
 
   @Output() public conditionChangeEvent: EventEmitter<any> = new EventEmitter();
-  @Output() public searchEvent: EventEmitter<any> = new EventEmitter();
-  @Output() public favoritesEvent: EventEmitter<any> = new EventEmitter();
 
   @Input() rule: any = {};
   @Input() filter: any = {};
@@ -42,6 +40,9 @@ export class TqlConditionComponent implements OnInit, AfterViewInit {
   }
   uiText() {
     return this._tqlConditionService.uiText(this.filter.input);
+  }
+  uiDatetime() {
+    return this._tqlConditionService.uiDatetime(this.filter.input);
   }
 
 }

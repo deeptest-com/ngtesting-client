@@ -36,22 +36,21 @@ export class TqlConditionCheckService {
     let checkedVals = [];
     let ret;
 
-    console.log('LSDFLDSJF');
     if (!filter.buildIn && this.tqlConditionService.mutiVal(filter.input)) {
       operator = 'contains';
 
-      let children = [];
+      const children = [];
       options.forEach((option: any) => {
         if (option.checked) {
           const val = filter.buildIn ? option.id : option.value;
 
-          const child = this.genRule( filter.code, filter.code, false, [],
+          const child = this.tqlConditionService.genRule( filter.code, filter.code, false, [],
             filter.input, filter.type, operator, val);
           children.push(child);
         }
       });
 
-      ret = this.genGroupRule(filter.code,'AND', children);
+      ret = this.tqlConditionService.genGroupRule(filter.code, 'AND', children);
 
     } else {
       options.forEach((option: any) => {
@@ -63,7 +62,7 @@ export class TqlConditionCheckService {
 
       operator = checkedVals.length > 1 ? 'in' : 'equal';
       checkedVals = checkedVals.length > 0 ? checkedVals : null;
-      ret = this.genRule( filter.code, filter.code, false, [],
+      ret = this.tqlConditionService.genRule( filter.code, filter.code, false, [],
         filter.input, filter.type, operator, checkedVals);
 
     }
@@ -71,35 +70,5 @@ export class TqlConditionCheckService {
     return ret;
   }
 
-  genRule(id, field, group, rules, input, type, operator, value) {
-    const ret: any = {
-      id: id,
-      field: field,
-      group: group,
-      rules: rules,
-      input: input,
-      type: type,
-
-      operator: operator,
-      value: value,
-    };
-
-    if (group) {
-      ret.condition = 'OR';
-    }
-
-    return ret;
-  }
-
-  genGroupRule(id, condition, rules) {
-    const ret: any = {
-      id: id,
-      group: true,
-      condition: condition,
-      rules: rules,
-    };
-
-    return ret;
-  }
 }
 

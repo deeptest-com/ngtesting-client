@@ -4,9 +4,15 @@ import { CONSTANT } from '../utils/constant';
 import { environment } from '../../environments/environment';
 
 declare var unescape;
+declare var Date;
 
 export let Utils: any = {
   config: function() {
+
+    Date.prototype.toJSON = function () {
+      return DateUtils.dateFormat(this, 'yyyy-MM-dd hh:mm:ss');
+    };
+
     if (environment.SERVICE_URL) {
       CONSTANT.SERVICE_URL = environment.SERVICE_URL;
     } else {
@@ -216,5 +222,45 @@ export const logger: any = {
   },
   error: function (msg: any) {
     console.error(msg);
+  },
+};
+
+export const DateUtils: any = {
+  firstSecOfDay: function (dt: any) {
+    const year = dt.getFullYear();
+    const month = dt.getMonth();
+    const day = dt.getDate();
+
+    const ret = new Date(year, month, day, 0, 0, 1);
+    return ret;
+  },
+  lastSecOfDay: function (dt: any) {
+    const year = dt.getFullYear();
+    const month = dt.getMonth();
+    const day = dt.getDate();
+
+    const ret = new Date(year, month, day, 23, 59, 59);
+    return ret;
+  },
+
+  dateFormat(date, fmt) {
+    if (null == date || undefined == date) { return ''; }
+    const o = {
+      'M+': date.getMonth() + 1,
+      'd+': date.getDate(),
+      'h+': date.getHours(),
+      'm+': date.getMinutes(),
+      's+': date.getSeconds(),
+      'S': date.getMilliseconds(),
+    };
+    if (/(y+)/.test(fmt)) {
+      fmt = fmt.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length));
+    }
+    for (const k in o) {
+      if (new RegExp('(' + k + ')').test(fmt)) {
+        fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (('00' + o[k]).substr(('' + o[k]).length)));
+      }
+    }
+    return fmt;
   },
 };

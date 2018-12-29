@@ -37,6 +37,9 @@ export class TimePassedPipe implements PipeTransform {
 @Pipe({ name: 'dateFormat' })
 export class DateFormatPipe extends DatePipe implements PipeTransform {
   transform(value: any, format: string = 'yyyy-MM-dd'): any {
+    if (!value) {
+      return null;
+    }
     return super.transform(value, format);
   }
 }

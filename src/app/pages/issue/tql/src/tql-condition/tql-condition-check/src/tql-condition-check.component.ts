@@ -3,6 +3,7 @@ import * as _ from 'lodash';
 import { Component, Input, OnInit, AfterViewInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
+import { TqlConditionService } from '../../tql-condition.service';
 import { TqlConditionCheckService } from './tql-condition-check.service';
 
 @Component({
@@ -23,7 +24,8 @@ export class TqlConditionCheckComponent implements OnInit, AfterViewInit {
   selectOptions: any[] = [];
   hasChecked: boolean = false;
 
-  constructor(private fb: FormBuilder, private tqlConditionCheckService: TqlConditionCheckService) {
+  constructor(private fb: FormBuilder,
+              private tqlConditionCheckService: TqlConditionCheckService) {
 
   }
 

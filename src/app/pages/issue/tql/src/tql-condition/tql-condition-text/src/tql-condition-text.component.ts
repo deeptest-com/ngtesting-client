@@ -35,6 +35,12 @@ export class TqlConditionTextComponent implements OnInit, AfterViewInit {
   keywordsChange() {
     const newRule = this.tqlConditionTextService.newBasicRule(this.filter, this.keywords);
     this.conditionChangeEvent.emit(newRule);
+
+    this.computerIfFilterIsWork();
+  }
+
+  computerIfFilterIsWork() {
+    this.hasChecked = !!this.keywords;
   }
 
 }

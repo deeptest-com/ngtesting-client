@@ -7,6 +7,37 @@ export class TqlConditionService {
 
   }
 
+  genRule(id, field, group, rules, input, type, operator, value) {
+    const ret: any = {
+      id: id,
+      field: field,
+      group: group,
+      rules: rules,
+      input: input,
+      type: type,
+
+      operator: operator,
+      value: value,
+    };
+
+    if (group) {
+      ret.condition = 'OR';
+    }
+
+    return ret;
+  }
+
+  genGroupRule(id, condition, rules) {
+    const ret: any = {
+      id: id,
+      group: true,
+      condition: condition,
+      rules: rules,
+    };
+
+    return ret;
+  }
+
   uiSelect(input) {
     return input == 'dropdown' || input == 'multi_select' || input == 'radio' || input == 'checkbox';
   }

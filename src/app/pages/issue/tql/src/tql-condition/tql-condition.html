@@ -8,9 +8,9 @@
     <tql-condition-text  [rule]="rule" [filter]="filter"
                          (conditionChangeEvent)="conditionChange($event)"></tql-condition-text>
   </ng-container>
-  <!--
-    <ng-container *ngIf="uiDatetime(filter.input)">
-      <tql-condition-check [rule]="rule" [filter]="filter"
-                           (conditionChangeEvent)="conditionChange($event)"></tql-condition-check>
-    </ng-container>-->
+
+    <ng-container *ngIf="uiDatetime()">
+      <tql-condition-datetime [rule]="rule" [filter]="filter"
+                           (conditionChangeEvent)="conditionChange($event)"></tql-condition-datetime>
+    </ng-container>
 </div>

@@ -29,7 +29,7 @@ export class IssuePropInTable implements OnInit {
   }
 
   getLabel() {
-    console.log(this.col, this.model);
+    // console.log(this.col, this.model);
 
     const code = this.col.code;
     let val = this.model[code];

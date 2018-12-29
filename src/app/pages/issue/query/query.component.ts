@@ -248,6 +248,9 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
   }
 
   goto(): void {
+    console.log('JSON=', this.rule);
+    console.log('STRING=', JSON.stringify(this.rule));
+
     const url = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + CONSTANT.CURR_PRJ_ID
       + '/issue/query/' + JSON.stringify(this.rule) + '/' + JSON.stringify(this.orderBy);
     console.log('url=', this.orderBy, url);
