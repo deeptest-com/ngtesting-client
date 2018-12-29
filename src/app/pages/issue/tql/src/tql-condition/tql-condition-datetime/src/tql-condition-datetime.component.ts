@@ -36,19 +36,26 @@ export class TqlConditionDatetimeComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    jQuery('.my-flatpickr-date-from').flatpickr({ wrap: true, minDate: 'today', dateFormat: 'Y-m-d' ,
+    const fromInput = jQuery('.my-flatpickr-date-from').flatpickr({ wrap: true, minDate: 'today', dateFormat: 'Y-m-d' ,
       onChange: (selectedDates, dateStr, instance) => {
       console.log('FROM', selectedDates[0]);
         this.from = selectedDates[0];
         this.datetimeChange();
-      }
+      },
     });
-    jQuery('.my-flatpickr-date-to').flatpickr({ wrap: true, minDate: 'today', dateFormat: 'Y-m-d' ,
+    const toInput = jQuery('.my-flatpickr-date-to').flatpickr({ wrap: true, minDate: 'today', dateFormat: 'Y-m-d' ,
       onChange: (selectedDates, dateStr, instance) => {
         this.to = selectedDates[0];
         this.datetimeChange();
-      }
+      },
     });
+
+    const data = this.tqlConditionDatetimeService.getDatesFromRule(this.rule, this.filter);
+    this.from = data.from;
+    this.to = data.to;
+
+    fromInput.setDate(this.from);
+    toInput.setDate(this.to);
   }
 
   datetimeChange() {

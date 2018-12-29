@@ -42,5 +42,26 @@ export class TqlConditionDatetimeService {
     return ret;
   }
 
+  getDatesFromRule(rule: any, filter: any): any {
+    console.log('dsfdsf', rule, filter);
+
+    const currRule = rule.rules.filter(it => it.id == filter.code)[0];
+
+    let rules: any[] = currRule.rules;
+
+    let from;
+    let to;
+
+    rules.forEach(item => {
+      if (item.operator == 'greater_or_equal') {
+        from = item.value;
+      } else if (item.operator == 'less_or_equal') {
+        to = item.value;
+      }
+    });
+
+    return { from: new Date(from), to: new Date(to) };
+  }
+
 }
 
