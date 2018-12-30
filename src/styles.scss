@@ -401,7 +401,8 @@ ul.al-share {
           }
           .modal-body {
             overflow: auto;
-            padding: 5px;
+            margin-top: 10px;
+            padding: 0;
             height: calc(100% - 35px);
           }
         }
