@@ -1,7 +1,7 @@
 .case-selection-inner {
   font-size: 14px;
-  .modal-body{
-    .cols{
+  .modal-body {
+    .cols {
       display: flex;
       border: 1px solid #ddd;
       height: 100%;
@@ -16,6 +16,9 @@
       }
       .filter {
         width: 350px;
+        height: 100%;
+        overflow: auto;
+
         .tree-toolbar {
           padding-left: 10px;
         }

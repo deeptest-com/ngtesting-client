@@ -19,12 +19,16 @@ import { FieldModule } from '../../field';
 
 import { IssuePage } from './issue-page/issue-page.component';
 
+import { IssueView } from './issue-view/issue-view.component';
+import { IssueCreate } from './issue-create/issue-create.component';
 import { IssueEdit } from './issue-edit/issue-edit.component';
 import { IssueAssign } from './issue-assign/issue-assign.component';
 import { IssueWatch } from './issue-watch/issue-watch.component';
 import { IssueTag } from './issue-tag/issue-tag.component';
 import { IssueLink } from './issue-link/issue-link.component';
 
+import { IssueViewPopupService } from './issue-view/issue-view.service';
+import { IssueCreatePopupService } from './issue-create/issue-create.service';
 import { IssueEditPopupService } from './issue-edit/issue-edit.service';
 import { IssueAssignPopupService } from './issue-assign/issue-assign.service';
 import { IssueWatchPopupService } from './issue-watch/issue-watch.service';
@@ -42,16 +46,16 @@ import { IssueLinkPopupService } from './issue-link/issue-link.service';
     FileUploaderModule, FieldModule, CommentsModule,
   ],
   declarations: [
-    IssuePage, IssueEdit, IssueAssign, IssueWatch, IssueTag, IssueLink,
+    IssuePage, IssueView, IssueCreate, IssueEdit, IssueAssign, IssueWatch, IssueTag, IssueLink,
   ],
   exports: [
-    IssuePage, IssueEdit, IssueAssign, IssueWatch, IssueTag, IssueLink,
+    IssuePage, IssueView, IssueCreate, IssueEdit, IssueAssign, IssueWatch, IssueTag, IssueLink,
   ],
   providers: [DateFormatPipe, CommentsService,
-    IssueEditPopupService, IssueAssignPopupService, IssueWatchPopupService,
-    IssueTagPopupService, IssueLinkPopupService],
+    IssueViewPopupService, IssueCreatePopupService, IssueEditPopupService, IssueAssignPopupService,
+    IssueWatchPopupService, IssueTagPopupService, IssueLinkPopupService],
   entryComponents: [
-    IssueEdit, IssueAssign, IssueWatch, IssueTag, IssueLink,
+    IssueView, IssueCreate, IssueEdit, IssueAssign, IssueWatch, IssueTag, IssueLink,
   ],
 })
 export class IssueCompModule {

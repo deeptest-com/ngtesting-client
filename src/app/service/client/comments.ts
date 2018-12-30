@@ -11,7 +11,7 @@ export class CommentsService {
   _apiBase = 'client/';
 
   save(modelId: number, modelType: string, comment: string) {
-    _.merge(comment, { modelId: modelId, modelType: modelType });
+    _.merge(comment, { modelId: modelId });
     return this._reqService.post(this._apiBase + modelType + '_comments/save', comment);
   }
   remove(id: number, modelType: string) {

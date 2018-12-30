@@ -17,7 +17,7 @@
       </div>
     </div>
     <div class="buttons">
-      <button (click)="addComments()" type="button" class="btn btn-secondary btn-with-icon btn-sm">
+      <button *ngIf="!viewOnly" (click)="addComments()" type="button" class="btn btn-secondary btn-with-icon btn-sm">
         <i class="fa fa-commenting-o"></i>备注
       </button>
     </div>

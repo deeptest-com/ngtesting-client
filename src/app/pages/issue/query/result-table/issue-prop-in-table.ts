@@ -4,6 +4,7 @@ import { Component, ViewEncapsulation, NgModule, Pipe, Input,
 import { GlobalState } from '../../../../global.state';
 import { CONSTANT } from '../../../../utils/constant';
 import { IssueService } from '../../../../service/client/issue';
+import { DateFormatPipe } from '../../../../pipe/date';
 
 declare var jQuery;
 
@@ -20,7 +21,8 @@ export class IssuePropInTable implements OnInit {
   @Input() col: any = {};
   @Input() issuePropValMap: any = {};
 
-  constructor(private _state: GlobalState, private _issueService: IssueService) {
+  constructor(private _state: GlobalState, private dateFormat: DateFormatPipe,
+              private _issueService: IssueService) {
 
   }
 
@@ -29,13 +31,17 @@ export class IssuePropInTable implements OnInit {
   }
 
   getLabel() {
-    // console.log(this.col, this.model);
+    console.log(this.col, this.model);
 
     const code = this.col.code;
-    let val = this.model[code];
+    const val = this.model[code];
 
     if (this.col.buildIn && this.col.input == 'dropdown') { // buildIn只有一种选项控件
       return this.issuePropValMap[code][val];
+    } else if (this.col.input == 'date') {
+      return this.dateFormat.transform(val, 'yyyy-mm-dd');
+    } else if (this.col.input == 'datetime') {
+      return this.dateFormat.transform(val, 'yyyy-mm-dd hh:mm');
     }
 
     return val;

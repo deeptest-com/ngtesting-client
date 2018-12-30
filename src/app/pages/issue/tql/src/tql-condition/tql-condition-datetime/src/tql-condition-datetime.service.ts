@@ -46,6 +46,9 @@ export class TqlConditionDatetimeService {
     console.log('dsfdsf', rule, filter);
 
     const currRule = rule.rules.filter(it => it.id == filter.code)[0];
+    if (!currRule) {
+      return;
+    }
 
     let rules: any[] = currRule.rules;
 

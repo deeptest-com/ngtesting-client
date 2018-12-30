@@ -27,8 +27,8 @@ import { DatetimePickerService } from '../../../service/datetime-picker';
 import { SuiteService } from '../../../service/client/suite';
 import { CaseService } from '../../../service/client/case';
 import { CaseAttachmentService } from '../../../service/client/case-attachment';
+// import { CommentsService } from '../../../service/client/comments';
 import { CaseStepService } from '../../../service/client/case-step';
-import { CommentsService } from '../../../service/client/comments';
 import { PrivilegeService } from '../../../service/privilege';
 
 import { Case } from './case.component';
@@ -71,9 +71,9 @@ import { CaseView } from './view/view.component';
     SuiteService,
     CaseService,
     CaseStepService,
-    CommentsService,
-    PrivilegeService,
     CaseAttachmentService,
+    // CommentsService,
+    PrivilegeService,
   ],
 })
 export class CaseModule {}

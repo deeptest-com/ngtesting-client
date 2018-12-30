@@ -224,12 +224,6 @@ export class CaseEdit implements OnInit, AfterViewInit, OnDestroy {
   }
 
   reviewResult(result: boolean) {
-    // if (!result) {
-    //   this._state.notifyDataChanged(CONSTANT.EVENT_COMMENTS_EDIT, { result: result, summary: '评审失败' });
-    // } else {
-    //   this._state.notifyDataChanged(CONSTANT.EVENT_COMMENTS_SAVE, { result: result, summary: '评审通过' });
-    // }
-
     this._caseService.reviewResult(this.model.id, result).subscribe((json: any) => {
       if (json.code == 1) {
         this.model = json.data;

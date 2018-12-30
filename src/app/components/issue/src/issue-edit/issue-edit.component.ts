@@ -17,7 +17,6 @@ import { IssueService } from '../../../../service/client/issue';
 import { PrivilegeService } from '../../../../service/privilege';
 import * as _ from 'lodash';
 import { Utils } from '../../../../utils';
-import { CustomValidator } from '../../../../validator';
 
 declare var jQuery;
 

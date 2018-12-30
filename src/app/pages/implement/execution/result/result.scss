@@ -52,7 +52,20 @@
       }
     }
   }
-  .field-show-container{
+  .field-show-container {
    margin: 10px;
+  }
+
+  .issue-list {
+    .item {
+      display: flex;
+
+      .opts {
+        width: 150px;
+      }
+      .descr {
+        flex: 1;
+      }
+    }
   }
 }

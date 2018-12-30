@@ -27,9 +27,16 @@ import { SuiteService } from '../../../service/client/suite';
 import { CaseService } from '../../../service/client/case';
 import { CaseStepService } from '../../../service/client/case-step';
 import { CaseInTaskService } from '../../../service/client/case-in-task';
-import { CaseAttachmentService } from '../../../service/client/case-attachment';
+import { CaseInTaskAttachmentService } from '../../../service/client/case-in-task-attachment';
 import { PrivilegeService } from '../../../service/privilege';
-import { CommentsService } from '../../../service/client/comments';
+
+import { IssueService } from '../../../service/client/issue';
+import { IssueOptService } from '../../../service/client/issue-opt';
+import { IssueWatchService} from '../../../service/client/issue-watch';
+
+import { IssueCompModule, IssueCreate, IssueCreatePopupService } from '../../../components/issue';
+
+import { CaseInTaskIssueService } from '../../../service/client/case-in-task-issue';
 
 import { Execution } from './execution.component';
 import { ExecutionSuite } from './suite/suite.component';
@@ -54,6 +61,7 @@ import { ExecutionResult } from './result/result.component';
     StepsTableModule,
     FieldModule,
     CommentsModule,
+    IssueCompModule,
   ],
   declarations: [
     Execution,
@@ -70,8 +78,13 @@ import { ExecutionResult } from './result/result.component';
     CaseStepService,
     CaseInTaskService,
     PrivilegeService,
-    CommentsService,
-    CaseAttachmentService,
+    CaseInTaskAttachmentService,
+
+    IssueService, IssueOptService, IssueWatchService,
+    IssueCreatePopupService, CaseInTaskIssueService,
+  ],
+  entryComponents: [
+    IssueCreate,
   ],
 })
 export class ExecutionModule {}

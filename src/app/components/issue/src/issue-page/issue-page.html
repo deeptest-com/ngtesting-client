@@ -1,5 +1,5 @@
 <div *ngIf="issue.id" class="issue-page">
-  <div class="buttons form-inline">
+  <div *ngIf="!viewOnly" class="buttons form-inline">
     <div class="btn-group">
       <button (click)="edit()" type="button" class="btn btn-default btn-with-icon btn-sm">
         <i class="fa fa-pencil"></i>编辑
@@ -66,12 +66,8 @@
     <div class="tabs-container light">
       <div class="tabs">
         <ngb-tabset  (tabChange)="tabChange($event)">
-          <ngb-tab id="comments">
-            <ng-template ngbTabTitle>备注</ng-template>
-            <ng-template ngbTabContent></ng-template>
-          </ngb-tab>
-          <ngb-tab id="link">
-            <ng-template ngbTabTitle>链接</ng-template>
+          <ngb-tab id="info">
+            <ng-template ngbTabTitle>常规</ng-template>
             <ng-template ngbTabContent></ng-template>
           </ngb-tab>
           <ngb-tab id="history">
@@ -82,24 +78,48 @@
       </div>
     </div>
 
-    <div [class.hidden]="tab != 'comments'" class="tab-history">
-      <comment-list [model]="issue" [modelType]="'issue'"></comment-list>
-    </div>
-
-    <div [class.hidden]="tab != 'link'" class="tab-link">
-      <div class="activity">
-        <div class="list">
-          <div *ngFor="let item of issue.links; let i = index;" class="item">
-            <div class="descr">
-              <span class="reason-name">{{item.reasonName}}</span>
-              <a [href]="viewLink(item)" target="_blank" class="link">
+    <div [class.hidden]="tab != 'info'" class="tab-history">
+      <div class="form-group row">
+        <label class="col-sm-1 col-form-label"><span>链接</span></label>
+        <div class="col-sm-10">
+          <div class="activity">
+            <div class="list" style="border: 0;">
+              <div *ngFor="let item of issue.links; let i = index;" class="item">
+                <div class="descr">
+                  <span class="reason-name">{{item.reasonName}}</span>
+                  <span *ngIf="!viewOnly" (click)="viewIssue(item)" class="link">
                 <span>IS-{{item.id}}</span>
                 <span>{{item.title}}</span>
-              </a>
+              </span>
+                  <span *ngIf="viewOnly">
+                <span>IS-{{item.id}}</span>
+                <span>{{item.title}}</span>
+              </span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
+
+      <div class="form-group row">
+        <label class="col-sm-1 col-form-label"><span>附件</span></label>
+        <div *ngIf="!viewOnly" class="col-sm-1">
+          <file-uploader (uploadedEvent)="uploadedEvent($event)"
+                         [ifile]="issue.testsetPath" [mimeType]="[]" [showDropZone]="false"></file-uploader>
+        </div>
+        <div class="col-sm-10">
+          <label class="attach-list">
+          <span *ngFor="let attach of issue.attachments; let i = index;" class="attach-item">
+            <span *ngIf="!viewOnly" (click)="removeAttachment(attach)" class="fa fa-times pointer" tabindex="-1"></span>
+            <a href="{{attach.uri | pathToLink}}" target="_blank" class="download pointer" >{{attach.name}}</a>
+          </span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+      <comment-list [model]="issue" [modelType]="'issue'" [viewOnly]="viewOnly"></comment-list>
     </div>
 
     <div [class.hidden]="tab != 'history'" class="tab-history">
@@ -114,23 +134,6 @@
         </div>
       </div>
     </div>
-
-    <div class="form-group row">
-      <label class="col-sm-2 col-form-label"><span>附件</span></label>
-      <div class="col-sm-1">
-        <file-uploader (uploadedEvent)="uploadedEvent($event)"
-                       [ifile]="issue.testsetPath" [mimeType]="[]" [showDropZone]="false"></file-uploader>
-      </div>
-      <div class="col-sm-9">
-        <label class="attach-list">
-          <span *ngFor="let attach of issue.attachments; let i = index;" class="attach-item">
-            <span (click)="removeAttachment(attach)" class="fa fa-times pointer" tabindex="-1"></span>
-            <a href="{{attach.uri | pathToLink}}" target="_blank" class="download pointer" >{{attach.name}}</a>
-          </span>
-        </label>
-      </div>
-    </div>
-  </div>
 
 </div>
 

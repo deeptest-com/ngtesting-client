@@ -377,13 +377,32 @@ ul.al-share {
 
     .modal-content {
       height: 100%;
+      //overflow: auto;
+
       > :first-child {
         height: 100%;
         .modal-content-inner {
+          margin: 0 !important;
+          padding: 15px !important;
           height: 100%;
+
+          .modal-header {
+            padding: 0;
+
+            display: flex;
+
+            .left {
+              flex: 1;
+            }
+            .right {
+              width: 200px;
+              text-align: right;
+            }
+          }
           .modal-body {
-            padding: 5px 15px 15px 15px;
-            height: calc(100% - 37px);
+            overflow: auto;
+            padding: 5px;
+            height: calc(100% - 35px);
           }
         }
       }

@@ -91,7 +91,7 @@
 
           <div class="tabs-container light">
             <div class="tabs">
-              <ngb-tabset  (tabChange)="tabChange($event)">
+              <ngb-tabset (tabChange)="tabChange($event)">
                 <ngb-tab id="info">
                   <ng-template ngbTabTitle>信息</ng-template>
                   <ng-template ngbTabContent></ng-template>
@@ -115,8 +115,8 @@
 
         <div class="row">
           <div class="col-sm-12 property">
-          <table class="io">
-            <tbody>
+            <table class="io">
+              <tbody>
               <tr>
                 <td style="width: 25%">
                   <div class="label">状态</div>
@@ -144,45 +144,45 @@
                   </div>
                 </td>
               </tr>
-            <tr>
-            </tr>
-            </tbody>
-          </table>
+              <tr>
+              </tr>
+              </tbody>
+            </table>
           </div>
-      </div>
-
-      <div class="row field-show-container">
-        <div class="col-sm-2 field-show-label">测试目标</div>
-        <div class="col-sm-11">
-          <case-field-show [model]="model" [elemCode]="'objective'" [casePropMap]="casePropMap"
-                           (onSave)="saveField($event)" [form]="form">
-          </case-field-show>
         </div>
-      </div>
 
-      <div *ngFor="let elem of customFields;" class="row field-show-container">
-        <div class="col-sm-2 field-show-label">{{elem.label}}</div>
-        <div class="col-sm-10">
-          <case-field-show [model]="model" [elem]="elem" [casePropMap]="casePropMap"
-                           (onSave)="saveField($event)" [form]="form">
-          </case-field-show>
+        <div class="row field-show-container">
+          <div class="col-sm-2 field-show-label">测试目标</div>
+          <div class="col-sm-11">
+            <case-field-show [model]="model" [elemCode]="'objective'" [casePropMap]="casePropMap"
+                             (onSave)="saveField($event)" [form]="form">
+            </case-field-show>
+          </div>
         </div>
-      </div>
 
-      <div class="form-group row">
-        <div class="col-sm-10">
-          <div class="tabs-container light">
-            <div class="tabs">
-              <ngb-tabset>
-                <ngb-tab id="content">
-                  <ng-template ngbTabTitle>测试步骤</ng-template>
-                  <ng-template ngbTabContent></ng-template>
-                </ngb-tab>
-              </ngb-tabset>
+        <div *ngFor="let elem of customFields;" class="row field-show-container">
+          <div class="col-sm-2 field-show-label">{{elem.label}}</div>
+          <div class="col-sm-10">
+            <case-field-show [model]="model" [elem]="elem" [casePropMap]="casePropMap"
+                             (onSave)="saveField($event)" [form]="form">
+            </case-field-show>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-sm-10">
+            <div class="tabs-container light">
+              <div class="tabs">
+                <ngb-tabset>
+                  <ngb-tab id="content">
+                    <ng-template ngbTabTitle>测试步骤</ng-template>
+                    <ng-template ngbTabContent></ng-template>
+                  </ngb-tab>
+                </ngb-tabset>
+              </div>
             </div>
           </div>
-        </div>
-        <div *ngIf="canEdit" class="contentType col-sm-2">
+          <div *ngIf="canEdit" class="contentType col-sm-2">
           <span *ngIf="model.contentType=='richText'" (click)="changeContentType('steps')" class="link">
             <i class="fa fa-th"></i>
             切换到表格
@@ -191,42 +191,70 @@
             <i class="fa fa-file-text-o"></i>
               切换到富文本
           </span>
-        </div>
-      </div>
-      <div class="tab-steps form-group row">
-        <div class="col-sm-12">
-          <div *ngIf="'steps'==model.contentType">
-            <steps-table [settings]="settings"
-                         [source]="model.steps"
-                         (upConfirm)="onUpConfirm($event)"
-                         (downConfirm)="onDownConfirm($event)"
-
-                         (createConfirm)="onCreateConfirm($event)"
-                         (saveConfirm)="onSaveConfirm($event)"
-                         (deleteConfirm)="onDeleteConfirm($event)"
-            ></steps-table>
-          </div>
-          <div *ngIf="'richText'==model.contentType">
-            <case-field-show [model]="model" [elemCode]="'content'" [casePropMap]="casePropMap"
-                             (onSave)="saveField($event)" [form]="form">
-            </case-field-show>
           </div>
         </div>
-      </div>
-    </div>
+        <div class="tab-steps form-group row">
+          <div class="col-sm-12">
+            <div *ngIf="'steps'==model.contentType">
+              <steps-table [settings]="settings"
+                           [source]="model.steps"
+                           (upConfirm)="onUpConfirm($event)"
+                           (downConfirm)="onDownConfirm($event)"
 
-    <div [class.hidden]="tab != 'result'" class="tab-summary">
-      <div class="form-group row">
-        <label class="col-sm-1 col-form-label"><span>实际结果</span></label>
-        <div *ngIf="canExe" class="col-sm-11">
+                           (createConfirm)="onCreateConfirm($event)"
+                           (saveConfirm)="onSaveConfirm($event)"
+                           (deleteConfirm)="onDeleteConfirm($event)"
+              ></steps-table>
+            </div>
+            <div *ngIf="'richText'==model.contentType">
+              <case-field-show [model]="model" [elemCode]="'content'" [casePropMap]="casePropMap"
+                               (onSave)="saveField($event)" [form]="form">
+              </case-field-show>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div [class.hidden]="tab != 'result'" class="tab-summary">
+        <div class="form-group row">
+          <label class="col-sm-1 col-form-label"><span>实际结果</span></label>
+          <div *ngIf="canExe" class="col-sm-11">
             <textarea type="text" class="form-control" name="result" formControlName="result"
                       [(ngModel)]="model.result" #result></textarea>
-        </div>
-        <label *ngIf="!canExe" class="col-sm-11 col-form-label">
+          </div>
+          <label *ngIf="!canExe" class="col-sm-11 col-form-label">
             {{model.result}}
-        </label>
+          </label>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-1">
+            <span>问题</span>
+          </label>
+          <div class="col-sm-11">
+
+            <div class="issue-list">
+              <div class="item">
+                <div class="descr"></div>
+                <div class="opts">
+                  <span (click)="createIssue()" class="link">创建</span>
+                </div>
+              </div>
+
+              <div *ngFor="let item of model.issues;" class="item">
+                <div class="descr">
+                  <span>IS-{{item.issueId}}</span>
+                  <span>{{item.title}}</span>
+                </div>
+                <div class="opts">
+                  <span (click)="viewIssue(item)" class="link">查看</span>
+                  <span (click)="removeIssue(item)" class="link">删除</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
 
       <div [class.hidden]="tab != 'history'" class="tab-history">
         <div class="activity">
@@ -241,36 +269,36 @@
         </div>
       </div>
 
-      <br />
+      <br/>
 
       <div class="form-group row">
         <label class="col-sm-1"><span>附件</span></label>
-        <div class="col-sm-11">
+        <div class="col-sm-1">
           <file-uploader (uploadedEvent)="uploadedEvent($event)"
                          [ifile]="model.testsetPath" [mimeType]="[]" [showDropZone]="false"></file-uploader>
         </div>
-        <div class="col-sm-11 offset-1">
+        <div class="col-sm-10">
           <label class="attach-list">
             <span *ngFor="let attach of model.attachments; let i = index;" class="attach-item">
               <span (click)="removeAttachment(attach)" class="fa fa-times pointer" tabindex="-1"></span>
-              <a href="{{attach.uri | pathToLink}}" target="_blank" class="download pointer" >{{attach.name}}</a>
+              <a href="{{attach.uri | pathToLink}}" target="_blank" class="download pointer">{{attach.name}}</a>
             </span>
           </label>
         </div>
       </div>
 
-      <comment-list [model]="model" [modelType]="'case'"></comment-list>
+      <comment-list [model]="model" [modelType]="'case_in_task'"></comment-list>
 
-    <div class="form-group row">
-      <label class="col-sm-2 col-form-label"></label>
-      <div class="col-sm-10">
-        <div class="validate-errors">
-          <div class="validate-error" *ngFor="let msg of formErrors">
-            <div>{{ msg }}</div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+          <div class="validate-errors">
+            <div class="validate-error" *ngFor="let msg of formErrors">
+              <div>{{ msg }}</div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
     </form>
   </div>

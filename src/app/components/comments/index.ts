@@ -16,7 +16,7 @@ export * from './comment-edit/src/comment-edit.component';
   imports: [CommonModule, RouterModule, FormsModule, PipeModule],
   declarations: [CommentListComponent, CommentEditComponent],
   exports: [CommentListComponent, CommentEditComponent],
-  providers: [],
+  providers: [CommentsService],
 })
 export class CommentsModule {
   static forRoot(): ModuleWithProviders {

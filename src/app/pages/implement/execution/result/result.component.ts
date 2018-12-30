@@ -1,22 +1,24 @@
-import { Component, ViewEncapsulation, NgModule, Pipe, OnInit, AfterViewInit, OnDestroy, Input } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
+import { AfterViewInit, Compiler, Component, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
+import { FormBuilder } from '@angular/forms';
 
 import { GlobalState } from '../../../../global.state';
 import { WS_CONSTANT } from '../../../../utils/ws-constant';
 
 import { CONSTANT } from '../../../../utils/constant';
-import { Utils, logger } from '../../../../utils/utils';
+import { logger } from '../../../../utils/utils';
 import { ValidatorUtils } from '../../../../validator/validator.utils';
 import { RouteService } from '../../../../service/route';
 
 import { CaseService } from '../../../../service/client/case';
 import { CaseStepService } from '../../../../service/client/case-step';
 import { CaseInTaskService } from '../../../../service/client/case-in-task';
-import { CaseAttachmentService } from '../../../../service/client/case-attachment';
+import { CaseInTaskAttachmentService } from '../../../../service/client/case-in-task-attachment';
+import { CaseInTaskIssueService } from '../../../../service/client/case-in-task-issue';
 import { ZtreeService } from '../../../../components/ztree';
 import { PrivilegeService } from '../../../../service/privilege';
+
+import { IssueViewPopupService, IssueCreatePopupService } from '../../../../components/issue';
 
 declare var jQuery;
 
@@ -28,6 +30,9 @@ declare var jQuery;
 })
 export class ExecutionResult implements OnInit, AfterViewInit, OnDestroy {
   eventCode: string = 'ExecutionResult';
+
+  issueViewModal: any;
+  issueCreateModal: any;
 
   planId: number;
   taskId: number;
@@ -54,8 +59,12 @@ export class ExecutionResult implements OnInit, AfterViewInit, OnDestroy {
   constructor(private _state: GlobalState, private _routeService: RouteService,
               private _route: ActivatedRoute, private fb: FormBuilder,
               private _caseService: CaseService, private _caseStepService: CaseStepService,
-              private _caseInTaskService: CaseInTaskService, private _caseAttachmentService: CaseAttachmentService,
-              private _ztreeService: ZtreeService, private privilegeService: PrivilegeService) {
+              private _caseInTaskService: CaseInTaskService,
+              private _caseInTaskAttachmentService: CaseInTaskAttachmentService,
+              private _ztreeService: ZtreeService, private privilegeService: PrivilegeService,
+              private _issueCreatePopupService: IssueCreatePopupService,
+              private _issueViewPopupService: IssueViewPopupService,
+              private _caseInTaskIssueService: CaseInTaskIssueService) {
 
     this._state.subscribe(WS_CONSTANT.WS_PRJ_SETTINGS, this.eventCode, (json) => {
       console.log(WS_CONSTANT.WS_PRJ_SETTINGS + ' in ' + this.eventCode, json);
@@ -65,6 +74,7 @@ export class ExecutionResult implements OnInit, AfterViewInit, OnDestroy {
 
     this.buildForm();
   }
+
   ngOnInit() {
     this.user = CONSTANT.PROFILE;
 
@@ -77,6 +87,8 @@ export class ExecutionResult implements OnInit, AfterViewInit, OnDestroy {
 
     this._state.subscribe(CONSTANT.EVENT_CASE_EXE, this.eventCode, (data: any) => {
       logger.log(CONSTANT.EVENT_CASE_EXE, data);
+      this.tab = 'info';
+
       const testCase = data.node;
       if (!testCase || testCase.isParent) {
         this.model = { childrenCount: data.childrenCount };
@@ -116,7 +128,10 @@ export class ExecutionResult implements OnInit, AfterViewInit, OnDestroy {
       },
     };
   }
-  ngAfterViewInit() {}
+
+  ngAfterViewInit() {
+
+  }
 
   buildForm(): void {
     this.form = this.fb.group(
@@ -129,14 +144,14 @@ export class ExecutionResult implements OnInit, AfterViewInit, OnDestroy {
     this.form.valueChanges.debounceTime(CONSTANT.DebounceTime).subscribe(data => this.onValueChanged(data));
     this.onValueChanged();
   }
+
   onValueChanged(data?: any) {
     const that = this;
     that.formErrors = ValidatorUtils.genMsg(that.form, that.validateMsg, []);
   }
 
   formErrors = [];
-  validateMsg = {
-  };
+  validateMsg = {};
 
   loadData() {
     const that = this;
@@ -153,22 +168,22 @@ export class ExecutionResult implements OnInit, AfterViewInit, OnDestroy {
 
     this._caseInTaskService.setResult(this.model.entityId, this.model.id, this.model.result,
       next ? next.entityId : null, status)
-        .subscribe((json: any) => {
-      if (json.code == 1) {
-        this.model.status = status;
-        this._ztreeService.selectNode(next);
+      .subscribe((json: any) => {
+        if (json.code == 1) {
+          this.model.status = status;
+          this._ztreeService.selectNode(next);
 
-        this._state.notifyDataChanged(CONSTANT.EVENT_CASE_UPDATE, { node: this.model, random: Math.random() });
-        this.model = json.data;
-      }
-    });
+          this._state.notifyDataChanged(CONSTANT.EVENT_CASE_UPDATE, { node: this.model, random: Math.random() });
+          this.model = json.data;
+        }
+      });
   }
 
   reset() {
     this.loadData();
   }
 
-  saveField (event: any) {
+  saveField(event: any) {
     this._caseService.saveField(this.model.id, event.data).subscribe((json: any) => {
       if (json.code == 1) {
         // this.model = json.data;
@@ -181,6 +196,7 @@ export class ExecutionResult implements OnInit, AfterViewInit, OnDestroy {
   tabChange(event: any) {
     this.tab = event.nextId;
   }
+
   changeContentType(contentType: string) {
     this._caseService.changeContentType(contentType, this.model.id).subscribe((json: any) => {
       if (json.code == 1) {
@@ -207,12 +223,14 @@ export class ExecutionResult implements OnInit, AfterViewInit, OnDestroy {
     logger.log('onCreateConfirm', event);
     event.confirm.resolve();
   }
+
   onSaveConfirm(event: any) {
     logger.log('onSaveConfirm', event);
     this._caseStepService.save(this.model.id, event.newData).subscribe((json: any) => {
       event.confirm.resolve();
     });
   }
+
   onDeleteConfirm(event: any) {
     logger.log('onDeleteConfirm', event);
     this._caseStepService.delete(event.data).subscribe((json: any) => {
@@ -221,16 +239,18 @@ export class ExecutionResult implements OnInit, AfterViewInit, OnDestroy {
   }
 
   uploadedEvent(event: any) {
-    this._caseAttachmentService.uploadAttachment(this.model.id, event.data.name, event.data.path)
+    this._caseInTaskAttachmentService.uploadAttachment(this.model.entityId, event.data.name, event.data.path)
       .subscribe((json: any) => {
         this.model.attachments = json.attachments;
         this.model.histories = json.histories;
         event.deferred.resolve();
       });
   }
+
   removeAttachment(item: any) {
-    this._caseAttachmentService.removeAttachment(this.model.id, item.id).subscribe((json: any) => {
-      this.model.attachments = json.data;
+    this._caseInTaskAttachmentService.removeAttachment(this.model.entityId, item.id).subscribe((json: any) => {
+      this.model.attachments = json.attachments;
+      this.model.histories = json.histories;
     });
   }
 
@@ -244,6 +264,32 @@ export class ExecutionResult implements OnInit, AfterViewInit, OnDestroy {
       + '/implement/plan/' + this.planId + '/view';
     logger.log(url);
     this._routeService.navTo(url);
+  }
+
+  createIssue() {
+    this.issueCreateModal = this._issueCreatePopupService.genPage();
+
+    this.issueCreateModal.result.then((result) => {
+      console.log('result', result);
+      if (result.success) {
+
+        this._caseInTaskIssueService.save(this.model.entityId, result.id).subscribe((json: any) => {
+          this.model.issues = json.issues;
+        });
+      }
+    }, (reason) => {
+      console.log('reason', reason);
+    });
+  }
+
+  removeIssue(item) {
+    this._caseInTaskIssueService.remove(this.model.entityId, item.id).subscribe((json: any) => {
+      this.model.issues = json.issues;
+    });
+  }
+
+  viewIssue(item) {
+    this.issueViewModal = this._issueViewPopupService.genPage(item.issueId);
   }
 
   ngOnDestroy(): void {

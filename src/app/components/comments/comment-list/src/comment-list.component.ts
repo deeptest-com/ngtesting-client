@@ -17,6 +17,7 @@ import { CommentEditComponent } from '../../comment-edit/src/comment-edit.compon
 export class CommentListComponent implements OnInit, AfterViewInit, OnDestroy{
   @Input() @Output() model: any = {};
   @Input() modelType: string;
+  @Input() viewOnly: boolean = false;
   userId: number;
 
   @ViewChild('modalWrapper') modalWrapper: CommentEditComponent;
@@ -62,7 +63,8 @@ export class CommentListComponent implements OnInit, AfterViewInit, OnDestroy{
   }
 
   saveComments(result: boolean) {
-    this._commentsService.save(this.model.id, this.modelType, this.comment).subscribe((json: any) => {
+    const modelId = this.modelType == 'case_in_task' ? this.model.entityId : this.model.id;
+    this._commentsService.save(modelId, this.modelType, this.comment).subscribe((json: any) => {
       if (json.code == 1) {
         if (this.comment.result != undefined) { // 评审
           this.reviewRequest(this.model.id, this.comment.result);
@@ -97,6 +99,6 @@ export class CommentListComponent implements OnInit, AfterViewInit, OnDestroy{
   ngOnDestroy(): void {
     // this._state.unsubscribe(CONSTANT.EVENT_COMMENTS_EDIT, this.eventCode);
     // this._state.unsubscribe(CONSTANT.EVENT_COMMENTS_SAVE, this.eventCode);
-  };
+  }
 
 }

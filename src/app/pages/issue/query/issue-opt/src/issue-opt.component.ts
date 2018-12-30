@@ -1,8 +1,6 @@
 import * as _ from 'lodash';
 
 import { Component, Input, OnInit, AfterViewInit, Output, EventEmitter, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 
 import { CONSTANT } from '../../../../../utils/constant';
 
@@ -12,13 +10,11 @@ import { CONSTANT } from '../../../../../utils/constant';
   styleUrls: ['./styles.scss'],
 })
 export class IssueOpt implements OnInit, AfterViewInit {
-  form: FormGroup;
-
   @Output() dealWithIssueEvent = new EventEmitter<any>();
   @Input() item: any;
   @Input() batchModel: boolean;
 
-  constructor(private fb: FormBuilder) {
+  constructor() {
   }
 
   ngOnInit(): any {

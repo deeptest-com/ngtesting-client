@@ -11,7 +11,7 @@ import { NgbModalModule, NgbPaginationModule, NgbDropdownModule, NgbDateParserFo
 import { DndModule, SortableContainer } from '../../components/ng2-dnd';
 
 import { NgaModule } from '../../theme/nga.module';
-import { routing }       from './issue.routing';
+import { routing } from './issue.routing';
 
 import { PipeModule } from '../../pipe/pipe.module';
 import { DirectiveModule } from '../../directive/directive.module';
@@ -22,13 +22,11 @@ import { PageInfoModule } from '../../components/page-info';
 import { TqlModule } from './tql';
 
 import { FieldModule } from '../../components/field';
-import { IssueCompModule } from '../../components/issue';
 
 import { RouteService } from '../../service/route';
 import { RequestService } from '../../service/request';
 import { DatetimePickerService } from '../../service/datetime-picker';
 
-// import { CommentsService } from '../../service/client/comments';
 import { ClientService } from '../../service/client/client';
 import { IssueQueryService } from './query/query.service';
 
@@ -50,6 +48,8 @@ import { IssueBrowse } from './query/result-browse/browse.component';
 
 import { TableColumnSelectionModule } from './query/table-column-selection';
 import { IssueOptModule } from './query/issue-opt';
+
+import { IssueCompModule } from '../../components/issue';
 
 import { IssueCreate } from './create/create.component';
 import { IssueEdit } from './edit/edit.component';

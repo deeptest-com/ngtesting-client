@@ -31,7 +31,8 @@ import { IssueTagPopupService } from '../issue-tag/issue-tag.service';
 import { IssueLinkPopupService } from '../issue-link/issue-link.service';
 
 import { PopDialogComponent } from '../../../pop-dialog';
-import {CONSTANT} from "../../../../utils";
+
+import { IssueViewPopupService } from '../issue-view/issue-view.service';
 
 declare var jQuery;
 
@@ -42,11 +43,13 @@ declare var jQuery;
   templateUrl: './issue-page.html',
 })
 export class IssuePage implements OnInit, AfterViewInit, OnDestroy {
+  issueViewModal: any;
+
   eventCode: string = 'IssuePage';
   canEdit: boolean;
 
   form: any;
-  tab: string = 'comments';
+  tab: string = 'info';
 
   issueEditModal: any;
   issueAssignModal: any;
@@ -56,6 +59,7 @@ export class IssuePage implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild('deleteModalWrapper') deleteModalWrapper: PopDialogComponent;
 
+  @Input() viewOnly: boolean = false;
   @Input() page: any = {};
   @Input() issuePropMap: any = {};
   @Input() issueTransMap: any = {};
@@ -78,6 +82,7 @@ export class IssuePage implements OnInit, AfterViewInit, OnDestroy {
               private issueOptService: IssueOptService,
               private issueWatchService: IssueWatchService,
 
+              private issueViewPopupService: IssueViewPopupService,
               private issueEditPopupService: IssueEditPopupService,
               private issueWatchPopupService: IssueWatchPopupService,
               private issueAssignPopupService: IssueAssignPopupService,
@@ -180,7 +185,7 @@ export class IssuePage implements OnInit, AfterViewInit, OnDestroy {
   link() {
     this.issueLinkModal = this.issueLinkPopupService.genPage(this._issue);
 
-      this.issueLinkModal.result.then((result) => {
+    this.issueLinkModal.result.then((result) => {
       console.log('result', result);
       if (result.success) {
         this.optEvent.emit(result);
@@ -232,10 +237,8 @@ export class IssuePage implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  viewLink(item) {
-    const url = '#/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + CONSTANT.CURR_PRJ_ID + '/issue/'
-      + item.id + '/view';
-    return url;
+  viewIssue(item) {
+    this.issueViewModal = this.issueViewPopupService.genPage(item.id);
   }
 
   ngOnDestroy(): void {
