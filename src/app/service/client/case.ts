@@ -53,8 +53,9 @@ export class CaseService {
     return this._reqService.post(this._apiBase + 'changeContentType', { id: id, contentType: contentType });
   }
 
-  reviewResult(id: number, result: boolean) {
-    return this._reqService.post(this._apiBase + 'reviewResult', { id: id, result: result });
+  reviewResult(id: number, result: boolean, nextId: number) {
+    return this._reqService.post(this._apiBase + 'reviewResult',
+      { id: id, result: result, nextId: nextId });
   }
 
   exportAll() {

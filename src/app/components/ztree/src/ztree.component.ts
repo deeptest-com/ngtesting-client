@@ -208,16 +208,28 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  setFontCss (treeId, treeNode) {
+  setFontCss = (treeId, treeNode) => {
     const css: any = {};
     css.color = '#333333';
-    if (treeNode.status == 'pass' || treeNode.reviewResult) {
-      css.color = '#209e91';
-    } else if (treeNode.status == 'fail' || treeNode.reviewResult == false) {
-      css.color = '#e85656';
-    } else if (treeNode.status == 'block') {
-      css.color = '#dfb81c';
+
+    console.log('sdfds', this.settings);
+
+    if (this.settings && this.settings.usage == 'edit') {
+      if (treeNode.reviewResult) {
+        css.color = '#209e91';
+      } else {
+        css.color = '#dfb81c';
+      }
+    } else if (this.settings && this.settings.usage == 'exe') {
+      if (treeNode.status == 'pass' || treeNode.reviewResult) {
+        css.color = '#209e91';
+      } else if (treeNode.status == 'fail' || treeNode.reviewResult == false) {
+        css.color = '#e85656';
+      } else if (treeNode.status == 'block') {
+        css.color = '#dfb81c';
+      }
     }
+
     return css;
   }
   onClick = (event, treeId, treeNode) => {
@@ -422,7 +434,7 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
     return (h + ':' + m + ':' + s + ' ' + ms);
   }
 
-  onKeywordsChange(values: string) {
+  onKeywordsChange = (values: string) => {
     if (!this.ztree) { return; }
 
     this.keywords = values;
@@ -434,14 +446,14 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
     });
     this.ztree.hideNodes(nodes);
   }
-  onProjectChange(id: number) {
+  onProjectChange = (id: number) => {
     if (id) {
       this.queryModel.projectId = id;
       this.projectChanged.emit(id);
     }
   }
 
-  updateCopiedNodes(node: any, data: any) {
+  updateCopiedNodes = (node: any, data: any) => {
     logger.log('===', node.id, data.id);
 
     node.id = data.id;
@@ -451,7 +463,7 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
       this.updateCopiedNodes(node.children[i], data.children[i]);
     }
   }
-  jumpTo(id: string) {
+  jumpTo = (id: string) => {
     this._routeService.gotoCase(id);
 
     const node = this.ztree.getNodeByParam('id', id, null);

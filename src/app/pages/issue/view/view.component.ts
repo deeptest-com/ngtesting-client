@@ -68,6 +68,7 @@ export class IssueView implements OnInit, AfterViewInit, OnDestroy {
       this.issue.links = json.data.links;
       this.issue.tags = json.data.tags;
       this.issue.histories = json.data.histories;
+      this.issue.watchList = json.data.watchList;
     });
   }
 

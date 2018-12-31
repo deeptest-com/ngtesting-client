@@ -15,6 +15,7 @@ import { CaseAttachmentService } from '../../../../service/client/case-attachmen
 import { CaseStepService } from '../../../../service/client/case-step';
 
 import { PrivilegeService } from '../../../../service/privilege';
+import { ZtreeService } from '../../../../components/ztree';
 
 declare var jQuery;
 
@@ -35,6 +36,7 @@ export class CaseEdit implements OnInit, AfterViewInit, OnDestroy {
   settings: any;
   data: any;
   form: any;
+  next: boolean = true;
   tab: string = 'content';
 
   casePropMap: any = {};
@@ -44,6 +46,7 @@ export class CaseEdit implements OnInit, AfterViewInit, OnDestroy {
   canEdit: boolean;
 
   constructor(private _state: GlobalState, private fb: FormBuilder, private toastyService: ToastyService,
+              private _ztreeService: ZtreeService,
               private _caseService: CaseService, private _caseAttachmentService: CaseAttachmentService,
               private _caseStepService: CaseStepService, private privilegeService: PrivilegeService) {
 
@@ -116,6 +119,7 @@ export class CaseEdit implements OnInit, AfterViewInit, OnDestroy {
         'estimate': ['', []],
         'objective': ['', []],
         'pre_condition': ['', []],
+        'next': ['', []],
       }, {},
     );
 
@@ -224,8 +228,21 @@ export class CaseEdit implements OnInit, AfterViewInit, OnDestroy {
   }
 
   reviewResult(result: boolean) {
-    this._caseService.reviewResult(this.model.id, result).subscribe((json: any) => {
+    let next;
+    if (this.next) {
+      next = this._ztreeService.getNextNode(this.model.id);
+    }
+
+    console.log('====');
+
+    this._caseService.reviewResult(this.model.id, result, next ? next.id : null)
+        .subscribe((json: any) => {
       if (json.code == 1) {
+        this.model.reviewResult = result;
+
+        this._ztreeService.selectNode(next);
+        this._state.notifyDataChanged(CONSTANT.EVENT_CASE_UPDATE, { node: this.model, random: Math.random() });
+
         this.model = json.data;
       }
     });

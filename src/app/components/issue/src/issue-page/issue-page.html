@@ -78,13 +78,22 @@
       </div>
     </div>
 
-    <div [class.hidden]="tab != 'info'" class="tab-history">
+    <div [class.hidden]="tab != 'info'" class="tab-info tab-contents">
       <div class="form-group row">
         <label class="col-sm-1 col-form-label"><span>标签</span></label>
-        <label class="col-sm-10 col-form-label">
-              <ng-container *ngFor="let item of issue.tags; let i = index;">
-                <span *ngIf="i>0">, </span> <span>{{item.name}}</span>
-              </ng-container>
+        <label class="col-sm-5 col-form-label">
+          <div class="tags">
+            <span *ngFor="let item of issue.tags; let i = index;" class="tag">
+              <i class="fa fa-tag"></i> <span>{{item.name}}</span>
+            </span>
+          </div>
+        </label>
+
+        <label class="col-sm-1 col-form-label"><span>关注</span></label>
+        <label class="col-sm-5 col-form-label">
+          <ng-container *ngFor="let item of issue.watchList; let i = index;">
+            <i class="fa fa-user"></i> <span>{{item.nickname}}</span>
+          </ng-container>
         </label>
       </div>
 
@@ -131,7 +140,7 @@
     </div>
   </div>
 
-  <div [class.hidden]="tab != 'history'" class="tab-history">
+  <div [class.hidden]="tab != 'history'" class="tab-history tab-contents">
     <div class="activity">
       <div class="list">
         <div *ngFor="let his of issue.histories; let i = index;" class="item">

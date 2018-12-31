@@ -54,6 +54,13 @@
                   [disabled]="!form.valid">评审通过</button>
           <button prj-privilege [privs]="'test_case-review'" (click)="reviewResult(false)" type="button" class="btn btn-warning btn-sm"
                   [disabled]="!form.valid">评审失败</button>
+
+          <label prj-privilege [privs]="'test_case-review'" class="col-form-label form-check-label">
+            <input [(ngModel)]="next" formControlName="next" name="next"
+                   class="form-check-input form-control-lg" type="checkbox" value="true">
+            &nbsp;同时转到下一个
+          </label>
+
         </div>
       </div>
 
