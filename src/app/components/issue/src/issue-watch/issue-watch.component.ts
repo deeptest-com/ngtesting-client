@@ -37,6 +37,8 @@ export class IssueWatch implements OnInit, AfterViewInit, OnDestroy {
   searchResult: any[];
   selectedModels: any[] = [];
 
+  updated: boolean = false;
+
   constructor(private _routeService: RouteService, private _state: GlobalState, private _route: ActivatedRoute,
               public activeModal: NgbActiveModal, private toastyService: ToastyService,
               private issueWatchService: IssueWatchService, private privilegeService: PrivilegeService) {
@@ -62,6 +64,10 @@ export class IssueWatch implements OnInit, AfterViewInit, OnDestroy {
     this.issueWatchService.batchSave(this.issue.id, ids).subscribe((json: any) => {
       if (json.code == 1) {
         // this.activeModal.close({ act: 'save', success: true });
+        this.selectedModels = [];
+        this.loadData();
+        
+        this.updated = true;
       }
     });
   }
@@ -70,12 +76,14 @@ export class IssueWatch implements OnInit, AfterViewInit, OnDestroy {
     this.issueWatchService.remove(item.id, this.issue.id).subscribe((json: any) => {
       if (json.code == 1) {
         this.loadData();
+
+        this.updated = true;
       }
     });
   }
 
   cancel() {
-      this.activeModal.dismiss({ act: 'cancel' });
+      this.activeModal.dismiss(this.updated ? { success: true } : { act: 'cancel' });
   }
 
   changeSearch(searchModel: any): void {

@@ -1,5 +1,5 @@
 <div class="field-input-view">
-  <span *ngIf="elem.input!='richtext'">{{getLabel()}}</span>
+  <span *ngIf="elem.input!='richtext'">{{val}}</span>
 
   <div *ngIf="elem.input=='richtext'" style="display: inline;"
        [innerHTML]="model[elem.colCode]"></div>

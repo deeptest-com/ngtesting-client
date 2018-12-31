@@ -17,12 +17,12 @@
           <button (click)="link()" class="dropdown-item list-item">
             <i class="fa fa-link"></i><a>链接</a>
           </button>
-<!--          <button (click)="selectItem()" class="dropdown-item list-item">
-            <i class="fa fa-indent"></i><a>移动</a>
-          </button>
-          <button (click)="selectItem()" class="dropdown-item list-item">
-            <i class="fa fa-copy"></i><a>复制</a>
-          </button>-->
+          <!--          <button (click)="selectItem()" class="dropdown-item list-item">
+                      <i class="fa fa-indent"></i><a>移动</a>
+                    </button>
+                    <button (click)="selectItem()" class="dropdown-item list-item">
+                      <i class="fa fa-copy"></i><a>复制</a>
+                    </button>-->
           <button (click)="showDeleteModal()" class="dropdown-item list-item">
             <i class="fa fa-copy"></i><a>删除</a>
           </button>
@@ -65,7 +65,7 @@
   <div>
     <div class="tabs-container light">
       <div class="tabs">
-        <ngb-tabset  (tabChange)="tabChange($event)">
+        <ngb-tabset (tabChange)="tabChange($event)">
           <ngb-tab id="info">
             <ng-template ngbTabTitle>常规</ng-template>
             <ng-template ngbTabContent></ng-template>
@@ -79,6 +79,15 @@
     </div>
 
     <div [class.hidden]="tab != 'info'" class="tab-history">
+      <div class="form-group row">
+        <label class="col-sm-1 col-form-label"><span>标签</span></label>
+        <label class="col-sm-10 col-form-label">
+              <ng-container *ngFor="let item of issue.tags; let i = index;">
+                <span *ngIf="i>0">, </span> <span>{{item.name}}</span>
+              </ng-container>
+        </label>
+      </div>
+
       <div class="form-group row">
         <label class="col-sm-1 col-form-label"><span>链接</span></label>
         <div class="col-sm-10">
@@ -112,28 +121,28 @@
           <label class="attach-list">
           <span *ngFor="let attach of issue.attachments; let i = index;" class="attach-item">
             <span *ngIf="!viewOnly" (click)="removeAttachment(attach)" class="fa fa-times pointer" tabindex="-1"></span>
-            <a href="{{attach.uri | pathToLink}}" target="_blank" class="download pointer" >{{attach.name}}</a>
+            <a href="{{attach.uri | pathToLink}}" target="_blank" class="download pointer">{{attach.name}}</a>
           </span>
           </label>
         </div>
       </div>
-    </div>
 
       <comment-list [model]="issue" [modelType]="'issue'" [viewOnly]="viewOnly"></comment-list>
     </div>
+  </div>
 
-    <div [class.hidden]="tab != 'history'" class="tab-history">
-      <div class="activity">
-        <div class="list">
-          <div *ngFor="let his of issue.histories; let i = index;" class="item">
-            <div class="descr">
-              <span [innerHTML]="his.title" class="content"></span> -
-              <span>{{his.createTime | date:'y/MM/dd HH:mm:ss'}}</span>
-            </div>
+  <div [class.hidden]="tab != 'history'" class="tab-history">
+    <div class="activity">
+      <div class="list">
+        <div *ngFor="let his of issue.histories; let i = index;" class="item">
+          <div class="descr">
+            <span [innerHTML]="his.title" class="content"></span> -
+            <span>{{his.createTime | date:'y/MM/dd HH:mm:ss'}}</span>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
 </div>
 

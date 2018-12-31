@@ -36,7 +36,7 @@ export class IssueFieldShowComponent implements OnInit {
       this.elem.readonly = true;
     }
 
-    // console.log('ngOnInit', this.elem.colCode, this.elem.readonly);
+    this.labelColNum = this.getCol();
   }
 
   edit () {
@@ -53,7 +53,7 @@ export class IssueFieldShowComponent implements OnInit {
     console.log('toSave', this.model[this.elem.colCode], this.temp);
     if (this.model[this.elem.colCode] != this.temp) {
       this.onSave.emit({ deferred: deferred,
-        data: { code: this.elem.colCode, value: this.model[this.elem.colCode] }});
+        data: { code: this.elem.colCode, value: this.model[this.elem.colCode], label: this.elem.label }});
     } else {
       this.cancel();
     }
@@ -64,12 +64,14 @@ export class IssueFieldShowComponent implements OnInit {
   }
 
   public getCol(): number {
+    let num;
+
     if (this.elem.fullLine) {
-      this.labelColNum = 2;
+      num = 2;
     } else {
-      this.labelColNum = 4;
+      num = 4;
     }
 
-    return this.labelColNum;
+    return num;
   }
 }

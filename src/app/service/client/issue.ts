@@ -29,6 +29,10 @@ export class IssueService {
     const model = { id: id };
     return this._reqService.post(this._apiBase + 'view', model);
   }
+  getData(id: number) {
+    const model = { id: id };
+    return this._reqService.post(this._apiBase + 'getData', model);
+  }
 
   save(model: any, pageId: number) {
     return this._reqService.post(this._apiBase + 'save', { issue: model, pageId: pageId });

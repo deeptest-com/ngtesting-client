@@ -21,16 +21,18 @@ export class IssueFieldEditComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    // console.log(this.elem, this.issuePropMap);
+    this.labelColNum = this.getCol();
   }
 
   public getCol(): number {
+    let num;
+
     if (this.elem.fullLine) {
-      this.labelColNum = 2;
+      num = 2;
     } else {
-      this.labelColNum = 4;
+      num = 4;
     }
 
-    return this.labelColNum;
+    return num;
   }
 }

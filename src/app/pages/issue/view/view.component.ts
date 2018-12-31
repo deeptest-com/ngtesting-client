@@ -63,14 +63,22 @@ export class IssueView implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
+  getData() {
+    this.issueService.getData(this.id).subscribe((json: any) => {
+      this.issue.links = json.data.links;
+      this.issue.tags = json.data.tags;
+      this.issue.histories = json.data.histories;
+    });
+  }
+
   optResult($event) {
     console.log('$event', $event);
-    if ($event.act == 'tran' || $event.act == 'update' || $event.act == 'link') {
+    if ($event.act == 'update' || $event.act == 'updateField' || $event.act == 'tran') {
       this.loadData();
     } else if ($event.act == 'delete') {
       this.back();
-    } else if ($event.act == 'watch') {
-
+    } else if ($event.act == 'link' || $event.act == 'tag' || $event.act == 'watch') {
+      this.getData();
     }
   }
 

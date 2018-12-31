@@ -23,16 +23,18 @@ export class InputViewComponent implements OnInit, AfterViewInit {
   @Input() model: any = {};
   @Input() propValMap: any = {};
 
+  val: any;
+
   public constructor(private dateFormat: DateFormatPipe) {
 
   }
 
   public ngOnInit(): void {
-
+    this.val = this.getLabel();
   }
 
   getLabel() {
-    // console.log(this.elem, this.model);
+    console.log(this.elem, this.model);
 
     const code = this.elem.colCode;
     let val = this.model[code];

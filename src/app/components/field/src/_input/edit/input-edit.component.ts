@@ -25,6 +25,8 @@ export class InputEditComponent implements OnInit, AfterViewInit {
   mutiSelectVal: any[] = [];
   checkboxVal: any = {};
 
+  val: any;
+
   _model: any = {};
 
   get model(): any {
@@ -128,12 +130,13 @@ export class InputEditComponent implements OnInit, AfterViewInit {
     console.log('richtextChange', this.model[this.elem.colCode]);
   }
 
-  getVal(elem, option) {
-    if (elem.buildIn) {
-      return option.id;
-    } else {
-      return option.value;
-    }
-  }
+  // getVal(elem, option) {
+  //   console.log('************');
+  //   if (elem.buildIn) {
+  //     return option.id;
+  //   } else {
+  //     return option.value;
+  //   }
+  // }
 
 }

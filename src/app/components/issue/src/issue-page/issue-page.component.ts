@@ -105,12 +105,14 @@ export class IssuePage implements OnInit, AfterViewInit, OnDestroy {
     this.issueService.updateField(this._issue.id, $event.data).subscribe((json: any) => {
       if (json.code == 1) {
         $event.deferred.resolve();
+
+        this.optEvent.emit({ act: 'updateField' });
       }
     });
   }
 
   statusTran(tran) {
-    this.issueOptService.statusTran(this._issue.id, tran.dictStatusId).subscribe((json: any) => {
+    this.issueOptService.statusTran(this._issue.id, tran.dictStatusId, tran.dictStatusName).subscribe((json: any) => {
       if (json.code == 1) {
         this.optEvent.emit({ act: 'tran' });
       }
@@ -166,6 +168,10 @@ export class IssuePage implements OnInit, AfterViewInit, OnDestroy {
       }
     }, (reason) => {
       console.log('reason', reason);
+
+      if (reason.success) {
+        this.optEvent.emit({ act: 'watch' });
+      }
     });
   }
 

@@ -7,9 +7,9 @@ export class TimePassedPipe implements PipeTransform {
     return this.timePassed(timestamp);
   }
 
-  timePassed(timestamp: any, local = 'en-US', format = 'y/MM/dd HH:mm') {
+  timePassed(timestamp: any, local = 'zh-CN', format = 'y/MM/dd HH:mm') {
     const now = new Date().getTime();
-    const diffValue = now - timestamp;
+    const diffValue = now - new Date(timestamp).getTime();
     let result = '';
     const minute = 1000 * 60;
     const hour = minute * 60;
@@ -18,6 +18,8 @@ export class TimePassedPipe implements PipeTransform {
     const _day = diffValue / day;
     const _hour = diffValue / hour;
     const _min = diffValue / minute;
+
+    // console.log('===', _day, _hour, _min);
 
     if (_day > 7) {
       result = new DatePipe(local).transform(timestamp, format);

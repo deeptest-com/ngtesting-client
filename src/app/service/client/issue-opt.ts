@@ -14,8 +14,8 @@ export class IssueOptService {
   _apiBase = 'client/issue_opt/';
   _apiAttachmentBase = 'client/issue_attachment/';
 
-  statusTran(id: number, dictStatusId: number) {
-    const model = { id: id, dictStatusId: dictStatusId };
+  statusTran(id: number, dictStatusId: number, dictStatusName: string) {
+    const model = { id: id, dictStatusId: dictStatusId, dictStatusName: dictStatusName };
     return this._reqService.post(this._apiBase + 'statusTran', model);
   }
 

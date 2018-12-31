@@ -13,7 +13,7 @@ declare var jQuery;
   encapsulation: ViewEncapsulation.None,
   styleUrls: [],
   template: `
-    <span>{{getLabel()}}</span>
+    <span>{{val}}</span>
   `,
 })
 export class IssuePropInTable implements OnInit {
@@ -21,13 +21,15 @@ export class IssuePropInTable implements OnInit {
   @Input() col: any = {};
   @Input() issuePropValMap: any = {};
 
+  val: any;
+
   constructor(private _state: GlobalState, private dateFormat: DateFormatPipe,
               private _issueService: IssueService) {
 
   }
 
   ngOnInit() {
-
+    this.val = this.getLabel();
   }
 
   getLabel() {

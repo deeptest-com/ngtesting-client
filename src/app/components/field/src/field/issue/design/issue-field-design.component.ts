@@ -23,21 +23,22 @@ export class IssueFieldDesignComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-
+    this.labelColNum = this.getCol();
   }
 
   public getCol(): number {
+    let num;
     if (this.forSelection) {
-      this.labelColNum = 3;
+      num = 3;
     } else {
       if (this.field.fullLine) {
-        this.labelColNum = 2;
+        num = 2;
       } else {
-        this.labelColNum = 4;
+        num = 4;
       }
     }
 
-    return this.labelColNum;
+    return num;
   }
 
   setProp ($event: any) {

@@ -86,7 +86,7 @@ export class ExecutionResult implements OnInit, AfterViewInit, OnDestroy {
     });
 
     this._state.subscribe(CONSTANT.EVENT_CASE_EXE, this.eventCode, (data: any) => {
-      logger.log(CONSTANT.EVENT_CASE_EXE, data);
+      console.log(CONSTANT.EVENT_CASE_EXE, data);
       this.tab = 'info';
 
       const testCase = data.node;

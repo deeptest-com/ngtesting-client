@@ -1,11 +1,11 @@
 <div class="form-group row issue-field-edit">
 
   <label [class.required]="elem.required"
-         [ngClass]="[elem.required?'required':'', 'col-sm-'+getCol(), 'col-sm', 'col-form-label']">
+         [ngClass]="[elem.required?'required':'', 'col-sm-'+labelColNum, 'col-sm', 'col-form-label']">
       <label-show [elem]="elem"></label-show>
   </label>
 
-  <div class="col-sm-{{12-getCol()}}">
+  <div class="col-sm-{{12-labelColNum}}">
     <input-edit [form]="form" [validateMsg]="validateMsg"
                 [model]="model" [elem]="elem" [options]="issuePropMap[elem.colCode]"></input-edit>
   </div>

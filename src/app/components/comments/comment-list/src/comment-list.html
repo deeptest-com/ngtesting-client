@@ -6,7 +6,7 @@
           <img src="{{ comment.userAvatar | imgPath }}" class="">
         </span>
         <span class="summary">
-          {{comment.userName}} {{comment.summary}} - {{comment.changeTime | timePassed}}
+          {{comment.userName}} {{comment.summary}} - {{comment.updateTime | timePassed}}
         </span>
       </div>
       <div>{{comment.content}}</div>
