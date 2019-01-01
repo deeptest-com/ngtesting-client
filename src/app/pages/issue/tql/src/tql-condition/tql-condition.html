@@ -1,15 +1,15 @@
 <div class="tql-condition">
-  <ng-container *ngIf="uiSelect()">
+  <ng-container *ngIf="ui == 'select'">
     <tql-condition-check [rule]="rule" [filter]="filter"
                    (conditionChangeEvent)="conditionChange($event)"></tql-condition-check>
   </ng-container>
 
-  <ng-container *ngIf="uiText()">
+  <ng-container *ngIf="ui == 'text'">
     <tql-condition-text  [rule]="rule" [filter]="filter"
                          (conditionChangeEvent)="conditionChange($event)"></tql-condition-text>
   </ng-container>
 
-    <ng-container *ngIf="uiDatetime()">
+    <ng-container *ngIf="ui == 'datetime'">
       <tql-condition-datetime [rule]="rule" [filter]="filter"
                            (conditionChangeEvent)="conditionChange($event)"></tql-condition-datetime>
     </ng-container>

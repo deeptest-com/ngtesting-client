@@ -17,12 +17,14 @@ export class TqlConditionComponent implements OnInit, AfterViewInit {
   @Input() rule: any = {};
   @Input() filter: any = {};
 
+  ui: string;
+
   constructor(private _route: ActivatedRoute, private _tqlConditionService: TqlConditionService) {
 
   }
 
   ngOnInit(): void {
-
+    this.ui = this._tqlConditionService.ui(this.filter.input);
   }
 
   ngAfterViewInit(): void {
@@ -32,16 +34,6 @@ export class TqlConditionComponent implements OnInit, AfterViewInit {
   conditionChange(data: any) {
     console.log('conditionChange in tql-condition');
     this.conditionChangeEvent.emit(data);
-  }
-
-  uiSelect() {
-    return this._tqlConditionService.uiSelect(this.filter.input);
-  }
-  uiText() {
-    return this._tqlConditionService.uiText(this.filter.input);
-  }
-  uiDatetime() {
-    return this._tqlConditionService.uiDatetime(this.filter.input);
   }
 
 }

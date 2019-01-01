@@ -38,23 +38,22 @@ export class TqlConditionService {
     return ret;
   }
 
-  uiSelect(input) {
-    return input == 'dropdown' || input == 'multi_select' || input == 'radio' || input == 'checkbox';
+  ui(input) {
+    if (input == 'dropdown' || input == 'multi_select' || input == 'radio' || input == 'checkbox') {
+      return 'select';
+    } else if (input == 'number' || input == 'text' || input == 'textarea' || input == 'richtext') {
+      return 'text';
+    } else if (input == 'date' || input == 'time' || input == 'datetime') {
+      return 'datetime';
+    }
   }
 
-  uiText(input) {
-    return input == 'number' || input == 'text' || input == 'textarea' || input == 'richtext';
-  }
   textOpt(input) {
     if (input == 'number') {
       return 'equal';
     } else if (input == 'text' || input == 'textarea' || input == 'richtext') {
       return 'contains';
     }
-  }
-
-  uiDatetime(input) {
-    return input == 'date' || input == 'time' || input == 'datetime';
   }
 
   mutiVal(input) {
