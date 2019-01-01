@@ -6,6 +6,15 @@ import { CONSTANT } from '../utils/constant';
 
 @Injectable()
 export class PrivilegeService {
+
+  issuePrivilege() {
+    const hasViewPriv = this.hasPrivilege('issue-view');
+    const hasMaintainPriv = this.hasPrivilege('issue-maintain');
+    const hasDeletePriv = this.hasPrivilege('issue-delete');
+
+    return { 'issue-view': hasViewPriv, 'issue-maintain': hasMaintainPriv, 'issue-delete': hasDeletePriv };
+  }
+
   hasPrivilege(privs: string, myPrivs?: any) {
     if (!myPrivs) {
       myPrivs = CONSTANT.PRJ_PRIVILEGES;

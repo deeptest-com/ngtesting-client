@@ -38,7 +38,6 @@ export class IssueView implements OnInit, AfterViewInit, OnDestroy {
               public activeModal: NgbActiveModal,
               private issueService: IssueService, private privilegeService: PrivilegeService) {
     this.issuePropMap = CONSTANT.ISU_PROPERTY_MAP;
-
     this.canEdit = this.privilegeService.hasPrivilege('issue-update');
   }
   ngOnInit() {
@@ -53,7 +52,6 @@ export class IssueView implements OnInit, AfterViewInit, OnDestroy {
       this.page = json.page;
       this.issuePropMap = json.issuePropMap;
       this.issueTransMap = json.issueTransMap;
-      CONSTANT.ISU_PROPERTY_VAL_MAP = json.issuePropValMap;
 
       this.page.elements.forEach(elem => {
         elem.readonly = true;

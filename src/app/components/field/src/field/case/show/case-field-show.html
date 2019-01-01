@@ -1,7 +1,7 @@
 <div class="form-group row case-field-show">
 
     <label *ngIf="!isEditing" class="text-label row col-form-label">
-      <input-view [model]="model" [elem]="elem" [propValMap]="casePropValMap"></input-view>
+      <input-view [model]="model" [elem]="elem"></input-view>
       &nbsp;&nbsp;
       <span *ngIf="!elem.readonly" (click)="edit($event)" class="smart-edit link"><i class="fa fa-pencil"></i></span>
     </label>

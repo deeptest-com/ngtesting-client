@@ -4,6 +4,7 @@ import { Component, Input, OnInit, AfterViewInit, Output, EventEmitter, ViewChil
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
 import { TqlConditionTextService } from './tql-condition-text.service';
+import {CONSTANT} from "../../../../../../../utils";
 
 @Component({
   selector: 'tql-condition-text',
@@ -13,7 +14,6 @@ import { TqlConditionTextService } from './tql-condition-text.service';
 export class TqlConditionTextComponent implements OnInit, AfterViewInit {
   @Input() rule: any = {};
   @Input() filter: any = {};
-  @Input() issuePropMap: any = {};
 
   @Output() conditionChangeEvent = new EventEmitter<any>();
 

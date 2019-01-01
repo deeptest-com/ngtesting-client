@@ -56,7 +56,7 @@
   <form [formGroup]="form" class="my-validate-form">
     <div class="form-group row elements">
       <div *ngFor="let elem of page.elements; let i = index;" [class.full-line]="elem.fullLine" class="element">
-        <issue-field-show [model]="issue" [elem]="elem" [issuePropMap]="issuePropMap"
+        <issue-field-show [model]="issue" [elem]="elem"
                           (onSave)="saveField($event)" [form]="form"></issue-field-show>
       </div>
     </div>
@@ -91,9 +91,11 @@
 
         <label class="col-sm-1 col-form-label"><span>关注</span></label>
         <label class="col-sm-5 col-form-label">
-          <ng-container *ngFor="let item of issue.watchList; let i = index;">
-            <i class="fa fa-user"></i> <span>{{item.nickname}}</span>
-          </ng-container>
+          <div class="tags">
+            <span *ngFor="let item of issue.watchList; let i = index;" class="tag no-border">
+              <i class="fa fa-user"></i> <span>{{item.nickname}}</span>
+            </span>
+          </div>
         </label>
       </div>
 
@@ -106,13 +108,13 @@
                 <div class="descr">
                   <span class="reason-name">{{item.reasonName}}</span>
                   <span *ngIf="!viewOnly" (click)="viewIssue(item)" class="link">
-                <span>IS-{{item.id}}</span>
-                <span>{{item.title}}</span>
-              </span>
+                    <span>IS-{{item.id}}</span>
+                    <span>{{item.title}}</span>
+                  </span>
                   <span *ngIf="viewOnly">
-                <span>IS-{{item.id}}</span>
-                <span>{{item.title}}</span>
-              </span>
+                    <span>IS-{{item.id}}</span>
+                    <span>{{item.title}}</span>
+                  </span>
                 </div>
               </div>
             </div>

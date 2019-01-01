@@ -7,6 +7,8 @@ import { CONSTANT } from '../../../../utils/constant';
 import { RouteService } from '../../../../service/route';
 import { IssueService } from '../../../../service/client/issue';
 import {Utils} from "../../../../utils";
+import {IssueOptService} from "../../../../service/client/issue-opt";
+import {PrivilegeService} from "../../../../service/privilege";
 
 declare var jQuery;
 
@@ -21,7 +23,6 @@ export class IssueTable implements OnInit, AfterViewInit, OnDestroy {
 
   @Input() issues: any[] = [];
   @Input() columns: any[] = [];
-  @Input() issuePropValMap: any = {};
   @Input() orderBy: any[] = [];
   @Input() batchModel: boolean;
 
@@ -31,13 +32,10 @@ export class IssueTable implements OnInit, AfterViewInit, OnDestroy {
 
   orderByMap: any = {};
 
-  orgId: number;
-  prjId: number;
+  priv: any = {};
 
-  constructor(private elementRef: ElementRef, private _routeService: RouteService,
-      private _state: GlobalState, private _issueService: IssueService) {
-    this.orgId = CONSTANT.CURR_ORG_ID;
-    this.prjId = CONSTANT.CURR_PRJ_ID;
+  constructor(private privilegeService: PrivilegeService) {
+    this.priv = this.privilegeService.issuePrivilege();
   }
 
   ngOnInit() {
@@ -52,15 +50,8 @@ export class IssueTable implements OnInit, AfterViewInit, OnDestroy {
   }
 
   order(col) {
-    console.log('order', this.orderBy);
-
     this.orderBy = Utils.reverseOrder(col, this.orderBy);
-    console.log('reOrder', this.orderBy);
-
     this.dealwithOrderMap();
-
-    console.log('this.orderByMap', this.orderByMap);
-
     this.orderEvent.emit(this.orderBy);
   }
 
@@ -73,8 +64,6 @@ export class IssueTable implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onThDropSuccess(col) {
-    console.log('===', col);
-
     this.columnOrderEvent.emit();
   }
 

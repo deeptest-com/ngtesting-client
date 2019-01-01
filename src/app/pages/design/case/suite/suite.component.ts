@@ -53,9 +53,6 @@ export class CaseSuite implements OnInit, AfterViewInit, OnDestroy {
     this._caseService.query().subscribe((json: any) => {
       this.treeModel = json.data;
 
-      CONSTANT.CASE_PROPERTY_MAP = json.casePropMap;
-      CONSTANT.CASE_CUSTOM_FIELDS = json.customFields;
-
       this.completeLoading();
     });
   }

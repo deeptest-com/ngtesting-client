@@ -9,12 +9,11 @@ export class IssueAssignPopupService {
 
     }
 
-    genPage(issue, users): any {
+    genPage(issue): any {
       this.compiler.clearCacheFor(IssueAssign);
       const page = this.modalService.open(IssueAssign, { windowClass: 'pop-modal' });
 
       page.componentInstance.issue = issue;
-      page.componentInstance.users = users;
 
       return page;
     }

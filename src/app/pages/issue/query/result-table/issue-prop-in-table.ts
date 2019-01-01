@@ -19,13 +19,13 @@ declare var jQuery;
 export class IssuePropInTable implements OnInit {
   @Input() model: any = {};
   @Input() col: any = {};
-  @Input() issuePropValMap: any = {};
+  issuePropValMap: any;
 
   val: any;
 
   constructor(private _state: GlobalState, private dateFormat: DateFormatPipe,
               private _issueService: IssueService) {
-
+    this.issuePropValMap = CONSTANT.ISU_PROPERTY_VAL_MAP;
   }
 
   ngOnInit() {
@@ -33,7 +33,7 @@ export class IssuePropInTable implements OnInit {
   }
 
   getLabel() {
-    console.log(this.col, this.model);
+    // console.log(this.col, this.model);
 
     const code = this.col.code;
     const val = this.model[code];

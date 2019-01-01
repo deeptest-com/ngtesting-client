@@ -6,7 +6,7 @@
       </div>
 
       <div class="filter">
-        <tql [rule]="rule" [filters]="filters" [issuePropMap]="issuePropMap"
+        <tql [rule]="rule" [filters]="filters"
              (conditionChangeEvent)="conditionChange($event)" (searchEvent)="search($event)"
              (favoritesEvent)="showModal()"></tql>
       </div>
@@ -38,20 +38,21 @@
 
         <div class="buttons row table-column-selection-wrap">
           <span *ngIf="!batchModel" class="row">
-            <span (click)="changeModel()" class="link">普通模式：</span>
+            <!--<span *ngIf="priv['issue-maintain']" (click)="changeModel()" class="link">普通模式：</span>-->
+            <!--<span *ngIf="!priv['issue-maintain']">普通模式：</span>-->
             <table-column-selection (selected)="changeColumns()" [columns]="columns"></table-column-selection>
           </span>
-          <span *ngIf="batchModel" class="row">
+          <!--<span *ngIf="batchModel" class="row">
             <span (click)="changeModel()" class="link">批量模式：</span>
             <span (click)="selectAll()" class="link">全选</span>&nbsp;
             <span (click)="selectNone()" class="link">全不选</span>
             <span><issue-opt (dealWithIssueEvent)="dealWithIssue($event)"></issue-opt></span>
-          </span>
+          </span>-->
         </div>
       </div>
     </div>
 
-    <issue-table [issues]="models" [columns]="columns" [issuePropValMap]="issuePropValMap"
+    <issue-table [issues]="models" [columns]="columns"
                  [orderBy]="orderBy" [batchModel]="batchModel"
                  (orderEvent)="reOrder($event)" (columnOrderEvent)="columnReOrder()"
                  (dealWithIssueEvent)="dealWithIssue($event)"></issue-table>
@@ -107,4 +108,8 @@
 
 <pop-dialog #modalWrapper (confirm)="addToFavorites()" [title]="'请输入查询名称'">
   <input type="text" class="form-control" name="queryName" [(ngModel)]="queryName">
+</pop-dialog>
+
+<pop-dialog #deleteModalWrapper (confirm)="delete()" [title]="'提示'">
+  确认删除名为"{{issue?.title}}"的问题?
 </pop-dialog>

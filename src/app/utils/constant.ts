@@ -17,12 +17,13 @@ export const CONSTANT: CONSTANT_INTERFACE = {
 
   PROFILE: undefined,
 
-  SYS_PRIVILEGES: undefined,
   MY_ORGS: undefined,
-  ORG_PRIVILEGES: undefined,
   RECENT_PROJECTS: undefined,
-  PRJ_PRIVILEGES: undefined,
   RECENT_QUERIES: undefined,
+
+  SYS_PRIVILEGES: undefined,
+  ORG_PRIVILEGES: undefined,
+  PRJ_PRIVILEGES: undefined,
 
   CASE_CUSTOM_FIELDS: undefined,
   CASE_PROPERTY_MAP: undefined,
@@ -30,6 +31,7 @@ export const CONSTANT: CONSTANT_INTERFACE = {
 
   ISU_PROPERTY_MAP: undefined,
   ISU_PROPERTY_VAL_MAP: undefined,
+  ISU_TRANS_MAP: undefined,
 
   TOKEN_KEY: 'com.ngtesting.token',
   TOKEN_EXPIRE: 'com.ngtesting.expire',
@@ -49,9 +51,6 @@ export const CONSTANT: CONSTANT_INTERFACE = {
   DebounceTime: 500,
 
   EVENT_LOADING_COMPLETE: 'loading.complete',
-  // EVENT_PROPERTY_STATUS: 'property.status',
-  // EVENT_COMMENTS_EDIT: 'comments.edit',
-  // EVENT_COMMENTS_SAVE: 'comments.save',
 
   EVENT_CASE_EDIT: 'case.edit',
   EVENT_CASE_UPDATE: 'case.update',
@@ -86,12 +85,14 @@ export interface CONSTANT_INTERFACE {
   TOKEN: string;
 
   PROFILE: any;
-  SYS_PRIVILEGES: any;
 
   MY_ORGS: any[];
-  ORG_PRIVILEGES: any;
   RECENT_PROJECTS: any[];
   RECENT_QUERIES: any[];
+
+  SYS_PRIVILEGES: any;
+  ORG_PRIVILEGES: any;
+  PRJ_PRIVILEGES: any;
 
   CASE_CUSTOM_FIELDS: any[];
   CASE_PROPERTY_MAP: any;
@@ -99,8 +100,7 @@ export interface CONSTANT_INTERFACE {
 
   ISU_PROPERTY_MAP: any;
   ISU_PROPERTY_VAL_MAP: any;
-
-  PRJ_PRIVILEGES: any;
+  ISU_TRANS_MAP: any;
 
   TOKEN_KEY: string;
   TOKEN_EXPIRE: string;
@@ -120,9 +120,6 @@ export interface CONSTANT_INTERFACE {
   DebounceTime: number;
 
   EVENT_LOADING_COMPLETE: string;
-  // EVENT_PROPERTY_STATUS: string;
-  // EVENT_COMMENTS_EDIT: string;
-  // EVENT_COMMENTS_SAVE: string;
 
   EVENT_CASE_EDIT: string;
   EVENT_CASE_UPDATE: string;

@@ -33,6 +33,7 @@ import { IssueLinkPopupService } from '../issue-link/issue-link.service';
 import { PopDialogComponent } from '../../../pop-dialog';
 
 import { IssueViewPopupService } from '../issue-view/issue-view.service';
+import {CONSTANT} from "../../../../utils";
 
 declare var jQuery;
 
@@ -61,7 +62,6 @@ export class IssuePage implements OnInit, AfterViewInit, OnDestroy {
 
   @Input() viewOnly: boolean = false;
   @Input() page: any = {};
-  @Input() issuePropMap: any = {};
   @Input() issueTransMap: any = {};
   @Output() optEvent = new EventEmitter<any>();
 
@@ -74,6 +74,8 @@ export class IssuePage implements OnInit, AfterViewInit, OnDestroy {
   get issue() {
     return this._issue;
   }
+
+  priv: any = {};
 
   constructor(private _routeService: RouteService, private _route: ActivatedRoute, private _state: GlobalState,
               private fb: FormBuilder, private toastyService: ToastyService, private privilegeService: PrivilegeService,
@@ -89,7 +91,10 @@ export class IssuePage implements OnInit, AfterViewInit, OnDestroy {
               private issueTagPopupService: IssueTagPopupService,
               private issueLinkPopupService: IssueLinkPopupService ) {
 
-    this.canEdit = this.privilegeService.hasPrivilege('issue-maintain');
+    this.issueTransMap = CONSTANT.ISU_TRANS_MAP;
+    this.priv = this.privilegeService.issuePrivilege();
+
+    this.viewOnly = this.viewOnly || !this.priv['issue-maintain'];
 
     this.buildForm();
   }
@@ -137,7 +142,7 @@ export class IssuePage implements OnInit, AfterViewInit, OnDestroy {
   }
 
   assign() {
-    this.issueAssignModal = this.issueAssignPopupService.genPage(this._issue, this.issuePropMap.assigneeId);
+    this.issueAssignModal = this.issueAssignPopupService.genPage(this._issue);
 
     this.issueAssignModal.result.then((result) => {
       console.log('result', result);

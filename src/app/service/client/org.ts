@@ -15,9 +15,9 @@ export class OrgService {
     return this._reqService.post(this._apiBase + 'view', model);
   }
 
-  change(id: number) {
+  changeContext(id: number) {
     const model = { orgId: id };
-    return this._reqService.post(this._apiBase + 'change', model);
+    return this._reqService.post(this._apiBase + 'changeContext', model);
   }
 
 }

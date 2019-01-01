@@ -22,7 +22,6 @@ export class Tql implements OnInit, AfterViewInit {
 
   @Input() rule: any = {};
   @Input() filters: any[];
-  @Input() issuePropMap: any = {};
 
   titleKeywords: string;
 

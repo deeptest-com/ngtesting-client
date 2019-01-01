@@ -15,7 +15,6 @@ import { IssueService } from '../../../service/client/issue';
 
 import { PrivilegeService } from '../../../service/privilege';
 import * as _ from 'lodash';
-import { Utils } from '../../../utils';
 
 declare var jQuery;
 
@@ -58,7 +57,6 @@ export class IssueCreate implements OnInit, AfterViewInit, OnDestroy {
   loadData() {
     this.issueService.create().subscribe((json: any) => {
       this.issue = json.data;
-      this.issuePropMap = json.issuePropMap;
 
       this.page = json.page;
 

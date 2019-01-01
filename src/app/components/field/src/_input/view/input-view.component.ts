@@ -6,6 +6,7 @@ import { Utils } from '../../../../../utils/utils';
 import { DateFormatPipe } from '../../../../../pipe/date';
 
 import * as _ from 'lodash';
+import {CONSTANT} from "../../../../../utils";
 
 declare var jQuery;
 
@@ -21,12 +22,12 @@ export class InputViewComponent implements OnInit, AfterViewInit {
 
   @Input() elem: any = {};
   @Input() model: any = {};
-  @Input() propValMap: any = {};
+  propValMap: any;
 
   val: any;
 
   public constructor(private dateFormat: DateFormatPipe) {
-
+    this.propValMap = CONSTANT.ISU_PROPERTY_VAL_MAP;
   }
 
   public ngOnInit(): void {

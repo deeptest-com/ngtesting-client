@@ -32,9 +32,13 @@ export class ProjectService {
     const model = { projectId: id };
     return this._reqService.post(this._apiBase + 'view', model);
   }
-  change(projectId: number) {
+  changeContext(projectId: number) {
     const model = { projectId: projectId };
-    return this._reqService.post(this._apiBase + 'change', model);
+    return this._reqService.post(this._apiBase + 'changeContext', model);
+  }
+  initContext(projectId: number) {
+    const model = { projectId: projectId };
+    return this._reqService.post(this._apiBase + 'initContext', model);
   }
 
   save(model: any) {

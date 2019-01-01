@@ -45,6 +45,7 @@ export class IssueEdit implements OnInit, AfterViewInit, OnDestroy {
   constructor(private _routeService: RouteService, private _state: GlobalState, private _route: ActivatedRoute,
               private fb: FormBuilder, private toastyService: ToastyService,
               private issueService: IssueService, private privilegeService: PrivilegeService) {
+    this.issuePropMap = CONSTANT.ISU_PROPERTY_MAP;
 
     this.routeSub = this._route.params.subscribe((params: Params) => {
       this.id = +params['id'];
@@ -65,7 +66,6 @@ export class IssueEdit implements OnInit, AfterViewInit, OnDestroy {
   loadData() {
     this.issueService.edit(this.id).subscribe((json: any) => {
       this.issue = json.data;
-      this.issuePropMap = json.issuePropMap;
 
       this.page = json.page;
 

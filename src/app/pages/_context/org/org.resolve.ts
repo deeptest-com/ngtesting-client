@@ -20,14 +20,14 @@ export class OrgResolve implements CanActivate {
     console.log('OrgResolve - canActivate', state.url, context);
 
     // 初始化org上下文：
-    //    1. 初次加载，CONSTANT.CURR_ORG_ID为空，pages.resolve中
+    //    1. 初次加载，CONSTANT.CURR_ORG_ID为空，pages.resolve会在loadProfileRemote中
     //    2. 查看Org时
     // 修改CONSTANT.CURR_ORG_ID：
     //    1. 在管Org管理页面
     if (CONSTANT.CURR_ORG_ID != null && CONSTANT.CURR_ORG_ID != context.orgId) {
 
       // if (this.willNotChangePrj(context) || !context.projectId) {
-        return this.orgService.change(context.orgId).toPromise().then(result => {
+        return this.orgService.changeContext(context.orgId).toPromise().then(result => {
           CONSTANT.CURR_ORG_ID = context.orgId;
           return true;
         });
@@ -41,8 +41,8 @@ export class OrgResolve implements CanActivate {
     }
   }
 
-  willNotChangePrj(context: any) {
-    return context.projectId == CONSTANT.CURR_PRJ_ID;
-  }
+  // willNotChangePrj(context: any) {
+  //   return context.projectId == CONSTANT.CURR_PRJ_ID;
+  // }
 
 }

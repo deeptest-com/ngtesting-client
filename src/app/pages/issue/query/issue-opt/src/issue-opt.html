@@ -12,11 +12,10 @@
         <span class="link">删除</span></button>
 
       <li class="dropdown-divider"></li>
-
-      <button (click)="dealWithIssue(item, 'slove')" class="dropdown-item">
-        <span class="link">解决</span></button>
-      <button (click)="dealWithIssue(item, 'close')" class="dropdown-item">
-        <span class="link">完成</span></button>
+      <ng-container *ngFor="let tran of issueTransMap[item.typeId][item.statusId]">
+        <button (click)="statusTran(item, tran)" class="dropdown-item">
+          <span class="link">{{tran.name}}</span></button>
+      </ng-container>
     </div>
   </div>
 </div>

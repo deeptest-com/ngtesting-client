@@ -35,6 +35,8 @@ export class IssueAssign implements OnInit, AfterViewInit, OnDestroy {
   constructor(private _routeService: RouteService, private _state: GlobalState, private _route: ActivatedRoute,
               private fb: FormBuilder,
               public activeModal: NgbActiveModal, private issueOptService: IssueOptService) {
+    this.users = CONSTANT.ISU_PROPERTY_MAP.assigneeId;
+
     this.buildForm();
   }
   ngOnInit() {

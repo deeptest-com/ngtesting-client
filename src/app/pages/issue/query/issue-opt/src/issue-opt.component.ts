@@ -13,8 +13,10 @@ export class IssueOpt implements OnInit, AfterViewInit {
   @Output() dealWithIssueEvent = new EventEmitter<any>();
   @Input() item: any;
   @Input() batchModel: boolean;
+  issueTransMap: any;
 
   constructor() {
+    this.issueTransMap = CONSTANT.ISU_TRANS_MAP;
   }
 
   ngOnInit(): any {
@@ -25,6 +27,10 @@ export class IssueOpt implements OnInit, AfterViewInit {
 
   dealWithIssue(item, act): any {
     this.dealWithIssueEvent.emit({ act: act, item: item });
+  }
+
+  statusTran(item, tran) {
+    this.dealWithIssueEvent.emit({ act: 'statusTran', item: item, tran: tran });
   }
 
 }

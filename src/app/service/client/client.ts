@@ -30,21 +30,22 @@ export class ClientService {
 
       return this._reqService.post(that._getProfile, context).map(json => {
         if (json.code == 1) {
+          // 个人层面
+          CONSTANT.SYS_PRIVILEGES = json.sysPrivileges;
+          CONSTANT.MY_ORGS = json.myOrgs;
+          CONSTANT.RECENT_QUERIES = json.recentQueries;
+
+          CONSTANT.PROFILE = json.profile;
           CONSTANT.CURR_ORG_ID = json.profile.defaultOrgId;
           CONSTANT.CURR_ORG_NAME = json.profile.defaultOrgName;
           CONSTANT.CURR_PRJ_ID = json.profile.defaultPrjId;
           CONSTANT.CURR_PRJ_NAME = json.profile.defaultPrjName;
 
-          CONSTANT.PROFILE = json.profile;
-          CONSTANT.SYS_PRIVILEGES = json.sysPrivileges;
-          CONSTANT.MY_ORGS = json.myOrgs;
+          // 组织层面
           CONSTANT.ORG_PRIVILEGES = json.orgPrivileges;
-          CONSTANT.CASE_PROPERTY_VAL_MAP = json.casePropertyValMap;
-
           CONSTANT.RECENT_PROJECTS = json.recentProjects;
-          CONSTANT.PRJ_PRIVILEGES = json.prjPrivileges;
 
-          CONSTANT.RECENT_QUERIES = json.recentQueries;
+          // 更多项目级需要初始化的东西，在PrjResolve中初始化
 
           return Observable.of(true);
         } else {
@@ -52,7 +53,7 @@ export class ClientService {
           return Observable.of(false);
         }
       });
-    } else  {
+    } else {
       this._routeService.navTo('/login');
       return Observable.of(false);
     }

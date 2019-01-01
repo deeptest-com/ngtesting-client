@@ -26,11 +26,11 @@ export class IssueFieldShowComponent implements OnInit {
   issuePropValMap: any;
 
   public constructor() {
-
+    this.issuePropMap = CONSTANT.ISU_PROPERTY_MAP;
+    this.issuePropValMap = CONSTANT.ISU_PROPERTY_VAL_MAP;
   }
 
   public ngOnInit(): void {
-    this.issuePropValMap = CONSTANT.ISU_PROPERTY_VAL_MAP;
 
     if (this.elem.colCode == 'statusId') {
       this.elem.readonly = true;

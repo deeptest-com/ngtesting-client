@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { DateFormatPipe } from '../../../../../../../pipe/date';
 
 import { TqlConditionDatetimeService } from './tql-condition-datetime.service';
+import {CONSTANT} from "../../../../../../../utils";
 
 @Component({
   selector: 'tql-condition-datetime',
@@ -15,7 +16,6 @@ import { TqlConditionDatetimeService } from './tql-condition-datetime.service';
 export class TqlConditionDatetimeComponent implements OnInit, AfterViewInit {
   @Input() rule: any = {};
   @Input() filter: any = {};
-  @Input() issuePropMap: any = {};
 
   from: any = null;
   to: any = null;

@@ -20,6 +20,10 @@ import { IssueService } from '../../../service/client/issue';
 import { TqlService } from '../tql/src/tql.service';
 import { IssueQueryService } from './query.service';
 import {PopDialogComponent} from "../../../components/pop-dialog";
+import {IssueOptService} from "../../../service/client/issue-opt";
+
+import * as _ from 'lodash';
+import {PrivilegeService} from "../../../service/privilege";
 
 @Component({
   selector: 'issue-query',
@@ -42,24 +46,33 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
   queryName: string;
   rule: any = {};
   orderBy: any[] = [];
-  checkedConditions: any = {};
   filters: any[] = [];
-  issuePropMap: any = {};
-  issuePropValMap: any = {};
   columns: any[] = [];
   init: boolean = true;
 
   orderColumn: string;
   orderSeq: string;
 
+  issue: any;
   batchModel: boolean = false;
 
+  priv: any = {};
+
   layout: string = CONSTANT.PROFILE.issueView;
+
   @ViewChild('modalWrapper') modalWrapper: PopDialogComponent;
+  @ViewChild('deleteModalWrapper') deleteModalWrapper: PopDialogComponent;
 
   constructor(private _activeRoute: ActivatedRoute, private _router: Router, private _routeService: RouteService,
               private _tqlService: TqlService, private _clientService: ClientService,
-              private _queryService: IssueQueryService, private _issueService: IssueService) {
+              private _queryService: IssueQueryService, private _issueService: IssueService,
+              private issueOptService: IssueOptService, private privilegeService: PrivilegeService) {
+
+    this.priv = this.privilegeService.issuePrivilege();
+
+    console.log('issue-view=' + this.priv.hasViewPriv + ', '
+      + 'issue-maintain=' + this.priv.hasMaintainPriv + ', '
+      + 'issue-delete=' + this.priv.hasDeletePriv);
 
     this.routeSub = this._activeRoute.params.subscribe(params => {
       const ruleStr = params['rule'];
@@ -135,8 +148,6 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
         this.filters = json.filters;
         this.orderBy = json.orderBy;
         this.columns = json.columns;
-        this.issuePropMap = json.issuePropMap;
-        this.issuePropValMap = json.issuePropValMap;
 
         this.updateForBrowse();
       }
@@ -154,8 +165,6 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
         this.init = false;
         this.filters = json.filters;
         this.columns = json.columns;
-        this.issuePropMap = json.issuePropMap;
-        this.issuePropValMap = json.issuePropValMap;
       }
     });
   }
@@ -221,27 +230,64 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  changeModel() {
-    this.batchModel = !this.batchModel;
-  }
+  // changeModel() {
+  //   if (!hasMaintainPriv) { return; }
+  //   this.batchModel = !this.batchModel;
+  // }
 
   dealWithIssue($event) {
-    const url = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + CONSTANT.CURR_PRJ_ID + '/issue/'
-      + $event.item.id + '/' + $event.act;
-    console.log('dealWithIssue', url);
-    this._routeService.navTo(url);
+    if ('statusTran' == $event.act) {
+      this.issueOptService.statusTran($event.item.id, $event.tran.dictStatusId, $event.tran.dictStatusName)
+        .subscribe((json: any) => {
+        if (json.code == 1) {
+          this.models.forEach((mode, index) => {
+            if (mode.id == $event.item.id) {
+              mode.statusId = $event.tran.dictStatusId;
+
+              this.models[index] = _.clone(mode);
+            }
+          });
+        }
+      });
+    } else if ('delete' == $event.act) {
+      this.issue = $event.item;
+      this.deleteModalWrapper.showModal();
+    } else {
+      const url = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + CONSTANT.CURR_PRJ_ID + '/issue/'
+        + $event.item.id + '/' + $event.act;
+      console.log('dealWithIssue', url);
+      this._routeService.navTo(url);
+    }
   }
 
-  selectAll() {
-    this.models.forEach(item => {
-      item.batchSelected = true;
+  delete() {
+    this._issueService.delete(this.issue.id).subscribe((json: any) => {
+      if (json.code == 1) {
+        this.deleteModalWrapper.closeModal();
+
+        let indexToDel;
+        this.models.forEach((mode, index) => {
+          if (mode.id == this.issue.id) {
+            indexToDel = index;
+          }
+        });
+        this.models.splice(indexToDel, 1);
+
+        this.issue = null;
+      }
     });
   }
-  selectNone() {
-    this.models.forEach(item => {
-      item.batchSelected = false;
-    });
-  }
+
+  // selectAll() {
+  //   this.models.forEach(item => {
+  //     item.batchSelected = true;
+  //   });
+  // }
+  // selectNone() {
+  //   this.models.forEach(item => {
+  //     item.batchSelected = false;
+  //   });
+  // }
 
   ngOnDestroy(): void {
     this.routeSub.unsubscribe();

@@ -16,7 +16,6 @@ export class TqlConditionComponent implements OnInit, AfterViewInit {
 
   @Input() rule: any = {};
   @Input() filter: any = {};
-  @Input() issuePropMap: any = {};
 
   constructor(private _route: ActivatedRoute, private _tqlConditionService: TqlConditionService) {
 

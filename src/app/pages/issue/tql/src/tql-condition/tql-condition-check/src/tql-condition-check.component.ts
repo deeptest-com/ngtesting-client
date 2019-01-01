@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
 import { TqlConditionService } from '../../tql-condition.service';
 import { TqlConditionCheckService } from './tql-condition-check.service';
+import {CONSTANT} from "../../../../../../../utils";
 
 @Component({
   selector: 'tql-condition-check',
@@ -14,7 +15,7 @@ import { TqlConditionCheckService } from './tql-condition-check.service';
 export class TqlConditionCheckComponent implements OnInit, AfterViewInit {
   @Input() rule: any = {};
   @Input() filter: any = {};
-  @Input() issuePropMap: any = {};
+  issuePropMap: any;
 
   @Output() conditionChangeEvent = new EventEmitter<any>();
 
@@ -26,10 +27,11 @@ export class TqlConditionCheckComponent implements OnInit, AfterViewInit {
 
   constructor(private fb: FormBuilder,
               private tqlConditionCheckService: TqlConditionCheckService) {
-
+    this.issuePropMap = CONSTANT.ISU_PROPERTY_MAP;
   }
 
   ngOnInit(): any {
+
     this.selectOptions = this.issuePropMap[this.filter.code];
 
     this.checkedItemsFromRule = this.tqlConditionCheckService.getSelectedItemsFromRule(this.rule, this.filter.code);

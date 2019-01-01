@@ -39,17 +39,18 @@
               <input [(ngModel)]="item.batchSelected" type="checkbox" name="batchSelected">
             </td>
 
-            <td *ngIf="!batchModel" (click)="dealWithIssue({ act: 'view', item: item})" class="link">
+            <td *ngIf="priv['issue-view'] && !batchModel" (click)="dealWithIssue({ act: 'view', item: item})" class="link">
               IS-{{item.id}}
             </td>
-            <td *ngIf="batchModel">IS-{{item.id}}</td>
+            <td *ngIf="!priv['issue-view'] || batchModel">IS-{{item.id}}</td>
 
             <ng-container *ngFor="let col of columns">
-              <td *ngIf="!batchModel && col.display" (click)="dealWithIssue({ act: 'view', item: item})" class="link">
-                <issue-prop-in-table [model]="item" [col]="col" [issuePropValMap]="issuePropValMap"></issue-prop-in-table>
+              <td *ngIf="priv['issue-view'] && !batchModel && col.display"
+                    (click)="dealWithIssue({ act: 'view', item: item})" class="link">
+                <issue-prop-in-table [model]="item" [col]="col"></issue-prop-in-table>
               </td>
 
-              <td *ngIf="batchModel && col.display">
+              <td *ngIf="(!priv['issue-view'] || batchModel) && col.display">
                 <issue-prop-in-table [model]="item" [col]="col"></issue-prop-in-table>
               </td>
             </ng-container>

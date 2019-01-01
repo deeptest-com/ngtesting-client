@@ -59,9 +59,6 @@ export class ExecutionSuite implements OnInit, AfterViewInit {
     this._caseInTaskService.query(this.taskId).subscribe((json: any) => {
       this.treeModel = json.data;
 
-      CONSTANT.CASE_PROPERTY_MAP = json.casePropMap;
-      CONSTANT.CASE_CUSTOM_FIELDS = json.customFields;
-
       this.completeLoading();
     });
 
