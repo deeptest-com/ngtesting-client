@@ -12,7 +12,6 @@ import {CONSTANT} from "../../../../../../utils";
 export class IssueFieldShowComponent implements OnInit {
   @Input() model: any = {};
   @Input() elem: any;
-  @Input() issuePropMap: any = {};
 
   @Input() form: FormGroup;
   @Input() validateMsg: any = {};
@@ -23,6 +22,7 @@ export class IssueFieldShowComponent implements OnInit {
   isEditing: boolean = false;
   labelColNum: number = 4;
 
+  issuePropMap: any = {};
   issuePropValMap: any;
 
   public constructor() {

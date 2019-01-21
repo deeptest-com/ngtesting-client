@@ -103,7 +103,7 @@ span.tmpzTreeMove_arrow {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
-    &.ico_open,&.ico_close,&.ico_docu,&.add,&.edit,&.remove {
+    &.ico_open,&.ico_close,&.ico_docu,&.add-folder,&.add-file,&.edit,&.remove {
       background-image: none;
     }
 
@@ -126,30 +126,40 @@ span.tmpzTreeMove_arrow {
 
     &.ico_open:before {
       font-family: FontAwesome;
-      content: "\f115";
+      content: '\f115';
     }
     &.ico_close:before {
       font-family: FontAwesome;
-      content: "\f114";
+      content: '\f114';
     }
     &.ico_docu:before {
       font-family: FontAwesome;
-      content: "\f016";
+      content: '\f016';
     }
 
-    &.add,&.edit,&.remove {
+    &.add-folder,&.add-file,&.edit,&.remove {
       width: 17px;
       font-family: FontAwesome;
       padding: 0 0 0 5px;
     }
-    &.add:before {
-      content: "\f067";
+    &.add-folder,&.add-file {
+      width: 20px;
+    }
+    &.add-folder:before {
+      content: '\f07b';
+    }
+    &.add-file {
+      font-size: 12px !important;
+      &:before {
+        content: '\f15b';
+        font-size: 10px;
+      }
     }
     &.edit:before {
-      content: "\f040";
+      content: '\f040';
     }
     &.remove:before {
-      content: "\f00d";
+      content: '\f00d';
     }
 
   }

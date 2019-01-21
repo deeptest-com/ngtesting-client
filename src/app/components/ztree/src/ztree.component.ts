@@ -212,12 +212,10 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
     const css: any = {};
     css.color = '#333333';
 
-    console.log('sdfds', this.settings);
-
     if (this.settings && this.settings.usage == 'edit') {
       if (treeNode.reviewResult) {
         css.color = '#209e91';
-      } else {
+      } else if (treeNode.reviewResult == false) {
         css.color = '#dfb81c';
       }
     } else if (this.settings && this.settings.usage == 'exe') {
@@ -252,6 +250,7 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
 
     console.log('case.' + this.settings.usage);
   }
+
   countChildren = (treeNode) => {
     console.log('countChildren', treeNode, treeNode.isParent, !treeNode.leaf);
 
@@ -260,27 +259,38 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
         this.countChildren(treeNode.children[obj]);
       }
     } else {
-      // 统计用例类型
-      if (!this.childrenCount[treeNode.type]) {
-        this.childrenCount[treeNode.type] = 0;
-      }
-      this.childrenCount[treeNode.type] = this.childrenCount[treeNode.type] + 1;
 
-      if (treeNode.status) {
-        if (!this.childrenCount[treeNode.status]) {
-          this.childrenCount[treeNode.status] = 0;
+      if (this.settings.usage == 'edit') {
+        // 统计用例类型
+        if (!this.childrenCount[treeNode.typeId]) {
+          this.childrenCount[treeNode.typeId] = 0;
         }
-        this.childrenCount[treeNode.status] = this.childrenCount[treeNode.status] + 1;
+        this.childrenCount[treeNode.typeId] = this.childrenCount[treeNode.typeId] + 1;
+
+        if (treeNode.status) {
+          if (!this.childrenCount[treeNode.status]) {
+            this.childrenCount[treeNode.status] = 0;
+          }
+          this.childrenCount[treeNode.status] = this.childrenCount[treeNode.status] + 1;
+        }
+
+        // 统计用例评审状态
+        if (treeNode.reviewResult == true) {
+          this.childrenCount['reviewPass'] = this.childrenCount['reviewPass'] + 1;
+        } else if (treeNode.reviewResult == false) {
+          this.childrenCount['reviewFail'] = this.childrenCount['reviewFail'] + 1;
+        } else {
+          this.childrenCount['notReview'] = this.childrenCount['notReview'] + 1;
+        }
+      } else if (this.settings.usage == 'exe') {
+        // 统计用例执行状态
+          if (!this.childrenCount[treeNode.status]) {
+            this.childrenCount[treeNode.status] = 1;
+          } else {
+            this.childrenCount[treeNode.status] = this.childrenCount[treeNode.status] + 1;
+          }
       }
 
-      // 统计用例评审状态
-      if (treeNode.reviewResult == true) {
-        this.childrenCount['reviewPass'] = this.childrenCount['reviewPass'] + 1;
-      } else if (treeNode.reviewResult == false) {
-        this.childrenCount['reviewFail'] = this.childrenCount['reviewFail'] + 1;
-      } else {
-        this.childrenCount['notReview'] = this.childrenCount['notReview'] + 1;
-      }
     }
   }
 
@@ -289,22 +299,39 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
 
     const sObj = $('#' + treeNode.tId + '_span');
 
-    if (treeNode.editNameFlag || $('#addBtn_' + treeNode.tId).length > 0) return;
-    const addStr = "<span class='button add' id='addBtn_" + treeNode.tId
-      + "' title='添加' onfocus='this.blur();'></span>";
-    sObj.after(addStr);
-    logger.log('treeNode.isShowDeleteBut', treeNode);
+    if (!treeNode.isParent || treeNode.editNameFlag
+      || $('#addFolderBtn_' + treeNode.tId).length > 0 || $('#addFileBtn_' + treeNode.tId).length > 0)
+      return;
 
-    const btn = jQuery('#addBtn_' + treeNode.tId);
-    if (btn) btn.bind('click', () => {
+    // 增加文件
+    const addFileStr = "<span class='button add-file' id='addFileBtn_" + treeNode.tId
+      + "' title='添加' onfocus='this.blur();'></span>";
+    sObj.after(addFileStr);
+
+    const btnFile = jQuery('#addFileBtn_' + treeNode.tId);
+    if (btnFile) btnFile.bind('click', () => {
       const newNode = this.ztree.addNodes(treeNode, {id: -1 * this.newCount++, pId: treeNode.id, name: '新用例',
-        type: 'functional', priority: 2, estimate: undefined});
+        type: 'functional', priority: 2, estimate: undefined, open: false, isParent: false});
+      this.ztree.editName(newNode[0]);
+      return false;
+    });
+
+    // 增加文件夹
+    const addFolderStr = "<span class='button add-folder' id='addFolderBtn_" + treeNode.tId
+      + "' title='添加' onfocus='this.blur();'></span>";
+    sObj.after(addFolderStr);
+
+    const btnFolder = jQuery('#addFolderBtn_' + treeNode.tId);
+    if (btnFolder) btnFolder.bind('click', () => {
+      const newNode = this.ztree.addNodes(treeNode, {id: -1 * this.newCount++, pId: treeNode.id, name: '新特性',
+        type: 'functional', priority: 2, estimate: undefined, open: true, isParent: true});
       this.ztree.editName(newNode[0]);
       return false;
     });
   }
   removeHoverDom = (treeId, treeNode) => {
-    $('#addBtn_' + treeNode.tId).unbind().remove();
+   $('#addFolderBtn_' + treeNode.tId).unbind().remove();
+   $('#addFileBtn_' + treeNode.tId).unbind().remove();
   }
 
   onRename = (e, treeId, treeNode, isCancel) => {

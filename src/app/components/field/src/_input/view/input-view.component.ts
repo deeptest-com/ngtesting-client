@@ -6,7 +6,7 @@ import { Utils } from '../../../../../utils/utils';
 import { DateFormatPipe } from '../../../../../pipe/date';
 
 import * as _ from 'lodash';
-import {CONSTANT} from "../../../../../utils";
+import { CONSTANT } from '../../../../../utils';
 
 declare var jQuery;
 
@@ -21,24 +21,35 @@ export class InputViewComponent implements OnInit, AfterViewInit {
   @Input() validateMsg: any = {};
 
   @Input() elem: any = {};
-  @Input() model: any = {};
+  @Input() modelType: string;
   propValMap: any;
 
   val: any;
+  init: boolean = true;
+
+  _model: any = {};
+  @Input() set model(value) {
+    this._model = value;
+    if (!this.init) { // 负责更新，初始化由ngOnInit完成
+      this.val = this.getLabel();
+    }
+  }
 
   public constructor(private dateFormat: DateFormatPipe) {
-    this.propValMap = CONSTANT.ISU_PROPERTY_VAL_MAP;
+
   }
 
   public ngOnInit(): void {
+    this.propValMap = this.modelType == 'case' ? CONSTANT.CASE_PROPERTY_VAL_MAP : CONSTANT.ISU_PROPERTY_VAL_MAP;
     this.val = this.getLabel();
+    this.init = false;
   }
 
   getLabel() {
-    console.log(this.elem, this.model);
+    console.log(this.elem, this._model);
 
     const code = this.elem.colCode;
-    let val = this.model[code];
+    let val = this._model[code];
 
     if (this.elem.buildIn && this.elem.input == 'dropdown') { // buildIn只有一种选项控件
       return this.propValMap[code][val];
@@ -49,7 +60,7 @@ export class InputViewComponent implements OnInit, AfterViewInit {
     }
 
     if (code == 'title') {
-      val = 'IS-' + this.model.id + ' ' + val;
+      val = 'IS-' + this._model.id + ' ' + val;
     }
 
     return val;

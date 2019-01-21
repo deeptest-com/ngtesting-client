@@ -40,6 +40,7 @@ export class CaseEdit implements OnInit, AfterViewInit, OnDestroy {
   tab: string = 'content';
 
   casePropMap: any = {};
+  casePropValMap: any = {};
   customFields: any[] = [];
   user: any;
 
@@ -49,6 +50,10 @@ export class CaseEdit implements OnInit, AfterViewInit, OnDestroy {
               private _ztreeService: ZtreeService,
               private _caseService: CaseService, private _caseAttachmentService: CaseAttachmentService,
               private _caseStepService: CaseStepService, private privilegeService: PrivilegeService) {
+
+    this.casePropMap = CONSTANT.CASE_PROPERTY_MAP;
+    this.casePropValMap = CONSTANT.CASE_PROPERTY_VAL_MAP;
+    this.customFields = CONSTANT.CASE_CUSTOM_FIELDS;
 
     this._state.subscribe(WS_CONSTANT.WS_PRJ_SETTINGS, this.eventCode, (json) => {
       console.log(WS_CONSTANT.WS_PRJ_SETTINGS + ' in ' + this.eventCode, json);
@@ -75,9 +80,6 @@ export class CaseEdit implements OnInit, AfterViewInit, OnDestroy {
         this.model = { childrenCount: data.childrenCount };
         return;
       }
-
-      this.casePropMap = CONSTANT.CASE_PROPERTY_MAP;
-      this.customFields = CONSTANT.CASE_CUSTOM_FIELDS;
 
       if (testCase) {
         this.id = testCase.id;

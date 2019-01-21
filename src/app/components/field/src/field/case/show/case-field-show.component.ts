@@ -12,7 +12,6 @@ import { CONSTANT } from '../../../../../../utils';
 export class CaseFieldShowComponent implements OnInit {
   @Input() model: any = {};
   @Input() elem: any = {};
-  @Input() casePropMap: any = {};
 
   @Input() form: FormGroup;
   @Input() validateMsg: any = {};
@@ -23,25 +22,23 @@ export class CaseFieldShowComponent implements OnInit {
   isEditing: boolean = false;
   labelColNum: number = 4;
 
+  casePropMap: any = {};
   casePropValMap: any = {};
 
-  _elemCode: any; // 系统字段
-  @Input() set elemCode(val) {
-    this.elem = { colCode: val, fullLine: true, buildIn: true };
-    if (['type', 'priority', 'status'].indexOf(val) > -1) {
-      this.elem.input = 'dropdown';
-    } else if ('content' == val) {
-      this.elem.input = 'richtext';
-    }
-  }
+  @Input() elemCode;
 
   public constructor() {
-
+    this.casePropMap = CONSTANT.CASE_PROPERTY_MAP;
+    this.casePropValMap = CONSTANT.CASE_PROPERTY_VAL_MAP;
   }
 
   public ngOnInit(): void {
-    // console.log('ngOnInit', this.model, this.elem.colCode, this.temp);
-    this.casePropValMap = CONSTANT.CASE_PROPERTY_VAL_MAP;
+    this.elem = { colCode: this.elemCode, fullLine: true, buildIn: true };
+    if (['typeId', 'priorityId', 'statusId'].indexOf(this.elemCode) > -1) {
+      this.elem.input = 'dropdown';
+    } else if ('content' == this.elemCode) {
+      this.elem.input = 'richtext';
+    }
   }
 
   edit () {
@@ -66,15 +63,5 @@ export class CaseFieldShowComponent implements OnInit {
 
   cancel() {
     this.isEditing = false;
-  }
-
-  public getCol(): number {
-    if (this.elem.fullLine) {
-      this.labelColNum = 2;
-    } else {
-      this.labelColNum = 4;
-    }
-
-    return this.labelColNum;
   }
 }

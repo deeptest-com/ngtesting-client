@@ -5,27 +5,6 @@
       <div class="form-group row">
         <div class="result-button col-sm-8">
           <div *ngIf="model.childrenCount" class="module-tips">
-            <div class="row header">用例类型：</div>
-
-            <div *ngIf="model.childrenCount.functional" class="row">
-              <label class="col-sm-2">功能</label>
-              <div class="col-sm-10">{{model.childrenCount.functional}}个</div>
-            </div>
-            <div *ngIf="model.childrenCount.performance" class="row">
-              <label class="col-sm-2">性能</label>
-              <div class="col-sm-10">{{model.childrenCount.performance}}个</div>
-            </div>
-            <div *ngIf="model.childrenCount.security" class="row">
-              <label class="col-sm-2">安全</label>
-              <div class="col-sm-10">{{model.childrenCount.security}}个</div>
-            </div>
-            <div *ngIf="model.childrenCount.others" class="row">
-              <label class="col-sm-2">其他</label>
-              <div class="col-sm-10">{{model.childrenCount.others}}个</div>
-            </div>
-          </div>
-
-          <div *ngIf="model.childrenCount" class="module-tips">
             <div class="row header">执行状态：</div>
 
             <div *ngIf="model.childrenCount.untest" class="row">
@@ -80,7 +59,7 @@
       <div class="form-group row">
         <div class="col-sm-2 case-id">TC-{{model.id}}</div>
         <div class="col-sm-10">
-          <case-field-show [model]="model" [elemCode]="'name'" [casePropMap]="casePropMap"
+          <case-field-show [model]="model" [elemCode]="'name'"
                            (onSave)="saveField($event)" [form]="form">
           </case-field-show>
         </div>
@@ -125,20 +104,20 @@
 
                 <td style="width: 25%">
                   <div class="label">类型</div>
-                  <case-field-show [model]="model" [elemCode]="'type'" [casePropMap]="casePropMap"
+                  <case-field-show [model]="model" [elemCode]="'typeId'"
                                    (onSave)="saveField($event)" [form]="form">
                   </case-field-show>
                 </td>
                 <td style="width: 25%">
                   <div class="label">优先级</div>
-                  <case-field-show [model]="model" [elemCode]="'priority'" [casePropMap]="casePropMap"
+                  <case-field-show [model]="model" [elemCode]="'priorityId'"
                                    (onSave)="saveField($event)" [form]="form">
                   </case-field-show>
                 </td>
                 <td style="width: 25%">
                   <div class="label">耗时(分钟)</div>
                   <div class="value">
-                    <case-field-show [model]="model" [elemCode]="'estimate'" [casePropMap]="casePropMap"
+                    <case-field-show [model]="model" [elemCode]="'estimate'"
                                      (onSave)="saveField($event)" [form]="form">
                     </case-field-show>
                   </div>
@@ -154,7 +133,7 @@
         <div class="row field-show-container">
           <div class="col-sm-2 field-show-label">测试目标</div>
           <div class="col-sm-11">
-            <case-field-show [model]="model" [elemCode]="'objective'" [casePropMap]="casePropMap"
+            <case-field-show [model]="model" [elemCode]="'objective'"
                              (onSave)="saveField($event)" [form]="form">
             </case-field-show>
           </div>
@@ -163,7 +142,7 @@
         <div *ngFor="let elem of customFields;" class="row field-show-container">
           <div class="col-sm-2 field-show-label">{{elem.label}}</div>
           <div class="col-sm-10">
-            <case-field-show [model]="model" [elem]="elem" [casePropMap]="casePropMap"
+            <case-field-show [model]="model" [elem]="elem"
                              (onSave)="saveField($event)" [form]="form">
             </case-field-show>
           </div>
@@ -207,7 +186,7 @@
               ></steps-table>
             </div>
             <div *ngIf="'richText'==model.contentType">
-              <case-field-show [model]="model" [elemCode]="'content'" [casePropMap]="casePropMap"
+              <case-field-show [model]="model" [elemCode]="'content'"
                                (onSave)="saveField($event)" [form]="form">
               </case-field-show>
             </div>
