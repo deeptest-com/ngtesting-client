@@ -24,12 +24,12 @@ export class Case implements OnInit, AfterViewInit, OnDestroy {
   leftWidth: number = CONSTANT.PROFILE.leftSizeDesign;
   canEdit: boolean;
 
-  constructor(private _state: GlobalState, private _route: ActivatedRoute, private privilegeService:PrivilegeService) {
-    this._state.subscribe(WS_CONSTANT.WS_PRJ_SETTINGS, this.eventCode, (json) => {
-      console.log(WS_CONSTANT.WS_PRJ_SETTINGS + ' in ' + this.eventCode, json);
-
-      this.canEdit = this.privilegeService.hasPrivilege('test_case-maintain', json.prjPrivileges);
-    });
+  constructor(private _state: GlobalState, private _route: ActivatedRoute, private privilegeService: PrivilegeService) {
+    // this._state.subscribe(WS_CONSTANT.WS_PRJ_SETTINGS, this.eventCode, (json) => {
+    //   console.log(WS_CONSTANT.WS_PRJ_SETTINGS + ' in ' + this.eventCode, json);
+    //
+    //   this.canEdit = this.privilegeService.hasPrivilege('test_case-maintain', json.prjPrivileges);
+    // });
 
     console.log('contentHeight', this.contentHeight);
   }
@@ -43,7 +43,7 @@ export class Case implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this._state.unsubscribe(WS_CONSTANT.WS_PRJ_SETTINGS, this.eventCode);
+    // this._state.unsubscribe(WS_CONSTANT.WS_PRJ_SETTINGS, this.eventCode);
   }
 
 }

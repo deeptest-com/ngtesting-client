@@ -94,6 +94,15 @@ export class BaPageTop implements OnInit, AfterViewInit, OnDestroy {
       console.log(WS_CONSTANT.WS_PRJ_SETTINGS + ' in ' + this.eventCode, json);
 
       CONSTANT.PRJ_PRIVILEGES = json.prjPrivileges;
+
+      CONSTANT.CASE_CUSTOM_FIELDS = json.caseCustomFields;
+      CONSTANT.CASE_PROPERTY_MAP = json.casePropMap;
+      CONSTANT.CASE_PROPERTY_VAL_MAP = json.casePropValMap;
+
+      CONSTANT.ISU_PROPERTY_MAP = json.issuePropMap;
+      CONSTANT.ISU_PROPERTY_VAL_MAP = json.issuePropValMap;
+      CONSTANT.ISU_TRANS_MAP = json.issueTransMap;
+
     });
 
     this._state.subscribe(WS_CONSTANT.WS_RECENT_QUERIES, this.eventCode, (json) => {

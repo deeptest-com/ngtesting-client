@@ -60,6 +60,8 @@ export class OrgRoleEdit implements OnInit, AfterViewInit {
       that.users = json.users;
       this.groups = json.groups;
 
+      console.log('sdfds', this.groups[0]);
+
       _.forEach(that.privileges, (item: any, index: number) => {
         this.form.addControl('privilege-' + item.orgPrivilegeId, new FormControl('', []));
       });
@@ -69,7 +71,7 @@ export class OrgRoleEdit implements OnInit, AfterViewInit {
       });
 
       _.forEach(that.groups, (item: any, index: number) => {
-        this.form.addControl('group-' + item.groupId, new FormControl('', []));
+        this.form.addControl('group-' + item.orgGroupId, new FormControl('', []));
       });
     });
   }

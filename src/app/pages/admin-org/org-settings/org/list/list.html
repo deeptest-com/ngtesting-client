@@ -44,7 +44,7 @@
         <th>{{ item.website }}</th>
         <td>{{statusMap[''+item.disabled]}}</td>
         <td>
-          <input *ngIf="!item.defaultOrg" (change)="setDefault(item)" [(ngModel)]="item.defaultOrg" type="checkbox" name="defaultOrg" #defaultOrg>
+          <input *ngIf="!item.defaultOrg && !item.disabled" (change)="setDefault(item)" [(ngModel)]="item.defaultOrg" type="checkbox" name="defaultOrg" #defaultOrg>
           <input *ngIf="item.defaultOrg" onclick="return false;" [(ngModel)]="item.defaultOrg" type="checkbox" name="defaultOrg" #defaultOrg>
         </td>
         <td>

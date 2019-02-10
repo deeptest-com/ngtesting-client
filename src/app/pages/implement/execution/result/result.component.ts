@@ -66,11 +66,11 @@ export class ExecutionResult implements OnInit, AfterViewInit, OnDestroy {
               private _issueViewPopupService: IssueViewPopupService,
               private _caseInTaskIssueService: CaseInTaskIssueService) {
 
-    this._state.subscribe(WS_CONSTANT.WS_PRJ_SETTINGS, this.eventCode, (json) => {
-      console.log(WS_CONSTANT.WS_PRJ_SETTINGS + ' in ' + this.eventCode, json);
-
-      this.updatePriv();
-    });
+    // this._state.subscribe(WS_CONSTANT.WS_PRJ_SETTINGS, this.eventCode, (json) => {
+    //   console.log(WS_CONSTANT.WS_PRJ_SETTINGS + ' in ' + this.eventCode, json);
+    //
+    //   this.updatePriv();
+    // });
 
     this.buildForm();
   }
@@ -294,7 +294,7 @@ export class ExecutionResult implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     this._state.unsubscribe(CONSTANT.EVENT_CASE_EXE, this.eventCode);
-    this._state.unsubscribe(WS_CONSTANT.WS_PRJ_SETTINGS, this.eventCode);
+    // this._state.unsubscribe(WS_CONSTANT.WS_PRJ_SETTINGS, this.eventCode);
   }
 
 }

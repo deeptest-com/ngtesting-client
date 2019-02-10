@@ -34,23 +34,8 @@ export class PrjResolve implements CanActivate {
         }
         return true;
       });
-    } else if (CONSTANT.CURR_PRJ_ID != context.projectId) {
+    } else if (CONSTANT.CURR_PRJ_ID != context.projectId) { // WebSocket会Push设置
       return this.projectService.changeContext(context.projectId).toPromise().then(json => {
-        const project = json.data;
-        if (project.type == 'project') {
-          CONSTANT.CURR_PRJ_ID = project.id;
-          CONSTANT.CURR_PRJ_NAME = project.name;
-
-          CONSTANT.PRJ_PRIVILEGES = json.prjPrivileges;
-
-          CONSTANT.CASE_CUSTOM_FIELDS = json.caseCustomFields;
-          CONSTANT.CASE_PROPERTY_MAP = json.casePropMap;
-          CONSTANT.CASE_PROPERTY_VAL_MAP = json.casePropValMap;
-
-          CONSTANT.ISU_PROPERTY_MAP = json.issuePropMap;
-          CONSTANT.ISU_PROPERTY_VAL_MAP = json.issuePropValMap;
-          CONSTANT.ISU_TRANS_MAP = json.issueTransMap;
-        }
         return true;
       });
     } else {

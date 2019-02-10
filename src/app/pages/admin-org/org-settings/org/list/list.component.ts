@@ -65,8 +65,6 @@ export class OrgList implements OnInit, AfterViewInit, OnDestroy {
     console.log($event);
   }
   delete($event: any): void {
-    const that = this;
-
     console.log($event);
   }
 

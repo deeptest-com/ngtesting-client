@@ -44,12 +44,12 @@ export class PlanList implements OnInit, AfterViewInit, OnDestroy {
       }, {},
     );
 
-    this._state.subscribe(WS_CONSTANT.WS_PRJ_SETTINGS, this.eventCode, (json) => {
-      console.log(WS_CONSTANT.WS_PRJ_SETTINGS + ' in ' + this.eventCode, json);
-
-      this.myPrivs = json.prjPrivileges;
-      this.projectName = json.prjName;
-    });
+    // this._state.subscribe(WS_CONSTANT.WS_PRJ_SETTINGS, this.eventCode, (json) => {
+    //   console.log(WS_CONSTANT.WS_PRJ_SETTINGS + ' in ' + this.eventCode, json);
+    //
+    //   this.myPrivs = json.prjPrivileges;
+    //   this.projectName = json.prjName;
+    // });
   }
 
   ngOnInit() {
@@ -87,7 +87,7 @@ export class PlanList implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this._state.unsubscribe(WS_CONSTANT.WS_PRJ_SETTINGS, this.eventCode);
+    // this._state.unsubscribe(WS_CONSTANT.WS_PRJ_SETTINGS, this.eventCode);
   }
 
 }
