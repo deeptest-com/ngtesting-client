@@ -8,7 +8,7 @@ export class ModelStatusPipe implements PipeTransform {
         var status: string;
 
         if (disabled) {
-            status = '禁用';
+            status = '归档';
         } else {
             status = '启用';
         }

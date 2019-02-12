@@ -43,7 +43,7 @@
         <th>控件类型</th>
         <th>数据类型</th>
 
-        <th>文本格式</th>
+        <!--<th>文本格式</th>-->
         <th>操作</th>
       </tr>
       </thead>
@@ -57,14 +57,14 @@
         <td>{{ inputMap[item.input] }}</td>
         <td>{{ typeMap[item.type] }}</td>
 
-        <td>
+<!--        <td>
           <span *ngIf="item.type == 'text'">
             {{ item.format | fieldFormat }} ({{item.rows}})
           </span>
           <span *ngIf="item.type != 'text'">
             N/A
           </span>
-        </td>
+        </td>-->
         <td>
           <span *ngIf="i == 0" class="ionic-icon link placeholder"></span>
           <span (click)="up(item)" *ngIf="i > 0" class="fa fa-arrow-up ionic-icon link"></span>

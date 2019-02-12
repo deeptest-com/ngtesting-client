@@ -7,7 +7,7 @@ export class TqlConditionService {
 
   }
 
-  genRule(id, field, group, rules, input, type, operator, value) {
+  genRule(id, field, group, rules, input, type, operator, value, buildIn) {
     const ret: any = {
       id: id,
       field: field,
@@ -15,6 +15,7 @@ export class TqlConditionService {
       rules: rules,
       input: input,
       type: type,
+      buildIn: buildIn,
 
       operator: operator,
       value: value,

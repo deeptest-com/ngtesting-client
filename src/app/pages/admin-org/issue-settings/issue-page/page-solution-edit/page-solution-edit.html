@@ -35,6 +35,17 @@
                [(ngModel)]="solution.name" #name>
       </div>
     </div>
+    <div class="form-group row just-label">
+      <label class="col-sm-2 col-form-label"><span>是否默认</span></label>
+      <label class="col-sm-4 col-form-label left">
+        {{solution.defaultVal | trueOrFalse}}
+      </label>
+
+      <label class="col-sm-2 col-form-label"><span>是否內置</span></label>
+      <label class="col-sm-4 col-form-label left">
+        {{solution.buildIn | trueOrFalse}}
+      </label>
+    </div>
 
     <div class="form-group row">
       <label class="col-sm-2 col-form-label"></label>

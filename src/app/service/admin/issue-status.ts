@@ -31,5 +31,10 @@ export class IssueStatusService {
     const model = { id: id, act: act };
     return this._reqService.post(this._apiBase + 'changeOrder', model);
   }
+
+  setDefault(id: number) {
+    const model = { id: id };
+    return this._reqService.post(this._apiBase + 'setDefault', model);
+  }
 }
 

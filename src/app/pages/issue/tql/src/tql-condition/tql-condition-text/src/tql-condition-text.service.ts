@@ -22,6 +22,7 @@ export class TqlConditionTextService {
       rules: [],
       input: filter.input,
       type: filter.type,
+      buildIn: filter.buildIn,
 
       operator: operator,
       value: value,

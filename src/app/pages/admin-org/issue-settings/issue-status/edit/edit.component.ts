@@ -116,6 +116,10 @@ export class IssueStatusEdit implements OnInit, AfterViewInit {
     });
   }
 
+  back() {
+    this._routeService.navTo('/pages/org-admin/issue-settings/issue-status/list');
+  }
+
   showModal(): void {
     this.modalWrapper.showModal();
   }

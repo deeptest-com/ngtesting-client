@@ -1,5 +1,21 @@
 <div class="issue-status-edit container-fluid">
 
+  <div class="row">
+    <div class="edit-toolbar col-xl-12">
+      <div class="title">
+        <span *ngIf="!model?.id">新建问题状态</span>
+        <span *ngIf="model?.id">编辑问题状态</span>
+      </div>
+      <div class="buttons">
+        <button (click)="back()" type="button"
+                class="btn btn-secondary btn-with-icon btn-sm back">
+          <i class="fa fa-arrow-circle-left"></i>返回
+        </button>
+      </div>
+    </div>
+  </div>
+  <hr/>
+
   <form [formGroup]="form" class="my-validate-form">
       <div class="form-group row">
         <label class="col-sm-2 col-form-label"><span>名称</span></label>
@@ -32,7 +48,7 @@
         <select *ngIf="!model.buildIn" [(ngModel)]="model.categoryId" formControlName="categoryId" class="form-control" name="categoryId">
           <option value=""></option>
           <option *ngFor="let entry of categories" value="{{entry.id}}">
-            <span>{{entry.name}}</span>
+            <span>{{entry.label}}</span>
           </option>
         </select>
       </div>
@@ -47,8 +63,13 @@
     </div>
 
     <div class="form-group row just-label">
+      <label class="col-sm-2 col-form-label"><span>是否默认</span></label>
+      <label class="col-sm-4 col-form-label left">
+        {{model.defaultVal | trueOrFalse}}
+      </label>
+
       <label class="col-sm-2 col-form-label"><span>是否內置</span></label>
-      <label class="col-sm-10 col-form-label left">
+      <label class="col-sm-4 col-form-label left">
         {{model.buildIn | trueOrFalse}}
       </label>
     </div>

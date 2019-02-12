@@ -46,12 +46,12 @@ export class InputViewComponent implements OnInit, AfterViewInit {
   }
 
   getLabel() {
-    console.log(this.elem, this._model);
+    // console.log(this.elem, this._model);
 
     const code = this.elem.colCode;
-    let val = this._model[code];
+    let val = this.elem.buildIn ? this._model[code] : this._model.jsonProp[code];
 
-    if (this.elem.buildIn && this.elem.input == 'dropdown') { // buildIn只有一种选项控件
+    if (this.elem.input == 'dropdown') { // buildIn只有一种选项控件
       return this.propValMap[code][val];
     } else if (this.elem.input == 'date') {
       return this.dateFormat.transform(val, 'yyyy-mm-dd');

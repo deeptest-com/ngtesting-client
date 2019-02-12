@@ -52,15 +52,15 @@
                 <div class="toolbar-inner">
                   <span (click)="select('all')" class="link">全选</span> |
                   <span (click)="select('none')" class="link">全不选</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  <span class="red">同时只能选中1个项目, 已有用例将被删除</span>
+                  <span class="red">同时只能选中1个项目的测试集, 导入后已有用例将被移除</span>
                 </div>
               </div>
               <div>
                 <div class="checkbox-list-item title">
                   <label>
                     <span class="checkbox-name">
-                      <span class="project">项目</span>
                       <span class="suite">测试集</span>
+                      <span class="project">所属项目</span>
                       <span class="count">用例数</span>
                     </span>
                   </label>
@@ -69,8 +69,8 @@
                 <div *ngFor="let item of suites" class="checkbox-list-item">
                   <label>
                     <span class="checkbox-name">
-                      <span class="project">{{item.caseProjectName}}</span>
                       <span class="suite">{{item.name}}</span>
+                      <span class="project">{{item.caseProjectName}}</span>
                       <span class="count">{{item.count}}</span>
                     </span>
 

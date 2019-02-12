@@ -37,13 +37,15 @@
         <th style="width: 150px">用例来源项目</th>
         <th style="width: 150px">修改人</th>
         <th style="width: 150px">修改时间</th>
+        <th style="width: 50px">启动</th>
+
         <th style="width: 150px">操作</th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let item of models">
         <td>{{ item.name }}</td>
-        <td>{{ item.count }}</td>
+        <td>{{ item.count?item.count: 0 }}</td>
         <td>{{ item.projectName }}</td>
         <td>{{ item.caseProjectName }}</td>
         <td>{{ item.userName }}</td>
@@ -51,6 +53,8 @@
           <span *ngIf="item.updateTime">{{ item.updateTime | date:'y/MM/dd HH:mm:ss' }}</span>
           <span *ngIf="!item.updateTime">{{ item.createTime | date:'y/MM/dd HH:mm:ss' }}</span>
         </td>
+        <td>{{ !item.disabled | trueOrFalse }}</td>
+
         <td>
           <!--<span [routerLink]="['/pages/org/' + orgId + '/prj/' + prjId + '/implement/suite/' + item.id + '/view']" class="link no-underline">查看</span>-->
           <span prj-privilege [privs]="'test_suite-maintain'" [routerLink]="['/pages/org/' + orgId + '/prj/' + prjId + '/implement/suite/' + item.id + '/edit']" class="link no-underline">编辑</span>

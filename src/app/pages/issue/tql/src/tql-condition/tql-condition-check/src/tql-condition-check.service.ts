@@ -42,10 +42,11 @@ export class TqlConditionCheckService {
       const children = [];
       options.forEach((option: any) => {
         if (option.checked) {
-          const val = filter.buildIn ? option.id : option.value;
+          // const val = filter.buildIn ? option.id : option.value;
+          const val = option.id;
 
           const child = this.tqlConditionService.genRule( filter.code, filter.code, false, [],
-            filter.input, filter.type, operator, val);
+            filter.input, filter.type, operator, val, filter.buildIn);
           children.push(child);
         }
       });
@@ -55,7 +56,8 @@ export class TqlConditionCheckService {
     } else {
       options.forEach((option: any) => {
         if (option.checked) {
-          const val = filter.buildIn ? option.id : option.value;
+          // const val = filter.buildIn ? option.id : option.value;
+          const val = option.id;
           checkedVals.push(val);
         }
       });
@@ -63,7 +65,7 @@ export class TqlConditionCheckService {
       operator = checkedVals.length > 1 ? 'in' : 'equal';
       checkedVals = checkedVals.length > 0 ? checkedVals : null;
       ret = this.tqlConditionService.genRule( filter.code, filter.code, false, [],
-        filter.input, filter.type, operator, checkedVals);
+        filter.input, filter.type, operator, checkedVals, filter.buildIn);
 
     }
 

@@ -65,4 +65,12 @@ export class IssueStatusList implements OnInit, AfterViewInit {
     });
   }
 
+  setDefault(item: any): void {
+    this.issueStatusService.setDefault(item.id).subscribe((json: any) => {
+      if (json.code == 1) {
+        this.models = json.data;
+      }
+    });
+  }
+
 }

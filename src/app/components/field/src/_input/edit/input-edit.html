@@ -8,18 +8,19 @@
       </ng-container>
 
       <ng-container *ngSwitchCase="'dropdown'">
-        <select [(ngModel)]="model[elem.colCode]" formControlName="{{'elem-'+elem.id}}" class="form-control">
-          <option *ngFor="let item of options" value="{{elem.buildIn?item.id:item.value}}">{{item?.label}}</option>
+        <select *ngIf="elem.buildIn" [(ngModel)]="model[elem.colCode]" formControlName="{{'elem-'+elem.id}}" class="form-control">
+          <option *ngFor="let item of options" value="{{item.id}}">{{item.label}}</option>
+        </select>
+        <select *ngIf="!elem.buildIn" [(ngModel)]="model.jsonProp[elem.colCode]" formControlName="{{'elem-'+elem.id}}" class="form-control">
+          <option *ngFor="let item of options" value="{{item.id}}">{{item.label}}</option>
         </select>
       </ng-container>
-
-
 
       <ng-container *ngSwitchCase="'radio'">
         <label class="col-form-label">
             <ng-container *ngFor="let item of options">
               <input [(ngModel)]="model[elem.colCode]" formControlName="{{'elem-'+elem.id}}"
-                     value="{{elem.buildIn?item.id:item.value}}" type="radio">
+                     value="{{item.id}}" type="radio">
               <span>{{item?.label}}</span>&nbsp;
             </ng-container>
         </label>
@@ -28,9 +29,9 @@
       <ng-container *ngSwitchCase="'checkbox'">
         <label class="col-form-label">
           <ng-container *ngFor="let item of options">
-            <input [(ngModel)]="checkboxVal[elem.buildIn?item.id:item.value]" (change)="checkboxValChange()" [ngModelOptions]="{standalone: true}"
-                   value="{{elem.buildIn?item.id:item.value}}" type="checkbox">
-            <span>{{item?.label}} - {{elem.buildIn?item.id:item.value}}</span>&nbsp;
+            <input [(ngModel)]="checkboxVal[item.id]" (change)="checkboxValChange()" [ngModelOptions]="{standalone: true}"
+                   value="{{item.id}}" type="checkbox">
+            <span>{{item?.label}}}}</span>&nbsp;
           </ng-container>
         </label>
       </ng-container>
@@ -38,7 +39,7 @@
       <ng-container *ngSwitchCase="'multi_select'">
         <select [(ngModel)]="mutiSelectVal" (change)="mutiSelectValChange()" multiple
                 [ngModelOptions]="{standalone: true}" class="form-control">
-          <option *ngFor="let item of options" value="{{elem.buildIn?item.id:item.value}}">{{item?.label}}</option>
+          <option *ngFor="let item of options" value="{{item.id}}">{{item?.label}}</option>
         </select>
       </ng-container>
 

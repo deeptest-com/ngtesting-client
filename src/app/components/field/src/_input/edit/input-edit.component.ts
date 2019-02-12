@@ -53,7 +53,7 @@ export class InputEditComponent implements OnInit, AfterViewInit {
       });
     }
 
-    console.log('###', this.mutiSelectVal, this.checkboxVal);
+    // console.log('###', this.mutiSelectVal, this.checkboxVal);
   }
 
   public constructor(private _dateFormatPipe: DateFormatPipe) {
@@ -61,11 +61,18 @@ export class InputEditComponent implements OnInit, AfterViewInit {
   }
 
   public ngOnInit(): void {
-    if (!this._model[this.elem.colCode] && this.options) {
+    const val = this.elem.buildIn ? this._model[this.elem.colCode] : this._model.jsonProp[this.elem.colCode];
+
+    if (!val && this.options) {
       const defaults: any[] = this.options.filter(
         (option, index) => option.defaultVal == true);
       if (defaults.length > 0) {
-        this._model[this.elem.colCode] = this.elem.buildIn ? defaults[0].id : defaults[0].value;
+        if (this.elem.buildIn) {
+          this._model[this.elem.colCode] = defaults[0].id;
+        } else {
+          this._model.jsonProp = {};
+          this._model.jsonProp[this.elem.colCode] = defaults[0].id;
+        }
       }
     }
 

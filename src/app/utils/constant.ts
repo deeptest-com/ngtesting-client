@@ -41,7 +41,7 @@ export const CONSTANT: CONSTANT_INTERFACE = {
   EntityRead: { '': '所有', 'false': '未读', 'true': '已读' },
 
   TrueOrFalse: { 'true': '是', 'false': '否' },
-  DisableOrNot: { 'true': '禁用', 'false': '启动' },
+  DisableOrNot: { 'true': '归档', 'false': '启动' },
   CaseExeStatus: { 'untest': '未执行', 'pass': '通过', 'fail': '失败', block: '阻塞' },
 
   FieldApplyTo: { 'test_case': '测试用例', 'test_result': '测试结果', 'issue': '问题' },

@@ -11,7 +11,6 @@ export class TqlConditionDatetimeService {
   }
 
   newBasicRule(filter: any, from: any, to: any): any {
-    let operator;
     const children = [];
 
     console.log('LSDFLDSJF');
@@ -21,13 +20,13 @@ export class TqlConditionDatetimeService {
 
     if (from) {
       fromRule = this.tqlConditionService.genRule(filter.code, filter.code, false, [],
-        filter.input, filter.type, 'greater_or_equal', DateUtils.firstSecOfDay(from));
+        filter.input, filter.type, 'greater_or_equal', DateUtils.firstSecOfDay(from), filter.buildIn);
       children.push(fromRule);
     }
 
     if (to) {
       toRule = this.tqlConditionService.genRule(filter.code, filter.code, false, [],
-        filter.input, filter.type, 'less_or_equal', DateUtils.lastSecOfDay(to));
+        filter.input, filter.type, 'less_or_equal', DateUtils.lastSecOfDay(to), filter.buildIn);
       children.push(toRule);
     }
 
@@ -36,7 +35,7 @@ export class TqlConditionDatetimeService {
       ret = this.tqlConditionService.genGroupRule(filter.code, 'AND', children);
     } else {
       ret = this.tqlConditionService.genRule(filter.code, filter.code, false, [],
-        filter.input, filter.type, '', null);
+        filter.input, filter.type, '', null, filter.buildIn);
     }
 
     return ret;
@@ -50,7 +49,7 @@ export class TqlConditionDatetimeService {
       return;
     }
 
-    let rules: any[] = currRule.rules;
+    const rules: any[] = currRule.rules;
 
     let from;
     let to;

@@ -41,7 +41,7 @@ export class IssueFieldShowComponent implements OnInit {
 
   edit () {
     this.isEditing = true;
-    this.temp = this.model[this.elem.colCode];
+    this.temp = this.elem.buildIn ? this.model[this.elem.colCode] : this.model.jsonProp[this.elem.colCode];
   }
 
   save() {
@@ -50,10 +50,17 @@ export class IssueFieldShowComponent implements OnInit {
       this.cancel();
     }).catch((err) => { console.log('err', err); });
 
-    console.log('toSave', this.model[this.elem.colCode], this.temp);
-    if (this.model[this.elem.colCode] != this.temp) {
+      let newVal;
+      if (this.elem.buildIn) {
+        newVal = this.model[this.elem.colCode];
+      } else {
+        newVal = this.model.jsonProp[this.elem.colCode];
+      }
+    console.log('toSave', newVal, this.temp);
+
+    if (newVal != this.temp) {
       this.onSave.emit({ deferred: deferred,
-        data: { code: this.elem.colCode, value: this.model[this.elem.colCode], label: this.elem.label }});
+        data: { code: this.elem.colCode, value: newVal, label: this.elem.label, buildIn: this.elem.buildIn }});
     } else {
       this.cancel();
     }

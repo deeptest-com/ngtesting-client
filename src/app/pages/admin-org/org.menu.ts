@@ -335,28 +335,28 @@ export const ORG_MENU = [
             ],
           },
 
-          {
-            path: 'org-admin/issue-settings/privilege/list',
-            data: {
-              menu: {
-                title: '权限方案',
-                icon: 'ion-edit',
-                selected: false,
-                order: 1,
-              },
-            },
-          },
-          {
-            path: 'org-admin/issue-settings/priority/list',
-            data: {
-              menu: {
-                title: '消息通知',
-                icon: 'ion-edit',
-                selected: false,
-                order: 1,
-              },
-            },
-          },
+          // {
+          //   path: 'org-admin/issue-settings/privilege/list',
+          //   data: {
+          //     menu: {
+          //       title: '权限方案',
+          //       icon: 'ion-edit',
+          //       selected: false,
+          //       order: 1,
+          //     },
+          //   },
+          // },
+          // {
+          //   path: 'org-admin/issue-settings/priority/list',
+          //   data: {
+          //     menu: {
+          //       title: '消息通知',
+          //       icon: 'ion-edit',
+          //       selected: false,
+          //       order: 1,
+          //     },
+          //   },
+          // },
         ],
       },
     ],
