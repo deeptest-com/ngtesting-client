@@ -22,7 +22,7 @@
     <form [formGroup]="form" class="my-validate-form">
       <div class="form-group row elements">
         <div *ngFor="let elem of page.elements; let i = index;" [class.full-line]="elem.fullLine" class="element">
-          <issue-field-edit [model]="issue" [elem]="elem" [issuePropMap]="issuePropMap"
+          <issue-field-edit [model]="issue" [elem]="elem"
                             [form]="form" [validateMsg]="validateMsg"></issue-field-edit>
         </div>
       </div>

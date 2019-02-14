@@ -19,25 +19,40 @@ export class IssueService {
   }
 
   create() {
-    return this._reqService.post(this._apiBase + 'create', {});
+    return this._reqService.post(this._apiBase + 'create', {})
+      .map(json => {
+        this.toFlat(json.data);
+        return json;
+      });
   }
   edit(id: number) {
     const model = { id: id };
-    return this._reqService.post(this._apiBase + 'edit', model);
+    return this._reqService.post(this._apiBase + 'edit', model).map(json => {
+      this.toFlat(json.data);
+      return json;
+    });
   }
   view(id: number) {
     const model = { id: id };
-    return this._reqService.post(this._apiBase + 'view', model);
+    return this._reqService.post(this._apiBase + 'view', model).map(json => {
+      this.toFlat(json.data);
+      return json;
+    });
   }
   getData(id: number) {
     const model = { id: id };
-    return this._reqService.post(this._apiBase + 'getData', model);
+    return this._reqService.post(this._apiBase + 'getData', model).map(json => {
+      this.toFlat(json.data);
+      return json;
+    });
   }
 
   save(model: any, pageId: number) {
+    // this.toNest(model);
     return this._reqService.post(this._apiBase + 'save', { issue: model, pageId: pageId });
   }
   update(model: any, pageId: number) {
+    // this.toNest(model);
     return this._reqService.post(this._apiBase + 'update', { issue: model, pageId: pageId });
   }
   delete(id: number) {
@@ -63,4 +78,12 @@ export class IssueService {
     const url = '/pages/org/' + CONSTANT.CURR_ORG_ID + '/prj/' + CONSTANT.CURR_PRJ_ID + '/issue/create';
     this._routeService.navTo(url);
   }
+
+  toFlat(model) {
+    _.merge(model, model.jsonProp);
+    model.jsonProp = null;
+
+    // console.log('===', model);
+  }
+
 }

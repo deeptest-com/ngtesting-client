@@ -33,12 +33,11 @@ export class CaseFieldShowComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.elem = { colCode: this.elemCode, fullLine: true, buildIn: true };
-    if (['typeId', 'priorityId', 'statusId'].indexOf(this.elemCode) > -1) {
-      this.elem.input = 'dropdown';
-    } else if ('content' == this.elemCode) {
-      this.elem.input = 'richtext';
-    }
+    // if (['typeId', 'priorityId', 'statusId'].indexOf(this.elem.colCode) > -1) {
+    //   this.elem.input = 'dropdown';
+    // } else if ('content' == this.elemCode) {
+    //   this.elem.input = 'richtext';
+    // }
   }
 
   edit () {
@@ -55,7 +54,7 @@ export class CaseFieldShowComponent implements OnInit {
     console.log('toSave', this.model[this.elem.colCode], this.temp);
     if (this.model[this.elem.colCode] != this.temp) {
       this.onSave.emit({ deferred: deferred,
-        data: { code: this.elem.colCode, value: this.model[this.elem.colCode] }});
+        data: { code: this.elem.colCode, value: this.model[this.elem.colCode], buildIn: this.elem.buildIn }});
     } else {
       this.cancel();
     }

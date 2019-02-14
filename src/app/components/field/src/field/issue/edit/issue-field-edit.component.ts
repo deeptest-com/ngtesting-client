@@ -1,5 +1,6 @@
 import { Input, Component, OnInit, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import {CONSTANT} from "../../../../../../utils";
 
 @Component({
   selector: 'issue-field-edit',
@@ -10,7 +11,7 @@ import { FormGroup } from '@angular/forms';
 export class IssueFieldEditComponent implements OnInit {
   @Input() model: any = {};
   @Input() elem: any;
-  @Input() issuePropMap: any = {};
+  issuePropMap: any = {};
 
   @Input() form: FormGroup;
   @Input() validateMsg: any = {};
@@ -18,6 +19,7 @@ export class IssueFieldEditComponent implements OnInit {
   labelColNum: number = 4;
 
   public constructor() {
+    this.issuePropMap = CONSTANT.ISU_PROPERTY_MAP;
   }
 
   public ngOnInit(): void {

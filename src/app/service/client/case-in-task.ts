@@ -18,7 +18,10 @@ export class CaseInTaskService {
 
   get(id: number) {
     const model = { id: id };
-    return this._reqService.post(this._apiBase + 'get', model);
+    return this._reqService.post(this._apiBase + 'get', model).map(json => {
+      this.toFlat(json.data);
+      return json;
+    });
   }
 
   setResult(modelId: number, caseId: number, result: string, nextId: number, status: string) {
@@ -38,6 +41,13 @@ export class CaseInTaskService {
     _.merge(data, { taskId: taskId });
 
     return this._reqService.post(this._apiBase + 'move', data);
+  }
+
+  toFlat(model) {
+    _.merge(model, model.jsonProp);
+    model.jsonProp = null;
+
+    // console.log('===', model);
   }
 
 }

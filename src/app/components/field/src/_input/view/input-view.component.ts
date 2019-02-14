@@ -49,7 +49,7 @@ export class InputViewComponent implements OnInit, AfterViewInit {
     // console.log(this.elem, this._model);
 
     const code = this.elem.colCode;
-    let val = this.elem.buildIn ? this._model[code] : this._model.jsonProp[code];
+    let val = this._model[code];
 
     if (this.elem.input == 'dropdown') { // buildIn只有一种选项控件
       return this.propValMap[code][val];

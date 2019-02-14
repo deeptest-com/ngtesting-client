@@ -1,5 +1,6 @@
 import { Input, Component, OnInit, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import {CONSTANT} from "../../../../../../utils";
 
 @Component({
   selector: 'case-field-edit',
@@ -10,7 +11,7 @@ import { FormGroup } from '@angular/forms';
 export class CaseFieldEditComponent implements OnInit {
   @Input() model: any = {};
   @Input() elem: any = {};
-  @Input() casePropMap: any = {};
+  casePropMap: any = {};
 
   @Input() form: FormGroup;
   @Input() validateMsg: any = {};
@@ -19,6 +20,7 @@ export class CaseFieldEditComponent implements OnInit {
   inputColNum: number = 9;
 
   public constructor() {
+    this.casePropMap = CONSTANT.CASE_PROPERTY_MAP;
   }
 
   public ngOnInit(): void {

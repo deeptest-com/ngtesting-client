@@ -35,6 +35,7 @@ export class InputEditComponent implements OnInit, AfterViewInit {
   @Input('model')
   set model(value: any) {
     this._model = value;
+    console.log('###', this._model, this.elem);
 
     if (this.elem.input == 'date') {
       this._model[this.elem.colCode] = this._dateFormatPipe.transform(this._model[this.elem.colCode]);
@@ -61,18 +62,14 @@ export class InputEditComponent implements OnInit, AfterViewInit {
   }
 
   public ngOnInit(): void {
-    const val = this.elem.buildIn ? this._model[this.elem.colCode] : this._model.jsonProp[this.elem.colCode];
+    const val = this._model[this.elem.colCode];
 
     if (!val && this.options) {
       const defaults: any[] = this.options.filter(
         (option, index) => option.defaultVal == true);
+
       if (defaults.length > 0) {
-        if (this.elem.buildIn) {
           this._model[this.elem.colCode] = defaults[0].id;
-        } else {
-          this._model.jsonProp = {};
-          this._model.jsonProp[this.elem.colCode] = defaults[0].id;
-        }
       }
     }
 

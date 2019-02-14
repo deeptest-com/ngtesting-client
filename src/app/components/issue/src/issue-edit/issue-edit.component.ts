@@ -61,7 +61,6 @@ export class IssueEdit implements OnInit, AfterViewInit, OnDestroy {
   loadData() {
     this.issueService.edit(this._id).subscribe((json: any) => {
       this.issue = json.data;
-      this.issuePropMap = json.issuePropMap;
 
       this.page = json.page;
 

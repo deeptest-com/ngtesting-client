@@ -26,7 +26,10 @@ export class CaseService {
   }
 
   get(id: number) {
-    return this._reqService.post(this._apiBase + 'get', { id: id });
+    return this._reqService.post(this._apiBase + 'get', { id: id }).map(json => {
+      this.toFlat(json.data);
+      return json;
+    });
   }
 
   rename(model: any) {
@@ -60,6 +63,13 @@ export class CaseService {
 
   exportAll() {
     return this._reqService.post(this._apiBase + 'exportAll', {});
+  }
+
+  toFlat(model) {
+    _.merge(model, model.jsonProp);
+    model.jsonProp = null;
+
+    // console.log('===', model);
   }
 
 }

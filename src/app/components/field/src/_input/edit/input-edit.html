@@ -2,16 +2,18 @@
   <div [formGroup]="form">
     <ng-container [ngSwitch]="elem.input">
 
+      <ng-container *ngSwitchCase="'text'">
+        <input [(ngModel)]="model[elem.colCode]" formControlName="{{'elem-'+elem.id}}"
+               type="text" class="form-control">
+      </ng-container>
+
       <ng-container *ngSwitchCase="'textarea'">
         <textarea [(ngModel)]="model[elem.colCode]" formControlName="{{'elem-'+elem.id}}"
                   type="text" class="form-control"></textarea>
       </ng-container>
 
       <ng-container *ngSwitchCase="'dropdown'">
-        <select *ngIf="elem.buildIn" [(ngModel)]="model[elem.colCode]" formControlName="{{'elem-'+elem.id}}" class="form-control">
-          <option *ngFor="let item of options" value="{{item.id}}">{{item.label}}</option>
-        </select>
-        <select *ngIf="!elem.buildIn" [(ngModel)]="model.jsonProp[elem.colCode]" formControlName="{{'elem-'+elem.id}}" class="form-control">
+        <select [(ngModel)]="model[elem.colCode]" formControlName="{{'elem-'+elem.id}}" class="form-control">
           <option *ngFor="let item of options" value="{{item.id}}">{{item.label}}</option>
         </select>
       </ng-container>
@@ -93,8 +95,7 @@
       </ng-container>
 
       <ng-container *ngSwitchDefault>
-        <input [(ngModel)]="model[elem.colCode]" formControlName="{{'elem-'+elem.id}}"
-               type="text" class="form-control">
+        elem.input = {{elem.input}}
       </ng-container>
 
     </ng-container>
