@@ -33,11 +33,22 @@ export class CaseFieldShowComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    // if (['typeId', 'priorityId', 'statusId'].indexOf(this.elem.colCode) > -1) {
-    //   this.elem.input = 'dropdown';
-    // } else if ('content' == this.elemCode) {
-    //   this.elem.input = 'richtext';
-    // }
+    // 对于用例的內置属性，直接传elemCode过来
+    if (this.elemCode != null) {
+      this.elem.colCode = this.elemCode;
+      this.elem.buildIn = true;
+
+      if (['typeId', 'priorityId', 'statusId'].indexOf(this.elemCode) > -1) {
+        this.elem.type = 'integer';
+        this.elem.input = 'dropdown';
+      } else if (['content'].indexOf(this.elemCode) > -1) {
+        this.elem.type = 'string';
+        this.elem.input = 'richtext';
+      } else if (['estimate', 'objective'].indexOf(this.elemCode) > -1) {
+        this.elem.type = 'string';
+        this.elem.input = 'text';
+      }
+    }
   }
 
   edit () {
@@ -54,7 +65,8 @@ export class CaseFieldShowComponent implements OnInit {
     console.log('toSave', this.model[this.elem.colCode], this.temp);
     if (this.model[this.elem.colCode] != this.temp) {
       this.onSave.emit({ deferred: deferred,
-        data: { code: this.elem.colCode, value: this.model[this.elem.colCode], buildIn: this.elem.buildIn }});
+        data: { code: this.elem.colCode, value: this.model[this.elem.colCode],
+          type: this.elem.type, buildIn: this.elem.buildIn }});
     } else {
       this.cancel();
     }

@@ -55,7 +55,8 @@ export class IssueFieldShowComponent implements OnInit {
 
     if (newVal != this.temp) {
       this.onSave.emit({ deferred: deferred,
-        data: { code: this.elem.colCode, value: newVal, label: this.elem.label, buildIn: this.elem.buildIn }});
+        data: { code: this.elem.colCode, value: newVal, label: this.elem.label,
+          type: this.elem.type, buildIn: this.elem.buildIn }});
     } else {
       this.cancel();
     }
