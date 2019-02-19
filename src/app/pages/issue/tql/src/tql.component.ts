@@ -30,11 +30,13 @@ export class Tql implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.rule.rules.forEach(r => {
-      if (r.field === 'fulltext') {
-        this.fulltextKeywords = r.value;
-      }
-    });
+    if (this.rule.rules) {
+      this.rule.rules.forEach(r => {
+        if (r.field === 'fulltext') {
+          this.fulltextKeywords = r.value;
+        }
+      });
+    }
   }
 
   ngAfterViewInit(): void {
