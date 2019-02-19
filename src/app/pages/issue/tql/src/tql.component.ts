@@ -23,14 +23,18 @@ export class Tql implements OnInit, AfterViewInit {
   @Input() rule: any = {};
   @Input() filters: any[];
 
-  titleKeywords: string;
+  fulltextKeywords: string;
 
   constructor(private _route: ActivatedRoute, private _state: GlobalState, private _tqlService: TqlService) {
 
   }
 
   ngOnInit(): void {
-
+    this.rule.rules.forEach(r => {
+      if (r.field === 'fulltext') {
+        this.fulltextKeywords = r.value;
+      }
+    });
   }
 
   ngAfterViewInit(): void {
@@ -41,8 +45,10 @@ export class Tql implements OnInit, AfterViewInit {
     console.log('conditionChange in tql');
     this.conditionChangeEvent.emit(data);
   }
-  titleChange() {
-    this.conditionChangeEvent.emit({ code: 'title', input: 'text', type: 'string', keywords: this.titleKeywords });
+  fulltextKeywordsChange() {
+    this.conditionChangeEvent.emit(
+      { code: 'fulltext', field: 'fulltext', operator: 'fulltext',
+        input: 'text', type: 'string', value: this.fulltextKeywords });
   }
 
   search() {

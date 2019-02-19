@@ -78,12 +78,12 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
       const ruleStr = params['rule'];
       const orderByStr = params['orderBy'];
 
-      if (ruleStr == 'all') {
+      if (ruleStr == 'all') { // 重置查询
         this.init = true;
         this.rule = {};
 
         this.loadData();
-      } else if (ruleStr == 'lastest') {
+      } else if (ruleStr == 'lastest') { // 上一次查询
         this.init = true;
 
         const ruleStore = localStorage.getItem('issue_query');
@@ -101,11 +101,11 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
 
         this.updateForBrowse();
         this.loadData();
-      } else if (ruleStr.startsWith('q_')) {
+      } else if (ruleStr.startsWith('q_')) { // 保存的查询
         this.init = true;
 
         this.loadDataByQueryId(this.rule.split('_')[1]);
-      } else {
+      } else { // 来自url的查询
         localStorage.setItem('issue_query', ruleStr);
         localStorage.setItem('order_by_for_' + this.layout, orderByStr);
 
