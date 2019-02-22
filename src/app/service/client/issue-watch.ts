@@ -18,9 +18,14 @@ export class IssueWatchService {
     return this._reqService.post(this._apiBase + 'list', model);
   }
 
-  batchSave(issueId: number, userIds: any[]) {
+  watch(id: number, status: boolean) {
+    const model = { id: id, status: status };
+    return this._reqService.post(this._apiBase + 'watch', model);
+  }
+
+  batchWatch(issueId: number, userIds: any[]) {
     const model = { issueId: issueId, userIds: userIds };
-    return this._reqService.post(this._apiBase + 'batchSave', model);
+    return this._reqService.post(this._apiBase + 'batchWatch', model);
   }
 
   remove(id, issueId) {
@@ -31,11 +36,6 @@ export class IssueWatchService {
   search(issueId: number, keywords: string, exceptIds: any[]) {
     const model = { issueId: issueId, keywords: keywords, exceptIds: exceptIds };
     return this._reqService.post(this._apiBase + 'search', model);
-  }
-
-  watch(id: number, status: boolean) {
-    const model = { id: id, status: status };
-    return this._reqService.post(this._apiBase + 'watch', model);
   }
 
 }

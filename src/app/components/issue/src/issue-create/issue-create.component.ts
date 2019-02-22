@@ -4,7 +4,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { ToastyService, ToastyConfig, ToastOptions, ToastData } from 'ng2-toasty';
+import { MyToastyService } from '../../../../service/my-toasty';
 
 import { GlobalState } from '../../../../global.state';
 
@@ -41,7 +41,7 @@ export class IssueCreate implements OnInit, AfterViewInit, OnDestroy {
   next: boolean = false;
 
   constructor(private _routeService: RouteService, private _state: GlobalState, private _route: ActivatedRoute,
-              private fb: FormBuilder, private toastyService: ToastyService, public activeModal: NgbActiveModal,
+              private fb: FormBuilder, private toastyService: MyToastyService, public activeModal: NgbActiveModal,
               private issueService: IssueService, private privilegeService: PrivilegeService) {
 
     this.canCreate = this.privilegeService.hasPrivilege('issue-maintain');

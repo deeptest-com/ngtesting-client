@@ -20,6 +20,8 @@ declare var jQuery;
 })
 export class ProjectView implements OnInit, AfterViewInit, OnDestroy {
   orgId: number;
+  prjId: number;
+
   id: number;
   tab: string = 'ver';
 
@@ -41,6 +43,8 @@ export class ProjectView implements OnInit, AfterViewInit, OnDestroy {
     this.orgId = CONSTANT.CURR_ORG_ID;
   }
   ngOnInit() {
+    this.prjId = CONSTANT.CURR_PRJ_ID; // 注意：可能和下面的不同，this.id有可能是项目组的id
+
     this.routeSub = this._route.pathFromRoot[5].params.subscribe(params => {
       if (this.id != +params['prjId']) {
         this.id = +params['prjId'];

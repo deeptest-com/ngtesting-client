@@ -29,16 +29,14 @@
             <table class="table table-bordered table-hover th-bolder">
               <thead>
               <tr>
-                <th>类型编号</th>
-                <th>类型标签</th>
-                <th>类型取值</th>
+                <th>编号</th>
+                <th>名称</th>
               </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let type of model.items;">
-                  <td>{{type.id}}</td>
+                <tr *ngFor="let type of model.items; let idx=index;">
+                  <td>{{idx+1}}</td>
                   <td>{{type.label}}</td>
-                  <td>{{type.value}}</td>
                 </tr>
               </tbody>
             </table>

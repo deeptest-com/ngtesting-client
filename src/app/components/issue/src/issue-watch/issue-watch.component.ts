@@ -4,7 +4,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { ToastyService, ToastyConfig, ToastOptions, ToastData } from 'ng2-toasty';
+import { MyToastyService } from '../../../../service/my-toasty';
 
 import { GlobalState } from '../../../../global.state';
 
@@ -40,7 +40,7 @@ export class IssueWatch implements OnInit, AfterViewInit, OnDestroy {
   updated: boolean = false;
 
   constructor(private _routeService: RouteService, private _state: GlobalState, private _route: ActivatedRoute,
-              public activeModal: NgbActiveModal, private toastyService: ToastyService,
+              public activeModal: NgbActiveModal, private toastyService: MyToastyService,
               private issueWatchService: IssueWatchService, private privilegeService: PrivilegeService) {
 
   }
@@ -57,11 +57,11 @@ export class IssueWatch implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  batchSave() {
+  batchWatch() {
     const ids = [];
     this.selectedModels.forEach(item => { ids.push(item.id); });
 
-    this.issueWatchService.batchSave(this.issue.id, ids).subscribe((json: any) => {
+    this.issueWatchService.batchWatch(this.issue.id, ids).subscribe((json: any) => {
       if (json.code == 1) {
         // this.activeModal.close({ act: 'save', success: true });
         this.selectedModels = [];

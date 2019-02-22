@@ -72,7 +72,7 @@ export class CaseSuite implements OnInit, AfterViewInit, OnDestroy {
   delete(event: any) {
     const testCase = event.data;
     this._caseService.delete(testCase.id).subscribe((json: any) => {
-      event.deferred.resolve(json.data);
+      event.deferred.resolve(json);
     });
   }
   move(event: any) {

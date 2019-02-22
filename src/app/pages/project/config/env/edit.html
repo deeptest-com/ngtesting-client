@@ -18,58 +18,58 @@
     </div>
   </div>
 
-    <form [formGroup]="form" (ngSubmit)="save()" class="my-validate-form">
-        <div class="form-group row">
-          <label class="col-sm-2 col-form-label"><span>名称</span></label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" name="label" formControlName="label"
-                   [(ngModel)]="model.label" #label>
-          </div>
-        </div>
+  <form [formGroup]="form" (ngSubmit)="save()" class="my-validate-form">
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label"><span>名称</span></label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" name="label" formControlName="label"
+               [(ngModel)]="model.label" #label>
+      </div>
+    </div>
 
-        <div class="form-group row">
-          <label class="col-sm-2 col-form-label"><span>简介</span></label>
-          <div class="col-sm-10">
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label"><span>简介</span></label>
+      <div class="col-sm-10">
               <textarea type="text" class="form-control" name="descr" formControlName="descr"
                         [(ngModel)]="model.descr" #descr></textarea>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="offset-sm-2 col-sm-10">
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="checkbox" class="form-check-input" name="disabled" formControlName="disabled"
+                   [(ngModel)]="model.disabled" #disabled>
+            &nbsp;&nbsp;归档
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label"></label>
+      <div class="col-sm-10">
+        <button (click)="save()" type="button" class="btn btn-primary" [disabled]="!form.valid">保存</button>
+        &nbsp;
+        <button (click)="gotoList()" type="button" class="btn btn-default">取消</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button (click)="showModal()" type="button" class="btn btn-danger">删除</button>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label"></label>
+      <div class="col-sm-10">
+        <div class="validate-errors">
+          <div class="validate-error" *ngFor="let msg of formErrors">
+            <div>{{ msg }}</div>
           </div>
         </div>
-
-        <div class="form-group row">
-          <div class="offset-sm-2 col-sm-10">
-            <div class="form-check">
-              <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" name="disabled" formControlName="disabled"
-                       [(ngModel)]="model.disabled" #disabled>
-                &nbsp;&nbsp;归档
-              </label>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <label class="col-sm-2 col-form-label"></label>
-          <div class="col-sm-10">
-            <button (click)="save()" type="button" class="btn btn-primary" [disabled]="!form.valid">保存</button>
-            &nbsp;
-            <button (click)="gotoList()" type="button" class="btn btn-default">取消</button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <button (click)="showModal()" type="button" class="btn btn-danger">删除</button>
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <label class="col-sm-2 col-form-label"></label>
-          <div class="col-sm-10">
-            <div class="validate-errors">
-              <div class="validate-error" *ngFor="let msg of formErrors">
-                <div>{{ msg }}</div>
-              </div>
-            </div>
-          </div>
-        </div>
-    </form>
-
+      </div>
+    </div>
+  </form>
+</div>
 <pop-dialog #modalWrapper (confirm)="delete()" [title]="'提示'">
-  确认删除名为"{{model.name}}"的环境?
+  确认删除名为"{{model.label}}"的环境?
 </pop-dialog>

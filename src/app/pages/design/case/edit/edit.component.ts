@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation, NgModule, Pipe, OnInit, AfterViewInit, On
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
-import { ToastyService, ToastyConfig, ToastOptions, ToastData } from 'ng2-toasty';
+import { MyToastyService } from '../../../../service/my-toasty';
 
 import { GlobalState } from '../../../../global.state';
 import { WS_CONSTANT } from '../../../../utils/ws-constant';
@@ -46,7 +46,7 @@ export class CaseEdit implements OnInit, AfterViewInit, OnDestroy {
 
   canEdit: boolean;
 
-  constructor(private _state: GlobalState, private fb: FormBuilder, private toastyService: ToastyService,
+  constructor(private _state: GlobalState, private fb: FormBuilder, private toastyService: MyToastyService,
               private _ztreeService: ZtreeService,
               private _caseService: CaseService, private _caseAttachmentService: CaseAttachmentService,
               private _caseStepService: CaseStepService, private privilegeService: PrivilegeService) {
@@ -151,11 +151,7 @@ export class CaseEdit implements OnInit, AfterViewInit, OnDestroy {
         this.model = json.data;
         this._state.notifyDataChanged(CONSTANT.EVENT_CASE_UPDATE, { node: this.model, random: Math.random() });
 
-        const toastOptions: ToastOptions = {
-          title: '保存成功',
-          timeout: 2000,
-        };
-        this.toastyService.success(toastOptions);
+        this.toastyService.success({ title: '保存成功' });
       }
     });
   }
@@ -216,6 +212,10 @@ export class CaseEdit implements OnInit, AfterViewInit, OnDestroy {
     });
   }
   removeAttachment(item: any) {
+    if (!confirm('确认删除名为' + item.name + '的附件？')) {
+      return;
+    }
+
     this._caseAttachmentService.removeAttachment(this.model.id, item.id).subscribe((json: any) => {
       this.model.attachments = json.attachments;
       this.model.histories = json.histories;
@@ -227,8 +227,6 @@ export class CaseEdit implements OnInit, AfterViewInit, OnDestroy {
     if (this.next) {
       next = this._ztreeService.getNextNode(this.model.id);
     }
-
-    console.log('====');
 
     this._caseService.reviewResult(this.model.id, result, next ? next.id : null)
         .subscribe((json: any) => {

@@ -5,8 +5,8 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Pipe({ name: 'pathToLink' })
 export class PathToLinkPipe implements PipeTransform {
-  transform(path: any): string {
-    return CONSTANT.SERVICE_URL + path;
+  transform(path: any, name: string): string {
+    return CONSTANT.SERVICE_URL + CONSTANT.DOWNLOAD_URI + '?path=' + path + '&name=' + name;
   }
 }
 

@@ -42,7 +42,6 @@ export class ProjectVerEdit implements OnInit, AfterViewInit {
     this._route.params.forEach(params => {
       this.id = +params['id'];
     });
-    console.log('projectId', this.projectId, 'id', this.id);
 
     this.loadData();
 

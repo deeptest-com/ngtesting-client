@@ -5,7 +5,7 @@ import { CONSTANT } from '../../../utils/constant';
 import { RouteService } from '../../../service/route';
 import { Utils } from '../../../utils/utils';
 import { Deferred } from '../../../service/deferred';
-import { ToastyService } from 'ng2-toasty';
+import { MyToastyService } from '../../../service/my-toasty';
 
 @Component({
   selector: 'file-uploader',
@@ -44,7 +44,7 @@ export class FileUploaderComponent implements OnInit, AfterViewInit {
     this.init();
   }
 
-  constructor(private routeService: RouteService, private toastyService: ToastyService) {
+  constructor(private routeService: RouteService, private toastyService: MyToastyService) {
     this.init();
   }
 
@@ -75,12 +75,7 @@ export class FileUploaderComponent implements OnInit, AfterViewInit {
         this.errorMessage = `未知错误：filter is ${filter.name}。`;
     }
     if (this.errorMessage) {
-      const toastOptions = {
-        title: '文件上传失败',
-        msg: this.errorMessage,
-        timeout: 3000,
-      };
-      this.toastyService.warning(toastOptions);
+      this.toastyService.warning({ title: '文件上传失败', msg: this.errorMessage });
     }
   }
 

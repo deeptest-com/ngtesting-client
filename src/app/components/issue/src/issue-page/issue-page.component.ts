@@ -13,7 +13,7 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
 
-import { ToastyService } from 'ng2-toasty';
+import { MyToastyService } from '../../../../service/my-toasty';
 
 import { GlobalState } from '../../../../global.state';
 
@@ -78,7 +78,7 @@ export class IssuePage implements OnInit, AfterViewInit, OnDestroy {
   priv: any = {};
 
   constructor(private _routeService: RouteService, private _route: ActivatedRoute, private _state: GlobalState,
-              private fb: FormBuilder, private toastyService: ToastyService, private privilegeService: PrivilegeService,
+              private fb: FormBuilder, private toastyService: MyToastyService, private privilegeService: PrivilegeService,
 
               private issueService: IssueService,
               private issueOptService: IssueOptService,

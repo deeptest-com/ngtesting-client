@@ -2,7 +2,7 @@ import { Input, Component, OnInit, OnDestroy, AfterViewInit, Renderer2, EventEmi
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import * as _ from 'lodash';
 
-import { ToastyService, ToastOptions } from 'ng2-toasty';
+import { MyToastyService } from '../../../service/my-toasty';
 import { GlobalState } from '../../../global.state';
 import { Deferred } from './helpers';
 
@@ -95,7 +95,7 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public constructor(private _state: GlobalState, private _routeService: RouteService,
                      @Inject(Renderer2) private renderer: Renderer2, private fb: FormBuilder,
-                     private privilegeService: PrivilegeService, private toastyService: ToastyService,
+                     private privilegeService: PrivilegeService, private toastyService: MyToastyService,
                      @Inject(ZtreeService) private ztreeService: ZtreeService) {
     this.treeHeight = Utils.getContainerHeight(CONSTANT.HEAD_HEIGHT + CONSTANT.FOOTER_HEIGHT
       + CONSTANT.ZTREE_TOOOLBAR_HEIGHT);
@@ -299,8 +299,9 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
 
     const sObj = $('#' + treeNode.tId + '_span');
 
-    if (!treeNode.isParent || treeNode.editNameFlag
-      || $('#addFolderBtn_' + treeNode.tId).length > 0 || $('#addFileBtn_' + treeNode.tId).length > 0)
+    if(!treeNode.isParent || treeNode.editNameFlag
+      || $('#addFolderBtn_' + treeNode.tId).length > 0
+      || $('#addFileBtn_' + treeNode.tId).length > 0)
       return;
 
     // 增加文件
@@ -309,12 +310,14 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
     sObj.after(addFileStr);
 
     const btnFile = jQuery('#addFileBtn_' + treeNode.tId);
-    if (btnFile) btnFile.bind('click', () => {
-      const newNode = this.ztree.addNodes(treeNode, {id: -1 * this.newCount++, pId: treeNode.id, name: '新用例',
-        type: 'functional', priority: 2, estimate: undefined, open: false, isParent: false});
-      this.ztree.editName(newNode[0]);
-      return false;
-    });
+    if (btnFile) {
+      btnFile.bind('click', () => {
+        const newNode = this.ztree.addNodes(treeNode, {id: -1 * this.newCount++, pId: treeNode.id, name: '新用例',
+          type: 'functional', priority: 2, estimate: undefined, open: false, isParent: false});
+        this.ztree.editName(newNode[0]);
+        return false;
+      });
+    }
 
     // 增加文件夹
     const addFolderStr = "<span class='button add-folder' id='addFolderBtn_" + treeNode.tId
@@ -322,13 +325,16 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
     sObj.after(addFolderStr);
 
     const btnFolder = jQuery('#addFolderBtn_' + treeNode.tId);
-    if (btnFolder) btnFolder.bind('click', () => {
-      const newNode = this.ztree.addNodes(treeNode, {id: -1 * this.newCount++, pId: treeNode.id, name: '新特性',
-        type: 'functional', priority: 2, estimate: undefined, open: true, isParent: true});
-      this.ztree.editName(newNode[0]);
-      return false;
-    });
+    if (btnFolder) {
+      btnFolder.bind('click', () => {
+        const newNode = this.ztree.addNodes(treeNode, {id: -1 * this.newCount++, pId: treeNode.id, name: '新特性',
+          type: 'functional', priority: 2, estimate: undefined, open: true, isParent: true});
+        this.ztree.editName(newNode[0]);
+        return false;
+      });
+    }
   }
+
   removeHoverDom = (treeId, treeNode) => {
    $('#addFolderBtn_' + treeNode.tId).unbind().remove();
    $('#addFileBtn_' + treeNode.tId).unbind().remove();
@@ -360,14 +366,8 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   onRemove = (e, treeId, treeNode) => {
     const deferred = new Deferred();
-    const pid = treeNode.pId;
 
     deferred.promise.then((data) => {
-      const node = this.ztree.getNodeByParam('id', pid, null);
-
-      // if (node.children.length == 0) {
-      //   this.ztree.removeNode(node);
-      // }
       console.log('success to remove');
       this._state.notifyDataChanged('case.' + this.settings.usage, { node: null, random: Math.random() });
     }).catch((err) => { logger.log('err', err); });
@@ -377,6 +377,7 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
       deferred: deferred,
     });
   }
+
   onDrag = (event, treeId, treeNodes) => {
     this.isDragging = true;
   }
@@ -498,11 +499,7 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
       this.ztree.selectNode(node);
       this.notifyCaseChange(node);
     } else {
-      const toastOptions: ToastOptions = {
-        title: '未找到用例',
-        timeout: 2000,
-      };
-      this.toastyService.warning(toastOptions);
+      this.toastyService.warning({ title: '未找到用例' });
     }
 
   }

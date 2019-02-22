@@ -132,7 +132,7 @@
           <label class="attach-list">
           <span *ngFor="let attach of issue.attachments; let i = index;" class="attach-item">
             <span *ngIf="!viewOnly" (click)="removeAttachment(attach)" class="fa fa-times pointer" tabindex="-1"></span>
-            <a href="{{attach.uri | pathToLink}}" target="_blank" class="download pointer">{{attach.name}}</a>
+            <a href="{{attach.uri | pathToLink:attach.name}}" target="_blank" class="download pointer">{{attach.name}}</a>
           </span>
           </label>
         </div>

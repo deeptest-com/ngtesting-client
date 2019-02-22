@@ -5,6 +5,7 @@ export const CONSTANT: CONSTANT_INTERFACE = {
 
   API_PATH: 'api/v1/',
   UPLOAD_URI: 'api/v1/uploadSingle',
+  DOWNLOAD_URI: 'api/v1/download',
 
   CURR_ORG_ID: undefined,
   CURR_PRJ_ID: undefined,
@@ -74,6 +75,7 @@ export interface CONSTANT_INTERFACE {
 
   API_PATH: string;
   UPLOAD_URI: string;
+  DOWNLOAD_URI: string;
 
   CURR_ORG_ID: number;
   CURR_ORG_NAME: string;

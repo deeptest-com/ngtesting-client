@@ -3,8 +3,6 @@ import { CommonModule }  from '@angular/common';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { ToastyModule } from 'ng2-toasty';
-
 import { NgbModalModule, NgbPaginationModule, NgbDropdownModule, NgbDateParserFormatter,
   NgbTabsetModule, NgbButtonsModule, NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -22,6 +20,9 @@ import { PageInfoModule } from '../../components/page-info';
 import { TqlModule } from './tql';
 
 import { FieldModule } from '../../components/field';
+
+import { ToastyModule } from 'ng2-toasty';
+import { MyToastyService } from '../../service/my-toasty';
 
 import { RouteService } from '../../service/route';
 import { RequestService } from '../../service/request';
@@ -66,10 +67,10 @@ import { IssueView } from './view/view.component';
     NgbTabsetModule, NgbButtonsModule, NgbCollapseModule,
     DndModule.forRoot(),
 
+    ToastyModule,
     FileUploaderModule,
     PipeModule,
     DirectiveModule,
-    ToastyModule,
     SlimLoadingBarModule.forRoot(),
     PopDialogModule,
     PageInfoModule,
@@ -87,6 +88,7 @@ import { IssueView } from './view/view.component';
     IssueView,
   ],
   providers: [
+    MyToastyService,
     RouteService,
     RequestService,
     DatetimePickerService,

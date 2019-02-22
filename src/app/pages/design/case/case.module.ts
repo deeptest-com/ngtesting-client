@@ -1,7 +1,6 @@
 import { NgModule }      from '@angular/core';
 import { CommonModule }  from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {ToastyModule} from 'ng2-toasty';
 
 import { NgbModalModule, NgbPaginationModule, NgbDropdownModule,
   NgbTabsetModule, NgbButtonsModule, NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
@@ -20,6 +19,7 @@ import { FieldModule } from '../../../components/field';
 import { TinyMCEModule } from '../../../components/tiny-mce';
 import { CommentsModule } from '../../../components/comments';
 
+import { ToastyModule } from 'ng2-toasty';
 import { RouteService } from '../../../service/route';
 import { RequestService } from '../../../service/request';
 import { DatetimePickerService } from '../../../service/datetime-picker';
@@ -27,7 +27,6 @@ import { DatetimePickerService } from '../../../service/datetime-picker';
 import { SuiteService } from '../../../service/client/suite';
 import { CaseService } from '../../../service/client/case';
 import { CaseAttachmentService } from '../../../service/client/case-attachment';
-// import { CommentsService } from '../../../service/client/comments';
 import { CaseStepService } from '../../../service/client/case-step';
 import { PrivilegeService } from '../../../service/privilege';
 
@@ -47,9 +46,9 @@ import { CaseView } from './view/view.component';
     NgbModalModule, NgbPaginationModule, NgbDropdownModule,
     NgbTabsetModule, NgbButtonsModule, NgbCollapseModule,
 
+    ToastyModule,
     PipeModule,
     DirectiveModule,
-    ToastyModule,
     SlimLoadingBarModule.forRoot(),
     CommentsModule,
     ZtreeModule,

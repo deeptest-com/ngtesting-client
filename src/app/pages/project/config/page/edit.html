@@ -29,6 +29,7 @@
           <table class="table table-bordered table-hover th-bolder">
             <thead>
             <tr>
+              <th style="width: 100px">编号</th>
               <th style="width: 200px">问题类型</th>
               <th style="width: 200px">创建界面</th>
               <th style="width: 200px">编辑界面</th>
@@ -37,10 +38,11 @@
             </thead>
 
             <tbody>
-            <tr *ngFor="let item of itemMap | mapToArray; let i = index;">
+            <tr *ngFor="let item of itemMap | mapToArray; let idx = index;">
+              <td>{{idx+1}}</td>
               <td>{{item.key | section:1}}</td>
               <td *ngFor="let opt of ['create', 'edit', 'view'];">
-                {{item.value[opt]}}
+                {{item.value[opt] | section:1}}
               </td>
             </tr>
             </tbody>

@@ -97,7 +97,7 @@ export class ProjectEditInfo implements OnInit, AfterViewInit {
     this._projectService.getInfo(this.id).subscribe((json: any) => {
       this.model = json.data ? json.data : { type: this.type, disabled: false };
       this.groups = json.groups;
-      if (this.type === 'project' && VARI.currGroupId) {
+      if (this.type === 'project' && !this.model.parentId && VARI.currGroupId) {
         this.model.parentId = VARI.currGroupId;
       }
     });

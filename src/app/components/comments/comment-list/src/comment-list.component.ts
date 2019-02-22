@@ -5,9 +5,10 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CONSTANT } from '../../../../utils/constant';
 import { GlobalState } from '../../../../global.state';
 
-import { CaseService } from '../../../../service/client/case';
 import { CommentsService } from '../../../../service/client/comments';
 import { CommentEditComponent } from '../../comment-edit/src/comment-edit.component';
+
+import * as _ from 'lodash';
 
 @Component({
   selector: 'comment-list',
@@ -26,16 +27,6 @@ export class CommentListComponent implements OnInit, AfterViewInit, OnDestroy{
 
   constructor(private _state: GlobalState, private modalService: NgbModal,
               private _commentsService: CommentsService) {
-    // this._state.subscribe(CONSTANT.EVENT_COMMENTS_EDIT, this.eventCode, (json) => {
-    //   console.log(CONSTANT.EVENT_COMMENTS_EDIT + ' in ' + this.eventCode, json);
-    //   this.addComments(json);
-    // });
-    //
-    // this._state.subscribe(CONSTANT.EVENT_COMMENTS_SAVE, this.eventCode, (json) => {
-    //   console.log(CONSTANT.EVENT_COMMENTS_SAVE + ' in ' + this.eventCode, json);
-    //   this.comment = json;
-    //   this.saveComments(json.result);
-    // });
   }
 
   public ngOnInit(): void {
@@ -54,51 +45,42 @@ export class CommentListComponent implements OnInit, AfterViewInit, OnDestroy{
       this.comment = { summary: '添加备注' };
     }
   }
-  editComments(comment: any) {
+  editComments(comment: any, indx: number) {
+    this.comment = _.clone(comment);
+    this.comment.index = indx;
+    this.comment.summary = '修改备注';
+
     this.modalWrapper.showModal('comment-edit');
-    this.comment = comment;
-    if (this.comment.summary === '添加备注') {
-      this.comment.summary = '修改备注';
-    }
   }
 
-  saveComments(result: boolean) {
+  saveComments() {
     const modelId = this.modelType == 'case_in_task' ? this.model.entityId : this.model.id;
     this._commentsService.save(modelId, this.modelType, this.comment).subscribe((json: any) => {
       if (json.code == 1) {
-        if (this.comment.result != undefined) { // 评审
-          this.reviewRequest(this.model.id, this.comment.result);
-        }
+        let index;
 
-        if (this.comment.id != json.data.id) {
-          this.model.comments[this.model.comments.length] = json.data;
+        if (this.comment.id != json.data.id) { // 新注释
+          index = this.model.comments.length;
+        } else {
+          index = this.comment.index;
         }
-        this.comment = json.data;
-        if (!result) {
-          this.modalWrapper.closeModal();
-        }
+        this.model.comments[index] = json.data;
+        this.modalWrapper.closeModal();
       }
     });
   }
 
-  removeComments(id: number, indx: number) {
-    this._commentsService.remove(id, this.modelType).subscribe((json: any) => {
+  removeComments(comment: any, indx: number) {
+    if (!confirm('确认删除' + comment.userName + '的备注？')) {
+      return;
+    }
+
+    this._commentsService.remove(comment.id, this.modelType).subscribe((json: any) => {
       this.model.comments.splice(indx, 1);
     });
   }
 
-  reviewRequest(id: number, result: boolean) {
-    // this._caseService.reviewResult(id, result).subscribe((json: any) => {
-    //   if (json.code == 1) {
-    //     this.model.reviewResult = result;
-    //     this._state.notifyDataChanged(CONSTANT.EVENT_CASE_UPDATE, { node: this.model, random: Math.random() });
-    //   }
-    // });
-  }
-
   ngOnDestroy(): void {
-    // this._state.unsubscribe(CONSTANT.EVENT_COMMENTS_EDIT, this.eventCode);
-    // this._state.unsubscribe(CONSTANT.EVENT_COMMENTS_SAVE, this.eventCode);
   }
 
 }

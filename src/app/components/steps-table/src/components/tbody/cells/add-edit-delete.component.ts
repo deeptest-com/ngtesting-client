@@ -50,10 +50,12 @@ export class TbodyAddEditDeleteComponent implements OnChanges {
     event.preventDefault();
     event.stopPropagation();
 
-    this.grid.delete(this.row, this.deleteConfirm);
+    if (confirm('确认删除编号为' + this.row.cells[0].getValue() + '的步骤？')) {
+      this.grid.delete(this.row, this.deleteConfirm);
+    }
   }
 
-  ngOnChanges(){
+  ngOnChanges() {
 
   }
 }

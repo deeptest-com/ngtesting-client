@@ -37,7 +37,11 @@ export class CaseService {
   }
   update(model: any) {
     const data = _.clone(model);
-    data.steps = null;
+    _.unset(data, 'steps');
+    _.unset(data, 'comments');
+    _.unset(data, 'attachments');
+    _.unset(data, 'histories');
+
     return this._reqService.post(this._apiBase + 'update', data);
   }
   move(data: any) {

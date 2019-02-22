@@ -25,6 +25,7 @@ declare var jQuery;
 export class ProjectEditMember implements OnInit, AfterViewInit {
   orgId: number;
   projectId: number;
+  currUserId: number;
 
   formInfo: FormGroup;
   formAdd: FormGroup;
@@ -34,6 +35,7 @@ export class ProjectEditMember implements OnInit, AfterViewInit {
 
   entityInRoles: any[] = [];
   entitySearchResult: any[];
+  entityToRemove: any = {};
 
   selectedModels: any[] = [];
   modelAdd: any = { };
@@ -45,6 +47,7 @@ export class ProjectEditMember implements OnInit, AfterViewInit {
               private fb: FormBuilder, private _projectMemberService: ProjectMemberService,
               private _userAndGroupService: UserAndGroupService) {
     this.orgId = CONSTANT.CURR_ORG_ID;
+    this.currUserId = CONSTANT.PROFILE.id;
 
     this._route.pathFromRoot[6].params.forEach(params => {
         this.projectId = +params['id'];
@@ -126,12 +129,19 @@ export class ProjectEditMember implements OnInit, AfterViewInit {
     });
   }
 
+
   remove(item) {
     this._projectMemberService.remove(item).subscribe((json: any) => {
       if (json.code == 1) {
         this.entityInRoles = json.entityInRoles;
+        this.modalWrapper.closeModal();
       }
     });
+  }
+
+  showDeleteModal(item): void {
+    this.entityToRemove = item;
+    this.modalWrapper.showModal();
   }
 
 }
