@@ -64,7 +64,6 @@
         <label class="col-sm-1 col-form-label">项目版本</label>
         <div class="col-sm-5">
           <select [(ngModel)]="model.verId" formControlName="verId" class="form-control" name="verId">
-            <option value="null">请选择</option>
             <option *ngFor="let entry of vers" value="{{entry.id}}">
               <span>{{entry.label}}</span>
             </option>

@@ -32,15 +32,17 @@
       <div class="dropdown-menu">
         <button class="dropdown-item">当前项目</button>
         <button class="dropdown-item">
-          <a (click)="selectProject(projects[0].prjId)" *ngIf="projects && projects[0]" class="link">
-            {{projects[0].prjName}}
-          </a>
+          <ng-container *ngFor="let item of projects; let i = index">
+            <a *ngIf="item.prjId == prjId" (click)="selectProject(item.prjId)" class="link">
+              {{item.prjName}}
+            </a>
+          </ng-container>
           <a *ngIf="!projects || projects.length == 0">无</a>
         </button>
 
         <button class="dropdown-item next">最近查看</button>
         <ng-container *ngFor="let item of projects; let i = index">
-          <button *ngIf="i > 0" class="dropdown-item" class="dropdown-item">
+          <button *ngIf="item.prjId != prjId" class="dropdown-item" class="dropdown-item">
             <a (click)="selectProject(item.prjId)" class="link">
               {{item.prjName}}</a>
           </button>

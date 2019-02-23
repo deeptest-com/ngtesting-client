@@ -24,9 +24,8 @@
         <label class="col-sm-2 col-form-label">测试环境</label>
         <div class="col-sm-10">
           <select [(ngModel)]="model.envId" formControlName="envId" class="form-control" name="envId">
-            <option value="null">请选择</option>
             <option *ngFor="let entry of envs" value="{{entry.id}}">
-              <span>{{entry.name}}</span>
+              <span>{{entry.label}}</span>
             </option>
           </select>
         </div>

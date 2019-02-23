@@ -9,8 +9,7 @@
   <span *ngIf="model.type=='project'">项目</span>
 </td>
 <td>
-  <span *ngIf="!model.disabled">启用</span>
-  <span *ngIf="model.disabled">归档</span>
+  {{ !model.disabled | trueOrFalse }}
 </td>
 <td class="opt">
 

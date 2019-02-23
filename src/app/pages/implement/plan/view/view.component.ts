@@ -67,6 +67,15 @@ export class PlanView implements OnInit, AfterViewInit {
     const that = this;
     that._planService.get(that.planId).subscribe((json: any) => {
       that.model = json.data;
+
+      that.model.tasks.forEach((task: any) => {
+        for (const item of task.assignees) {
+          if (item.id == this.profile.id) {
+            task.assignedToMe = true;
+            break;
+          }
+        }
+      });
     });
   }
 

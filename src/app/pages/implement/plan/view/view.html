@@ -93,7 +93,7 @@
           <td class="pointer">{{item.userName}}</td>
           <td>
                 <span *ngFor="let a of item.assignees; let i = index;">
-                  <span>{{a.name}}</span><span *ngIf="i != item.assignees.length-1">, </span>
+                  <span>{{a.nickname}}</span><span *ngIf="i != item.assignees.length-1">, </span>
                 </span>
           </td>
           <td>{{item.caseProjectName}}</td>
@@ -102,11 +102,11 @@
           </td>
           <td>{{item.status | exeStatus}}</td>
           <td>
-            <span *ngIf="!item.assigned">
+            <span *ngIf="!item.assignedToMe">
               <span prj-privilege [privs]="'test_task-view'" *ngIf="item.countMap.total > 0" (click)="exeOrView('view', item.id)" class="link no-underline">查看</span>
               <span prj-privilege [privs]="'test_task-close'" *ngIf="item.status != 'end'" (click)="close(item, i)" class="link no-underline">关闭</span>
             </span>
-            <span *ngIf="item.assigned">
+            <span *ngIf="item.assignedToMe">
               <span prj-privilege [privs]="'test_task-view'" *ngIf="item.status == 'end' && item.countMap.total > 0" (click)="exeOrView('view', item.id)" class="link no-underline">查看</span>
               <span prj-privilege [privs]="'test_task-exe'" *ngIf="item.status != 'end' && item.countMap.total > 0" (click)="exeOrView('exe', item.id)" class="link no-underline">执行</span>
               <span prj-privilege [privs]="'test_task-close'" *ngIf="item.status != 'end'" (click)="close(item, i)" class="link no-underline">关闭</span>

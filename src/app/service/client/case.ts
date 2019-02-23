@@ -51,9 +51,12 @@ export class CaseService {
     return this._reqService.post(this._apiBase + 'delete', { id: id });
   }
 
-  saveField(id: number, field: any) {
-    const model = _.merge(field, { id: id });
+  saveFieldWithOtherProject(id: number, caseProjectId: number, field: any) {
+    const model = _.merge(field, { id: id, caseProjectId: caseProjectId });
     return this._reqService.post(this._apiBase + 'saveField', model);
+  }
+  saveField(id: number, field: any) {
+    return this.saveFieldWithOtherProject(id, null, field);
   }
 
   changeContentType(contentType: string, id: number) {

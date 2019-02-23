@@ -184,7 +184,7 @@ export class ExecutionResult implements OnInit, AfterViewInit, OnDestroy {
   }
 
   saveField(event: any) {
-    this._caseService.saveField(this.model.id, event.data).subscribe((json: any) => {
+    this._caseService.saveFieldWithOtherProject(this.model.id, this.model.projectId, event.data).subscribe((json: any) => {
       if (json.code == 1) {
         // this.model = json.data;
         this._state.notifyDataChanged(CONSTANT.EVENT_CASE_UPDATE, { node: this.model, random: Math.random() });

@@ -34,6 +34,9 @@ export class InputViewComponent implements OnInit, AfterViewInit {
       this.val = this.getLabel();
     }
   }
+  get model() {
+    return this._model;
+  }
 
   public constructor(private dateFormat: DateFormatPipe) {
 
