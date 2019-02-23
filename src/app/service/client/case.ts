@@ -42,7 +42,10 @@ export class CaseService {
     _.unset(data, 'attachments');
     _.unset(data, 'histories');
 
-    return this._reqService.post(this._apiBase + 'update', data);
+    return this._reqService.post(this._apiBase + 'update', data).map(json => {
+      this.toFlat(json.data);
+      return json;
+    });
   }
   move(data: any) {
     return this._reqService.post(this._apiBase + 'move', data);

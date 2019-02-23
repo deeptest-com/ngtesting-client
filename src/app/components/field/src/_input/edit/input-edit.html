@@ -50,8 +50,6 @@
                   (changed)="richtextChange($event)"></tiny-mce>
       </ng-container>
 
-
-
       <ng-container *ngSwitchCase="'date'">
         <div class="input-group my-flatpickr-date">
           <input [(ngModel)]="model[elem.colCode]" formControlName="{{'elem-'+elem.id}}"

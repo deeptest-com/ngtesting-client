@@ -108,7 +108,7 @@ export class DropdownOptionsComponent implements OnInit, OnDestroy, AfterViewIni
     this.form = this.fb.group(
       {
         label: ['', [Validators.required]],
-        value: ['', [Validators.required]],
+        /*value: ['', [Validators.required]],*/
       }, {},
     );
 
@@ -121,12 +121,12 @@ export class DropdownOptionsComponent implements OnInit, OnDestroy, AfterViewIni
   }
   formErrors = [];
   validateMsg = {
-    'value': {
-      'required': '取值不能为空',
-    },
     'label': {
       'required': '名称不能为空',
     },
+    /*'value': {
+      'required': '取值不能为空',
+    },*/
   };
 
 }

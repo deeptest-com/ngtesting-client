@@ -37,7 +37,7 @@
       <div *ngIf="!model.buildIn" class="col-sm-4">
         <select *ngIf="module!='issue'" [(ngModel)]="model.applyTo" formControlName="applyTo" name="applyTo" class="form-control form-control-sm">
           <option value="test_case">测试用例</option>
-          <option value="test_result">测试结果</option>
+          <!--<option value="test_result">测试结果</option>-->
         </select>
 
         <select *ngIf="module=='issue'" [(ngModel)]="model.applyTo" formControlName="applyTo" name="applyTo" class="form-control form-control-sm">

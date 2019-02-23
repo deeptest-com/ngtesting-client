@@ -109,7 +109,7 @@ export const ORG_MENU = [
             path: 'org-admin/case-settings/case-field/list/test_case',
             data: {
               menu: {
-                title: '自定义字段',
+                title: '用例字段',
                 icon: 'ion-edit',
                 selected: false,
                 expanded: true,

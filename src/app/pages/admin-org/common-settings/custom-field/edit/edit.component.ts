@@ -125,6 +125,8 @@ export class CustomFieldEdit implements OnInit, AfterViewInit {
 
       if (this.module == 'issue') {
         this.model.applyTo = 'issue';
+      } else {
+        this.model.applyTo = 'test_case';
       }
 
       if (!this.id) {

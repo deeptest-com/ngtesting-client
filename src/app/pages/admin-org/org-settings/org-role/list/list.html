@@ -28,27 +28,25 @@
   </div>
   <!-- /.row -->
   <div class="row">
-    <div class="row">
-      <table class="table table-bordered table-striped">
-        <thead class="thead-inverse">
-        <tr>
-          <th style="width: 250px">名称</th>
-          <th>描述</th>
-          <th style="width: 150px">状态</th>
-          <th style="width: 150px">操作</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let item of models">
-          <td>{{ item.name }}</td>
-          <th>{{ item.descr }}</th>
-          <td>{{statusMap[''+item.disabled]}}</td>
-          <td>
-            <span [routerLink]="['/pages/org-admin/org-settings/org-role/edit', item.id]" class="link no-underline">编辑</span>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
+    <table class="table table-bordered table-striped">
+      <thead class="thead-inverse">
+      <tr>
+        <th style="width: 250px">名称</th>
+        <th>描述</th>
+        <th style="width: 150px">状态</th>
+        <th style="width: 150px">操作</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of models">
+        <td>{{ item.name }}</td>
+        <th>{{ item.descr }}</th>
+        <td>{{statusMap[''+item.disabled]}}</td>
+        <td>
+          <span [routerLink]="['/pages/org-admin/org-settings/org-role/edit', item.id]" class="link no-underline">编辑</span>
+        </td>
+      </tr>
+      </tbody>
+    </table>
   </div>
 </div>
