@@ -1,0 +1,18 @@
+.issue-tran-page {
+  margin: 15px;
+
+  form {
+    width: 100%;
+  }
+  .elements {
+    padding-top: 15px;
+    .element {
+      float: left;
+      width: 50%;
+      &.full-line {
+        width: 100%;
+      }
+    }
+  }
+
+}

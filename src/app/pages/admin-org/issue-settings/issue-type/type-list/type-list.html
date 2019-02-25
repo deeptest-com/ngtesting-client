@@ -22,7 +22,6 @@
       <thead class="thead-inverse">
       <tr>
         <th>名称</th>
-        <th>值</th>
         <th style="width: 250px;">是否默认</th>
         <th style="width: 250px;">是否內置</th>
         <th style="width: 250px;">操作</th>
@@ -31,7 +30,6 @@
       <tbody>
       <tr *ngFor="let item of models; let i = index;">
         <td>{{ item.label }}</td>
-        <td>{{ item.value }}</td>
         <td>
           <input *ngIf="!item.defaultVal" (change)="setDefault(item)" [(ngModel)]="item.defaultVal" type="checkbox" name="default" #default>
           <input *ngIf="item.defaultVal" onclick="return false;" [(ngModel)]="item.defaultVal" type="checkbox" name="default" #default>

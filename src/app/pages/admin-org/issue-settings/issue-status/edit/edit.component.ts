@@ -53,7 +53,7 @@ export class IssueStatusEdit implements OnInit, AfterViewInit {
     this.form = this.fb.group(
       {
         'label': ['', [Validators.required]],
-        'value': ['', [Validators.required]],
+        /*'value': ['', [Validators.required]],*/
         'categoryId': ['', [Validators.required]],
         'descr': ['', []],
       }, {},
@@ -72,9 +72,9 @@ export class IssueStatusEdit implements OnInit, AfterViewInit {
     'label': {
       'required': '标签不能为空',
     },
-    'value': {
+    /*'value': {
       'required': '取值不能为空',
-    },
+    },*/
   };
 
   loadData() {
@@ -108,6 +108,7 @@ export class IssueStatusEdit implements OnInit, AfterViewInit {
 
     that.issueStatusService.delete(that.model.id).subscribe((json: any) => {
       if (json.code == 1) {
+        this.modalWrapper.closeModal();
         that.formErrors = ['删除成功'];
         that._routeService.navTo('/pages/org-admin/issue-settings/issue-status/list');
       } else {

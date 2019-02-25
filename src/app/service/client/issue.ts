@@ -48,11 +48,17 @@ export class IssueService {
   }
 
   save(model: any, pageId: number) {
-    // this.toNest(model);
     return this._reqService.post(this._apiBase + 'save', { issue: model, pageId: pageId });
   }
   update(model: any, pageId: number) {
-    // this.toNest(model);
+    const data = _.clone(model);
+    _.unset(data, 'comments');
+    _.unset(data, 'attachments');
+    _.unset(data, 'histories');
+    _.unset(data, 'tags');
+    _.unset(data, 'watchList');
+    _.unset(data, 'links');
+
     return this._reqService.post(this._apiBase + 'update', { issue: model, pageId: pageId });
   }
   delete(id: number) {

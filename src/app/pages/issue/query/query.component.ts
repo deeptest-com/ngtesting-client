@@ -1,6 +1,6 @@
 import {
   Component, ViewEncapsulation, OnInit, AfterViewInit, OnDestroy,
-  ElementRef, Inject, Renderer2, ViewChild, Input
+  ElementRef, Inject, Renderer2, ViewChild, Input,
 } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -19,11 +19,13 @@ import { IssueService } from '../../../service/client/issue';
 
 import { TqlService } from '../tql/src/tql.service';
 import { IssueQueryService } from './query.service';
-import {PopDialogComponent} from "../../../components/pop-dialog";
-import {IssueOptService} from "../../../service/client/issue-opt";
+import { PopDialogComponent } from '../../../components/pop-dialog';
+import { IssueOptService } from '../../../service/client/issue-opt';
+
+import { IssueTranPageService } from '../../../components/issue/src/issue-tran-page/issue-tran-page.service';
 
 import * as _ from 'lodash';
-import {PrivilegeService} from "../../../service/privilege";
+import { PrivilegeService } from '../../../service/privilege';
 
 @Component({
   selector: 'issue-query',
@@ -60,13 +62,16 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
 
   layout: string = CONSTANT.PROFILE.issueView;
 
+  issueTranPageModal: any;
+
   @ViewChild('modalWrapper') modalWrapper: PopDialogComponent;
   @ViewChild('deleteModalWrapper') deleteModalWrapper: PopDialogComponent;
 
   constructor(private _activeRoute: ActivatedRoute, private _router: Router, private _routeService: RouteService,
               private _tqlService: TqlService, private _clientService: ClientService,
               private _queryService: IssueQueryService, private _issueService: IssueService,
-              private issueOptService: IssueOptService, private privilegeService: PrivilegeService) {
+              private issueOptService: IssueOptService, private issueTranPageService: IssueTranPageService,
+              private privilegeService: PrivilegeService) {
 
     this.priv = this.privilegeService.issuePrivilege();
 
@@ -237,18 +242,26 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
 
   dealWithIssue($event) {
     if ('statusTran' == $event.act) {
-      this.issueOptService.statusTran($event.item.id, $event.tran.dictStatusId, $event.tran.dictStatusName)
-        .subscribe((json: any) => {
-        if (json.code == 1) {
-          this.models.forEach((mode, index) => {
-            if (mode.id == $event.item.id) {
-              mode.statusId = $event.tran.dictStatusId;
 
-              this.models[index] = _.clone(mode);
-            }
-          });
-        }
-      });
+      const workTran = this.issueOptService.getWorkTran($event.item.typeId, $event.tran);
+
+      if (workTran.actionPageId) { // 弹出转台转换页面
+        this.issueTranPageModal = this.issueTranPageService.genPage($event.item, workTran);
+
+        this.issueTranPageModal.result.then((result) => {
+          if (result.success) {
+            this.updateIssueToNew($event.item.id, $event.tran.dictStatusId);
+          }
+        });
+      } else { // 直接转换状态
+        this.issueOptService.statusTran($event.item.id, $event.tran.dictStatusId, $event.tran.dictStatusName)
+          .subscribe((json: any) => {
+          if (json.code == 1) {
+            this.updateIssueToNew($event.item.id, $event.tran.dictStatusId);
+          }
+        });
+      }
+
     } else if ('delete' == $event.act) {
       this.issue = $event.item;
       this.deleteModalWrapper.showModal();
@@ -310,5 +323,14 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
     }
 
     console.log('updateForBrowse', this.orderBy, this.orderColumn, this.orderSeq);
+  }
+
+  updateIssueToNew(id, dictStatusId) {
+    this.models.forEach((mode, index) => {
+      if (mode.id == id) {
+        mode.statusId = dictStatusId;
+        this.models[index] = _.clone(mode);
+      }
+    });
   }
 }

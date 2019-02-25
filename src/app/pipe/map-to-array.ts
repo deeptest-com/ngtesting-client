@@ -5,7 +5,7 @@ import * as _ from 'lodash';
 @Pipe({ name: 'mapToArray' })
 export class MapToArrayPipe implements PipeTransform {
   transform(map: any, ignore: string[]): any {
-    console.log('***', map);
+    // console.log('***', map);
 
     if (!_.isArray(ignore)) {
       ignore = _.union([], [ignore]);

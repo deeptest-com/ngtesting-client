@@ -1,6 +1,9 @@
 import {Input, Component, OnInit, Output, EventEmitter} from '@angular/core';
 
 import {FormGroup} from "@angular/forms";
+import {Deferred} from "../../../../../ztree/src/helpers";
+import {logger} from "../../../../../../utils/utils";
+import * as _ from "lodash";
 
 @Component({
   selector: 'issue-field-design',
@@ -10,12 +13,13 @@ import {FormGroup} from "@angular/forms";
 })
 export class IssueFieldDesignComponent implements OnInit {
   @Input() issuePropMap: any = {};
-  @Input() field: any;
   @Input() forSelection: boolean = false;
 
   @Input() form: FormGroup;
 
   @Output() propEvent = new EventEmitter<any>();
+
+  @Input() field: any;
 
   labelColNum: number = 4;
 
@@ -41,9 +45,18 @@ export class IssueFieldDesignComponent implements OnInit {
     return num;
   }
 
-  setProp ($event: any) {
-    console.log('set', $event);
-    this.propEvent.emit($event);
+  setProp (data: any) {
+    console.log('set', data);
+
+    const deferred = new Deferred();
+    deferred.promise.then((code) => {
+      this.labelColNum = this.getCol();
+    }).catch((err) => { logger.log('err', err); });
+
+    this.propEvent.emit({
+      data: data,
+      deferred: deferred,
+    });
   }
 
 }

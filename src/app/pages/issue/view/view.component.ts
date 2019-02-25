@@ -70,7 +70,8 @@ export class IssueView implements OnInit, AfterViewInit, OnDestroy {
 
   optResult($event) {
     console.log('$event', $event);
-    if ($event.act == 'update' || $event.act == 'updateField' || $event.act == 'tran') {
+    if ($event.act == 'update' || $event.act == 'updateField'
+      || $event.act == 'assign' || $event.act == 'tran') {
       this.loadData();
     } else if ($event.act == 'link' || $event.act == 'tag' || $event.act == 'watch') {
       this.getData();

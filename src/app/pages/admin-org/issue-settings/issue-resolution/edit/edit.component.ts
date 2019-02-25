@@ -52,7 +52,6 @@ export class IssueResolutionEdit implements OnInit, AfterViewInit {
     this.form = this.fb.group(
       {
         'label': ['', [Validators.required]],
-        'value': ['', [Validators.required]],
         'descr': ['', []],
         'disabled': ['', []],
       }, {},

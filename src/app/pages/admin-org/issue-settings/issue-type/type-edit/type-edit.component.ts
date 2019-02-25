@@ -53,7 +53,7 @@ export class IssueTypeEdit implements OnInit, AfterViewInit {
     this.form = this.fb.group(
       {
         'label': ['', [Validators.required]],
-        'value': ['', [Validators.required]],
+        /*'value': ['', [Validators.required]],*/
         'descr': ['', []],
         'disabled': ['', []],
       }, {},

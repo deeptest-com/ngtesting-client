@@ -14,9 +14,37 @@ export class IssueOptService {
   _apiBase = 'client/issue_opt/';
   _apiAttachmentBase = 'client/issue_attachment/';
 
+  getWorkTran(typeId: number, tran: any) {
+    let workTran = null;
+
+    if (CONSTANT.ISU_TRANS_MAP[typeId] && CONSTANT.ISU_TRANS_MAP[typeId][tran.srcStatusId]) {
+      const definedTrans = CONSTANT.ISU_TRANS_MAP[typeId][tran.srcStatusId];
+      definedTrans.forEach(definedTran => {
+        if (definedTran.dictStatusId == tran.dictStatusId) {
+          workTran = definedTran;
+        }
+      });
+    }
+
+    return workTran;
+  }
+
   statusTran(id: number, dictStatusId: number, dictStatusName: string) {
     const model = { id: id, dictStatusId: dictStatusId, dictStatusName: dictStatusName };
     return this._reqService.post(this._apiBase + 'statusTran', model);
+  }
+
+  updateThenStatusTran(issue, tran) {
+    const data = _.clone(issue);
+    _.unset(data, 'comments');
+    _.unset(data, 'attachments');
+    _.unset(data, 'histories');
+    _.unset(data, 'tags');
+    _.unset(data, 'watchList');
+    _.unset(data, 'links');
+
+    const model = { issue: data, tran: tran };
+    return this._reqService.post(this._apiBase + 'updateThenStatusTran', model);
   }
 
   assign(id: number, userId: number, comments: string) {

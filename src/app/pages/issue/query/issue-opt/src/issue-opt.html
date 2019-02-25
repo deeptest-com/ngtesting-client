@@ -12,9 +12,11 @@
         <span class="link">删除</span></button>
 
       <li class="dropdown-divider"></li>
-      <ng-container *ngFor="let tran of issueTransMap[item.typeId][item.statusId]">
-        <button (click)="statusTran(item, tran)" class="dropdown-item">
-          <span class="link">{{tran.name}}</span></button>
+      <ng-container *ngIf="issueTransMap[item.typeId] && issueTransMap[item.typeId][item.statusId]">
+        <ng-container *ngFor="let tran of issueTransMap[item.typeId][item.statusId]">
+          <button (click)="statusTran(item, tran)" class="dropdown-item">
+            <span class="link">{{tran.name}}</span></button>
+        </ng-container>
       </ng-container>
     </div>
   </div>

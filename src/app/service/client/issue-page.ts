@@ -9,6 +9,11 @@ export class IssuePageService {
   constructor(private _reqService: RequestService) { }
   _apiBase = 'client/issue_page/';
 
+  get(id) {
+    const model = { id: id };
+    return this._reqService.post(this._apiBase + 'get', model);
+  }
+
   getByProject() {
     const model = { };
     return this._reqService.post(this._apiBase + 'getByProject', model);

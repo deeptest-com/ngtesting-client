@@ -1,14 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  EventEmitter,
-  Input,
-  OnDestroy,
-  OnInit,
-  Output,
-  ViewChild,
-  ViewEncapsulation,
-} from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
@@ -24,6 +14,7 @@ import { IssueService } from '../../../../service/client/issue';
 import { IssueOptService } from '../../../../service/client/issue-opt';
 import { IssueWatchService } from '../../../../service/client/issue-watch';
 
+import { IssueTranPageService } from '../issue-tran-page/issue-tran-page.service';
 import { IssueEditPopupService } from '../issue-edit/issue-edit.service';
 import { IssueAssignPopupService } from '../issue-assign/issue-assign.service';
 import { IssueWatchPopupService } from '../issue-watch/issue-watch.service';
@@ -33,7 +24,7 @@ import { IssueLinkPopupService } from '../issue-link/issue-link.service';
 import { PopDialogComponent } from '../../../pop-dialog';
 
 import { IssueViewPopupService } from '../issue-view/issue-view.service';
-import {CONSTANT} from "../../../../utils";
+import { CONSTANT } from '../../../../utils';
 
 declare var jQuery;
 
@@ -53,6 +44,7 @@ export class IssuePage implements OnInit, AfterViewInit, OnDestroy {
   tab: string = 'info';
 
   issueEditModal: any;
+  issueTranPageModal: any;
   issueAssignModal: any;
   issueWatchModal: any;
   issueTagModal: any;
@@ -62,8 +54,9 @@ export class IssuePage implements OnInit, AfterViewInit, OnDestroy {
 
   @Input() viewOnly: boolean = false;
   @Input() page: any = {};
-  @Input() issueTransMap: any = {};
   @Output() optEvent = new EventEmitter<any>();
+
+  issueTransMap: any = {};
 
   _issue: any = {};
   @Input() set issue(val) {
@@ -78,18 +71,19 @@ export class IssuePage implements OnInit, AfterViewInit, OnDestroy {
   priv: any = {};
 
   constructor(private _routeService: RouteService, private _route: ActivatedRoute, private _state: GlobalState,
-              private fb: FormBuilder, private toastyService: MyToastyService, private privilegeService: PrivilegeService,
-
+              private fb: FormBuilder, private toastyService: MyToastyService,
+              private privilegeService: PrivilegeService,
               private issueService: IssueService,
+
+              private issueTranPageService: IssueTranPageService,
               private issueOptService: IssueOptService,
               private issueWatchService: IssueWatchService,
-
               private issueViewPopupService: IssueViewPopupService,
               private issueEditPopupService: IssueEditPopupService,
               private issueWatchPopupService: IssueWatchPopupService,
               private issueAssignPopupService: IssueAssignPopupService,
               private issueTagPopupService: IssueTagPopupService,
-              private issueLinkPopupService: IssueLinkPopupService ) {
+              private issueLinkPopupService: IssueLinkPopupService) {
 
     this.issueTransMap = CONSTANT.ISU_TRANS_MAP;
     this.priv = this.privilegeService.issuePrivilege();
@@ -117,11 +111,23 @@ export class IssuePage implements OnInit, AfterViewInit, OnDestroy {
   }
 
   statusTran(tran) {
-    this.issueOptService.statusTran(this._issue.id, tran.dictStatusId, tran.dictStatusName).subscribe((json: any) => {
-      if (json.code == 1) {
-        this.optEvent.emit({ act: 'tran' });
-      }
-    });
+    const workTran = this.issueOptService.getWorkTran(this._issue.typeId, tran);
+
+    if (workTran.actionPageId) { // 弹出转台转换页面
+      this.issueTranPageModal = this.issueTranPageService.genPage(this._issue, workTran);
+
+      this.issueTranPageModal.result.then((result) => {
+        if (result.success) {
+          this.optEvent.emit(result);
+        }
+      });
+    } else { // 直接转换状态
+      this.issueOptService.statusTran(this._issue.id, tran.dictStatusId, tran.dictStatusName).subscribe((json: any) => {
+        if (json.code == 1) {
+          this.optEvent.emit({ act: 'tran' });
+        }
+      });
+    }
   }
 
   tabChange(event: any) {
@@ -227,6 +233,7 @@ export class IssuePage implements OnInit, AfterViewInit, OnDestroy {
         event.deferred.resolve();
       });
   }
+
   removeAttachment(item: any) {
     this.issueOptService.removeAttachment(this._issue.id, item.id).subscribe((json: any) => {
       this._issue.attachments = json.attachments;
