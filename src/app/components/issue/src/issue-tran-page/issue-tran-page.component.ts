@@ -13,7 +13,9 @@ import { IssuePageService } from '../../../../service/client/issue-page';
 import { IssueOptService } from '../../../../service/client/issue-opt';
 import { CONSTANT } from '../../../../utils';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import * as _ from "lodash";
+import { ValidatorUtils } from '../../../../validator';
+
+import * as _ from 'lodash';
 
 declare var jQuery;
 
@@ -47,10 +49,10 @@ export class IssueTranPageComponent implements OnInit, AfterViewInit, OnDestroy 
   }
 
   ngOnInit() {
-    console.log('===', this.tran.actionPageId);
-
     this.issuePageService.get(this.tran.actionPageId).subscribe((json: any) => {
       this.page = json.data;
+
+      this.onValueChanged();
     });
   }
 
@@ -59,10 +61,6 @@ export class IssueTranPageComponent implements OnInit, AfterViewInit, OnDestroy 
 
   statusTran(tran) {
 
-  }
-
-  buildForm() {
-    this.form = this.fb.group({});
   }
 
   update() {
@@ -80,6 +78,19 @@ export class IssueTranPageComponent implements OnInit, AfterViewInit, OnDestroy 
   ngOnDestroy(): void {
 
   }
+
+  onValueChanged(data?: any) {
+    console.log('onValueChanged');
+    this.formErrors = ValidatorUtils.genMsg(this.form, this.validateMsg, []);
+  }
+  buildForm() {
+    this.form = this.fb.group({});
+
+    this.form.valueChanges.debounceTime(CONSTANT.DebounceTime).subscribe(data => this.onValueChanged(data));
+    this.onValueChanged();
+  }
+  formErrors = [];
+
 
 }
 

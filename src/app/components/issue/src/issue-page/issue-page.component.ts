@@ -120,6 +120,8 @@ export class IssuePage implements OnInit, AfterViewInit, OnDestroy {
         if (result.success) {
           this.optEvent.emit(result);
         }
+      }, (reason) => {
+        console.log('reason', reason);
       });
     } else { // 直接转换状态
       this.issueOptService.statusTran(this._issue.id, tran.dictStatusId, tran.dictStatusName).subscribe((json: any) => {
