@@ -23,7 +23,10 @@ export class SockService {
   }
 
   public init(): void {
-    const url = new SockJS(CONSTANT.API_URL + 'websocket');
+    const str = CONSTANT.API_URL + 'websocket';
+    console.log('====', str);
+
+    const url = new SockJS(str);
     const stompConfig = {
       url: url,
 
