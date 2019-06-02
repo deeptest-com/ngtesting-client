@@ -33,7 +33,8 @@ export class AccountService {
         const days: number = model.rememberMe ? 30 : 1;
 
         that.saveTokenLocal(json.token, days);
-        that._routeService.navTo('/pages/org/' + json.profile.defaultOrgId + '/prjs');
+        const url = '/pages/org/' + json.orgId + '/prjs';
+        that._routeService.navTo(url);
       } else {
         errors = json.msg;
       }
@@ -48,7 +49,8 @@ export class AccountService {
         const days: number = 1;
 
         that.saveTokenLocal(json.token, days);
-        that._routeService.navTo('/pages/org/' + json.profile.defaultOrgId + '/prjs');
+        const url = '/pages/org/' + json.orgId + '/prjs';
+        that._routeService.navTo(url);
       } else {
         errors = json.msg;
       }
@@ -71,8 +73,8 @@ export class AccountService {
       let error = undefined;
       if (json.code == 1) {
         this.saveTokenLocal(json.token, 1);
-
-        this._routeService.navTo('/pages/dashboard');
+        const url = '/pages/org/' + json.orgId + '/prjs';
+        this._routeService.navTo(url);
       } else {
         error = json.msg;
       }
@@ -103,14 +105,7 @@ export class AccountService {
   }
 
   saveTokenLocal(token: any, expireDays: number) {
-    const that = this;
     CONSTANT.TOKEN = token;
-
-    if (!expireDays) {
-      expireDays = parseInt(Cookie.get(CONSTANT.TOKEN_EXPIRE));
-    } else {
-      Cookie.set(CONSTANT.TOKEN_EXPIRE, expireDays + '', 365);
-    }
 
     Cookie.set(CONSTANT.TOKEN_KEY, JSON.stringify(token), expireDays);
   }

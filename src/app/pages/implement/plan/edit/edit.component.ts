@@ -210,7 +210,7 @@ export class PlanEdit implements OnInit, AfterViewInit {
     this.caseSelectionModal.componentInstance.caseProjectId = task.caseProjectId ? task.caseProjectId : task.prjId;
     this.caseSelectionModal.componentInstance.taskId = task.id;
 
-    this._userService.getUsers().subscribe((json: any) => {
+    this._userService.getProjectUsers().subscribe((json: any) => {
       this.caseSelectionModal.componentInstance.users = json.data;
     });
 

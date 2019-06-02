@@ -20,10 +20,10 @@
       </div>
 
       <div class="buttons">
-        <button org-privilege [privs]="'project-admin'" (click)="create('group')" type="button" class="btn btn-primary btn-with-icon btn-sm">
+        <button org-privilege [privs]="'org_project:*'" (click)="create('group')" type="button" class="btn btn-primary btn-with-icon btn-sm">
           <i class="fa fa-plus-circle"></i>新建项目组
         </button>
-        <button org-privilege [privs]="'project-admin'" (click)="create('project')" type="button" class="btn btn-primary btn-with-icon btn-sm">
+        <button org-privilege [privs]="'org_project:*'" (click)="create('project')" type="button" class="btn btn-primary btn-with-icon btn-sm">
           <i class="fa fa-plus-circle"></i>新建项目
         </button>
       </div>

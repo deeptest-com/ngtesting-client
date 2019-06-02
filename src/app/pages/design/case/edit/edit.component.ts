@@ -56,7 +56,7 @@ export class CaseEdit implements OnInit, AfterViewInit, OnDestroy {
     this.customFields = CONSTANT.CASE_CUSTOM_FIELDS;
   }
   ngOnInit() {
-    this.canEdit = this.privilegeService.hasPrivilege('test_case-maintain');
+    this.canEdit = this.privilegeService.hasPrivilege('test_case:maintain');
 
     this.projectId = CONSTANT.CURR_PRJ_ID;
     this.user = CONSTANT.PROFILE;

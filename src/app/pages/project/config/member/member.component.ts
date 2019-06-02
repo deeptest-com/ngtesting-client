@@ -112,7 +112,7 @@ export class ProjectEditMember implements OnInit, AfterViewInit {
       }
     });
 
-    this._userAndGroupService.search(searchModel.keywords, userIds, groupIds).subscribe((json: any) => {
+    this._userAndGroupService.searchInOrg(searchModel.keywords, userIds, groupIds).subscribe((json: any) => {
       if (json.data.length == 0) {
         this.entitySearchResult = null;
       } else {

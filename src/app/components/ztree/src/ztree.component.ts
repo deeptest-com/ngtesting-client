@@ -295,7 +295,7 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   addHoverDom = (treeId, treeNode) => {
-    if (!this.privilegeService.hasPrivilege('test_case-maintain') || this.settings.usage == 'exe') { return false; }
+    if (!this.privilegeService.hasPrivilege('test_case:maintain') || this.settings.usage == 'exe') { return false; }
 
     const sObj = $('#' + treeNode.tId + '_span');
 
@@ -505,11 +505,11 @@ export class ZtreeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   showRemoveBtn = (treeId, treeNode) => {
-    return this.treeSettings.usage != 'exe' && this.privilegeService.hasPrivilege('test_case-delete') && !!treeNode.pId;
+    return this.treeSettings.usage != 'exe' && this.privilegeService.hasPrivilege('test_case:delete') && !!treeNode.pId;
   }
 
   showRenameBtn = (treeId, treeNode) => {
-    return this.privilegeService.hasPrivilege('test_case-maintain');
+    return this.privilegeService.hasPrivilege('test_case:maintain');
   }
 
 }

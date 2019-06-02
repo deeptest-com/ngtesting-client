@@ -219,6 +219,9 @@ main {
   display: flex;
   margin: 0px;
 
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+
   .title {
     flex: 1;
     font-size: 20px;

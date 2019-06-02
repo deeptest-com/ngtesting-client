@@ -43,7 +43,7 @@ export class IssueCreate implements OnInit, AfterViewInit, OnDestroy {
               private issueService: IssueService, private privilegeService: PrivilegeService) {
     this.issuePropMap = CONSTANT.ISU_PROPERTY_MAP;
 
-    this.canCreate = this.privilegeService.hasPrivilege('issue-maintain');
+    this.canCreate = this.privilegeService.hasPrivilege('issue:maintain');
 
     this.loadData();
     this.buildForm();

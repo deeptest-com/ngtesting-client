@@ -255,8 +255,8 @@ export class ExecutionResult implements OnInit, AfterViewInit, OnDestroy {
   }
 
   updatePriv() {
-    this.canEdit = this.act != 'view' && this.privilegeService.hasPrivilege('test_case-maintain');
-    this.canExe = this.act != 'view' && this.privilegeService.hasPrivilege('test_task-exe');
+    this.canEdit = this.act != 'view' && this.privilegeService.hasPrivilege('test_case:maintain');
+    this.canExe = this.act != 'view' && this.privilegeService.hasPrivilege('test_task:exe');
   }
 
   returnTo() {

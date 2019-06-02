@@ -65,7 +65,7 @@
             <td>{{plan.startTime | date:'y/MM/dd'}} - {{plan.endTime | date:'y/MM/dd'}}</td>
             <td>{{plan.status | exeStatus}}</td>
             <td>
-                      <span prj-privilege [privs]="'test_plan-view'"
+                      <span prj-privilege [privs]="'test_plan:view'"
                             [routerLink]="['/pages/org/' + id + '/prj/' + plan.projectId + '/implement/plan/' + plan.id + '/view']" class="link no-underline">查看</span>
             </td>
           </tr>

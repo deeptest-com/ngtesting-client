@@ -75,9 +75,9 @@ export class IssueQuery implements OnInit, AfterViewInit, OnDestroy {
 
     this.priv = this.privilegeService.issuePrivilege();
 
-    console.log('issue-view=' + this.priv.hasViewPriv + ', '
-      + 'issue-maintain=' + this.priv.hasMaintainPriv + ', '
-      + 'issue-delete=' + this.priv.hasDeletePriv);
+    console.log('issue:view=' + this.priv.hasViewPriv + ', '
+      + 'issue:maintain=' + this.priv.hasMaintainPriv + ', '
+      + 'issue:delete=' + this.priv.hasDeletePriv);
 
     this.routeSub = this._activeRoute.params.subscribe(params => {
       const ruleStr = params['rule'];

@@ -28,11 +28,11 @@ export class RequestService {
 
     const headers = new Headers({
       'Content-Type': 'application/json',
-      'token': CONSTANT.TOKEN
+       'token': CONSTANT.TOKEN,
     });
     const options = new RequestOptions({headers: headers, withCredentials: true});
 
-    console.log(url, body);
+    console.log(url, body, CONSTANT.TOKEN);
     return this.http.post(url, body, options)
       .map(
         function (res) {
@@ -42,6 +42,8 @@ export class RequestService {
 
           } else if (json.code == -100) {
             me.routeService.navTo('/login');
+          } else if (json.code < 0) {
+
           } else {
             me.handleError(json);
           }

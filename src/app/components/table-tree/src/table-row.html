@@ -4,6 +4,7 @@
   <a [routerLink]="['/pages/org/' + orgId + '/prj/' + model.id + '/view']">{{model.name}}</a>
 </td>
 <td *ngIf="model.type=='group'" [attr.colSpan]="2">{{model.name}}</td>
+
 <td>
   <span *ngIf="model.type=='group'">组({{model.childrenNumb}})</span>
   <span *ngIf="model.type=='project'">项目</span>

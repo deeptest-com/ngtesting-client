@@ -26,13 +26,6 @@ export class TableRowComponent implements OnInit, OnDestroy {
   constructor(private _state: GlobalState, private el: ElementRef,
               private _routeService: RouteService) {
     this.orgId = CONSTANT.CURR_ORG_ID;
-    // this.orgPrivileges = CONSTANT.ORG_PRIVILEGES;
-
-    // this._state.subscribe(WS_CONSTANT.WS_ORG_SETTINGS, this.eventCode, (json) => {
-    //   console.log(WS_CONSTANT.WS_ORG_SETTINGS + ' in ' + this.eventCode, json);
-    //
-    //   this.orgPrivileges = json.orgPrivileges;
-    // });
   }
 
   public ngOnInit(): void {
@@ -46,17 +39,17 @@ export class TableRowComponent implements OnInit, OnDestroy {
   }
 
   canEditProject(project: any) {
-    return CONSTANT.ORG_PRIVILEGES['org-admin'] || CONSTANT.ORG_PRIVILEGES['project-admin'];
+    return CONSTANT.ORG_PRIVILEGES['org_org:*'] || CONSTANT.ORG_PRIVILEGES['org_project:*'];
   }
   canDesign(project: any) {
-    return project.privs != null && (project.privs['test_case-view'] || project.privs['test_case-maintain']);
+    return project.privs != null && (project.privs['test_case:view'] || project.privs['test_case:maintain']);
   }
   canExe(project: any) {
-    return project.privs != null && (project.privs['test_task-view'] || project.privs['test_task-exe']);
+    return project.privs != null && (project.privs['test_task:view'] || project.privs['test_task:exe']);
   }
 
   ngOnDestroy(): void {
-    // this._state.unsubscribe(WS_CONSTANT.WS_ORG_SETTINGS, this.eventCode);
+
   }
 
 }

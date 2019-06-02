@@ -24,7 +24,7 @@ export class Login implements OnInit {
     this.form = fb.group({
       'email': ['', [Validators.required, Validators.email]],
       'password': ['', [Validators.minLength(6)]],
-      'rememberMe': []
+      'rememberMe': [],
     });
 
     this.form.valueChanges.debounceTime(CONSTANT.DebounceTime).subscribe(data => this.onValueChanged(data));

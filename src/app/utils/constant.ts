@@ -35,7 +35,6 @@ export const CONSTANT: CONSTANT_INTERFACE = {
   ISU_TRANS_MAP: undefined,
 
   TOKEN_KEY: 'com.ngtesting.token',
-  TOKEN_EXPIRE: 'com.ngtesting.expire',
 
   ExeStatus: { '': '所有', 'not_start': '未开始', 'in_progress': '执行中', 'end': '已完成' },
   EntityDisabled: { 'false': '启用', 'true': '归档', '': '所有' },
@@ -105,7 +104,6 @@ export interface CONSTANT_INTERFACE {
   ISU_TRANS_MAP: any;
 
   TOKEN_KEY: string;
-  TOKEN_EXPIRE: string;
 
   ExeStatus: any;
   EntityDisabled: any;

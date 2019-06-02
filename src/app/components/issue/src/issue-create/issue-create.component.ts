@@ -44,7 +44,7 @@ export class IssueCreate implements OnInit, AfterViewInit, OnDestroy {
               private fb: FormBuilder, private toastyService: MyToastyService, public activeModal: NgbActiveModal,
               private issueService: IssueService, private privilegeService: PrivilegeService) {
 
-    this.canCreate = this.privilegeService.hasPrivilege('issue-maintain');
+    this.canCreate = this.privilegeService.hasPrivilege('issue:maintain');
 
     this.loadData();
     this.buildForm();

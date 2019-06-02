@@ -154,7 +154,7 @@ export class SuiteEditComponent implements OnInit, AfterViewInit {
     this.caseSelectionModal.componentInstance.caseProjectId = this.caseProjectId ? this.caseProjectId : this.prjId;
     this.caseSelectionModal.componentInstance.suiteId = suite.id;
 
-    this._userService.getUsers().subscribe((json: any) => {
+    this._userService.getProjectUsers().subscribe((json: any) => {
       this.caseSelectionModal.componentInstance.users = json.data;
     });
 

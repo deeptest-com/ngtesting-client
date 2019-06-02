@@ -17,7 +17,7 @@ export class TermPipe implements PipeTransform {
     if (!str) {
       return '<span></span>';
     }
-    return this.sanitized.bypassSecurityTrustHtml('<span style="font-weight: bolder">「' + str + '」</span>');
+    return this.sanitized.bypassSecurityTrustHtml('<span style="font-weight: bolder">' + str + '</span>');
   }
 }
 

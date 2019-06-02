@@ -38,10 +38,10 @@ export class OrgAdminComponent implements OnInit, OnDestroy {
   updateMenu(defaultOrgName: string, orgPrivileges: any) {
     const menu = _.cloneDeep(ORG_MENU);
     menu[0].children[0].data.menu.title = defaultOrgName;
-    if (orgPrivileges['org-admin']) {
+    if (orgPrivileges['org_org:*']) {
       menu[0].children.splice(1, 1);
     } else {
-      menu[0].children.splice(2, 2);
+      menu[0].children.splice(2, 3);
     }
     this._menuService.updateMenuByRoutes(<Routes> menu);
   }

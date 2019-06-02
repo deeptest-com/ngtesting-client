@@ -54,7 +54,7 @@ export class IssueBrowse implements OnInit, AfterViewInit, OnDestroy, OnChanges 
   }
 
   viewIssue(item): any {
-    if (!this.priv['issue-view']) { return; }
+    if (!this.priv['issue:view']) { return; }
 
     this.issueService.view(item.id).subscribe((json: any) => {
       this.issue = json.data;

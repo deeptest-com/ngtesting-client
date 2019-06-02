@@ -22,7 +22,7 @@ export class SuiteListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   models: any;
   collectionSize: number = 0;
-  page: number = 1;
+  pageNum: number = 1;
   pageSize: number = 15;
 
   queryForm: FormGroup;
@@ -73,7 +73,7 @@ export class SuiteListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   loadData() {
-    this._suiteService.query(this.queryModel, this.page, this.pageSize).subscribe((json: any) => {
+    this._suiteService.query(this.queryModel, this.pageNum, this.pageSize).subscribe((json: any) => {
       this.collectionSize = json.total;
       this.models = json.data;
     });

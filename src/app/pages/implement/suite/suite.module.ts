@@ -31,7 +31,6 @@ import { ReportService } from '../../../service/client/report';
 
 import { SuiteComponent } from './suite.component';
 import { SuiteListComponent } from './list/list.component';
-import { SuiteViewComponent } from './view/view.component';
 import { SuiteEditComponent } from './edit/edit.component';
 
 export function myDateParserFormatterFactory() {
@@ -58,7 +57,6 @@ export function myDateParserFormatterFactory() {
   declarations: [
     SuiteComponent,
     SuiteListComponent,
-    SuiteViewComponent,
     SuiteEditComponent,
   ],
   providers: [
@@ -66,7 +64,7 @@ export function myDateParserFormatterFactory() {
     RequestService,
     DatetimePickerService,
     PlanService, TaskService, SuiteService, CaseService, UserService,
-    AccountService, ProjectService, ReportService
+    AccountService, ProjectService, ReportService,
   ],
   entryComponents: [
     TaskEditComponent,

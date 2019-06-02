@@ -88,7 +88,7 @@ export class IssuePage implements OnInit, AfterViewInit, OnDestroy {
     this.issueTransMap = CONSTANT.ISU_TRANS_MAP;
     this.priv = this.privilegeService.issuePrivilege();
 
-    this.viewOnly = this.viewOnly || !this.priv['issue-maintain'];
+    this.viewOnly = this.viewOnly || !this.priv['issue:maintain'];
 
     this.buildForm();
   }

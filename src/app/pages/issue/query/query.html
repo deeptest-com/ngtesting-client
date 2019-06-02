@@ -38,8 +38,8 @@
 
         <div class="buttons row table-column-selection-wrap">
           <span *ngIf="!batchModel" class="row">
-            <!--<span *ngIf="priv['issue-maintain']" (click)="changeModel()" class="link">普通模式：</span>-->
-            <!--<span *ngIf="!priv['issue-maintain']">普通模式：</span>-->
+            <!--<span *ngIf="priv['issue:maintain']" (click)="changeModel()" class="link">普通模式：</span>-->
+            <!--<span *ngIf="!priv['issue:maintain']">普通模式：</span>-->
             <table-column-selection (selected)="changeColumns()" [columns]="columns"></table-column-selection>
           </span>
           <!--<span *ngIf="batchModel" class="row">

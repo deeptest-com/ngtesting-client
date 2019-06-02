@@ -40,12 +40,12 @@
         <div class="col-sm-9">
           <button (click)="update()" type="button" class="btn btn-info btn-sm" [disabled]="!form.valid">保存</button>
           &nbsp;&nbsp;
-          <button prj-privilege [privs]="'test_case-review'" (click)="reviewResult(true)" type="button" class="btn btn-primary btn-sm"
+          <button prj-privilege [privs]="'test_case:review'" (click)="reviewResult(true)" type="button" class="btn btn-primary btn-sm"
                   [disabled]="!form.valid">评审通过</button>
-          <button prj-privilege [privs]="'test_case-review'" (click)="reviewResult(false)" type="button" class="btn btn-warning btn-sm"
+          <button prj-privilege [privs]="'test_case:review'" (click)="reviewResult(false)" type="button" class="btn btn-warning btn-sm"
                   [disabled]="!form.valid">评审失败</button>
 
-          <label prj-privilege [privs]="'test_case-review'" class="col-form-label form-check-label">
+          <label prj-privilege [privs]="'test_case:review'" class="col-form-label form-check-label">
             <input [(ngModel)]="next" formControlName="next" name="next"
                    class="form-check-input form-control-lg" type="checkbox" value="true">
             &nbsp;同时转到下一个
@@ -173,17 +173,9 @@
       </div>
 
       <div class="form-group row">
-        <div class="col-sm-1">
+        <div class="col-sm-12">
           <file-uploader (uploadedEvent)="uploadedEvent($event)"
                          [ifile]="model.testsetPath" [mimeType]="[]" [showDropZone]="false"></file-uploader>
-        </div>
-        <div class="col-sm-11">
-          <label class="attach-list">
-          <span *ngFor="let attach of model.attachments; let i = index;" class="attach-item">
-            <span (click)="removeAttachment(attach)" class="fa fa-times pointer" tabindex="-1"></span>
-            <a href="{{ attach.uri | pathToLink:attach.name }}" target="_blank" class="download pointer" >{{attach.name}}</a>
-          </span>
-          </label>
         </div>
       </div>
 
